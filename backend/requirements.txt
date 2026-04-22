@@ -12,7 +12,7 @@ asyncpg==0.29.0
 alembic==1.13.1
 
 # Auth — Supabase (replaces Firebase)
-supabase==2.4.0
+supabase>=2.9.0,<3.0
 python-jose[cryptography]==3.3.0
 
 # Caching
@@ -29,8 +29,8 @@ openai>=1.30.0
 # edge-tts kept as fallback if no OPENAI_API_KEY is set
 edge-tts>=6.1.9
 
-# HTTP client — pinned to satisfy supabase==2.4.0 (<0.26) and fastapi (>=0.23)
-httpx>=0.24,<0.26
+# HTTP client — let supabase>=2.9 resolve its own httpx version
+httpx>=0.27
 
 # Utilities
 python-dotenv==1.0.1
