@@ -1,0 +1,14 @@
+{
+  "version": 3,
+  "skills": {
+    "planning-with-files": {
+      "source": "othmanadi/planning-with-files",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/othmanadi/planning-with-files.git",
+      "skillFolderHash": "",
+      "installedAt": "2026-04-01T16:11:46.875Z",
+      "updatedAt": "2026-04-01T16:11:46.875Z"
+    }
+  },
+  "dismissed": {}
+}

@@ -1,0 +1,160 @@
+{
+  "lesson_id": "greetings_001",
+  "topic": "Greetings",
+  "topic_ar": "تحيات",
+  "level": "beginner",
+  "xp_reward": 50,
+  "estimated_minutes": 10,
+  "thumbnail_url": "https://images.unsplash.com/photo-1521791136064-7986c2920216?w=600&h=280&fit=crop&auto=format",
+
+  "words": {
+    "w001": {
+      "arabic": "مَرْحَبا",
+      "arabic_plain": "مرحبا",
+      "hebrew_pronunciation": "מַרְחַבָּא",
+      "hebrew": "שלום / היי",
+      "icon": "fluent:hand-wave-24-filled",
+      "icon_color": "#FF9500",
+      "letter_blocks": ["ب", "م", "ا", "ر", "ح"]
+    },
+    "w002": {
+      "arabic": "أَهْلاً وَسَهْلاً",
+      "arabic_plain": "أهلا",
+      "hebrew_pronunciation": "אַהְלַן וַסַהְלַן",
+      "hebrew": "ברוך הבא / אהלן",
+      "icon": "fluent:person-arrow-right-24-filled",
+      "icon_color": "#34C759",
+      "letter_blocks": ["ل", "أ", "ا", "ه"]
+    },
+    "w003": {
+      "arabic": "كِيفَك؟",
+      "arabic_plain": "كيفك",
+      "hebrew_pronunciation": "כִּיפַּק?",
+      "hebrew": "מה שלומך?",
+      "icon": "fluent:chat-bubbles-question-24-filled",
+      "icon_color": "#007AFF",
+      "letter_blocks": ["ف", "ك", "ي", "ك"]
+    },
+    "w004": {
+      "arabic": "مْنِيح، شُكْراً",
+      "arabic_plain": "منيح",
+      "hebrew_pronunciation": "מְנִיח, שֻׁקְרָן",
+      "hebrew": "בסדר, תודה",
+      "icon": "fluent:thumb-like-24-filled",
+      "icon_color": "#AF52DE",
+      "letter_blocks": ["ن", "م", "ح", "ي"]
+    },
+    "w005": {
+      "arabic": "مَعَ السَّلامَة",
+      "arabic_plain": "السلامة",
+      "hebrew_pronunciation": "מַעַ סַּלָאמֶה",
+      "hebrew": "להתראות (לך בשלום)",
+      "icon": "fluent:door-arrow-right-24-filled",
+      "icon_color": "#FF3B30",
+      "letter_blocks": ["م", "ل", "ا", "ة", "ل", "س", "ا"]
+    }
+  },
+
+  "stages": [
+    { "type": "listen_repeat", "word_id": "w001" },
+    { "type": "listen_repeat", "word_id": "w002" },
+    { "type": "listen_repeat", "word_id": "w003" },
+    { "type": "listen_repeat", "word_id": "w004" },
+    { "type": "listen_repeat", "word_id": "w005" },
+
+    { "type": "choose_translation", "word_id": "w001", "option_ids": ["w001", "w002", "w004", "w005"] },
+    { "type": "choose_translation", "word_id": "w002", "option_ids": ["w001", "w002", "w003", "w005"] },
+    { "type": "choose_translation", "word_id": "w003", "option_ids": ["w001", "w003", "w004", "w005"] },
+    { "type": "choose_translation", "word_id": "w004", "option_ids": ["w001", "w003", "w004", "w005"] },
+    { "type": "choose_translation", "word_id": "w005", "option_ids": ["w001", "w002", "w003", "w005"] },
+
+    { "type": "write_translation", "word_id": "w001" },
+    { "type": "write_translation", "word_id": "w002" },
+    { "type": "write_translation", "word_id": "w003" },
+    { "type": "write_translation", "word_id": "w004" },
+    { "type": "write_translation", "word_id": "w005" },
+
+    {
+      "type": "dialogue",
+      "context_label": "פגישה עם מישהו חדש ברמאללה",
+      "cultural_note": "בתרבות הפלסטינית, ברכות הן טקס חברתי חשוב. 'יַאלָּה' הוא אחד הביטויים הנפוצים ביותר בלבנטינית.",
+      "lines": [
+        {
+          "speaker": "A",
+          "name": "אחמד",
+          "avatar_letter": "א",
+          "arabic": "مَرْحَبا، أَنا أَحْمَد. شُو اسْمَك؟",
+          "hebrew_pronunciation": "מַרְחַבָּא, אַנָא אַחְמַד. שוּ אִסְמַק?",
+          "hebrew": "שלום, אני אחמד. מה שמך?"
+        },
+        {
+          "speaker": "B",
+          "is_user_turn": true,
+          "word_id": "w002",
+          "target_voweled": "أَهْلاً",
+          "full_arabic": "أَهْلاً! تَشَرَّفْنا.",
+          "hebrew": "אהלן! נעים להכיר.",
+          "hebrew_gap": "אהלן"
+        },
+        {
+          "speaker": "A",
+          "name": "אחמד",
+          "avatar_letter": "א",
+          "arabic": "كِيفَك؟ مْنِيح؟",
+          "hebrew_pronunciation": "כִּיפַּק? מְנִיח?",
+          "hebrew": "מה שלומך? בסדר?"
+        },
+        {
+          "speaker": "B",
+          "is_user_turn": true,
+          "word_id": "w004",
+          "target_voweled": "مْنِيح",
+          "full_arabic": "مْنِيح كَتِير، شُكْراً! وَأِنْتَ؟",
+          "hebrew": "בסדר מאוד, תודה! ואתה?",
+          "hebrew_gap": "בסדר"
+        },
+        {
+          "speaker": "A",
+          "name": "אחמד",
+          "avatar_letter": "א",
+          "arabic": "مْنِيح. يَلَّا، مَعَ السَّلامَة!",
+          "hebrew_pronunciation": "מְנִיח. יַאלָּה, מַעַ סַּלָאמֶה!",
+          "hebrew": "בסדר. יאללה, להתראות!"
+        }
+      ]
+    },
+
+    {
+      "type": "match_pairs",
+      "word_ids": ["w001", "w002", "w003", "w004", "w005"]
+    },
+
+    {
+      "type": "listen_choose",
+      "items": [
+        { "word_id": "w001", "distractor_id": "w005" },
+        { "word_id": "w005", "distractor_id": "w003" }
+      ]
+    },
+
+    {
+      "type": "sentence_build",
+      "sentence_hebrew": "שלום, מה שלומך?",
+      "sentence_arabic": "مَرْحَبا كِيفَك؟",
+      "words": ["مَرْحَبا", "كِيفَك؟"]
+    }
+  ],
+
+  "srs_words": [
+    "مَرْحَبا",
+    "أَهْلاً وَسَهْلاً",
+    "كِيفَك؟",
+    "مْنِيح",
+    "شُكْراً",
+    "مَعَ السَّلامَة",
+    "يَلَّا",
+    "تَشَرَّفْنا"
+  ],
+  "next_lesson": "greetings_002",
+  "related_topics": ["food_001", "directions_001"]
+}

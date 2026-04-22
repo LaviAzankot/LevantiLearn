@@ -1,0 +1,2 @@
+Run to start the project:
+.\start-dev.ps1

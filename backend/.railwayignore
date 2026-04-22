@@ -1,0 +1,10 @@
+# Don't upload to Railway
+__pycache__/
+*.pyc
+*.pyo
+.env
+.env.*
+tests/
+*.egg-info/
+.pytest_cache/
+firebase-service-account.json

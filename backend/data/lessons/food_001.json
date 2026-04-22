@@ -1,0 +1,113 @@
+{
+  "lesson_id": "food_001",
+  "topic": "Food & Ordering",
+  "topic_ar": "طعام وطلب",
+  "level": "beginner",
+  "xp_reward": 50,
+  "estimated_minutes": 12,
+  "thumbnail_query": "arabic coffee cafe jerusalem",
+  "stages": [
+    {
+      "stage": 1,
+      "type": "vocabulary_intro",
+      "title": "מילות מפתח בבית קפה",
+      "words": [
+        {
+          "id": "f001",
+          "arabic": "قَهْوَة",
+          "hebrew_pronunciation": "קַהְוֶה",
+          "hebrew": "קפה",
+          "image_url": "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=320&h=200&fit=crop&auto=format",
+          "notes": "ההגייה הלבנטינית/פלסטינית של 'קַהְוַה'. לרוב מוגש עם הל (הֵיל)."
+        },
+        {
+          "id": "f002",
+          "arabic": "ماي",
+          "hebrew_pronunciation": "מַאי",
+          "hebrew": "מים",
+          "image_url": "https://images.unsplash.com/photo-1548839140-29a749e1cf4d?w=320&h=200&fit=crop&auto=format",
+          "notes": "'מַאי' היא המילה הלבנטינית למים. בערבית ספרותית אומרים 'מָאא'."
+        },
+        {
+          "id": "f003",
+          "arabic": "بَدِّي",
+          "hebrew_pronunciation": "בֶּדִּי / בִּדִּי",
+          "hebrew": "אני רוצה",
+          "image_url": "https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=320&h=200&fit=crop&auto=format",
+          "notes": "ביטוי חיוני! 'בֶּדִּי קַהְוֶה' = אני רוצה קפה. מקוצר מ'בִּ-וַדִּי' (ברצוני)."
+        },
+        {
+          "id": "f004",
+          "arabic": "أَيَّشْ بَدَّك؟",
+          "hebrew_pronunciation": "אַיֵּשׁ בַּדַּק?",
+          "hebrew": "מה תרצה?",
+          "image_url": "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=320&h=200&fit=crop&auto=format",
+          "notes": "'אַיֵּשׁ' = מה (לבנטינית). 'בַּדַּק' = אתה רוצה (לגבר). לאישה: 'בַּדִּיק'."
+        },
+        {
+          "id": "f005",
+          "arabic": "بِكَم هاد؟",
+          "hebrew_pronunciation": "בִּכַּם הַאד?",
+          "hebrew": "כמה זה עולה?",
+          "image_url": "https://images.unsplash.com/photo-1580519542036-c47de6196ba5?w=320&h=200&fit=crop&auto=format",
+          "notes": "'בִּכַּם' = כמה. 'הַאד' (לבנטינית) = זה. שימושי גם לקניות!"
+        }
+      ]
+    },
+    {
+      "stage": 2,
+      "type": "match_pairs",
+      "title": "התאם מילים לתרגום",
+      "pairs": [
+        { "id": "f001", "arabic": "قَهْوَة",          "hebrew": "קפה" },
+        { "id": "f002", "arabic": "ماي",               "hebrew": "מים" },
+        { "id": "f003", "arabic": "بَدِّي",            "hebrew": "אני רוצה" },
+        { "id": "f004", "arabic": "أَيَّشْ بَدَّك؟", "hebrew": "מה תרצה?" },
+        { "id": "f005", "arabic": "بِكَم هاد؟",       "hebrew": "כמה זה עולה?" }
+      ]
+    },
+    {
+      "stage": 3,
+      "type": "dialogue",
+      "scene": "הזמנת קפה בבית קפה בירושלים",
+      "lines": [
+        {
+          "speaker": "A",
+          "arabic": "أَهْلاً! أَيَّشْ بَدَّك؟",
+          "hebrew_pronunciation": "אַהְלַן! אַיֵּשׁ בַּדַּק?",
+          "hebrew": "אהלן! מה תרצה?"
+        },
+        {
+          "speaker": "B",
+          "arabic": "بَدِّي قَهْوَة، مِن فَضْلَك.",
+          "hebrew_pronunciation": "בֶּדִּי קַהְוֶה, מִן פַּדְּלַק.",
+          "hebrew": "אני רוצה קפה, בבקשה.",
+          "is_user_turn": true
+        },
+        {
+          "speaker": "A",
+          "arabic": "بِالشَّكَر؟",
+          "hebrew_pronunciation": "בִּשׁ-שֶׁכַּר?",
+          "hebrew": "עם סוכר?"
+        },
+        {
+          "speaker": "B",
+          "arabic": "لأ، بَدُّون شَكَر، شُكْراً.",
+          "hebrew_pronunciation": "לַאא, בַּדּוּן שֶׁכַּר, שֻׁקְרָן.",
+          "hebrew": "לא, בלי סוכר, תודה.",
+          "is_user_turn": true
+        },
+        {
+          "speaker": "A",
+          "arabic": "تَفَضَّل. بِكَم؟ عَشَرَة شَوَاكِل.",
+          "hebrew_pronunciation": "תַפַּדַּל. בִּכַּם? עַשַׁרָה שַׁוָאכִּל.",
+          "hebrew": "הנה. כמה? עשרה שקלים."
+        }
+      ],
+      "cultural_note": "בבתי קפה פלסטיניים, קפה מוגש לרוב עם כוס מים קטנה — מסורת מהכנסת אורחים הבדואית. 'תַפַּדַּל' (הנה / בבקשה) משמש כל הזמן כהצעה מנומסת."
+    }
+  ],
+  "srs_words": ["قَهْوَة", "ماي", "بَدِّي", "أَيَّشْ بَدَّك؟", "بِكَم هاد؟", "مِن فَضْلَك", "تَفَضَّل"],
+  "next_lesson": "food_002",
+  "related_topics": ["shopping_001", "numbers_001"]
+}

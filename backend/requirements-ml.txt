@@ -1,0 +1,21 @@
+# LevantiLearn — ML/Audio Dependencies (OPTIONAL)
+# You do NOT need this file if you have an OPENAI_API_KEY in .env.
+# The app uses cloud OpenAI for TTS (tts-1-hd) and STT (whisper-1).
+#
+# Only install this if you want to run TTS/STT fully offline.
+# Run: pip install --upgrade pip setuptools wheel  FIRST, then:
+#       pip install -r requirements-ml.txt
+
+# Hugging Face — Levanti dataset for vocabulary import
+datasets==2.19.1
+transformers==4.41.0
+
+# Audio processing (used for pronunciation scoring locally)
+librosa==0.10.2
+soundfile==0.12.1
+
+# ── Only needed for fully offline mode (no OpenAI key) ─────────────────────
+# Uncomment if needed — requires: pip install --upgrade setuptools wheel first
+# openai-whisper==20231117       # local Whisper STT (large download)
+# TTS==0.22.0                    # Coqui TTS (500MB model)
+# azure-cognitiveservices-speech==1.38.0  # Azure TTS fallback

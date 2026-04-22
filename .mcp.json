@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "carl-mcp": {
+      "command": "node",
+      "args": [
+        "C:/Users/tomer/OneDrive/Desktop/WEB DEVELOPMENT/LevantiLearn/.carl/carl-mcp/index.js"
+      ],
+      "type": "stdio"
+    }
+  }
+}
