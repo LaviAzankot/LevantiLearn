@@ -169,8 +169,7 @@ def get_catalog(is_premium: bool = False):
     result = []
     for i, lesson in enumerate(LESSON_CATALOG):
         item = dict(lesson)
-        # Phase 1 is always free; Phase 2+ requires premium
-        item["locked"] = not lesson["free"] and not is_premium
+        item["locked"] = False
         # Mark completed based on progress — placeholder (always False for now)
         item["completed"] = False
         result.append(item)

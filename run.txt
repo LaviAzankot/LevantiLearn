@@ -1,5 +1,5 @@
 # Start working
-cd frontend; npx expo start         ← starts Expo only, backend is already live
+cd frontend; npx expo start --clear         ← starts Expo only, backend is already live
 
 # After making changes
 git add .

@@ -144,6 +144,22 @@ function AudioProgressRing({
   );
 }
 
+// ── Stage label metadata ──────────────────────────────────────────────────────
+const STAGE_LABELS: Record<string, { label: string; icon: IoniconName }> = {
+  'listen_repeat':           { label: 'האזן וחזור',       icon: 'volume-medium' },
+  'choose_translation':      { label: 'בחר תרגום',         icon: 'language-outline' },
+  'write_translation':       { label: 'מה המילה בערבית?',  icon: 'create-outline' },
+  'dialogue':                { label: 'דיאלוג',             icon: 'chatbubbles-outline' },
+  'match_pairs':             { label: 'התאם זוגות',         icon: 'link-outline' },
+  'listen_choose':           { label: 'האזן ובחר',          icon: 'ear-outline' },
+  'sentence_build':          { label: 'בנה משפט',           icon: 'reorder-three-outline' },
+  'sentence_complete':       { label: 'השלם משפט',          icon: 'text-outline' },
+  'cultural_note':           { label: 'ידעת?',              icon: 'sparkles' },
+  'shadowing':               { label: 'חקה את ההגייה',      icon: 'mic-outline' },
+  'listening_comprehension': { label: 'האזן וענה',          icon: 'headset-outline' },
+  'idiom_card':              { label: 'ביטוי חשוב',         icon: 'chatbubble-ellipses-outline' },
+};
+
 // ═════════════════════════════════════════════════════════════════════════════
 export default function LessonScreen() {
   const { id }   = useLocalSearchParams<{ id: string }>();
@@ -178,6 +194,7 @@ export default function LessonScreen() {
   const [buildSlots,        setBuildSlots]        = useState<string[]>([]);
   const [buildAvailable,    setBuildAvailable]    = useState<boolean[]>([]);
   const [buildWrong,        setBuildWrong]        = useState(false);
+  const [shadowPhase,       setShadowPhase]       = useState<'idle' | 'playing' | 'ready' | 'recording' | 'correct' | 'wrong'>('idle');
 
   // ── Audio / recording refs ────────────────────────────────────────────────
   const audioSoundRef     = useRef<Audio.Sound | null>(null);
@@ -426,6 +443,9 @@ export default function LessonScreen() {
       if (stg.type === 'sentence_build' && stg.words?.length) {
         map[idx] = shuffleArray([...stg.words]);
       }
+      if (stg.type === 'listening_comprehension' && stg.options?.length) {
+        map[idx] = { options: shuffleArray([...(stg.options ?? [])]) };
+      }
       // sentence_complete: word chips from lesson words
       if (stg.type === 'sentence_complete' && stg.gap_word_id) {
         const correctId = stg.gap_word_id;
@@ -457,24 +477,36 @@ export default function LessonScreen() {
     if (!expandedLesson) return;
     const stg = (expandedLesson.stages ?? [])[stage];
     let text: string | null = null;
-    if (stg?.type === 'listen_repeat')      text = stg.arabic;
+    if (stg?.type === 'listen_repeat')           text = stg.arabic;
     else if (stg?.type === 'choose_translation') text = stg.arabic;
     else if (stg?.type === 'write_translation')  text = stg.arabic;
     else if (stg?.type === 'sentence_build')     text = stg.sentence_arabic;
+    else if (stg?.type === 'shadowing')          { setShadowPhase('idle'); text = null; }
+    else if (stg?.type === 'listening_comprehension') text = stg.audio_text;
     if (!text) return;
     playAudio(text);
   }, [stage, qIndex, expandedLesson, playAudio]);
 
-  // ── STT result handler (listen_repeat) ────────────────────────────────────
+  // ── STT result handler (listen_repeat + shadowing) ───────────────────────
   useEffect(() => {
     const stg = (expandedLesson?.stages ?? [])[stage];
-    if (!speechResult || stg?.type !== 'listen_repeat') return;
-    if (speechResult.score >= 50) {
-      setListenPhase('correct');
-      setTimeout(() => { goNextStage(); setListenPhase('speak'); setSpeechResult(null); }, 1400);
-    } else {
-      setListenPhase('wrong');
-      setTimeout(() => { setListenPhase('speak'); setSpeechResult(null); }, 1200);
+    if (!speechResult) return;
+    if (stg?.type === 'listen_repeat') {
+      if (speechResult.score >= 50) {
+        setListenPhase('correct');
+        setTimeout(() => { goNextStage(); setListenPhase('speak'); setSpeechResult(null); }, 1400);
+      } else {
+        setListenPhase('wrong');
+        setTimeout(() => { setListenPhase('speak'); setSpeechResult(null); }, 1200);
+      }
+    } else if (stg?.type === 'shadowing' && shadowPhase === 'recording') {
+      if (speechResult.score >= 50) {
+        setShadowPhase('correct');
+        setTimeout(() => { goNextStage(); setShadowPhase('idle'); setSpeechResult(null); }, 1400);
+      } else {
+        setShadowPhase('wrong');
+        setTimeout(() => { setShadowPhase('idle'); setSpeechResult(null); }, 1200);
+      }
     }
   }, [speechResult]);
 
@@ -521,6 +553,7 @@ export default function LessonScreen() {
     setQIndex(0); setDialogueStep(0); setAudioProgress(0);
     setDialogueMicState('idle'); setDialogueFailCount(0);
     setLastTranscript(''); setBuildSlots([]); setBuildAvailable([]); setBuildWrong(false);
+    setShadowPhase('idle');
   };
 
   const goNextStage = useCallback(() => {
@@ -550,15 +583,19 @@ export default function LessonScreen() {
   const currentLines       = currentStage?.type === 'dialogue' ? (currentStage.lines ?? []) : [];
   const currentDialogueLine = currentLines[dialogueStep];
   const isActiveUserTurn   = !!(currentDialogueLine?.is_user_turn && dialogueStep < currentLines.length);
-  const showFloatingMic    = currentStage?.type === 'listen_repeat' || isActiveUserTurn;
+  const isShadowingTurn    = currentStage?.type === 'shadowing' && (shadowPhase === 'recording' || shadowPhase === 'ready' || shadowPhase === 'correct' || shadowPhase === 'wrong');
+  const showFloatingMic    = currentStage?.type === 'listen_repeat' || isActiveUserTurn || isShadowingTurn;
 
   const micIsRecording = (currentStage?.type === 'listen_repeat' && listenPhase === 'recording') ||
-                         (isActiveUserTurn && dialogueMicState === 'recording');
-  const micIsScoring   = isActiveUserTurn && dialogueMicState === 'scoring';
+                         (isActiveUserTurn && dialogueMicState === 'recording') ||
+                         (currentStage?.type === 'shadowing' && shadowPhase === 'recording');
+  const micIsScoring   = (isActiveUserTurn && dialogueMicState === 'scoring');
   const micIsCorrect   = (currentStage?.type === 'listen_repeat' && listenPhase === 'correct') ||
-                         (isActiveUserTurn && dialogueMicState === 'correct');
+                         (isActiveUserTurn && dialogueMicState === 'correct') ||
+                         (currentStage?.type === 'shadowing' && shadowPhase === 'correct');
   const micIsWrong     = (currentStage?.type === 'listen_repeat' && listenPhase === 'wrong') ||
-                         (isActiveUserTurn && dialogueMicState === 'wrong');
+                         (isActiveUserTurn && dialogueMicState === 'wrong') ||
+                         (currentStage?.type === 'shadowing' && shadowPhase === 'wrong');
   const micColor       = micIsWrong ? c.wrong : c.primary;
   const showPassLink   = isActiveUserTurn && dialogueFailCount >= PASS_AFTER_FAILS && !micIsRecording && !micIsScoring;
 
@@ -566,6 +603,14 @@ export default function LessonScreen() {
     if (currentStage?.type === 'listen_repeat') {
       if (listenPhase === 'recording') stopRecording();
       else if (listenPhase === 'speak') startRecording(currentStage.arabic);
+    } else if (currentStage?.type === 'shadowing') {
+      if (shadowPhase === 'recording') {
+        finishListenRepeatRecording();
+        setShadowPhase('idle');
+      } else if (shadowPhase === 'ready') {
+        startRecording(currentStage.sentence_arabic);
+        setShadowPhase('recording');
+      }
     } else if (isActiveUserTurn) {
       if (dialogueMicState === 'recording') stopDialogueRecording();
       else if (dialogueMicState === 'idle') startDialogueRecording(currentDialogueLine);
@@ -699,8 +744,6 @@ export default function LessonScreen() {
     const stg = currentStage;
     return (
       <View style={s.stageWrap}>
-        <Text style={[s.stageLabel, { color: c.label }]}>Listen & Repeat</Text>
-
         <TouchableOpacity
           onPress={() => playAudio(stg.arabic)}
           activeOpacity={0.92}
@@ -735,7 +778,6 @@ export default function LessonScreen() {
     const isLocked = lockedAnswer !== null;
     return (
       <View style={s.stageWrap}>
-        <Text style={[s.stageLabel, { color: c.label }]}>Choose the right translation</Text>
         <View style={s.audioRow}>
           <AudioProgressRing
             progress={audioProgress} size={52}
@@ -807,8 +849,6 @@ export default function LessonScreen() {
 
     return (
       <View style={[s.stageWrap, { flex: 1 }]}>
-        <Text style={[s.stageLabel, { color: c.label }]}>What is the Arabic word?</Text>
-
         {/* Word display centred in available space */}
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', gap: 16 }}>
           <WordIcon icon={stg.icon} iconColor={stg.icon_color} size={148} />
@@ -869,10 +909,6 @@ export default function LessonScreen() {
 
     return (
       <View style={s.stageWrap}>
-        <Text style={[s.stageLabel, { color: c.label }]}>
-          {stg.context_label ?? 'Dialogue — listen and respond'}
-        </Text>
-
         <View style={s.dialogueThread}>
           {lines.map((line: any, idx: number) => {
             if (idx > dialogueStep) return null;
@@ -996,7 +1032,6 @@ export default function LessonScreen() {
     const allMatched    = matchedIds.length === pairs.length && pairs.length > 0;
     return (
       <View style={s.stageWrap}>
-        <Text style={[s.stageLabel, { color: c.label }]}>Match words to translations</Text>
         <Text style={[s.matchCounter, { color: c.label }]}>{matchedIds.length} / {pairs.length} matched</Text>
         <View style={s.matchGrid}>
           <View style={s.matchCol}>
@@ -1069,7 +1104,6 @@ export default function LessonScreen() {
     const isLocked = lockedAnswer !== null;
     return (
       <View style={s.stageWrap}>
-        <Text style={[s.stageLabel, { color: c.label }]}>Listen & Choose</Text>
         <View style={{ alignItems: 'center', marginBottom: 12 }}>
           <AudioProgressRing
             progress={audioProgress} size={86}
@@ -1191,8 +1225,6 @@ export default function LessonScreen() {
 
     return (
       <View style={s.stageWrap}>
-        <Text style={[s.stageLabel, { color: c.label }]}>Build the sentence</Text>
-
         <Text style={[s.dialogueArabic, { color: c.text, textAlign: 'center', fontSize: 22, marginBottom: 16 }]}>
           {stg.sentence_hebrew}
         </Text>
@@ -1270,8 +1302,6 @@ export default function LessonScreen() {
     const stg = currentStage;
     return (
       <View style={[s.stageWrap, { flex: 1 }]}>
-        <Text style={[s.stageLabel, { color: c.label }]}>Did You Know?</Text>
-
         <View style={{ flex: 1, justifyContent: 'center', paddingHorizontal: 4 }}>
           {/* Icon */}
           <View style={{ alignItems: 'center', marginBottom: 28 }}>
@@ -1322,8 +1352,6 @@ export default function LessonScreen() {
 
     return (
       <View style={s.stageWrap}>
-        <Text style={[s.stageLabel, { color: c.label }]}>Complete the sentence</Text>
-
         {/* Arabic sentence with gap — tap any word to hear it */}
         <View style={[s.sentenceCard, { backgroundColor: c.card }]}>
           <TouchableOpacity onPress={() => playAudio(stg.arabic_context ?? '')} activeOpacity={0.8}>
@@ -1384,17 +1412,221 @@ export default function LessonScreen() {
     );
   };
 
+  // ── Shadowing ─────────────────────────────────────────────────────────────
+  const renderShadowing = () => {
+    const stg = currentStage;
+    const isPlaying = shadowPhase === 'playing';
+    return (
+      <View style={[s.stageWrap, { alignItems: 'center' }]}>
+        <View style={{ alignItems: 'center', marginBottom: 28 }}>
+          <AudioProgressRing
+            progress={isPlaying ? audioProgress : 0}
+            size={72}
+            ringColor={c.primary} trackColor={c.border}
+            onPress={() => {
+              if (shadowPhase !== 'playing') {
+                setShadowPhase('playing');
+                playAudio(stg.sentence_arabic, () => {
+                  setShadowPhase('ready');
+                  setTimeout(() => {
+                    startRecording(stg.sentence_arabic);
+                    setShadowPhase('recording');
+                  }, 800);
+                });
+              }
+            }}
+          >
+            <View style={[s.audioInner, { backgroundColor: isPlaying ? c.primary : c.card, width: 56, height: 56, borderRadius: 28 }]}>
+              <Ionicons name={isPlaying ? 'volume-high' : 'play'} size={24} color={isPlaying ? '#fff' : c.primary} />
+            </View>
+          </AudioProgressRing>
+        </View>
+
+        <Text style={[s.arabicLarge, { color: c.text, fontSize: 34, lineHeight: 50 }]} adjustsFontSizeToFit>
+          {stg.sentence_arabic}
+        </Text>
+        {stg.hebrew_pronunciation && (
+          <Text style={[s.pronText, { color: c.label }]}>[{stg.hebrew_pronunciation}]</Text>
+        )}
+        <Text style={[s.hebrewText, { color: c.text }]}>{stg.sentence_hebrew}</Text>
+
+        {shadowPhase === 'idle' && (
+          <Text style={[s.micHint, { color: c.label, marginTop: 8 }]}>לחץ על הכפתור להאזנה</Text>
+        )}
+        {shadowPhase === 'ready' && (
+          <Text style={[s.micHint, { color: c.primary, fontWeight: '700', marginTop: 8 }]}>עכשיו חזור אחרי!</Text>
+        )}
+        {shadowPhase === 'correct' && (
+          <View style={{ alignItems: 'center', marginTop: 16, gap: 8 }}>
+            <Ionicons name="checkmark-circle" size={48} color={c.right} />
+            <Text style={{ color: c.right, fontSize: 18, fontWeight: '800' }}>מעולה!</Text>
+          </View>
+        )}
+        {shadowPhase === 'wrong' && (
+          <View style={{ alignItems: 'center', marginTop: 16, gap: 8 }}>
+            <Ionicons name="close-circle" size={48} color={c.wrong} />
+            <Text style={{ color: c.wrong, fontSize: 18, fontWeight: '700' }}>נסה שוב</Text>
+          </View>
+        )}
+      </View>
+    );
+  };
+
+  // ── Listening Comprehension ───────────────────────────────────────────────
+  const renderListeningComprehension = () => {
+    const stg      = currentStage;
+    const shuffled = shuffledMap[stage];
+    const options  = shuffled?.options ?? stg.options ?? [];
+    const isLocked = lockedAnswer !== null;
+
+    return (
+      <View style={s.stageWrap}>
+        <View style={{ alignItems: 'center', marginBottom: 20 }}>
+          <AudioProgressRing
+            progress={audioProgress} size={86}
+            ringColor={c.primary} trackColor={c.border}
+            onPress={() => playAudio(stg.audio_text)}
+          >
+            <View style={{
+              width: 72, height: 72, borderRadius: 36,
+              backgroundColor: c.primary,
+              alignItems: 'center', justifyContent: 'center',
+              shadowColor: c.primary, shadowOpacity: 0.35,
+              shadowOffset: { width: 0, height: 6 }, shadowRadius: 14, elevation: 8,
+            }}>
+              <Ionicons name="headset" size={30} color="#fff" />
+            </View>
+          </AudioProgressRing>
+        </View>
+
+        <Text style={[s.lcQuestion, { color: c.text }]}>{stg.question_he}</Text>
+
+        <View style={s.lcOptionsList}>
+          {options.map((opt: any) => {
+            const isWrong   = wrongAnswers.includes(opt.id);
+            const isCorrect = isLocked && opt.correct;
+            if (isWrong) return null;
+            return (
+              <TouchableOpacity
+                key={opt.id}
+                style={[s.lcOption, {
+                  backgroundColor: isCorrect ? c.right + '15' : c.card,
+                  borderColor:     isCorrect ? c.right        : c.border,
+                  borderWidth: isCorrect ? 2 : 1.5,
+                }]}
+                onPress={() => {
+                  if (isLocked) return;
+                  if (opt.correct) {
+                    setLockedAnswer(opt.id);
+                    playFeedbackSound('correct');
+                    setTimeout(() => goNextStage(), 900);
+                  } else {
+                    playFeedbackSound('wrong');
+                    setWrongAnswers(w => [...w, opt.id]);
+                  }
+                }}
+                disabled={isLocked} activeOpacity={0.8}
+              >
+                {isCorrect && <Ionicons name="checkmark-circle" size={20} color={c.right} style={{ marginRight: 10 }} />}
+                <Text style={[s.lcOptionText, {
+                  color: isCorrect ? c.right : c.text,
+                  fontWeight: isCorrect ? '700' : '500',
+                }]}>{opt.hebrew}</Text>
+              </TouchableOpacity>
+            );
+          })}
+        </View>
+      </View>
+    );
+  };
+
+  // ── Idiom Card ────────────────────────────────────────────────────────────
+  const renderIdiomCard = () => {
+    const stg = currentStage;
+    return (
+      <View style={[s.stageWrap, { flex: 1 }]}>
+        <View style={{ flex: 1, justifyContent: 'center', paddingHorizontal: 4 }}>
+          <View style={{ alignItems: 'center', marginBottom: 20 }}>
+            <View style={[s.culturalNoteIcon, { backgroundColor: c.primary + '18' }]}>
+              <Ionicons name="chatbubble-ellipses" size={40} color={c.primary} />
+            </View>
+          </View>
+
+          <Text style={[s.idiomArabic, { color: c.text }]}>{stg.idiom_arabic}</Text>
+          {stg.idiom_hebrew && (
+            <Text style={[s.pronText, { color: c.label, fontStyle: 'italic', marginBottom: 20 }]}>
+              {stg.idiom_hebrew}
+            </Text>
+          )}
+
+          <View style={[s.idiomMeaningCard, { backgroundColor: c.card, borderColor: c.border }]}>
+            <View style={s.idiomMeaningRow}>
+              <Ionicons name="book-outline" size={16} color={c.label} />
+              <View style={{ flex: 1 }}>
+                <Text style={[s.idiomMeaningLabel, { color: c.label }]}>פשוטו כמשמעו</Text>
+                <Text style={[s.idiomMeaningText, { color: c.text }]}>{stg.literal_meaning_he}</Text>
+              </View>
+            </View>
+            <View style={[s.idiomDivider, { backgroundColor: c.border }]} />
+            <View style={s.idiomMeaningRow}>
+              <Ionicons name="bulb-outline" size={16} color={c.primary} />
+              <View style={{ flex: 1 }}>
+                <Text style={[s.idiomMeaningLabel, { color: c.label }]}>בפועל</Text>
+                <Text style={[s.idiomMeaningText, { color: c.text }]}>{stg.actual_meaning_he}</Text>
+              </View>
+            </View>
+          </View>
+
+          {stg.example_arabic && (
+            <View style={{ marginTop: 16 }}>
+              <Text style={[s.idiomMeaningLabel, { color: c.label, textAlign: 'center', marginBottom: 6 }]}>דוגמה</Text>
+              <Text style={[s.dialogueArabic, { color: c.text, textAlign: 'center', fontSize: 20 }]}>
+                {stg.example_arabic}
+              </Text>
+              <Text style={[s.pronText, { color: c.label }]}>{stg.example_hebrew}</Text>
+            </View>
+          )}
+
+          {stg.audio_text && (
+            <TouchableOpacity
+              style={[s.culturalNoteAudio, { borderColor: c.primary + '50', backgroundColor: c.primary + '10', marginTop: 16 }]}
+              onPress={() => playAudio(stg.audio_text)}
+              activeOpacity={0.8}
+            >
+              <Ionicons name="volume-high" size={18} color={c.primary} />
+              <Text style={[s.culturalNoteAudioText, { color: c.primary }]}>שמע דוגמה</Text>
+            </TouchableOpacity>
+          )}
+        </View>
+
+        <TouchableOpacity
+          style={[s.btn, { backgroundColor: c.primary, marginBottom: 8 }]}
+          onPress={goNextStage} activeOpacity={0.85}
+        >
+          <Text style={s.btnText}>המשך</Text>
+        </TouchableOpacity>
+      </View>
+    );
+  };
+
   // ── Main render ───────────────────────────────────────────────────────────
   return (
     <SafeAreaView style={[s.safe, { backgroundColor: c.background }]}>
       <View style={s.centeredWrapper}>
 
-        {/* ── Header row: [✕]  [spacer]  [←][→] ── */}
+        {/* ── Header row: [✕]  [topic + stage]  [←][→] ── */}
         <View style={[s.header, { backgroundColor: c.background }]}>
           <TouchableOpacity onPress={() => router.back()} style={s.headerBtn}>
             <Ionicons name="close" size={22} color={c.primary} />
           </TouchableOpacity>
-          <View style={{ flex: 1 }} />
+          <View style={s.headerCenter}>
+            <Text style={[s.headerTitle, { color: c.text }]} numberOfLines={1}>
+              {expandedLesson?.topic ?? ''}
+            </Text>
+            <Text style={[s.headerSubtitle, { color: c.label }]}>
+              שלב {stage + 1} מתוך {totalStages}
+            </Text>
+          </View>
           <View style={s.navGroup}>
             <TouchableOpacity
               onPress={goPrevStage}
@@ -1409,17 +1641,30 @@ export default function LessonScreen() {
           </View>
         </View>
 
-        {/* ── Progress bar with glow ── */}
+        {/* ── Progress bar with stage segments ── */}
         <View style={[s.progressTrack, { backgroundColor: c.border }]}>
-          <View style={[s.progressFill, {
-            width: `${progress * 100}%` as any,
-            backgroundColor: c.primary,
-            shadowColor: c.primary,
-            shadowOpacity: 0.5,
-            shadowOffset: { width: 0, height: 0 },
-            shadowRadius: 8,
-          }]} />
+          <View style={[s.progressFill, { width: `${progress * 100}%` as any, backgroundColor: c.primary }]} />
+          {Array.from({ length: totalStages - 1 }).map((_, i) => (
+            <View key={i} style={[s.progressSegment, {
+              left: `${((i + 1) / totalStages) * 100}%` as any,
+              backgroundColor: c.background,
+            }]} />
+          ))}
         </View>
+
+        {/* ── Stage pill label ── */}
+        {currentStage?.type && STAGE_LABELS[currentStage.type] && (
+          <View style={s.stagePillRow}>
+            <View style={[s.stagePill, { backgroundColor: c.primary + '18', borderColor: c.primary + '30' }]}>
+              <Ionicons name={STAGE_LABELS[currentStage.type].icon} size={13} color={c.primary} />
+              <Text style={[s.stagePillText, { color: c.primary }]}>
+                {currentStage.type === 'dialogue' && currentStage.context_label
+                  ? currentStage.context_label
+                  : STAGE_LABELS[currentStage.type].label}
+              </Text>
+            </View>
+          </View>
+        )}
 
         {/* ── Exercise content ── */}
         <Animated.View style={{ flex: 1, opacity: stageOpacity }}>
@@ -1435,8 +1680,11 @@ export default function LessonScreen() {
             {currentStage?.type === 'match_pairs'        && renderMatchPairs()}
             {currentStage?.type === 'listen_choose'      && renderListenChoose()}
             {currentStage?.type === 'sentence_build'     && renderSentenceBuild()}
-            {currentStage?.type === 'sentence_complete'  && renderSentenceComplete()}
-            {currentStage?.type === 'cultural_note'      && renderCulturalNote()}
+            {currentStage?.type === 'sentence_complete'        && renderSentenceComplete()}
+            {currentStage?.type === 'cultural_note'           && renderCulturalNote()}
+            {currentStage?.type === 'shadowing'               && renderShadowing()}
+            {currentStage?.type === 'listening_comprehension' && renderListeningComprehension()}
+            {currentStage?.type === 'idiom_card'              && renderIdiomCard()}
           </ScrollView>
         </Animated.View>
 
@@ -1516,19 +1764,48 @@ function ErrorScreen({ c, error, onBack }: any) {
 function CompleteScreen({ c, lesson, onHome }: any) {
   return (
     <SafeAreaView style={[s.safe, { backgroundColor: c.background, justifyContent: 'center', alignItems: 'center', padding: 32 }]}>
-      <Ionicons name="checkmark-circle" size={88} color={c.right} />
-      <Text style={{ color: c.text, fontSize: 30, fontWeight: '800', marginTop: 20, letterSpacing: -0.5 }}>
-        Lesson Complete!
-      </Text>
-      <Text style={{ color: c.label, fontSize: 17, marginTop: 8 }}>{lesson.topic}</Text>
       <View style={{
-        borderRadius: 50, backgroundColor: c.primary + '18',
-        paddingHorizontal: 36, paddingVertical: 12, marginTop: 24,
+        width: 110, height: 110, borderRadius: 55,
+        backgroundColor: c.primary + '15',
+        borderWidth: 2, borderColor: c.primary + '25',
+        alignItems: 'center', justifyContent: 'center',
+        shadowColor: c.primary, shadowOpacity: 0.2,
+        shadowOffset: { width: 0, height: 8 }, shadowRadius: 20, elevation: 6,
       }}>
-        <Text style={{ color: c.primary, fontSize: 22, fontWeight: '800' }}>+{lesson.xp_reward} XP</Text>
+        <Ionicons name="sparkles" size={54} color={c.primary} />
       </View>
-      <TouchableOpacity style={[s.btn, { backgroundColor: c.primary, marginTop: 36, paddingHorizontal: 48 }]} onPress={onHome}>
-        <Text style={s.btnText}>Back to Home</Text>
+
+      <Text style={{ color: c.text, fontSize: 38, fontWeight: '900', marginTop: 24, letterSpacing: -1, textAlign: 'center' }}>
+        כל הכבוד!
+      </Text>
+      <Text style={{ color: c.label, fontSize: 17, marginTop: 8, textAlign: 'center' }}>
+        סיימת את השיעור בהצלחה
+      </Text>
+      {lesson?.topic && (
+        <Text style={{ color: c.label, fontSize: 14, marginTop: 4, fontStyle: 'italic', textAlign: 'center' }}>
+          {lesson.topic}
+        </Text>
+      )}
+
+      <View style={{
+        borderRadius: 24, backgroundColor: c.primary + '12',
+        borderWidth: 1.5, borderColor: c.primary + '28',
+        paddingHorizontal: 44, paddingVertical: 22, marginTop: 36,
+        alignItems: 'center',
+        shadowColor: c.primary, shadowOpacity: 0.1,
+        shadowOffset: { width: 0, height: 4 }, shadowRadius: 16, elevation: 4,
+      }}>
+        <Text style={{ color: c.primary, fontSize: 32, fontWeight: '900' }}>+{lesson?.xp_reward ?? 50} XP</Text>
+        <Text style={{ color: c.primary + 'aa', fontSize: 13, fontWeight: '600', marginTop: 3 }}>ניקוד שנצבר</Text>
+      </View>
+
+      <TouchableOpacity
+        style={[s.btn, { backgroundColor: c.primary, marginTop: 40, paddingHorizontal: 48, alignSelf: 'stretch' }]}
+        onPress={onHome}
+        activeOpacity={0.87}
+      >
+        <Ionicons name="home-outline" size={20} color="#fff" />
+        <Text style={s.btnText}>חזרה לשיעורים</Text>
       </TouchableOpacity>
     </SafeAreaView>
   );
@@ -1577,21 +1854,26 @@ const s = StyleSheet.create({
   centeredWrapper: { flex: 1, maxWidth: 640, alignSelf: 'center', width: '100%' },
 
   // ── Header ──
-  header:     { flexDirection: 'row', alignItems: 'center', paddingHorizontal: 12, height: 60 },
-  headerBtn:  { width: 44, height: 44, borderRadius: 22, alignItems: 'center', justifyContent: 'center' },
-  navGroup:   { flexDirection: 'row', gap: 2 },
+  header:        { flexDirection: 'row', alignItems: 'center', paddingHorizontal: 12, height: 64 },
+  headerBtn:     { width: 44, height: 44, borderRadius: 22, alignItems: 'center', justifyContent: 'center' },
+  headerCenter:  { flex: 1, alignItems: 'center', justifyContent: 'center' },
+  headerTitle:   { fontSize: 15, fontWeight: '700', textAlign: 'center', letterSpacing: -0.2 },
+  headerSubtitle:{ fontSize: 11, fontWeight: '500', textAlign: 'center', marginTop: 1 },
+  navGroup:      { flexDirection: 'row', gap: 2 },
 
   // ── Progress bar ──
-  progressTrack: { height: 4, width: '100%', overflow: 'hidden', borderRadius: 4 },
-  progressFill:  { height: '100%', borderRadius: 4 },
+  progressTrack:   { height: 7, width: '100%', overflow: 'hidden', borderRadius: 4, position: 'relative' as any },
+  progressFill:    { height: '100%', borderRadius: 4 },
+  progressSegment: { position: 'absolute' as any, top: 0, bottom: 0, width: 1.5 },
+
+  // ── Stage pill ──
+  stagePillRow:  { alignItems: 'center', paddingTop: 14, paddingBottom: 2 },
+  stagePill:     { flexDirection: 'row', alignItems: 'center', gap: 6, borderWidth: 1, borderRadius: 50, paddingHorizontal: 14, paddingVertical: 6 },
+  stagePillText: { fontSize: 13, fontWeight: '700' },
 
   // ── Scroll content ──
   content:   { paddingHorizontal: 24, paddingBottom: 64, paddingTop: 16 },
   stageWrap: { paddingTop: 4 },
-  stageLabel: {
-    fontSize: 12, textAlign: 'center', marginBottom: 28,
-    textTransform: 'uppercase', letterSpacing: 1.8, fontWeight: '600',
-  },
 
   // ── Audio ──
   audioInner: { width: 40, height: 40, borderRadius: 20, alignItems: 'center', justifyContent: 'center' },
@@ -1735,4 +2017,18 @@ const s = StyleSheet.create({
   culturalNoteText:      { fontSize: 15, lineHeight: 24, textAlign: 'center' },
   culturalNoteAudio:     { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 8, borderWidth: 1.5, borderRadius: 50, paddingHorizontal: 20, paddingVertical: 10, alignSelf: 'center' },
   culturalNoteAudioText: { fontSize: 14, fontWeight: '600' },
+
+  // Listening comprehension
+  lcQuestion:    { fontSize: 20, fontWeight: '700', textAlign: 'center', marginBottom: 24, lineHeight: 30 },
+  lcOptionsList: { gap: 12 },
+  lcOption:      { flexDirection: 'row', alignItems: 'center', borderRadius: 16, paddingVertical: 16, paddingHorizontal: 20, shadowColor: '#a0846a', shadowOpacity: 0.07, shadowOffset: { width: 0, height: 2 }, shadowRadius: 8, elevation: 2 },
+  lcOptionText:  { fontSize: 17, flex: 1 },
+
+  // Idiom card
+  idiomArabic:      { fontSize: 36, fontWeight: '900', textAlign: 'center', marginBottom: 6, lineHeight: 52 },
+  idiomMeaningCard: { borderRadius: 20, borderWidth: 1.5, padding: 20, gap: 12, shadowColor: '#a0846a', shadowOpacity: 0.07, shadowOffset: { width: 0, height: 3 }, shadowRadius: 10, elevation: 2 },
+  idiomMeaningRow:  { flexDirection: 'row', alignItems: 'flex-start', gap: 12 },
+  idiomMeaningLabel:{ fontSize: 11, fontWeight: '600', textTransform: 'uppercase', letterSpacing: 1, marginBottom: 2 },
+  idiomMeaningText: { fontSize: 16, fontWeight: '600', lineHeight: 22 },
+  idiomDivider:     { height: 1 },
 });

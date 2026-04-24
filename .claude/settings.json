@@ -9,6 +9,19 @@
           }
         ]
       }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "timeout": 60,
+            "statusMessage": "Pushing backend changes to Railway...",
+            "command": "file=$(jq -r '.tool_input.file_path // \"\"'); echo \"$file\" | grep -q 'backend/' && git -C \"/c/Users/tomer/OneDrive/Desktop/WEB DEVELOPMENT/LevantiLearn\" add -A && git -C \"/c/Users/tomer/OneDrive/Desktop/WEB DEVELOPMENT/LevantiLearn\" commit -m \"chore: auto-commit backend changes\" && git -C \"/c/Users/tomer/OneDrive/Desktop/WEB DEVELOPMENT/LevantiLearn\" push origin main 2>/dev/null || true"
+          }
+        ]
+      }
     ]
   }
 }
