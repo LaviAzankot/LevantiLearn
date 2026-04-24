@@ -2,45 +2,159 @@
   "lesson_id": "cafe_001",
   "topic": "At the Café",
   "topic_ar": "في المقهى",
-  "level": "beginner",
+  "level": "A1",
+  "cefr": "A1",
+  "communicative_goal": "Order a drink at a Levantine café, ask the price, and thank politely",
   "xp_reward": 35,
-  "estimated_minutes": 9,
+  "estimated_minutes": 20,
+  "phase": 1,
   "thumbnail_url": "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=600&h=280&fit=crop&auto=format",
 
   "words": {
-    "w001": { "arabic": "قَهْوَة",       "arabic_plain": "قهوة",       "hebrew_pronunciation": "קַהְוֶה",       "hebrew": "קפה",              "icon": "cafe-outline",    "icon_color": "#8B4513", "letter_blocks": ["ق", "ه", "و", "ة"] },
-    "w002": { "arabic": "شاي",           "arabic_plain": "شاي",        "hebrew_pronunciation": "שַׁאי",          "hebrew": "תה",               "icon": "cafe-outline",    "icon_color": "#34C759", "letter_blocks": ["ش", "ا", "ي"] },
-    "w003": { "arabic": "مَاي",          "arabic_plain": "ماي",        "hebrew_pronunciation": "מַאי",           "hebrew": "מים",              "icon": "water-outline",   "icon_color": "#007AFF", "letter_blocks": ["م", "ا", "ي"] },
-    "w004": { "arabic": "عَصِير",        "arabic_plain": "عصير",       "hebrew_pronunciation": "עַצִּיר",        "hebrew": "מיץ",              "icon": "nutrition-outline","icon_color": "#FF9500", "letter_blocks": ["ع", "ص", "ي", "ر"] },
-    "w005": { "arabic": "بَدِّي",        "arabic_plain": "بدي",        "hebrew_pronunciation": "בַּדִּי",        "hebrew": "אני רוצה",         "icon": "hand-left-outline","icon_color": "#FF6B35", "letter_blocks": ["ب", "د", "ي"] },
-    "w006": { "arabic": "بِكَم هَاد؟",  "arabic_plain": "بكم هاد",    "hebrew_pronunciation": "בִּכַּם הַאד?",  "hebrew": "כמה עולה זה?",    "icon": "pricetag-outline", "icon_color": "#AF52DE", "letter_blocks": ["ب", "ك", "م", "ه", "ا", "د"] },
-    "w007": { "arabic": "تَفَضَّل",      "arabic_plain": "تفضل",       "hebrew_pronunciation": "תְפַצַּל",       "hebrew": "הנה לך / בבקשה",  "icon": "gift-outline",    "icon_color": "#FF3B30", "letter_blocks": ["ت", "ف", "ض", "ل"] },
-    "w008": { "arabic": "لَوْ سَمَحْت", "arabic_plain": "لو سمحت",    "hebrew_pronunciation": "לוֹ סַמַּחְת",  "hebrew": "בבקשה / סליחה",   "icon": "hand-right-outline","icon_color": "#5856D6","letter_blocks": ["ل", "و", "س", "م", "ح", "ت"] }
+    "w001": {
+      "arabic": "قَهْوَة",
+      "arabic_plain": "قهوة",
+      "hebrew_pronunciation": "קַהְוֶה",
+      "hebrew": "קפה",
+      "icon": "cafe-outline",
+      "icon_color": "#8B4513",
+      "letter_blocks": ["ق","ه","و","ة"],
+      "frequency": "core",
+      "dialect_note": null,
+      "chunk": false
+    },
+    "w002": {
+      "arabic": "شاي",
+      "arabic_plain": "شاي",
+      "hebrew_pronunciation": "שַׁאי",
+      "hebrew": "תה",
+      "icon": "cafe-outline",
+      "icon_color": "#34C759",
+      "letter_blocks": ["ش","ا","ي"],
+      "frequency": "core",
+      "dialect_note": null,
+      "chunk": false
+    },
+    "w003": {
+      "arabic": "مَاي",
+      "arabic_plain": "ماي",
+      "hebrew_pronunciation": "מַאי",
+      "hebrew": "מים",
+      "icon": "water-outline",
+      "icon_color": "#007AFF",
+      "letter_blocks": ["م","ا","ي"],
+      "frequency": "core",
+      "dialect_note": "בסוריה ולבנון לעיתים 'مي' — אותה משמעות",
+      "chunk": false
+    },
+    "w004": {
+      "arabic": "عَصِير",
+      "arabic_plain": "عصير",
+      "hebrew_pronunciation": "עַצִּיר",
+      "hebrew": "מיץ",
+      "icon": "nutrition-outline",
+      "icon_color": "#FF9500",
+      "letter_blocks": ["ع","ص","ي","ر"],
+      "frequency": "common",
+      "dialect_note": null,
+      "chunk": false
+    },
+    "w005": {
+      "arabic": "بَدِّي",
+      "arabic_plain": "بدي",
+      "hebrew_pronunciation": "בַּדִּי",
+      "hebrew": "אני רוצה",
+      "icon": "hand-left-outline",
+      "icon_color": "#FF6B35",
+      "letter_blocks": ["ب","د","ي"],
+      "frequency": "core",
+      "dialect_note": "בלבנון: 'بدي' — זהה. בירדן: לעיתים 'بدي' או 'بدي أشيل'",
+      "chunk": false
+    },
+    "w006": {
+      "arabic": "بِكَم هاد؟",
+      "arabic_plain": "بكم هاد",
+      "hebrew_pronunciation": "בִּכַּם הַאד?",
+      "hebrew": "כמה עולה זה?",
+      "icon": "pricetag-outline",
+      "icon_color": "#AF52DE",
+      "letter_blocks": ["ب","ك","م","ه","ا","د"],
+      "frequency": "core",
+      "dialect_note": null,
+      "chunk": true
+    },
+    "w007": {
+      "arabic": "تَفَضَّل",
+      "arabic_plain": "تفضل",
+      "hebrew_pronunciation": "תְפַצַּל",
+      "hebrew": "הנה לך / בבקשה",
+      "icon": "gift-outline",
+      "icon_color": "#FF3B30",
+      "letter_blocks": ["ت","ف","ض","ل"],
+      "frequency": "core",
+      "dialect_note": "לאישה: 'تفضلي' (תְפַצְּלִי)",
+      "chunk": false
+    },
+    "w008": {
+      "arabic": "لَوْ سَمَحْت",
+      "arabic_plain": "لو سمحت",
+      "hebrew_pronunciation": "לוֹ סַמַּחְת",
+      "hebrew": "בבקשה / סליחה",
+      "icon": "hand-right-outline",
+      "icon_color": "#5856D6",
+      "letter_blocks": ["ل","و","س","م","ح","ت"],
+      "frequency": "core",
+      "dialect_note": "לאישה: 'لو سمحتي'",
+      "chunk": true
+    }
   },
 
   "stages": [
-    { "type": "listen_repeat", "word_id": "w001" },
-    { "type": "listen_repeat", "word_id": "w002" },
-    { "type": "listen_repeat", "word_id": "w003" },
-    { "type": "listen_repeat", "word_id": "w004" },
-    { "type": "listen_repeat", "word_id": "w005" },
-    { "type": "listen_repeat", "word_id": "w007" },
-    { "type": "listen_repeat", "word_id": "w008" },
+    {
+      "type": "micro_review",
+      "source_lesson": "greetings_001",
+      "arabic": "مَرْحَبَا",
+      "hebrew": "שלום / היי",
+      "icon": "hand-right",
+      "icon_color": "#FF9500",
+      "options": [
+        { "id": "r1", "arabic": "مَرْحَبَا", "hebrew": "שלום",        "icon": "hand-right",           "icon_color": "#FF9500", "correct": true },
+        { "id": "r2", "arabic": "شُكْراً",   "hebrew": "תודה",        "icon": "heart-outline",         "icon_color": "#34C759", "correct": false },
+        { "id": "r3", "arabic": "كِيفَك؟",   "hebrew": "מה שלומך?",   "icon": "chatbubble-ellipses-outline","icon_color": "#007AFF","correct": false },
+        { "id": "r4", "arabic": "يَلَّا",    "hebrew": "יאללה / בוא", "icon": "flash-outline",         "icon_color": "#FF3B30", "correct": false }
+      ]
+    },
 
-    { "type": "choose_translation", "word_id": "w001", "option_ids": ["w001", "w002", "w003", "w004"] },
-    { "type": "choose_translation", "word_id": "w005", "option_ids": ["w005", "w006", "w007", "w008"] },
-    { "type": "choose_translation", "word_id": "w007", "option_ids": ["w005", "w006", "w007", "w008"] },
-    { "type": "choose_translation", "word_id": "w006", "option_ids": ["w003", "w005", "w006", "w008"] },
+    { "type": "word_card", "word_id": "w001" },
+    { "type": "word_card", "word_id": "w002" },
+    { "type": "word_card", "word_id": "w003" },
+    { "type": "word_card", "word_id": "w005" },
+    { "type": "word_card", "word_id": "w006" },
+    { "type": "word_card", "word_id": "w007" },
+    { "type": "word_card", "word_id": "w008" },
 
-    { "type": "listen_choose", "items": [
-      { "word_id": "w001", "distractor_id": "w003" },
-      { "word_id": "w008", "distractor_id": "w007" }
-    ]},
+    {
+      "type": "listen_choose",
+      "items": [
+        { "word_id": "w001", "distractor_id": "w003" },
+        { "word_id": "w008", "distractor_id": "w007" }
+      ]
+    },
 
-    { "type": "write_translation", "word_id": "w001" },
+    { "type": "choose_translation", "word_id": "w001", "option_ids": ["w001","w002","w003","w004"] },
+    { "type": "choose_translation", "word_id": "w006", "option_ids": ["w005","w006","w007","w008"] },
+
+    { "type": "match_pairs", "word_ids": ["w001","w002","w003","w005","w007","w008"] },
+
     { "type": "write_translation", "word_id": "w005" },
+    { "type": "write_translation", "word_id": "w001" },
 
-    { "type": "match_pairs", "word_ids": ["w001", "w002", "w003", "w004", "w005", "w007", "w008"] },
+    {
+      "type": "sentence_build",
+      "sentence_hebrew": "אני רוצה קפה, בבקשה",
+      "sentence_arabic": "بَدِّي قَهْوَة، لَوْ سَمَحْت",
+      "words": ["بَدِّي","قَهْوَة،","لَوْ سَمَحْت"]
+    },
 
     {
       "type": "dialogue",
@@ -65,13 +179,6 @@
         {
           "speaker": "A",
           "name": "המלצר",
-          "arabic": "بِكَم هَاد؟",
-          "hebrew_pronunciation": "בִּכַּם הַאד?",
-          "hebrew": "כמה זה עולה?"
-        },
-        {
-          "speaker": "A",
-          "name": "המלצר",
           "arabic": "القَهْوَة بِخَمْسَة شَوَاقِل. تَفَضَّل!",
           "hebrew_pronunciation": "אַלְקַהְוֶה בִּחַמְסֶה שַׁוָּאקִיל. תְפַצַּל!",
           "hebrew": "הקפה בחמישה שקלים. הנה לך!"
@@ -89,22 +196,23 @@
     },
 
     {
-      "type": "sentence_complete",
-      "arabic_context": "بَدِّي",
-      "sentence_translation": "אני רוצה תה, בבקשה",
-      "gap_word_id": "w002",
-      "gap_word_id_list": ["w002", "w001", "w003", "w004"]
+      "type": "cultural_note",
+      "title": "המקהלה — לב החיים הלבנטיניים",
+      "body_hebrew": "בית הקפה (מקהלה) הוא מרכז החיים החברתיים בעולם הלבנטיני. יושבים שם שעות, שותים קפה טורקי שחור או מיץ טרי ומדברים. 'تَفَضَّل' אומרים כשנותנים משהו — כמו 'הנה לך'. 'لَوْ سَمَحْت' הוא 'בבקשה' כשמבקשים משהו.",
+      "audio_text": "بدي قهوة، لو سمحت. بكم هاد؟"
     },
 
     {
-      "type": "cultural_note",
-      "title": "המקהלה — לב החיים הלבנטיניים",
-      "body_hebrew": "בית הקפה (מקהלה) הוא מרכז החיים החברתיים בעולם הלבנטיני. יושבים שם שעות, שותים קפה טורקי שחור או מיץ טרי, ומדברים. 'תְפַצַּל' (تفضل) פירושו 'הנה לך' או 'בבקשה' — כאשר נותנים לך משהו. 'לוֹ סַמַּחְת' הוא 'בבקשה' כשמבקשים משהו.",
-      "audio_text": "بدي قهوة، لو سمحت"
+      "type": "mastery_check",
+      "items": [
+        { "prompt_he": "כיצד אומרים 'אני רוצה קפה'?", "word_id": "w005", "mode": "choose", "option_ids": ["w005","w006","w007","w008"] },
+        { "prompt_he": "כיצד שואלים 'כמה עולה זה'?", "word_id": "w006", "mode": "choose", "option_ids": ["w001","w004","w006","w008"] },
+        { "prompt_he": "כיצד אומרים 'בבקשה / סליחה' כשמבקשים?", "word_id": "w008", "mode": "choose", "option_ids": ["w005","w006","w007","w008"] }
+      ]
     }
   ],
 
-  "srs_words": ["قهوة", "شاي", "ماي", "عصير", "بدي", "بكم هاد", "تفضل", "لو سمحت"],
+  "srs_words": ["قهوة","شاي","ماي","بدي","بكم هاد","تفضل","لو سمحت"],
   "next_lesson": "colors_001",
-  "related_topics": ["market_001", "numbers_001"]
+  "related_topics": ["market_001","numbers_001"]
 }
