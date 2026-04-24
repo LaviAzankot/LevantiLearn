@@ -1,2 +1,8 @@
-Run to start the project:
-.\start-dev.ps1
+# Start working
+cd frontend; npx expo start         ← starts Expo only, backend is already live
+
+# After making changes
+git add .
+git commit -m "describe what you changed"
+git push                 ← Railway auto-deploys backend in ~2 min
+                         ← frontend changes are instant (just save + Expo hot-reloads)

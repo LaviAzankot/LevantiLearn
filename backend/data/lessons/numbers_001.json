@@ -1,0 +1,109 @@
+{
+  "lesson_id": "numbers_001",
+  "topic": "Numbers 1–10",
+  "topic_ar": "أرقام ١–١٠",
+  "level": "beginner",
+  "xp_reward": 30,
+  "estimated_minutes": 8,
+  "thumbnail_url": "https://images.unsplash.com/photo-1509228627152-72ae9ae6848d?w=600&h=280&fit=crop&auto=format",
+
+  "words": {
+    "w001": { "arabic": "وَاحَد",  "arabic_plain": "واحد",  "hebrew_pronunciation": "וָאחַד",   "hebrew": "אחד (1)",   "icon": "calculator-outline", "icon_color": "#FF9500", "letter_blocks": ["و", "ا", "ح", "د"] },
+    "w002": { "arabic": "اثْنِين", "arabic_plain": "اثنين", "hebrew_pronunciation": "אִתְנֵיין", "hebrew": "שניים (2)", "icon": "calculator-outline", "icon_color": "#FF9500", "letter_blocks": ["ا", "ث", "ن", "ي"] },
+    "w003": { "arabic": "تَلاتَة", "arabic_plain": "تلاتة", "hebrew_pronunciation": "תְלָאתֶה",  "hebrew": "שלושה (3)", "icon": "calculator-outline", "icon_color": "#FF9500", "letter_blocks": ["ت", "ل", "ا", "ة"] },
+    "w004": { "arabic": "أَرْبَعَة","arabic_plain": "أربعة", "hebrew_pronunciation": "אַרְבַּעָה", "hebrew": "ארבעה (4)", "icon": "calculator-outline", "icon_color": "#FF9500", "letter_blocks": ["أ", "ر", "ب", "ة"] },
+    "w005": { "arabic": "خَمْسَة", "arabic_plain": "خمسة",  "hebrew_pronunciation": "חַמְסֶה",  "hebrew": "חמישה (5)", "icon": "calculator-outline", "icon_color": "#FF9500", "letter_blocks": ["خ", "م", "س", "ة"] },
+    "w006": { "arabic": "سِتَّة",  "arabic_plain": "ستة",   "hebrew_pronunciation": "סִתָּה",    "hebrew": "שישה (6)",  "icon": "calculator-outline", "icon_color": "#5856D6", "letter_blocks": ["س", "ت", "ة"] },
+    "w007": { "arabic": "سَبْعَة", "arabic_plain": "سبعة",  "hebrew_pronunciation": "סַבְּעָה",  "hebrew": "שבעה (7)",  "icon": "calculator-outline", "icon_color": "#5856D6", "letter_blocks": ["س", "ب", "ع", "ة"] },
+    "w008": { "arabic": "تَمانِيَة","arabic_plain": "تمانية","hebrew_pronunciation": "תְמָאנְיֶה", "hebrew": "שמונה (8)", "icon": "calculator-outline", "icon_color": "#5856D6", "letter_blocks": ["ت", "م", "ا", "ة"] },
+    "w009": { "arabic": "تِسْعَة", "arabic_plain": "تسعة",  "hebrew_pronunciation": "תִּסְעָה",  "hebrew": "תשעה (9)",  "icon": "calculator-outline", "icon_color": "#5856D6", "letter_blocks": ["ت", "س", "ع", "ة"] },
+    "w010": { "arabic": "عَشَرَة", "arabic_plain": "عشرة",  "hebrew_pronunciation": "עַשַׁרֶה",  "hebrew": "עשרה (10)", "icon": "calculator-outline", "icon_color": "#34C759", "letter_blocks": ["ع", "ش", "ر", "ة"] }
+  },
+
+  "stages": [
+    { "type": "listen_repeat", "word_id": "w001" },
+    { "type": "listen_repeat", "word_id": "w002" },
+    { "type": "listen_repeat", "word_id": "w003" },
+    { "type": "listen_repeat", "word_id": "w004" },
+    { "type": "listen_repeat", "word_id": "w005" },
+    { "type": "listen_repeat", "word_id": "w006" },
+    { "type": "listen_repeat", "word_id": "w007" },
+    { "type": "listen_repeat", "word_id": "w008" },
+    { "type": "listen_repeat", "word_id": "w009" },
+    { "type": "listen_repeat", "word_id": "w010" },
+
+    { "type": "choose_translation", "word_id": "w001", "option_ids": ["w001", "w003", "w005", "w007"] },
+    { "type": "choose_translation", "word_id": "w005", "option_ids": ["w003", "w005", "w007", "w009"] },
+    { "type": "choose_translation", "word_id": "w008", "option_ids": ["w006", "w007", "w008", "w010"] },
+    { "type": "choose_translation", "word_id": "w010", "option_ids": ["w008", "w009", "w010", "w002"] },
+
+    { "type": "listen_choose", "items": [
+      { "word_id": "w003", "distractor_id": "w008" },
+      { "word_id": "w007", "distractor_id": "w002" }
+    ]},
+
+    { "type": "write_translation", "word_id": "w001" },
+    { "type": "write_translation", "word_id": "w005" },
+    { "type": "write_translation", "word_id": "w010" },
+
+    { "type": "match_pairs", "word_ids": ["w001", "w002", "w003", "w004", "w005"] },
+    { "type": "match_pairs", "word_ids": ["w006", "w007", "w008", "w009", "w010"] },
+
+    {
+      "type": "dialogue",
+      "context_label": "בשוק — כמה זה עולה?",
+      "lines": [
+        {
+          "speaker": "A",
+          "name": "בעל החנות",
+          "arabic": "أَهْلاً! بَدَّك إِشِي؟",
+          "hebrew_pronunciation": "אַהְלַן! בַּדַּק אִישִׁי?",
+          "hebrew": "אהלן! אתה רוצה משהו?"
+        },
+        {
+          "speaker": "B",
+          "is_user_turn": true,
+          "word_id": "w005",
+          "target_voweled": "خَمْسَة",
+          "full_arabic": "آه، بَدِّي خَمْسَة كِيلو بَنَدُورَة.",
+          "hebrew": "כן, אני רוצה חמישה קילו עגבניות.",
+          "hebrew_gap": "חמישה"
+        },
+        {
+          "speaker": "A",
+          "name": "בעל החנות",
+          "arabic": "بِعَشَرَة شَوَاقِل، تَفَضَّل!",
+          "hebrew_pronunciation": "בִּעַשַׁרֶה שַׁוָּאקִיל, תְפַצַּל!",
+          "hebrew": "בעשרה שקלים, הנה לך!"
+        },
+        {
+          "speaker": "B",
+          "is_user_turn": true,
+          "word_id": "w010",
+          "target_voweled": "عَشَرَة",
+          "full_arabic": "عَشَرَة؟ تَمَام، شُكْراً!",
+          "hebrew": "עשרה? בסדר, תודה!",
+          "hebrew_gap": "עשרה"
+        }
+      ]
+    },
+
+    {
+      "type": "sentence_build",
+      "sentence_hebrew": "אני רוצה חמישה מזה",
+      "sentence_arabic": "بَدِّي خَمْسَة مِن هَاد",
+      "words": ["بَدِّي", "خَمْسَة", "مِن", "هَاد"]
+    },
+
+    {
+      "type": "cultural_note",
+      "title": "ספירה בלבנטינית — כמה זה שונה מעברית?",
+      "body_hebrew": "בערבית מדוברת, המספרים קצת שונים מהספרותית. 'תלאתה' (3) ו'תמאניה' (8) הם הלבנטיניים לשלושה ושמונה. שימו לב: בשוק, לפני שאומרים מחיר, נאמר 'בְּ...' שאומר 'עולה...' (לדוגמה, 'בעשרה' = 'עולה עשרה').",
+      "audio_text": "واحد، اثنين، تلاتة، أربعة، خمسة"
+    }
+  ],
+
+  "srs_words": ["واحد", "اثنين", "تلاتة", "أربعة", "خمسة", "ستة", "سبعة", "تمانية", "تسعة", "عشرة"],
+  "next_lesson": "numbers_002",
+  "related_topics": ["numbers_002", "cafe_001", "market_001"]
+}

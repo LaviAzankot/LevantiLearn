@@ -1,6 +1,6 @@
 """
 Vocabulary API
-Queries the Maknuune Palestinian Arabic Lexicon
+Queries the Maknuune Arabic Lexicon
 (CC-BY-SA license — 36,000 entries)
 
 Dataset: https://github.com/CAMeL-Lab/maknuune
@@ -38,7 +38,7 @@ def load_maknuune() -> list[dict]:
                 "english": row.get("GLOSS", row.get("ENGLISH", "")),
                 "pos": row.get("POS", ""),
                 "root": row.get("ROOT", ""),
-                "dialect": "Palestinian",
+                "dialect": "Arabic",
                 "source": "Maknuune",
             })
     _vocab_cache = entries
@@ -51,7 +51,7 @@ class VocabEntry(BaseModel):
     english: str
     pos: str = ""
     root: str = ""
-    dialect: str = "Palestinian"
+    dialect: str = "Arabic"
     source: str = ""
 
 
@@ -60,7 +60,7 @@ def search_vocab(
     q: str = Query(..., min_length=1, description="Search in Arabic, English, or romanization"),
     limit: int = Query(20, ge=1, le=100),
 ):
-    """Search the Maknuune Palestinian lexicon."""
+    """Search the Maknuune Arabic lexicon."""
     vocab = load_maknuune()
     if not vocab:
         # Return sample entries if dataset not downloaded yet

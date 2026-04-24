@@ -148,11 +148,11 @@ pip install TTS
 python -c "from TTS.api import TTS; TTS('tts_models/ar/cv/vits')"
 ```
 
-### Option B: Azure TTS (Palestinian Arabic voice, $4/1M chars)
+### Option B: Azure TTS (Arabic voice, $4/1M chars)
 ```bash
 pip install azure-cognitiveservices-speech
 # Set AZURE_SPEECH_KEY in .env
-# Voice: ar-PS-SanaNeural (female) — native Palestinian Arabic
+# Voice: ar-PS-SanaNeural (female) — native Arabic (Levantine)
 ```
 
 ### Audio caching strategy:
@@ -165,7 +165,7 @@ pip install azure-cognitiveservices-speech
 ## 6. Maknuune Vocab Data Setup
 
 ```bash
-# Download CC-BY-SA Palestinian lexicon
+# Download CC-BY-SA Arabic lexicon
 wget https://github.com/CAMeL-Lab/maknuune/raw/main/maknuune.csv
 mv maknuune.csv backend/data/maknuune.csv
 

@@ -1,0 +1,102 @@
+{
+  "lesson_id": "family_001",
+  "topic": "Family",
+  "topic_ar": "العائلة",
+  "level": "beginner",
+  "xp_reward": 30,
+  "estimated_minutes": 8,
+  "thumbnail_url": "https://images.unsplash.com/photo-1511895426328-dc8714191011?w=600&h=280&fit=crop&auto=format",
+
+  "words": {
+    "w001": { "arabic": "أَبُو / أَبِي",  "arabic_plain": "أبو",  "hebrew_pronunciation": "אַבּוּ / אַבִּי",   "hebrew": "אבא / אבי",    "icon": "people-outline",  "icon_color": "#FF9500", "letter_blocks": ["أ", "ب", "و"] },
+    "w002": { "arabic": "إِمُّو / إِمِّي","arabic_plain": "إمو",  "hebrew_pronunciation": "אִמּוּ / אִמִּי",   "hebrew": "אמא / אמי",    "icon": "people-outline",  "icon_color": "#FF6B35", "letter_blocks": ["إ", "م", "و"] },
+    "w003": { "arabic": "أَخ",            "arabic_plain": "أخ",   "hebrew_pronunciation": "אַח",               "hebrew": "אח",            "icon": "people-outline",  "icon_color": "#34C759", "letter_blocks": ["أ", "خ"] },
+    "w004": { "arabic": "أُخْت",          "arabic_plain": "أخت",  "hebrew_pronunciation": "אֻחְּת",            "hebrew": "אחות",          "icon": "people-outline",  "icon_color": "#AF52DE", "letter_blocks": ["أ", "خ", "ت"] },
+    "w005": { "arabic": "جَد",            "arabic_plain": "جد",   "hebrew_pronunciation": "גַּד",              "hebrew": "סבא",           "icon": "person-outline",  "icon_color": "#8B4513", "letter_blocks": ["ج", "د"] },
+    "w006": { "arabic": "سِتُّو / سِتِّي","arabic_plain": "ستو",  "hebrew_pronunciation": "סִתּוּ / סִתִּי",   "hebrew": "סבתא",          "icon": "person-outline",  "icon_color": "#FF3B30", "letter_blocks": ["س", "ت", "و"] },
+    "w007": { "arabic": "عَمُّو",          "arabic_plain": "عمو",  "hebrew_pronunciation": "עַמּוּ",            "hebrew": "דוד (מאבא)",    "icon": "person-outline",  "icon_color": "#007AFF", "letter_blocks": ["ع", "م", "و"] },
+    "w008": { "arabic": "خَالُو",          "arabic_plain": "خالو", "hebrew_pronunciation": "חַאלוּ",            "hebrew": "דוד (מאמא)",    "icon": "person-outline",  "icon_color": "#5856D6", "letter_blocks": ["خ", "ا", "ل", "و"] }
+  },
+
+  "stages": [
+    { "type": "listen_repeat", "word_id": "w001" },
+    { "type": "listen_repeat", "word_id": "w002" },
+    { "type": "listen_repeat", "word_id": "w003" },
+    { "type": "listen_repeat", "word_id": "w004" },
+    { "type": "listen_repeat", "word_id": "w005" },
+    { "type": "listen_repeat", "word_id": "w006" },
+    { "type": "listen_repeat", "word_id": "w007" },
+
+    { "type": "choose_translation", "word_id": "w001", "option_ids": ["w001", "w002", "w005", "w006"] },
+    { "type": "choose_translation", "word_id": "w003", "option_ids": ["w003", "w004", "w007", "w008"] },
+    { "type": "choose_translation", "word_id": "w005", "option_ids": ["w001", "w002", "w005", "w006"] },
+    { "type": "choose_translation", "word_id": "w007", "option_ids": ["w003", "w004", "w007", "w008"] },
+
+    { "type": "listen_choose", "items": [
+      { "word_id": "w001", "distractor_id": "w002" },
+      { "word_id": "w003", "distractor_id": "w004" }
+    ]},
+
+    { "type": "write_translation", "word_id": "w001" },
+    { "type": "write_translation", "word_id": "w002" },
+
+    { "type": "match_pairs", "word_ids": ["w001", "w002", "w003", "w004", "w005", "w006", "w007", "w008"] },
+
+    {
+      "type": "dialogue",
+      "context_label": "הצגת המשפחה",
+      "lines": [
+        {
+          "speaker": "A",
+          "name": "רים",
+          "arabic": "عِنْدَك إِخْوَة؟",
+          "hebrew_pronunciation": "עִינְדַּק אִחְוֶה?",
+          "hebrew": "יש לך אחים?"
+        },
+        {
+          "speaker": "B",
+          "is_user_turn": true,
+          "word_id": "w003",
+          "target_voweled": "أَخ",
+          "full_arabic": "آه، عِنْدِي أَخ وِأُخْت.",
+          "hebrew": "כן, יש לי אח ואחות.",
+          "hebrew_gap": "אח"
+        },
+        {
+          "speaker": "A",
+          "name": "רים",
+          "arabic": "وَأَبُوك وَإِمَّك، وِيْن؟",
+          "hebrew_pronunciation": "וַאַבּוּק וַאִמָּק, וֵיין?",
+          "hebrew": "ואבא שלך ואמא שלך, איפה?"
+        },
+        {
+          "speaker": "B",
+          "is_user_turn": true,
+          "word_id": "w001",
+          "target_voweled": "أَبُو",
+          "full_arabic": "أَبُو وِإِمِّي فِي إِسْرائِيل.",
+          "hebrew": "אבא ואמא שלי בישראל.",
+          "hebrew_gap": "אבא"
+        }
+      ]
+    },
+
+    {
+      "type": "sentence_build",
+      "sentence_hebrew": "יש לי אח ואחות",
+      "sentence_arabic": "عِنْدِي أَخ وِأُخْت",
+      "words": ["عِنْدِي", "أَخ", "وِأُخْت"]
+    },
+
+    {
+      "type": "cultural_note",
+      "title": "משפחה בתרבות הלבנטינית — הכל ב-'עִינְדַּק'",
+      "body_hebrew": "בתרבות הלבנטינית, המשפחה היא הכל. שאלה ראשונה בהיכרות כמעט תמיד תכלול שאלות על המשפחה. 'עִינְדַּק אִחְוֶה?' (יש לך אחים?) היא שאלה רגילה לגמרי. 'אַבּוּ' = אבא שלו/שלה; 'אַבִּי' = אבא שלי — שימו לב להבדל בסיומת!",
+      "audio_text": "عندي أخ وأخت وأبو وإمو"
+    }
+  ],
+
+  "srs_words": ["أبو", "إمو", "أخ", "أخت", "جد", "ستو", "عمو", "خالو"],
+  "next_lesson": "market_001",
+  "related_topics": ["greetings_001", "conversation_001"]
+}

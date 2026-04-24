@@ -1,0 +1,101 @@
+{
+  "lesson_id": "days_001",
+  "topic": "Days of the Week",
+  "topic_ar": "أيام الأسبوع",
+  "level": "beginner",
+  "xp_reward": 30,
+  "estimated_minutes": 8,
+  "thumbnail_url": "https://images.unsplash.com/photo-1506784365847-bbad939e9501?w=600&h=280&fit=crop&auto=format",
+
+  "words": {
+    "w001": { "arabic": "السَّبْت",    "arabic_plain": "السبت",    "hebrew_pronunciation": "אַסַּבְּת",    "hebrew": "שבת",    "icon": "calendar-outline", "icon_color": "#FF9500", "letter_blocks": ["ا", "ل", "س", "ب", "ت"] },
+    "w002": { "arabic": "الأَحَد",     "arabic_plain": "الأحد",     "hebrew_pronunciation": "אַלְאַחַד",    "hebrew": "ראשון", "icon": "calendar-outline", "icon_color": "#FF6B35", "letter_blocks": ["ا", "ل", "أ", "ح", "د"] },
+    "w003": { "arabic": "الاِثْنِين",  "arabic_plain": "الاثنين",   "hebrew_pronunciation": "אַלִּתְנֵיין",  "hebrew": "שני",    "icon": "calendar-outline", "icon_color": "#007AFF", "letter_blocks": ["ا", "ل", "ث", "ن", "ي"] },
+    "w004": { "arabic": "الثَّلاثاء",  "arabic_plain": "الثلاثاء",  "hebrew_pronunciation": "אַתְּלָאת",     "hebrew": "שלישי", "icon": "calendar-outline", "icon_color": "#34C759", "letter_blocks": ["ا", "ل", "ث", "ل", "ث", "ء"] },
+    "w005": { "arabic": "الأَرْبِعاء", "arabic_plain": "الأربعاء",  "hebrew_pronunciation": "אַרְבַּעָא",    "hebrew": "רביעי", "icon": "calendar-outline", "icon_color": "#5856D6", "letter_blocks": ["ا", "ل", "أ", "ر", "ب", "ع", "ء"] },
+    "w006": { "arabic": "الخَمِيس",   "arabic_plain": "الخميس",    "hebrew_pronunciation": "אַלְחַמִּיס",   "hebrew": "חמישי", "icon": "calendar-outline", "icon_color": "#AF52DE", "letter_blocks": ["ا", "ل", "خ", "م", "ي", "س"] },
+    "w007": { "arabic": "الجُمْعَة",  "arabic_plain": "الجمعة",    "hebrew_pronunciation": "אַלְגֻּמְעָה",  "hebrew": "שישי",  "icon": "calendar-outline", "icon_color": "#FF3B30", "letter_blocks": ["ا", "ل", "ج", "م", "ع", "ة"] },
+    "w008": { "arabic": "هَالأُسْبُوع","arabic_plain": "هالأسبوع",  "hebrew_pronunciation": "הָאלְאוּסְבּוּע","hebrew": "השבוע", "icon": "today-outline",    "icon_color": "#FF9500", "letter_blocks": ["ه", "ا", "ل", "أ", "س", "ب", "و", "ع"] }
+  },
+
+  "stages": [
+    { "type": "listen_repeat", "word_id": "w001" },
+    { "type": "listen_repeat", "word_id": "w002" },
+    { "type": "listen_repeat", "word_id": "w003" },
+    { "type": "listen_repeat", "word_id": "w004" },
+    { "type": "listen_repeat", "word_id": "w005" },
+    { "type": "listen_repeat", "word_id": "w006" },
+    { "type": "listen_repeat", "word_id": "w007" },
+
+    { "type": "choose_translation", "word_id": "w001", "option_ids": ["w001", "w002", "w006", "w007"] },
+    { "type": "choose_translation", "word_id": "w007", "option_ids": ["w004", "w005", "w006", "w007"] },
+    { "type": "choose_translation", "word_id": "w003", "option_ids": ["w001", "w002", "w003", "w004"] },
+
+    { "type": "listen_choose", "items": [
+      { "word_id": "w002", "distractor_id": "w006" },
+      { "word_id": "w005", "distractor_id": "w003" }
+    ]},
+
+    { "type": "write_translation", "word_id": "w001" },
+    { "type": "write_translation", "word_id": "w007" },
+
+    { "type": "match_pairs", "word_ids": ["w001", "w002", "w003", "w004", "w005", "w006", "w007"] },
+
+    {
+      "type": "dialogue",
+      "context_label": "תיאום פגישה",
+      "lines": [
+        {
+          "speaker": "A",
+          "name": "לינה",
+          "arabic": "إِيمْتى بِتِجِي؟",
+          "hebrew_pronunciation": "אֵימְתָּא בִּתִּגִּי?",
+          "hebrew": "מתי אתה בא?"
+        },
+        {
+          "speaker": "B",
+          "is_user_turn": true,
+          "word_id": "w004",
+          "target_voweled": "الثَّلاثاء",
+          "full_arabic": "بِيجِي الثَّلاثاء، إِن شَاء الله.",
+          "hebrew": "אבוא ביום שלישי, אם ירצה האל.",
+          "hebrew_gap": "שלישי"
+        },
+        {
+          "speaker": "A",
+          "name": "לינה",
+          "arabic": "مِنِيح! وِالجُمْعَة؟",
+          "hebrew_pronunciation": "מְנִיח! וִאַלְגֻּמְעָה?",
+          "hebrew": "יופי! ומה עם יום שישי?"
+        },
+        {
+          "speaker": "B",
+          "is_user_turn": true,
+          "word_id": "w007",
+          "target_voweled": "الجُمْعَة",
+          "full_arabic": "الجُمْعَة مَا بَقْدَر، بَس الأَحَد مْنِيح.",
+          "hebrew": "ביום שישי אני לא יכול, אבל יום ראשון בסדר.",
+          "hebrew_gap": "שישי"
+        }
+      ]
+    },
+
+    {
+      "type": "sentence_build",
+      "sentence_hebrew": "אני בא ביום שלישי",
+      "sentence_arabic": "بِيجِي الثَّلاثاء",
+      "words": ["بِيجِي", "الثَّلاثاء"]
+    },
+
+    {
+      "type": "cultural_note",
+      "title": "השבוע בעולם הערבי",
+      "body_hebrew": "בעולם הערבי, יום שישי (الجمعة) הוא יום הקדוש לתפילה ולמנוחה — בדומה לשבת ביהדות. השבוע מתחיל ביום ראשון (الأحد). 'יאללה, לתראות אחד מהימים' — 'يلا، بشوفك يوم من الأيام'",
+      "audio_text": "شو يومك اليوم؟"
+    }
+  ],
+
+  "srs_words": ["السبت", "الأحد", "الاثنين", "الثلاثاء", "الأربعاء", "الخميس", "الجمعة", "هالأسبوع"],
+  "next_lesson": "time_001",
+  "related_topics": ["time_001", "conversation_001"]
+}

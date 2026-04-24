@@ -1,0 +1,103 @@
+{
+  "lesson_id": "questions_001",
+  "topic": "Question Words",
+  "topic_ar": "كلمات السؤال",
+  "level": "beginner",
+  "xp_reward": 35,
+  "estimated_minutes": 9,
+  "thumbnail_url": "https://images.unsplash.com/photo-1488190211105-8b0e65b80b4e?w=600&h=280&fit=crop&auto=format",
+
+  "words": {
+    "w001": { "arabic": "شُو؟",      "arabic_plain": "شو",     "hebrew_pronunciation": "שוּ?",      "hebrew": "מה?",        "icon": "help-circle-outline",   "icon_color": "#FF9500", "letter_blocks": ["ش", "و"] },
+    "w002": { "arabic": "وِيْن؟",    "arabic_plain": "وين",    "hebrew_pronunciation": "וֵיין?",    "hebrew": "איפה?",      "icon": "location-outline",      "icon_color": "#007AFF", "letter_blocks": ["و", "ي", "ن"] },
+    "w003": { "arabic": "مِين؟",     "arabic_plain": "مين",    "hebrew_pronunciation": "מִין?",     "hebrew": "מי?",        "icon": "person-outline",        "icon_color": "#34C759", "letter_blocks": ["م", "ي", "ن"] },
+    "w004": { "arabic": "كِيف؟",     "arabic_plain": "كيف",    "hebrew_pronunciation": "כִּיף?",    "hebrew": "איך?",       "icon": "chatbubble-outline",     "icon_color": "#AF52DE", "letter_blocks": ["ك", "ي", "ف"] },
+    "w005": { "arabic": "قَدِّيش؟",  "arabic_plain": "قديش",   "hebrew_pronunciation": "קַדִּישׁ?", "hebrew": "כמה?",       "icon": "pricetag-outline",      "icon_color": "#FF3B30", "letter_blocks": ["ق", "د", "ي", "ش"] },
+    "w006": { "arabic": "لِيش؟",     "arabic_plain": "ليش",    "hebrew_pronunciation": "לֵיש?",     "hebrew": "למה?",       "icon": "chatbubbles-outline",    "icon_color": "#5856D6", "letter_blocks": ["ل", "ي", "ش"] },
+    "w007": { "arabic": "إِيمْتى؟",  "arabic_plain": "إيمتى",  "hebrew_pronunciation": "אֵימְתָּא?","hebrew": "מתי?",       "icon": "calendar-outline",      "icon_color": "#FF9500", "letter_blocks": ["إ", "ي", "م", "ت", "ى"] },
+    "w008": { "arabic": "كَم؟",      "arabic_plain": "كم",     "hebrew_pronunciation": "כַּם?",     "hebrew": "כמה (כמות)?","icon": "calculator-outline",    "icon_color": "#34C759", "letter_blocks": ["ك", "م"] }
+  },
+
+  "stages": [
+    { "type": "listen_repeat", "word_id": "w001" },
+    { "type": "listen_repeat", "word_id": "w002" },
+    { "type": "listen_repeat", "word_id": "w003" },
+    { "type": "listen_repeat", "word_id": "w004" },
+    { "type": "listen_repeat", "word_id": "w005" },
+    { "type": "listen_repeat", "word_id": "w006" },
+    { "type": "listen_repeat", "word_id": "w007" },
+
+    { "type": "choose_translation", "word_id": "w001", "option_ids": ["w001", "w003", "w004", "w006"] },
+    { "type": "choose_translation", "word_id": "w002", "option_ids": ["w002", "w005", "w007", "w008"] },
+    { "type": "choose_translation", "word_id": "w006", "option_ids": ["w001", "w004", "w005", "w006"] },
+    { "type": "choose_translation", "word_id": "w007", "option_ids": ["w004", "w006", "w007", "w008"] },
+
+    { "type": "listen_choose", "items": [
+      { "word_id": "w001", "distractor_id": "w006" },
+      { "word_id": "w002", "distractor_id": "w007" }
+    ]},
+
+    { "type": "write_translation", "word_id": "w001" },
+    { "type": "write_translation", "word_id": "w002" },
+    { "type": "write_translation", "word_id": "w006" },
+
+    { "type": "match_pairs", "word_ids": ["w001", "w002", "w003", "w004", "w005", "w006", "w007", "w008"] },
+
+    {
+      "type": "dialogue",
+      "context_label": "שאלות וסקרנות — שיחה עם חדש",
+      "lines": [
+        {
+          "speaker": "A",
+          "name": "עמר",
+          "arabic": "مِين أَنْتَ؟ مِنِيْن؟",
+          "hebrew_pronunciation": "מִין אַנְתַּ? מְנֵיין?",
+          "hebrew": "מי אתה? מאיפה?"
+        },
+        {
+          "speaker": "B",
+          "is_user_turn": true,
+          "word_id": "w003",
+          "target_voweled": "مِين",
+          "full_arabic": "أَنا مِن إِسْرائِيل. وِإِنْتَ مِين؟",
+          "hebrew": "אני מישראל. ואתה מי?",
+          "hebrew_gap": "מי"
+        },
+        {
+          "speaker": "A",
+          "name": "עמר",
+          "arabic": "أَنا عُمَر مِن عَمَّان. شُو اسْمَك؟",
+          "hebrew_pronunciation": "אַנָא עוּמַר מִן עַמָּן. שוּ אִסְמַק?",
+          "hebrew": "אני עמר מעמאן. מה שמך?"
+        },
+        {
+          "speaker": "B",
+          "is_user_turn": true,
+          "word_id": "w004",
+          "target_voweled": "كِيف",
+          "full_arabic": "اسْمِي دَانِيِيل. كِيف حالَك؟",
+          "hebrew": "שמי דניאל. איך אתה?",
+          "hebrew_gap": "איך"
+        }
+      ]
+    },
+
+    {
+      "type": "sentence_build",
+      "sentence_hebrew": "מה שמך ומאיפה אתה?",
+      "sentence_arabic": "شُو اسْمَك وِمِنِيْن؟",
+      "words": ["شُو", "اسْمَك", "وِمِنِيْن؟"]
+    },
+
+    {
+      "type": "cultural_note",
+      "title": "שאלות בלבנטינית — פחות פורמלי, יותר חם",
+      "body_hebrew": "שאלות בלבנטינית הן הרבה יותר ישירות ואישיות מאשר בשפות אירופיות. שאלה כמו 'מִין אַנְתַּ?' ('מי אתה?') נאמרת בחיבה ובסקרנות, לא בחשד. 'לֵיש?' (למה?) ו-'שוּ?' (מה?) הן המילים הנפוצות ביותר בשיחה.",
+      "audio_text": "شو اسمك؟ مين أنت؟ وين ساكن؟"
+    }
+  ],
+
+  "srs_words": ["شو", "وين", "مين", "كيف", "قديش", "ليش", "إيمتى", "كم"],
+  "next_lesson": "verbs_001",
+  "related_topics": ["greetings_001", "conversation_001"]
+}

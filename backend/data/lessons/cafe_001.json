@@ -1,0 +1,110 @@
+{
+  "lesson_id": "cafe_001",
+  "topic": "At the Café",
+  "topic_ar": "في المقهى",
+  "level": "beginner",
+  "xp_reward": 35,
+  "estimated_minutes": 9,
+  "thumbnail_url": "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=600&h=280&fit=crop&auto=format",
+
+  "words": {
+    "w001": { "arabic": "قَهْوَة",       "arabic_plain": "قهوة",       "hebrew_pronunciation": "קַהְוֶה",       "hebrew": "קפה",              "icon": "cafe-outline",    "icon_color": "#8B4513", "letter_blocks": ["ق", "ه", "و", "ة"] },
+    "w002": { "arabic": "شاي",           "arabic_plain": "شاي",        "hebrew_pronunciation": "שַׁאי",          "hebrew": "תה",               "icon": "cafe-outline",    "icon_color": "#34C759", "letter_blocks": ["ش", "ا", "ي"] },
+    "w003": { "arabic": "مَاي",          "arabic_plain": "ماي",        "hebrew_pronunciation": "מַאי",           "hebrew": "מים",              "icon": "water-outline",   "icon_color": "#007AFF", "letter_blocks": ["م", "ا", "ي"] },
+    "w004": { "arabic": "عَصِير",        "arabic_plain": "عصير",       "hebrew_pronunciation": "עַצִּיר",        "hebrew": "מיץ",              "icon": "nutrition-outline","icon_color": "#FF9500", "letter_blocks": ["ع", "ص", "ي", "ر"] },
+    "w005": { "arabic": "بَدِّي",        "arabic_plain": "بدي",        "hebrew_pronunciation": "בַּדִּי",        "hebrew": "אני רוצה",         "icon": "hand-left-outline","icon_color": "#FF6B35", "letter_blocks": ["ب", "د", "ي"] },
+    "w006": { "arabic": "بِكَم هَاد؟",  "arabic_plain": "بكم هاد",    "hebrew_pronunciation": "בִּכַּם הַאד?",  "hebrew": "כמה עולה זה?",    "icon": "pricetag-outline", "icon_color": "#AF52DE", "letter_blocks": ["ب", "ك", "م", "ه", "ا", "د"] },
+    "w007": { "arabic": "تَفَضَّل",      "arabic_plain": "تفضل",       "hebrew_pronunciation": "תְפַצַּל",       "hebrew": "הנה לך / בבקשה",  "icon": "gift-outline",    "icon_color": "#FF3B30", "letter_blocks": ["ت", "ف", "ض", "ل"] },
+    "w008": { "arabic": "لَوْ سَمَحْت", "arabic_plain": "لو سمحت",    "hebrew_pronunciation": "לוֹ סַמַּחְת",  "hebrew": "בבקשה / סליחה",   "icon": "hand-right-outline","icon_color": "#5856D6","letter_blocks": ["ل", "و", "س", "م", "ح", "ت"] }
+  },
+
+  "stages": [
+    { "type": "listen_repeat", "word_id": "w001" },
+    { "type": "listen_repeat", "word_id": "w002" },
+    { "type": "listen_repeat", "word_id": "w003" },
+    { "type": "listen_repeat", "word_id": "w004" },
+    { "type": "listen_repeat", "word_id": "w005" },
+    { "type": "listen_repeat", "word_id": "w007" },
+    { "type": "listen_repeat", "word_id": "w008" },
+
+    { "type": "choose_translation", "word_id": "w001", "option_ids": ["w001", "w002", "w003", "w004"] },
+    { "type": "choose_translation", "word_id": "w005", "option_ids": ["w005", "w006", "w007", "w008"] },
+    { "type": "choose_translation", "word_id": "w007", "option_ids": ["w005", "w006", "w007", "w008"] },
+    { "type": "choose_translation", "word_id": "w006", "option_ids": ["w003", "w005", "w006", "w008"] },
+
+    { "type": "listen_choose", "items": [
+      { "word_id": "w001", "distractor_id": "w003" },
+      { "word_id": "w008", "distractor_id": "w007" }
+    ]},
+
+    { "type": "write_translation", "word_id": "w001" },
+    { "type": "write_translation", "word_id": "w005" },
+
+    { "type": "match_pairs", "word_ids": ["w001", "w002", "w003", "w004", "w005", "w007", "w008"] },
+
+    {
+      "type": "dialogue",
+      "context_label": "הזמנה במקהל'ה (בית קפה)",
+      "lines": [
+        {
+          "speaker": "A",
+          "name": "המלצר",
+          "arabic": "أَهْلاً! شُو بَدَّك؟",
+          "hebrew_pronunciation": "אַהְלַן! שוּ בַּדַּק?",
+          "hebrew": "אהלן! מה אתה רוצה?"
+        },
+        {
+          "speaker": "B",
+          "is_user_turn": true,
+          "word_id": "w005",
+          "target_voweled": "بَدِّي",
+          "full_arabic": "بَدِّي قَهْوَة، لَوْ سَمَحْت.",
+          "hebrew": "אני רוצה קפה, בבקשה.",
+          "hebrew_gap": "אני רוצה"
+        },
+        {
+          "speaker": "A",
+          "name": "המלצר",
+          "arabic": "بِكَم هَاد؟",
+          "hebrew_pronunciation": "בִּכַּם הַאד?",
+          "hebrew": "כמה זה עולה?"
+        },
+        {
+          "speaker": "A",
+          "name": "המלצר",
+          "arabic": "القَهْوَة بِخَمْسَة شَوَاقِل. تَفَضَّل!",
+          "hebrew_pronunciation": "אַלְקַהְוֶה בִּחַמְסֶה שַׁוָּאקִיל. תְפַצַּל!",
+          "hebrew": "הקפה בחמישה שקלים. הנה לך!"
+        },
+        {
+          "speaker": "B",
+          "is_user_turn": true,
+          "word_id": "w006",
+          "target_voweled": "بِكَم",
+          "full_arabic": "شُكْراً كِتِير!",
+          "hebrew": "תודה רבה!",
+          "hebrew_gap": "תודה"
+        }
+      ]
+    },
+
+    {
+      "type": "sentence_complete",
+      "arabic_context": "بَدِّي",
+      "sentence_translation": "אני רוצה תה, בבקשה",
+      "gap_word_id": "w002",
+      "gap_word_id_list": ["w002", "w001", "w003", "w004"]
+    },
+
+    {
+      "type": "cultural_note",
+      "title": "המקהלה — לב החיים הלבנטיניים",
+      "body_hebrew": "בית הקפה (מקהלה) הוא מרכז החיים החברתיים בעולם הלבנטיני. יושבים שם שעות, שותים קפה טורקי שחור או מיץ טרי, ומדברים. 'תְפַצַּל' (تفضل) פירושו 'הנה לך' או 'בבקשה' — כאשר נותנים לך משהו. 'לוֹ סַמַּחְת' הוא 'בבקשה' כשמבקשים משהו.",
+      "audio_text": "بدي قهوة، لو سمحت"
+    }
+  ],
+
+  "srs_words": ["قهوة", "شاي", "ماي", "عصير", "بدي", "بكم هاد", "تفضل", "لو سمحت"],
+  "next_lesson": "colors_001",
+  "related_topics": ["market_001", "numbers_001"]
+}

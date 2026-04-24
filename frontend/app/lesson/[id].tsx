@@ -37,7 +37,7 @@ const COLORS = {
   },
 };
 
-const API              = 'https://suffix-ahead-letter.ngrok-free.dev';
+const API              = process.env.EXPO_PUBLIC_API_URL?.replace('/api', '') ?? 'http://localhost:8000';
 const DEFAULT_ICON     = 'fluent:translate-24-filled';
 const DEFAULT_COLOR    = '#8E8E93';
 const PASS_THRESHOLD   = 65;
@@ -75,6 +75,8 @@ const FLUENT_MAP: Record<string, IoniconName> = {
 };
 function toIonicon(name?: string): IoniconName {
   if (!name) return 'book-outline';
+  // Direct Ionicons name (no fluent: prefix) — use as-is
+  if (!name.startsWith('fluent:')) return name as IoniconName;
   return FLUENT_MAP[name] ?? 'book-outline';
 }
 
@@ -183,6 +185,7 @@ export default function LessonScreen() {
   const expectedArabicRef = useRef<string>('');
   const dialogueLineRef   = useRef<any>(null);
   const scrollRef         = useRef<any>(null);
+  const stageOpacity      = useRef(new Animated.Value(1)).current;
 
   // ── Avatar selection (deterministic per lesson) ───────────────────────────
   const [npcAvatar, userAvatar] = useMemo(() => pickAvatarsForLesson(id ?? 'default'), [id]);
@@ -190,10 +193,10 @@ export default function LessonScreen() {
   // ── UI feedback sounds (correct / wrong / complete) ──────────────────────
   const playFeedbackSound = useCallback(async (type: 'correct' | 'wrong' | 'complete') => {
     try {
-      const { sound } = await Audio.Sound.createAsync(
-        { uri: `${API}/api/audio/${type}` },
-        { shouldPlay: true, volume: 0.85 },
-      );
+      const src = type === 'correct'
+        ? require('../../assets/sounds/correct.mp3')
+        : { uri: `${API}/api/audio/${type}` };
+      const { sound } = await Audio.Sound.createAsync(src, { shouldPlay: true, volume: 0.85 });
       sound.setOnPlaybackStatusUpdate((status: any) => {
         if (status.didJustFinish) sound.unloadAsync().catch(() => {});
       });
@@ -458,13 +461,8 @@ export default function LessonScreen() {
     else if (stg?.type === 'choose_translation') text = stg.arabic;
     else if (stg?.type === 'write_translation')  text = stg.arabic;
     else if (stg?.type === 'sentence_build')     text = stg.sentence_arabic;
-    else if (stg?.type === 'listen_choose') {
-      const items = stg.items ?? [];
-      text = items[qIndex]?.arabic ?? null;
-    }
     if (!text) return;
-    const t = setTimeout(() => playAudio(text!), 500);
-    return () => clearTimeout(t);
+    playAudio(text);
   }, [stage, qIndex, expandedLesson, playAudio]);
 
   // ── STT result handler (listen_repeat) ────────────────────────────────────
@@ -527,9 +525,12 @@ export default function LessonScreen() {
 
   const goNextStage = useCallback(() => {
     const total = expandedLesson?.stages?.length ?? 0;
-    if (stage < total - 1) { setStage(s => s + 1); resetExerciseState(); }
-    else                   { setCompleted(true); playFeedbackSound('complete'); }
-  }, [expandedLesson, stage]);
+    Animated.timing(stageOpacity, { toValue: 0, duration: 120, useNativeDriver: true }).start(() => {
+      if (stage < total - 1) { setStage(s => s + 1); resetExerciseState(); }
+      else                   { setCompleted(true); playFeedbackSound('complete'); }
+      Animated.timing(stageOpacity, { toValue: 1, duration: 180, useNativeDriver: true }).start();
+    });
+  }, [expandedLesson, stage, stageOpacity]);
 
   const goPrevStage = useCallback(() => {
     if (stage > 0) { setStage(s => s - 1); resetExerciseState(); }
@@ -558,7 +559,7 @@ export default function LessonScreen() {
                          (isActiveUserTurn && dialogueMicState === 'correct');
   const micIsWrong     = (currentStage?.type === 'listen_repeat' && listenPhase === 'wrong') ||
                          (isActiveUserTurn && dialogueMicState === 'wrong');
-  const micColor       = micIsCorrect ? c.right : micIsWrong ? c.wrong : c.primary;
+  const micColor       = micIsWrong ? c.wrong : c.primary;
   const showPassLink   = isActiveUserTurn && dialogueFailCount >= PASS_AFTER_FAILS && !micIsRecording && !micIsScoring;
 
   const handleFloatingMicPress = () => {
@@ -756,9 +757,9 @@ export default function LessonScreen() {
             return (
               <TouchableOpacity key={opt.id}
                 style={[s.choiceCard, {
-                  backgroundColor: c.card,
+                  backgroundColor: isCorrect ? c.primary + '18' : isWrong ? c.wrong + '10' : c.card,
                   borderColor: isCorrect ? c.primary : isWrong ? c.wrong : c.border,
-                  borderWidth: isCorrect || isWrong ? 2.5 : 1.5,
+                  borderWidth: 2,
                   shadowColor: isCorrect ? c.primary : isWrong ? c.wrong : '#a0846a',
                   shadowOpacity: isCorrect || isWrong ? 0.18 : 0.07,
                 }]}
@@ -780,9 +781,7 @@ export default function LessonScreen() {
                 <View style={[s.choiceCardIcon, { backgroundColor: col + '18' }]}>
                   <Ionicons name={toIonicon(ic)} size={52} color={col} />
                 </View>
-                <View style={[s.choiceCardLabel, {
-                  backgroundColor: isCorrect ? c.primary + '15' : isWrong ? c.wrong + '10' : 'transparent',
-                }]}>
+                <View style={s.choiceCardLabel}>
                   <Text style={[s.choiceCardText, {
                     color: isCorrect ? c.primary : isWrong ? c.wrong : c.text,
                   }]} numberOfLines={2}>{opt.hebrew}</Text>
@@ -1097,20 +1096,14 @@ export default function LessonScreen() {
             return (
               <TouchableOpacity key={idx}
                 style={[s.choiceCard, {
-                  backgroundColor: c.card,
+                  backgroundColor: isCorrect ? c.primary + '18' : isWrong ? c.wrong + '10' : c.card,
                   borderColor: isCorrect ? c.primary : isWrong ? c.wrong : c.border,
-                  borderWidth: isCorrect || isWrong ? 2.5 : 1.5,
+                  borderWidth: 2,
                 }]}
                 onPress={() => {
                   if (isLocked || isWrong) return;
                   if (opt.correct) {
-                    playFeedbackSound('correct');
-                    setLockedAnswer(`ok_${idx}`);
-                    setTimeout(() => {
-                      if (qIndex < items.length - 1) {
-                        setQIndex(i => i + 1); setLockedAnswer(null); setWrongAnswers([]);
-                      } else { goNextStage(); }
-                    }, 800);
+                    setLockedAnswer('ok');
                   } else {
                     playFeedbackSound('wrong');
                     setWrongAnswers(w => [...w, `lc_${idx}`]);
@@ -1122,9 +1115,7 @@ export default function LessonScreen() {
                 <View style={[s.choiceCardIcon, { backgroundColor: col + '18' }]}>
                   <Ionicons name={toIonicon(ic)} size={52} color={col} />
                 </View>
-                <View style={[s.choiceCardLabel, {
-                  backgroundColor: isCorrect ? c.primary + '15' : isWrong ? c.wrong + '10' : 'transparent',
-                }]}>
+                <View style={s.choiceCardLabel}>
                   <Text style={[s.choiceCardText, {
                     color: isCorrect ? c.primary : isWrong ? c.wrong : c.text,
                   }]} numberOfLines={2}>{opt.hebrew}</Text>
@@ -1133,6 +1124,21 @@ export default function LessonScreen() {
             );
           })}
         </View>
+        {isLocked && (
+          <TouchableOpacity
+            style={[s.doneBtn, { backgroundColor: c.primary, marginTop: 16 }]}
+            onPress={() => {
+              playFeedbackSound('correct');
+              setTimeout(() => {
+                if (qIndex < items.length - 1) {
+                  setQIndex(i => i + 1); setLockedAnswer(null); setWrongAnswers([]);
+                } else { goNextStage(); }
+              }, 800);
+            }}
+          >
+            <Text style={[s.doneBtnText, { color: '#fff' }]}>בדוק ✓</Text>
+          </TouchableOpacity>
+        )}
         <Text style={[s.matchCounter, { color: c.label, marginTop: 12 }]}>{qIndex + 1} / {items.length}</Text>
       </View>
     );
@@ -1259,6 +1265,54 @@ export default function LessonScreen() {
     );
   };
 
+  // ── Cultural Note ─────────────────────────────────────────────────────────
+  const renderCulturalNote = () => {
+    const stg = currentStage;
+    return (
+      <View style={[s.stageWrap, { flex: 1 }]}>
+        <Text style={[s.stageLabel, { color: c.label }]}>Did You Know?</Text>
+
+        <View style={{ flex: 1, justifyContent: 'center', paddingHorizontal: 4 }}>
+          {/* Icon */}
+          <View style={{ alignItems: 'center', marginBottom: 28 }}>
+            <View style={[s.culturalNoteIcon, { backgroundColor: c.primary + '18' }]}>
+              <Ionicons name="sparkles" size={40} color={c.primary} />
+            </View>
+          </View>
+
+          {/* Title */}
+          <Text style={[s.culturalNoteTitle, { color: c.text }]}>{stg.title}</Text>
+
+          {/* Body */}
+          <View style={[s.culturalNoteBody, { backgroundColor: c.card, borderColor: c.border }]}>
+            <Text style={[s.culturalNoteText, { color: c.text }]}>{stg.body_hebrew}</Text>
+          </View>
+
+          {/* Audio button (optional) */}
+          {stg.audio_text && (
+            <TouchableOpacity
+              style={[s.culturalNoteAudio, { borderColor: c.primary + '50', backgroundColor: c.primary + '10' }]}
+              onPress={() => playAudio(stg.audio_text)}
+              activeOpacity={0.8}
+            >
+              <Ionicons name="volume-high" size={18} color={c.primary} />
+              <Text style={[s.culturalNoteAudioText, { color: c.primary }]}>שמע בערבית</Text>
+            </TouchableOpacity>
+          )}
+        </View>
+
+        {/* Continue button */}
+        <TouchableOpacity
+          style={[s.btn, { backgroundColor: c.primary, marginBottom: 8 }]}
+          onPress={goNextStage}
+          activeOpacity={0.85}
+        >
+          <Text style={s.btnText}>המשך</Text>
+        </TouchableOpacity>
+      </View>
+    );
+  };
+
   // ── Sentence Complete ─────────────────────────────────────────────────────
   const renderSentenceComplete = () => {
     const stg      = currentStage;
@@ -1368,19 +1422,23 @@ export default function LessonScreen() {
         </View>
 
         {/* ── Exercise content ── */}
-        <ScrollView
-          ref={scrollRef}
-          contentContainerStyle={[s.content, { flexGrow: 1 }, showFloatingMic && { paddingBottom: 148 + insets.bottom }]}
-          showsVerticalScrollIndicator={false}
-        >
-          {currentStage?.type === 'listen_repeat'      && renderListenRepeat()}
-          {currentStage?.type === 'choose_translation' && renderChooseTranslation()}
-          {currentStage?.type === 'write_translation'  && renderWriteTranslation()}
-          {currentStage?.type === 'dialogue'           && renderDialogue()}
-          {currentStage?.type === 'match_pairs'        && renderMatchPairs()}
-          {currentStage?.type === 'listen_choose'      && renderListenChoose()}
-          {currentStage?.type === 'sentence_build'     && renderSentenceBuild()}
-        </ScrollView>
+        <Animated.View style={{ flex: 1, opacity: stageOpacity }}>
+          <ScrollView
+            ref={scrollRef}
+            contentContainerStyle={[s.content, { flexGrow: 1 }, showFloatingMic && { paddingBottom: 148 + insets.bottom }]}
+            showsVerticalScrollIndicator={false}
+          >
+            {currentStage?.type === 'listen_repeat'      && renderListenRepeat()}
+            {currentStage?.type === 'choose_translation' && renderChooseTranslation()}
+            {currentStage?.type === 'write_translation'  && renderWriteTranslation()}
+            {currentStage?.type === 'dialogue'           && renderDialogue()}
+            {currentStage?.type === 'match_pairs'        && renderMatchPairs()}
+            {currentStage?.type === 'listen_choose'      && renderListenChoose()}
+            {currentStage?.type === 'sentence_build'     && renderSentenceBuild()}
+            {currentStage?.type === 'sentence_complete'  && renderSentenceComplete()}
+            {currentStage?.type === 'cultural_note'      && renderCulturalNote()}
+          </ScrollView>
+        </Animated.View>
 
         {/* ── Floating mic ── */}
         {showFloatingMic && (
@@ -1669,4 +1727,12 @@ const s = StyleSheet.create({
   // Generic button
   btn:     { borderRadius: 20, paddingVertical: 17, paddingHorizontal: 28, alignItems: 'center', justifyContent: 'center', flexDirection: 'row', gap: 8 },
   btnText: { color: '#fff', fontSize: 16, fontWeight: '700', letterSpacing: 0.2 },
+
+  // Cultural note
+  culturalNoteIcon:      { width: 80, height: 80, borderRadius: 40, alignItems: 'center', justifyContent: 'center' },
+  culturalNoteTitle:     { fontSize: 20, fontWeight: '800', textAlign: 'center', marginBottom: 20, letterSpacing: -0.3 },
+  culturalNoteBody:      { borderRadius: 20, borderWidth: 1.5, padding: 20, marginBottom: 20, shadowColor: '#a0846a', shadowOpacity: 0.06, shadowOffset: { width: 0, height: 3 }, shadowRadius: 10, elevation: 2 },
+  culturalNoteText:      { fontSize: 15, lineHeight: 24, textAlign: 'center' },
+  culturalNoteAudio:     { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 8, borderWidth: 1.5, borderRadius: 50, paddingHorizontal: 20, paddingVertical: 10, alignSelf: 'center' },
+  culturalNoteAudioText: { fontSize: 14, fontWeight: '600' },
 });

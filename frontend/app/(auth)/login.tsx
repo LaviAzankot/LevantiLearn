@@ -53,7 +53,7 @@ export default function LoginScreen() {
           {/* Logo */}
           <View style={s.logoWrap}>
             <Text style={[s.logoText, { color: c.primary }]}>LevantiLearn</Text>
-            <Text style={[s.logoSub, { color: c.label }]}>Learn Palestinian Arabic</Text>
+            <Text style={[s.logoSub, { color: c.label }]}>Learn Arabic</Text>
           </View>
 
           {/* Card */}

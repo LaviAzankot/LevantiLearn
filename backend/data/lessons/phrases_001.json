@@ -1,0 +1,103 @@
+{
+  "lesson_id": "phrases_001",
+  "topic": "Essential Phrases",
+  "topic_ar": "جمل أساسية",
+  "level": "beginner",
+  "xp_reward": 30,
+  "estimated_minutes": 8,
+  "thumbnail_url": "https://images.unsplash.com/photo-1577563908411-5077b6dc7624?w=600&h=280&fit=crop&auto=format",
+
+  "words": {
+    "w001": { "arabic": "آه",             "arabic_plain": "آه",            "hebrew_pronunciation": "אָה",          "hebrew": "כן",                 "icon": "checkmark-outline",      "icon_color": "#34C759", "letter_blocks": ["آ", "ه"] },
+    "w002": { "arabic": "لا",             "arabic_plain": "لا",            "hebrew_pronunciation": "לָא",          "hebrew": "לא",                 "icon": "close-circle-outline",   "icon_color": "#FF3B30", "letter_blocks": ["ل", "ا"] },
+    "w003": { "arabic": "يِمْكِن",        "arabic_plain": "يمكن",          "hebrew_pronunciation": "יִמְכִּן",     "hebrew": "אולי / אפשרי",       "icon": "help-outline",           "icon_color": "#FF9500", "letter_blocks": ["ي", "م", "ك", "ن"] },
+    "w004": { "arabic": "مَا بَعْرَف",    "arabic_plain": "ما بعرف",       "hebrew_pronunciation": "מָא בַּעְרַף", "hebrew": "אני לא יודע",        "icon": "help-circle-outline",    "icon_color": "#5856D6", "letter_blocks": ["م", "ا", "ب", "ع", "ر", "ف"] },
+    "w005": { "arabic": "مَا فِي مُشْكِلة","arabic_plain": "ما في مشكلة",  "hebrew_pronunciation": "מָא פִי מֻשְׁכִּלֶה","hebrew": "אין בעיה",       "icon": "happy-outline",          "icon_color": "#34C759", "letter_blocks": ["م", "ا", "ف", "ي", "م", "ش", "ك", "ل", "ة"] },
+    "w006": { "arabic": "مَعْقُول",       "arabic_plain": "معقول",         "hebrew_pronunciation": "מַעְקוּל",     "hebrew": "הגיוני / בסדר",      "icon": "thumbs-up-outline",      "icon_color": "#007AFF", "letter_blocks": ["م", "ع", "ق", "و", "ل"] },
+    "w007": { "arabic": "مِن فَضْلَك",    "arabic_plain": "من فضلك",       "hebrew_pronunciation": "מִן פַּצְּלַק", "hebrew": "בבקשה",              "icon": "hand-right-outline",     "icon_color": "#AF52DE", "letter_blocks": ["م", "ن", "ف", "ض", "ل", "ك"] },
+    "w008": { "arabic": "سامِحْنِي",      "arabic_plain": "سامحني",        "hebrew_pronunciation": "סַאמֶחְנִי",   "hebrew": "סלח לי / סליחה",     "icon": "heart-outline",          "icon_color": "#FF6B35", "letter_blocks": ["س", "ا", "م", "ح", "ن", "ي"] }
+  },
+
+  "stages": [
+    { "type": "listen_repeat", "word_id": "w001" },
+    { "type": "listen_repeat", "word_id": "w002" },
+    { "type": "listen_repeat", "word_id": "w003" },
+    { "type": "listen_repeat", "word_id": "w004" },
+    { "type": "listen_repeat", "word_id": "w005" },
+    { "type": "listen_repeat", "word_id": "w006" },
+    { "type": "listen_repeat", "word_id": "w007" },
+    { "type": "listen_repeat", "word_id": "w008" },
+
+    { "type": "choose_translation", "word_id": "w001", "option_ids": ["w001", "w002", "w003", "w004"] },
+    { "type": "choose_translation", "word_id": "w003", "option_ids": ["w001", "w002", "w003", "w006"] },
+    { "type": "choose_translation", "word_id": "w005", "option_ids": ["w004", "w005", "w007", "w008"] },
+    { "type": "choose_translation", "word_id": "w008", "option_ids": ["w005", "w006", "w007", "w008"] },
+
+    { "type": "listen_choose", "items": [
+      { "word_id": "w001", "distractor_id": "w002" },
+      { "word_id": "w005", "distractor_id": "w004" }
+    ]},
+
+    { "type": "write_translation", "word_id": "w001" },
+    { "type": "write_translation", "word_id": "w005" },
+
+    { "type": "match_pairs", "word_ids": ["w001", "w002", "w003", "w004", "w005", "w006", "w007", "w008"] },
+
+    {
+      "type": "dialogue",
+      "context_label": "אי-הבנה קטנה — ופתרון",
+      "lines": [
+        {
+          "speaker": "A",
+          "name": "תמאם",
+          "arabic": "فَاهِم؟",
+          "hebrew_pronunciation": "פַּאהִם?",
+          "hebrew": "מבין?"
+        },
+        {
+          "speaker": "B",
+          "is_user_turn": true,
+          "word_id": "w004",
+          "target_voweled": "بَعْرَف",
+          "full_arabic": "مَا بَعْرَف كَتِير... سامِحْنِي!",
+          "hebrew": "אני לא יודע הרבה... סליחה!",
+          "hebrew_gap": "יודע"
+        },
+        {
+          "speaker": "A",
+          "name": "תמאם",
+          "arabic": "مَا فِي مُشْكِلة! حْكِي شْوَي شْوَي.",
+          "hebrew_pronunciation": "מָא פִי מֻשְׁכִּלֶה! חְכִּי שְׁוַאי שְׁוַאי.",
+          "hebrew": "אין בעיה! דבר לאט לאט."
+        },
+        {
+          "speaker": "B",
+          "is_user_turn": true,
+          "word_id": "w005",
+          "target_voweled": "مُشْكِلة",
+          "full_arabic": "شُكْراً! مَا فِي مُشْكِلة.",
+          "hebrew": "תודה! אין בעיה.",
+          "hebrew_gap": "בעיה"
+        }
+      ]
+    },
+
+    {
+      "type": "sentence_build",
+      "sentence_hebrew": "אין בעיה, אני לא יודע אבל אני לומד",
+      "sentence_arabic": "مَا فِي مُشْكِلة، مَا بَعْرَف بَس عَم تَعَلَّم",
+      "words": ["مَا فِي", "مُشْكِلة،", "مَا بَعْرَف", "بَس", "عَم", "تَعَلَّم"]
+    },
+
+    {
+      "type": "cultural_note",
+      "title": "הביטויים שישמרו עליך",
+      "body_hebrew": "כשאתם מתחילים ללמוד, שלושה ביטויים יעזרו לכם תמיד: 'מָא פִי מֻשְׁכִּלֶה' (אין בעיה) — כשמתנצלים, 'מֻמְכִּן תִּחְכִּי שְׁוַאי שְׁוַאי?' (אפשר לדבר לאט?) — כשלא מבינים, ו-'מָא בַּעְרַף' (אני לא יודע) — כשצריך עזרה. הערבים מעריכים את הניסיון!",
+      "audio_text": "ما في مشكلة! حكي شوي شوي، من فضلك"
+    }
+  ],
+
+  "srs_words": ["آه", "لا", "يمكن", "ما بعرف", "ما في مشكلة", "معقول", "من فضلك", "سامحني"],
+  "next_lesson": "body_001",
+  "related_topics": ["greetings_001", "questions_001"]
+}

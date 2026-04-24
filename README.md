@@ -1,6 +1,6 @@
-# LevantiLearn — Palestinian/Levantine Arabic Learning App
+# LevantiLearn — Levantine Arabic Learning App
 
-> Babbel-style mobile/web app for learning Palestinian Arabic dialect.
+> Babbel-style mobile/web app for learning Levantine Arabic dialect.
 > Built for Tel Aviv / Israel learners. Production-ready MVP.
 
 ---
@@ -16,7 +16,7 @@
 | Auth         | Firebase Auth (Google, Apple, Email)                          |
 | TTS          | Coqui TTS (open-source) → fallback Azure Cognitive Services   |
 | STT          | OpenAI Whisper (local / self-hosted)                          |
-| Vocab Data   | Maknuune Palestinian Lexicon (36K entries, CC-BY-SA)          |
+| Vocab Data   | Maknuune Arabic Lexicon (36K entries, CC-BY-SA)          |
 | Images       | Unsplash API (CC0 licensed)                                   |
 | Deployment   | Frontend → Expo EAS (mobile) + Vercel (web)                   |
 |              | Backend → Railway.app (FastAPI) + Supabase (Postgres)         |

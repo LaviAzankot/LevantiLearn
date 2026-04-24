@@ -1,0 +1,102 @@
+{
+  "lesson_id": "weather_001",
+  "topic": "Weather",
+  "topic_ar": "الطقس",
+  "level": "beginner",
+  "xp_reward": 30,
+  "estimated_minutes": 8,
+  "thumbnail_url": "https://images.unsplash.com/photo-1504608524841-42583e7ef490?w=600&h=280&fit=crop&auto=format",
+
+  "words": {
+    "w001": { "arabic": "حَر",         "arabic_plain": "حر",       "hebrew_pronunciation": "חַר",        "hebrew": "חם",      "icon": "sunny-outline",        "icon_color": "#FF3B30", "letter_blocks": ["ح", "ر"] },
+    "w002": { "arabic": "بَرَد",        "arabic_plain": "برد",      "hebrew_pronunciation": "בָּרַד",      "hebrew": "קר",      "icon": "snow-outline",         "icon_color": "#007AFF", "letter_blocks": ["ب", "ر", "د"] },
+    "w003": { "arabic": "بِتْمَطَّر",   "arabic_plain": "بتمطر",    "hebrew_pronunciation": "בִּתְמַטַּר", "hebrew": "גשם (יורד גשם)","icon": "rainy-outline",   "icon_color": "#5856D6", "letter_blocks": ["ب", "ت", "م", "ط", "ر"] },
+    "w004": { "arabic": "غَيِم",        "arabic_plain": "غيم",      "hebrew_pronunciation": "גַּאיִם",     "hebrew": "מעונן",   "icon": "cloudy-outline",       "icon_color": "#8E8E93", "letter_blocks": ["غ", "ي", "م"] },
+    "w005": { "arabic": "الشِّتا",      "arabic_plain": "الشتا",    "hebrew_pronunciation": "אַשְׁשִׁתָּא", "hebrew": "חורף",    "icon": "snow-outline",         "icon_color": "#007AFF", "letter_blocks": ["ا", "ل", "ش", "ت", "ا"] },
+    "w006": { "arabic": "الصِّيف",      "arabic_plain": "الصيف",    "hebrew_pronunciation": "אַצּוּיָּאף",  "hebrew": "קיץ",     "icon": "sunny-outline",        "icon_color": "#FFD60A", "letter_blocks": ["ا", "ل", "ص", "ي", "ف"] },
+    "w007": { "arabic": "الرَّبِيع",    "arabic_plain": "الربيع",   "hebrew_pronunciation": "אַרְרַבִּיעְ", "hebrew": "אביב",    "icon": "leaf-outline",         "icon_color": "#34C759", "letter_blocks": ["ا", "ل", "ر", "ب", "ي", "ع"] },
+    "w008": { "arabic": "الخَرِيف",     "arabic_plain": "الخريف",   "hebrew_pronunciation": "אַלְחַרִּיף",  "hebrew": "סתיו",    "icon": "leaf-outline",         "icon_color": "#FF9500", "letter_blocks": ["ا", "ل", "خ", "ر", "ي", "ف"] }
+  },
+
+  "stages": [
+    { "type": "listen_repeat", "word_id": "w001" },
+    { "type": "listen_repeat", "word_id": "w002" },
+    { "type": "listen_repeat", "word_id": "w003" },
+    { "type": "listen_repeat", "word_id": "w004" },
+    { "type": "listen_repeat", "word_id": "w005" },
+    { "type": "listen_repeat", "word_id": "w006" },
+    { "type": "listen_repeat", "word_id": "w007" },
+
+    { "type": "choose_translation", "word_id": "w001", "option_ids": ["w001", "w002", "w004", "w006"] },
+    { "type": "choose_translation", "word_id": "w003", "option_ids": ["w001", "w002", "w003", "w004"] },
+    { "type": "choose_translation", "word_id": "w005", "option_ids": ["w005", "w006", "w007", "w008"] },
+    { "type": "choose_translation", "word_id": "w007", "option_ids": ["w004", "w005", "w007", "w008"] },
+
+    { "type": "listen_choose", "items": [
+      { "word_id": "w001", "distractor_id": "w002" },
+      { "word_id": "w005", "distractor_id": "w006" }
+    ]},
+
+    { "type": "write_translation", "word_id": "w001" },
+    { "type": "write_translation", "word_id": "w002" },
+
+    { "type": "match_pairs", "word_ids": ["w001", "w002", "w003", "w004", "w005", "w006", "w007", "w008"] },
+
+    {
+      "type": "dialogue",
+      "context_label": "שיחה על הטקס",
+      "lines": [
+        {
+          "speaker": "A",
+          "name": "ניזאר",
+          "arabic": "شُو الطَّقَس اليَوْم؟",
+          "hebrew_pronunciation": "שוּ אַטַּקַּס אַלְיוֹם?",
+          "hebrew": "מה מזג האוויר היום?"
+        },
+        {
+          "speaker": "B",
+          "is_user_turn": true,
+          "word_id": "w001",
+          "target_voweled": "حَر",
+          "full_arabic": "حَر كَتِير! وِغَيِم شْوَي.",
+          "hebrew": "חם מאוד! וקצת מעונן.",
+          "hebrew_gap": "חם"
+        },
+        {
+          "speaker": "A",
+          "name": "ניזאר",
+          "arabic": "بِتْمَطَّر؟",
+          "hebrew_pronunciation": "בִּתְמַטַּר?",
+          "hebrew": "יורד גשם?"
+        },
+        {
+          "speaker": "B",
+          "is_user_turn": true,
+          "word_id": "w003",
+          "target_voweled": "بِتْمَطَّر",
+          "full_arabic": "لا، مَا بِتْمَطَّر هَلَّق. بَس بَكْرا يِمْكِن.",
+          "hebrew": "לא, עכשיו לא גשם. אבל מחר אולי.",
+          "hebrew_gap": "גשם"
+        }
+      ]
+    },
+
+    {
+      "type": "sentence_build",
+      "sentence_hebrew": "היום חם מאוד וקצת מעונן",
+      "sentence_arabic": "اليَوْم حَر كَتِير وِغَيِم شْوَي",
+      "words": ["اليَوْم", "حَر", "كَتِير", "وِغَيِم", "شْوَي"]
+    },
+
+    {
+      "type": "cultural_note",
+      "title": "מזג האוויר — שיחת פתיחה אוניברסלית",
+      "body_hebrew": "כמו בישראל, גם בלבנטינית 'שו אַטַּקַּס?' (מה מזג האוויר?) היא שיחת פתיחה קלאסית. הקיץ בלבנטינית ('אַצּוּיָּאף') הוא שרב אמיתי — ואנשים מדברים על זה המון. 'חַר כְּתִיר!' (חם מאוד!) היא ביטוי יומיומי.",
+      "audio_text": "شو الطقس اليوم؟ حر كتير!"
+    }
+  ],
+
+  "srs_words": ["حر", "برد", "بتمطر", "غيم", "الشتا", "الصيف", "الربيع", "الخريف"],
+  "next_lesson": "conversation_001",
+  "related_topics": ["time_001", "days_001"]
+}

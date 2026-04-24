@@ -52,7 +52,8 @@ async def transcribe(audio: UploadFile = File(...)):
                 "https://api.openai.com/v1/audio/transcriptions",
                 headers={"Authorization": f"Bearer {os.environ['OPENAI_API_KEY']}"},
                 files={"file": (filename, audio_bytes, audio.content_type or "audio/webm")},
-                data={"model": "whisper-1", "language": "ar", "response_format": "text"},
+                data={"model": "whisper-1", "language": "ar", "response_format": "text",
+                      "prompt": "لهجة فلسطينية شامية. كلمات شائعة: مرحبا، كيفك، شو، هيك، عم، رح، هلق، يلا، تفضل، شكراً، من فضلك"},
                 timeout=30,
             )
             resp.raise_for_status()

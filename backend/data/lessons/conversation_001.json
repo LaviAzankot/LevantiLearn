@@ -1,0 +1,132 @@
+{
+  "lesson_id": "conversation_001",
+  "topic": "First Conversation",
+  "topic_ar": "أول حوار",
+  "level": "beginner",
+  "xp_reward": 50,
+  "estimated_minutes": 12,
+  "thumbnail_url": "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=600&h=280&fit=crop&auto=format",
+
+  "words": {
+    "w001": { "arabic": "بَفْهَم",       "arabic_plain": "بفهم",      "hebrew_pronunciation": "בַּפְהַם",     "hebrew": "אני מבין",       "icon": "bulb-outline",           "icon_color": "#FFD60A", "letter_blocks": ["ب", "ف", "ه", "م"] },
+    "w002": { "arabic": "مَا بِفْهَم",   "arabic_plain": "ما بفهم",   "hebrew_pronunciation": "מָא בִּפְהַם", "hebrew": "אני לא מבין",    "icon": "help-circle-outline",    "icon_color": "#FF3B30", "letter_blocks": ["م", "ا", "ب", "ف", "ه", "م"] },
+    "w003": { "arabic": "مُمْكِن تْحِكِي بَطِّي؟","arabic_plain": "ممكن تحكي بطي","hebrew_pronunciation": "מוּמְכִּן תְּחִכִּי בַּטִּי?","hebrew": "אפשר לדבר לאט?","icon": "mic-outline",          "icon_color": "#007AFF", "letter_blocks": ["م", "م", "ك", "ن", "ت", "ح", "ك", "ي", "ب", "ط", "ي"] },
+    "w004": { "arabic": "مُمْكِن تِعِيد؟", "arabic_plain": "ممكن تعيد","hebrew_pronunciation": "מוּמְכִּן תִּעִיד?","hebrew": "אפשר לחזור?",   "icon": "refresh-outline",        "icon_color": "#34C759", "letter_blocks": ["م", "م", "ك", "ن", "ت", "ع", "ي", "د"] },
+    "w005": { "arabic": "عَم تَعَلَّم",   "arabic_plain": "عم تعلم",   "hebrew_pronunciation": "עַם תְּעַלַּם","hebrew": "אני לומד",        "icon": "school-outline",         "icon_color": "#AF52DE", "letter_blocks": ["ع", "م", "ت", "ع", "ل", "م"] },
+    "w006": { "arabic": "اللُّغَة العَرَبِيَّة","arabic_plain": "اللغة العربية","hebrew_pronunciation": "אַלְּלוּגַּה אַלְעַרַבִּיּَה","hebrew": "השפה הערבית","icon": "language-outline",  "icon_color": "#FF9500", "letter_blocks": ["ا", "ل", "ل", "غ", "ة", "ع", "ر", "ب", "ي", "ة"] },
+    "w007": { "arabic": "أَنا مَبْسُوط",  "arabic_plain": "أنا مبسوط", "hebrew_pronunciation": "אַנָא מַבְסוּט","hebrew": "אני שמח / בסדר",  "icon": "happy-outline",          "icon_color": "#34C759", "letter_blocks": ["أ", "ن", "ا", "م", "ب", "س", "و", "ط"] },
+    "w008": { "arabic": "مَشَاء الله",    "arabic_plain": "ما شاء الله","hebrew_pronunciation": "מַשַׁאַלָּה","hebrew": "מה שאמר האל (wow!)", "icon": "star-outline",         "icon_color": "#FFD60A", "letter_blocks": ["م", "ا", "ش", "ا", "ء", "ا", "ل", "ل", "ه"] }
+  },
+
+  "stages": [
+    { "type": "listen_repeat", "word_id": "w001" },
+    { "type": "listen_repeat", "word_id": "w002" },
+    { "type": "listen_repeat", "word_id": "w003" },
+    { "type": "listen_repeat", "word_id": "w004" },
+    { "type": "listen_repeat", "word_id": "w005" },
+    { "type": "listen_repeat", "word_id": "w007" },
+    { "type": "listen_repeat", "word_id": "w008" },
+
+    { "type": "choose_translation", "word_id": "w001", "option_ids": ["w001", "w002", "w005", "w007"] },
+    { "type": "choose_translation", "word_id": "w003", "option_ids": ["w003", "w004", "w006", "w008"] },
+    { "type": "choose_translation", "word_id": "w007", "option_ids": ["w001", "w005", "w007", "w008"] },
+
+    { "type": "listen_choose", "items": [
+      { "word_id": "w001", "distractor_id": "w002" },
+      { "word_id": "w007", "distractor_id": "w008" }
+    ]},
+
+    { "type": "write_translation", "word_id": "w001" },
+    { "type": "write_translation", "word_id": "w005" },
+
+    { "type": "match_pairs", "word_ids": ["w001", "w002", "w003", "w004", "w005", "w007", "w008"] },
+
+    {
+      "type": "dialogue",
+      "context_label": "שיחה אמיתית ראשונה — הכרות ב-10 משפטים",
+      "lines": [
+        {
+          "speaker": "A",
+          "name": "ג'מאל",
+          "arabic": "مَرْحَبا! شُو اسْمَك؟",
+          "hebrew_pronunciation": "מַרְחַבָּא! שוּ אִסְמַק?",
+          "hebrew": "שלום! מה שמך?"
+        },
+        {
+          "speaker": "B",
+          "is_user_turn": true,
+          "word_id": "w005",
+          "target_voweled": "تَعَلَّم",
+          "full_arabic": "أَنا دَانِيِيل. عَم تَعَلَّم عَرَبِي!",
+          "hebrew": "אני דניאל. אני לומד ערבית!",
+          "hebrew_gap": "לומד"
+        },
+        {
+          "speaker": "A",
+          "name": "ג'מאל",
+          "arabic": "مَشَاء الله! كَتِير مِنِيح. مِنِيْن؟",
+          "hebrew_pronunciation": "מַשַׁאַלָּה! כְּתִיר מְנִיח. מְנֵיין?",
+          "hebrew": "מה שאמר האל! מצוין מאוד. מאיפה?"
+        },
+        {
+          "speaker": "B",
+          "is_user_turn": true,
+          "word_id": "w007",
+          "target_voweled": "مَبْسُوط",
+          "full_arabic": "أَنا مِن إِسْرائِيل وِأَنا مَبْسُوط كَتِير أَتْكَلَّم عَرَبِي!",
+          "hebrew": "אני מישראל ואני מאוד שמח לדבר ערבית!",
+          "hebrew_gap": "שמח"
+        },
+        {
+          "speaker": "A",
+          "name": "ג'מאל",
+          "arabic": "أَنا كَمَان! يَلَّا نِحْكِي!",
+          "hebrew_pronunciation": "אַנָא כַּמָּאן! יַאלָּה נִחְכִּי!",
+          "hebrew": "גם אני! יאללה בוא נדבר!"
+        },
+        {
+          "speaker": "B",
+          "is_user_turn": true,
+          "word_id": "w003",
+          "target_voweled": "بَطِّي",
+          "full_arabic": "يَلَّا! بَس مُمْكِن تِحْكِي بَطِّي؟ لِسَّا مَا بَعْرَف كَتِير.",
+          "hebrew": "יאללה! אבל אפשר לדבר לאט? עדיין לא יודע הרבה.",
+          "hebrew_gap": "לאט"
+        },
+        {
+          "speaker": "A",
+          "name": "ג'מאל",
+          "arabic": "مَا فِي مُشْكِلة! أَنا بِبْطى. إِن شَاء الله رَح تِتْعَلَّم بَسُرْعَة!",
+          "hebrew_pronunciation": "מָא פִי מֻשְׁכִּלֶה! אַנָא בִּבְּטָא. אִינְשַׁאַלָּה רַח תִּתְעַלַּם בַּסּוּרְעָה!",
+          "hebrew": "אין בעיה! אני לאט. אם ירצה האל, תלמד מהר!"
+        }
+      ]
+    },
+
+    {
+      "type": "sentence_build",
+      "sentence_hebrew": "אני לומד ערבית ואני שמח מאוד",
+      "sentence_arabic": "عَم تَعَلَّم عَرَبِي وِأَنا مَبْسُوط كَتِير",
+      "words": ["عَم", "تَعَلَّم", "عَرَبِي", "وِأَنا", "مَبْسُوط", "كَتِير"]
+    },
+
+    {
+      "type": "sentence_complete",
+      "arabic_context": "مُمْكِن تِحْكِي",
+      "sentence_translation": "אפשר לדבר לאט?",
+      "gap_word_id": "w003",
+      "gap_word_id_list": ["w003", "w001", "w002", "w007"]
+    },
+
+    {
+      "type": "cultural_note",
+      "title": "מזל טוב — סיימת שלב 1!",
+      "body_hebrew": "השלמת את 16 שיעורי השורשים! עכשיו אתם יודעים: ברכות, מספרים, קפה, צבעים, ימים, שאלות, פעלים, משפחה, שוק, ביטויים, גוף, מזג אוויר — ושפה שלמה לשיחה ראשונה. 'מַשַׁאַלָּה!' — כמה שזה טוב שדיברתם ערבית. בשלב הבא: מסעדה, כיוונים, קניות ועוד. إِن شَاء الله רח תהיו שוטפים!",
+      "audio_text": "أنا مبسوط كتير أتكلم عربي! ماشاء الله"
+    }
+  ],
+
+  "srs_words": ["بفهم", "ما بفهم", "ممكن تحكي بطي", "ممكن تعيد", "عم تعلم", "اللغة العربية", "أنا مبسوط", "ما شاء الله"],
+  "next_lesson": "food_001",
+  "related_topics": ["greetings_001", "phrases_001", "questions_001"]
+}

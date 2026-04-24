@@ -1,0 +1,147 @@
+{
+  "lesson_id": "greetings_002",
+  "topic": "More Greetings",
+  "topic_ar": "تحيات أكثر",
+  "level": "beginner",
+  "xp_reward": 30,
+  "estimated_minutes": 8,
+  "thumbnail_url": "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=600&h=280&fit=crop&auto=format",
+
+  "words": {
+    "w001": {
+      "arabic": "صَباح الخِير",
+      "arabic_plain": "صباح الخير",
+      "hebrew_pronunciation": "סַבָּאח אֶלְחֵיר",
+      "hebrew": "בוקר טוב",
+      "icon": "sunny-outline",
+      "icon_color": "#FF9500",
+      "letter_blocks": ["ح", "ص", "ب", "ا", "ل"]
+    },
+    "w002": {
+      "arabic": "صَباح النُّور",
+      "arabic_plain": "صباح النور",
+      "hebrew_pronunciation": "סַבָּאח אַנּוּר",
+      "hebrew": "בוקר אור (תשובה לבוקר טוב)",
+      "icon": "sunny-outline",
+      "icon_color": "#FFD60A",
+      "letter_blocks": ["ن", "ص", "ب", "ا", "ر"]
+    },
+    "w003": {
+      "arabic": "مَساء الخِير",
+      "arabic_plain": "مساء الخير",
+      "hebrew_pronunciation": "מַסָּא אֶלְחֵיר",
+      "hebrew": "ערב טוב",
+      "icon": "moon-outline",
+      "icon_color": "#5856D6",
+      "letter_blocks": ["م", "ء", "س", "ا", "ل"]
+    },
+    "w004": {
+      "arabic": "يَلَّا",
+      "arabic_plain": "يلا",
+      "hebrew_pronunciation": "יַאלָּה",
+      "hebrew": "יאללה / בוא / בסדר",
+      "icon": "flash-outline",
+      "icon_color": "#FF6B35",
+      "letter_blocks": ["ي", "ل", "ا"]
+    },
+    "w005": {
+      "arabic": "إِن شَاء الله",
+      "arabic_plain": "إن شاء الله",
+      "hebrew_pronunciation": "אִינְשַׁאַלָּה",
+      "hebrew": "אם ירצה האל / בתקווה",
+      "icon": "heart-outline",
+      "icon_color": "#AF52DE",
+      "letter_blocks": ["ل", "إ", "ن", "ا", "ه"]
+    },
+    "w006": {
+      "arabic": "يَعطِيك الصِّحَّة",
+      "arabic_plain": "يعطيك الصحة",
+      "hebrew_pronunciation": "יַעְטִיק אַצִּחָּה",
+      "hebrew": "תודה (תן לך בריאות)",
+      "icon": "heart-circle-outline",
+      "icon_color": "#34C759",
+      "letter_blocks": ["ي", "ع", "ط", "ك", "ح"]
+    }
+  },
+
+  "stages": [
+    { "type": "listen_repeat", "word_id": "w001" },
+    { "type": "listen_repeat", "word_id": "w002" },
+    { "type": "listen_repeat", "word_id": "w003" },
+    { "type": "listen_repeat", "word_id": "w004" },
+    { "type": "listen_repeat", "word_id": "w005" },
+    { "type": "listen_repeat", "word_id": "w006" },
+
+    { "type": "choose_translation", "word_id": "w001", "option_ids": ["w001", "w003", "w005", "w006"] },
+    { "type": "choose_translation", "word_id": "w003", "option_ids": ["w001", "w002", "w003", "w004"] },
+    { "type": "choose_translation", "word_id": "w004", "option_ids": ["w002", "w004", "w005", "w006"] },
+    { "type": "choose_translation", "word_id": "w005", "option_ids": ["w001", "w003", "w005", "w006"] },
+
+    { "type": "listen_choose", "items": [
+      { "word_id": "w001", "distractor_id": "w003" },
+      { "word_id": "w004", "distractor_id": "w006" }
+    ]},
+
+    { "type": "write_translation", "word_id": "w001" },
+    { "type": "write_translation", "word_id": "w004" },
+
+    { "type": "match_pairs", "word_ids": ["w001", "w002", "w003", "w004", "w005", "w006"] },
+
+    {
+      "type": "dialogue",
+      "context_label": "פגישת בוקר עם שכן",
+      "lines": [
+        {
+          "speaker": "A",
+          "name": "נאדיה",
+          "arabic": "صَباح الخِير!",
+          "hebrew_pronunciation": "סַבָּאח אֶלְחֵיר!",
+          "hebrew": "בוקר טוב!"
+        },
+        {
+          "speaker": "B",
+          "is_user_turn": true,
+          "word_id": "w002",
+          "target_voweled": "صَباح النُّور",
+          "full_arabic": "صَباح النُّور! كِيفَك؟",
+          "hebrew": "בוקר אור! מה שלומך?",
+          "hebrew_gap": "בוקר אור"
+        },
+        {
+          "speaker": "A",
+          "name": "נאדיה",
+          "arabic": "مْنِيح، شُكْراً. يَلَّا، بِشُوفَك بَعْدِين!",
+          "hebrew_pronunciation": "מְנִיח, שֻׁקְרָן. יַאלָּה, בִּשׁוּפַק בַּעְדִּין!",
+          "hebrew": "בסדר, תודה. יאללה, נתראה אחר כך!"
+        },
+        {
+          "speaker": "B",
+          "is_user_turn": true,
+          "word_id": "w004",
+          "target_voweled": "يَلَّا",
+          "full_arabic": "يَلَّا، مَعَ السَّلامَة!",
+          "hebrew": "יאללה, להתראות!",
+          "hebrew_gap": "יאללה"
+        }
+      ]
+    },
+
+    {
+      "type": "sentence_build",
+      "sentence_hebrew": "ערב טוב, מה שלומך?",
+      "sentence_arabic": "مَساء الخِير، كِيفَك؟",
+      "words": ["مَساء", "الخِير،", "كِيفَك؟"]
+    },
+
+    {
+      "type": "cultural_note",
+      "title": "יאללה — המילה הכי שימושית בערבית",
+      "body_hebrew": "\"יאללה\" (يلا) היא אחת המילים הנפוצות ביותר בלבנטינית. היא יכולה להיאמר כדי להגיד: 'בוא!', 'מהר!', 'בסדר', 'להתראות' — הכל תלוי בהקשר ובטון. \"אינשאאללה\" מופיעה בשיחה יומיומית כדי לבטא תקווה, כוונה, או אי-ודאות.",
+      "audio_text": "يلا، إن شاء الله"
+    }
+  ],
+
+  "srs_words": ["صباح الخير", "صباح النور", "مساء الخير", "يلا", "إن شاء الله", "يعطيك الصحة"],
+  "next_lesson": "numbers_001",
+  "related_topics": ["greetings_001", "phrases_001"]
+}

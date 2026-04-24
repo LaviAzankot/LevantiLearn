@@ -1,6 +1,6 @@
 # LEVANTI LEARN RULES
 ## PROJECT OVERVIEW [levanti:*]
-- App: Babbel-style Palestinian/Levantine Arabic learning for Tel Aviv/Israel users
+- App: Babbel-style Levantine Arabic learning for Tel Aviv/Israel users
 - Goals: MVP with 10 topics (Greetings-Food-Directions-Shopping-Family-Travel-Numbers-Colors-Emergency-Culture)
 - Ethical: Open-source only (Maknuune CC-BY-SA, Unsplash CC0); no copyrighted content
 

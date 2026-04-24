@@ -1,6 +1,6 @@
 """
 LevantiLearn Backend — FastAPI
-Levantine/Palestinian Arabic learning app API
+Levantine Arabic learning app API
 """
 
 from dotenv import load_dotenv
@@ -22,7 +22,7 @@ from api.audio    import router as audio_router
 
 app = FastAPI(
     title="LevantiLearn API",
-    description="Palestinian/Levantine Arabic learning platform",
+    description="Levantine Arabic learning platform",
     version="1.0.0",
     docs_url="/docs",
     redoc_url="/redoc",

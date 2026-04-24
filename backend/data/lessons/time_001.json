@@ -1,0 +1,95 @@
+{
+  "lesson_id": "time_001",
+  "topic": "Time & Clock",
+  "topic_ar": "الوقت والساعة",
+  "level": "beginner",
+  "xp_reward": 30,
+  "estimated_minutes": 8,
+  "thumbnail_url": "https://images.unsplash.com/photo-1501139083538-0139583c060f?w=600&h=280&fit=crop&auto=format",
+
+  "words": {
+    "w001": { "arabic": "هَلَّق",      "arabic_plain": "هلق",     "hebrew_pronunciation": "הַלַּק",      "hebrew": "עכשיו / הרגע",     "icon": "time-outline",      "icon_color": "#FF9500", "letter_blocks": ["ه", "ل", "ق"] },
+    "w002": { "arabic": "بَكْرا",      "arabic_plain": "بكرا",    "hebrew_pronunciation": "בַּכְּרָא",   "hebrew": "מחר",              "icon": "calendar-outline",  "icon_color": "#34C759", "letter_blocks": ["ب", "ك", "ر", "ا"] },
+    "w003": { "arabic": "مْبارِح",     "arabic_plain": "مبارح",   "hebrew_pronunciation": "מְבַּארֶח",   "hebrew": "אתמול",            "icon": "arrow-back-outline", "icon_color": "#5856D6", "letter_blocks": ["م", "ب", "ا", "ر", "ح"] },
+    "w004": { "arabic": "قَدِّيش الساعة؟","arabic_plain": "قديش الساعة","hebrew_pronunciation": "קַדִּישׁ אַסָּאעָה?","hebrew": "כמה השעה?",    "icon": "help-circle-outline","icon_color": "#007AFF", "letter_blocks": ["ق", "د", "ي", "ش", "س", "ا", "ع", "ة"] },
+    "w005": { "arabic": "الصُّبُح",    "arabic_plain": "الصبح",   "hebrew_pronunciation": "אַצּוּבּוּח", "hebrew": "בבוקר",            "icon": "sunny-outline",     "icon_color": "#FFD60A", "letter_blocks": ["ا", "ل", "ص", "ب", "ح"] },
+    "w006": { "arabic": "الضُّهُر",    "arabic_plain": "الضهر",   "hebrew_pronunciation": "אַדּוּהֻּר",  "hebrew": "בצהריים",          "icon": "sunny-outline",     "icon_color": "#FF9500", "letter_blocks": ["ا", "ل", "ض", "ه", "ر"] },
+    "w007": { "arabic": "الليل",       "arabic_plain": "الليل",   "hebrew_pronunciation": "אַלְּלֵיל",   "hebrew": "בלילה",            "icon": "moon-outline",      "icon_color": "#5856D6", "letter_blocks": ["ا", "ل", "ل", "ي", "ل"] },
+    "w008": { "arabic": "بَدِّيِر",    "arabic_plain": "بدير",    "hebrew_pronunciation": "בַּדִּיר",    "hebrew": "מוקדם / עוד",      "icon": "time-outline",      "icon_color": "#FF3B30", "letter_blocks": ["ب", "د", "ي", "ر"] }
+  },
+
+  "stages": [
+    { "type": "listen_repeat", "word_id": "w001" },
+    { "type": "listen_repeat", "word_id": "w002" },
+    { "type": "listen_repeat", "word_id": "w003" },
+    { "type": "listen_repeat", "word_id": "w004" },
+    { "type": "listen_repeat", "word_id": "w005" },
+    { "type": "listen_repeat", "word_id": "w006" },
+    { "type": "listen_repeat", "word_id": "w007" },
+
+    { "type": "choose_translation", "word_id": "w001", "option_ids": ["w001", "w002", "w003", "w008"] },
+    { "type": "choose_translation", "word_id": "w002", "option_ids": ["w001", "w002", "w003", "w004"] },
+    { "type": "choose_translation", "word_id": "w005", "option_ids": ["w005", "w006", "w007", "w008"] },
+    { "type": "choose_translation", "word_id": "w007", "option_ids": ["w004", "w005", "w006", "w007"] },
+
+    { "type": "listen_choose", "items": [
+      { "word_id": "w002", "distractor_id": "w003" },
+      { "word_id": "w005", "distractor_id": "w007" }
+    ]},
+
+    { "type": "write_translation", "word_id": "w001" },
+    { "type": "write_translation", "word_id": "w002" },
+
+    { "type": "match_pairs", "word_ids": ["w001", "w002", "w003", "w005", "w006", "w007"] },
+
+    {
+      "type": "dialogue",
+      "context_label": "תיאום על הטלפון",
+      "lines": [
+        {
+          "speaker": "A",
+          "name": "סמר",
+          "arabic": "مَرْحَبا! قَدِّيش الساعة هَلَّق؟",
+          "hebrew_pronunciation": "מַרְחַבָּא! קַדִּישׁ אַסָּאעָה הַלַּק?",
+          "hebrew": "שלום! כמה השעה עכשיו?"
+        },
+        {
+          "speaker": "B",
+          "is_user_turn": true,
+          "word_id": "w001",
+          "target_voweled": "هَلَّق",
+          "full_arabic": "هَلَّق الساعة اثْنِين الضُّهُر.",
+          "hebrew": "עכשיו השעה שתיים בצהריים.",
+          "hebrew_gap": "עכשיו"
+        },
+        {
+          "speaker": "A",
+          "name": "סמר",
+          "arabic": "بَكْرا الصُّبُح مِنِيح؟",
+          "hebrew_pronunciation": "בַּכְּרָא אַצּוּבּוּח מְנִיח?",
+          "hebrew": "מחר בבוקר בסדר?"
+        },
+        {
+          "speaker": "B",
+          "is_user_turn": true,
+          "word_id": "w002",
+          "target_voweled": "بَكْرا",
+          "full_arabic": "آه، بَكْرا الصُّبُح مِنِيح كَتِير!",
+          "hebrew": "כן, מחר בבוקר מצוין!",
+          "hebrew_gap": "מחר"
+        }
+      ]
+    },
+
+    {
+      "type": "sentence_build",
+      "sentence_hebrew": "כמה השעה עכשיו?",
+      "sentence_arabic": "قَدِّيش الساعة هَلَّق؟",
+      "words": ["قَدِّيش", "الساعة", "هَلَّق؟"]
+    }
+  ],
+
+  "srs_words": ["هلق", "بكرا", "مبارح", "قديش الساعة", "الصبح", "الضهر", "الليل"],
+  "next_lesson": "questions_001",
+  "related_topics": ["days_001", "conversation_001"]
+}

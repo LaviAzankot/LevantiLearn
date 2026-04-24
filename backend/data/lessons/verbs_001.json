@@ -1,0 +1,103 @@
+{
+  "lesson_id": "verbs_001",
+  "topic": "Essential Verbs",
+  "topic_ar": "أفعال أساسية",
+  "level": "beginner",
+  "xp_reward": 35,
+  "estimated_minutes": 9,
+  "thumbnail_url": "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&h=280&fit=crop&auto=format",
+
+  "words": {
+    "w001": { "arabic": "بْرُوح / رُحْت",  "arabic_plain": "بروح",  "hebrew_pronunciation": "בְּרוּח / רוּחְת",   "hebrew": "הולך / הלכתי",  "icon": "walk-outline",    "icon_color": "#FF9500", "letter_blocks": ["ب", "ر", "و", "ح"] },
+    "w002": { "arabic": "بِيجِي / جِيت",   "arabic_plain": "بيجي",  "hebrew_pronunciation": "בִּיגִּי / גִּיתְ",   "hebrew": "בא / באתי",     "icon": "enter-outline",   "icon_color": "#34C759", "letter_blocks": ["ب", "ي", "ج", "ي"] },
+    "w003": { "arabic": "بِياكُل / أَكَلْت","arabic_plain": "بياكل", "hebrew_pronunciation": "בִּיאָאכֻּל / אַכַּלְתְּ","hebrew": "אוכל / אכלתי","icon": "fast-food-outline","icon_color": "#FF6B35", "letter_blocks": ["ب", "ي", "ا", "ك", "ل"] },
+    "w004": { "arabic": "بِشْرَب / شَرِبْت","arabic_plain": "بشرب",  "hebrew_pronunciation": "בִּשְׁרַב / שַׁרִּבְּתְ","hebrew": "שותה / שתיתי","icon": "water-outline",   "icon_color": "#007AFF", "letter_blocks": ["ب", "ش", "ر", "ب"] },
+    "w005": { "arabic": "بِشُوف / شُفْت",  "arabic_plain": "بشوف",  "hebrew_pronunciation": "בִּשׁוּף / שוּפְּת",   "hebrew": "רואה / ראיתי", "icon": "eye-outline",     "icon_color": "#AF52DE", "letter_blocks": ["ب", "ش", "و", "ف"] },
+    "w006": { "arabic": "بِحْكِي / حَكِيت","arabic_plain": "بحكي",  "hebrew_pronunciation": "בִּחְכִּי / חַכִּיתְ",  "hebrew": "מדבר / דיברתי","icon": "chatbubble-outline","icon_color": "#5856D6","letter_blocks": ["ب", "ح", "ك", "ي"] },
+    "w007": { "arabic": "بِعْرَف / عَرَفْت","arabic_plain": "بعرف",  "hebrew_pronunciation": "בִּעְרַף / עַרַפְּת",   "hebrew": "יודע / ידעתי", "icon": "bulb-outline",    "icon_color": "#FFD60A", "letter_blocks": ["ب", "ع", "ر", "ف"] },
+    "w008": { "arabic": "بِحِب / حَبِّيت",  "arabic_plain": "بحب",   "hebrew_pronunciation": "בִּחִב / חַבִּיתְ",    "hebrew": "אוהב / אהבתי", "icon": "heart-outline",   "icon_color": "#FF3B30", "letter_blocks": ["ب", "ح", "ب"] }
+  },
+
+  "stages": [
+    { "type": "listen_repeat", "word_id": "w001" },
+    { "type": "listen_repeat", "word_id": "w002" },
+    { "type": "listen_repeat", "word_id": "w003" },
+    { "type": "listen_repeat", "word_id": "w004" },
+    { "type": "listen_repeat", "word_id": "w005" },
+    { "type": "listen_repeat", "word_id": "w006" },
+    { "type": "listen_repeat", "word_id": "w007" },
+    { "type": "listen_repeat", "word_id": "w008" },
+
+    { "type": "choose_translation", "word_id": "w001", "option_ids": ["w001", "w002", "w004", "w007"] },
+    { "type": "choose_translation", "word_id": "w003", "option_ids": ["w003", "w004", "w006", "w008"] },
+    { "type": "choose_translation", "word_id": "w008", "option_ids": ["w005", "w006", "w007", "w008"] },
+    { "type": "choose_translation", "word_id": "w006", "option_ids": ["w001", "w005", "w006", "w007"] },
+
+    { "type": "listen_choose", "items": [
+      { "word_id": "w003", "distractor_id": "w004" },
+      { "word_id": "w008", "distractor_id": "w007" }
+    ]},
+
+    { "type": "write_translation", "word_id": "w001" },
+    { "type": "write_translation", "word_id": "w008" },
+
+    { "type": "match_pairs", "word_ids": ["w001", "w002", "w003", "w004", "w005", "w006", "w007", "w008"] },
+
+    {
+      "type": "dialogue",
+      "context_label": "מה אתה אוהב לעשות?",
+      "lines": [
+        {
+          "speaker": "A",
+          "name": "דינה",
+          "arabic": "شُو بِتْحِب تِعْمَل بِالأُسْبُوع؟",
+          "hebrew_pronunciation": "שוּ בִּתְחִב תִּעְמַל בִּאַלְאוּסְבּוּע?",
+          "hebrew": "מה אתה אוהב לעשות בשבוע?"
+        },
+        {
+          "speaker": "B",
+          "is_user_turn": true,
+          "word_id": "w008",
+          "target_voweled": "بِحِب",
+          "full_arabic": "بِحِب آكُل وِبِشُوف أَفْلام.",
+          "hebrew": "אני אוהב לאכול ולראות סרטים.",
+          "hebrew_gap": "אוהב"
+        },
+        {
+          "speaker": "A",
+          "name": "דינה",
+          "arabic": "وِأَنا بِحِب أَحْكِي مَعَ صَحابِي!",
+          "hebrew_pronunciation": "וַאַנָא בִּחִב אַחְכִּי מַע צַחַּאבִּי!",
+          "hebrew": "ואני אוהבת לדבר עם חבריי!"
+        },
+        {
+          "speaker": "B",
+          "is_user_turn": true,
+          "word_id": "w006",
+          "target_voweled": "بِحْكِي",
+          "full_arabic": "آه! أَنا كَمَان بِحِب أَحْكِي عَرَبِي!",
+          "hebrew": "כן! גם אני אוהב לדבר ערבית!",
+          "hebrew_gap": "לדבר"
+        }
+      ]
+    },
+
+    {
+      "type": "sentence_build",
+      "sentence_hebrew": "אני אוהב לאכול ולשתות קפה",
+      "sentence_arabic": "بِحِب آكُل وِأَشْرَب قَهْوَة",
+      "words": ["بِحِب", "آكُل", "وِأَشْرَب", "قَهْوَة"]
+    },
+
+    {
+      "type": "cultural_note",
+      "title": "פעלים לבנטיניים — ב + שורש",
+      "body_hebrew": "בלבנטינית, עוברים לזמן הווה/עתיד עם הקידומת 'ב-': בְּרוּח = הולך, בִּיגִּי = בא, בִּאָאכֻּל = אוכל. זמן עבר: פשוט בלי קידומת — רוּחְת (הלכתי), גִּיתְ (באתי), אַכַּלְתְּ (אכלתי). תיכף תרגישו שהדפוס חוזר על עצמו!",
+      "audio_text": "بحب آكل وبشرب قهوة كل يوم"
+    }
+  ],
+
+  "srs_words": ["بروح", "بيجي", "بياكل", "بشرب", "بشوف", "بحكي", "بعرف", "بحب"],
+  "next_lesson": "family_001",
+  "related_topics": ["conversation_001", "phrases_001"]
+}

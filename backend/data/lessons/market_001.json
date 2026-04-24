@@ -1,0 +1,110 @@
+{
+  "lesson_id": "market_001",
+  "topic": "At the Market",
+  "topic_ar": "في السوق",
+  "level": "beginner",
+  "xp_reward": 35,
+  "estimated_minutes": 9,
+  "thumbnail_url": "https://images.unsplash.com/photo-1488459716781-31db52582fe9?w=600&h=280&fit=crop&auto=format",
+
+  "words": {
+    "w001": { "arabic": "غَالِي",        "arabic_plain": "غالي",      "hebrew_pronunciation": "גַּאלִי",     "hebrew": "יקר",             "icon": "pricetag-outline",  "icon_color": "#FF3B30", "letter_blocks": ["غ", "ا", "ل", "ي"] },
+    "w002": { "arabic": "رَخِيص",        "arabic_plain": "رخيص",      "hebrew_pronunciation": "רַחִּיס",    "hebrew": "זול",             "icon": "pricetag-outline",  "icon_color": "#34C759", "letter_blocks": ["ر", "خ", "ي", "ص"] },
+    "w003": { "arabic": "بَدِّي أَشْتِري","arabic_plain": "بدي أشتري", "hebrew_pronunciation": "בַּדִּי אַשְׁתְּרִי","hebrew": "אני רוצה לקנות","icon": "bag-outline",       "icon_color": "#FF9500", "letter_blocks": ["ب", "د", "ي", "أ", "ش", "ت", "ر", "ي"] },
+    "w004": { "arabic": "هَاد / هَاي",   "arabic_plain": "هاد",       "hebrew_pronunciation": "הַאד / הַאי","hebrew": "זה / זאת",         "icon": "hand-right-outline","icon_color": "#007AFF", "letter_blocks": ["ه", "ا", "د"] },
+    "w005": { "arabic": "كَتِير",        "arabic_plain": "كتير",      "hebrew_pronunciation": "כְּתִיר",    "hebrew": "הרבה / מאוד",     "icon": "add-circle-outline","icon_color": "#AF52DE", "letter_blocks": ["ك", "ت", "ي", "ر"] },
+    "w006": { "arabic": "شْوَي",         "arabic_plain": "شوي",       "hebrew_pronunciation": "שְׁוַאי",    "hebrew": "קצת",             "icon": "remove-circle-outline","icon_color": "#5856D6","letter_blocks": ["ش", "و", "ي"] },
+    "w007": { "arabic": "إِعْطِينِي",    "arabic_plain": "اعطيني",    "hebrew_pronunciation": "אִיעְטִינִי","hebrew": "תן לי",            "icon": "hand-left-outline", "icon_color": "#FF6B35", "letter_blocks": ["إ", "ع", "ط", "ي", "ن", "ي"] },
+    "w008": { "arabic": "خَلَّص",        "arabic_plain": "خلص",       "hebrew_pronunciation": "חַלַּס",     "hebrew": "נגמר / מספיק",    "icon": "checkmark-circle-outline","icon_color": "#34C759","letter_blocks": ["خ", "ل", "ص"] }
+  },
+
+  "stages": [
+    { "type": "listen_repeat", "word_id": "w001" },
+    { "type": "listen_repeat", "word_id": "w002" },
+    { "type": "listen_repeat", "word_id": "w003" },
+    { "type": "listen_repeat", "word_id": "w004" },
+    { "type": "listen_repeat", "word_id": "w005" },
+    { "type": "listen_repeat", "word_id": "w006" },
+    { "type": "listen_repeat", "word_id": "w007" },
+
+    { "type": "choose_translation", "word_id": "w001", "option_ids": ["w001", "w002", "w005", "w006"] },
+    { "type": "choose_translation", "word_id": "w002", "option_ids": ["w001", "w002", "w003", "w007"] },
+    { "type": "choose_translation", "word_id": "w005", "option_ids": ["w004", "w005", "w006", "w008"] },
+    { "type": "choose_translation", "word_id": "w007", "option_ids": ["w003", "w004", "w007", "w008"] },
+
+    { "type": "listen_choose", "items": [
+      { "word_id": "w001", "distractor_id": "w002" },
+      { "word_id": "w005", "distractor_id": "w006" }
+    ]},
+
+    { "type": "write_translation", "word_id": "w001" },
+    { "type": "write_translation", "word_id": "w002" },
+    { "type": "write_translation", "word_id": "w007" },
+
+    { "type": "match_pairs", "word_ids": ["w001", "w002", "w003", "w004", "w005", "w006", "w007", "w008"] },
+
+    {
+      "type": "dialogue",
+      "context_label": "מיקוח בשוק",
+      "lines": [
+        {
+          "speaker": "A",
+          "name": "המוכר",
+          "arabic": "بِكَم بَدَّك؟",
+          "hebrew_pronunciation": "בִּכַּם בַּדַּק?",
+          "hebrew": "כמה אתה רוצה לשלם?"
+        },
+        {
+          "speaker": "B",
+          "is_user_turn": true,
+          "word_id": "w003",
+          "target_voweled": "أَشْتِري",
+          "full_arabic": "بَدِّي أَشْتِري هَاد. بِكَم؟",
+          "hebrew": "אני רוצה לקנות את זה. כמה?",
+          "hebrew_gap": "לקנות"
+        },
+        {
+          "speaker": "A",
+          "name": "המוכר",
+          "arabic": "هَاد بِعِشْرِين.",
+          "hebrew_pronunciation": "הַאד בִּעִשְׁרִין.",
+          "hebrew": "זה בעשרים."
+        },
+        {
+          "speaker": "B",
+          "is_user_turn": true,
+          "word_id": "w001",
+          "target_voweled": "غَالِي",
+          "full_arabic": "وَّاه، غَالِي كَتِير! عَشَرَة؟",
+          "hebrew": "וואו, יקר מאוד! עשרה?",
+          "hebrew_gap": "יקר"
+        },
+        {
+          "speaker": "A",
+          "name": "המוכר",
+          "arabic": "خَمِسْطَاش، وَخَلَّص!",
+          "hebrew_pronunciation": "חַמִּסְטָּאש, וַחַלַּס!",
+          "hebrew": "חמישה עשר, ומספיק!"
+        }
+      ]
+    },
+
+    {
+      "type": "sentence_build",
+      "sentence_hebrew": "זה יקר מאוד, תן לי קצת פחות",
+      "sentence_arabic": "هَاد غَالِي كَتِير، إِعْطِينِي شْوَي",
+      "words": ["هَاد", "غَالِي", "كَتِير،", "إِعْطِينِي", "شْوَي"]
+    },
+
+    {
+      "type": "cultural_note",
+      "title": "המיקוח בשוק — אמנות חברתית",
+      "body_hebrew": "מיקוח (مساومة) בשוק לבנטיני הוא חברתי, לא רק כלכלי. זה בסדר לגמרי להגיד 'גַּאלִי כְּתִיר!' (יקר מאוד!). המוכר מצפה לזה. 'חַלַּס!' פירושו 'נגמר / מספיק / עזוב' — שימוש רב בסיום עסקאות ובחיי יומיום.",
+      "audio_text": "بكم هاد؟ غالي كتير! اعطيني رخيص"
+    }
+  ],
+
+  "srs_words": ["غالي", "رخيص", "بدي أشتري", "هاد", "كتير", "شوي", "اعطيني", "خلص"],
+  "next_lesson": "phrases_001",
+  "related_topics": ["numbers_001", "cafe_001", "shopping_001"]
+}

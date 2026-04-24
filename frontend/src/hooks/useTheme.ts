@@ -1,5 +1,5 @@
 /**
- * Theme hook — light/dark mode with Palestinian-inspired palette
+ * Theme hook — light/dark mode with Arabic-inspired palette
  */
 
 import { useColorScheme } from 'react-native';
@@ -20,7 +20,7 @@ export interface ThemeColors {
 const LIGHT: ThemeColors = {
   background:    '#F5F3EF',   // Warm off-white (like old Jerusalem stone)
   card:          '#FFFFFF',
-  primary:       '#2D6A4F',   // Deep olive green (Palestinian olive trees)
+  primary:       '#2D6A4F',   // Deep olive green (Arabic olive trees)
   accent:        '#E07A2F',   // Warm orange (sunset over the Levant)
   text:          '#1A1A1A',
   textSecondary: '#6B6B6B',

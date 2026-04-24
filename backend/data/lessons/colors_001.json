@@ -1,0 +1,96 @@
+{
+  "lesson_id": "colors_001",
+  "topic": "Colors",
+  "topic_ar": "ألوان",
+  "level": "beginner",
+  "xp_reward": 30,
+  "estimated_minutes": 8,
+  "thumbnail_url": "https://images.unsplash.com/photo-1558865869-c93f6f8482af?w=600&h=280&fit=crop&auto=format",
+
+  "words": {
+    "w001": { "arabic": "أَحْمَر",   "arabic_plain": "أحمر",   "hebrew_pronunciation": "אַחְמַר",   "hebrew": "אדום",   "icon": "color-palette-outline", "icon_color": "#FF3B30", "letter_blocks": ["أ", "ح", "م", "ر"] },
+    "w002": { "arabic": "أَزْرَق",   "arabic_plain": "أزرق",   "hebrew_pronunciation": "אַזְרַק",   "hebrew": "כחול",   "icon": "color-palette-outline", "icon_color": "#007AFF", "letter_blocks": ["أ", "ز", "ر", "ق"] },
+    "w003": { "arabic": "أَخْضَر",   "arabic_plain": "أخضر",   "hebrew_pronunciation": "אַחְ'ضַר",  "hebrew": "ירוק",   "icon": "color-palette-outline", "icon_color": "#34C759", "letter_blocks": ["أ", "خ", "ض", "ر"] },
+    "w004": { "arabic": "أَصْفَر",   "arabic_plain": "أصفر",   "hebrew_pronunciation": "אַצְפַר",   "hebrew": "צהוב",   "icon": "color-palette-outline", "icon_color": "#FFD60A", "letter_blocks": ["أ", "ص", "ف", "ر"] },
+    "w005": { "arabic": "أَبْيَض",   "arabic_plain": "أبيض",   "hebrew_pronunciation": "אַבְּיַד",  "hebrew": "לבן",    "icon": "color-palette-outline", "icon_color": "#8E8E93", "letter_blocks": ["أ", "ب", "ي", "ض"] },
+    "w006": { "arabic": "أَسْوَد",   "arabic_plain": "أسود",   "hebrew_pronunciation": "אַסְוַד",   "hebrew": "שחור",   "icon": "color-palette-outline", "icon_color": "#1C1C1E", "letter_blocks": ["أ", "س", "و", "د"] },
+    "w007": { "arabic": "بُرْتُقالِي","arabic_plain": "برتقالي","hebrew_pronunciation": "בּוּרְתֻּקַאלִי","hebrew": "כתום",  "icon": "color-palette-outline", "icon_color": "#FF9500", "letter_blocks": ["ب", "ر", "ت", "ق", "ا", "ل", "ي"] },
+    "w008": { "arabic": "بَنَفْسَجِي","arabic_plain": "بنفسجي","hebrew_pronunciation": "בַּנַפְסַגִּי","hebrew": "סגול",  "icon": "color-palette-outline", "icon_color": "#AF52DE", "letter_blocks": ["ب", "ن", "ف", "س", "ج", "ي"] }
+  },
+
+  "stages": [
+    { "type": "listen_repeat", "word_id": "w001" },
+    { "type": "listen_repeat", "word_id": "w002" },
+    { "type": "listen_repeat", "word_id": "w003" },
+    { "type": "listen_repeat", "word_id": "w004" },
+    { "type": "listen_repeat", "word_id": "w005" },
+    { "type": "listen_repeat", "word_id": "w006" },
+    { "type": "listen_repeat", "word_id": "w007" },
+    { "type": "listen_repeat", "word_id": "w008" },
+
+    { "type": "choose_translation", "word_id": "w001", "option_ids": ["w001", "w003", "w004", "w007"] },
+    { "type": "choose_translation", "word_id": "w002", "option_ids": ["w002", "w005", "w006", "w008"] },
+    { "type": "choose_translation", "word_id": "w006", "option_ids": ["w005", "w006", "w007", "w008"] },
+    { "type": "choose_translation", "word_id": "w003", "option_ids": ["w001", "w002", "w003", "w004"] },
+
+    { "type": "listen_choose", "items": [
+      { "word_id": "w001", "distractor_id": "w002" },
+      { "word_id": "w005", "distractor_id": "w006" }
+    ]},
+
+    { "type": "write_translation", "word_id": "w001" },
+    { "type": "write_translation", "word_id": "w003" },
+
+    { "type": "match_pairs", "word_ids": ["w001", "w002", "w003", "w004", "w005", "w006", "w007", "w008"] },
+
+    {
+      "type": "dialogue",
+      "context_label": "קניית ביגוד בשוק",
+      "lines": [
+        {
+          "speaker": "A",
+          "name": "המוכר",
+          "arabic": "شُو لَوْن بَدَّك؟",
+          "hebrew_pronunciation": "שוּ לוֹן בַּדַּק?",
+          "hebrew": "איזה צבע אתה רוצה?"
+        },
+        {
+          "speaker": "B",
+          "is_user_turn": true,
+          "word_id": "w002",
+          "target_voweled": "أَزْرَق",
+          "full_arabic": "بَدِّي أَزْرَق، لَوْ سَمَحْت.",
+          "hebrew": "אני רוצה כחול, בבקשה.",
+          "hebrew_gap": "כחול"
+        },
+        {
+          "speaker": "A",
+          "name": "המוכר",
+          "arabic": "عِنْدِي أَزْرَق وَأَحْمَر. شُو أَحْلى؟",
+          "hebrew_pronunciation": "עִינְדִּי אַזְרַק וַאַחְמַר. שוּ אַחְלָא?",
+          "hebrew": "יש לי כחול ואדום. איזה יותר יפה?"
+        },
+        {
+          "speaker": "B",
+          "is_user_turn": true,
+          "word_id": "w001",
+          "target_voweled": "أَحْمَر",
+          "full_arabic": "الأَحْمَر أَحْلى! بَدِّي هَاد.",
+          "hebrew": "האדום יותר יפה! אני רוצה את זה.",
+          "hebrew_gap": "האדום"
+        }
+      ]
+    },
+
+    {
+      "type": "sentence_build",
+      "sentence_hebrew": "אני רוצה את הכחול",
+      "sentence_arabic": "بَدِّي الأَزْرَق",
+      "words": ["بَدِّي", "الأَزْرَق"]
+    }
+  ],
+
+  "srs_words": ["أحمر", "أزرق", "أخضر", "أصفر", "أبيض", "أسود", "برتقالي", "بنفسجي"],
+  "next_lesson": "days_001",
+  "related_topics": ["shopping_001", "market_001"]
+}
