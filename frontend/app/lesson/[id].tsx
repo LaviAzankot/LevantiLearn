@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useMemo, useRef } from 'react';
+﻿import React, { useState, useEffect, useCallback, useMemo, useRef } from 'react';
 import {
   View, Text, TouchableOpacity, StyleSheet,
   ScrollView, ActivityIndicator, Animated, Image,
@@ -29,6 +29,10 @@ const API            = process.env.EXPO_PUBLIC_API_URL?.replace('/api', '') ?? '
 const DEFAULT_ICON   = 'language-outline';
 const DEFAULT_COLOR  = '#8E8E93';
 const PASS_THRESHOLD = 50;
+
+// Correct-reveal accent (Claude Design: cool blue for disclosed answers)
+const REVEAL_CORRECT_BG   = 'rgba(115,140,230,0.10)';
+const REVEAL_CORRECT_TEXT = '#3d57b8';
 
 function shuffleArray<T>(arr: T[]): T[] {
   const a = [...arr];
@@ -189,6 +193,8 @@ export default function LessonScreen() {
   const [buildSlots,       setBuildSlots]         = useState<string[]>([]);
   const [buildAvailable,   setBuildAvailable]     = useState<boolean[]>([]);
   const [buildWrong,       setBuildWrong]         = useState(false);
+  const [buildPhase,       setBuildPhase]         = useState<'attempt'|'practice'|'done'>('attempt');
+  const [choosePendingAnswer, setChoosePendingAnswer] = useState<string | null>(null);
   const [placedSlots,      setPlacedSlots]        = useState<{ char: string; idx: number }[]>([]);
   const [writeCheckState,  setWriteCheckState]    = useState<'idle'|'correct'|'wrong'>('idle');
   const [shadowPhase,      setShadowPhase]        = useState<'idle'|'playing'|'ready'|'recording'|'correct'|'wrong'>('idle');
@@ -501,6 +507,7 @@ export default function LessonScreen() {
     setMatchWrong(null); setQIndex(0); setDialogueStep(0); setAudioProgress(0);
     setDialogueMicState('idle'); setDialogueFailCount(0); setLastTranscript('');
     setBuildSlots([]); setBuildAvailable([]); setBuildWrong(false); setShadowPhase('idle');
+    setBuildPhase('attempt'); setChoosePendingAnswer(null);
     setMasteryItemIndex(0); setMasteryScore(0); setMasteryDone(false);
     setFeedbackVisible(false); feedbackAnim.setValue(80);
   };
@@ -584,7 +591,14 @@ export default function LessonScreen() {
       const pairs = currentStage.pairs ?? [];
       return matchedIds.length === pairs.length && pairs.length > 0 ? { type: 'continue' } : { type: 'hidden' };
     }
-    if (t === 'sentence_build') return { type: 'check', disabled: buildSlots.length !== (currentStage.words ?? []).length };
+    if (t === 'choose_translation') {
+      if (lockedAnswer !== null) return { type: 'continue' };
+      return { type: 'check', disabled: choosePendingAnswer === null };
+    }
+    if (t === 'sentence_build') {
+      if (buildPhase === 'done') return { type: 'continue' };
+      return { type: 'check', disabled: buildSlots.length !== (currentStage.words ?? []).length };
+    }
     if (t === 'listen_choose')  return lockedAnswer !== null ? { type: 'continue' } : { type: 'hidden' };
     if (t === 'mastery_check') {
       if (masteryDone) return { type: 'continue' };
@@ -614,19 +628,36 @@ export default function LessonScreen() {
   };
 
   const handleCheck = () => {
-    if (currentStage?.type !== 'sentence_build') return;
-    const built = buildSlots.join(' ').trim();
-    const target = currentStage.sentence_arabic?.trim() ?? '';
-    const strip = (s: string) => s.replace(/[ؐ-ًؚ-ٰٟ]/g, '').trim();
-    if (strip(built) === strip(target)) {
-      playFeedbackSound('correct');
-      showFeedback(true, '');
-      setTimeout(() => { hideFeedback(); goNextStage(); }, 1100);
-    } else {
-      playFeedbackSound('wrong');
-      showFeedback(false, target);
-      setBuildWrong(true);
-      setTimeout(() => { setBuildWrong(false); setBuildSlots([]); setBuildAvailable([]); hideFeedback(); }, 1400);
+    const t = currentStage?.type;
+    if (t === 'choose_translation') {
+      if (!choosePendingAnswer) return;
+      const opts = shuffledMap[stage] ?? currentStage.options ?? [];
+      const chosen  = opts.find((o: any) => o.id === choosePendingAnswer);
+      const correct = opts.find((o: any) => o.correct);
+      setLockedAnswer(correct?.id ?? 'ok');
+      if (chosen?.correct) { playFeedbackSound('correct'); }
+      else { playFeedbackSound('wrong'); setWrongAnswers([choosePendingAnswer]); }
+      return;
+    }
+    if (t === 'sentence_build') {
+      const words = currentStage.words ?? [];
+      const isCorrect = buildSlots.every((w: string, i: number) => w === words[i]);
+      if (isCorrect) {
+        setBuildPhase('done');
+        playFeedbackSound('correct');
+        showFeedback(true, '');
+        setTimeout(() => hideFeedback(), 800);
+      } else {
+        playFeedbackSound('wrong');
+        setBuildWrong(true);
+        setTimeout(() => {
+          setBuildWrong(false);
+          setBuildSlots([]);
+          setBuildAvailable(Array(words.length).fill(false));
+          setBuildPhase('practice');
+        }, 1100);
+      }
+      return;
     }
   };
 
@@ -805,19 +836,25 @@ export default function LessonScreen() {
 
   const renderListenRepeat = () => {
     const stg = currentStage;
+    const isPlaying = audioProgress > 0;
     return (
       <View style={[s.stageWrap, { alignItems: 'center' }]}>
-        <TouchableOpacity onPress={() => playAudio(stg.arabic)} activeOpacity={0.92} style={{ marginBottom: 20 }}>
+        {/* Illustration card with speaker button overlaid top-right */}
+        <View style={[s.listenRepeatCard, { backgroundColor: c.card, borderColor: c.border }]}>
           <WordIcon icon={stg.icon} iconColor={stg.icon_color} size={148} />
-        </TouchableOpacity>
-        <View style={{ alignItems: 'center', marginBottom: 16 }}>
-          <AudioProgressRing progress={audioProgress} size={52} ringColor={c.primary} onPress={() => playAudio(stg.arabic)}>
-            <View style={[s.audioInner, { backgroundColor: c.card }]}><Ionicons name="volume-high" size={20} color={c.primary} /></View>
-          </AudioProgressRing>
+          <TouchableOpacity
+            style={[s.speakerBtnOverlay]}
+            onPress={() => playAudio(stg.arabic)}
+            activeOpacity={0.82}>
+            <View style={[s.speakerBtnCircle, { backgroundColor: isPlaying ? c.primary : '#ffffff' }]}>
+              <Ionicons name="volume-high" size={20} color={isPlaying ? '#ffffff' : c.primary} />
+            </View>
+          </TouchableOpacity>
         </View>
+
         <Text style={[s.wordCardArabic, { color: c.text }]}>{stg.arabic}</Text>
-        <Text style={[s.pronText,       { color: c.label }]}>[{stg.hebrew_pronunciation}]</Text>
-        <Text style={[s.hebrewText,     { color: c.text  }]}>{stg.hebrew}</Text>
+        <Text style={[s.pronText, { color: c.label, fontStyle: 'italic' }]}>[{stg.hebrew_pronunciation}]</Text>
+        <Text style={[s.hebrewText, { color: c.text }]}>{stg.hebrew}</Text>
         {listenPhase === 'correct' && (
           <View style={{ alignItems: 'center', marginTop: 16, gap: 6 }}>
             <Ionicons name="checkmark-circle" size={44} color={c.right} />
@@ -838,38 +875,54 @@ export default function LessonScreen() {
     const stg     = currentStage;
     const options = shuffledMap[stage] ?? stg.options ?? [];
     const isLocked = lockedAnswer !== null;
+    const isPlaying = audioProgress > 0;
     return (
       <View style={s.stageWrap}>
-        <View style={s.audioRow}>
-          <AudioProgressRing progress={audioProgress} size={52} ringColor={c.primary} onPress={() => playAudio(stg.arabic)}>
-            <View style={[s.audioInner, { backgroundColor: c.card }]}><Ionicons name="volume-high" size={20} color={c.primary} /></View>
-          </AudioProgressRing>
-          <Text style={[s.arabicMedium, { color: c.text }]}>{stg.arabic}</Text>
+        {/* Word card with speaker button + large Arabic */}
+        <View style={[s.chooseWordCard, { backgroundColor: c.card, borderColor: c.border }]}>
+          <TouchableOpacity onPress={() => playAudio(stg.arabic)} activeOpacity={0.82}>
+            <View style={[s.speakerBtnCircle, { backgroundColor: isPlaying ? c.primary : c.surface, width: 56, height: 56, borderRadius: 28 }]}>
+              <Ionicons name="volume-high" size={26} color={isPlaying ? '#ffffff' : c.primary} />
+            </View>
+          </TouchableOpacity>
+          <Text style={[s.chooseArabicLarge, { color: c.text }]}>{stg.arabic}</Text>
+          {isLocked && (
+            <Text style={[s.pronText, { color: c.label, fontStyle: 'italic', marginTop: 0 }]}>[{stg.hebrew_pronunciation}]</Text>
+          )}
         </View>
-        <View style={s.choiceGrid}>
+
+        {/* Text-only 2×2 option grid */}
+        <View style={s.chooseOptionGrid}>
           {options.map((opt: any) => {
-            const isWrong   = wrongAnswers.includes(opt.id);
-            const isCorrect = isLocked && opt.correct;
-            const col       = opt.icon_color ?? DEFAULT_COLOR;
+            const isWrong     = wrongAnswers.includes(opt.id);
+            const isPending   = choosePendingAnswer === opt.id && !isLocked;
+            const isRevealCorrect = isLocked && opt.correct;
+            const isRevealWrong   = isLocked && isWrong;
+
+            let bgColor = c.card;
+            let bdColor = c.border;
+            let txtColor = c.text;
+            let bdWidth: number = 1.5;
+
+            if (isPending)        { bgColor = c.primary; bdColor = c.primary; txtColor = '#ffffff'; }
+            if (isRevealCorrect)  { bgColor = REVEAL_CORRECT_BG; bdColor = '#738ce6'; txtColor = REVEAL_CORRECT_TEXT; }
+            if (isRevealWrong)    { bgColor = c.primary+'10'; bdColor = c.primary+'66'; txtColor = c.primary; }
+
             return (
               <TouchableOpacity key={opt.id}
-                style={[s.choiceCard, { backgroundColor: isCorrect ? c.primary+'18' : isWrong ? c.wrong+'10' : c.card, borderColor: isCorrect ? c.primary : isWrong ? c.wrong : c.border, borderWidth: 2 }]}
+                style={[s.chooseOption, { backgroundColor: bgColor, borderColor: bdColor, borderWidth: bdWidth,
+                  transform: [{ scale: isPending ? 1.02 : 1 }] }]}
                 onPress={() => {
-                  if (isLocked || isWrong) return;
-                  if (opt.correct) {
-                    setLockedAnswer(opt.id); playFeedbackSound('correct');
-                    showFeedback(true, '');
-                    setTimeout(() => { hideFeedback(); goNextStage(); }, 1000);
-                  } else {
-                    playFeedbackSound('wrong');
-                    showFeedback(false, stg.arabic);
-                    setWrongAnswers(w => [...w, opt.id]);
-                    setTimeout(() => { setWrongAnswers(w => w.filter(id => id !== opt.id)); hideFeedback(); }, 1200);
-                  }
+                  if (isLocked) return;
+                  setChoosePendingAnswer(opt.id);
                 }}
-                disabled={isLocked || isWrong} activeOpacity={1}>
-                <View style={[s.choiceCardIcon, { backgroundColor: col + '18' }]}><Ionicons name={toIonicon(opt.icon ?? DEFAULT_ICON)} size={50} color={col} /></View>
-                <View style={s.choiceCardLabel}><Text style={[s.choiceCardText, { color: isCorrect ? c.primary : isWrong ? c.wrong : c.text }]} numberOfLines={2}>{opt.hebrew}</Text></View>
+                disabled={isLocked} activeOpacity={0.85}>
+                <Text style={[s.chooseOptionText, { color: txtColor }]} numberOfLines={3}>{opt.hebrew}</Text>
+                {isRevealCorrect && (
+                  <View style={{ position: 'absolute', top: 8, right: 8, width: 20, height: 20, borderRadius: 10, backgroundColor: '#738ce6', alignItems: 'center', justifyContent: 'center' }}>
+                    <Ionicons name="checkmark" size={13} color="#ffffff" />
+                  </View>
+                )}
               </TouchableOpacity>
             );
           })}
@@ -929,36 +982,51 @@ export default function LessonScreen() {
     const shuffledRight = shuffledMap[stage] ?? [...pairs];
     return (
       <View style={s.stageWrap}>
-        <Text style={[s.matchCounter, { color: c.label }]}>{matchedIds.length} / {pairs.length} התאמות</Text>
-        <View style={s.matchGrid}>
-          <View style={s.matchCol}>
-            {pairs.map((p: any) => {
-              const isMatched = matchedIds.includes(p.id); const isSelected = matchSelected === p.id;
-              return (
-                <TouchableOpacity key={p.id} style={[s.matchChipLeft, { backgroundColor: isMatched ? c.right+'20' : isSelected ? c.primary+'22' : c.card, borderColor: isMatched ? c.right : isSelected ? c.primary : c.border, opacity: isMatched ? 0.6 : 1 }]}
-                  onPress={() => !isMatched && setMatchSelected(p.id)} disabled={isMatched} activeOpacity={0.8}>
-                  <Text style={[s.matchAr, { color: isMatched ? c.right : isSelected ? c.primary : c.text }]}>{p.arabic}</Text>
+        {/* Row-per-pair layout — equal height both sides */}
+        <View style={s.pairsContainer}>
+          {pairs.map((p: any, i: number) => {
+            const rightPair    = shuffledRight[i];
+            const isLeftMatched  = matchedIds.includes(p.id);
+            const isLeftSelected = matchSelected === p.id;
+            const isRightMatched = rightPair && matchedIds.includes(rightPair.id);
+            const isRightWrong   = rightPair && matchWrong === rightPair.id;
+
+            const leftBg  = isLeftMatched ? c.primary+'12' : isLeftSelected ? c.primary : c.card;
+            const leftBd  = isLeftMatched ? c.primary+'40' : isLeftSelected ? c.primary : c.border;
+            const leftTxt = isLeftSelected ? '#ffffff' : isLeftMatched ? c.primary : c.text;
+
+            const rightBg  = isRightMatched ? c.primary+'12' : isRightWrong ? c.wrong+'18' : c.card;
+            const rightBd  = isRightMatched ? c.primary+'40' : isRightWrong ? c.wrong : c.border;
+            const rightTxt = isRightMatched ? c.primary : isRightWrong ? c.wrong : c.text;
+
+            return (
+              <View key={p.id} style={s.pairRow}>
+                <TouchableOpacity
+                  style={[s.matchPairCard, { backgroundColor: leftBg, borderColor: leftBd, opacity: isLeftMatched ? 0.6 : 1 }]}
+                  onPress={() => !isLeftMatched && setMatchSelected(p.id)}
+                  disabled={isLeftMatched} activeOpacity={0.8}>
+                  <Text style={[s.matchAr, { color: leftTxt }]}>{p.arabic}</Text>
                 </TouchableOpacity>
-              );
-            })}
-          </View>
-          <View style={s.matchCol}>
-            {shuffledRight.map((p: any) => {
-              const isMatched = matchedIds.includes(p.id); const isWrong = matchWrong === p.id;
-              return (
-                <TouchableOpacity key={p.id} style={[s.matchChipRight, { backgroundColor: isMatched ? c.right+'20' : isWrong ? c.wrong+'20' : c.card, borderColor: isMatched ? c.right : isWrong ? c.wrong : c.border, opacity: isMatched ? 0.6 : 1 }]}
-                  onPress={() => {
-                    if (isMatched || !matchSelected) return;
-                    if (p.id === matchSelected) { setMatchedIds(prev => [...prev, p.id]); setMatchSelected(null); }
-                    else { setMatchWrong(p.id); setTimeout(() => setMatchWrong(null), 500); setMatchSelected(null); }
-                  }}
-                  disabled={isMatched} activeOpacity={0.8}>
-                  <Text style={[s.matchHe, { color: isMatched ? c.right : isWrong ? c.wrong : c.text }]}>{p.hebrew}</Text>
-                </TouchableOpacity>
-              );
-            })}
-          </View>
+                {rightPair && (
+                  <TouchableOpacity
+                    style={[s.matchPairCard, { backgroundColor: rightBg, borderColor: rightBd, opacity: isRightMatched ? 0.6 : 1 }]}
+                    onPress={() => {
+                      if (isRightMatched || !matchSelected) return;
+                      if (rightPair.id === matchSelected) { setMatchedIds(prev => [...prev, rightPair.id]); setMatchSelected(null); }
+                      else { setMatchWrong(rightPair.id); setTimeout(() => setMatchWrong(null), 500); setMatchSelected(null); }
+                    }}
+                    disabled={isRightMatched} activeOpacity={0.8}>
+                    <Text style={[s.matchHe, { color: rightTxt }]}>{rightPair.hebrew}</Text>
+                  </TouchableOpacity>
+                )}
+              </View>
+            );
+          })}
         </View>
+        {/* Counter at bottom */}
+        <Text style={[s.matchCounter, { color: c.label, marginTop: 14, marginBottom: 0 }]}>
+          {matchedIds.length} / {pairs.length} התאמות
+        </Text>
       </View>
     );
   };
@@ -1003,40 +1071,80 @@ export default function LessonScreen() {
   const renderSentenceBuild = () => {
     const stg     = currentStage;
     const words: string[] = stg.words ?? [];
+    const wordTranslit: string[] = stg.word_translit ?? [];
     const shuffled: string[] = shuffledMap[stage] ?? words;
-    const isComplete = buildSlots.length === words.length;
     const handleAvailableTap = (displayIdx: number) => {
-      if (buildAvailable[displayIdx]) return;
+      if (buildAvailable[displayIdx] || buildPhase === 'done') return;
       playAudio(shuffled[displayIdx]);
-      setBuildSlots(s => [...s, shuffled[displayIdx]]);
+      setBuildSlots(sl => [...sl, shuffled[displayIdx]]);
       setBuildAvailable(prev => { const n = [...prev]; n[displayIdx] = true; return n; });
     };
     const handleSlotTap = (slotIdx: number) => {
+      if (buildPhase === 'done') return;
       const word = buildSlots[slotIdx];
-      setBuildSlots(s => s.filter((_, i) => i !== slotIdx));
+      setBuildSlots(sl => sl.filter((_, i) => i !== slotIdx));
       setBuildAvailable(prev => { const n = [...prev]; const fi = shuffled.findIndex((w, i) => w === word && n[i]); if (fi !== -1) n[fi] = false; return n; });
     };
     return (
       <View style={s.stageWrap}>
-        <Text style={[s.dialogueArabic, { color: c.text, textAlign: 'center', fontSize: 20, marginBottom: 16 }]}>{stg.sentence_hebrew}</Text>
-        <View style={[s.sentenceCard, { backgroundColor: c.card, minHeight: 64, flexDirection: 'row-reverse', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'flex-start', gap: 8, borderColor: buildWrong ? c.wrong : c.border, borderWidth: buildWrong ? 2 : 1.5 }]}>
-          {buildSlots.length === 0
-            ? <Text style={{ color: c.label, fontSize: 14 }}>לחץ על מילים לבנייה…</Text>
-            : buildSlots.map((word, i) => (
-                <TouchableOpacity key={i} onPress={() => handleSlotTap(i)} style={[s.wordChip, { backgroundColor: buildWrong ? c.wrong+'18' : c.primary+'15', borderColor: buildWrong ? c.wrong : c.primary, borderWidth: 1.5 }]} activeOpacity={0.75}>
-                  <Text style={[s.wordChipText, { color: buildWrong ? c.wrong : c.primary }]}>{word}</Text>
-                </TouchableOpacity>
-              ))}
-        </View>
-        <View style={[s.wordChoiceGrid, { marginTop: 16, flexDirection: 'row-reverse', flexWrap: 'wrap', justifyContent: 'center' }]}>
-          {shuffled.map((word, displayIdx) => {
-            const used = buildAvailable[displayIdx] === true;
+        {/* Hebrew prompt */}
+        <Text style={{ color: c.label, fontSize: 14, fontWeight: '600', textAlign: 'center', marginBottom: 6, letterSpacing: 0.3 }}>תרגם את המשפט</Text>
+        <Text style={{ color: c.text, fontSize: 20, fontWeight: '700', textAlign: 'center', marginBottom: 18, lineHeight: 30 }}>
+          "{stg.sentence_hebrew}"
+        </Text>
+
+        {/* Answer area — RTL with dashed slots for empty positions */}
+        <View style={[s.sbAnswerArea, { backgroundColor: c.surface, borderColor: buildWrong ? c.wrong : c.border }]}>
+          {Array.from({ length: words.length }).map((_, i) => {
+            const placedWord = buildSlots[i];
+            if (!placedWord) {
+              return <View key={'slot-'+i} style={[s.sbSlotDash, { borderColor: c.border+'88' }]} />;
+            }
+            const slotBg  = buildWrong ? c.wrong+'12'   : buildPhase === 'done' ? REVEAL_CORRECT_BG : c.primary+'12';
+            const slotBd  = buildWrong ? c.wrong         : buildPhase === 'done' ? '#738ce6'          : c.primary;
+            const slotTxt = buildWrong ? c.wrong         : buildPhase === 'done' ? REVEAL_CORRECT_TEXT : c.primary;
             return (
-              <TouchableOpacity key={displayIdx} onPress={() => !used && handleAvailableTap(displayIdx)} style={[s.wordChip, { backgroundColor: used ? c.surface : c.card, opacity: used ? 0.32 : 1 }]} disabled={used} activeOpacity={0.8}>
-                <Text style={[s.wordChipText, { color: c.text }]}>{word}</Text>
+              <TouchableOpacity key={'placed-'+i} onPress={() => handleSlotTap(i)}
+                style={[s.sbWordBlock, { backgroundColor: slotBg, borderColor: slotBd }]} activeOpacity={0.8}>
+                <Text style={[s.sbWordAr, { color: slotTxt }]}>{placedWord}</Text>
               </TouchableOpacity>
             );
           })}
+        </View>
+
+        {/* Practice phase reference banner */}
+        {buildPhase === 'practice' && (
+          <View style={[s.sbPracticeStrip, { backgroundColor: REVEAL_CORRECT_BG, borderColor: '#738ce644' }]}>
+            <Text style={{ fontSize: 11, fontWeight: '700', color: REVEAL_CORRECT_TEXT, letterSpacing: 1.2, textTransform: 'uppercase' as any, marginBottom: 8 }}>
+              כעת בנה בעצמך — העתק זאת
+            </Text>
+            <View style={{ flexDirection: 'row-reverse', flexWrap: 'wrap', gap: 8 }}>
+              {words.map((w, i) => (
+                <Text key={i} style={{ fontWeight: '700', fontSize: 18, color: REVEAL_CORRECT_TEXT, lineHeight: 28 }}>{w}</Text>
+              ))}
+            </View>
+          </View>
+        )}
+
+        {/* Word bank */}
+        <View style={{ marginTop: 'auto' as any, paddingTop: 16 }}>
+          <Text style={{ color: c.label, fontSize: 11, fontWeight: '700', letterSpacing: 1.2, textTransform: 'uppercase' as any, textAlign: 'center', marginBottom: 10 }}>
+            לחץ להוספה · לחץ שוב לשמיעה
+          </Text>
+          <View style={{ flexDirection: 'row-reverse', flexWrap: 'wrap', gap: 8, justifyContent: 'center' }}>
+            {shuffled.map((word, displayIdx) => {
+              const used = buildAvailable[displayIdx] === true;
+              const translit = wordTranslit[displayIdx];
+              return (
+                <TouchableOpacity key={displayIdx} onPress={() => !used && handleAvailableTap(displayIdx)}
+                  style={[s.sbWordBlock, { backgroundColor: used ? c.surface : c.card, borderColor: c.border, opacity: used ? 0.3 : 1 }]}
+                  disabled={used} activeOpacity={0.8}>
+                  <Text style={[s.sbWordAr, { color: c.text }]}>{word}</Text>
+                  {translit ? <Text style={[s.sbWordTr, { color: c.label }]}>{translit}</Text> : null}
+                </TouchableOpacity>
+              );
+            })}
+          </View>
         </View>
       </View>
     );
@@ -1337,6 +1445,21 @@ export default function LessonScreen() {
     return (
       <View style={[s.actionBar, { backgroundColor: c.card, borderTopColor: c.border, paddingBottom: insets.bottom + 12 }]}>
         <View style={{ paddingHorizontal: 24, paddingTop: 12 }}>
+          {/* Inline feedback strip for choose_translation */}
+          {currentStage?.type === 'choose_translation' && lockedAnswer !== null && (() => {
+            const opts    = shuffledMap[stage] ?? currentStage.options ?? [];
+            const correct = opts.find((o: any) => o.correct);
+            const isRight = wrongAnswers.length === 0;
+            return (
+              <View style={[s.feedbackStrip, { backgroundColor: isRight ? REVEAL_CORRECT_BG : c.primary+'12' }]}>
+                <Ionicons name={isRight ? 'checkmark-circle' : 'close-circle'} size={18} color={isRight ? REVEAL_CORRECT_TEXT : c.primary} />
+                <Text style={[s.feedbackStripText, { color: isRight ? REVEAL_CORRECT_TEXT : c.primary }]}>
+                  {isRight ? 'נכון! בדיוק.' : `התשובה הנכונה: ${correct?.arabic ?? ''}`}
+                </Text>
+              </View>
+            );
+          })()}
+
           {bar.type === 'continue' && (
             <TouchableOpacity style={[s.actionBtn, { backgroundColor: c.primary }]} onPress={handleContinue} activeOpacity={0.87}>
               <Text style={s.actionBtnText}>המשך</Text>
@@ -1541,14 +1664,17 @@ const s = StyleSheet.create({
   writeChip:     { borderRadius: 22, paddingVertical: 20, paddingHorizontal: 24, alignItems: 'center', justifyContent: 'center', flexDirection: 'row', gap: 8, shadowColor: '#a0846a', shadowOpacity: 0.09, shadowOffset: { width: 0, height: 3 }, shadowRadius: 8, elevation: 2 },
   writeChipText: { fontSize: 28, fontWeight: '800', textAlign: 'center' },
 
-  // Match pairs
-  matchCounter:   { fontSize: 13, textAlign: 'center', marginBottom: 16, fontWeight: '500' },
-  matchGrid:      { flexDirection: 'row', gap: 12 },
-  matchCol:       { flex: 1, gap: 10 },
-  matchChipLeft:  { borderRadius: 16, borderTopLeftRadius: 28, borderBottomLeftRadius: 28, borderWidth: 1.5, padding: 16, alignItems: 'center', shadowColor: '#a0846a', shadowOpacity: 0.07, shadowOffset: { width: 0, height: 2 }, shadowRadius: 6, elevation: 2 },
-  matchChipRight: { borderRadius: 16, borderTopRightRadius: 28, borderBottomRightRadius: 28, borderWidth: 1.5, padding: 16, alignItems: 'center', shadowColor: '#a0846a', shadowOpacity: 0.07, shadowOffset: { width: 0, height: 2 }, shadowRadius: 6, elevation: 2 },
-  matchAr:        { fontSize: 17, fontWeight: '700', textAlign: 'center' },
-  matchHe:        { fontSize: 16, fontWeight: '600', textAlign: 'center' },
+  // Match pairs (row-per-pair layout)
+  matchCounter:    { fontSize: 13, textAlign: 'center', marginBottom: 16, fontWeight: '500' },
+  matchGrid:       { flexDirection: 'row', gap: 12 },
+  matchCol:        { flex: 1, gap: 10 },
+  pairsContainer:  { flexDirection: 'column', gap: 10 },
+  pairRow:         { flexDirection: 'row', gap: 10 },
+  matchPairCard:   { flex: 1, borderRadius: 18, borderWidth: 1.5, padding: 16, alignItems: 'center', justifyContent: 'center', minHeight: 70, shadowColor: '#a0846a', shadowOpacity: 0.07, shadowOffset: { width: 0, height: 2 }, shadowRadius: 6, elevation: 2 },
+  matchChipLeft:   { borderRadius: 16, borderTopLeftRadius: 28, borderBottomLeftRadius: 28, borderWidth: 1.5, padding: 16, alignItems: 'center', shadowColor: '#a0846a', shadowOpacity: 0.07, shadowOffset: { width: 0, height: 2 }, shadowRadius: 6, elevation: 2 },
+  matchChipRight:  { borderRadius: 16, borderTopRightRadius: 28, borderBottomRightRadius: 28, borderWidth: 1.5, padding: 16, alignItems: 'center', shadowColor: '#a0846a', shadowOpacity: 0.07, shadowOffset: { width: 0, height: 2 }, shadowRadius: 6, elevation: 2 },
+  matchAr:         { fontSize: 24, fontWeight: '700', textAlign: 'center', lineHeight: 36 },
+  matchHe:         { fontSize: 17, fontWeight: '600', textAlign: 'center', lineHeight: 26 },
 
   // Word chips
   wordChoiceGrid: { gap: 12, marginTop: 4 },
@@ -1610,6 +1736,30 @@ const s = StyleSheet.create({
   idiomMeaningLabel:{ fontSize: 11, fontWeight: '600', textTransform: 'uppercase', letterSpacing: 1, marginBottom: 2 },
   idiomMeaningText: { fontSize: 16, fontWeight: '600', lineHeight: 22 },
   idiomDivider:     { height: 1 },
+
+  // Listen repeat illustration card
+  listenRepeatCard:  { borderRadius: 28, borderWidth: 1, padding: 28, alignItems: 'center', justifyContent: 'center', position: 'relative', marginBottom: 20, shadowColor: '#a0846a', shadowOpacity: 0.07, shadowOffset: { width: 0, height: 4 }, shadowRadius: 14, elevation: 2 },
+  speakerBtnOverlay: { position: 'absolute', top: 14, right: 14 },
+  speakerBtnCircle:  { width: 44, height: 44, borderRadius: 22, alignItems: 'center', justifyContent: 'center', shadowColor: '#000', shadowOpacity: 0.10, shadowOffset: { width: 0, height: 3 }, shadowRadius: 8, elevation: 3 },
+
+  // Choose translation
+  chooseWordCard:     { borderRadius: 24, borderWidth: 1, padding: 28, alignItems: 'center', gap: 14, marginBottom: 18, shadowColor: '#a0846a', shadowOpacity: 0.05, shadowOffset: { width: 0, height: 6 }, shadowRadius: 18, elevation: 3 },
+  chooseArabicLarge:  { fontSize: 42, fontWeight: '700', textAlign: 'center', lineHeight: 62 },
+  chooseOptionGrid:   { flexDirection: 'row', flexWrap: 'wrap', gap: 10 },
+  chooseOption:       { flexBasis: '47.5%', borderRadius: 18, borderWidth: 1.5, padding: 16, minHeight: 70, alignItems: 'center', justifyContent: 'center', shadowColor: '#a0846a', shadowOpacity: 0.04, shadowOffset: { width: 0, height: 2 }, shadowRadius: 6, elevation: 2 },
+  chooseOptionText:   { fontSize: 17, fontWeight: '600', textAlign: 'center', lineHeight: 24 },
+
+  // Sentence build
+  sbAnswerArea:    { borderRadius: 22, borderWidth: 1.5, padding: 16, minHeight: 110, flexDirection: 'row-reverse', flexWrap: 'wrap', alignItems: 'center', gap: 8, marginBottom: 12, shadowColor: '#a0846a', shadowOpacity: 0.05, shadowOffset: { width: 0, height: 3 }, shadowRadius: 8, elevation: 1 },
+  sbSlotDash:      { minWidth: 64, height: 54, borderBottomWidth: 2, flexShrink: 0 },
+  sbWordBlock:     { borderRadius: 14, borderWidth: 1.5, paddingVertical: 10, paddingHorizontal: 14, alignItems: 'center', gap: 2 },
+  sbWordAr:        { fontSize: 22, fontWeight: '700', lineHeight: 32, textAlign: 'center' },
+  sbWordTr:        { fontSize: 11, fontWeight: '500', fontStyle: 'italic', textAlign: 'center' },
+  sbPracticeStrip: { borderRadius: 14, borderWidth: 1, padding: 14, marginBottom: 12, gap: 6 },
+
+  // Feedback strip (inline, inside action bar, for choose_translation)
+  feedbackStrip:     { flexDirection: 'row', alignItems: 'center', gap: 10, borderRadius: 14, padding: 12, marginBottom: 10 },
+  feedbackStripText: { fontSize: 14, fontWeight: '600', flex: 1 },
 
   // Action bar
   actionBar:     { borderTopWidth: 1, shadowColor: '#000', shadowOpacity: 0.06, shadowOffset: { width: 0, height: -4 }, shadowRadius: 12, elevation: 8 },
