@@ -69,21 +69,21 @@ function toIonicon(name?: string): IoniconName {
 
 // ── Phase labels ──────────────────────────────────────────────────────────────
 const PHASE_LABELS: Record<string, { emoji: string; label: string }> = {
-  micro_review:           { emoji: '🔁', label: 'חזרה מהשיעור הקודם' },
-  word_card:              { emoji: '👂', label: 'שלב ההקשבה' },
-  listen_repeat:          { emoji: '🎤', label: 'חזור אחרי' },
-  listen_choose:          { emoji: '🎧', label: 'זהה את המילה' },
-  choose_translation:     { emoji: '🧠', label: 'בחר תרגום' },
-  match_pairs:            { emoji: '🔗', label: 'התאם זוגות' },
-  write_translation:      { emoji: '✍️', label: 'מה המילה?' },
-  sentence_build:         { emoji: '🧩', label: 'בנה משפט' },
-  sentence_complete:      { emoji: '📝', label: 'השלם משפט' },
-  dialogue:               { emoji: '🗣️', label: 'שיחה אמיתית' },
-  cultural_note:          { emoji: '💡', label: 'ידעת?' },
-  shadowing:              { emoji: '🎙️', label: 'חקה את ההגייה' },
-  listening_comprehension:{ emoji: '🎧', label: 'האזן וענה' },
-  idiom_card:             { emoji: '💬', label: 'ביטוי חשוב' },
-  mastery_check:          { emoji: '🎯', label: 'בדיקת שליטה' },
+  micro_review:           { emoji: '🔁', label: 'Review' },
+  word_card:              { emoji: '👂', label: 'Listen and Remember' },
+  listen_repeat:          { emoji: '🎤', label: 'Listen and Repeat' },
+  listen_choose:          { emoji: '🎧', label: 'Identify the Word' },
+  choose_translation:     { emoji: '🧠', label: 'Choose the Translation' },
+  match_pairs:            { emoji: '🔗', label: 'Match the Pairs' },
+  write_translation:      { emoji: '✍️', label: 'What is the Word?' },
+  sentence_build:         { emoji: '🧩', label: 'Build the Sentence' },
+  sentence_complete:      { emoji: '📝', label: 'Complete the Sentence' },
+  dialogue:               { emoji: '🗣️', label: 'Real Conversation' },
+  cultural_note:          { emoji: '💡', label: 'Did You Know?' },
+  shadowing:              { emoji: '🎙️', label: 'Mimic the Pronunciation' },
+  listening_comprehension:{ emoji: '🎧', label: 'Listen and Answer' },
+  idiom_card:             { emoji: '💬', label: 'Key Expression' },
+  mastery_check:          { emoji: '🎯', label: 'Mastery Check' },
 };
 
 // ── WordIcon ──────────────────────────────────────────────────────────────────
@@ -878,6 +878,8 @@ export default function LessonScreen() {
     const isPlaying = audioProgress > 0;
     return (
       <View style={s.stageWrap}>
+        <Text style={{ fontSize: 22, fontWeight: '700', color: c.text, textAlign: 'center', marginBottom: 2, letterSpacing: -0.2 }}>What does this word mean?</Text>
+        <Text style={{ fontSize: 15, fontWeight: '500', color: c.label, textAlign: 'center', marginBottom: 16 }}>Tap the speaker to listen again</Text>
         {/* Word card with speaker button + large Arabic */}
         <View style={[s.chooseWordCard, { backgroundColor: c.card, borderColor: c.border }]}>
           <TouchableOpacity onPress={() => playAudio(stg.arabic)} activeOpacity={0.82}>
@@ -982,6 +984,8 @@ export default function LessonScreen() {
     const shuffledRight = shuffledMap[stage] ?? [...pairs];
     return (
       <View style={s.stageWrap}>
+        <Text style={{ fontSize: 22, fontWeight: '700', color: c.text, textAlign: 'center', marginBottom: 2, letterSpacing: -0.2 }}>Tap each Arabic word</Text>
+        <Text style={{ fontSize: 15, fontWeight: '500', color: c.label, textAlign: 'center', marginBottom: 16 }}>…and its English meaning</Text>
         {/* Row-per-pair layout — equal height both sides */}
         <View style={s.pairsContainer}>
           {pairs.map((p: any, i: number) => {
@@ -1025,7 +1029,7 @@ export default function LessonScreen() {
         </View>
         {/* Counter at bottom */}
         <Text style={[s.matchCounter, { color: c.label, marginTop: 14, marginBottom: 0 }]}>
-          {matchedIds.length} / {pairs.length} התאמות
+          {matchedIds.length} of {pairs.length} matched
         </Text>
       </View>
     );
@@ -1087,8 +1091,8 @@ export default function LessonScreen() {
     };
     return (
       <View style={s.stageWrap}>
-        {/* Hebrew prompt */}
-        <Text style={{ color: c.label, fontSize: 14, fontWeight: '600', textAlign: 'center', marginBottom: 6, letterSpacing: 0.3 }}>תרגם את המשפט</Text>
+        {/* English prompt */}
+        <Text style={{ color: c.label, fontSize: 14, fontWeight: '600', textAlign: 'center', marginBottom: 6, letterSpacing: 0.3 }}>Translate this sentence</Text>
         <Text style={{ color: c.text, fontSize: 20, fontWeight: '700', textAlign: 'center', marginBottom: 18, lineHeight: 30 }}>
           "{stg.sentence_hebrew}"
         </Text>
@@ -1116,7 +1120,7 @@ export default function LessonScreen() {
         {buildPhase === 'practice' && (
           <View style={[s.sbPracticeStrip, { backgroundColor: REVEAL_CORRECT_BG, borderColor: '#738ce644' }]}>
             <Text style={{ fontSize: 11, fontWeight: '700', color: REVEAL_CORRECT_TEXT, letterSpacing: 1.2, textTransform: 'uppercase' as any, marginBottom: 8 }}>
-              כעת בנה בעצמך — העתק זאת
+              Now you try — match this
             </Text>
             <View style={{ flexDirection: 'row-reverse', flexWrap: 'wrap', gap: 8 }}>
               {words.map((w, i) => (
@@ -1129,7 +1133,7 @@ export default function LessonScreen() {
         {/* Word bank */}
         <View style={{ marginTop: 'auto' as any, paddingTop: 16 }}>
           <Text style={{ color: c.label, fontSize: 11, fontWeight: '700', letterSpacing: 1.2, textTransform: 'uppercase' as any, textAlign: 'center', marginBottom: 10 }}>
-            לחץ להוספה · לחץ שוב לשמיעה
+            Tap to add · Tap again to hear
           </Text>
           <View style={{ flexDirection: 'row-reverse', flexWrap: 'wrap', gap: 8, justifyContent: 'center' }}>
             {shuffled.map((word, displayIdx) => {
@@ -1451,7 +1455,7 @@ export default function LessonScreen() {
               <View style={{ width: 22, height: 22, borderRadius: 11, backgroundColor: '#738ce6', alignItems: 'center', justifyContent: 'center' }}>
                 <Ionicons name="checkmark" size={13} color="#ffffff" />
               </View>
-              <Text style={[s.feedbackStripText, { color: REVEAL_CORRECT_TEXT }]}>כל הכבוד — המשפט נכון!</Text>
+              <Text style={[s.feedbackStripText, { color: REVEAL_CORRECT_TEXT }]}>Nice — that reads right.</Text>
             </View>
           )}
 
@@ -1464,7 +1468,7 @@ export default function LessonScreen() {
               <View style={[s.feedbackStrip, { backgroundColor: isRight ? REVEAL_CORRECT_BG : c.primary+'12' }]}>
                 <Ionicons name={isRight ? 'checkmark-circle' : 'close-circle'} size={18} color={isRight ? REVEAL_CORRECT_TEXT : c.primary} />
                 <Text style={[s.feedbackStripText, { color: isRight ? REVEAL_CORRECT_TEXT : c.primary }]}>
-                  {isRight ? 'נכון! בדיוק.' : `התשובה הנכונה: ${correct?.arabic ?? ''}`}
+                  {isRight ? 'Nice — that\'s right.' : <>The answer is <Text style={{ fontWeight: '800' }}>{correct?.arabic ?? ''}</Text>.</>}
                 </Text>
               </View>
             );
@@ -1472,15 +1476,20 @@ export default function LessonScreen() {
 
           {bar.type === 'continue' && (
             <TouchableOpacity style={[s.actionBtn, { backgroundColor: c.primary }]} onPress={handleContinue} activeOpacity={0.87}>
-              <Text style={s.actionBtnText}>המשך</Text>
+              <Text style={s.actionBtnText}>Continue</Text>
             </TouchableOpacity>
           )}
-          {bar.type === 'check' && (
-            <TouchableOpacity style={[s.actionBtn, { backgroundColor: bar.disabled ? '#efeeeb' : c.primary, shadowOpacity: bar.disabled ? 0 : 0.28 }]}
-              onPress={handleCheck} disabled={bar.disabled} activeOpacity={0.87}>
-              <Text style={[s.actionBtnText, { color: bar.disabled ? '#bebbb1' : '#fff' }]}>בדוק</Text>
-            </TouchableOpacity>
-          )}
+          {bar.type === 'check' && (() => {
+            const isSentenceBuild = currentStage?.type === 'sentence_build';
+            const remaining = isSentenceBuild ? (currentStage.words ?? []).length - buildSlots.length : 0;
+            const label = isSentenceBuild && remaining > 0 ? `${remaining} more` : 'Check';
+            return (
+              <TouchableOpacity style={[s.actionBtn, { backgroundColor: bar.disabled ? '#efeeeb' : c.primary, shadowOpacity: bar.disabled ? 0 : 0.28 }]}
+                onPress={handleCheck} disabled={bar.disabled} activeOpacity={0.87}>
+                <Text style={[s.actionBtnText, { color: bar.disabled ? '#bebbb1' : '#fff' }]}>{label}</Text>
+              </TouchableOpacity>
+            );
+          })()}
           {bar.type === 'mic' && (
             <TouchableOpacity style={[s.micActionBtn, { backgroundColor: micColor, shadowColor: micColor }]}
               onPress={handleMicPress}
@@ -1490,7 +1499,7 @@ export default function LessonScreen() {
                bar.phase === 'correct' ? <Ionicons name="checkmark" size={36} color="#fff" /> :
                bar.phase === 'wrong'   ? <><Ionicons name="close" size={36} color="#fff" /><Text style={s.micActionLabel}>נסה שוב</Text></> :
                bar.phase === 'recording' ? <WaveAnimation /> :
-               <><Ionicons name="mic" size={32} color="#fff" /><Text style={s.micActionLabel}>{currentStage?.type === 'dialogue' ? 'לחץ לדיבור' : 'חזור אחרי'}</Text></>}
+               <><Ionicons name="mic" size={32} color="#fff" /><Text style={s.micActionLabel}>Tap to speak</Text></>}
             </TouchableOpacity>
           )}
         </View>
