@@ -17,11 +17,7 @@
       "hebrew_pronunciation": "מַרְחַבָּא",
       "hebrew": "שלום / היי",
       "icon": "hand-right",
-      "icon_color": "#FF9500",
-      "letter_blocks": ["م","ر","ح","ب","ا"],
-      "frequency": "core",
-      "dialect_note": null,
-      "chunk": false
+      "icon_color": "#FF9500"
     },
     "w002": {
       "arabic": "أَهْلاً",
@@ -29,11 +25,7 @@
       "hebrew_pronunciation": "אַהְלַן",
       "hebrew": "אהלן / ברוך הבא",
       "icon": "person-circle-outline",
-      "icon_color": "#34C759",
-      "letter_blocks": ["أ","ه","ل","ا"],
-      "frequency": "core",
-      "dialect_note": "בלבנון נפוץ 'أهلين' (אַהְלֵין) — אותה משמעות",
-      "chunk": false
+      "icon_color": "#34C759"
     },
     "w003": {
       "arabic": "كِيفَك؟",
@@ -41,11 +33,7 @@
       "hebrew_pronunciation": "כִּיפַּק?",
       "hebrew": "מה שלומך?",
       "icon": "chatbubble-ellipses-outline",
-      "icon_color": "#007AFF",
-      "letter_blocks": ["ك","ي","ف","ك"],
-      "frequency": "core",
-      "dialect_note": "בסוריה ולבנון: 'كيفك؟' — זהה. בירדן: לעיתים 'شلونك؟'",
-      "chunk": true
+      "icon_color": "#007AFF"
     },
     "w004": {
       "arabic": "مْنِيح",
@@ -53,66 +41,47 @@
       "hebrew_pronunciation": "מְנִיח",
       "hebrew": "בסדר / טוב",
       "icon": "thumbs-up-outline",
-      "icon_color": "#AF52DE",
-      "letter_blocks": ["م","ن","ي","ح"],
-      "frequency": "core",
-      "dialect_note": "בירדן נפוץ גם 'كويس' (כּוַּיְיס)",
-      "chunk": false
+      "icon_color": "#AF52DE"
     },
     "w005": {
       "arabic": "مَعَ السَّلامَة",
       "arabic_plain": "مع السلامة",
       "hebrew_pronunciation": "מַעַ סַּלָאמֶה",
-      "hebrew": "להתראות / לך בשלום",
+      "hebrew": "להתראות",
       "icon": "exit-outline",
-      "icon_color": "#FF3B30",
-      "letter_blocks": ["م","ع","ا","ل","س","ل","ا","م","ة"],
-      "frequency": "core",
-      "dialect_note": null,
-      "chunk": true
+      "icon_color": "#FF3B30"
     }
   },
 
   "stages": [
-    { "type": "word_card", "word_id": "w001" },
-    { "type": "word_card", "word_id": "w002" },
-    { "type": "word_card", "word_id": "w003" },
-    { "type": "word_card", "word_id": "w004" },
-    { "type": "word_card", "word_id": "w005" },
 
-    {
-      "type": "listen_choose",
-      "items": [
-        { "word_id": "w001", "distractor_id": "w005" },
-        { "word_id": "w003", "distractor_id": "w004" }
-      ]
-    },
+    { "type": "listen_repeat", "word_id": "w001" },
+    { "type": "listen_repeat", "word_id": "w002" },
+    { "type": "listen_repeat", "word_id": "w003" },
+    { "type": "listen_repeat", "word_id": "w004" },
 
-    { "type": "choose_translation", "word_id": "w001", "option_ids": ["w001","w002","w004","w005"] },
+    { "type": "choose_translation", "word_id": "w001", "option_ids": ["w001","w002","w003","w004"] },
+    { "type": "choose_translation", "word_id": "w002", "option_ids": ["w001","w002","w004","w005"] },
     { "type": "choose_translation", "word_id": "w003", "option_ids": ["w001","w003","w004","w005"] },
-
-    { "type": "match_pairs", "word_ids": ["w001","w002","w003","w004","w005"] },
-
-    { "type": "write_translation", "word_id": "w001" },
-    { "type": "write_translation", "word_id": "w004" },
+    { "type": "choose_translation", "word_id": "w004", "option_ids": ["w002","w003","w004","w005"] },
 
     {
       "type": "sentence_build",
-      "sentence_hebrew": "שלום, מה שלומך?",
+      "sentence_hebrew": "Hello, how are you?",
       "sentence_arabic": "مَرْحَبَا كِيفَك؟",
       "words": ["مَرْحَبَا","كِيفَك؟"]
     },
 
     {
       "type": "dialogue",
-      "context_label": "פגישה עם מישהו חדש",
+      "context_label": "Meeting someone new",
       "lines": [
         {
           "speaker": "A",
-          "name": "אחמד",
+          "name": "Ahmed",
           "arabic": "مَرْحَبَا، أَنا أَحْمَد. شُو اسْمَك؟",
           "hebrew_pronunciation": "מַרְחַבָּא, אַנָא אַחְמַד. שוּ אִסְמַק?",
-          "hebrew": "שלום, אני אחמד. מה שמך?"
+          "hebrew": "Hello, I'm Ahmed. What's your name?"
         },
         {
           "speaker": "B",
@@ -120,15 +89,15 @@
           "word_id": "w002",
           "target_voweled": "أَهْلاً",
           "full_arabic": "أَهْلاً! تَشَرَّفْنا.",
-          "hebrew": "אהלן! נעים להכיר.",
-          "hebrew_gap": "אהלן"
+          "hebrew": "Nice to meet you!",
+          "hebrew_gap": "Nice"
         },
         {
           "speaker": "A",
-          "name": "אחמד",
+          "name": "Ahmed",
           "arabic": "كِيفَك؟ مْنِيح؟",
           "hebrew_pronunciation": "כִּיפַּק? מְנִיח?",
-          "hebrew": "מה שלומך? בסדר?"
+          "hebrew": "How are you? Good?"
         },
         {
           "speaker": "B",
@@ -136,34 +105,147 @@
           "word_id": "w004",
           "target_voweled": "مْنِيح",
           "full_arabic": "مْنِيح كَتِير، شُكْراً!",
-          "hebrew": "בסדר מאוד, תודה!",
-          "hebrew_gap": "בסדר"
+          "hebrew": "Very good, thanks!",
+          "hebrew_gap": "good"
         },
         {
           "speaker": "A",
-          "name": "אחמד",
+          "name": "Ahmed",
           "arabic": "يَلَّا، مَعَ السَّلامَة!",
           "hebrew_pronunciation": "יַאלָּה, מַעַ סַּלָאמֶה!",
-          "hebrew": "יאללה, להתראות!"
+          "hebrew": "Alright, goodbye!"
         }
       ]
     },
 
+    { "type": "listen_repeat", "word_id": "w002" },
+    { "type": "listen_repeat", "word_id": "w003" },
+    { "type": "listen_repeat", "word_id": "w004" },
+    { "type": "listen_repeat", "word_id": "w005" },
+
+    { "type": "choose_translation", "word_id": "w002", "option_ids": ["w001","w002","w003","w005"] },
+    { "type": "choose_translation", "word_id": "w003", "option_ids": ["w002","w003","w004","w005"] },
+    { "type": "choose_translation", "word_id": "w004", "option_ids": ["w001","w003","w004","w005"] },
+    { "type": "choose_translation", "word_id": "w005", "option_ids": ["w001","w002","w004","w005"] },
+
     {
-      "type": "cultural_note",
-      "title": "ברכות בעולם הלבנטיני",
-      "body_hebrew": "בתרבות הלבנטינית ברכות הן טקס חברתי חשוב. אנשים מברכים זה את זה בנדיבות — אפילו זרים. 'מַרְחַבָּא' היא הברכה הניטרלית ביותר. כשאתה עונה, אמור 'مرحبتين' (מַרְחַבְּתֵין — שתי ברכות בחזרה) לקבל תגובה חמה.",
-      "audio_text": "مرحبا، كيفك؟ منيح كتير، شكراً!"
+      "type": "sentence_build",
+      "sentence_hebrew": "How are you? Fine.",
+      "sentence_arabic": "كِيفَك؟ مْنِيح",
+      "words": ["كِيفَك؟","مْنِيح"]
     },
 
     {
-      "type": "mastery_check",
-      "items": [
-        { "prompt_he": "כיצד אומרים 'שלום' בערבית לבנטינית?", "word_id": "w001", "mode": "choose", "option_ids": ["w001","w002","w003","w004"] },
-        { "prompt_he": "כיצד שואלים 'מה שלומך'?", "word_id": "w003", "mode": "choose", "option_ids": ["w001","w003","w004","w005"] },
-        { "prompt_he": "כיצד אומרים 'להתראות'?", "word_id": "w005", "mode": "choose", "option_ids": ["w002","w003","w004","w005"] }
+      "type": "dialogue",
+      "context_label": "Meeting someone new",
+      "lines": [
+        {
+          "speaker": "A",
+          "name": "Ahmed",
+          "arabic": "مَرْحَبَا، أَنا أَحْمَد. شُو اسْمَك؟",
+          "hebrew_pronunciation": "מַרְחַבָּא, אַנָא אַחְמַד. שוּ אִסְמַק?",
+          "hebrew": "Hello, I'm Ahmed. What's your name?"
+        },
+        {
+          "speaker": "B",
+          "is_user_turn": true,
+          "word_id": "w002",
+          "target_voweled": "أَهْلاً",
+          "full_arabic": "أَهْلاً! تَشَرَّفْنا.",
+          "hebrew": "Nice to meet you!",
+          "hebrew_gap": "Nice"
+        },
+        {
+          "speaker": "A",
+          "name": "Ahmed",
+          "arabic": "كِيفَك؟ مْنِيح؟",
+          "hebrew_pronunciation": "כִּיפַּק? מְנִיח?",
+          "hebrew": "How are you? Good?"
+        },
+        {
+          "speaker": "B",
+          "is_user_turn": true,
+          "word_id": "w004",
+          "target_voweled": "مْنِيح",
+          "full_arabic": "مْنِيح كَتِير، شُكْراً!",
+          "hebrew": "Very good, thanks!",
+          "hebrew_gap": "good"
+        },
+        {
+          "speaker": "A",
+          "name": "Ahmed",
+          "arabic": "يَلَّا، مَعَ السَّلامَة!",
+          "hebrew_pronunciation": "יַאלָּה, מַעַ סַּלָאמֶה!",
+          "hebrew": "Alright, goodbye!"
+        }
       ]
-    }
+    },
+
+    { "type": "listen_repeat", "word_id": "w001" },
+    { "type": "listen_repeat", "word_id": "w003" },
+    { "type": "listen_repeat", "word_id": "w004" },
+    { "type": "listen_repeat", "word_id": "w005" },
+
+    { "type": "choose_translation", "word_id": "w001", "option_ids": ["w001","w003","w004","w005"] },
+    { "type": "choose_translation", "word_id": "w003", "option_ids": ["w001","w002","w003","w005"] },
+    { "type": "choose_translation", "word_id": "w004", "option_ids": ["w001","w002","w004","w005"] },
+    { "type": "choose_translation", "word_id": "w005", "option_ids": ["w002","w003","w004","w005"] },
+
+    {
+      "type": "sentence_build",
+      "sentence_hebrew": "Hello, goodbye!",
+      "sentence_arabic": "أَهْلاً مَعَ السَّلامَة",
+      "words": ["أَهْلاً","مَعَ السَّلامَة"]
+    },
+
+    {
+      "type": "dialogue",
+      "context_label": "Meeting someone new",
+      "lines": [
+        {
+          "speaker": "A",
+          "name": "Ahmed",
+          "arabic": "مَرْحَبَا، أَنا أَحْمَد. شُو اسْمَك؟",
+          "hebrew_pronunciation": "מַרְחַבָּא, אַנָא אַחְמַד. שוּ אִסְמַק?",
+          "hebrew": "Hello, I'm Ahmed. What's your name?"
+        },
+        {
+          "speaker": "B",
+          "is_user_turn": true,
+          "word_id": "w002",
+          "target_voweled": "أَهْلاً",
+          "full_arabic": "أَهْلاً! تَشَرَّفْنا.",
+          "hebrew": "Nice to meet you!",
+          "hebrew_gap": "Nice"
+        },
+        {
+          "speaker": "A",
+          "name": "Ahmed",
+          "arabic": "كِيفَك؟ مْنِيح؟",
+          "hebrew_pronunciation": "כִּיפַּק? מְנִיח?",
+          "hebrew": "How are you? Good?"
+        },
+        {
+          "speaker": "B",
+          "is_user_turn": true,
+          "word_id": "w004",
+          "target_voweled": "مْنِيح",
+          "full_arabic": "مْنِيح كَتِير، شُكْراً!",
+          "hebrew": "Very good, thanks!",
+          "hebrew_gap": "good"
+        },
+        {
+          "speaker": "A",
+          "name": "Ahmed",
+          "arabic": "يَلَّا، مَعَ السَّلامَة!",
+          "hebrew_pronunciation": "יַאלָּה, מַעַ סַּלָאמֶה!",
+          "hebrew": "Alright, goodbye!"
+        }
+      ]
+    },
+
+    { "type": "match_pairs", "word_ids": ["w001","w002","w003","w004","w005"] }
+
   ],
 
   "srs_words": ["مَرْحَبَا","أَهْلاً","كِيفَك؟","مْنِيح","مَعَ السَّلامَة"],
