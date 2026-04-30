@@ -881,7 +881,7 @@ export default function LessonScreen() {
         {/* Word card with speaker button + large Arabic */}
         <View style={[s.chooseWordCard, { backgroundColor: c.card, borderColor: c.border }]}>
           <TouchableOpacity onPress={() => playAudio(stg.arabic)} activeOpacity={0.82}>
-            <View style={[s.speakerBtnCircle, { backgroundColor: isPlaying ? c.primary : c.surface, width: 56, height: 56, borderRadius: 28 }]}>
+            <View style={[s.speakerBtnCircle, { backgroundColor: isPlaying ? c.primary : '#ffffff', width: 56, height: 56, borderRadius: 28 }]}>
               <Ionicons name="volume-high" size={26} color={isPlaying ? '#ffffff' : c.primary} />
             </View>
           </TouchableOpacity>
@@ -1445,6 +1445,16 @@ export default function LessonScreen() {
     return (
       <View style={[s.actionBar, { backgroundColor: c.card, borderTopColor: c.border, paddingBottom: insets.bottom + 12 }]}>
         <View style={{ paddingHorizontal: 24, paddingTop: 12 }}>
+          {/* Inline feedback strip for sentence_build */}
+          {currentStage?.type === 'sentence_build' && buildPhase === 'done' && (
+            <View style={[s.feedbackStrip, { backgroundColor: REVEAL_CORRECT_BG }]}>
+              <View style={{ width: 22, height: 22, borderRadius: 11, backgroundColor: '#738ce6', alignItems: 'center', justifyContent: 'center' }}>
+                <Ionicons name="checkmark" size={13} color="#ffffff" />
+              </View>
+              <Text style={[s.feedbackStripText, { color: REVEAL_CORRECT_TEXT }]}>כל הכבוד — המשפט נכון!</Text>
+            </View>
+          )}
+
           {/* Inline feedback strip for choose_translation */}
           {currentStage?.type === 'choose_translation' && lockedAnswer !== null && (() => {
             const opts    = shuffledMap[stage] ?? currentStage.options ?? [];
@@ -1463,13 +1473,12 @@ export default function LessonScreen() {
           {bar.type === 'continue' && (
             <TouchableOpacity style={[s.actionBtn, { backgroundColor: c.primary }]} onPress={handleContinue} activeOpacity={0.87}>
               <Text style={s.actionBtnText}>המשך</Text>
-              <Ionicons name="arrow-forward" size={18} color="#fff" />
             </TouchableOpacity>
           )}
           {bar.type === 'check' && (
-            <TouchableOpacity style={[s.actionBtn, { backgroundColor: bar.disabled ? c.surface : c.primary, opacity: bar.disabled ? 0.55 : 1 }]}
+            <TouchableOpacity style={[s.actionBtn, { backgroundColor: bar.disabled ? '#efeeeb' : c.primary, shadowOpacity: bar.disabled ? 0 : 0.28 }]}
               onPress={handleCheck} disabled={bar.disabled} activeOpacity={0.87}>
-              <Text style={[s.actionBtnText, { color: bar.disabled ? c.label : '#fff' }]}>בדוק</Text>
+              <Text style={[s.actionBtnText, { color: bar.disabled ? '#bebbb1' : '#fff' }]}>בדוק</Text>
             </TouchableOpacity>
           )}
           {bar.type === 'mic' && (
@@ -1496,30 +1505,28 @@ export default function LessonScreen() {
     <SafeAreaView style={[s.safe, { backgroundColor: c.background }]}>
       <View style={s.centeredWrapper}>
 
-        {/* Header */}
+        {/* Header — X circle · back arrow · progress bar · skip arrow · counter */}
         <View style={[s.header, { backgroundColor: c.background }]}>
-          <TouchableOpacity onPress={() => router.back()} style={s.headerBtn}>
-            <Ionicons name="close" size={22} color={c.primary} />
+          <TouchableOpacity onPress={() => router.back()} style={[s.headerCloseBtn, { backgroundColor: c.surface }]}>
+            <Ionicons name="close" size={20} color={c.text} />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={goPrevStage} style={s.headerArrowBtn}>
+            <Ionicons name="chevron-back" size={18} color={c.label} />
           </TouchableOpacity>
           <View style={s.progressWrap}>
-            <View style={[s.progressTrack, { backgroundColor: c.border }]}>
+            <View style={[s.progressTrack, { backgroundColor: '#efeeeb' }]}>
               <View style={[s.progressFill, { width: `${progress * 100}%` as any, backgroundColor: c.primary }]} />
-              {Array.from({ length: totalStages - 1 }).map((_, i) => (
-                <View key={i} style={[s.progressSegment, { left: `${((i + 1) / totalStages) * 100}%` as any, backgroundColor: c.background }]} />
-              ))}
             </View>
           </View>
-          <View style={s.stageCounter}>
-            <Text style={[s.stageCountText, { color: c.label }]}>{stage + 1}/{totalStages}</Text>
-          </View>
+          <TouchableOpacity onPress={goNextStage} style={s.headerArrowBtn}>
+            <Ionicons name="chevron-forward" size={18} color={c.label} />
+          </TouchableOpacity>
+          <Text style={[s.stageCountText, { color: c.label }]}>{stage + 1}/{totalStages}</Text>
         </View>
 
-        {/* Phase label */}
+        {/* Eyebrow label — orange uppercase, matches design */}
         {phaseInfo && (
-          <View style={s.phaseLabelRow}>
-            <Text style={s.phaseEmoji}>{phaseInfo.emoji}</Text>
-            <Text style={[s.phaseLabelText, { color: c.label }]}>{phaseInfo.label}</Text>
-          </View>
+          <Text style={s.eyebrow}>{phaseInfo.label}</Text>
         )}
 
         {/* Content */}
@@ -1613,20 +1620,17 @@ const s = StyleSheet.create({
   safe:             { flex: 1 },
   centeredWrapper:  { flex: 1, maxWidth: 640, alignSelf: 'center', width: '100%' },
 
-  // Header
-  header:        { flexDirection: 'row', alignItems: 'center', paddingHorizontal: 12, height: 52, gap: 8 },
-  headerBtn:     { width: 44, height: 44, borderRadius: 22, alignItems: 'center', justifyContent: 'center' },
-  progressWrap:  { flex: 1 },
-  progressTrack: { height: 8, width: '100%', overflow: 'hidden', borderRadius: 6, position: 'relative' as any },
-  progressFill:  { height: '100%', borderRadius: 6 },
-  progressSegment: { position: 'absolute' as any, top: 0, bottom: 0, width: 2 },
-  stageCounter:  { width: 36, alignItems: 'flex-end' },
-  stageCountText:{ fontSize: 11, fontWeight: '600' },
+  // Header — matches Claude Design LessonHeader
+  header:          { flexDirection: 'row', alignItems: 'center', paddingHorizontal: 20, paddingTop: 14, paddingBottom: 8, gap: 8 },
+  headerCloseBtn:  { width: 36, height: 36, borderRadius: 18, alignItems: 'center', justifyContent: 'center', marginRight: 6 },
+  headerArrowBtn:  { width: 28, height: 28, borderRadius: 14, alignItems: 'center', justifyContent: 'center' },
+  progressWrap:    { flex: 1 },
+  progressTrack:   { height: 12, width: '100%', borderRadius: 999, overflow: 'hidden' },
+  progressFill:    { height: '100%', borderRadius: 999 },
+  stageCountText:  { fontSize: 13, fontWeight: '600', minWidth: 28, textAlign: 'right' as any },
 
-  // Phase label
-  phaseLabelRow:  { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 6, paddingVertical: 8 },
-  phaseEmoji:     { fontSize: 16 },
-  phaseLabelText: { fontSize: 13, fontWeight: '600', letterSpacing: 0.2 },
+  // Eyebrow label — orange uppercase section label
+  eyebrow: { fontSize: 13, fontWeight: '700', letterSpacing: 1.6, textTransform: 'uppercase' as any, color: '#fe4d01', textAlign: 'center' as any, paddingVertical: 8 },
 
   // Content
   content:   { paddingHorizontal: 24, paddingTop: 8 },
@@ -1763,9 +1767,9 @@ const s = StyleSheet.create({
 
   // Action bar
   actionBar:     { borderTopWidth: 1, shadowColor: '#000', shadowOpacity: 0.06, shadowOffset: { width: 0, height: -4 }, shadowRadius: 12, elevation: 8 },
-  actionBtn:     { borderRadius: 20, paddingVertical: 17, alignItems: 'center', justifyContent: 'center', flexDirection: 'row', gap: 8 },
-  actionBtnText: { color: '#fff', fontSize: 17, fontWeight: '700', letterSpacing: 0.2 },
-  micActionBtn:  { borderRadius: 20, paddingVertical: 18, alignItems: 'center', justifyContent: 'center', flexDirection: 'row', gap: 10, shadowOpacity: 0.3, shadowOffset: { width: 0, height: 6 }, shadowRadius: 16, elevation: 8 },
+  actionBtn:     { borderRadius: 999, paddingVertical: 16, paddingHorizontal: 32, alignItems: 'center', justifyContent: 'center', flexDirection: 'row', gap: 8, shadowColor: '#fe4d01', shadowOffset: { width: 0, height: 8 }, shadowRadius: 22, elevation: 6 },
+  actionBtnText: { color: '#fff', fontSize: 16, fontWeight: '700', letterSpacing: 0.2 },
+  micActionBtn:  { borderRadius: 999, paddingVertical: 18, alignItems: 'center', justifyContent: 'center', flexDirection: 'row', gap: 10, shadowOpacity: 0.3, shadowOffset: { width: 0, height: 6 }, shadowRadius: 16, elevation: 8 },
   micActionLabel:{ color: '#fff', fontSize: 16, fontWeight: '700' },
 
   // Feedback banner
