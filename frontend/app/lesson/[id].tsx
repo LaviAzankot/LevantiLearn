@@ -40,6 +40,9 @@ const FONT_UI_EXTRABOLD = 'PlusJakartaSans_800ExtraBold';
 const REVEAL_CORRECT_BG   = 'rgba(115,140,230,0.10)';
 const REVEAL_CORRECT_TEXT = '#3d57b8';
 
+// Returns only the first translation when a field has "X / Y" alternatives
+const firstHebrew = (h: string): string => h?.split(' / ')[0]?.split('/')[0]?.trim() ?? h;
+
 function shuffleArray<T>(arr: T[]): T[] {
   const a = [...arr];
   for (let i = a.length - 1; i > 0; i--) {
@@ -925,11 +928,17 @@ export default function LessonScreen() {
   const renderListenRepeat = () => {
     const stg = currentStage;
     const isPlaying = audioProgress > 0;
+    const thumbUri = expandedLesson?.thumbnail_url;
     return (
       <View style={[s.stageWrap, { alignItems: 'center' }]}>
-        {/* Illustration card with speaker button overlaid top-right */}
-        <View style={[s.listenRepeatCard, { backgroundColor: c.card, borderColor: c.border }]}>
-          <WordIcon icon={stg.icon} iconColor={stg.icon_color} size={148} />
+        {/* Static lesson thumbnail — same image for all listen_repeat stages */}
+        <View style={[s.listenRepeatCard, { backgroundColor: c.card, borderColor: c.border, padding: 0, overflow: 'hidden' }]}>
+          {thumbUri
+            ? <Image source={{ uri: thumbUri }} style={{ width: '100%', height: 180 }} resizeMode="cover" />
+            : <View style={{ width: '100%', height: 180, backgroundColor: c.surface, alignItems: 'center', justifyContent: 'center' }}>
+                <Ionicons name="image-outline" size={48} color={c.label} />
+              </View>
+          }
           <TouchableOpacity
             style={[s.speakerBtnOverlay]}
             onPress={() => playAudio(stg.arabic)}
@@ -941,8 +950,8 @@ export default function LessonScreen() {
         </View>
 
         <Text style={[s.wordCardArabic, { color: c.text }]}>{stg.arabic}</Text>
-        <Text style={[s.pronText, { color: c.label, fontStyle: 'italic' }]}>[{stg.hebrew_pronunciation}]</Text>
-        <Text style={[s.hebrewText, { color: c.text }]}>{stg.hebrew}</Text>
+        <Text style={[s.pronText, { color: c.label, fontStyle: 'italic', writingDirection: 'ltr' }]}>[{stg.hebrew_pronunciation}]</Text>
+        <Text style={[s.hebrewText, { color: c.text }]}>{firstHebrew(stg.hebrew)}</Text>
         {listenPhase === 'correct' && (
           <View style={{ alignItems: 'center', marginTop: 16, gap: 6 }}>
             <Ionicons name="checkmark-circle" size={44} color={c.right} />
@@ -1007,7 +1016,7 @@ export default function LessonScreen() {
                   setChoosePendingAnswer(opt.id);
                 }}
                 disabled={isLocked} activeOpacity={0.85}>
-                <Text style={[s.chooseOptionText, { color: txtColor, fontFamily: FONT_UI }]} numberOfLines={3}>{opt.english ?? opt.hebrew}</Text>
+                <Text style={[s.chooseOptionText, { color: txtColor, fontFamily: FONT_UI, backgroundColor: 'transparent' }]} numberOfLines={3}>{firstHebrew(opt.hebrew)}</Text>
                 {isRevealCorrect && (
                   <View style={{ position: 'absolute', top: 8, right: 8, width: 20, height: 20, borderRadius: 10, backgroundColor: '#738ce6', alignItems: 'center', justifyContent: 'center' }}>
                     <Ionicons name="checkmark" size={13} color="#ffffff" />
@@ -1072,8 +1081,7 @@ export default function LessonScreen() {
     const shuffledRight = shuffledMap[stage] ?? [...pairs];
     return (
       <View style={s.stageWrap}>
-        <Text style={{ fontSize: 22, fontWeight: '700', fontFamily: FONT_UI_BOLD, color: c.text, textAlign: 'center', marginBottom: 2, letterSpacing: -0.2 }}>Tap each Arabic word</Text>
-        <Text style={{ fontSize: 15, fontWeight: '500', fontFamily: FONT_UI, color: c.label, textAlign: 'center', marginBottom: 16 }}>…and its English meaning</Text>
+        <Text style={{ fontSize: 22, fontWeight: '700', fontFamily: FONT_UI_BOLD, color: c.text, textAlign: 'center', marginBottom: 16, letterSpacing: -0.2 }}>Tap each Arabic word</Text>
         <View style={s.pairsContainer}>
           {pairs.map((p: any, i: number) => {
             const rightPair    = shuffledRight[i];
@@ -1114,7 +1122,7 @@ export default function LessonScreen() {
                       else { setMatchWrong(rightPair.id); setTimeout(() => setMatchWrong(null), 500); setMatchSelected(null); }
                     }}
                     disabled={isRightMatched} activeOpacity={0.8}>
-                    <Text style={[s.matchHe, { color: rightTxt, fontFamily: FONT_UI }]}>{rightPair.english ?? rightPair.hebrew}</Text>
+                    <Text style={[s.matchHe, { color: rightTxt, fontFamily: FONT_UI }]}>{firstHebrew(rightPair.hebrew ?? rightPair.english)}</Text>
                   </TouchableOpacity>
                 )}
               </View>
@@ -1710,9 +1718,10 @@ export default function LessonScreen() {
             };
 
             const renderBubbleEnglish = () => {
-              if (!isBlank) return <Text style={{ fontFamily: FONT_UI, fontSize: 13, color: englishColor, fontWeight: '500', marginTop: 2, textAlign: isYou ? 'right' : 'left' }}>{line.english}</Text>;
-              const word = line.blank?.english ?? '';
-              const parts = line.english.split('___');
+              const hebrewLine = line.hebrew ?? line.english ?? '';
+              if (!isBlank) return <Text style={{ fontFamily: FONT_UI, fontSize: 13, color: englishColor, fontWeight: '500', marginTop: 2, textAlign: isYou ? 'right' : 'left' }}>{hebrewLine}</Text>;
+              const word = line.blank?.hebrew ?? line.blank?.english ?? '';
+              const parts = hebrewLine.split('___');
               return (
                 <View style={{ flexDirection: isYou ? 'row-reverse' : 'row', flexWrap: 'wrap', alignItems: 'center', marginTop: 2 }}>
                   {parts.map((p: string, pi: number) => (
