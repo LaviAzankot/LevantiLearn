@@ -3,6 +3,20 @@ import { Stack, useRouter, useSegments } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { useColorScheme, ActivityIndicator, View } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { useFonts } from 'expo-font';
+import {
+  ReemKufi_400Regular,
+  ReemKufi_500Medium,
+  ReemKufi_600SemiBold,
+  ReemKufi_700Bold,
+} from '@expo-google-fonts/reem-kufi';
+import {
+  PlusJakartaSans_400Regular,
+  PlusJakartaSans_500Medium,
+  PlusJakartaSans_600SemiBold,
+  PlusJakartaSans_700Bold,
+  PlusJakartaSans_800ExtraBold,
+} from '@expo-google-fonts/plus-jakarta-sans';
 import { useAuthStore } from '../src/store/authStore';
 
 export default function RootLayout() {
@@ -12,6 +26,18 @@ export default function RootLayout() {
   const initialize  = useAuthStore(s => s.initialize);
   const session     = useAuthStore(s => s.session);
   const isInitialized = useAuthStore(s => s.isInitialized);
+
+  const [fontsLoaded] = useFonts({
+    ReemKufi_400Regular,
+    ReemKufi_500Medium,
+    ReemKufi_600SemiBold,
+    ReemKufi_700Bold,
+    PlusJakartaSans_400Regular,
+    PlusJakartaSans_500Medium,
+    PlusJakartaSans_600SemiBold,
+    PlusJakartaSans_700Bold,
+    PlusJakartaSans_800ExtraBold,
+  });
 
   // Initialize Supabase session once on mount
   useEffect(() => {
@@ -33,8 +59,8 @@ export default function RootLayout() {
     }
   }, [session, isInitialized, segments]);
 
-  // Show spinner while Supabase session is being restored
-  if (!isInitialized) {
+  // Show spinner while fonts or auth are loading
+  if (!isInitialized || !fontsLoaded) {
     return (
       <SafeAreaProvider>
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center',

@@ -30,6 +30,12 @@ const DEFAULT_ICON   = 'language-outline';
 const DEFAULT_COLOR  = '#8E8E93';
 const PASS_THRESHOLD = 50;
 
+// Font family constants — loaded via useFonts in _layout.tsx
+const FONT_AR = 'ReemKufi_600SemiBold';
+const FONT_UI = 'PlusJakartaSans_600SemiBold';
+const FONT_UI_BOLD = 'PlusJakartaSans_700Bold';
+const FONT_UI_EXTRABOLD = 'PlusJakartaSans_800ExtraBold';
+
 // Correct-reveal accent (Claude Design: cool blue for disclosed answers)
 const REVEAL_CORRECT_BG   = 'rgba(115,140,230,0.10)';
 const REVEAL_CORRECT_TEXT = '#3d57b8';
@@ -84,6 +90,7 @@ const PHASE_LABELS: Record<string, { emoji: string; label: string }> = {
   listening_comprehension:{ emoji: '🎧', label: 'Listen and Answer' },
   idiom_card:             { emoji: '💬', label: 'Key Expression' },
   mastery_check:          { emoji: '🎯', label: 'Mastery Check' },
+  speak_the_blank:        { emoji: '🎤', label: 'Speak to Fill the Blank' },
 };
 
 // ── WordIcon ──────────────────────────────────────────────────────────────────
@@ -199,6 +206,11 @@ export default function LessonScreen() {
   const [writeCheckState,  setWriteCheckState]    = useState<'idle'|'correct'|'wrong'>('idle');
   const [shadowPhase,      setShadowPhase]        = useState<'idle'|'playing'|'ready'|'recording'|'correct'|'wrong'>('idle');
 
+  // ── Speak the Blank state ──────────────────────────────────────────────────
+  const [speakBlankRoundIdx,    setSpeakBlankRoundIdx]    = useState(0);
+  const [speakBlankRevealed,    setSpeakBlankRevealed]    = useState(false);
+  const [speakBlankPlayingLine, setSpeakBlankPlayingLine] = useState<number|null>(null);
+
   // ── Mastery check state ────────────────────────────────────────────────────
   const [masteryItemIndex, setMasteryItemIndex] = useState(0);
   const [masteryScore,     setMasteryScore]     = useState(0);
@@ -217,6 +229,8 @@ export default function LessonScreen() {
   const dialogueLineRef   = useRef<any>(null);
   const scrollRef         = useRef<any>(null);
   const stageOpacity      = useRef(new Animated.Value(1)).current;
+  const micRing1          = useRef(new Animated.Value(0)).current;
+  const micRing2          = useRef(new Animated.Value(0)).current;
 
   const [npcAvatar, userAvatar] = useMemo(() => pickAvatarsForLesson(id ?? 'default'), [id]);
 
@@ -345,7 +359,13 @@ export default function LessonScreen() {
         return { ...word, ...stg, options };
       }
       if (stg.type === 'match_pairs' && stg.word_ids) {
-        const pairs = stg.word_ids.map((wid: string) => ({ id: wid, arabic: words[wid]?.arabic, hebrew: words[wid]?.hebrew }));
+        const pairs = stg.word_ids.map((wid: string) => ({
+          id: wid,
+          arabic: words[wid]?.arabic,
+          translit: words[wid]?.translit,
+          hebrew: words[wid]?.hebrew,
+          english: words[wid]?.english,
+        }));
         return { ...stg, pairs };
       }
       if (stg.type === 'listen_choose' && stg.items?.[0]?.word_id) {
@@ -365,6 +385,7 @@ export default function LessonScreen() {
         });
         return { ...stg, items };
       }
+      if (stg.type === 'speak_the_blank') return stg;
       if (word) return { ...word, ...stg, target_word: stg.target_word ?? word.arabic_plain };
       return stg;
     });
@@ -398,7 +419,8 @@ export default function LessonScreen() {
           ]);
         }
       }
-      if (stg.type === 'sentence_build' && stg.words?.length) map[idx] = shuffleArray([...stg.words]);
+      if (stg.type === 'sentence_build' && stg.bank?.length)  map[idx] = shuffleArray([...stg.bank]);
+      else if (stg.type === 'sentence_build' && stg.words?.length) map[idx] = shuffleArray([...stg.words]);
       if (stg.type === 'sentence_complete' && stg.gap_word_id) {
         const correctWord = allWords[stg.gap_word_id];
         if (correctWord) {
@@ -472,6 +494,23 @@ export default function LessonScreen() {
         setListenPhase('wrong');
         setTimeout(() => { advanceMasteryItem(); setListenPhase('speak'); setSpeechResult(null); }, 1200);
       }
+    } else if (stg?.type === 'speak_the_blank') {
+      const rounds = stg.rounds ?? [];
+      if (speechResult.score >= PASS_THRESHOLD) {
+        setListenPhase('correct');
+        setTimeout(() => {
+          setSpeechResult(null);
+          if (speakBlankRoundIdx + 1 >= rounds.length) {
+            goNextStage(); setListenPhase('speak');
+          } else {
+            setSpeakBlankRoundIdx(r => r + 1);
+            setListenPhase('speak'); setSpeakBlankRevealed(false); setSpeakBlankPlayingLine(null);
+          }
+        }, 1100);
+      } else {
+        setListenPhase('wrong');
+        setTimeout(() => { setListenPhase('speak'); setSpeechResult(null); }, 1200);
+      }
     }
   }, [speechResult]);
 
@@ -500,6 +539,25 @@ export default function LessonScreen() {
     return () => clearTimeout(t);
   }, [dialogueStep, stage, expandedLesson]);
 
+  // ── Speak the Blank: auto-play partner line on round entry ─────────────────
+  useEffect(() => {
+    if (!expandedLesson) return;
+    const stg = (expandedLesson.stages ?? [])[stage];
+    if (stg?.type !== 'speak_the_blank') return;
+    const round = (stg.rounds ?? [])[speakBlankRoundIdx];
+    if (!round) return;
+    const t = setTimeout(() => {
+      const promptIdx = (round.lines ?? []).findIndex((l: any, i: number) =>
+        i < round.blankLineIdx && l.speaker === 'them'
+      );
+      if (promptIdx >= 0) {
+        setSpeakBlankPlayingLine(promptIdx);
+        playAudio(round.lines[promptIdx].arabic, () => setSpeakBlankPlayingLine(null));
+      }
+    }, 500);
+    return () => clearTimeout(t);
+  }, [stage, speakBlankRoundIdx, expandedLesson, playAudio]);
+
   // ── Reset exercise state ───────────────────────────────────────────────────
   const resetExerciseState = () => {
     setLockedAnswer(null); setWrongAnswers([]); setPlacedSlots([]); setWriteCheckState('idle');
@@ -510,6 +568,7 @@ export default function LessonScreen() {
     setBuildPhase('attempt'); setChoosePendingAnswer(null);
     setMasteryItemIndex(0); setMasteryScore(0); setMasteryDone(false);
     setFeedbackVisible(false); feedbackAnim.setValue(80);
+    setSpeakBlankRoundIdx(0); setSpeakBlankRevealed(false); setSpeakBlankPlayingLine(null);
   };
 
   const goNextStage = useCallback(() => {
@@ -524,6 +583,23 @@ export default function LessonScreen() {
   const goPrevStage = useCallback(() => {
     if (stage > 0) { setStage(s => s - 1); resetExerciseState(); }
   }, [stage]);
+
+  // ── Mic ring pulse animation (for 96px circle mic in action bar) ───────────
+  useEffect(() => {
+    const isRecording = listenPhase === 'recording';
+    if (isRecording) {
+      const mk = (v: Animated.Value, delay: number) => Animated.loop(Animated.sequence([
+        Animated.delay(delay),
+        Animated.timing(v, { toValue: 1, duration: 1200, useNativeDriver: true }),
+        Animated.timing(v, { toValue: 0, duration: 0,    useNativeDriver: true }),
+      ]));
+      const a1 = mk(micRing1, 0); const a2 = mk(micRing2, 600);
+      a1.start(); a2.start();
+      return () => { a1.stop(); a2.stop(); micRing1.setValue(0); micRing2.setValue(0); };
+    } else {
+      micRing1.setValue(0); micRing2.setValue(0);
+    }
+  }, [listenPhase]);
 
   // ── Mastery check helpers ──────────────────────────────────────────────────
   const advanceMasteryItem = useCallback(() => {
@@ -597,9 +673,11 @@ export default function LessonScreen() {
     }
     if (t === 'sentence_build') {
       if (buildPhase === 'done') return { type: 'continue' };
-      return { type: 'check', disabled: buildSlots.length !== (currentStage.words ?? []).length };
+      const slotCount = Array.isArray(currentStage.bank) ? (currentStage.correct ?? []).length : (currentStage.words ?? []).length;
+      return { type: 'check', disabled: buildSlots.length !== slotCount };
     }
     if (t === 'listen_choose')  return lockedAnswer !== null ? { type: 'continue' } : { type: 'hidden' };
+    if (t === 'speak_the_blank') return { type: 'hidden' }; // custom bar inside renderer
     if (t === 'mastery_check') {
       if (masteryDone) return { type: 'continue' };
       const item = (shuffledMap[stage] ?? [])[masteryItemIndex];
@@ -640,7 +718,11 @@ export default function LessonScreen() {
       return;
     }
     if (t === 'sentence_build') {
-      const words = currentStage.words ?? [];
+      const isNewSchema = Array.isArray(currentStage.bank);
+      const correctWords: string[] = isNewSchema
+        ? (currentStage.correct ?? []).map((id: string) => currentStage.bank.find((b: any) => b.id === id)?.ar ?? '')
+        : (currentStage.words ?? []);
+      const words = correctWords;
       const isCorrect = buildSlots.every((w: string, i: number) => w === words[i]);
       if (isCorrect) {
         setBuildPhase('done');
@@ -674,6 +756,12 @@ export default function LessonScreen() {
       const word = item.word ?? (expandedLesson.words ?? {})[item.word_id];
       if (listenPhase === 'recording') finishListenRepeatRecording();
       else if (listenPhase === 'speak' && word) startRecording(word.arabic);
+    } else if (currentStage?.type === 'speak_the_blank') {
+      const round = (currentStage.rounds ?? [])[speakBlankRoundIdx];
+      const blank = round?.lines?.[round.blankLineIdx]?.blank;
+      if (!blank) return;
+      if (listenPhase === 'recording') finishListenRepeatRecording();
+      else if (listenPhase === 'speak' || listenPhase === 'wrong') startRecording(blank.arabic);
     } else if (isActiveUserTurn) {
       if (dialogueMicState === 'recording') finishDialogueRecording();
       else if (dialogueMicState === 'idle') startDialogueRecording(currentDialogueLine);
@@ -878,8 +966,8 @@ export default function LessonScreen() {
     const isPlaying = audioProgress > 0;
     return (
       <View style={s.stageWrap}>
-        <Text style={{ fontSize: 22, fontWeight: '700', color: c.text, textAlign: 'center', marginBottom: 2, letterSpacing: -0.2 }}>What does this word mean?</Text>
-        <Text style={{ fontSize: 15, fontWeight: '500', color: c.label, textAlign: 'center', marginBottom: 16 }}>Tap the speaker to listen again</Text>
+        <Text style={{ fontSize: 22, fontWeight: '700', fontFamily: FONT_UI_BOLD, color: '#151515', textAlign: 'center', marginBottom: 2, letterSpacing: -0.2 }}>What does this word mean?</Text>
+        <Text style={{ fontSize: 15, fontWeight: '500', fontFamily: FONT_UI, color: '#9d998e', textAlign: 'center', marginBottom: 16 }}>Tap the speaker to listen again</Text>
         {/* Word card with speaker button + large Arabic */}
         <View style={[s.chooseWordCard, { backgroundColor: c.card, borderColor: c.border }]}>
           <TouchableOpacity onPress={() => playAudio(stg.arabic)} activeOpacity={0.82}>
@@ -887,9 +975,9 @@ export default function LessonScreen() {
               <Ionicons name="volume-high" size={26} color={isPlaying ? '#ffffff' : c.primary} />
             </View>
           </TouchableOpacity>
-          <Text style={[s.chooseArabicLarge, { color: c.text }]}>{stg.arabic}</Text>
+          <Text style={[s.chooseArabicLarge, { color: '#151515', fontFamily: FONT_AR }]}>{stg.arabic}</Text>
           {isLocked && (
-            <Text style={[s.pronText, { color: c.label, fontStyle: 'italic', marginTop: 0 }]}>[{stg.hebrew_pronunciation}]</Text>
+            <Text style={{ fontFamily: FONT_UI, fontStyle: 'italic', fontSize: 15, color: '#9d998e', fontWeight: '500', letterSpacing: 0.1 }}>{stg.translit ?? stg.hebrew_pronunciation}</Text>
           )}
         </View>
 
@@ -919,7 +1007,7 @@ export default function LessonScreen() {
                   setChoosePendingAnswer(opt.id);
                 }}
                 disabled={isLocked} activeOpacity={0.85}>
-                <Text style={[s.chooseOptionText, { color: txtColor }]} numberOfLines={3}>{opt.hebrew}</Text>
+                <Text style={[s.chooseOptionText, { color: txtColor, fontFamily: FONT_UI }]} numberOfLines={3}>{opt.english ?? opt.hebrew}</Text>
                 {isRevealCorrect && (
                   <View style={{ position: 'absolute', top: 8, right: 8, width: 20, height: 20, borderRadius: 10, backgroundColor: '#738ce6', alignItems: 'center', justifyContent: 'center' }}>
                     <Ionicons name="checkmark" size={13} color="#ffffff" />
@@ -984,9 +1072,8 @@ export default function LessonScreen() {
     const shuffledRight = shuffledMap[stage] ?? [...pairs];
     return (
       <View style={s.stageWrap}>
-        <Text style={{ fontSize: 22, fontWeight: '700', color: c.text, textAlign: 'center', marginBottom: 2, letterSpacing: -0.2 }}>Tap each Arabic word</Text>
-        <Text style={{ fontSize: 15, fontWeight: '500', color: c.label, textAlign: 'center', marginBottom: 16 }}>…and its English meaning</Text>
-        {/* Row-per-pair layout — equal height both sides */}
+        <Text style={{ fontSize: 22, fontWeight: '700', fontFamily: FONT_UI_BOLD, color: c.text, textAlign: 'center', marginBottom: 2, letterSpacing: -0.2 }}>Tap each Arabic word</Text>
+        <Text style={{ fontSize: 15, fontWeight: '500', fontFamily: FONT_UI, color: c.label, textAlign: 'center', marginBottom: 16 }}>…and its English meaning</Text>
         <View style={s.pairsContainer}>
           {pairs.map((p: any, i: number) => {
             const rightPair    = shuffledRight[i];
@@ -995,40 +1082,46 @@ export default function LessonScreen() {
             const isRightMatched = rightPair && matchedIds.includes(rightPair.id);
             const isRightWrong   = rightPair && matchWrong === rightPair.id;
 
-            const leftBg  = isLeftMatched ? c.primary+'12' : isLeftSelected ? c.primary : c.card;
-            const leftBd  = isLeftMatched ? c.primary+'40' : isLeftSelected ? c.primary : c.border;
-            const leftTxt = isLeftSelected ? '#ffffff' : isLeftMatched ? c.primary : c.text;
+            const leftBg  = isLeftMatched ? '#fe4d0114' : isLeftSelected ? '#fe4d01' : '#ffffff';
+            const leftBd  = isLeftMatched ? 'rgba(254,77,1,0.25)' : isLeftSelected ? '#fe4d01' : '#efeeeb';
+            const leftTxt = isLeftSelected ? '#ffffff' : isLeftMatched ? '#fe4d01' : '#151515';
+            const leftOp  = isLeftMatched ? 0.6 : 1;
 
-            const rightBg  = isRightMatched ? c.primary+'12' : isRightWrong ? c.wrong+'18' : c.card;
-            const rightBd  = isRightMatched ? c.primary+'40' : isRightWrong ? c.wrong : c.border;
-            const rightTxt = isRightMatched ? c.primary : isRightWrong ? c.wrong : c.text;
+            const rightBg  = isRightMatched ? '#fe4d0114' : '#ffffff';
+            const rightBd  = isRightMatched ? 'rgba(254,77,1,0.25)' : '#efeeeb';
+            const rightTxt = isRightMatched ? '#fe4d01' : '#151515';
+            const rightOp  = isRightMatched ? 0.6 : 1;
 
             return (
               <View key={p.id} style={s.pairRow}>
                 <TouchableOpacity
-                  style={[s.matchPairCard, { backgroundColor: leftBg, borderColor: leftBd, opacity: isLeftMatched ? 0.6 : 1 }]}
+                  style={[s.matchPairCard, { backgroundColor: leftBg, borderColor: isRightWrong ? '#efeeeb' : leftBd, opacity: leftOp,
+                    transform: [{ scale: isLeftSelected ? 1.02 : 1 }],
+                    shadowColor: isLeftSelected ? '#fe4d01' : '#151515',
+                    shadowOpacity: isLeftSelected ? 0.28 : 0.04 }]}
                   onPress={() => !isLeftMatched && setMatchSelected(p.id)}
                   disabled={isLeftMatched} activeOpacity={0.8}>
-                  <Text style={[s.matchAr, { color: leftTxt }]}>{p.arabic}</Text>
+                  <Text style={[s.matchAr, { color: leftTxt, fontFamily: FONT_AR }]}>{p.arabic}</Text>
+                  {p.translit ? <Text style={[s.matchTr, { color: isLeftSelected ? 'rgba(255,255,255,0.8)' : '#9d998e' }]}>{p.translit}</Text> : null}
                 </TouchableOpacity>
                 {rightPair && (
                   <TouchableOpacity
-                    style={[s.matchPairCard, { backgroundColor: rightBg, borderColor: rightBd, opacity: isRightMatched ? 0.6 : 1 }]}
+                    style={[s.matchPairCard, { backgroundColor: rightBg, borderColor: rightBd, opacity: rightOp,
+                      shadowColor: '#fe4d01', shadowOpacity: matchWrong === rightPair.id ? 0.2 : 0 }]}
                     onPress={() => {
                       if (isRightMatched || !matchSelected) return;
                       if (rightPair.id === matchSelected) { setMatchedIds(prev => [...prev, rightPair.id]); setMatchSelected(null); }
                       else { setMatchWrong(rightPair.id); setTimeout(() => setMatchWrong(null), 500); setMatchSelected(null); }
                     }}
                     disabled={isRightMatched} activeOpacity={0.8}>
-                    <Text style={[s.matchHe, { color: rightTxt }]}>{rightPair.hebrew}</Text>
+                    <Text style={[s.matchHe, { color: rightTxt, fontFamily: FONT_UI }]}>{rightPair.english ?? rightPair.hebrew}</Text>
                   </TouchableOpacity>
                 )}
               </View>
             );
           })}
         </View>
-        {/* Counter at bottom */}
-        <Text style={[s.matchCounter, { color: c.label, marginTop: 14, marginBottom: 0 }]}>
+        <Text style={[s.matchCounter, { color: '#9d998e', marginTop: 14, marginBottom: 0, fontFamily: FONT_UI }]}>
           {matchedIds.length} of {pairs.length} matched
         </Text>
       </View>
@@ -1073,44 +1166,57 @@ export default function LessonScreen() {
   };
 
   const renderSentenceBuild = () => {
-    const stg     = currentStage;
-    const words: string[] = stg.words ?? [];
-    const wordTranslit: string[] = stg.word_translit ?? [];
-    const shuffled: string[] = shuffledMap[stage] ?? words;
+    const stg = currentStage;
+    // Support both new schema (bank/correct) and old schema (words/sentence_arabic)
+    const isNewSchema = Array.isArray(stg.bank);
+    const shuffledBank: any[] = shuffledMap[stage] ?? [];
+    const correctIds: string[] = stg.correct ?? [];
+    const correctWords: string[] = isNewSchema ? correctIds.map((id: string) => stg.bank.find((b: any) => b.id === id)?.ar ?? '') : (stg.words ?? []);
+    const slotCount = isNewSchema ? correctIds.length : (stg.words ?? []).length;
+    const promptText = isNewSchema ? (stg.english ?? stg.sentence_hebrew) : (stg.sentence_hebrew ?? stg.sentence_english);
+
     const handleAvailableTap = (displayIdx: number) => {
       if (buildAvailable[displayIdx] || buildPhase === 'done') return;
-      playAudio(shuffled[displayIdx]);
-      setBuildSlots(sl => [...sl, shuffled[displayIdx]]);
+      const wordVal = isNewSchema ? shuffledBank[displayIdx]?.ar : shuffledBank[displayIdx];
+      if (!wordVal) return;
+      playAudio(wordVal);
+      setBuildSlots(sl => [...sl, wordVal]);
       setBuildAvailable(prev => { const n = [...prev]; n[displayIdx] = true; return n; });
     };
     const handleSlotTap = (slotIdx: number) => {
       if (buildPhase === 'done') return;
       const word = buildSlots[slotIdx];
       setBuildSlots(sl => sl.filter((_, i) => i !== slotIdx));
-      setBuildAvailable(prev => { const n = [...prev]; const fi = shuffled.findIndex((w, i) => w === word && n[i]); if (fi !== -1) n[fi] = false; return n; });
+      setBuildAvailable(prev => {
+        const n = [...prev];
+        const fi = shuffledBank.findIndex((w: any, i: number) => (isNewSchema ? w.ar : w) === word && n[i]);
+        if (fi !== -1) n[fi] = false;
+        return n;
+      });
     };
     return (
       <View style={s.stageWrap}>
-        {/* English prompt */}
-        <Text style={{ color: c.label, fontSize: 14, fontWeight: '600', textAlign: 'center', marginBottom: 6, letterSpacing: 0.3 }}>Translate this sentence</Text>
-        <Text style={{ color: c.text, fontSize: 20, fontWeight: '700', textAlign: 'center', marginBottom: 18, lineHeight: 30 }}>
-          "{stg.sentence_hebrew}"
+        <Text style={{ color: '#9d998e', fontSize: 14, fontWeight: '600', fontFamily: FONT_UI, textAlign: 'center', marginBottom: 6, letterSpacing: 0.3 }}>Translate this sentence</Text>
+        <Text style={{ color: '#151515', fontSize: 22, fontWeight: '700', fontFamily: FONT_UI_BOLD, textAlign: 'center', marginBottom: 18, lineHeight: 32, letterSpacing: -0.2 }}>
+          "{promptText}"
         </Text>
 
         {/* Answer area — RTL with dashed slots for empty positions */}
-        <View style={[s.sbAnswerArea, { backgroundColor: c.surface, borderColor: buildWrong ? c.wrong : c.border }]}>
-          {Array.from({ length: words.length }).map((_, i) => {
+        <View style={[s.sbAnswerArea, { backgroundColor: '#faf9f6', borderColor: buildWrong ? c.wrong : '#efeeeb' }]}>
+          {Array.from({ length: slotCount }).map((_, i) => {
             const placedWord = buildSlots[i];
+            const placedItem = isNewSchema ? stg.bank?.find((b: any) => b.ar === placedWord) : null;
             if (!placedWord) {
-              return <View key={'slot-'+i} style={[s.sbSlotDash, { borderColor: c.border+'88' }]} />;
+              return <View key={'slot-'+i} style={[s.sbSlotDash, { borderColor: '#d8d5cd' }]} />;
             }
-            const slotBg  = buildWrong ? c.wrong+'12'   : buildPhase === 'done' ? REVEAL_CORRECT_BG : c.primary+'12';
-            const slotBd  = buildWrong ? c.wrong         : buildPhase === 'done' ? '#738ce6'          : c.primary;
-            const slotTxt = buildWrong ? c.wrong         : buildPhase === 'done' ? REVEAL_CORRECT_TEXT : c.primary;
+            const slotBg  = buildWrong ? c.wrong+'12'   : buildPhase === 'done' ? REVEAL_CORRECT_BG : 'rgba(254,77,1,0.08)';
+            const slotBd  = buildWrong ? c.wrong         : buildPhase === 'done' ? '#738ce6'          : '#fe4d01';
+            const slotTxt = buildWrong ? c.wrong         : buildPhase === 'done' ? REVEAL_CORRECT_TEXT : '#fe4d01';
             return (
               <TouchableOpacity key={'placed-'+i} onPress={() => handleSlotTap(i)}
                 style={[s.sbWordBlock, { backgroundColor: slotBg, borderColor: slotBd }]} activeOpacity={0.8}>
-                <Text style={[s.sbWordAr, { color: slotTxt }]}>{placedWord}</Text>
+                <Text style={[s.sbWordAr, { color: slotTxt, fontFamily: FONT_AR }]}>{placedWord}</Text>
+                {placedItem?.tr ? <Text style={[s.sbWordTr, { color: buildPhase === 'done' ? REVEAL_CORRECT_TEXT : '#fe4d01', opacity: 0.7 }]}>{placedItem.tr}</Text> : null}
               </TouchableOpacity>
             );
           })}
@@ -1118,33 +1224,44 @@ export default function LessonScreen() {
 
         {/* Practice phase reference banner */}
         {buildPhase === 'practice' && (
-          <View style={[s.sbPracticeStrip, { backgroundColor: REVEAL_CORRECT_BG, borderColor: '#738ce644' }]}>
-            <Text style={{ fontSize: 11, fontWeight: '700', color: REVEAL_CORRECT_TEXT, letterSpacing: 1.2, textTransform: 'uppercase' as any, marginBottom: 8 }}>
-              Now you try — match this
-            </Text>
+          <View style={[s.sbPracticeStrip, { backgroundColor: REVEAL_CORRECT_BG, borderColor: 'rgba(115,140,230,0.28)' }]}>
+            <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginBottom: 6 }}>
+              <Text style={{ fontSize: 11, fontWeight: '700', fontFamily: FONT_UI_BOLD, color: REVEAL_CORRECT_TEXT, letterSpacing: 1.2, textTransform: 'uppercase' as any }}>
+                Now you try — match this
+              </Text>
+              <Text style={{ fontSize: 11, fontFamily: FONT_UI, color: '#9d998e' }}>{buildSlots.length}/{slotCount}</Text>
+            </View>
             <View style={{ flexDirection: 'row-reverse', flexWrap: 'wrap', gap: 8 }}>
-              {words.map((w, i) => (
-                <Text key={i} style={{ fontWeight: '700', fontSize: 18, color: REVEAL_CORRECT_TEXT, lineHeight: 28 }}>{w}</Text>
-              ))}
+              {correctWords.map((w, i) => {
+                const item = isNewSchema ? stg.bank?.find((b: any) => b.ar === w) : null;
+                return (
+                  <View key={i} style={{ alignItems: 'center' }}>
+                    <Text style={{ fontWeight: '700', fontFamily: FONT_AR, fontSize: 20, color: REVEAL_CORRECT_TEXT, lineHeight: 28 }}>{w}</Text>
+                    {item?.tr ? <Text style={{ fontFamily: FONT_UI, fontStyle: 'italic', fontSize: 10, color: 'rgba(61,87,184,0.7)' }}>{item.tr}</Text> : null}
+                  </View>
+                );
+              })}
             </View>
           </View>
         )}
 
         {/* Word bank */}
         <View style={{ marginTop: 'auto' as any, paddingTop: 16 }}>
-          <Text style={{ color: c.label, fontSize: 11, fontWeight: '700', letterSpacing: 1.2, textTransform: 'uppercase' as any, textAlign: 'center', marginBottom: 10 }}>
+          <Text style={{ color: '#9d998e', fontSize: 11, fontWeight: '700', fontFamily: FONT_UI_BOLD, letterSpacing: 1.2, textTransform: 'uppercase' as any, textAlign: 'center', marginBottom: 10 }}>
             Tap to add · Tap again to hear
           </Text>
           <View style={{ flexDirection: 'row-reverse', flexWrap: 'wrap', gap: 8, justifyContent: 'center' }}>
-            {shuffled.map((word, displayIdx) => {
+            {shuffledBank.map((item: any, displayIdx: number) => {
+              const word = isNewSchema ? item.ar : item;
+              const tr   = isNewSchema ? item.tr : null;
               const used = buildAvailable[displayIdx] === true;
-              const translit = wordTranslit[displayIdx];
               return (
                 <TouchableOpacity key={displayIdx} onPress={() => !used && handleAvailableTap(displayIdx)}
-                  style={[s.sbWordBlock, { backgroundColor: used ? c.surface : c.card, borderColor: c.border, opacity: used ? 0.3 : 1 }]}
+                  style={[s.sbWordBlock, { backgroundColor: used ? '#faf9f6' : '#ffffff', borderColor: '#efeeeb', opacity: used ? 0.3 : 1,
+                    shadowColor: '#151515', shadowOpacity: used ? 0 : 0.04, shadowOffset: { width: 0, height: 2 }, shadowRadius: 6, elevation: used ? 0 : 2 }]}
                   disabled={used} activeOpacity={0.8}>
-                  <Text style={[s.sbWordAr, { color: c.text }]}>{word}</Text>
-                  {translit ? <Text style={[s.sbWordTr, { color: c.label }]}>{translit}</Text> : null}
+                  <Text style={[s.sbWordAr, { color: '#151515', fontFamily: FONT_AR }]}>{word}</Text>
+                  {tr ? <Text style={[s.sbWordTr, { color: '#9d998e' }]}>{tr}</Text> : null}
                 </TouchableOpacity>
               );
             })}
@@ -1191,43 +1308,73 @@ export default function LessonScreen() {
   const renderDialogue = () => {
     const stg   = currentStage;
     const lines = stg.lines ?? [];
+
+    // Design-spec avatar: 36×36 circle
+    const DlgAvatar = ({ isUser }: { isUser: boolean }) => (
+      <View style={{
+        width: 36, height: 36, borderRadius: 18,
+        backgroundColor: isUser ? '#fe4d01' : '#738ce6',
+        alignItems: 'center', justifyContent: 'center', flexShrink: 0,
+        borderWidth: 2.5, borderColor: '#ffffff',
+        shadowColor: '#000', shadowOpacity: 0.10, shadowOffset: { width: 0, height: 2 }, shadowRadius: 4, elevation: 3,
+      }}>
+        <Text style={{ color: '#ffffff', fontWeight: '700', fontFamily: FONT_UI_BOLD, fontSize: 14 }}>{isUser ? 'S' : 'L'}</Text>
+      </View>
+    );
+
     return (
       <View style={s.stageWrap}>
-        <View style={s.dialogueThread}>
+        <View style={{ gap: 14 }}>
           {lines.map((line: any, idx: number) => {
             if (idx > dialogueStep) return null;
-            const isNPC  = !line.is_user_turn;
-            const isDone = line.is_user_turn && idx < dialogueStep;
-            if (isNPC) return (
-              <View key={idx} style={s.npcWrap}>
-                <View style={s.npcAvatarAnchor}><Image source={getAvatar(npcAvatar)} style={s.avatarImage} /></View>
-                <TouchableOpacity style={[s.npcBubble, { backgroundColor: c.card, borderColor: c.border }]} onPress={() => playAudio(line.arabic)} activeOpacity={0.88}>
-                  <Text style={[s.dialogueName, { color: c.label }]}>{line.name}</Text>
-                  <Text style={[s.dialogueArabic, { color: c.text }]}>{line.arabic}</Text>
-                  {line.hebrew_pronunciation && <Text style={[s.dialoguePron, { color: c.label }]}>[{line.hebrew_pronunciation}]</Text>}
-                  <Text style={[s.dialogueHebrew, { color: c.label, fontStyle: 'italic' }]}>{line.hebrew}</Text>
-                  <View style={s.replayRow}><Ionicons name="volume-low" size={12} color={c.label} /><Text style={[s.tapHint, { color: c.label }]}>לחץ לשמיעה</Text></View>
-                </TouchableOpacity>
-              </View>
-            );
+            const isUser = !!line.is_user_turn;
+            const isDone = isUser && idx < dialogueStep;
+            const isCurrent = idx === dialogueStep;
+
+            // NPC bubble (partner)
+            if (!isUser) {
+              const isPlayingThis = audioProgress > 0 && dialogueStep === idx;
+              return (
+                <View key={idx} style={{ flexDirection: 'row', alignItems: 'flex-end', gap: 8, alignSelf: 'flex-start', maxWidth: '86%' }}>
+                  <DlgAvatar isUser={false} />
+                  <TouchableOpacity
+                    style={[s.dlgBubbleThem, { transform: [{ scale: isPlayingThis ? 1.015 : 1 }], outlineWidth: isPlayingThis ? 2 : 0 } as any]}
+                    onPress={() => playAudio(line.arabic)} activeOpacity={0.88}>
+                    {/* Inline speaker pill + Arabic in a row */}
+                    <View style={{ flexDirection: 'row', alignItems: 'center', gap: 10 }}>
+                      <View style={{ width: 30, height: 30, borderRadius: 15, backgroundColor: 'rgba(254,77,1,0.10)', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                        <Ionicons name="volume-medium" size={14} color="#fe4d01" />
+                      </View>
+                      <Text style={{ fontFamily: FONT_AR, fontSize: 26, fontWeight: '600', color: '#151515', lineHeight: 44, textAlign: 'right', flex: 1 }}>{line.arabic}</Text>
+                    </View>
+                    {line.hebrew_pronunciation && <Text style={{ fontFamily: FONT_UI, fontStyle: 'italic', fontSize: 13, color: '#9d998e', marginTop: 4 }}>{line.hebrew_pronunciation}</Text>}
+                    <Text style={{ fontFamily: FONT_UI, fontSize: 13, color: '#9d998e', marginTop: 2 }}>{line.hebrew ?? line.english}</Text>
+                  </TouchableOpacity>
+                </View>
+              );
+            }
+
+            // User bubble — done (filled orange)
             if (isDone) return (
-              <View key={idx} style={s.userWrap}>
-                <View style={s.userAvatarAnchor}><Image source={getAvatar(userAvatar)} style={s.avatarImage} /></View>
-                <View style={[s.userBubble, { backgroundColor: c.right+'0C', borderColor: c.right+'30' }]}>
-                  <Text style={[s.dialogueArabic, { color: c.right, textAlign: 'right' }]}>{line.full_arabic}</Text>
+              <View key={idx} style={{ flexDirection: 'row-reverse', alignItems: 'flex-end', gap: 8, alignSelf: 'flex-end', maxWidth: '86%' }}>
+                <DlgAvatar isUser={true} />
+                <View style={[s.dlgBubbleYouDone]}>
+                  <Text style={{ fontFamily: FONT_AR, fontSize: 26, fontWeight: '600', color: '#ffffff', lineHeight: 44, textAlign: 'right' }}>{line.full_arabic}</Text>
+                  {line.hebrew_pronunciation && <Text style={{ fontFamily: FONT_UI, fontStyle: 'italic', fontSize: 13, color: 'rgba(255,255,255,0.85)', marginTop: 4, textAlign: 'right' }}>{line.hebrew_pronunciation}</Text>}
+                  <Text style={{ fontFamily: FONT_UI, fontSize: 13, color: 'rgba(255,255,255,0.85)', marginTop: 2, textAlign: 'right' }}>{line.hebrew ?? line.english}</Text>
                 </View>
               </View>
             );
-            const bubbleBg     = dialogueMicState === 'correct' ? c.right+'0C' : dialogueMicState === 'wrong' ? c.wrong+'0A' : c.card;
-            const bubbleBorder = dialogueMicState === 'correct' ? c.right+'35' : dialogueMicState === 'wrong' ? c.wrong+'35' : c.border;
+
+            // User bubble — current / active (ghost with dashed border)
             return (
-              <View key={idx} style={s.userWrap}>
-                <View style={s.userAvatarAnchor}><Image source={getAvatar(userAvatar)} style={s.avatarImage} /></View>
-                <View style={[s.userBubble, { backgroundColor: bubbleBg, borderColor: bubbleBorder }]}>
-                  {renderHebrewGap(line.hebrew, line.hebrew_gap)}
+              <View key={idx} style={{ flexDirection: 'row-reverse', alignItems: 'flex-end', gap: 8, alignSelf: 'flex-end', maxWidth: '86%' }}>
+                <DlgAvatar isUser={true} />
+                <View style={s.dlgBubbleYouGhost}>
+                  {renderHebrewGap(line.hebrew ?? line.english ?? '', line.hebrew_gap ?? '')}
                   <View style={{ marginTop: 10 }}>{renderArabicGap(line.full_arabic, line.target_voweled)}</View>
                   {dialogueMicState === 'wrong' && lastTranscript.length > 1 && (
-                    <Text style={{ color: c.wrong, fontSize: 12, marginTop: 6 }}>שמעתי: {lastTranscript}</Text>
+                    <Text style={{ color: c.wrong, fontSize: 12, marginTop: 6, fontFamily: FONT_UI }}>Heard: {lastTranscript}</Text>
                   )}
                   {dialogueMicState === 'scoring' && <View style={{ alignItems: 'center', marginTop: 12 }}><ActivityIndicator color={c.primary} size="small" /></View>}
                 </View>
@@ -1245,7 +1392,7 @@ export default function LessonScreen() {
         )}
         {showPassLink && (
           <TouchableOpacity onPress={() => passDialogueLine(currentDialogueLine)} style={{ alignSelf: 'center', marginTop: 12, paddingVertical: 6, paddingHorizontal: 20 }}>
-            <Text style={{ color: c.label, fontSize: 14, fontWeight: '500', textDecorationLine: 'underline' }}>דלג →</Text>
+            <Text style={{ color: c.label, fontSize: 14, fontWeight: '500', fontFamily: FONT_UI, textDecorationLine: 'underline' }}>Skip →</Text>
           </TouchableOpacity>
         )}
       </View>
@@ -1441,6 +1588,214 @@ export default function LessonScreen() {
     );
   };
 
+  // ── Speak the Blank renderer ──────────────────────────────────────────────
+  const renderSpeakTheBlank = () => {
+    const stg   = currentStage;
+    const round = (stg.rounds ?? [])[speakBlankRoundIdx];
+    if (!round) return null;
+
+    const isListening = listenPhase === 'recording';
+    const isSuccess   = listenPhase === 'correct';
+    const isRetry     = listenPhase === 'wrong';
+    const micBg = isRetry ? '#46443f' : '#fe4d01';
+    const statusLabel = isListening ? 'Listening…' : isSuccess ? 'Nicely said' : isRetry ? 'Try again' : 'Speak the missing word';
+
+    // Mic ring style
+    const mkRingStyle = (v: Animated.Value) => ({
+      position: 'absolute' as const,
+      width: 96, height: 96, borderRadius: 48,
+      backgroundColor: micBg,
+      transform: [{ scale: v.interpolate({ inputRange: [0,1], outputRange: [0.85, 1.4] }) }],
+      opacity: v.interpolate({ inputRange: [0, 0.2, 1], outputRange: [0, 0.35, 0] }),
+    });
+
+    // Avatar
+    const SBAvatar = ({ speaker }: { speaker: string }) => (
+      <View style={{
+        width: 32, height: 32, borderRadius: 16, flexShrink: 0,
+        backgroundColor: speaker === 'you' ? '#fe4d01' : '#738ce6',
+        alignItems: 'center', justifyContent: 'center',
+        borderWidth: 3, borderColor: '#faf9f6',
+      }}>
+        <Text style={{ color: '#ffffff', fontFamily: FONT_UI_BOLD, fontSize: 14, fontWeight: '700' }}>{speaker === 'you' ? 'S' : 'L'}</Text>
+      </View>
+    );
+
+    // Blank rect — rendered as RTL view split on ___
+    const BlankRect = ({ onLight, fontSize = 26 }: { onLight: boolean; fontSize?: number }) => {
+      let bg = onLight ? '#faf9f6' : 'rgba(255,255,255,0.18)';
+      let bd = onLight ? '#d8d5cd' : 'rgba(255,255,255,0.35)';
+      if (isListening) { bg = onLight ? '#ffece0' : 'rgba(255,255,255,0.28)'; bd = onLight ? '#fe4d01' : '#ffffff'; }
+      else if (isRetry) { bd = onLight ? '#46443f' : 'rgba(255,255,255,0.5)'; }
+      return <View style={{ minWidth: 96, height: fontSize + 10, borderRadius: 8, borderWidth: 1.5, borderColor: bd, backgroundColor: bg, marginHorizontal: 6 }} />;
+    };
+
+    const BlankRectMini = ({ onLight }: { onLight: boolean }) => {
+      let bg = onLight ? '#faf9f6' : 'rgba(255,255,255,0.18)';
+      let bd = onLight ? '#d8d5cd' : 'rgba(255,255,255,0.35)';
+      if (isListening) { bg = onLight ? '#ffece0' : 'rgba(255,255,255,0.28)'; bd = onLight ? '#fe4d01' : '#ffffff'; }
+      else if (isRetry) { bd = onLight ? '#46443f' : 'rgba(255,255,255,0.5)'; }
+      return <View style={{ minWidth: 54, height: 14, borderRadius: 4, borderWidth: 1, borderColor: bd, backgroundColor: bg, marginHorizontal: 4 }} />;
+    };
+
+    return (
+      <View style={{ flex: 1 }}>
+        {/* Context card */}
+        <View style={{ paddingHorizontal: 20, paddingBottom: 0, flexShrink: 0 }}>
+          <View style={{ backgroundColor: 'rgba(115,140,230,0.08)', borderWidth: 1, borderColor: 'rgba(115,140,230,0.22)', borderRadius: 16, padding: 10, flexDirection: 'row', gap: 10, alignItems: 'flex-start' }}>
+            <View style={{ width: 22, height: 22, borderRadius: 11, backgroundColor: '#738ce6', alignItems: 'center', justifyContent: 'center', flexShrink: 0, marginTop: 1 }}>
+              <Text style={{ color: '#ffffff', fontFamily: 'PlusJakartaSans_700Bold', fontSize: 11, fontWeight: '700' }}>i</Text>
+            </View>
+            <Text style={{ fontFamily: FONT_UI, fontSize: 13, fontWeight: '500', color: '#3d57b8', lineHeight: 19, flex: 1 }}>{round.context}</Text>
+          </View>
+        </View>
+
+        {/* Conversation bubbles */}
+        <View style={{ flex: 1, padding: 16, paddingHorizontal: 20, paddingBottom: 6, gap: 14 }}>
+          {round.lines.map((line: any, i: number) => {
+            const isYou  = line.speaker === 'you';
+            const isBlank = i === round.blankLineIdx;
+            const filledBubble = isYou && (isSuccess || speakBlankRevealed);
+            const onLight = !filledBubble;
+            const isPlayingThis = speakBlankPlayingLine === i;
+
+            let bubbleBg     = isYou ? (filledBubble ? '#fe4d01' : '#ffffff') : '#ffffff';
+            let bubbleBorder = isYou ? (filledBubble ? 'none' : '1.5px dashed rgba(254,77,1,0.45)') : '1px solid #efeeeb';
+            const arabicColor = isYou ? (filledBubble ? '#ffffff' : '#151515') : '#151515';
+            const translitColor = isYou ? (filledBubble ? 'rgba(255,255,255,0.85)' : '#9d998e') : '#9d998e';
+            const englishColor  = translitColor;
+            const borderStyle: any = isYou && !filledBubble
+              ? { borderWidth: 1.5, borderStyle: 'dashed', borderColor: 'rgba(254,77,1,0.45)' }
+              : isYou ? { borderWidth: 0 }
+              : { borderWidth: 1, borderStyle: 'solid', borderColor: '#efeeeb' };
+
+            const corners: any = isYou ? { borderRadius: 20, borderTopRightRadius: 6 } : { borderRadius: 20, borderTopLeftRadius: 6 };
+            const bubbleShadow = isPlayingThis ? { shadowColor: '#fe4d01', shadowOpacity: 0.18, shadowOffset: { width: 0, height: 6 }, shadowRadius: 20, elevation: 4 } : {};
+
+            // Arabic with blank split
+            const renderBubbleArabic = () => {
+              if (!isBlank) return <Text style={{ fontFamily: FONT_AR, fontSize: 26, fontWeight: '600', color: arabicColor, lineHeight: 44, textAlign: 'right' }}>{line.arabic}</Text>;
+              const parts = line.arabic.split('___');
+              return (
+                <View style={{ flexDirection: 'row-reverse', alignItems: 'center', flexWrap: 'wrap' }}>
+                  {parts.map((p: string, pi: number) => (
+                    <React.Fragment key={pi}>
+                      {p !== '' && <Text style={{ fontFamily: FONT_AR, fontSize: 26, fontWeight: '600', color: arabicColor, lineHeight: 44 }}>{p}</Text>}
+                      {pi < parts.length - 1 && (isSuccess || speakBlankRevealed
+                        ? <Text style={{ fontFamily: FONT_AR, fontSize: 26, fontWeight: '600', color: onLight ? '#fe4d01' : '#ffffff', borderBottomWidth: 2, borderColor: onLight ? 'rgba(254,77,1,0.55)' : 'rgba(255,255,255,0.7)' }}>{line.blank?.arabic}</Text>
+                        : <BlankRect onLight={onLight} />
+                      )}
+                    </React.Fragment>
+                  ))}
+                </View>
+              );
+            };
+
+            const renderBubbleTranslit = () => {
+              if (!isBlank) return <Text style={{ fontFamily: FONT_UI, fontStyle: 'italic', fontSize: 13, color: translitColor, fontWeight: '500', marginTop: 4, textAlign: isYou ? 'right' : 'left' }}>{line.translit}</Text>;
+              const parts = line.translit.split('___');
+              return (
+                <View style={{ flexDirection: isYou ? 'row-reverse' : 'row', flexWrap: 'wrap', alignItems: 'center', marginTop: 4 }}>
+                  {parts.map((p: string, pi: number) => (
+                    <React.Fragment key={pi}>
+                      {p !== '' && <Text style={{ fontFamily: FONT_UI, fontStyle: 'italic', fontSize: 13, color: translitColor, fontWeight: '500' }}>{p}</Text>}
+                      {pi < parts.length - 1 && (isSuccess || speakBlankRevealed
+                        ? <Text style={{ fontFamily: FONT_UI, fontStyle: 'italic', fontWeight: '700', color: onLight ? '#fe4d01' : '#ffffff' }}>{line.blank?.translit}</Text>
+                        : <BlankRectMini onLight={onLight} />
+                      )}
+                    </React.Fragment>
+                  ))}
+                </View>
+              );
+            };
+
+            const renderBubbleEnglish = () => {
+              if (!isBlank) return <Text style={{ fontFamily: FONT_UI, fontSize: 13, color: englishColor, fontWeight: '500', marginTop: 2, textAlign: isYou ? 'right' : 'left' }}>{line.english}</Text>;
+              const word = line.blank?.english ?? '';
+              const parts = line.english.split('___');
+              return (
+                <View style={{ flexDirection: isYou ? 'row-reverse' : 'row', flexWrap: 'wrap', alignItems: 'center', marginTop: 2 }}>
+                  {parts.map((p: string, pi: number) => (
+                    <React.Fragment key={pi}>
+                      {p !== '' && <Text style={{ fontFamily: FONT_UI, fontSize: 13, color: englishColor, fontWeight: '500' }}>{p}</Text>}
+                      {pi < parts.length - 1 && (
+                        <Text style={{ fontFamily: FONT_UI_BOLD, fontSize: 13, color: filledBubble ? '#ffffff' : '#fe4d01', fontWeight: '700', borderBottomWidth: 1.5, borderColor: filledBubble ? 'rgba(255,255,255,0.7)' : 'rgba(254,77,1,0.5)' }}>{word}</Text>
+                      )}
+                    </React.Fragment>
+                  ))}
+                </View>
+              );
+            };
+
+            return (
+              <View key={i} style={{ flexDirection: isYou ? 'row-reverse' : 'row', alignItems: 'flex-end', gap: 8, alignSelf: isYou ? 'flex-end' : 'flex-start', maxWidth: '86%' }}>
+                <SBAvatar speaker={line.speaker} />
+                <TouchableOpacity
+                  style={[corners, borderStyle, { backgroundColor: bubbleBg, padding: 14, paddingBottom: 12 }, bubbleShadow,
+                    { transform: [{ scale: isPlayingThis ? 1.015 : 1 }] }]}
+                  onPress={() => {
+                    setSpeakBlankPlayingLine(i);
+                    playAudio(line.arabic, () => setSpeakBlankPlayingLine(null));
+                  }}
+                  activeOpacity={0.88}>
+                  {renderBubbleArabic()}
+                  {renderBubbleTranslit()}
+                  {renderBubbleEnglish()}
+                </TouchableOpacity>
+              </View>
+            );
+          })}
+        </View>
+
+        {/* Custom action bar */}
+        <View style={{ borderTopWidth: 1, borderTopColor: '#efeeeb', backgroundColor: '#faf9f6', paddingTop: 18, paddingHorizontal: 24, paddingBottom: insets.bottom + 12, alignItems: 'center', gap: 14, flexShrink: 0 }}>
+          <Text style={{ fontSize: 13, fontWeight: '600', fontFamily: FONT_UI, color: '#9d998e', letterSpacing: 0.6, textTransform: 'uppercase' as any }}>{statusLabel}</Text>
+          <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 18, width: '100%' }}>
+            {/* Show/Hide answer toggle */}
+            <TouchableOpacity
+              onPress={() => setSpeakBlankRevealed(v => !v)}
+              style={{ flexDirection: 'row', alignItems: 'center', gap: 7, paddingVertical: 11, paddingHorizontal: 16, borderRadius: 999, borderWidth: 1,
+                backgroundColor: speakBlankRevealed ? 'rgba(115,140,230,0.12)' : '#ffffff',
+                borderColor: speakBlankRevealed ? 'rgba(115,140,230,0.35)' : '#efeeeb',
+                shadowColor: '#151515', shadowOpacity: speakBlankRevealed ? 0 : 0.05, shadowOffset: { width: 0, height: 2 }, shadowRadius: 6, elevation: speakBlankRevealed ? 0 : 2,
+              }}>
+              <Ionicons name={speakBlankRevealed ? 'eye-off-outline' : 'eye-outline'} size={16} color={speakBlankRevealed ? '#3d57b8' : '#46443f'} />
+              <Text style={{ fontFamily: FONT_UI, fontWeight: '600', fontSize: 13, color: speakBlankRevealed ? '#3d57b8' : '#46443f', letterSpacing: 0.1 }}>
+                {speakBlankRevealed ? 'Hide answer' : 'Show answer'}
+              </Text>
+            </TouchableOpacity>
+
+            {/* 96px Mic */}
+            <View style={{ position: 'relative', alignItems: 'center', justifyContent: 'center' }}>
+              {isListening && <>
+                <Animated.View style={mkRingStyle(micRing1)} />
+                <Animated.View style={mkRingStyle(micRing2)} />
+              </>}
+              <TouchableOpacity
+                style={[s.micCircleBtn, { backgroundColor: micBg, shadowColor: micBg }]}
+                onPress={() => {
+                  if (listenPhase === 'recording') finishListenRepeatRecording();
+                  else if (listenPhase === 'speak' || listenPhase === 'wrong') {
+                    const round2 = (currentStage.rounds ?? [])[speakBlankRoundIdx];
+                    const blank = round2?.lines?.[round2.blankLineIdx]?.blank;
+                    if (blank) startRecording(blank.arabic);
+                  }
+                }}
+                activeOpacity={0.87}>
+                {isSuccess ? <Ionicons name="checkmark" size={38} color="#fff" /> :
+                 isRetry   ? <Ionicons name="refresh" size={28} color="#fff" /> :
+                 <Ionicons name="mic" size={38} color="#fff" />}
+              </TouchableOpacity>
+            </View>
+
+            {/* Balance spacer */}
+            <View style={{ width: 116, flexShrink: 0 }} />
+          </View>
+        </View>
+      </View>
+    );
+  };
+
   // ── Action bar renderer ────────────────────────────────────────────────────
   const renderActionBar = () => {
     const bar = actionBarState;
@@ -1481,7 +1836,8 @@ export default function LessonScreen() {
           )}
           {bar.type === 'check' && (() => {
             const isSentenceBuild = currentStage?.type === 'sentence_build';
-            const remaining = isSentenceBuild ? (currentStage.words ?? []).length - buildSlots.length : 0;
+            const sbCount = isSentenceBuild ? (Array.isArray(currentStage.bank) ? (currentStage.correct ?? []).length : (currentStage.words ?? []).length) : 0;
+            const remaining = isSentenceBuild ? sbCount - buildSlots.length : 0;
             const label = isSentenceBuild && remaining > 0 ? `${remaining} more` : 'Check';
             return (
               <TouchableOpacity style={[s.actionBtn, { backgroundColor: bar.disabled ? '#efeeeb' : c.primary, shadowOpacity: bar.disabled ? 0 : 0.28 }]}
@@ -1490,18 +1846,45 @@ export default function LessonScreen() {
               </TouchableOpacity>
             );
           })()}
-          {bar.type === 'mic' && (
-            <TouchableOpacity style={[s.micActionBtn, { backgroundColor: micColor, shadowColor: micColor }]}
-              onPress={handleMicPress}
-              disabled={bar.phase === 'scoring' || bar.phase === 'correct' || bar.phase === 'wrong'}
-              activeOpacity={0.87}>
-              {bar.phase === 'scoring' ? <ActivityIndicator color="#fff" size="large" /> :
-               bar.phase === 'correct' ? <Ionicons name="checkmark" size={36} color="#fff" /> :
-               bar.phase === 'wrong'   ? <><Ionicons name="close" size={36} color="#fff" /><Text style={s.micActionLabel}>נסה שוב</Text></> :
-               bar.phase === 'recording' ? <WaveAnimation /> :
-               <><Ionicons name="mic" size={32} color="#fff" /><Text style={s.micActionLabel}>Tap to speak</Text></>}
-            </TouchableOpacity>
-          )}
+          {bar.type === 'mic' && (() => {
+            const micBg = bar.phase === 'wrong' ? '#46443f' : bar.phase === 'correct' ? '#738ce6' : '#fe4d01';
+            const statusLabel =
+              bar.phase === 'recording' ? 'Listening…' :
+              bar.phase === 'correct'   ? 'Nicely said' :
+              bar.phase === 'wrong'     ? 'Try again' :
+              bar.phase === 'scoring'   ? 'Scoring…' :
+              'Tap to speak';
+            const mkRingStyle = (v: Animated.Value) => ({
+              position: 'absolute' as const,
+              width: 96, height: 96, borderRadius: 48,
+              backgroundColor: micBg,
+              transform: [{ scale: v.interpolate({ inputRange: [0,1], outputRange: [0.85, 1.4] }) }],
+              opacity: v.interpolate({ inputRange: [0, 0.2, 1], outputRange: [0, 0.35, 0] }),
+            });
+            return (
+              <View style={{ alignItems: 'center', gap: 12, paddingVertical: 8 }}>
+                <Text style={{ fontSize: 13, fontWeight: '600', fontFamily: FONT_UI, color: '#9d998e', letterSpacing: 0.6, textTransform: 'uppercase' as any }}>
+                  {statusLabel}
+                </Text>
+                <View style={{ position: 'relative', alignItems: 'center', justifyContent: 'center' }}>
+                  {bar.phase === 'recording' && <>
+                    <Animated.View style={mkRingStyle(micRing1)} />
+                    <Animated.View style={mkRingStyle(micRing2)} />
+                  </>}
+                  <TouchableOpacity
+                    style={[s.micCircleBtn, { backgroundColor: micBg, shadowColor: micBg }]}
+                    onPress={handleMicPress}
+                    disabled={bar.phase === 'scoring'}
+                    activeOpacity={0.87}>
+                    {bar.phase === 'scoring' ? <ActivityIndicator color="#fff" size="large" /> :
+                     bar.phase === 'correct' ? <Ionicons name="checkmark" size={38} color="#fff" /> :
+                     bar.phase === 'wrong'   ? <Ionicons name="refresh" size={28} color="#fff" /> :
+                     <Ionicons name="mic" size={38} color="#fff" />}
+                  </TouchableOpacity>
+                </View>
+              </View>
+            );
+          })()}
         </View>
       </View>
     );
@@ -1540,23 +1923,27 @@ export default function LessonScreen() {
 
         {/* Content */}
         <Animated.View style={{ flex: 1, opacity: stageOpacity }}>
-          <ScrollView ref={scrollRef} contentContainerStyle={[s.content, { flexGrow: 1, paddingBottom: 24 }]} showsVerticalScrollIndicator={false}>
-            {currentStage?.type === 'word_card'               && renderWordCard()}
-            {currentStage?.type === 'micro_review'            && renderMicroReview()}
-            {currentStage?.type === 'listen_repeat'           && renderListenRepeat()}
-            {currentStage?.type === 'choose_translation'      && renderChooseTranslation()}
-            {currentStage?.type === 'write_translation'       && renderWriteTranslation()}
-            {currentStage?.type === 'match_pairs'             && renderMatchPairs()}
-            {currentStage?.type === 'listen_choose'           && renderListenChoose()}
-            {currentStage?.type === 'sentence_build'          && renderSentenceBuild()}
-            {currentStage?.type === 'sentence_complete'       && renderSentenceComplete()}
-            {currentStage?.type === 'dialogue'                && renderDialogue()}
-            {currentStage?.type === 'cultural_note'           && renderCulturalNote()}
-            {currentStage?.type === 'shadowing'               && renderShadowing()}
-            {currentStage?.type === 'listening_comprehension' && renderListeningComprehension()}
-            {currentStage?.type === 'idiom_card'              && renderIdiomCard()}
-            {currentStage?.type === 'mastery_check'           && renderMasteryCheck()}
-          </ScrollView>
+          {currentStage?.type === 'speak_the_blank' ? (
+            renderSpeakTheBlank()
+          ) : (
+            <ScrollView ref={scrollRef} contentContainerStyle={[s.content, { flexGrow: 1, paddingBottom: 24 }]} showsVerticalScrollIndicator={false}>
+              {currentStage?.type === 'word_card'               && renderWordCard()}
+              {currentStage?.type === 'micro_review'            && renderMicroReview()}
+              {currentStage?.type === 'listen_repeat'           && renderListenRepeat()}
+              {currentStage?.type === 'choose_translation'      && renderChooseTranslation()}
+              {currentStage?.type === 'write_translation'       && renderWriteTranslation()}
+              {currentStage?.type === 'match_pairs'             && renderMatchPairs()}
+              {currentStage?.type === 'listen_choose'           && renderListenChoose()}
+              {currentStage?.type === 'sentence_build'          && renderSentenceBuild()}
+              {currentStage?.type === 'sentence_complete'       && renderSentenceComplete()}
+              {currentStage?.type === 'dialogue'                && renderDialogue()}
+              {currentStage?.type === 'cultural_note'           && renderCulturalNote()}
+              {currentStage?.type === 'shadowing'               && renderShadowing()}
+              {currentStage?.type === 'listening_comprehension' && renderListeningComprehension()}
+              {currentStage?.type === 'idiom_card'              && renderIdiomCard()}
+              {currentStage?.type === 'mastery_check'           && renderMasteryCheck()}
+            </ScrollView>
+          )}
         </Animated.View>
 
         {/* Feedback banner */}
@@ -1780,6 +2167,16 @@ const s = StyleSheet.create({
   actionBtnText: { color: '#fff', fontSize: 16, fontWeight: '700', letterSpacing: 0.2 },
   micActionBtn:  { borderRadius: 999, paddingVertical: 18, alignItems: 'center', justifyContent: 'center', flexDirection: 'row', gap: 10, shadowOpacity: 0.3, shadowOffset: { width: 0, height: 6 }, shadowRadius: 16, elevation: 8 },
   micActionLabel:{ color: '#fff', fontSize: 16, fontWeight: '700' },
+  // 96px circle mic — design-spec, replaces wide pill for listen_repeat/dialogue/speak_the_blank
+  micCircleBtn:  { width: 96, height: 96, borderRadius: 48, alignItems: 'center', justifyContent: 'center', shadowOpacity: 0.32, shadowOffset: { width: 0, height: 8 }, shadowRadius: 22, elevation: 8 },
+
+  // Match pairs translit line
+  matchTr: { fontSize: 11, fontStyle: 'italic', fontWeight: '500', textAlign: 'center', marginTop: 2 },
+
+  // Dialogue bubbles (design-spec)
+  dlgBubbleThem: { backgroundColor: '#ffffff', borderWidth: 1, borderColor: '#efeeeb', borderRadius: 20, borderTopLeftRadius: 6, padding: 12, paddingLeft: 14, paddingRight: 16, shadowColor: '#151515', shadowOpacity: 0.05, shadowOffset: { width: 0, height: 2 }, shadowRadius: 10, elevation: 2 },
+  dlgBubbleYouDone: { backgroundColor: '#fe4d01', borderRadius: 20, borderTopRightRadius: 6, padding: 12, paddingLeft: 16, paddingRight: 14, shadowColor: '#fe4d01', shadowOpacity: 0.20, shadowOffset: { width: 0, height: 4 }, shadowRadius: 14, elevation: 4 },
+  dlgBubbleYouGhost: { backgroundColor: '#ffffff', borderWidth: 1.5, borderStyle: 'dashed', borderColor: 'rgba(254,77,1,0.45)', borderRadius: 20, borderTopRightRadius: 6, padding: 12, paddingLeft: 16, paddingRight: 14 },
 
   // Feedback banner
   feedbackBanner:     { position: 'absolute', left: 24, right: 24, bottom: 100, flexDirection: 'row', alignItems: 'center', gap: 10, borderRadius: 16, padding: 16, zIndex: 100, shadowColor: '#000', shadowOpacity: 0.2, shadowOffset: { width: 0, height: 4 }, shadowRadius: 12, elevation: 10 },
