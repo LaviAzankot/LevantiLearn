@@ -932,7 +932,7 @@ export default function LessonScreen() {
     return (
       <View style={[s.stageWrap, { alignItems: 'center' }]}>
         {/* Static lesson thumbnail — same image for all listen_repeat stages */}
-        <View style={[s.listenRepeatCard, { backgroundColor: c.card, borderColor: c.border, padding: 0, overflow: 'hidden' }]}>
+        <View style={[s.listenRepeatCard, { backgroundColor: c.card, borderColor: c.border }]}>
           {thumbUri
             ? <Image source={{ uri: thumbUri }} style={{ width: '100%', height: 180 }} resizeMode="cover" />
             : <View style={{ width: '100%', height: 180, backgroundColor: c.surface, alignItems: 'center', justifyContent: 'center' }}>
@@ -950,7 +950,7 @@ export default function LessonScreen() {
         </View>
 
         <Text style={[s.wordCardArabic, { color: c.text }]}>{stg.arabic}</Text>
-        <Text style={[s.pronText, { color: c.label, fontStyle: 'italic', writingDirection: 'ltr' }]}>[{stg.hebrew_pronunciation}]</Text>
+        <Text style={[s.pronText, { color: c.label, fontStyle: 'italic' }]}>{`‪[${stg.hebrew_pronunciation}]‬`}</Text>
         <Text style={[s.hebrewText, { color: c.text }]}>{firstHebrew(stg.hebrew)}</Text>
         {listenPhase === 'correct' && (
           <View style={{ alignItems: 'center', marginTop: 16, gap: 6 }}>
@@ -1016,7 +1016,7 @@ export default function LessonScreen() {
                   setChoosePendingAnswer(opt.id);
                 }}
                 disabled={isLocked} activeOpacity={0.85}>
-                <Text style={[s.chooseOptionText, { color: txtColor, fontFamily: FONT_UI, backgroundColor: 'transparent' }]} numberOfLines={3}>{firstHebrew(opt.hebrew)}</Text>
+                <Text style={[s.chooseOptionText, { color: txtColor, fontFamily: FONT_UI, backgroundColor: 'transparent' }]} numberOfLines={3}>{firstHebrew(opt.hebrew ?? '')}</Text>
                 {isRevealCorrect && (
                   <View style={{ position: 'absolute', top: 8, right: 8, width: 20, height: 20, borderRadius: 10, backgroundColor: '#738ce6', alignItems: 'center', justifyContent: 'center' }}>
                     <Ionicons name="checkmark" size={13} color="#ffffff" />
@@ -1122,7 +1122,7 @@ export default function LessonScreen() {
                       else { setMatchWrong(rightPair.id); setTimeout(() => setMatchWrong(null), 500); setMatchSelected(null); }
                     }}
                     disabled={isRightMatched} activeOpacity={0.8}>
-                    <Text style={[s.matchHe, { color: rightTxt, fontFamily: FONT_UI }]}>{firstHebrew(rightPair.hebrew ?? rightPair.english)}</Text>
+                    <Text style={[s.matchHe, { color: rightTxt, fontFamily: FONT_UI }]}>{firstHebrew(rightPair.hebrew ?? rightPair.english ?? '')}</Text>
                   </TouchableOpacity>
                 )}
               </View>
@@ -2147,7 +2147,7 @@ const s = StyleSheet.create({
   idiomDivider:     { height: 1 },
 
   // Listen repeat illustration card
-  listenRepeatCard:  { borderRadius: 28, borderWidth: 1, padding: 28, alignItems: 'center', justifyContent: 'center', position: 'relative', marginBottom: 20, shadowColor: '#a0846a', shadowOpacity: 0.07, shadowOffset: { width: 0, height: 4 }, shadowRadius: 14, elevation: 2 },
+  listenRepeatCard:  { borderRadius: 28, borderWidth: 1, overflow: 'hidden', position: 'relative', marginBottom: 20, shadowColor: '#a0846a', shadowOpacity: 0.07, shadowOffset: { width: 0, height: 4 }, shadowRadius: 14, elevation: 2 },
   speakerBtnOverlay: { position: 'absolute', top: 14, right: 14 },
   speakerBtnCircle:  { width: 44, height: 44, borderRadius: 22, alignItems: 'center', justifyContent: 'center', shadowColor: '#000', shadowOpacity: 0.10, shadowOffset: { width: 0, height: 3 }, shadowRadius: 8, elevation: 3 },
 
