@@ -94,6 +94,7 @@ const PHASE_LABELS: Record<string, { emoji: string; label: string }> = {
   idiom_card:             { emoji: '💬', label: 'Key Expression' },
   mastery_check:          { emoji: '🎯', label: 'Mastery Check' },
   speak_the_blank:        { emoji: '🎤', label: 'Speak to Fill the Blank' },
+  subject:                { emoji: '📖', label: 'Arabic, the Basics' },
 };
 
 // ── WordIcon ──────────────────────────────────────────────────────────────────
@@ -172,6 +173,38 @@ function WaveAnimation() {
 }
 
 // ═════════════════════════════════════════════════════════════════════════════
+// ── Subject lesson static data ────────────────────────────────────────────────
+const SUBJECT_LETTERS = [
+  { id: 'ق', label: 'Qaf',  msa: 'qa',  lev: 'ʔa',     note: "Classical 'q'",        note2: 'In Levantine, often a glottal stop.' },
+  { id: 'ج', label: 'Jīm',  msa: 'ja',  lev: 'ja / ʒa', note: "Hard 'j' in MSA",      note2: "Soft 'zh' in some Levantine cities." },
+  { id: 'ث', label: 'Thāʾ', msa: 'tha', lev: 'ta / sa', note: "English 'th' in MSA",  note2: "Often becomes 't' or 's' in Levantine." },
+];
+const SUBJECT_GREETINGS = [
+  { id:'g1', arabic:'مَرْحَبا',              translit:'marḥabā',          meaning:'Hello',               use:'Neutral, anytime, for anyone.',                                    gendered:false },
+  { id:'g2', arabic:'أَهْلًا',               translit:'ahlan',            meaning:'Hi / Welcome',         use:"Casual, friendly. Often pairs as 'ahlan wa sahlan'.",              gendered:false },
+  { id:'g3', arabic:'صَبَاحُ الخَيْر',       translit:'ṣabāḥ al-khayr',  meaning:'Good morning',         use:"Until ~noon. Reply: 'ṣabāḥ an-nūr' (morning of light).",          gendered:false },
+  { id:'g4', arabic:'مَسَا الخَيْر',          translit:'masā al-khayr',   meaning:'Good evening',         use:"Afternoon onward. Reply: 'masā an-nūr'.",                          gendered:false },
+  { id:'g5', meaning:'How are you?',          gendered:true,
+    masculine:{ arabic:'كَيْفَ حَالَك؟',  translit:'kīf ḥālak',  note:'to a man'   },
+    feminine: { arabic:'كَيْفَ حَالِك؟',  translit:'kīf ḥālik',  note:'to a woman' },
+    use:'The ending shifts: ‑ak for him, ‑ik for her.' },
+  { id:'g6', meaning:'Nice to meet you',      gendered:true,
+    masculine:{ arabic:'تَشَرَّفْتُ بِك',  translit:'tsharrafit fīk',  note:'to a man'   },
+    feminine: { arabic:'تَشَرَّفْتُ بِكِ', translit:'tsharrafit fīki', note:'to a woman' },
+    use:"Literally 'I was honoured by you'." },
+  { id:'g7', arabic:'السَّلامُ عَلَيْكُم',   translit:'as-salāmu ʿalaykum', meaning:'Peace be upon you', use:"Plural form — works for any audience. Reply: 'wa ʿalaykum as-salām'.", gendered:false },
+];
+const SUBJECT_PRONOUNS = [
+  { id:'p1', arabic:'أَنَا',    translit:'ana',    english:'I',         person:'1st', number:'singular', gender:'any', note:'Same for men and women.' },
+  { id:'p2', arabic:'أَنْتَ',   translit:'anta',   english:'You',       person:'2nd', number:'singular', gender:'m',   note:'Speaking to a man.' },
+  { id:'p3', arabic:'أَنْتِ',   translit:'anti',   english:'You',       person:'2nd', number:'singular', gender:'f',   note:'Speaking to a woman.' },
+  { id:'p4', arabic:'هُوَ',     translit:'huwa',   english:'He / it',   person:'3rd', number:'singular', gender:'m',   note:'Also used for masculine objects.' },
+  { id:'p5', arabic:'هِيَ',     translit:'hiya',   english:'She / it',  person:'3rd', number:'singular', gender:'f',   note:'Also used for feminine objects.' },
+  { id:'p6', arabic:'نَحْنُ',    translit:'naḥnu',  english:'We',        person:'1st', number:'plural',   gender:'any', note:'Mixed groups too.' },
+  { id:'p7', arabic:'أَنْتُم',   translit:'antum',  english:'You all',   person:'2nd', number:'plural',   gender:'any', note:'Use for any group.' },
+  { id:'p8', arabic:'هُم',       translit:'hum',    english:'They',      person:'3rd', number:'plural',   gender:'any', note:'Use for any group.' },
+];
+
 export default function LessonScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const router  = useRouter();
@@ -213,6 +246,12 @@ export default function LessonScreen() {
   const [speakBlankRoundIdx,    setSpeakBlankRoundIdx]    = useState(0);
   const [speakBlankRevealed,    setSpeakBlankRevealed]    = useState(false);
   const [speakBlankPlayingLine, setSpeakBlankPlayingLine] = useState<number|null>(null);
+
+  // ── Subject stage state ────────────────────────────────────────────────────
+  const [subjectLetter,    setSubjectLetter]    = useState(0);
+  const [subjectAudience,  setSubjectAudience]  = useState<'him'|'her'>('him');
+  const [subjectFilter,    setSubjectFilter]    = useState<'all'|'sing'|'plur'>('all');
+  const [subjectPlayingId, setSubjectPlayingId] = useState<string|null>(null);
 
   // ── Mastery check state ────────────────────────────────────────────────────
   const [masteryItemIndex, setMasteryItemIndex] = useState(0);
@@ -542,22 +581,17 @@ export default function LessonScreen() {
     return () => clearTimeout(t);
   }, [dialogueStep, stage, expandedLesson]);
 
-  // ── Speak the Blank: auto-play partner line on round entry ─────────────────
+  // ── Speak the Blank: auto-play prompt on round entry ─────────────────────
   useEffect(() => {
     if (!expandedLesson) return;
     const stg = (expandedLesson.stages ?? [])[stage];
     if (stg?.type !== 'speak_the_blank') return;
     const round = (stg.rounds ?? [])[speakBlankRoundIdx];
-    if (!round) return;
+    if (!round?.prompt) return;
     const t = setTimeout(() => {
-      const promptIdx = (round.lines ?? []).findIndex((l: any, i: number) =>
-        i < round.blankLineIdx && l.speaker === 'them'
-      );
-      if (promptIdx >= 0) {
-        setSpeakBlankPlayingLine(promptIdx);
-        playAudio(round.lines[promptIdx].arabic, () => setSpeakBlankPlayingLine(null));
-      }
-    }, 500);
+      setSpeakBlankPlayingLine(0); // 0 = prompt playing
+      playAudio(round.prompt.arabic, () => setSpeakBlankPlayingLine(null));
+    }, 450);
     return () => clearTimeout(t);
   }, [stage, speakBlankRoundIdx, expandedLesson, playAudio]);
 
@@ -572,6 +606,7 @@ export default function LessonScreen() {
     setMasteryItemIndex(0); setMasteryScore(0); setMasteryDone(false);
     setFeedbackVisible(false); feedbackAnim.setValue(80);
     setSpeakBlankRoundIdx(0); setSpeakBlankRevealed(false); setSpeakBlankPlayingLine(null);
+    setSubjectLetter(0); setSubjectAudience('him'); setSubjectFilter('all'); setSubjectPlayingId(null);
   };
 
   const goNextStage = useCallback(() => {
@@ -655,7 +690,7 @@ export default function LessonScreen() {
   const actionBarState: ActionBarState = (() => {
     if (!currentStage) return { type: 'hidden' };
     const t = currentStage.type;
-    if (t === 'word_card' || t === 'cultural_note' || t === 'idiom_card') return { type: 'continue' };
+    if (t === 'word_card' || t === 'cultural_note' || t === 'idiom_card' || t === 'subject') return { type: 'continue' };
     if (t === 'listen_repeat') return { type: 'mic', phase: listenPhase === 'speak' ? 'idle' : listenPhase };
     if (t === 'shadowing') {
       if (shadowPhase === 'idle' || shadowPhase === 'playing') return { type: 'hidden' };
@@ -761,7 +796,7 @@ export default function LessonScreen() {
       else if (listenPhase === 'speak' && word) startRecording(word.arabic);
     } else if (currentStage?.type === 'speak_the_blank') {
       const round = (currentStage.rounds ?? [])[speakBlankRoundIdx];
-      const blank = round?.lines?.[round.blankLineIdx]?.blank;
+      const blank = round?.answer?.blank;
       if (!blank) return;
       if (listenPhase === 'recording') finishListenRepeatRecording();
       else if (listenPhase === 'speak' || listenPhase === 'wrong') startRecording(blank.arabic);
@@ -1596,19 +1631,351 @@ export default function LessonScreen() {
     );
   };
 
+  // ── Subject (read-only intro lesson) renderer ────────────────────────────
+  const renderSubject = () => {
+    const SC = {
+      ink: '#151515', inkSoft: '#46443f', muted: '#9d998e', muted2: '#b9b5ab',
+      hair: '#ece9e2', surface: '#faf9f6', card: '#ffffff',
+      accent: '#fe4d01', accentWash: '#fff7f1',
+      cool: '#738ce6', coolDeep: '#3d57b8', coolWash: 'rgba(115,140,230,0.08)',
+    };
+
+    const curLetter = SUBJECT_LETTERS[subjectLetter];
+    const filteredPronouns = SUBJECT_PRONOUNS.filter(p =>
+      subjectFilter === 'all' ? true : subjectFilter === 'sing' ? p.number === 'singular' : p.number === 'plural'
+    );
+
+    const playSubject = (id: string, arabicText: string) => {
+      setSubjectPlayingId(id);
+      playAudio(arabicText, () => setSubjectPlayingId(null));
+    };
+
+    // ── sub-components ─────────────────────────────────────────────────────
+
+    const SubCard = ({ children, style = {} }: any) => (
+      <View style={[{ backgroundColor: SC.card, borderWidth: 1, borderColor: SC.hair, borderRadius: 20,
+        padding: 20, shadowColor: '#151515', shadowOpacity: 0.04, shadowOffset: { width: 0, height: 6 },
+        shadowRadius: 18, elevation: 2 }, style]}>
+        {children}
+      </View>
+    );
+
+    const SubEyebrow = ({ text, color = SC.accent }: any) => (
+      <Text style={{ fontFamily: FONT_UI_BOLD, fontSize: 12, fontWeight: '700', letterSpacing: 1.6,
+        textTransform: 'uppercase' as any, color }}>{text}</Text>
+    );
+
+    const SubSectionTitle = ({ kicker, kickerColor, title, sub }: any) => (
+      <View style={{ gap: 6, marginBottom: 18 }}>
+        <SubEyebrow text={kicker} color={kickerColor} />
+        <Text style={{ fontFamily: FONT_UI_EXTRABOLD, fontSize: 26, fontWeight: '800', color: SC.ink,
+          letterSpacing: -0.4, lineHeight: 30 }}>{title}</Text>
+        {sub && <Text style={{ fontFamily: FONT_UI, fontSize: 14, fontWeight: '500', color: SC.muted,
+          lineHeight: 21 }}>{sub}</Text>}
+      </View>
+    );
+
+    const InfoRow = ({ tone, title: t2, body }: any) => {
+      const isWarm = tone === 'warm';
+      return (
+        <View style={{ flexDirection: 'row', gap: 12, alignItems: 'flex-start', paddingVertical: 10 }}>
+          <View style={{ width: 28, height: 28, borderRadius: 14, flexShrink: 0,
+            backgroundColor: isWarm ? SC.accentWash : SC.coolWash,
+            alignItems: 'center', justifyContent: 'center' }}>
+            <Text style={{ fontFamily: FONT_UI_EXTRABOLD, fontSize: 13, fontWeight: '800',
+              color: isWarm ? SC.accent : SC.coolDeep }}>·</Text>
+          </View>
+          <View style={{ flex: 1, gap: 3 }}>
+            <Text style={{ fontFamily: FONT_UI_BOLD, fontSize: 14, fontWeight: '700', color: SC.ink }}>{t2}</Text>
+            <Text style={{ fontFamily: FONT_UI, fontSize: 13, fontWeight: '500', color: SC.muted, lineHeight: 19 }}>{body}</Text>
+          </View>
+        </View>
+      );
+    };
+
+    const PronCell = ({ label, value, note, accent: acc }: any) => (
+      <View style={{ flex: 1, backgroundColor: acc ? SC.accentWash : '#ffffff',
+        borderWidth: 1, borderColor: acc ? 'rgba(254,77,1,0.18)' : SC.hair,
+        borderRadius: 12, padding: 12, gap: 4 }}>
+        <Text style={{ fontFamily: FONT_UI_BOLD, fontSize: 11, fontWeight: '700', letterSpacing: 1.2,
+          textTransform: 'uppercase' as any, color: acc ? SC.accent : SC.muted }}>{label}</Text>
+        <Text style={{ fontFamily: FONT_UI_EXTRABOLD, fontSize: 22, fontWeight: '700', color: SC.ink,
+          letterSpacing: -0.3 }}>{value}</Text>
+        <Text style={{ fontFamily: FONT_UI, fontSize: 12, fontWeight: '500', color: SC.muted,
+          lineHeight: 17 }}>{note}</Text>
+      </View>
+    );
+
+    const PlayPill = ({ id, arabicText, label }: any) => {
+      const playing = subjectPlayingId === id;
+      return (
+        <TouchableOpacity onPress={() => playSubject(id, arabicText)} activeOpacity={0.8}
+          style={{ width: 34, height: 34, borderRadius: 999, alignItems: 'center', justifyContent: 'center',
+            flexShrink: 0, backgroundColor: playing ? SC.accent : '#ffffff',
+            shadowColor: playing ? SC.accent : '#151515',
+            shadowOpacity: playing ? 0.35 : 0.06, shadowOffset: { width: 0, height: 1 }, shadowRadius: 2,
+            borderWidth: 1, borderColor: SC.hair }}>
+          <Ionicons name={playing ? 'volume-high' : 'volume-medium-outline'} size={16}
+            color={playing ? '#ffffff' : SC.inkSoft} />
+        </TouchableOpacity>
+      );
+    };
+
+    // ── Section 1: Background ───────────────────────────────────────────────
+    const BackgroundSection = () => (
+      <SubCard style={{ gap: 16 }}>
+        <SubSectionTitle kicker="01 · Background" kickerColor={SC.accent}
+          title="A few things to know first"
+          sub="You're learning Levantine Arabic — the everyday spoken Arabic of Syria, Lebanon, Jordan and Palestine. It's close to Modern Standard Arabic, but with a softer, looser pronunciation." />
+        <InfoRow tone="warm" title="It's regional"
+          body="Levantine is spoken, not formal. Newspapers and the Qur'an use Modern Standard Arabic — but on the street, on TV, between friends, it's Levantine." />
+        <InfoRow tone="cool" title="It has gender"
+          body="Every noun and many verbs change depending on whether you're addressing a man or a woman. 'You' isn't one word — it's two." />
+        <InfoRow tone="warm" title="Pronunciation flexes"
+          body="Some letters are pronounced one way in the formal language and a softer way in everyday Levantine speech. Tap a letter below to hear how." />
+
+        {/* Pronunciation toggle */}
+        <View style={{ backgroundColor: SC.surface, borderWidth: 1, borderColor: SC.hair,
+          borderRadius: 16, padding: 16, marginTop: 6 }}>
+          <View style={{ flexDirection: 'row', gap: 8, marginBottom: 14, flexWrap: 'wrap' }}>
+            {SUBJECT_LETTERS.map((v, i) => {
+              const active = i === subjectLetter;
+              return (
+                <TouchableOpacity key={v.id} onPress={() => setSubjectLetter(i)} activeOpacity={0.8}
+                  style={{ paddingVertical: 8, paddingHorizontal: 14, borderRadius: 999, flexDirection: 'row',
+                    alignItems: 'center', gap: 8,
+                    backgroundColor: active ? SC.ink : '#ffffff',
+                    borderWidth: 1, borderColor: active ? SC.ink : SC.hair }}>
+                  <Text style={{ fontFamily: FONT_AR, fontSize: 18, fontWeight: '700',
+                    color: active ? '#ffffff' : SC.inkSoft }}>{v.id}</Text>
+                  <Text style={{ fontFamily: FONT_UI_BOLD, fontSize: 13, fontWeight: '600', letterSpacing: 0.1,
+                    color: active ? '#ffffff' : SC.inkSoft }}>{v.label}</Text>
+                </TouchableOpacity>
+              );
+            })}
+          </View>
+          <View style={{ flexDirection: 'row', gap: 10 }}>
+            <PronCell label="Formal · MSA" value={curLetter.msa} note={curLetter.note} accent={false} />
+            <PronCell label="Levantine" value={curLetter.lev} note={curLetter.note2} accent={true} />
+          </View>
+        </View>
+      </SubCard>
+    );
+
+    // ── Section 2: Greetings ────────────────────────────────────────────────
+    const GreetingsSection = () => (
+      <SubCard style={{ gap: 16 }}>
+        <SubSectionTitle kicker="02 · Greetings" kickerColor={SC.accent}
+          title="Saying hello"
+          sub="Most greetings are unisex. Some change depending on whether you're greeting a man or a woman — toggle below to see the difference." />
+
+        {/* Audience toggle */}
+        <View style={{ flexDirection: 'row', alignSelf: 'flex-start', backgroundColor: SC.surface,
+          borderWidth: 1, borderColor: SC.hair, borderRadius: 999, padding: 4, gap: 4 }}>
+          {[{ id:'him', label:'to him', ar:'أَنتَ' }, { id:'her', label:'to her', ar:'أَنتِ' }].map(o => {
+            const active = o.id === subjectAudience;
+            return (
+              <TouchableOpacity key={o.id} onPress={() => setSubjectAudience(o.id as any)} activeOpacity={0.8}
+                style={{ paddingVertical: 8, paddingHorizontal: 14, borderRadius: 999, flexDirection: 'row',
+                  alignItems: 'center', gap: 8, backgroundColor: active ? SC.accent : 'transparent' }}>
+                <Text style={{ fontFamily: FONT_AR, fontSize: 15, fontWeight: '700',
+                  color: active ? '#ffffff' : SC.inkSoft }}>{o.ar}</Text>
+                <Text style={{ fontFamily: FONT_UI_BOLD, fontSize: 13, fontWeight: '700', letterSpacing: 0.2,
+                  color: active ? '#ffffff' : SC.inkSoft }}>{o.label}</Text>
+              </TouchableOpacity>
+            );
+          })}
+        </View>
+
+        {/* Greeting rows */}
+        <View>
+          {SUBJECT_GREETINGS.map((g, i) => {
+            const variant = g.gendered ? (subjectAudience === 'him' ? g.masculine : g.feminine) : null;
+            const arabic  = g.gendered ? variant!.arabic  : g.arabic!;
+            const translit = g.gendered ? variant!.translit : g.translit!;
+            const isLast = i === SUBJECT_GREETINGS.length - 1;
+            return (
+              <View key={g.id} style={{ flexDirection: 'row', gap: 14, alignItems: 'center',
+                paddingVertical: 14, paddingHorizontal: 4,
+                borderBottomWidth: isLast ? 0 : 1, borderBottomColor: SC.hair }}>
+                <PlayPill id={g.id} arabicText={arabic} label={g.meaning} />
+                <View style={{ flex: 1, gap: 4 }}>
+                  <View style={{ flexDirection: 'row', alignItems: 'baseline', gap: 10, flexWrap: 'wrap' }}>
+                    <Text style={{ fontFamily: FONT_AR, fontSize: 22, fontWeight: '600', color: SC.ink,
+                      lineHeight: 28 }}>{arabic}</Text>
+                    <Text style={{ fontFamily: FONT_UI, fontStyle: 'italic', fontSize: 13,
+                      color: SC.muted, fontWeight: '500' }}>{translit}</Text>
+                  </View>
+                  <Text style={{ fontFamily: FONT_UI, fontSize: 13, fontWeight: '500', color: SC.muted, lineHeight: 19 }}>
+                    <Text style={{ fontFamily: FONT_UI_BOLD, color: SC.inkSoft }}>{g.meaning}</Text>
+                    {' · ' + g.use}
+                  </Text>
+                </View>
+                {g.gendered && (
+                  <View style={{ paddingVertical: 4, paddingHorizontal: 8, borderRadius: 999,
+                    backgroundColor: subjectAudience === 'him' ? SC.coolWash : SC.accentWash }}>
+                    <Text style={{ fontFamily: FONT_UI_BOLD, fontSize: 11, fontWeight: '700', letterSpacing: 0.4,
+                      textTransform: 'uppercase' as any,
+                      color: subjectAudience === 'him' ? SC.coolDeep : SC.accent }}>
+                      {subjectAudience === 'him' ? 'to him' : 'to her'}
+                    </Text>
+                  </View>
+                )}
+              </View>
+            );
+          })}
+        </View>
+      </SubCard>
+    );
+
+    // ── Section 3: Pronouns ─────────────────────────────────────────────────
+    const PronounsSection = () => (
+      <SubCard style={{ gap: 16 }}>
+        <SubSectionTitle kicker="03 · Pronouns" kickerColor={SC.coolDeep}
+          title="Subject pronouns"
+          sub="Eight words cover 'I, you, he, she, we, you all, they'. Notice how 'you' splits into masculine and feminine — that pattern repeats everywhere in Arabic." />
+
+        {/* Filter */}
+        <View style={{ flexDirection: 'row', alignSelf: 'flex-start', backgroundColor: SC.surface,
+          borderWidth: 1, borderColor: SC.hair, borderRadius: 999, padding: 4, gap: 4 }}>
+          {([['all','All'],['sing','Singular'],['plur','Plural']] as const).map(([id, label]) => {
+            const active = id === subjectFilter;
+            return (
+              <TouchableOpacity key={id} onPress={() => setSubjectFilter(id)} activeOpacity={0.8}
+                style={{ paddingVertical: 7, paddingHorizontal: 14, borderRadius: 999,
+                  backgroundColor: active ? SC.coolDeep : 'transparent' }}>
+                <Text style={{ fontFamily: FONT_UI_BOLD, fontSize: 12, fontWeight: '700', letterSpacing: 0.2,
+                  color: active ? '#ffffff' : SC.inkSoft }}>{label}</Text>
+              </TouchableOpacity>
+            );
+          })}
+        </View>
+
+        {/* 2-col pronoun grid */}
+        <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 10 }}>
+          {filteredPronouns.map(p => {
+            const playing = subjectPlayingId === p.id;
+            const gTag =
+              p.gender === 'm' ? { label: 'masculine', color: SC.coolDeep, bg: SC.coolWash } :
+              p.gender === 'f' ? { label: 'feminine',  color: SC.accent,   bg: SC.accentWash } :
+                                 { label: 'any',       color: SC.muted,    bg: SC.surface };
+            return (
+              <TouchableOpacity key={p.id} onPress={() => playSubject(p.id, p.arabic)} activeOpacity={0.85}
+                style={{ width: '47%', backgroundColor: playing ? SC.accentWash : '#ffffff',
+                  borderWidth: 1, borderColor: playing ? 'rgba(254,77,1,0.4)' : SC.hair,
+                  borderRadius: 16, padding: 14, gap: 6,
+                  shadowColor: playing ? SC.accent : '#151515',
+                  shadowOpacity: playing ? 0.15 : 0.04, shadowOffset: { width: 0, height: 1 }, shadowRadius: 2 }}>
+                <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+                  <Text style={{ fontFamily: FONT_UI_BOLD, fontSize: 11, fontWeight: '700', letterSpacing: 1.2,
+                    textTransform: 'uppercase' as any, color: SC.muted }}>{p.english}</Text>
+                  <Ionicons name={playing ? 'volume-high' : 'volume-medium-outline'} size={14}
+                    color={playing ? SC.accent : SC.muted} />
+                </View>
+                <Text style={{ fontFamily: FONT_AR, fontSize: 28, fontWeight: '600', color: SC.ink,
+                  lineHeight: 34, textAlign: 'right' }}>{p.arabic}</Text>
+                <Text style={{ fontFamily: FONT_UI, fontStyle: 'italic', fontSize: 13, fontWeight: '500',
+                  color: SC.inkSoft, textAlign: 'right' }}>{p.translit}</Text>
+                <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginTop: 4, gap: 8 }}>
+                  <View style={{ paddingVertical: 3, paddingHorizontal: 8, borderRadius: 999, backgroundColor: gTag.bg }}>
+                    <Text style={{ fontFamily: FONT_UI_BOLD, fontSize: 10, fontWeight: '700', letterSpacing: 0.4,
+                      textTransform: 'uppercase' as any, color: gTag.color }}>{gTag.label}</Text>
+                  </View>
+                  <Text style={{ fontFamily: FONT_UI, fontSize: 11, fontWeight: '600',
+                    color: SC.muted2, textTransform: 'lowercase' as any }}>{p.number}</Text>
+                </View>
+              </TouchableOpacity>
+            );
+          })}
+        </View>
+      </SubCard>
+    );
+
+    return (
+      <View style={{ flex: 1 }}>
+        {/* Hero — scrolls with content */}
+        <View style={{ backgroundColor: '#ffffff', borderBottomWidth: 1, borderBottomColor: SC.hair,
+          paddingHorizontal: 28, paddingTop: 20, paddingBottom: 22 }}>
+          <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginBottom: 14 }}>
+            <Text style={{ fontFamily: 'Courier New', fontSize: 11, color: SC.muted, letterSpacing: 0.4 }}>
+              UNIT 01 · ARABIC · LEVANTINE
+            </Text>
+            <Text style={{ fontFamily: FONT_UI_BOLD, fontSize: 12, fontWeight: '700', color: SC.muted }}>Read-only lesson</Text>
+          </View>
+          <Text style={{ fontFamily: FONT_UI_EXTRABOLD, fontSize: 30, fontWeight: '800', color: SC.ink,
+            letterSpacing: -0.6, lineHeight: 33 }}>Arabic, the basics</Text>
+          <Text style={{ fontFamily: FONT_UI, fontSize: 14, fontWeight: '500', color: SC.muted,
+            lineHeight: 21, marginTop: 8 }}>
+            {'A quick orientation to '}
+            <Text style={{ fontFamily: FONT_AR, fontWeight: '600', color: SC.inkSoft }}>العَرَبِيَّة</Text>
+            {' — what kind of Arabic you\'ll learn, how to greet someone, and the words for "I, you, he, she."'}
+          </Text>
+          {/* Section index */}
+          <View style={{ marginTop: 18, flexDirection: 'row', alignItems: 'center', gap: 6 }}>
+            {['Background', 'Greetings', 'Pronouns'].map((label, i) => (
+              <View key={label} style={{ flexDirection: 'row', alignItems: 'center', gap: i < 2 ? 6 : 0 }}>
+                <View style={{ flexDirection: 'row', alignItems: 'center', gap: 6 }}>
+                  <View style={{ width: 18, height: 18, borderRadius: 9,
+                    backgroundColor: i < 2 ? SC.accent : SC.coolDeep,
+                    alignItems: 'center', justifyContent: 'center' }}>
+                    <Text style={{ fontFamily: FONT_UI_EXTRABOLD, fontSize: 10, fontWeight: '800',
+                      color: '#ffffff' }}>{'0' + (i + 1)}</Text>
+                  </View>
+                  <Text style={{ fontFamily: FONT_UI_BOLD, fontSize: 12, fontWeight: '700',
+                    color: SC.inkSoft, letterSpacing: 0.2 }}>{label}</Text>
+                </View>
+                {i < 2 && <View style={{ width: 18, height: 1, backgroundColor: SC.hair, marginHorizontal: 4 }} />}
+              </View>
+            ))}
+          </View>
+        </View>
+
+        {/* Scrollable content */}
+        <ScrollView contentContainerStyle={{ padding: 22, paddingBottom: 80, gap: 18 }}
+          showsVerticalScrollIndicator={false}>
+          <BackgroundSection />
+          <GreetingsSection />
+          <PronounsSection />
+          {/* Footer info card */}
+          <View style={{ padding: 16, backgroundColor: SC.coolWash, borderWidth: 1,
+            borderColor: 'rgba(115,140,230,0.22)', borderRadius: 16,
+            flexDirection: 'row', gap: 12, alignItems: 'flex-start' }}>
+            <View style={{ width: 22, height: 22, borderRadius: 11, backgroundColor: SC.cool,
+              alignItems: 'center', justifyContent: 'center', flexShrink: 0, marginTop: 1 }}>
+              <Text style={{ fontFamily: 'Courier New', fontSize: 11, fontWeight: '700', color: '#ffffff' }}>i</Text>
+            </View>
+            <Text style={{ fontFamily: FONT_UI, fontSize: 13, fontWeight: '500', color: SC.coolDeep, lineHeight: 19, flex: 1 }}>
+              This is an introduction page — nothing to memorise yet. The next lessons will drill greetings, then pronouns, then put them together in short conversations.
+            </Text>
+          </View>
+        </ScrollView>
+      </View>
+    );
+  };
+
   // ── Speak the Blank renderer ──────────────────────────────────────────────
   const renderSpeakTheBlank = () => {
     const stg   = currentStage;
     const round = (stg.rounds ?? [])[speakBlankRoundIdx];
-    if (!round) return null;
+    if (!round?.prompt) return null;
 
     const isListening = listenPhase === 'recording';
     const isSuccess   = listenPhase === 'correct';
     const isRetry     = listenPhase === 'wrong';
+    const promptPlaying = speakBlankPlayingLine === 0;
     const micBg = isRetry ? '#46443f' : '#fe4d01';
-    const statusLabel = isListening ? 'Listening…' : isSuccess ? 'Nicely said' : isRetry ? 'Try again' : 'Speak the missing word';
 
-    // Mic ring style
+    const SBC = {
+      ink: '#151515', inkSoft: '#46443f', muted: '#9d998e',
+      hair: '#ece9e2', card: '#ffffff', accent: '#fe4d01', accentWash: '#fff7f1',
+    };
+
+    const status =
+      isListening ? 'Listening…' :
+      isRetry     ? 'Try again — speak clearly' :
+      isSuccess   ? 'Nicely said' :
+                    'Speak the missing word';
+
     const mkRingStyle = (v: Animated.Value) => ({
       position: 'absolute' as const,
       width: 96, height: 96, borderRadius: 48,
@@ -1617,188 +1984,170 @@ export default function LessonScreen() {
       opacity: v.interpolate({ inputRange: [0, 0.2, 1], outputRange: [0, 0.35, 0] }),
     });
 
-    // Avatar
-    const SBAvatar = ({ speaker }: { speaker: string }) => (
-      <View style={{
-        width: 32, height: 32, borderRadius: 16, flexShrink: 0,
-        backgroundColor: speaker === 'you' ? '#fe4d01' : '#738ce6',
-        alignItems: 'center', justifyContent: 'center',
-        borderWidth: 3, borderColor: '#faf9f6',
-      }}>
-        <Text style={{ color: '#ffffff', fontFamily: FONT_UI_BOLD, fontSize: 14, fontWeight: '700' }}>{speaker === 'you' ? 'S' : 'L'}</Text>
-      </View>
-    );
-
-    // Blank rect — rendered as RTL view split on ___
-    const BlankRect = ({ onLight, fontSize = 26 }: { onLight: boolean; fontSize?: number }) => {
-      let bg = onLight ? '#faf9f6' : 'rgba(255,255,255,0.18)';
-      let bd = onLight ? '#d8d5cd' : 'rgba(255,255,255,0.35)';
-      if (isListening) { bg = onLight ? '#ffece0' : 'rgba(255,255,255,0.28)'; bd = onLight ? '#fe4d01' : '#ffffff'; }
-      else if (isRetry) { bd = onLight ? '#46443f' : 'rgba(255,255,255,0.5)'; }
-      return <View style={{ minWidth: 96, height: fontSize + 10, borderRadius: 8, borderWidth: 1.5, borderColor: bd, backgroundColor: bg, marginHorizontal: 6 }} />;
+    // ── BlankRect (RTL split on ___) ──────────────────────────────────────
+    const BlankRect = ({ fontSize = 28 }: { fontSize?: number }) => {
+      const filled = speakBlankRevealed || isSuccess;
+      if (filled) {
+        return (
+          <View style={{ backgroundColor: '#f5f2ea', borderWidth: 1, borderColor: '#ffffff',
+            borderRadius: 8, paddingHorizontal: 12, paddingVertical: 2, marginHorizontal: 4 }}>
+            <Text style={{ fontFamily: FONT_AR, fontSize, fontWeight: '600', color: SBC.ink }}>{round.answer.blank.arabic}</Text>
+          </View>
+        );
+      }
+      const bg = isListening ? SBC.accentWash : isRetry ? '#ece8df' : '#f5f2ea';
+      return (
+        <View style={{ minWidth: 110, height: fontSize + 14, marginHorizontal: 6,
+          backgroundColor: bg, borderWidth: 1, borderColor: '#ffffff', borderRadius: 8 }} />
+      );
     };
 
-    const BlankRectMini = ({ onLight }: { onLight: boolean }) => {
-      let bg = onLight ? '#faf9f6' : 'rgba(255,255,255,0.18)';
-      let bd = onLight ? '#d8d5cd' : 'rgba(255,255,255,0.35)';
-      if (isListening) { bg = onLight ? '#ffece0' : 'rgba(255,255,255,0.28)'; bd = onLight ? '#fe4d01' : '#ffffff'; }
-      else if (isRetry) { bd = onLight ? '#46443f' : 'rgba(255,255,255,0.5)'; }
-      return <View style={{ minWidth: 54, height: 14, borderRadius: 4, borderWidth: 1, borderColor: bd, backgroundColor: bg, marginHorizontal: 4 }} />;
+    const BlankRectMini = () => {
+      const filled = speakBlankRevealed || isSuccess;
+      if (filled) {
+        return (
+          <Text style={{ fontFamily: FONT_UI, fontStyle: 'italic', fontWeight: '700',
+            color: SBC.ink, paddingHorizontal: 4 }}>{round.answer.blank.translit}</Text>
+        );
+      }
+      const bg = isListening ? SBC.accentWash : '#f5f2ea';
+      return (
+        <View style={{ minWidth: 60, height: 14, backgroundColor: bg,
+          borderWidth: 1, borderColor: '#ffffff', borderRadius: 4, marginHorizontal: 4 }} />
+      );
+    };
+
+    // ── PromptCard ─────────────────────────────────────────────────────────
+    const PromptCard = () => (
+      <TouchableOpacity onPress={() => {
+        setSpeakBlankPlayingLine(0);
+        playAudio(round.prompt.arabic, () => setSpeakBlankPlayingLine(null));
+      }} activeOpacity={0.88}
+        style={{ textAlign: 'right' as any, padding: 4 }}>
+        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginBottom: 6 }}>
+          <Text style={{ fontFamily: FONT_UI_BOLD, fontSize: 12, fontWeight: '700', letterSpacing: 1.4,
+            textTransform: 'uppercase' as any, color: promptPlaying ? SBC.accent : SBC.muted }}>Layla</Text>
+          <Ionicons name={promptPlaying ? 'volume-high' : 'volume-medium-outline'} size={16}
+            color={promptPlaying ? SBC.accent : SBC.muted} style={{ opacity: promptPlaying ? 1 : 0.7 }} />
+        </View>
+        <Text style={{ fontFamily: FONT_AR, fontSize: 30, fontWeight: '600', color: SBC.ink,
+          lineHeight: 47, textAlign: 'right' }}>{round.prompt.arabic}</Text>
+        <Text style={{ fontFamily: FONT_UI, fontStyle: 'italic', fontSize: 14, color: SBC.muted,
+          fontWeight: '500', textAlign: 'right', marginTop: 4 }}>{round.prompt.translit}</Text>
+        <Text style={{ fontFamily: FONT_UI, fontSize: 14, color: SBC.muted, fontWeight: '500',
+          textAlign: 'right', marginTop: 2 }}>{round.prompt.english}</Text>
+      </TouchableOpacity>
+    );
+
+    // ── AnswerCard ─────────────────────────────────────────────────────────
+    const AnswerCard = () => {
+      const arabicParts  = round.answer.arabic.split('___');
+      const translitParts = round.answer.translit.split('___');
+      const englishParts  = round.answer.english.split('___');
+      const targetWord    = round.answer.blank.english;
+
+      return (
+        <View style={{ backgroundColor: SBC.card, borderRadius: 24, borderWidth: 1,
+          borderColor: SBC.hair, paddingTop: 26, paddingHorizontal: 24, paddingBottom: 24,
+          shadowColor: '#151515', shadowOpacity: 0.04, shadowOffset: { width: 0, height: 8 }, shadowRadius: 24, elevation: 2,
+          gap: 8 }}>
+          <Text style={{ fontFamily: FONT_UI_BOLD, fontSize: 12, fontWeight: '700', letterSpacing: 1.4,
+            textTransform: 'uppercase' as any, color: SBC.accent }}>Your reply</Text>
+
+          {/* Arabic row with blank */}
+          <View style={{ flexDirection: 'row-reverse', alignItems: 'center', flexWrap: 'wrap' }}>
+            {arabicParts.map((p: string, i: number) => (
+              <React.Fragment key={i}>
+                {p !== '' && <Text style={{ fontFamily: FONT_AR, fontSize: 28, fontWeight: '600',
+                  color: SBC.ink, lineHeight: 44 }}>{p}</Text>}
+                {i < arabicParts.length - 1 && <BlankRect fontSize={28} />}
+              </React.Fragment>
+            ))}
+          </View>
+
+          {/* Translit row with mini blank */}
+          <View style={{ flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center', marginTop: 2 }}>
+            {translitParts.map((p: string, i: number) => (
+              <React.Fragment key={i}>
+                {p !== '' && <Text style={{ fontFamily: FONT_UI, fontStyle: 'italic', fontSize: 14,
+                  color: SBC.muted, fontWeight: '500' }}>{p}</Text>}
+                {i < translitParts.length - 1 && <BlankRectMini />}
+              </React.Fragment>
+            ))}
+          </View>
+
+          {/* English row — target word always orange bold */}
+          <View style={{ flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center', marginTop: 2 }}>
+            {englishParts.map((p: string, i: number) => (
+              <React.Fragment key={i}>
+                {p !== '' && <Text style={{ fontFamily: FONT_UI, fontSize: 14, color: SBC.inkSoft,
+                  fontWeight: '500' }}>{p}</Text>}
+                {i < englishParts.length - 1 && (
+                  <Text style={{ fontFamily: FONT_UI_BOLD, fontSize: 14, color: SBC.accent,
+                    fontWeight: '700', paddingHorizontal: 1 }}>{targetWord}</Text>
+                )}
+              </React.Fragment>
+            ))}
+          </View>
+        </View>
+      );
     };
 
     return (
       <View style={{ flex: 1 }}>
-        {/* Context card */}
-        <View style={{ paddingHorizontal: 20, paddingBottom: 0, flexShrink: 0 }}>
-          <View style={{ backgroundColor: 'rgba(115,140,230,0.08)', borderWidth: 1, borderColor: 'rgba(115,140,230,0.22)', borderRadius: 16, padding: 10, flexDirection: 'row', gap: 10, alignItems: 'flex-start' }}>
-            <View style={{ width: 22, height: 22, borderRadius: 11, backgroundColor: '#738ce6', alignItems: 'center', justifyContent: 'center', flexShrink: 0, marginTop: 1 }}>
-              <Text style={{ color: '#ffffff', fontFamily: 'PlusJakartaSans_700Bold', fontSize: 11, fontWeight: '700' }}>i</Text>
-            </View>
-            <Text style={{ fontFamily: FONT_UI, fontSize: 13, fontWeight: '500', color: '#3d57b8', lineHeight: 19, flex: 1 }}>{round.context}</Text>
-          </View>
+        {/* Title + context */}
+        <View style={{ paddingHorizontal: 28, paddingTop: 12, paddingBottom: 0, flexShrink: 0 }}>
+          <Text style={{ fontFamily: FONT_UI_BOLD, fontSize: 12, fontWeight: '700', letterSpacing: 1.6,
+            textTransform: 'uppercase' as any, color: SBC.accent, marginBottom: 6 }}>Speak the blank</Text>
+          <Text style={{ fontFamily: FONT_UI, fontSize: 14, fontWeight: '500', color: SBC.muted, lineHeight: 21 }}>
+            {round.context}
+          </Text>
         </View>
 
-        {/* Conversation bubbles */}
-        <View style={{ flex: 1, padding: 16, paddingHorizontal: 20, paddingBottom: 6, gap: 14 }}>
-          {round.lines.map((line: any, i: number) => {
-            const isYou  = line.speaker === 'you';
-            const isBlank = i === round.blankLineIdx;
-            const filledBubble = isYou && (isSuccess || speakBlankRevealed);
-            const onLight = !filledBubble;
-            const isPlayingThis = speakBlankPlayingLine === i;
-
-            let bubbleBg     = isYou ? (filledBubble ? '#fe4d01' : '#ffffff') : '#ffffff';
-            let bubbleBorder = isYou ? (filledBubble ? 'none' : '1.5px dashed rgba(254,77,1,0.45)') : '1px solid #efeeeb';
-            const arabicColor = isYou ? (filledBubble ? '#ffffff' : '#151515') : '#151515';
-            const translitColor = isYou ? (filledBubble ? 'rgba(255,255,255,0.85)' : '#9d998e') : '#9d998e';
-            const englishColor  = translitColor;
-            const borderStyle: any = isYou && !filledBubble
-              ? { borderWidth: 1.5, borderStyle: 'dashed', borderColor: 'rgba(254,77,1,0.45)' }
-              : isYou ? { borderWidth: 0 }
-              : { borderWidth: 1, borderStyle: 'solid', borderColor: '#efeeeb' };
-
-            const corners: any = isYou ? { borderRadius: 20, borderTopRightRadius: 6 } : { borderRadius: 20, borderTopLeftRadius: 6 };
-            const bubbleShadow = isPlayingThis ? { shadowColor: '#fe4d01', shadowOpacity: 0.18, shadowOffset: { width: 0, height: 6 }, shadowRadius: 20, elevation: 4 } : {};
-
-            // Arabic with blank split
-            const renderBubbleArabic = () => {
-              if (!isBlank) return <Text style={{ fontFamily: FONT_AR, fontSize: 26, fontWeight: '600', color: arabicColor, lineHeight: 44, textAlign: 'right' }}>{line.arabic}</Text>;
-              const parts = line.arabic.split('___');
-              return (
-                <View style={{ flexDirection: 'row-reverse', alignItems: 'center', flexWrap: 'wrap' }}>
-                  {parts.map((p: string, pi: number) => (
-                    <React.Fragment key={pi}>
-                      {p !== '' && <Text style={{ fontFamily: FONT_AR, fontSize: 26, fontWeight: '600', color: arabicColor, lineHeight: 44 }}>{p}</Text>}
-                      {pi < parts.length - 1 && (isSuccess || speakBlankRevealed
-                        ? <Text style={{ fontFamily: FONT_AR, fontSize: 26, fontWeight: '600', color: onLight ? '#fe4d01' : '#ffffff', borderBottomWidth: 2, borderColor: onLight ? 'rgba(254,77,1,0.55)' : 'rgba(255,255,255,0.7)' }}>{line.blank?.arabic}</Text>
-                        : <BlankRect onLight={onLight} />
-                      )}
-                    </React.Fragment>
-                  ))}
-                </View>
-              );
-            };
-
-            const renderBubbleTranslit = () => {
-              if (!isBlank) return <Text style={{ fontFamily: FONT_UI, fontStyle: 'italic', fontSize: 13, color: translitColor, fontWeight: '500', marginTop: 4, textAlign: isYou ? 'right' : 'left' }}>{line.translit}</Text>;
-              const parts = line.translit.split('___');
-              return (
-                <View style={{ flexDirection: isYou ? 'row-reverse' : 'row', flexWrap: 'wrap', alignItems: 'center', marginTop: 4 }}>
-                  {parts.map((p: string, pi: number) => (
-                    <React.Fragment key={pi}>
-                      {p !== '' && <Text style={{ fontFamily: FONT_UI, fontStyle: 'italic', fontSize: 13, color: translitColor, fontWeight: '500' }}>{p}</Text>}
-                      {pi < parts.length - 1 && (isSuccess || speakBlankRevealed
-                        ? <Text style={{ fontFamily: FONT_UI, fontStyle: 'italic', fontWeight: '700', color: onLight ? '#fe4d01' : '#ffffff' }}>{line.blank?.translit}</Text>
-                        : <BlankRectMini onLight={onLight} />
-                      )}
-                    </React.Fragment>
-                  ))}
-                </View>
-              );
-            };
-
-            const renderBubbleEnglish = () => {
-              const hebrewLine = line.hebrew ?? line.english ?? '';
-              if (!isBlank) return <Text style={{ fontFamily: FONT_UI, fontSize: 13, color: englishColor, fontWeight: '500', marginTop: 2, textAlign: isYou ? 'right' : 'left' }}>{hebrewLine}</Text>;
-              const word = line.blank?.hebrew ?? line.blank?.english ?? '';
-              const parts = hebrewLine.split('___');
-              return (
-                <View style={{ flexDirection: isYou ? 'row-reverse' : 'row', flexWrap: 'wrap', alignItems: 'center', marginTop: 2 }}>
-                  {parts.map((p: string, pi: number) => (
-                    <React.Fragment key={pi}>
-                      {p !== '' && <Text style={{ fontFamily: FONT_UI, fontSize: 13, color: englishColor, fontWeight: '500' }}>{p}</Text>}
-                      {pi < parts.length - 1 && (
-                        <Text style={{ fontFamily: FONT_UI_BOLD, fontSize: 13, color: filledBubble ? '#ffffff' : '#fe4d01', fontWeight: '700', borderBottomWidth: 1.5, borderColor: filledBubble ? 'rgba(255,255,255,0.7)' : 'rgba(254,77,1,0.5)' }}>{word}</Text>
-                      )}
-                    </React.Fragment>
-                  ))}
-                </View>
-              );
-            };
-
-            return (
-              <View key={i} style={{ flexDirection: isYou ? 'row-reverse' : 'row', alignItems: 'flex-end', gap: 8, alignSelf: isYou ? 'flex-end' : 'flex-start', maxWidth: '86%' }}>
-                <SBAvatar speaker={line.speaker} />
-                <TouchableOpacity
-                  style={[corners, borderStyle, { backgroundColor: bubbleBg, padding: 14, paddingBottom: 12 }, bubbleShadow,
-                    { transform: [{ scale: isPlayingThis ? 1.015 : 1 }] }]}
-                  onPress={() => {
-                    setSpeakBlankPlayingLine(i);
-                    playAudio(line.arabic, () => setSpeakBlankPlayingLine(null));
-                  }}
-                  activeOpacity={0.88}>
-                  {renderBubbleArabic()}
-                  {renderBubbleTranslit()}
-                  {renderBubbleEnglish()}
-                </TouchableOpacity>
-              </View>
-            );
-          })}
-        </View>
-
-        {/* Custom action bar */}
-        <View style={{ borderTopWidth: 1, borderTopColor: '#efeeeb', backgroundColor: '#faf9f6', paddingTop: 18, paddingHorizontal: 24, paddingBottom: insets.bottom + 12, alignItems: 'center', gap: 14, flexShrink: 0 }}>
-          <Text style={{ fontSize: 13, fontWeight: '600', fontFamily: FONT_UI, color: '#9d998e', letterSpacing: 0.6, textTransform: 'uppercase' as any }}>{statusLabel}</Text>
-          <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 18, width: '100%' }}>
-            {/* Show/Hide answer toggle */}
-            <TouchableOpacity
-              onPress={() => setSpeakBlankRevealed(v => !v)}
-              style={{ flexDirection: 'row', alignItems: 'center', gap: 7, paddingVertical: 11, paddingHorizontal: 16, borderRadius: 999, borderWidth: 1,
-                backgroundColor: speakBlankRevealed ? 'rgba(115,140,230,0.12)' : '#ffffff',
-                borderColor: speakBlankRevealed ? 'rgba(115,140,230,0.35)' : '#efeeeb',
-                shadowColor: '#151515', shadowOpacity: speakBlankRevealed ? 0 : 0.05, shadowOffset: { width: 0, height: 2 }, shadowRadius: 6, elevation: speakBlankRevealed ? 0 : 2,
-              }}>
-              <Ionicons name={speakBlankRevealed ? 'eye-off-outline' : 'eye-outline'} size={16} color={speakBlankRevealed ? '#3d57b8' : '#46443f'} />
-              <Text style={{ fontFamily: FONT_UI, fontWeight: '600', fontSize: 13, color: speakBlankRevealed ? '#3d57b8' : '#46443f', letterSpacing: 0.1 }}>
-                {speakBlankRevealed ? 'Hide answer' : 'Show answer'}
+        {/* Scrollable body */}
+        <ScrollView contentContainerStyle={{ paddingHorizontal: 28, paddingTop: 24, paddingBottom: 16, gap: 22 }}
+          showsVerticalScrollIndicator={false}>
+          <PromptCard />
+          <View style={{ height: 1, backgroundColor: SBC.hair, marginVertical: 2 }} />
+          <AnswerCard />
+          {/* Show / hide answer link */}
+          <View style={{ alignItems: 'center', marginTop: -4 }}>
+            <TouchableOpacity onPress={() => setSpeakBlankRevealed(v => !v)} activeOpacity={0.7}
+              style={{ paddingVertical: 6, paddingHorizontal: 10 }}>
+              <Text style={{ fontFamily: FONT_UI_BOLD, fontSize: 13, fontWeight: '600',
+                color: speakBlankRevealed ? SBC.inkSoft : SBC.muted, letterSpacing: 0.2,
+                textDecorationLine: 'underline' }}>
+                {speakBlankRevealed ? 'Hide the answer' : 'Show the answer'}
               </Text>
             </TouchableOpacity>
+          </View>
+        </ScrollView>
 
-            {/* 96px Mic */}
-            <View style={{ position: 'relative', alignItems: 'center', justifyContent: 'center' }}>
-              {isListening && <>
-                <Animated.View style={mkRingStyle(micRing1)} />
-                <Animated.View style={mkRingStyle(micRing2)} />
-              </>}
-              <TouchableOpacity
-                style={[s.micCircleBtn, { backgroundColor: micBg, shadowColor: micBg }]}
-                onPress={() => {
-                  if (listenPhase === 'recording') finishListenRepeatRecording();
-                  else if (listenPhase === 'speak' || listenPhase === 'wrong') {
-                    const round2 = (currentStage.rounds ?? [])[speakBlankRoundIdx];
-                    const blank = round2?.lines?.[round2.blankLineIdx]?.blank;
-                    if (blank) startRecording(blank.arabic);
-                  }
-                }}
-                activeOpacity={0.87}>
-                {isSuccess ? <Ionicons name="checkmark" size={38} color="#fff" /> :
-                 isRetry   ? <Ionicons name="refresh" size={28} color="#fff" /> :
-                 <Ionicons name="mic" size={38} color="#fff" />}
-              </TouchableOpacity>
-            </View>
-
-            {/* Balance spacer */}
-            <View style={{ width: 116, flexShrink: 0 }} />
+        {/* Bottom: status + mic */}
+        <View style={{ paddingTop: 10, paddingHorizontal: 24, paddingBottom: insets.bottom + 20,
+          alignItems: 'center', gap: 14, flexShrink: 0,
+          borderTopWidth: 1, borderTopColor: SBC.hair }}>
+          <Text style={{ fontFamily: FONT_UI_BOLD, fontSize: 13, fontWeight: '600', letterSpacing: 0.4,
+            color: isRetry ? SBC.inkSoft : SBC.muted }}>{status}</Text>
+          <View style={{ position: 'relative', alignItems: 'center', justifyContent: 'center' }}>
+            {isListening && <>
+              <Animated.View style={mkRingStyle(micRing1)} />
+              <Animated.View style={mkRingStyle(micRing2)} />
+            </>}
+            <TouchableOpacity
+              style={[s.micCircleBtn, { backgroundColor: micBg, shadowColor: micBg }]}
+              onPress={() => {
+                if (listenPhase === 'recording') finishListenRepeatRecording();
+                else if (listenPhase === 'speak' || listenPhase === 'wrong') {
+                  const r = (currentStage.rounds ?? [])[speakBlankRoundIdx];
+                  if (r?.answer?.blank) startRecording(r.answer.blank.arabic);
+                }
+              }}
+              activeOpacity={0.87}>
+              {isSuccess ? <Ionicons name="checkmark" size={38} color="#fff" /> :
+               isRetry   ? <Ionicons name="refresh"   size={28} color="#fff" /> :
+               <Ionicons name="mic" size={38} color="#fff" />}
+            </TouchableOpacity>
           </View>
         </View>
       </View>
@@ -1934,6 +2283,8 @@ export default function LessonScreen() {
         <Animated.View style={{ flex: 1, opacity: stageOpacity }}>
           {currentStage?.type === 'speak_the_blank' ? (
             renderSpeakTheBlank()
+          ) : currentStage?.type === 'subject' ? (
+            renderSubject()
           ) : (
             <ScrollView ref={scrollRef} contentContainerStyle={[s.content, { flexGrow: 1, paddingBottom: 24 }]} showsVerticalScrollIndicator={false}>
               {currentStage?.type === 'word_card'               && renderWordCard()}
