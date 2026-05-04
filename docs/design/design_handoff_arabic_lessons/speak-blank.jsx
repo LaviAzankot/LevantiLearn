@@ -1,108 +1,109 @@
-// Speak the Blank — fill-in-the-blank dialogue.
-// The missing word is shown as a clean BLANK RECTANGLE inline.
-// Whole bubble is tappable to play audio; partner line auto-plays on entry.
-// The English translation always highlights the target word in orange so
-// the learner knows what they're speaking.
+// Speak the Blank — calmer, focused redesign.
+// Replaces the chat-bubble vocabulary with a single-focus "exercise card":
+//   PROMPT (partner says…)  →  YOUR LINE (with the blank)  →  MIC
+// One accent color, one font scale per role, generous whitespace.
 
 const ROUNDS = [
   {
     id: "r1",
-    context: "Sara meets her neighbour Layla in the morning at the entrance of their building.",
-    lines: [
-      {
-        speaker: "them",
-        arabic: "صَبَاحُ الخَيْر يَا سَارَة!",
-        translit: "ṣabāḥu l-khayr yā Sāra",
-        english: "Good morning, Sara!",
-      },
-      {
-        speaker: "you",
-        arabic: "صَبَاحُ ___",
-        translit: "ṣabāḥu ___",
-        english: "Good morning of ___.",
-        blank: { arabic: "النُّور", translit: "an-nūr", english: "light" },
-      },
-    ],
-    blankLineIdx: 1,
+    context: "Greeting your neighbour Layla on the way out in the morning.",
+    prompt: {
+      arabic: "صَبَاحُ الخَيْر يَا سَارَة!",
+      translit: "ṣabāḥu l-khayr yā Sāra",
+      english: "Good morning, Sara!",
+    },
+    answer: {
+      arabic: "صَبَاحُ ___",
+      translit: "ṣabāḥu ___",
+      english: "Good morning of ___.",
+      blank: { arabic: "النُّور", translit: "an-nūr", english: "light" },
+    },
   },
   {
     id: "r2",
-    context: "After greeting, Layla asks how Sara is doing today.",
-    lines: [
-      {
-        speaker: "them",
-        arabic: "كَيْفَ حَالُكِ اليَوْم؟",
-        translit: "kayfa ḥāluki l-yawm",
-        english: "How are you today?",
-      },
-      {
-        speaker: "you",
-        arabic: "أَنَا ___ ، شُكْرًا.",
-        translit: "anā ___, shukran",
-        english: "I am ___, thank you.",
-        blank: { arabic: "بِخَيْر", translit: "bi-khayr", english: "fine" },
-      },
-    ],
-    blankLineIdx: 1,
+    context: "Layla asks how you are doing today.",
+    prompt: {
+      arabic: "كَيْفَ حَالُكِ اليَوْم؟",
+      translit: "kayfa ḥāluki l-yawm",
+      english: "How are you today?",
+    },
+    answer: {
+      arabic: "أَنَا ___ ، شُكْرًا.",
+      translit: "anā ___, shukran",
+      english: "I am ___, thank you.",
+      blank: { arabic: "بِخَيْر", translit: "bi-khayr", english: "fine" },
+    },
   },
   {
     id: "r3",
-    context: "They walk to the café. Layla offers to order something.",
-    lines: [
-      {
-        speaker: "them",
-        arabic: "مَاذَا تُرِيدِين؟",
-        translit: "māthā turīdīn",
-        english: "What would you like?",
-      },
-      {
-        speaker: "you",
-        arabic: "أُرِيدُ ___ مِنْ فَضْلِك.",
-        translit: "urīdu ___ min faḍlik",
-        english: "I would like ___, please.",
-        blank: { arabic: "قَهْوَة", translit: "qahwa", english: "coffee" },
-      },
-    ],
-    blankLineIdx: 1,
+    context: "At the café, Layla asks what you'd like.",
+    prompt: {
+      arabic: "مَاذَا تُرِيدِين؟",
+      translit: "māthā turīdīn",
+      english: "What would you like?",
+    },
+    answer: {
+      arabic: "أُرِيدُ ___ مِنْ فَضْلِك.",
+      translit: "urīdu ___ min faḍlik",
+      english: "I would like ___, please.",
+      blank: { arabic: "قَهْوَة", translit: "qahwa", english: "coffee" },
+    },
   },
 ];
 
-// ---------- Avatars ----------
-const Avatar = ({ speaker, size = 32 }) => {
-  const isYou = speaker === "you";
-  return (
-    <div style={{
-      width: size, height: size, borderRadius: size / 2,
-      background: isYou ? "#fe4d01" : "#738ce6",
-      display: "inline-flex", alignItems: "center", justifyContent: "center",
-      color: "#fff", fontWeight: 700, fontSize: size * 0.44,
-      fontFamily: "'Plus Jakarta Sans', sans-serif",
-      flexShrink: 0,
-      boxShadow: "0 0 0 3px #faf9f6",
-    }}>
-      {isYou ? "S" : "L"}
-    </div>
-  );
+// ---------- Tokens ----------
+const C = {
+  ink: "#151515",
+  inkSoft: "#46443f",
+  muted: "#9d998e",
+  muted2: "#b9b5ab",
+  hair: "#ece9e2",
+  surface: "#faf9f6",
+  card: "#ffffff",
+  accent: "#fe4d01",
+  accentDeep: "#b53700",
+  accentWash: "#fff7f1",
 };
 
+// ---------- Tiny speaker glyph (no chrome around it) ----------
+function SpeakerGlyph({ playing, size = 18 }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none"
+         stroke="currentColor" strokeWidth="2"
+         strokeLinecap="round" strokeLinejoin="round"
+         style={{
+           opacity: playing ? 1 : 0.7,
+           transition: "opacity 200ms ease",
+         }}>
+      <path d="M11 5L6 9H3v6h3l5 4V5z" fill="currentColor" stroke="none" />
+      {playing && <path d="M16 9a4 4 0 0 1 0 6" />}
+      {playing && <path d="M19 6a8 8 0 0 1 0 12" />}
+    </svg>
+  );
+}
+
 // ---------- Blank rectangle ----------
-// Plain rectangle stand-in for the missing word. Pulses subtly while listening.
-function BlankRect({ state, revealed, success, blank, onLight, fontSize = 24 }) {
-  // When success or revealed, replace with the answer (orange or light)
-  if (revealed || success) {
+// Single warm-orange border, with a thicker bottom edge to read as a "write here" line.
+// On reveal/success, it dissolves and the Arabic answer takes its place — same orange,
+// same underline, no recoloring of the surrounding card.
+function BlankRect({ state, revealed, success, blank, fontSize = 28 }) {
+  const filled = revealed || success;
+
+  if (filled) {
     return (
-      <span style={{
-        display: "inline-block",
-        color: onLight ? "#fe4d01" : "#ffffff",
-        fontFamily: "'Reem Kufi', sans-serif",
-        fontSize, fontWeight: 600,
-        padding: "0 6px",
-        margin: "0 4px",
-        borderBottom: onLight
-          ? "2px solid rgba(254,77,1,0.55)"
-          : "2px solid rgba(255,255,255,0.7)",
-        animation: "fade-in 240ms ease",
-      }} dir="rtl" lang="ar">
+      <span dir="rtl" lang="ar"
+            style={{
+              display: "inline-block",
+              color: C.ink,
+              fontFamily: "'Reem Kufi', sans-serif",
+              fontSize, fontWeight: 600,
+              padding: "2px 12px",
+              margin: "0 4px",
+              background: "#f5f2ea",
+              border: "1px solid #ffffff",
+              borderRadius: 8,
+              animation: "fade-in 240ms ease",
+            }}>
         {blank.arabic}
       </span>
     );
@@ -111,14 +112,14 @@ function BlankRect({ state, revealed, success, blank, onLight, fontSize = 24 }) 
   const isListening = state === "listening";
   const isRetry = state === "retry";
 
-  let bg = onLight ? "#faf9f6" : "rgba(255,255,255,0.18)";
-  let border = onLight ? "1.5px solid #d8d5cd" : "1.5px solid rgba(255,255,255,0.35)";
+  let borderColor = "#ffffff";
+  let bg = "#f5f2ea"; // brighter warm fill
   if (isListening) {
-    bg = onLight ? "#ffece0" : "rgba(255,255,255,0.28)";
-    border = onLight ? "1.5px solid #fe4d01" : "1.5px solid #ffffff";
+    bg = C.accentWash;
+    borderColor = "#ffffff";
   } else if (isRetry) {
-    bg = onLight ? "#f3f1ec" : "rgba(255,255,255,0.18)";
-    border = onLight ? "1.5px solid #46443f" : "1.5px solid rgba(255,255,255,0.5)";
+    bg = "#ece8df";
+    borderColor = "#ffffff";
   }
 
   return (
@@ -126,26 +127,26 @@ function BlankRect({ state, revealed, success, blank, onLight, fontSize = 24 }) 
       className={isListening ? "sb-blank-pulse" : ""}
       style={{
         display: "inline-block",
-        minWidth: 96, height: fontSize + 10,
+        minWidth: 110, height: fontSize + 14,
         margin: "0 6px",
         background: bg,
-        border,
+        border: `1px solid ${borderColor}`,
         borderRadius: 8,
         verticalAlign: "middle",
-        transition: "all 200ms ease",
+        transition: "all 220ms ease",
       }}
     />
   );
 }
 
-// Translit-line equivalent — small flat blank
-function BlankRectMini({ state, revealed, success, blank, onLight }) {
-  if (revealed || success) {
+function BlankRectMini({ state, revealed, success, blank }) {
+  const filled = revealed || success;
+  if (filled) {
     return (
       <span style={{
-        color: onLight ? "#fe4d01" : "#ffffff",
-        fontStyle: "italic", fontWeight: 700,
-        padding: "0 2px",
+        color: C.ink, fontStyle: "italic", fontWeight: 700,
+        padding: "0 4px",
+        animation: "fade-in 240ms ease",
       }}>
         {blank.translit}
       </span>
@@ -153,63 +154,87 @@ function BlankRectMini({ state, revealed, success, blank, onLight }) {
   }
   const isListening = state === "listening";
   const isRetry = state === "retry";
-  let bg = onLight ? "#faf9f6" : "rgba(255,255,255,0.18)";
-  let border = onLight ? "1px solid #d8d5cd" : "1px solid rgba(255,255,255,0.35)";
-  if (isListening) {
-    bg = onLight ? "#ffece0" : "rgba(255,255,255,0.28)";
-    border = onLight ? "1px solid #fe4d01" : "1px solid #ffffff";
-  } else if (isRetry) {
-    border = onLight ? "1px solid #46443f" : "1px solid rgba(255,255,255,0.5)";
-  }
+  const color = "#ffffff";
+  const bg = isListening ? C.accentWash : "#f5f2ea";
   return (
     <span style={{
       display: "inline-block",
-      minWidth: 54, height: 14,
-      background: bg, border, borderRadius: 4,
+      minWidth: 60, height: 14,
+      background: bg,
+      border: `1px solid ${color}`,
+      borderRadius: 4,
       verticalAlign: "middle",
       margin: "0 4px",
-      transition: "all 200ms ease",
+      transition: "all 220ms ease",
     }} />
   );
 }
 
-// ---------- Bubble ----------
-function Bubble({ line, isBlank, blankRevealed, micState, audioPlaying, onPlay }) {
-  const isYou = line.speaker === "you";
-  const align = isYou ? "flex-end" : "flex-start";
+// ---------- Prompt (what they say) ----------
+function PromptCard({ line, playing, onPlay }) {
+  return (
+    <button
+      onClick={onPlay}
+      aria-label="Play prompt"
+      style={{
+        appearance: "none", background: "transparent", border: "none",
+        textAlign: "right", cursor: "pointer",
+        padding: "4px 0",
+        font: "inherit", color: "inherit",
+        display: "flex", flexDirection: "column", alignItems: "stretch", gap: 6,
+        width: "100%",
+      }}
+    >
+      {/* eyebrow row: speaker name + tiny audio glyph */}
+      <div style={{
+        display: "flex", alignItems: "center", justifyContent: "space-between",
+        color: playing ? C.accent : C.muted,
+        transition: "color 200ms ease",
+      }}>
+        <span style={{
+          fontFamily: "'Plus Jakarta Sans', sans-serif",
+          fontSize: 12, fontWeight: 700,
+          letterSpacing: 1.4, textTransform: "uppercase",
+        }}>
+          Layla
+        </span>
+        <SpeakerGlyph playing={playing} size={16} />
+      </div>
+
+      <div dir="rtl" lang="ar" style={{
+        fontFamily: "'Reem Kufi', sans-serif",
+        fontSize: 30, fontWeight: 600,
+        color: C.ink,
+        lineHeight: 1.55,
+        textAlign: "right",
+      }}>
+        {line.arabic}
+      </div>
+      <div style={{
+        fontFamily: "'Plus Jakarta Sans', sans-serif",
+        fontStyle: "italic",
+        fontSize: 14, color: C.muted, fontWeight: 500,
+        textAlign: "right",
+      }}>
+        {line.translit}
+      </div>
+      <div style={{
+        fontFamily: "'Plus Jakarta Sans', sans-serif",
+        fontSize: 14, color: C.muted, fontWeight: 500,
+        textAlign: "right",
+      }}>
+        {line.english}
+      </div>
+    </button>
+  );
+}
+
+// ---------- Answer (your line, with the blank) ----------
+function AnswerCard({ line, micState, blankRevealed }) {
   const success = micState === "success";
 
-  // Visual treatment
-  let bubbleBg, bubbleBorder, arabicColor, translitColor, englishColor;
-  if (isYou) {
-    if (isBlank && !success && !blankRevealed) {
-      // Awaiting answer — ghost bubble (matches Dialogue)
-      bubbleBg = "#ffffff";
-      bubbleBorder = "1.5px dashed rgba(254,77,1,0.45)";
-      arabicColor = "#151515";
-      translitColor = "#9d998e";
-      englishColor = "#9d998e";
-    } else {
-      bubbleBg = "#fe4d01";
-      bubbleBorder = "none";
-      arabicColor = "#ffffff";
-      translitColor = "rgba(255,255,255,0.85)";
-      englishColor = "rgba(255,255,255,0.85)";
-    }
-  } else {
-    bubbleBg = "#ffffff";
-    bubbleBorder = "1px solid #efeeeb";
-    arabicColor = "#151515";
-    translitColor = "#9d998e";
-    englishColor = "#9d998e";
-  }
-
-  const filledBubble = isYou && (success || blankRevealed);
-  const onLight = !filledBubble; // are we drawing on a light bubble bg?
-
-  // Render Arabic with optional inline blank rectangle
+  // Arabic
   const renderArabic = () => {
-    if (!isBlank) return line.arabic;
     const parts = line.arabic.split("___");
     return (
       <span dir="rtl">
@@ -217,13 +242,7 @@ function Bubble({ line, isBlank, blankRevealed, micState, audioPlaying, onPlay }
           <React.Fragment key={i}>
             <span>{p}</span>
             {i < parts.length - 1 && (
-              <BlankRect
-                state={micState}
-                revealed={blankRevealed}
-                success={success}
-                blank={line.blank}
-                onLight={onLight}
-              />
+              <BlankRect state={micState} revealed={blankRevealed} success={success} blank={line.blank} />
             )}
           </React.Fragment>
         ))}
@@ -232,30 +251,19 @@ function Bubble({ line, isBlank, blankRevealed, micState, audioPlaying, onPlay }
   };
 
   const renderTranslit = () => {
-    if (!isBlank) return line.translit;
     const parts = line.translit.split("___");
     return parts.map((p, i) => (
       <React.Fragment key={i}>
         <span>{p}</span>
         {i < parts.length - 1 && (
-          <BlankRectMini
-            state={micState}
-            revealed={blankRevealed}
-            success={success}
-            blank={line.blank}
-            onLight={onLight}
-          />
+          <BlankRectMini state={micState} revealed={blankRevealed} success={success} blank={line.blank} />
         )}
       </React.Fragment>
     ));
   };
 
-  // English: ALWAYS highlight the target word in orange (so the learner
-  // always knows what they're trying to say). For non-blank lines or
-  // already-filled bubbles, fall back to the literal english.
+  // English with target word always highlighted
   const renderEnglish = () => {
-    if (!isBlank) return line.english;
-
     const word = line.blank.english;
     const parts = line.english.split("___");
     return parts.map((p, i) => (
@@ -263,12 +271,8 @@ function Bubble({ line, isBlank, blankRevealed, micState, audioPlaying, onPlay }
         <span>{p}</span>
         {i < parts.length - 1 && (
           <span style={{
-            color: filledBubble ? "#ffffff" : "#fe4d01",
-            fontWeight: 700,
-            padding: "0 2px",
-            borderBottom: filledBubble
-              ? "1.5px solid rgba(255,255,255,0.7)"
-              : "1.5px solid rgba(254,77,1,0.5)",
+            color: C.accent, fontWeight: 700,
+            padding: "0 1px",
           }}>
             {word}
           </span>
@@ -277,95 +281,51 @@ function Bubble({ line, isBlank, blankRevealed, micState, audioPlaying, onPlay }
     ));
   };
 
-  const radius = isYou ? "20px 20px 6px 20px" : "20px 20px 20px 6px";
-
   return (
     <div style={{
-      display: "flex", flexDirection: isYou ? "row-reverse" : "row",
-      alignItems: "flex-end", gap: 8,
-      alignSelf: align,
-      maxWidth: "86%",
+      background: C.card,
+      borderRadius: 24,
+      border: `1px solid ${C.hair}`,
+      padding: "26px 24px 24px",
+      boxShadow: "0 1px 2px rgba(21,21,21,0.04), 0 8px 24px rgba(21,21,21,0.04)",
+      display: "flex", flexDirection: "column", gap: 8,
     }}>
-      <Avatar speaker={line.speaker} />
-      <button
-        onClick={onPlay}
-        aria-label="Play audio"
-        style={{
-          background: bubbleBg, border: bubbleBorder,
-          borderRadius: radius,
-          padding: "14px 18px 12px",
-          boxShadow: audioPlaying
-            ? "0 6px 20px rgba(254,77,1,0.18), 0 2px 6px rgba(21,21,21,0.05)"
-            : (bubbleBg === "#fe4d01"
-                ? "0 4px 14px rgba(254,77,1,0.20)"
-                : "0 2px 10px rgba(21,21,21,0.05)"),
-          minWidth: 0,
-          textAlign: "inherit",
-          cursor: "pointer",
-          color: "inherit",
-          font: "inherit",
-          transition: "all 220ms ease",
-          transform: audioPlaying ? "scale(1.015)" : "scale(1)",
-          outline: audioPlaying ? "2px solid rgba(254,77,1,0.35)" : "none",
-          outlineOffset: 2,
-          display: "block",
-        }}
-      >
-        <div
-          dir="rtl" lang="ar"
-          style={{
-            fontFamily: "'Reem Kufi', sans-serif",
-            fontSize: 26, fontWeight: 600,
-            color: arabicColor,
-            lineHeight: 1.7,
-            textAlign: "right",
-          }}
-        >
-          {renderArabic()}
-        </div>
-        <div style={{
-          fontFamily: "'Plus Jakarta Sans', sans-serif",
-          fontStyle: "italic",
-          fontSize: 13, color: translitColor, fontWeight: 500,
-          marginTop: 4,
-          textAlign: isYou ? "right" : "left",
-        }}>
-          {renderTranslit()}
-        </div>
-        <div style={{
-          fontFamily: "'Plus Jakarta Sans', sans-serif",
-          fontSize: 13, color: englishColor, fontWeight: 500,
-          marginTop: 2,
-          textAlign: isYou ? "right" : "left",
-        }}>
-          {renderEnglish()}
-        </div>
-      </button>
-    </div>
-  );
-}
+      <div style={{
+        fontFamily: "'Plus Jakarta Sans', sans-serif",
+        fontSize: 12, fontWeight: 700,
+        letterSpacing: 1.4, textTransform: "uppercase",
+        color: C.accent,
+      }}>
+        Your reply
+      </div>
 
-// ---------- Eye icon (for show-answer toggle) ----------
-function EyeIcon({ open }) {
-  if (open) {
-    return (
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
-           stroke="currentColor" strokeWidth="2.2"
-           strokeLinecap="round" strokeLinejoin="round">
-        <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z" />
-        <circle cx="12" cy="12" r="3" />
-      </svg>
-    );
-  }
-  return (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
-         stroke="currentColor" strokeWidth="2.2"
-         strokeLinecap="round" strokeLinejoin="round">
-      <path d="M3 3l18 18" />
-      <path d="M10.6 10.6a2 2 0 0 0 2.8 2.8" />
-      <path d="M9.9 5.1A10.7 10.7 0 0 1 12 5c6.5 0 10 7 10 7a17.6 17.6 0 0 1-3.2 4.2" />
-      <path d="M6.6 6.6A17.4 17.4 0 0 0 2 12s3.5 7 10 7c1.6 0 3-.3 4.3-.8" />
-    </svg>
+      <div dir="rtl" lang="ar" style={{
+        fontFamily: "'Reem Kufi', sans-serif",
+        fontSize: 28, fontWeight: 600,
+        color: C.ink,
+        lineHeight: 1.7,
+        textAlign: "right",
+      }}>
+        {renderArabic()}
+      </div>
+      <div style={{
+        fontFamily: "'Plus Jakarta Sans', sans-serif",
+        fontStyle: "italic",
+        fontSize: 14, color: C.muted, fontWeight: 500,
+        textAlign: "right",
+        marginTop: 2,
+      }}>
+        {renderTranslit()}
+      </div>
+      <div style={{
+        fontFamily: "'Plus Jakarta Sans', sans-serif",
+        fontSize: 14, color: C.inkSoft, fontWeight: 500,
+        textAlign: "right",
+        marginTop: 2,
+      }}>
+        {renderEnglish()}
+      </div>
+    </div>
   );
 }
 
@@ -381,37 +341,32 @@ function SpeakBlankApp() {
 
   const [roundIdx, setRoundIdx] = React.useState(0);
   const [micState, setMicState] = React.useState("idle");
-  const [playingLine, setPlayingLine] = React.useState(null);
+  const [promptPlaying, setPromptPlaying] = React.useState(false);
   const [blankRevealed, setBlankRevealed] = React.useState(false);
   const [completed, setCompleted] = React.useState(false);
 
   const round = ROUNDS[roundIdx];
 
-  // Reset per-round state
+  // Reset per-round
   React.useEffect(() => {
     setMicState("idle");
-    setPlayingLine(null);
+    setPromptPlaying(false);
     setBlankRevealed(false);
   }, [roundIdx]);
 
-  // Auto-play partner's prompt line on round entry
+  // Auto-play prompt on round entry
   React.useEffect(() => {
     if (completed) return;
     const t = setTimeout(() => {
-      const promptIdx = round.lines.findIndex(
-        (l, i) => i < round.blankLineIdx && l.speaker === "them"
-      );
-      if (promptIdx >= 0) {
-        setPlayingLine(promptIdx);
-        setTimeout(() => setPlayingLine(null), 1300);
-      }
-    }, 500);
+      setPromptPlaying(true);
+      setTimeout(() => setPromptPlaying(false), 1300);
+    }, 450);
     return () => clearTimeout(t);
   }, [roundIdx, completed]);
 
-  const playLineAudio = (i) => {
-    setPlayingLine(i);
-    setTimeout(() => setPlayingLine((p) => (p === i ? null : p)), 1200);
+  const playPrompt = () => {
+    setPromptPlaying(true);
+    setTimeout(() => setPromptPlaying(false), 1200);
   };
 
   const handleMic = () => {
@@ -422,11 +377,8 @@ function SpeakBlankApp() {
         setMicState(ok ? "success" : "retry");
         if (ok) {
           setTimeout(() => {
-            if (roundIdx + 1 >= ROUNDS.length) {
-              setCompleted(true);
-            } else {
-              setRoundIdx((i) => i + 1);
-            }
+            if (roundIdx + 1 >= ROUNDS.length) setCompleted(true);
+            else setRoundIdx((i) => i + 1);
           }, 1100);
         }
       }, 1800);
@@ -438,12 +390,12 @@ function SpeakBlankApp() {
   const reset = () => {
     setRoundIdx(0);
     setMicState("idle");
-    setPlayingLine(null);
+    setPromptPlaying(false);
     setBlankRevealed(false);
     setCompleted(false);
   };
 
-  // ---------- Completion screen ----------
+  // ---------- Completion ----------
   if (completed) {
     return (
       <window.PhoneFrame tone="light" label="01 Speak the Blank">
@@ -452,41 +404,42 @@ function SpeakBlankApp() {
           step={ROUNDS.length} total={ROUNDS.length}
         />
         <div style={{
-          flex: 1, padding: "24px 28px",
+          flex: 1, padding: "32px 32px 0",
           display: "flex", flexDirection: "column",
-          alignItems: "center", justifyContent: "center", gap: 18,
+          alignItems: "center", justifyContent: "center", gap: 20,
         }}>
           <div style={{
-            width: 88, height: 88, borderRadius: 44,
-            background: "rgba(115,140,230,0.12)", color: "#3d57b8",
+            width: 84, height: 84, borderRadius: 42,
+            background: C.accentWash, color: C.accent,
             display: "flex", alignItems: "center", justifyContent: "center",
+            boxShadow: `inset 0 0 0 1px ${C.hair}`,
           }}>
-            <window.Icon.Check size={44} color="#3d57b8" />
+            <window.Icon.Check size={40} color={C.accent} />
           </div>
           <div style={{
             fontFamily: "'Plus Jakarta Sans', sans-serif",
-            fontSize: 26, fontWeight: 800, color: "#151515",
-            letterSpacing: -0.3, textAlign: "center",
+            fontSize: 28, fontWeight: 800, color: C.ink,
+            letterSpacing: -0.4, textAlign: "center",
           }}>
             Conversation done
           </div>
           <div style={{
             fontFamily: "'Plus Jakarta Sans', sans-serif",
-            fontSize: 16, fontWeight: 500, color: "#9d998e",
-            textAlign: "center", maxWidth: 280, lineHeight: 1.4,
+            fontSize: 15, fontWeight: 500, color: C.muted,
+            textAlign: "center", maxWidth: 280, lineHeight: 1.5,
           }}>
             You spoke {ROUNDS.length} replies in context.
           </div>
         </div>
         <div style={{
-          padding: "20px 24px 36px",
+          padding: "24px 24px 36px",
           display: "flex", justifyContent: "center", flexShrink: 0,
         }}>
           <button
             onClick={reset}
             style={{
-              padding: "16px 32px", borderRadius: 999,
-              background: "#fe4d01", color: "#ffffff", border: "none",
+              padding: "16px 36px", borderRadius: 999,
+              background: C.accent, color: "#ffffff", border: "none",
               fontFamily: "'Plus Jakarta Sans', sans-serif",
               fontWeight: 700, fontSize: 16, letterSpacing: 0.2,
               cursor: "pointer",
@@ -500,6 +453,13 @@ function SpeakBlankApp() {
     );
   }
 
+  // ---------- Status copy ----------
+  const status =
+    micState === "listening" ? "Listening…" :
+    micState === "retry"     ? "Try again — speak clearly" :
+    micState === "success"   ? "Nicely said" :
+                               "Speak the missing word";
+
   return (
     <>
     <window.PhoneFrame tone="light" label="01 Speak the Blank">
@@ -508,114 +468,88 @@ function SpeakBlankApp() {
         step={roundIdx} total={ROUNDS.length}
       />
 
-      <div style={{ padding: "10px 24px 0", flexShrink: 0 }}>
-        <window.Eyebrow>Speak to fill the blank</window.Eyebrow>
+      {/* Title block */}
+      <div style={{ padding: "12px 28px 0", flexShrink: 0 }}>
+        <div style={{
+          fontFamily: "'Plus Jakarta Sans', sans-serif",
+          fontSize: 12, fontWeight: 700,
+          letterSpacing: 1.6, textTransform: "uppercase",
+          color: C.accent,
+          marginBottom: 6,
+        }}>
+          Speak the blank
+        </div>
+        {tweaks.showContext && (
+          <div style={{
+            fontFamily: "'Plus Jakarta Sans', sans-serif",
+            fontSize: 14, fontWeight: 500, color: C.muted,
+            lineHeight: 1.5,
+          }}>
+            {round.context}
+          </div>
+        )}
       </div>
 
-      {/* Context card */}
-      {tweaks.showContext && (
-        <div style={{ padding: "14px 20px 0", flexShrink: 0 }}>
-          <div style={{
-            background: "rgba(115,140,230,0.08)",
-            border: "1px solid rgba(115,140,230,0.22)",
-            borderRadius: 16,
-            padding: "10px 14px",
-            display: "flex", gap: 10, alignItems: "flex-start",
-          }}>
-            <span style={{
-              display: "inline-flex", alignItems: "center", justifyContent: "center",
-              width: 22, height: 22, borderRadius: 11,
-              background: "#738ce6", color: "#ffffff",
-              flexShrink: 0, marginTop: 1,
-              fontFamily: "'JetBrains Mono', monospace",
-              fontSize: 11, fontWeight: 700,
-            }}>i</span>
-            <div style={{
-              fontFamily: "'Plus Jakarta Sans', sans-serif",
-              fontSize: 13, fontWeight: 500, color: "#3d57b8",
-              lineHeight: 1.45,
-            }}>
-              {round.context}
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Conversation */}
+      {/* Body */}
       <div style={{
         flex: 1,
-        padding: "16px 20px 6px",
-        display: "flex", flexDirection: "column", gap: 14,
+        padding: "24px 28px 16px",
+        display: "flex", flexDirection: "column", gap: 22,
         overflowY: "auto",
       }}>
-        {round.lines.map((line, i) => (
-          <Bubble
-            key={i}
-            line={line}
-            isBlank={i === round.blankLineIdx}
-            blankRevealed={i === round.blankLineIdx && blankRevealed}
-            micState={i === round.blankLineIdx ? micState : "idle"}
-            audioPlaying={playingLine === i}
-            onPlay={() => playLineAudio(i)}
-          />
-        ))}
+        {/* Prompt — quiet, no card chrome */}
+        <PromptCard line={round.prompt} playing={promptPlaying} onPlay={playPrompt} />
+
+        {/* Hairline separator */}
+        <div style={{ height: 1, background: C.hair, margin: "2px 0" }} />
+
+        {/* Your reply */}
+        <AnswerCard line={round.answer} micState={micState} blankRevealed={blankRevealed} />
+
+        {/* Show / hide answer link */}
+        <div style={{ display: "flex", justifyContent: "center", marginTop: -4 }}>
+          <button
+            onClick={() => setBlankRevealed((v) => !v)}
+            style={{
+              appearance: "none", background: "transparent", border: "none",
+              padding: "6px 10px", cursor: "pointer",
+              fontFamily: "'Plus Jakarta Sans', sans-serif",
+              fontSize: 13, fontWeight: 600,
+              color: blankRevealed ? C.inkSoft : C.muted,
+              letterSpacing: 0.2,
+              textDecoration: "underline",
+              textUnderlineOffset: 4,
+              textDecorationColor: blankRevealed ? C.muted2 : C.muted2,
+              textDecorationThickness: "1px",
+              transition: "color 200ms ease",
+            }}
+          >
+            {blankRevealed ? "Hide the answer" : "Show the answer"}
+          </button>
+        </div>
       </div>
 
-      {/* Bottom action */}
+      {/* Bottom — just status + mic */}
       <div style={{
-        borderTop: "1px solid #efeeeb",
-        background: "#faf9f6",
-        padding: "18px 24px 30px",
+        padding: "10px 24px 32px",
         display: "flex", flexDirection: "column", alignItems: "center", gap: 14,
         flexShrink: 0,
       }}>
         <div style={{
           fontFamily: "'Plus Jakarta Sans', sans-serif",
-          fontSize: 13, fontWeight: 600, color: "#9d998e",
-          letterSpacing: 0.6, textTransform: "uppercase",
+          fontSize: 13, fontWeight: 600,
+          color: micState === "retry" ? C.inkSoft : C.muted,
+          letterSpacing: 0.4,
+          transition: "color 200ms ease",
         }}>
-          {micState === "listening" ? "Listening…" :
-           micState === "retry" ? "Try again" :
-           micState === "success" ? "Nicely said" :
-           "Speak the missing word"}
+          {status}
         </div>
-
-        <div style={{
-          display: "flex", alignItems: "center", justifyContent: "center", gap: 18,
-          width: "100%",
-        }}>
-          {/* Show answer toggle (left) */}
-          <button
-            onClick={() => setBlankRevealed((v) => !v)}
-            aria-pressed={blankRevealed}
-            style={{
-              display: "inline-flex", alignItems: "center", gap: 7,
-              padding: "11px 16px", borderRadius: 999,
-              background: blankRevealed ? "rgba(115,140,230,0.12)" : "#ffffff",
-              color: blankRevealed ? "#3d57b8" : "#46443f",
-              border: blankRevealed ? "1px solid rgba(115,140,230,0.35)" : "1px solid #efeeeb",
-              fontFamily: "'Plus Jakarta Sans', sans-serif",
-              fontWeight: 600, fontSize: 13, letterSpacing: 0.1,
-              cursor: "pointer",
-              boxShadow: blankRevealed ? "none" : "0 2px 6px rgba(21,21,21,0.05)",
-              flexShrink: 0,
-              transition: "all 200ms ease",
-            }}
-          >
-            <EyeIcon open={blankRevealed} />
-            {blankRevealed ? "Hide answer" : "Show answer"}
-          </button>
-
-          <window.MicButton
-            state={micState}
-            onClick={handleMic}
-            accent="#fe4d01"
-            micStyle="large"
-          />
-
-          {/* Spacer to balance the row visually opposite the button */}
-          <div style={{ width: 116, flexShrink: 0 }} />
-        </div>
+        <window.MicButton
+          state={micState}
+          onClick={handleMic}
+          accent={C.accent}
+          micStyle="large"
+        />
       </div>
     </window.PhoneFrame>
 
@@ -623,7 +557,7 @@ function SpeakBlankApp() {
       <window.TweaksPanel title="Tweaks">
         <window.TweakSection title="Layout">
           <window.TweakToggle
-            label="Show context card"
+            label="Show context line"
             value={tweaks.showContext}
             onChange={(v) => setTweak("showContext", v)}
           />
