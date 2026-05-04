@@ -9,6 +9,8 @@ import { useColorScheme } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { Audio } from 'expo-av';
+import { SvgXml } from 'react-native-svg';
+import * as FileSystem from 'expo-file-system';
 import { pickAvatarsForLesson, getAvatar } from '../../src/assets/avatars';
 
 // ── Design tokens ─────────────────────────────────────────────────────────────
@@ -97,9 +99,45 @@ const PHASE_LABELS: Record<string, { emoji: string; label: string }> = {
   subject:                { emoji: '📖', label: 'Arabic, the Basics' },
 };
 
+// ── IconifyIcon — cached SVG from api.iconify.design ─────────────────────────
+const ICONIFY_BASE = 'https://api.iconify.design';
+
+function IconifyIcon({ icon, color, size }: { icon: string; color: string; size: number }) {
+  const [svgXml, setSvgXml] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!icon.includes(':')) return;
+    const [set, name] = icon.split(':');
+    const url = `${ICONIFY_BASE}/${set}/${name}.svg?color=${encodeURIComponent(color)}`;
+    const cacheKey = `iconify_${set}_${name}_${color.replace('#', '')}.svg`;
+    const cacheUri = FileSystem.cacheDirectory ? FileSystem.cacheDirectory + cacheKey : null;
+
+    (async () => {
+      try {
+        if (cacheUri) {
+          const info = await FileSystem.getInfoAsync(cacheUri);
+          if (info.exists) {
+            setSvgXml(await FileSystem.readAsStringAsync(cacheUri));
+            return;
+          }
+        }
+        const res = await fetch(url);
+        if (!res.ok) return;
+        const xml = await res.text();
+        setSvgXml(xml);
+        if (cacheUri) await FileSystem.writeAsStringAsync(cacheUri, xml);
+      } catch { /* silent — container stays empty until network available */ }
+    })();
+  }, [icon, color]);
+
+  if (!svgXml) return null;
+  return <SvgXml xml={svgXml} width={size} height={size} />;
+}
+
 // ── WordIcon ──────────────────────────────────────────────────────────────────
 function WordIcon({ icon, iconColor, size = 120 }: { icon?: string; iconColor?: string; size?: number }) {
   const col = iconColor ?? DEFAULT_COLOR;
+  const isIconify = icon?.includes(':') ?? false;
   return (
     <View style={{
       width: size, height: size, borderRadius: size * 0.32,
@@ -107,7 +145,10 @@ function WordIcon({ icon, iconColor, size = 120 }: { icon?: string; iconColor?: 
       alignItems: 'center', justifyContent: 'center',
       shadowColor: col, shadowOpacity: 0.12, shadowOffset: { width: 0, height: 6 }, shadowRadius: 18,
     }}>
-      <Ionicons name={toIonicon(icon)} size={size * 0.50} color={col} />
+      {isIconify
+        ? <IconifyIcon icon={icon!} color={col} size={Math.round(size * 0.46)} />
+        : <Ionicons name={toIonicon(icon)} size={size * 0.50} color={col} />
+      }
     </View>
   );
 }
@@ -899,8 +940,7 @@ export default function LessonScreen() {
         </TouchableOpacity>
 
         <Text style={[s.wordCardArabic, { color: c.text }]}>{stg.arabic}</Text>
-        <Text style={[s.pronText, { color: c.label, fontStyle: 'italic' }]}>[{stg.hebrew_pronunciation}]</Text>
-        <Text style={[s.hebrewText, { color: c.text }]}>{stg.hebrew}</Text>
+        <Text style={[s.hebrewText, { color: c.label }]}>{stg.english ?? ''}</Text>
 
         {stg.dialect_note ? (
           <View style={[s.dialectNote, { backgroundColor: c.surface, borderColor: c.border }]}>
@@ -951,7 +991,7 @@ export default function LessonScreen() {
                 }}
                 disabled={isLocked || isWrong} activeOpacity={1}>
                 <View style={[s.choiceCardIcon, { backgroundColor: col + '18' }]}><Ionicons name={toIonicon(opt.icon)} size={46} color={col} /></View>
-                <View style={s.choiceCardLabel}><Text style={[s.choiceCardText, { color: isCorrect ? c.right : isWrong ? c.wrong : c.text }]} numberOfLines={2}>{opt.hebrew}</Text></View>
+                <View style={s.choiceCardLabel}><Text style={[s.choiceCardText, { color: isCorrect ? c.right : isWrong ? c.wrong : c.text }]} numberOfLines={2}>{opt.english ?? opt.hebrew ?? ''}</Text></View>
               </TouchableOpacity>
             );
           })}
@@ -985,18 +1025,17 @@ export default function LessonScreen() {
         </View>
 
         <Text style={[s.wordCardArabic, { color: c.text }]}>{stg.arabic}</Text>
-        <Text style={[s.pronText, { color: c.label, fontStyle: 'italic' }]}>{`‪[${stg.hebrew_pronunciation}]‬`}</Text>
-        <Text style={[s.hebrewText, { color: c.text }]}>{firstHebrew(stg.hebrew)}</Text>
+        <Text style={[s.hebrewText, { color: c.label }]}>{stg.english ?? ''}</Text>
         {listenPhase === 'correct' && (
           <View style={{ alignItems: 'center', marginTop: 16, gap: 6 }}>
             <Ionicons name="checkmark-circle" size={44} color={c.right} />
-            <Text style={{ color: c.right, fontSize: 16, fontWeight: '700' }}>מעולה!</Text>
+            <Text style={{ color: c.right, fontSize: 16, fontWeight: '700' }}>Well done!</Text>
           </View>
         )}
         {listenPhase === 'wrong' && (
           <View style={{ alignItems: 'center', marginTop: 16, gap: 6 }}>
             <Ionicons name="close-circle" size={44} color={c.wrong} />
-            <Text style={{ color: c.wrong, fontSize: 15, fontWeight: '600' }}>נסה שוב</Text>
+            <Text style={{ color: c.wrong, fontSize: 15, fontWeight: '600' }}>Try again</Text>
           </View>
         )}
       </View>
@@ -1021,7 +1060,7 @@ export default function LessonScreen() {
           </TouchableOpacity>
           <Text style={[s.chooseArabicLarge, { color: '#151515', fontFamily: FONT_AR }]}>{stg.arabic}</Text>
           {isLocked && (
-            <Text style={{ fontFamily: FONT_UI, fontStyle: 'italic', fontSize: 15, color: '#9d998e', fontWeight: '500', letterSpacing: 0.1 }}>{stg.translit ?? stg.hebrew_pronunciation}</Text>
+            <Text style={{ fontFamily: FONT_UI, fontStyle: 'italic', fontSize: 15, color: '#9d998e', fontWeight: '500', letterSpacing: 0.1 }}>{stg.english ?? ''}</Text>
           )}
         </View>
 
@@ -1051,7 +1090,7 @@ export default function LessonScreen() {
                   setChoosePendingAnswer(opt.id);
                 }}
                 disabled={isLocked} activeOpacity={0.85}>
-                <Text style={[s.chooseOptionText, { color: txtColor, fontFamily: FONT_UI, backgroundColor: 'transparent' }]} numberOfLines={3}>{firstHebrew(opt.hebrew ?? '')}</Text>
+                <Text style={[s.chooseOptionText, { color: txtColor, fontFamily: FONT_UI, backgroundColor: 'transparent' }]} numberOfLines={3}>{opt.english ?? ''}</Text>
                 {isRevealCorrect && (
                   <View style={{ position: 'absolute', top: 8, right: 8, width: 20, height: 20, borderRadius: 10, backgroundColor: '#738ce6', alignItems: 'center', justifyContent: 'center' }}>
                     <Ionicons name="checkmark" size={13} color="#ffffff" />
@@ -1076,8 +1115,7 @@ export default function LessonScreen() {
       <View style={[s.stageWrap, { flex: 1 }]}>
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', gap: 14 }}>
           <WordIcon icon={stg.icon} iconColor={stg.icon_color} size={140} />
-          <Text style={[s.hebrewText, { color: c.text, marginBottom: 0 }]}>{stg.hebrew}</Text>
-          <Text style={[s.pronText,   { color: c.label }]}>[{stg.hebrew_pronunciation}]</Text>
+          <Text style={[s.hebrewText, { color: c.label, marginBottom: 0 }]}>{stg.english ?? ''}</Text>
         </View>
         <View style={{ gap: 12, marginBottom: 8 }}>
           {twoOptions.map((opt: any) => {
@@ -1145,7 +1183,6 @@ export default function LessonScreen() {
                   onPress={() => !isLeftMatched && setMatchSelected(p.id)}
                   disabled={isLeftMatched} activeOpacity={0.8}>
                   <Text style={[s.matchAr, { color: leftTxt, fontFamily: FONT_AR }]}>{p.arabic}</Text>
-                  {p.translit ? <Text style={[s.matchTr, { color: isLeftSelected ? 'rgba(255,255,255,0.8)' : '#9d998e' }]}>{p.translit}</Text> : null}
                 </TouchableOpacity>
                 {rightPair && (
                   <TouchableOpacity
@@ -1157,7 +1194,7 @@ export default function LessonScreen() {
                       else { setMatchWrong(rightPair.id); setTimeout(() => setMatchWrong(null), 500); setMatchSelected(null); }
                     }}
                     disabled={isRightMatched} activeOpacity={0.8}>
-                    <Text style={[s.matchHe, { color: rightTxt, fontFamily: FONT_UI }]}>{firstHebrew(rightPair.hebrew ?? rightPair.english ?? '')}</Text>
+                    <Text style={[s.matchHe, { color: rightTxt, fontFamily: FONT_UI }]}>{rightPair.english ?? ''}</Text>
                   </TouchableOpacity>
                 )}
               </View>
@@ -1198,7 +1235,7 @@ export default function LessonScreen() {
                 }}
                 disabled={isLocked || isWrong} activeOpacity={1}>
                 <View style={[s.choiceCardIcon, { backgroundColor: col + '18' }]}><Ionicons name={toIonicon(opt.icon ?? DEFAULT_ICON)} size={50} color={col} /></View>
-                <View style={s.choiceCardLabel}><Text style={[s.choiceCardText, { color: isCorrect ? c.primary : isWrong ? c.wrong : c.text }]} numberOfLines={2}>{opt.hebrew}</Text></View>
+                <View style={s.choiceCardLabel}><Text style={[s.choiceCardText, { color: isCorrect ? c.primary : isWrong ? c.wrong : c.text }]} numberOfLines={2}>{opt.english ?? opt.hebrew ?? ''}</Text></View>
               </TouchableOpacity>
             );
           })}
@@ -1259,7 +1296,6 @@ export default function LessonScreen() {
               <TouchableOpacity key={'placed-'+i} onPress={() => handleSlotTap(i)}
                 style={[s.sbWordBlock, { backgroundColor: slotBg, borderColor: slotBd }]} activeOpacity={0.8}>
                 <Text style={[s.sbWordAr, { color: slotTxt, fontFamily: FONT_AR }]}>{placedWord}</Text>
-                {placedItem?.tr ? <Text style={[s.sbWordTr, { color: buildPhase === 'done' ? REVEAL_CORRECT_TEXT : '#fe4d01', opacity: 0.7 }]}>{placedItem.tr}</Text> : null}
               </TouchableOpacity>
             );
           })}
@@ -1280,7 +1316,6 @@ export default function LessonScreen() {
                 return (
                   <View key={i} style={{ alignItems: 'center' }}>
                     <Text style={{ fontWeight: '700', fontFamily: FONT_AR, fontSize: 20, color: REVEAL_CORRECT_TEXT, lineHeight: 28 }}>{w}</Text>
-                    {item?.tr ? <Text style={{ fontFamily: FONT_UI, fontStyle: 'italic', fontSize: 10, color: 'rgba(61,87,184,0.7)' }}>{item.tr}</Text> : null}
                   </View>
                 );
               })}
@@ -1304,7 +1339,6 @@ export default function LessonScreen() {
                     shadowColor: '#151515', shadowOpacity: used ? 0 : 0.04, shadowOffset: { width: 0, height: 2 }, shadowRadius: 6, elevation: used ? 0 : 2 }]}
                   disabled={used} activeOpacity={0.8}>
                   <Text style={[s.sbWordAr, { color: '#151515', fontFamily: FONT_AR }]}>{word}</Text>
-                  {tr ? <Text style={[s.sbWordTr, { color: '#9d998e' }]}>{tr}</Text> : null}
                 </TouchableOpacity>
               );
             })}
@@ -1390,8 +1424,7 @@ export default function LessonScreen() {
                       </View>
                       <Text style={{ fontFamily: FONT_AR, fontSize: 26, fontWeight: '600', color: '#151515', lineHeight: 44, textAlign: 'right', flex: 1 }}>{line.arabic}</Text>
                     </View>
-                    {line.hebrew_pronunciation && <Text style={{ fontFamily: FONT_UI, fontStyle: 'italic', fontSize: 13, color: '#9d998e', marginTop: 4 }}>{line.hebrew_pronunciation}</Text>}
-                    <Text style={{ fontFamily: FONT_UI, fontSize: 13, color: '#9d998e', marginTop: 2 }}>{line.hebrew ?? line.english}</Text>
+                    <Text style={{ fontFamily: FONT_UI, fontSize: 13, color: '#9d998e', marginTop: 2 }}>{line.english ?? ''}</Text>
                   </TouchableOpacity>
                 </View>
               );
@@ -1403,8 +1436,7 @@ export default function LessonScreen() {
                 <DlgAvatar isUser={true} />
                 <View style={[s.dlgBubbleYouDone]}>
                   <Text style={{ fontFamily: FONT_AR, fontSize: 26, fontWeight: '600', color: '#ffffff', lineHeight: 44, textAlign: 'right' }}>{line.full_arabic}</Text>
-                  {line.hebrew_pronunciation && <Text style={{ fontFamily: FONT_UI, fontStyle: 'italic', fontSize: 13, color: 'rgba(255,255,255,0.85)', marginTop: 4, textAlign: 'right' }}>{line.hebrew_pronunciation}</Text>}
-                  <Text style={{ fontFamily: FONT_UI, fontSize: 13, color: 'rgba(255,255,255,0.85)', marginTop: 2, textAlign: 'right' }}>{line.hebrew ?? line.english}</Text>
+                  <Text style={{ fontFamily: FONT_UI, fontSize: 13, color: 'rgba(255,255,255,0.85)', marginTop: 2, textAlign: 'right' }}>{line.english ?? ''}</Text>
                 </View>
               </View>
             );
@@ -1414,7 +1446,7 @@ export default function LessonScreen() {
               <View key={idx} style={{ flexDirection: 'row-reverse', alignItems: 'flex-end', gap: 8, alignSelf: 'flex-end', maxWidth: '86%' }}>
                 <DlgAvatar isUser={true} />
                 <View style={s.dlgBubbleYouGhost}>
-                  {renderHebrewGap(line.hebrew ?? line.english ?? '', line.hebrew_gap ?? '')}
+                  {renderHebrewGap(line.english ?? line.hebrew ?? '', line.english_gap ?? line.hebrew_gap ?? '')}
                   <View style={{ marginTop: 10 }}>{renderArabicGap(line.full_arabic, line.target_voweled)}</View>
                   {dialogueMicState === 'wrong' && lastTranscript.length > 1 && (
                     <Text style={{ color: c.wrong, fontSize: 12, marginTop: 6, fontFamily: FONT_UI }}>Heard: {lastTranscript}</Text>
@@ -1489,12 +1521,11 @@ export default function LessonScreen() {
           </AudioProgressRing>
         </View>
         <Text style={[s.wordCardArabic, { color: c.text, fontSize: 34, lineHeight: 50 }]} adjustsFontSizeToFit>{stg.sentence_arabic}</Text>
-        {stg.hebrew_pronunciation && <Text style={[s.pronText, { color: c.label }]}>[{stg.hebrew_pronunciation}]</Text>}
-        <Text style={[s.hebrewText, { color: c.text }]}>{stg.sentence_hebrew}</Text>
-        {shadowPhase === 'idle' && <Text style={[s.micHint, { color: c.label, marginTop: 8 }]}>לחץ על הכפתור להאזנה</Text>}
-        {shadowPhase === 'ready' && <Text style={[s.micHint, { color: c.primary, fontWeight: '700', marginTop: 8 }]}>עכשיו חזור אחרי!</Text>}
-        {shadowPhase === 'correct' && <View style={{ alignItems: 'center', marginTop: 16, gap: 6 }}><Ionicons name="checkmark-circle" size={48} color={c.right} /><Text style={{ color: c.right, fontSize: 18, fontWeight: '800' }}>מעולה!</Text></View>}
-        {shadowPhase === 'wrong'   && <View style={{ alignItems: 'center', marginTop: 16, gap: 6 }}><Ionicons name="close-circle" size={48} color={c.wrong} /><Text style={{ color: c.wrong, fontSize: 18, fontWeight: '700' }}>נסה שוב</Text></View>}
+        <Text style={[s.hebrewText, { color: c.label }]}>{stg.sentence_english ?? stg.sentence_hebrew ?? ''}</Text>
+        {shadowPhase === 'idle' && <Text style={[s.micHint, { color: c.label, marginTop: 8 }]}>Tap to listen</Text>}
+        {shadowPhase === 'ready' && <Text style={[s.micHint, { color: c.primary, fontWeight: '700', marginTop: 8 }]}>Now repeat!</Text>}
+        {shadowPhase === 'correct' && <View style={{ alignItems: 'center', marginTop: 16, gap: 6 }}><Ionicons name="checkmark-circle" size={48} color={c.right} /><Text style={{ color: c.right, fontSize: 18, fontWeight: '800' }}>Well done!</Text></View>}
+        {shadowPhase === 'wrong'   && <View style={{ alignItems: 'center', marginTop: 16, gap: 6 }}><Ionicons name="close-circle" size={48} color={c.wrong} /><Text style={{ color: c.wrong, fontSize: 18, fontWeight: '700' }}>Try again</Text></View>}
       </View>
     );
   };
@@ -1527,7 +1558,7 @@ export default function LessonScreen() {
                 }}
                 disabled={isLocked} activeOpacity={0.8}>
                 {isCorrect && <Ionicons name="checkmark-circle" size={20} color={c.right} style={{ marginRight: 10 }} />}
-                <Text style={[s.lcOptionText, { color: isCorrect ? c.right : c.text, fontWeight: isCorrect ? '700' : '500' }]}>{opt.hebrew}</Text>
+                <Text style={[s.lcOptionText, { color: isCorrect ? c.right : c.text, fontWeight: isCorrect ? '700' : '500' }]}>{opt.english ?? opt.hebrew ?? ''}</Text>
               </TouchableOpacity>
             );
           })}
@@ -1612,7 +1643,7 @@ export default function LessonScreen() {
                   }}
                   disabled={!!lockedAnswer || isWrong} activeOpacity={1}>
                   <View style={[s.choiceCardIcon, { backgroundColor: col + '18' }]}><Ionicons name={toIonicon(opt.icon)} size={42} color={col} /></View>
-                  <View style={s.choiceCardLabel}><Text style={[s.choiceCardText, { color: isCorrect ? c.right : isWrong ? c.wrong : c.text }]} numberOfLines={2}>{opt.hebrew}</Text></View>
+                  <View style={s.choiceCardLabel}><Text style={[s.choiceCardText, { color: isCorrect ? c.right : isWrong ? c.wrong : c.text }]} numberOfLines={2}>{opt.english ?? opt.hebrew ?? ''}</Text></View>
                 </TouchableOpacity>
               );
             })}
@@ -1621,10 +1652,9 @@ export default function LessonScreen() {
           <View style={{ alignItems: 'center', gap: 16 }}>
             {item.word && <WordIcon icon={item.word.icon} iconColor={item.word.icon_color} size={140} />}
             <Text style={[s.wordCardArabic, { color: c.text, fontSize: 52 }]}>{item.word?.arabic}</Text>
-            <Text style={[s.pronText, { color: c.label }]}>[{item.word?.hebrew_pronunciation}]</Text>
-            <Text style={[s.hebrewText, { color: c.text }]}>{item.word?.hebrew}</Text>
-            {listenPhase === 'correct' && <View style={{ alignItems: 'center', gap: 6 }}><Ionicons name="checkmark-circle" size={40} color={c.right} /><Text style={{ color: c.right, fontWeight: '700' }}>מעולה!</Text></View>}
-            {listenPhase === 'wrong'   && <View style={{ alignItems: 'center', gap: 6 }}><Ionicons name="close-circle" size={40} color={c.wrong} /><Text style={{ color: c.wrong, fontWeight: '600' }}>נסה שוב</Text></View>}
+            <Text style={[s.hebrewText, { color: c.label }]}>{item.word?.english}</Text>
+            {listenPhase === 'correct' && <View style={{ alignItems: 'center', gap: 6 }}><Ionicons name="checkmark-circle" size={40} color={c.right} /><Text style={{ color: c.right, fontWeight: '700' }}>Well done!</Text></View>}
+            {listenPhase === 'wrong'   && <View style={{ alignItems: 'center', gap: 6 }}><Ionicons name="close-circle" size={40} color={c.wrong} /><Text style={{ color: c.wrong, fontWeight: '600' }}>Try again</Text></View>}
           </View>
         )}
       </View>
@@ -1650,8 +1680,6 @@ export default function LessonScreen() {
       playAudio(arabicText, () => setSubjectPlayingId(null));
     };
 
-    // ── sub-components ─────────────────────────────────────────────────────
-
     const SubCard = ({ children, style = {} }: any) => (
       <View style={[{ backgroundColor: SC.card, borderWidth: 1, borderColor: SC.hair, borderRadius: 20,
         padding: 20, shadowColor: '#151515', shadowOpacity: 0.04, shadowOffset: { width: 0, height: 6 },
@@ -1668,10 +1696,10 @@ export default function LessonScreen() {
     const SubSectionTitle = ({ kicker, kickerColor, title, sub }: any) => (
       <View style={{ gap: 6, marginBottom: 18 }}>
         <SubEyebrow text={kicker} color={kickerColor} />
-        <Text style={{ fontFamily: FONT_UI_EXTRABOLD, fontSize: 26, fontWeight: '800', color: SC.ink,
-          letterSpacing: -0.4, lineHeight: 30 }}>{title}</Text>
-        {sub && <Text style={{ fontFamily: FONT_UI, fontSize: 14, fontWeight: '500', color: SC.muted,
-          lineHeight: 21 }}>{sub}</Text>}
+        <Text style={{ fontFamily: FONT_UI_EXTRABOLD, fontSize: 30, fontWeight: '800', color: SC.ink,
+          letterSpacing: -0.4, lineHeight: 36 }}>{title}</Text>
+        {sub && <Text style={{ fontFamily: FONT_UI, fontSize: 15, fontWeight: '500', color: SC.muted,
+          lineHeight: 22 }}>{sub}</Text>}
       </View>
     );
 
@@ -1686,8 +1714,8 @@ export default function LessonScreen() {
               color: isWarm ? SC.accent : SC.coolDeep }}>·</Text>
           </View>
           <View style={{ flex: 1, gap: 3 }}>
-            <Text style={{ fontFamily: FONT_UI_BOLD, fontSize: 14, fontWeight: '700', color: SC.ink }}>{t2}</Text>
-            <Text style={{ fontFamily: FONT_UI, fontSize: 13, fontWeight: '500', color: SC.muted, lineHeight: 19 }}>{body}</Text>
+            <Text style={{ fontFamily: FONT_UI_BOLD, fontSize: 15, fontWeight: '700', color: SC.ink }}>{t2}</Text>
+            <Text style={{ fontFamily: FONT_UI, fontSize: 14, fontWeight: '500', color: SC.muted, lineHeight: 20 }}>{body}</Text>
           </View>
         </View>
       );
@@ -1710,12 +1738,12 @@ export default function LessonScreen() {
       const playing = subjectPlayingId === id;
       return (
         <TouchableOpacity onPress={() => playSubject(id, arabicText)} activeOpacity={0.8}
-          style={{ width: 34, height: 34, borderRadius: 999, alignItems: 'center', justifyContent: 'center',
+          style={{ width: 40, height: 40, borderRadius: 999, alignItems: 'center', justifyContent: 'center',
             flexShrink: 0, backgroundColor: playing ? SC.accent : '#ffffff',
             shadowColor: playing ? SC.accent : '#151515',
             shadowOpacity: playing ? 0.35 : 0.06, shadowOffset: { width: 0, height: 1 }, shadowRadius: 2,
             borderWidth: 1, borderColor: SC.hair }}>
-          <Ionicons name={playing ? 'volume-high' : 'volume-medium-outline'} size={16}
+          <Ionicons name={playing ? 'volume-high' : 'volume-medium-outline'} size={18}
             color={playing ? '#ffffff' : SC.inkSoft} />
         </TouchableOpacity>
       );
@@ -1726,15 +1754,14 @@ export default function LessonScreen() {
       <SubCard style={{ gap: 16 }}>
         <SubSectionTitle kicker="01 · Background" kickerColor={SC.accent}
           title="A few things to know first"
-          sub="You're learning Levantine Arabic — the everyday spoken Arabic of Syria, Lebanon, Jordan and Palestine. It's close to Modern Standard Arabic, but with a softer, looser pronunciation." />
+          sub="You're learning Levantine Arabic — the everyday spoken Arabic of Syria, Lebanon, Jordan and Palestine." />
         <InfoRow tone="warm" title="It's regional"
-          body="Levantine is spoken, not formal. Newspapers and the Qur'an use Modern Standard Arabic — but on the street, on TV, between friends, it's Levantine." />
+          body="Levantine is spoken, not formal. Newspapers and the Qur'an use Modern Standard Arabic — but on the street and between friends, it's Levantine." />
         <InfoRow tone="cool" title="It has gender"
           body="Every noun and many verbs change depending on whether you're addressing a man or a woman. 'You' isn't one word — it's two." />
         <InfoRow tone="warm" title="Pronunciation flexes"
-          body="Some letters are pronounced one way in the formal language and a softer way in everyday Levantine speech. Tap a letter below to hear how." />
+          body="Some letters sound different in everyday Levantine versus formal Arabic. Tap a letter below to see how." />
 
-        {/* Pronunciation toggle */}
         <View style={{ backgroundColor: SC.surface, borderWidth: 1, borderColor: SC.hair,
           borderRadius: 16, padding: 16, marginTop: 6 }}>
           <View style={{ flexDirection: 'row', gap: 8, marginBottom: 14, flexWrap: 'wrap' }}>
@@ -1742,13 +1769,13 @@ export default function LessonScreen() {
               const active = i === subjectLetter;
               return (
                 <TouchableOpacity key={v.id} onPress={() => setSubjectLetter(i)} activeOpacity={0.8}
-                  style={{ paddingVertical: 8, paddingHorizontal: 14, borderRadius: 999, flexDirection: 'row',
+                  style={{ paddingVertical: 9, paddingHorizontal: 16, borderRadius: 999, flexDirection: 'row',
                     alignItems: 'center', gap: 8,
                     backgroundColor: active ? SC.ink : '#ffffff',
                     borderWidth: 1, borderColor: active ? SC.ink : SC.hair }}>
-                  <Text style={{ fontFamily: FONT_AR, fontSize: 18, fontWeight: '700',
+                  <Text style={{ fontFamily: FONT_AR, fontSize: 20, fontWeight: '700',
                     color: active ? '#ffffff' : SC.inkSoft }}>{v.id}</Text>
-                  <Text style={{ fontFamily: FONT_UI_BOLD, fontSize: 13, fontWeight: '600', letterSpacing: 0.1,
+                  <Text style={{ fontFamily: FONT_UI_BOLD, fontSize: 14, fontWeight: '600', letterSpacing: 0.1,
                     color: active ? '#ffffff' : SC.inkSoft }}>{v.label}</Text>
                 </TouchableOpacity>
               );
@@ -1767,60 +1794,61 @@ export default function LessonScreen() {
       <SubCard style={{ gap: 16 }}>
         <SubSectionTitle kicker="02 · Greetings" kickerColor={SC.accent}
           title="Saying hello"
-          sub="Most greetings are unisex. Some change depending on whether you're greeting a man or a woman — toggle below to see the difference." />
+          sub="Most greetings work for anyone. Some change depending on whether you're addressing a man or a woman — both forms shown below." />
 
-        {/* Audience toggle */}
-        <View style={{ flexDirection: 'row', alignSelf: 'flex-start', backgroundColor: SC.surface,
-          borderWidth: 1, borderColor: SC.hair, borderRadius: 999, padding: 4, gap: 4 }}>
-          {[{ id:'him', label:'to him', ar:'أَنتَ' }, { id:'her', label:'to her', ar:'أَنتِ' }].map(o => {
-            const active = o.id === subjectAudience;
-            return (
-              <TouchableOpacity key={o.id} onPress={() => setSubjectAudience(o.id as any)} activeOpacity={0.8}
-                style={{ paddingVertical: 8, paddingHorizontal: 14, borderRadius: 999, flexDirection: 'row',
-                  alignItems: 'center', gap: 8, backgroundColor: active ? SC.accent : 'transparent' }}>
-                <Text style={{ fontFamily: FONT_AR, fontSize: 15, fontWeight: '700',
-                  color: active ? '#ffffff' : SC.inkSoft }}>{o.ar}</Text>
-                <Text style={{ fontFamily: FONT_UI_BOLD, fontSize: 13, fontWeight: '700', letterSpacing: 0.2,
-                  color: active ? '#ffffff' : SC.inkSoft }}>{o.label}</Text>
-              </TouchableOpacity>
-            );
-          })}
-        </View>
-
-        {/* Greeting rows */}
         <View>
           {SUBJECT_GREETINGS.map((g, i) => {
-            const variant = g.gendered ? (subjectAudience === 'him' ? g.masculine : g.feminine) : null;
-            const arabic  = g.gendered ? variant!.arabic  : g.arabic!;
-            const translit = g.gendered ? variant!.translit : g.translit!;
             const isLast = i === SUBJECT_GREETINGS.length - 1;
-            return (
-              <View key={g.id} style={{ flexDirection: 'row', gap: 14, alignItems: 'center',
-                paddingVertical: 14, paddingHorizontal: 4,
-                borderBottomWidth: isLast ? 0 : 1, borderBottomColor: SC.hair }}>
-                <PlayPill id={g.id} arabicText={arabic} label={g.meaning} />
-                <View style={{ flex: 1, gap: 4 }}>
-                  <View style={{ flexDirection: 'row', alignItems: 'baseline', gap: 10, flexWrap: 'wrap' }}>
-                    <Text style={{ fontFamily: FONT_AR, fontSize: 22, fontWeight: '600', color: SC.ink,
-                      lineHeight: 28 }}>{arabic}</Text>
-                    <Text style={{ fontFamily: FONT_UI, fontStyle: 'italic', fontSize: 13,
-                      color: SC.muted, fontWeight: '500' }}>{translit}</Text>
-                  </View>
-                  <Text style={{ fontFamily: FONT_UI, fontSize: 13, fontWeight: '500', color: SC.muted, lineHeight: 19 }}>
-                    <Text style={{ fontFamily: FONT_UI_BOLD, color: SC.inkSoft }}>{g.meaning}</Text>
-                    {' · ' + g.use}
-                  </Text>
-                </View>
-                {g.gendered && (
-                  <View style={{ paddingVertical: 4, paddingHorizontal: 8, borderRadius: 999,
-                    backgroundColor: subjectAudience === 'him' ? SC.coolWash : SC.accentWash }}>
-                    <Text style={{ fontFamily: FONT_UI_BOLD, fontSize: 11, fontWeight: '700', letterSpacing: 0.4,
-                      textTransform: 'uppercase' as any,
-                      color: subjectAudience === 'him' ? SC.coolDeep : SC.accent }}>
-                      {subjectAudience === 'him' ? 'to him' : 'to her'}
+            if (!g.gendered) {
+              return (
+                <View key={g.id} style={{ flexDirection: 'row', gap: 14, alignItems: 'center',
+                  paddingVertical: 18, paddingHorizontal: 4,
+                  borderBottomWidth: isLast ? 0 : 1, borderBottomColor: SC.hair }}>
+                  <PlayPill id={g.id} arabicText={g.arabic!} label={g.meaning} />
+                  <View style={{ flex: 1, gap: 6 }}>
+                    <Text style={{ fontFamily: FONT_AR, fontSize: 30, fontWeight: '600', color: SC.ink,
+                      lineHeight: 40 }}>{g.arabic}</Text>
+                    <Text style={{ fontFamily: FONT_UI_BOLD, fontSize: 17, fontWeight: '700', color: SC.inkSoft }}>
+                      {g.meaning}
+                    </Text>
+                    <Text style={{ fontFamily: FONT_UI, fontSize: 14, fontWeight: '500', color: SC.muted, lineHeight: 20 }}>
+                      {g.use}
                     </Text>
                   </View>
-                )}
+                </View>
+              );
+            }
+            return (
+              <View key={g.id} style={{ paddingVertical: 18, paddingHorizontal: 4,
+                borderBottomWidth: isLast ? 0 : 1, borderBottomColor: SC.hair, gap: 10 }}>
+                <Text style={{ fontFamily: FONT_UI_BOLD, fontSize: 17, fontWeight: '700', color: SC.inkSoft }}>
+                  {g.meaning}
+                </Text>
+                <Text style={{ fontFamily: FONT_UI, fontSize: 14, fontWeight: '500', color: SC.muted, lineHeight: 20 }}>
+                  {g.use}
+                </Text>
+                <View style={{ flexDirection: 'row', gap: 12, alignItems: 'center',
+                  backgroundColor: SC.coolWash, borderRadius: 14, padding: 14 }}>
+                  <PlayPill id={g.id + '_m'} arabicText={g.masculine!.arabic} label={g.meaning} />
+                  <View style={{ flex: 1, gap: 4 }}>
+                    <Text style={{ fontFamily: FONT_AR, fontSize: 30, fontWeight: '600', color: SC.ink, lineHeight: 40 }}>
+                      {g.masculine!.arabic}
+                    </Text>
+                    <Text style={{ fontFamily: FONT_UI_BOLD, fontSize: 12, fontWeight: '700', letterSpacing: 0.8,
+                      textTransform: 'uppercase' as any, color: SC.coolDeep }}>to a man</Text>
+                  </View>
+                </View>
+                <View style={{ flexDirection: 'row', gap: 12, alignItems: 'center',
+                  backgroundColor: SC.accentWash, borderRadius: 14, padding: 14 }}>
+                  <PlayPill id={g.id + '_f'} arabicText={g.feminine!.arabic} label={g.meaning} />
+                  <View style={{ flex: 1, gap: 4 }}>
+                    <Text style={{ fontFamily: FONT_AR, fontSize: 30, fontWeight: '600', color: SC.ink, lineHeight: 40 }}>
+                      {g.feminine!.arabic}
+                    </Text>
+                    <Text style={{ fontFamily: FONT_UI_BOLD, fontSize: 12, fontWeight: '700', letterSpacing: 0.8,
+                      textTransform: 'uppercase' as any, color: SC.accent }}>to a woman</Text>
+                  </View>
+                </View>
               </View>
             );
           })}
@@ -1833,25 +1861,23 @@ export default function LessonScreen() {
       <SubCard style={{ gap: 16 }}>
         <SubSectionTitle kicker="03 · Pronouns" kickerColor={SC.coolDeep}
           title="Subject pronouns"
-          sub="Eight words cover 'I, you, he, she, we, you all, they'. Notice how 'you' splits into masculine and feminine — that pattern repeats everywhere in Arabic." />
+          sub="Eight words cover I, you, he, she, we, you all, they. Notice how 'you' splits into masculine and feminine — that pattern repeats everywhere in Arabic." />
 
-        {/* Filter */}
         <View style={{ flexDirection: 'row', alignSelf: 'flex-start', backgroundColor: SC.surface,
           borderWidth: 1, borderColor: SC.hair, borderRadius: 999, padding: 4, gap: 4 }}>
           {([['all','All'],['sing','Singular'],['plur','Plural']] as const).map(([id, label]) => {
             const active = id === subjectFilter;
             return (
               <TouchableOpacity key={id} onPress={() => setSubjectFilter(id)} activeOpacity={0.8}
-                style={{ paddingVertical: 7, paddingHorizontal: 14, borderRadius: 999,
+                style={{ paddingVertical: 8, paddingHorizontal: 16, borderRadius: 999,
                   backgroundColor: active ? SC.coolDeep : 'transparent' }}>
-                <Text style={{ fontFamily: FONT_UI_BOLD, fontSize: 12, fontWeight: '700', letterSpacing: 0.2,
+                <Text style={{ fontFamily: FONT_UI_BOLD, fontSize: 14, fontWeight: '700', letterSpacing: 0.2,
                   color: active ? '#ffffff' : SC.inkSoft }}>{label}</Text>
               </TouchableOpacity>
             );
           })}
         </View>
 
-        {/* 2-col pronoun grid */}
         <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 10 }}>
           {filteredPronouns.map(p => {
             const playing = subjectPlayingId === p.id;
@@ -1863,25 +1889,23 @@ export default function LessonScreen() {
               <TouchableOpacity key={p.id} onPress={() => playSubject(p.id, p.arabic)} activeOpacity={0.85}
                 style={{ width: '47%', backgroundColor: playing ? SC.accentWash : '#ffffff',
                   borderWidth: 1, borderColor: playing ? 'rgba(254,77,1,0.4)' : SC.hair,
-                  borderRadius: 16, padding: 14, gap: 6,
+                  borderRadius: 16, padding: 16, gap: 8,
                   shadowColor: playing ? SC.accent : '#151515',
                   shadowOpacity: playing ? 0.15 : 0.04, shadowOffset: { width: 0, height: 1 }, shadowRadius: 2 }}>
                 <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
-                  <Text style={{ fontFamily: FONT_UI_BOLD, fontSize: 11, fontWeight: '700', letterSpacing: 1.2,
-                    textTransform: 'uppercase' as any, color: SC.muted }}>{p.english}</Text>
-                  <Ionicons name={playing ? 'volume-high' : 'volume-medium-outline'} size={14}
+                  <Text style={{ fontFamily: FONT_UI_BOLD, fontSize: 14, fontWeight: '700',
+                    color: SC.muted }}>{p.english}</Text>
+                  <Ionicons name={playing ? 'volume-high' : 'volume-medium-outline'} size={16}
                     color={playing ? SC.accent : SC.muted} />
                 </View>
-                <Text style={{ fontFamily: FONT_AR, fontSize: 28, fontWeight: '600', color: SC.ink,
-                  lineHeight: 34, textAlign: 'right' }}>{p.arabic}</Text>
-                <Text style={{ fontFamily: FONT_UI, fontStyle: 'italic', fontSize: 13, fontWeight: '500',
-                  color: SC.inkSoft, textAlign: 'right' }}>{p.translit}</Text>
-                <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginTop: 4, gap: 8 }}>
-                  <View style={{ paddingVertical: 3, paddingHorizontal: 8, borderRadius: 999, backgroundColor: gTag.bg }}>
-                    <Text style={{ fontFamily: FONT_UI_BOLD, fontSize: 10, fontWeight: '700', letterSpacing: 0.4,
+                <Text style={{ fontFamily: FONT_AR, fontSize: 36, fontWeight: '600', color: SC.ink,
+                  lineHeight: 44, textAlign: 'right' }}>{p.arabic}</Text>
+                <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <View style={{ paddingVertical: 4, paddingHorizontal: 8, borderRadius: 999, backgroundColor: gTag.bg }}>
+                    <Text style={{ fontFamily: FONT_UI_BOLD, fontSize: 11, fontWeight: '700', letterSpacing: 0.4,
                       textTransform: 'uppercase' as any, color: gTag.color }}>{gTag.label}</Text>
                   </View>
-                  <Text style={{ fontFamily: FONT_UI, fontSize: 11, fontWeight: '600',
+                  <Text style={{ fontFamily: FONT_UI, fontSize: 12, fontWeight: '600',
                     color: SC.muted2, textTransform: 'lowercase' as any }}>{p.number}</Text>
                 </View>
               </TouchableOpacity>
@@ -1893,60 +1917,53 @@ export default function LessonScreen() {
 
     return (
       <View style={{ flex: 1 }}>
-        {/* Hero — scrolls with content */}
-        <View style={{ backgroundColor: '#ffffff', borderBottomWidth: 1, borderBottomColor: SC.hair,
-          paddingHorizontal: 28, paddingTop: 20, paddingBottom: 22 }}>
-          <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginBottom: 14 }}>
-            <Text style={{ fontFamily: 'Courier New', fontSize: 11, color: SC.muted, letterSpacing: 0.4 }}>
-              UNIT 01 · ARABIC · LEVANTINE
-            </Text>
-            <Text style={{ fontFamily: FONT_UI_BOLD, fontSize: 12, fontWeight: '700', color: SC.muted }}>Read-only lesson</Text>
-          </View>
-          <Text style={{ fontFamily: FONT_UI_EXTRABOLD, fontSize: 30, fontWeight: '800', color: SC.ink,
-            letterSpacing: -0.6, lineHeight: 33 }}>Arabic, the basics</Text>
-          <Text style={{ fontFamily: FONT_UI, fontSize: 14, fontWeight: '500', color: SC.muted,
-            lineHeight: 21, marginTop: 8 }}>
-            {'A quick orientation to '}
-            <Text style={{ fontFamily: FONT_AR, fontWeight: '600', color: SC.inkSoft }}>العَرَبِيَّة</Text>
-            {' — what kind of Arabic you\'ll learn, how to greet someone, and the words for "I, you, he, she."'}
-          </Text>
-          {/* Section index */}
-          <View style={{ marginTop: 18, flexDirection: 'row', alignItems: 'center', gap: 6 }}>
-            {['Background', 'Greetings', 'Pronouns'].map((label, i) => (
-              <View key={label} style={{ flexDirection: 'row', alignItems: 'center', gap: i < 2 ? 6 : 0 }}>
-                <View style={{ flexDirection: 'row', alignItems: 'center', gap: 6 }}>
-                  <View style={{ width: 18, height: 18, borderRadius: 9,
-                    backgroundColor: i < 2 ? SC.accent : SC.coolDeep,
-                    alignItems: 'center', justifyContent: 'center' }}>
-                    <Text style={{ fontFamily: FONT_UI_EXTRABOLD, fontSize: 10, fontWeight: '800',
-                      color: '#ffffff' }}>{'0' + (i + 1)}</Text>
-                  </View>
-                  <Text style={{ fontFamily: FONT_UI_BOLD, fontSize: 12, fontWeight: '700',
-                    color: SC.inkSoft, letterSpacing: 0.2 }}>{label}</Text>
-                </View>
-                {i < 2 && <View style={{ width: 18, height: 1, backgroundColor: SC.hair, marginHorizontal: 4 }} />}
-              </View>
-            ))}
-          </View>
-        </View>
-
-        {/* Scrollable content */}
-        <ScrollView contentContainerStyle={{ padding: 22, paddingBottom: 80, gap: 18 }}
+        <ScrollView contentContainerStyle={{ paddingBottom: 16 }}
           showsVerticalScrollIndicator={false}>
-          <BackgroundSection />
-          <GreetingsSection />
-          <PronounsSection />
-          {/* Footer info card */}
-          <View style={{ padding: 16, backgroundColor: SC.coolWash, borderWidth: 1,
-            borderColor: 'rgba(115,140,230,0.22)', borderRadius: 16,
-            flexDirection: 'row', gap: 12, alignItems: 'flex-start' }}>
-            <View style={{ width: 22, height: 22, borderRadius: 11, backgroundColor: SC.cool,
-              alignItems: 'center', justifyContent: 'center', flexShrink: 0, marginTop: 1 }}>
-              <Text style={{ fontFamily: 'Courier New', fontSize: 11, fontWeight: '700', color: '#ffffff' }}>i</Text>
-            </View>
-            <Text style={{ fontFamily: FONT_UI, fontSize: 13, fontWeight: '500', color: SC.coolDeep, lineHeight: 19, flex: 1 }}>
-              This is an introduction page — nothing to memorise yet. The next lessons will drill greetings, then pronouns, then put them together in short conversations.
+          {/* Hero — scrolls with content */}
+          <View style={{ backgroundColor: '#ffffff', borderBottomWidth: 1, borderBottomColor: SC.hair,
+            paddingHorizontal: 28, paddingTop: 22, paddingBottom: 24 }}>
+            <Text style={{ fontFamily: FONT_UI_EXTRABOLD, fontSize: 32, fontWeight: '800', color: SC.ink,
+              letterSpacing: -0.6, lineHeight: 38 }}>Arabic, the basics</Text>
+            <Text style={{ fontFamily: FONT_UI, fontSize: 15, fontWeight: '500', color: SC.muted,
+              lineHeight: 22, marginTop: 10 }}>
+              {'A quick orientation to '}
+              <Text style={{ fontFamily: FONT_AR, fontWeight: '600', color: SC.inkSoft }}>العَرَبِيَّة</Text>
+              {' — the kind of Arabic you\'ll learn, how to greet someone, and the words for "I, you, he, she."'}
             </Text>
+            <View style={{ marginTop: 20, flexDirection: 'row', alignItems: 'center', gap: 6 }}>
+              {['Background', 'Greetings', 'Pronouns'].map((label, i) => (
+                <View key={label} style={{ flexDirection: 'row', alignItems: 'center', gap: i < 2 ? 6 : 0 }}>
+                  <View style={{ flexDirection: 'row', alignItems: 'center', gap: 6 }}>
+                    <View style={{ width: 22, height: 22, borderRadius: 11,
+                      backgroundColor: i < 2 ? SC.accent : SC.coolDeep,
+                      alignItems: 'center', justifyContent: 'center' }}>
+                      <Text style={{ fontFamily: FONT_UI_EXTRABOLD, fontSize: 11, fontWeight: '800',
+                        color: '#ffffff' }}>{'0' + (i + 1)}</Text>
+                    </View>
+                    <Text style={{ fontFamily: FONT_UI_BOLD, fontSize: 13, fontWeight: '700',
+                      color: SC.inkSoft, letterSpacing: 0.2 }}>{label}</Text>
+                  </View>
+                  {i < 2 && <View style={{ width: 20, height: 1, backgroundColor: SC.hair, marginHorizontal: 4 }} />}
+                </View>
+              ))}
+            </View>
+          </View>
+
+          <View style={{ padding: 22, paddingBottom: 80, gap: 18 }}>
+            <BackgroundSection />
+            <GreetingsSection />
+            <PronounsSection />
+            <View style={{ padding: 16, backgroundColor: SC.coolWash, borderWidth: 1,
+              borderColor: 'rgba(115,140,230,0.22)', borderRadius: 16,
+              flexDirection: 'row', gap: 12, alignItems: 'flex-start' }}>
+              <View style={{ width: 24, height: 24, borderRadius: 12, backgroundColor: SC.cool,
+                alignItems: 'center', justifyContent: 'center', flexShrink: 0, marginTop: 1 }}>
+                <Text style={{ fontFamily: 'Courier New', fontSize: 12, fontWeight: '700', color: '#ffffff' }}>i</Text>
+              </View>
+              <Text style={{ fontFamily: FONT_UI, fontSize: 14, fontWeight: '500', color: SC.coolDeep, lineHeight: 21, flex: 1 }}>
+                This is an introduction — nothing to memorise yet. The exercises ahead will drill greetings first, then pronouns, then put them together.
+              </Text>
+            </View>
           </View>
         </ScrollView>
       </View>
@@ -2314,7 +2331,7 @@ export default function LessonScreen() {
           }]}>
             <Ionicons name={feedbackCorrect ? 'checkmark-circle' : 'close-circle'} size={22} color="#fff" />
             <Text style={s.feedbackBannerText}>
-              {feedbackCorrect ? 'נכון! 🎉' : `הצורה הנכונה: ${feedbackCorrectForm}`}
+              {feedbackCorrect ? 'Correct! 🎉' : `Correct answer: ${feedbackCorrectForm}`}
             </Text>
           </Animated.View>
         )}
@@ -2332,7 +2349,7 @@ function LoadingScreen({ c }: any) {
   return (
     <SafeAreaView style={[s.safe, { backgroundColor: c.background, justifyContent: 'center', alignItems: 'center' }]}>
       <ActivityIndicator size="large" color={c.primary} />
-      <Text style={{ color: c.label, marginTop: 16, fontWeight: '500' }}>טוען שיעור…</Text>
+      <Text style={{ color: c.label, marginTop: 16, fontWeight: '500' }}>Loading lesson…</Text>
     </SafeAreaView>
   );
 }
@@ -2341,9 +2358,9 @@ function ErrorScreen({ c, error, onBack }: any) {
   return (
     <SafeAreaView style={[s.safe, { backgroundColor: c.background, justifyContent: 'center', alignItems: 'center', padding: 32 }]}>
       <Ionicons name="warning-outline" size={52} color={c.wrong} />
-      <Text style={{ color: c.text, fontSize: 18, fontWeight: '700', marginTop: 16, textAlign: 'center' }}>{error || 'השיעור אינו זמין כרגע'}</Text>
+      <Text style={{ color: c.text, fontSize: 18, fontWeight: '700', marginTop: 16, textAlign: 'center' }}>{error || 'Lesson unavailable'}</Text>
       <TouchableOpacity style={[s.actionBtn, { backgroundColor: c.primary, marginTop: 24, width: '100%' }]} onPress={onBack}>
-        <Text style={s.actionBtnText}>חזרה</Text>
+        <Text style={s.actionBtnText}>Go back</Text>
       </TouchableOpacity>
     </SafeAreaView>
   );
@@ -2355,17 +2372,17 @@ function CompleteScreen({ c, lesson, onHome }: any) {
       <View style={{ width: 110, height: 110, borderRadius: 55, backgroundColor: c.primary+'15', borderWidth: 2, borderColor: c.primary+'25', alignItems: 'center', justifyContent: 'center', shadowColor: c.primary, shadowOpacity: 0.2, shadowOffset: { width: 0, height: 8 }, shadowRadius: 20, elevation: 6 }}>
         <Ionicons name="sparkles" size={54} color={c.primary} />
       </View>
-      <Text style={{ color: c.text, fontSize: 38, fontWeight: '900', marginTop: 24, letterSpacing: -1, textAlign: 'center' }}>כל הכבוד!</Text>
-      <Text style={{ color: c.label, fontSize: 17, marginTop: 8, textAlign: 'center' }}>סיימת את השיעור בהצלחה</Text>
+      <Text style={{ color: c.text, fontSize: 38, fontWeight: '900', marginTop: 24, letterSpacing: -1, textAlign: 'center' }}>Well done!</Text>
+      <Text style={{ color: c.label, fontSize: 17, marginTop: 8, textAlign: 'center' }}>Lesson complete!</Text>
       {lesson?.topic && <Text style={{ color: c.label, fontSize: 14, marginTop: 4, fontStyle: 'italic', textAlign: 'center' }}>{lesson.topic}</Text>}
       {lesson?.communicative_goal && <Text style={{ color: c.label, fontSize: 13, marginTop: 6, textAlign: 'center', paddingHorizontal: 20 }}>{lesson.communicative_goal}</Text>}
       <View style={{ borderRadius: 24, backgroundColor: c.primary+'12', borderWidth: 1.5, borderColor: c.primary+'28', paddingHorizontal: 44, paddingVertical: 22, marginTop: 36, alignItems: 'center', shadowColor: c.primary, shadowOpacity: 0.1, shadowOffset: { width: 0, height: 4 }, shadowRadius: 16, elevation: 4 }}>
         <Text style={{ color: c.primary, fontSize: 32, fontWeight: '900' }}>+{lesson?.xp_reward ?? 50} XP</Text>
-        <Text style={{ color: c.primary+'aa', fontSize: 13, fontWeight: '600', marginTop: 3 }}>ניקוד שנצבר</Text>
+        <Text style={{ color: c.primary+'aa', fontSize: 13, fontWeight: '600', marginTop: 3 }}>points earned</Text>
       </View>
       <TouchableOpacity style={[s.actionBtn, { backgroundColor: c.primary, marginTop: 40, alignSelf: 'stretch', flexDirection: 'row', gap: 8 }]} onPress={onHome} activeOpacity={0.87}>
         <Ionicons name="home-outline" size={20} color="#fff" />
-        <Text style={s.actionBtnText}>חזרה לשיעורים</Text>
+        <Text style={s.actionBtnText}>Back to lessons</Text>
       </TouchableOpacity>
     </SafeAreaView>
   );

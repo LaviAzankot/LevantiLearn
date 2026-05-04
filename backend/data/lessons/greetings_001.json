@@ -4,9 +4,9 @@
   "topic_ar": "أول سلام",
   "level": "A0",
   "cefr": "Pre-A1",
-  "communicative_goal": "Greet someone and ask how they are in Levantine Arabic",
+  "communicative_goal": "Greet someone and use subject pronouns in Levantine Arabic",
   "xp_reward": 50,
-  "estimated_minutes": 22,
+  "estimated_minutes": 35,
   "phase": 1,
   "thumbnail_url": "https://images.unsplash.com/photo-1521791136064-7986c2920216?w=600&h=280&fit=crop&auto=format",
 
@@ -15,51 +15,113 @@
       "arabic": "مَرْحَبا",
       "arabic_plain": "مرحبا",
       "translit": "marḥabā",
-      "hebrew_pronunciation": "מַרְחַבָּא",
-      "hebrew": "שלום",
       "english": "Hello",
-      "icon": "hand-right",
-      "icon_color": "#FF9500"
+      "icon": "solar:hand-stars-linear",
+      "icon_color": "#fe4d01"
     },
     "w002": {
       "arabic": "أَهْلًا",
       "arabic_plain": "أهلا",
       "translit": "ahlan",
-      "hebrew_pronunciation": "אַהְלַן",
-      "hebrew": "אהלן",
       "english": "Hi",
-      "icon": "person-circle-outline",
-      "icon_color": "#34C759"
+      "icon": "solar:smile-circle-linear",
+      "icon_color": "#007aff"
     },
     "w003": {
       "arabic": "صَبَاحُ الخَيْر",
       "arabic_plain": "صباح الخير",
       "translit": "ṣabāḥ al-khayr",
-      "hebrew_pronunciation": "צַבַּאח אַלְח'יְר",
-      "hebrew": "בוקר טוב",
       "english": "Good morning",
-      "icon": "sunny-outline",
-      "icon_color": "#FF9F0A"
+      "icon": "solar:sun-2-linear",
+      "icon_color": "#ff9f0a"
     },
     "w004": {
+      "arabic": "مَسَا الخَيْر",
+      "arabic_plain": "مسا الخير",
+      "translit": "masā al-khayr",
+      "english": "Good evening",
+      "icon": "solar:moon-stars-linear",
+      "icon_color": "#5856d6"
+    },
+    "w005": {
       "arabic": "كَيْفَ حَالَك؟",
       "arabic_plain": "كيف حالك",
       "translit": "kīf ḥālak",
-      "hebrew_pronunciation": "כִּיפ חַאלַק?",
-      "hebrew": "מה שלומך?",
       "english": "How are you?",
-      "icon": "chatbubble-ellipses-outline",
-      "icon_color": "#007AFF"
+      "icon": "solar:chat-round-dots-linear",
+      "icon_color": "#007aff"
     },
-    "w005": {
+    "w006": {
       "arabic": "السَّلامُ عَلَيْكُم",
       "arabic_plain": "السلام عليكم",
       "translit": "as-salāmu ʿalaykum",
-      "hebrew_pronunciation": "אַסְּסַלָאמוּ עַלַיְכּוּם",
-      "hebrew": "שלום עליכם",
       "english": "Peace be upon you",
-      "icon": "earth-outline",
-      "icon_color": "#5856D6"
+      "icon": "solar:heart-linear",
+      "icon_color": "#34c759"
+    },
+    "w007": {
+      "arabic": "أَنَا",
+      "arabic_plain": "أنا",
+      "translit": "ana",
+      "english": "I",
+      "icon": "solar:user-linear",
+      "icon_color": "#fe4d01"
+    },
+    "w008": {
+      "arabic": "أَنْتَ",
+      "arabic_plain": "أنتَ",
+      "translit": "anta",
+      "english": "You (to a man)",
+      "icon": "solar:user-id-linear",
+      "icon_color": "#007aff"
+    },
+    "w009": {
+      "arabic": "أَنْتِ",
+      "arabic_plain": "أنتِ",
+      "translit": "anti",
+      "english": "You (to a woman)",
+      "icon": "solar:user-rounded-linear",
+      "icon_color": "#ff2d55"
+    },
+    "w010": {
+      "arabic": "هُوَ",
+      "arabic_plain": "هو",
+      "translit": "huwa",
+      "english": "He",
+      "icon": "solar:user-circle-linear",
+      "icon_color": "#34c759"
+    },
+    "w011": {
+      "arabic": "هِيَ",
+      "arabic_plain": "هي",
+      "translit": "hiya",
+      "english": "She",
+      "icon": "solar:user-speak-linear",
+      "icon_color": "#5856d6"
+    },
+    "w012": {
+      "arabic": "نَحْنُ",
+      "arabic_plain": "نحن",
+      "translit": "naḥnu",
+      "english": "We",
+      "icon": "solar:users-group-two-rounded-linear",
+      "icon_color": "#ff9f0a"
+    },
+    "w013": {
+      "arabic": "أَنْتُم",
+      "arabic_plain": "أنتم",
+      "translit": "antum",
+      "english": "You all",
+      "icon": "solar:users-group-rounded-linear",
+      "icon_color": "#007aff"
+    },
+    "w014": {
+      "arabic": "هُم",
+      "arabic_plain": "هم",
+      "translit": "hum",
+      "english": "They",
+      "icon": "solar:users-group-two-rounded-linear",
+      "icon_color": "#6e6e73"
     }
   },
 
@@ -72,12 +134,14 @@
     { "type": "listen_repeat", "word_id": "w003" },
     { "type": "listen_repeat", "word_id": "w004" },
     { "type": "listen_repeat", "word_id": "w005" },
+    { "type": "listen_repeat", "word_id": "w006" },
 
     { "type": "choose_translation", "word_id": "w001", "option_ids": ["w001","w002","w003","w004"] },
-    { "type": "choose_translation", "word_id": "w002", "option_ids": ["w001","w002","w004","w005"] },
+    { "type": "choose_translation", "word_id": "w002", "option_ids": ["w001","w002","w005","w006"] },
     { "type": "choose_translation", "word_id": "w003", "option_ids": ["w001","w003","w004","w005"] },
-    { "type": "choose_translation", "word_id": "w004", "option_ids": ["w002","w003","w004","w005"] },
-    { "type": "choose_translation", "word_id": "w005", "option_ids": ["w001","w002","w004","w005"] },
+    { "type": "choose_translation", "word_id": "w004", "option_ids": ["w002","w003","w004","w006"] },
+    { "type": "choose_translation", "word_id": "w005", "option_ids": ["w001","w004","w005","w006"] },
+    { "type": "choose_translation", "word_id": "w006", "option_ids": ["w002","w003","w005","w006"] },
 
     {
       "type": "sentence_build",
@@ -86,7 +150,7 @@
         { "id": "w1", "ar": "مَرْحَبا",           "tr": "marḥabā" },
         { "id": "w2", "ar": "كَيْفَ حَالَك؟",      "tr": "kīf ḥālak" },
         { "id": "d1", "ar": "أَهْلًا",             "tr": "ahlan" },
-        { "id": "d2", "ar": "صَبَاحُ الخَيْر",     "tr": "ṣabāḥ al-khayr" }
+        { "id": "d2", "ar": "مَسَا الخَيْر",        "tr": "masā al-khayr" }
       ],
       "correct": ["w1", "w2"]
     },
@@ -105,12 +169,12 @@
 
     {
       "type": "sentence_build",
-      "english": "Hi, how are you?",
+      "english": "Good evening! Hi.",
       "bank": [
-        { "id": "w1", "ar": "أَهْلًا",              "tr": "ahlan" },
-        { "id": "w2", "ar": "كَيْفَ حَالَك؟",       "tr": "kīf ḥālak" },
-        { "id": "d1", "ar": "مَرْحَبا",              "tr": "marḥabā" },
-        { "id": "d2", "ar": "السَّلامُ عَلَيْكُم",  "tr": "as-salāmu ʿalaykum" }
+        { "id": "w1", "ar": "مَسَا الخَيْر",         "tr": "masā al-khayr" },
+        { "id": "w2", "ar": "أَهْلًا",               "tr": "ahlan" },
+        { "id": "d1", "ar": "صَبَاحُ الخَيْر",        "tr": "ṣabāḥ al-khayr" },
+        { "id": "d2", "ar": "السَّلامُ عَلَيْكُم",   "tr": "as-salāmu ʿalaykum" }
       ],
       "correct": ["w1", "w2"]
     },
@@ -150,66 +214,74 @@
         },
         {
           "id": "r3",
-          "context": "At the café, Layla asks what you'd like.",
+          "context": "You meet a new neighbour in the evening.",
           "prompt": {
-            "arabic": "مَاذَا تُرِيدِين؟",
-            "translit": "māthā turīdīn",
-            "english": "What would you like?"
+            "arabic": "مَسَا الخَيْر!",
+            "translit": "masā l-khayr",
+            "english": "Good evening!"
           },
           "answer": {
-            "arabic": "أُرِيدُ ___ مِنْ فَضْلِك.",
-            "translit": "urīdu ___ min faḍlik",
-            "english": "I would like ___, please.",
-            "blank": { "arabic": "قَهْوَة", "translit": "qahwa", "english": "coffee" }
+            "arabic": "مَسَا ___!",
+            "translit": "masā ___",
+            "english": "Evening of ___!",
+            "blank": { "arabic": "النُّور", "translit": "an-nūr", "english": "light" }
           }
         }
       ]
     },
 
-    { "type": "listen_repeat", "word_id": "w001" },
-    { "type": "listen_repeat", "word_id": "w002" },
-    { "type": "listen_repeat", "word_id": "w003" },
-    { "type": "listen_repeat", "word_id": "w004" },
-    { "type": "listen_repeat", "word_id": "w005" },
+    { "type": "match_pairs", "word_ids": ["w001","w002","w003","w004","w005","w006"] },
 
-    { "type": "choose_translation", "word_id": "w001", "option_ids": ["w001","w003","w004","w005"] },
-    { "type": "choose_translation", "word_id": "w002", "option_ids": ["w001","w002","w003","w005"] },
-    { "type": "choose_translation", "word_id": "w003", "option_ids": ["w001","w002","w003","w004"] },
-    { "type": "choose_translation", "word_id": "w004", "option_ids": ["w001","w002","w004","w005"] },
-    { "type": "choose_translation", "word_id": "w005", "option_ids": ["w002","w003","w004","w005"] },
+    { "type": "listen_repeat", "word_id": "w007" },
+    { "type": "listen_repeat", "word_id": "w008" },
+    { "type": "listen_repeat", "word_id": "w009" },
+    { "type": "listen_repeat", "word_id": "w010" },
+    { "type": "listen_repeat", "word_id": "w011" },
+    { "type": "listen_repeat", "word_id": "w012" },
+    { "type": "listen_repeat", "word_id": "w013" },
+    { "type": "listen_repeat", "word_id": "w014" },
+
+    { "type": "choose_translation", "word_id": "w007", "option_ids": ["w007","w008","w011","w012"] },
+    { "type": "choose_translation", "word_id": "w008", "option_ids": ["w007","w008","w009","w013"] },
+    { "type": "choose_translation", "word_id": "w009", "option_ids": ["w008","w009","w010","w011"] },
+    { "type": "choose_translation", "word_id": "w010", "option_ids": ["w009","w010","w011","w014"] },
+    { "type": "choose_translation", "word_id": "w011", "option_ids": ["w007","w010","w011","w012"] },
+    { "type": "choose_translation", "word_id": "w012", "option_ids": ["w007","w012","w013","w014"] },
+    { "type": "choose_translation", "word_id": "w013", "option_ids": ["w008","w009","w013","w014"] },
+    { "type": "choose_translation", "word_id": "w014", "option_ids": ["w010","w011","w012","w014"] },
 
     {
       "type": "sentence_build",
-      "english": "Hello, goodbye!",
+      "english": "Hello, it's me!",
       "bank": [
-        { "id": "w1", "ar": "مَرْحَبا",             "tr": "marḥabā" },
+        { "id": "w1", "ar": "أَنَا",               "tr": "ana" },
+        { "id": "w2", "ar": "مَرْحَبا",             "tr": "marḥabā" },
+        { "id": "d1", "ar": "هُوَ",                 "tr": "huwa" },
+        { "id": "d2", "ar": "أَهْلًا",              "tr": "ahlan" }
+      ],
+      "correct": ["w1", "w2"]
+    },
+
+    {
+      "type": "sentence_build",
+      "english": "He says good morning",
+      "bank": [
+        { "id": "w1", "ar": "هُوَ",                 "tr": "huwa" },
+        { "id": "w2", "ar": "صَبَاحُ الخَيْر",      "tr": "ṣabāḥ al-khayr" },
+        { "id": "d1", "ar": "هِيَ",                 "tr": "hiya" },
+        { "id": "d2", "ar": "مَسَا الخَيْر",         "tr": "masā al-khayr" }
+      ],
+      "correct": ["w1", "w2"]
+    },
+
+    {
+      "type": "sentence_build",
+      "english": "We offer peace",
+      "bank": [
+        { "id": "w1", "ar": "نَحْنُ",               "tr": "naḥnu" },
         { "id": "w2", "ar": "السَّلامُ عَلَيْكُم",  "tr": "as-salāmu ʿalaykum" },
-        { "id": "d1", "ar": "أَهْلًا",               "tr": "ahlan" },
-        { "id": "d2", "ar": "كَيْفَ حَالَك؟",        "tr": "kīf ḥālak" }
-      ],
-      "correct": ["w1", "w2"]
-    },
-
-    {
-      "type": "sentence_build",
-      "english": "Hi, how are you?",
-      "bank": [
-        { "id": "w1", "ar": "أَهْلًا",              "tr": "ahlan" },
-        { "id": "w2", "ar": "كَيْفَ حَالَك؟",       "tr": "kīf ḥālak" },
-        { "id": "d1", "ar": "صَبَاحُ الخَيْر",       "tr": "ṣabāḥ al-khayr" },
-        { "id": "d2", "ar": "مَرْحَبا",              "tr": "marḥabā" }
-      ],
-      "correct": ["w1", "w2"]
-    },
-
-    {
-      "type": "sentence_build",
-      "english": "Peace be upon you! Good morning.",
-      "bank": [
-        { "id": "w1", "ar": "السَّلامُ عَلَيْكُم",  "tr": "as-salāmu ʿalaykum" },
-        { "id": "w2", "ar": "صَبَاحُ الخَيْر",       "tr": "ṣabāḥ al-khayr" },
-        { "id": "d1", "ar": "مَرْحَبا",              "tr": "marḥabā" },
-        { "id": "d2", "ar": "أَهْلًا",               "tr": "ahlan" }
+        { "id": "d1", "ar": "أَنْتُم",              "tr": "antum" },
+        { "id": "d2", "ar": "أَهْلًا",              "tr": "ahlan" }
       ],
       "correct": ["w1", "w2"]
     },
@@ -219,57 +291,57 @@
       "rounds": [
         {
           "id": "r4",
-          "context": "Greeting your neighbour Layla on the way out in the morning.",
+          "context": "Layla asks who sent the message.",
           "prompt": {
-            "arabic": "صَبَاحُ الخَيْر يَا سَارَة!",
-            "translit": "ṣabāḥu l-khayr yā Sāra",
-            "english": "Good morning, Sara!"
+            "arabic": "مَنْ أَرْسَلَ الرِّسَالَة؟",
+            "translit": "man arsala r-risāla",
+            "english": "Who sent the message?"
           },
           "answer": {
-            "arabic": "صَبَاحُ ___",
-            "translit": "ṣabāḥu ___",
-            "english": "Good morning of ___.",
-            "blank": { "arabic": "النُّور", "translit": "an-nūr", "english": "light" }
+            "arabic": "___ أَرْسَلَ الرِّسَالَة.",
+            "translit": "___ arsala r-risāla",
+            "english": "___ sent the message.",
+            "blank": { "arabic": "هُوَ", "translit": "huwa", "english": "He" }
           }
         },
         {
           "id": "r5",
-          "context": "Layla asks how you are doing today.",
+          "context": "Your friend asks if you and your family are joining dinner.",
           "prompt": {
-            "arabic": "كَيْفَ حَالُكِ اليَوْم؟",
-            "translit": "kayfa ḥāluki l-yawm",
-            "english": "How are you today?"
+            "arabic": "هَل تَأتُون إِلى العَشَاء؟",
+            "translit": "hal tatūna ila l-ʿashā",
+            "english": "Are you all coming to dinner?"
           },
           "answer": {
-            "arabic": "أَنَا ___ ، شُكْرًا.",
-            "translit": "anā ___, shukran",
-            "english": "I am ___, thank you.",
-            "blank": { "arabic": "بِخَيْر", "translit": "bi-khayr", "english": "fine" }
+            "arabic": "نَعَم، ___ نَأتِي.",
+            "translit": "naʿam, ___ naʾtī",
+            "english": "Yes, ___ are coming.",
+            "blank": { "arabic": "نَحْنُ", "translit": "naḥnu", "english": "We" }
           }
         },
         {
           "id": "r6",
-          "context": "At the café, Layla asks what you'd like.",
+          "context": "Layla asks who said hello first.",
           "prompt": {
-            "arabic": "مَاذَا تُرِيدِين؟",
-            "translit": "māthā turīdīn",
-            "english": "What would you like?"
+            "arabic": "مَنْ قَالَ مَرْحَبا أَوَّلًا؟",
+            "translit": "man qāla marḥabā awwalan",
+            "english": "Who said hello first?"
           },
           "answer": {
-            "arabic": "أُرِيدُ ___ مِنْ فَضْلِك.",
-            "translit": "urīdu ___ min faḍlik",
-            "english": "I would like ___, please.",
-            "blank": { "arabic": "قَهْوَة", "translit": "qahwa", "english": "coffee" }
+            "arabic": "___ قَالَت مَرْحَبا.",
+            "translit": "___ qālat marḥabā",
+            "english": "___ said hello.",
+            "blank": { "arabic": "هِيَ", "translit": "hiya", "english": "She" }
           }
         }
       ]
     },
 
-    { "type": "match_pairs", "word_ids": ["w001","w002","w003","w004","w005"] }
+    { "type": "match_pairs", "word_ids": ["w007","w008","w009","w010","w011","w012"] }
 
   ],
 
-  "srs_words": ["مَرْحَبا","أَهْلًا","صَبَاحُ الخَيْر","كَيْفَ حَالَك؟","السَّلامُ عَلَيْكُم"],
+  "srs_words": ["مَرْحَبا","أَهْلًا","صَبَاحُ الخَيْر","مَسَا الخَيْر","كَيْفَ حَالَك؟","السَّلامُ عَلَيْكُم","أَنَا","أَنْتَ","أَنْتِ","هُوَ","هِيَ","نَحْنُ"],
   "next_lesson": "greetings_002",
   "related_topics": ["food_001","directions_001"]
 }
