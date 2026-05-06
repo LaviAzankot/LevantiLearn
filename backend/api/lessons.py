@@ -179,8 +179,7 @@ def get_catalog(is_premium: bool = False):
 @router.get("/{lesson_id}")
 def get_lesson(lesson_id: str):
     """Load a lesson JSON by ID."""
-    # lesson_path = os.path.join(LESSONS_DIR, f"{lesson_id}.json")
-    lesson_path = os.path.join(LESSONS_DIR, f"greetings_001.json")
+    lesson_path = os.path.join(LESSONS_DIR, f"{lesson_id}.json")
     if not os.path.exists(lesson_path):
         raise HTTPException(status_code=404, detail=f"Lesson '{lesson_id}' not found")
     with open(lesson_path, "r", encoding="utf-8") as f:
