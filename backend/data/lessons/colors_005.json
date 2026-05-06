@@ -1,0 +1,415 @@
+{
+  "topic": "Colors & Adjectives",
+  "cycles": [
+    {
+      "cycle": 1,
+      "vocab": [
+        {
+          "arabic": "أَحمر",
+          "transcription": "AH-mar",
+          "romanization": "ʾaḥmar",
+          "english": "red",
+          "note": "masculine form; feminine is حمرا (ḥamra); agrees with noun in gender",
+          "icon": "solar:heart-linear",
+          "icon_color": "#ff3b30"
+        },
+        {
+          "arabic": "أَزرق",
+          "transcription": "AZ-raʔ",
+          "romanization": "ʾazraʔ",
+          "english": "blue",
+          "note": "masculine form; feminine is زرقا (zarʔa); the ق is pronounced as glottal stop in Palestinian",
+          "icon": "solar:cloud-linear",
+          "icon_color": "#007aff"
+        },
+        {
+          "arabic": "أَخضر",
+          "transcription": "AKH-dar",
+          "romanization": "ʾaḫḍar",
+          "english": "green",
+          "note": "masculine form; feminine is خضرا (ḫaḍra); common in nature and flag imagery",
+          "icon": "solar:leaf-linear",
+          "icon_color": "#34c759"
+        },
+        {
+          "arabic": "أَبيض",
+          "transcription": "AB-yaḍ",
+          "romanization": "ʾabyaḍ",
+          "english": "white",
+          "note": "masculine form; feminine is بيضا (bēḍa); note ض is an emphatic consonant",
+          "icon": "solar:sun-2-linear",
+          "icon_color": "#8e8e93"
+        },
+        {
+          "arabic": "أَسود",
+          "transcription": "AS-wad",
+          "romanization": "ʾaswad",
+          "english": "black",
+          "note": "masculine form; feminine is سودا (sōda); used also for dark/gloomy in expressions",
+          "icon": "solar:moon-stars-linear",
+          "icon_color": "#1c1c1e"
+        },
+        {
+          "arabic": "لَون",
+          "transcription": "LŌWN",
+          "romanization": "lōn",
+          "english": "color",
+          "note": "general noun for color; إيش لونه؟ (ʾēš lōnu?) = 'what color is it?'",
+          "icon": "solar:palette-linear",
+          "icon_color": "#ff9f0a"
+        }
+      ],
+      "quiz": [
+        {
+          "arabic": "أَحمر",
+          "transcription": "AH-mar",
+          "romanization": "ʾaḥmar",
+          "options": ["blue", "red", "green", "white"],
+          "answer": 1
+        },
+        {
+          "arabic": "أَزرق",
+          "transcription": "AZ-raʔ",
+          "romanization": "ʾazraʔ",
+          "options": ["green", "black", "blue", "red"],
+          "answer": 2
+        },
+        {
+          "arabic": "أَخضر",
+          "transcription": "AKH-dar",
+          "romanization": "ʾaḫḍar",
+          "options": ["white", "green", "blue", "black"],
+          "answer": 1
+        },
+        {
+          "arabic": "أَبيض",
+          "transcription": "AB-yaḍ",
+          "romanization": "ʾabyaḍ",
+          "options": ["black", "red", "white", "green"],
+          "answer": 2
+        },
+        {
+          "arabic": "أَسود",
+          "transcription": "AS-wad",
+          "romanization": "ʾaswad",
+          "options": ["white", "blue", "red", "black"],
+          "answer": 3
+        },
+        {
+          "arabic": "لَون",
+          "transcription": "LŌWN",
+          "romanization": "lōn",
+          "options": ["shape", "size", "color", "number"],
+          "answer": 2
+        }
+      ],
+      "build": [
+        {
+          "sentence": ["أَحمر", "أَزرق"],
+          "decoys": ["أَسود", "لَون", "أَبيض"],
+          "english": "Red and blue"
+        },
+        {
+          "sentence": ["أَخضر", "أَبيض"],
+          "decoys": ["أَحمر", "لَون", "أَزرق"],
+          "english": "Green and white"
+        },
+        {
+          "sentence": ["لَون", "أَسود"],
+          "decoys": ["أَخضر", "أَبيض", "أَزرق"],
+          "english": "The color black"
+        }
+      ],
+      "speak": {
+        "scenario": "You are shopping for paint colors at a hardware store.",
+        "turns": [
+          {
+            "speaker": "them",
+            "arabic": "إيش لون بدك؟",
+            "romanization": "ʾēš lōn biddak",
+            "english": "What color do you want?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "أَحمر!",
+            "romanization": "ʾaḥmar",
+            "english": "Red!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وللسقف؟",
+            "romanization": "w-lis-saʾf",
+            "english": "And for the ceiling?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "أَبيض!",
+            "romanization": "ʾabyaḍ",
+            "english": "White!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وللباب؟",
+            "romanization": "w-lil-bāb",
+            "english": "And for the door?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "أَزرق!",
+            "romanization": "ʾazraʔ",
+            "english": "Blue!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وللحديقة؟",
+            "romanization": "w-lil-ḥadīʾa",
+            "english": "And for the garden?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "أَخضر!",
+            "romanization": "ʾaḫḍar",
+            "english": "Green!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وللسيارة الجديدة؟",
+            "romanization": "w-lis-sayyāra l-jdīde",
+            "english": "And for the new car?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "أَسود!",
+            "romanization": "ʾaswad",
+            "english": "Black!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "إيش هاد؟",
+            "romanization": "ʾēš hād",
+            "english": "What is this?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "لَون!",
+            "romanization": "lōn",
+            "english": "A color!"
+          }
+        ]
+      }
+    },
+    {
+      "cycle": 2,
+      "vocab": [
+        {
+          "arabic": "أَصفر",
+          "transcription": "AS-far",
+          "romanization": "ʾaṣfar",
+          "english": "yellow",
+          "note": "masculine form; feminine is صفرا (ṣafra); note the emphatic ص",
+          "icon": "solar:sun-2-linear",
+          "icon_color": "#ffcc00"
+        },
+        {
+          "arabic": "بُرتقالي",
+          "transcription": "bur-tu-QA-li",
+          "romanization": "burtuʾāli",
+          "english": "orange",
+          "note": "named after the fruit برتقال (burtuʾāl = orange); same form for m and f",
+          "icon": "solar:heart-linear",
+          "icon_color": "#fe4d01"
+        },
+        {
+          "arabic": "بَنفسجي",
+          "transcription": "ba-naf-SA-ji",
+          "romanization": "banafsaji",
+          "english": "purple / violet",
+          "note": "named after the flower بنفسج (violet); same form for m and f",
+          "icon": "solar:flower-linear",
+          "icon_color": "#5856d6"
+        },
+        {
+          "arabic": "كَبير",
+          "transcription": "ka-BĒR",
+          "romanization": "kabīr",
+          "english": "big / large / old",
+          "note": "adjective for size and age; feminine كبيرة (kabīra); also means 'senior' or 'important'",
+          "icon": "solar:maximize-square-linear",
+          "icon_color": "#ff9f0a"
+        },
+        {
+          "arabic": "صَغير",
+          "transcription": "sa-GHĒR",
+          "romanization": "ṣaġīr",
+          "english": "small / little / young",
+          "note": "adjective for size and age; feminine صغيرة (ṣaġīra); opposite of كبير",
+          "icon": "solar:minimize-square-linear",
+          "icon_color": "#34c759"
+        },
+        {
+          "arabic": "حِلو",
+          "transcription": "HIL-wu",
+          "romanization": "ḥilwu",
+          "english": "pretty / nice / sweet",
+          "note": "very common Palestinian adjective; feminine حلوة (ḥilwe); used for people, food, and situations",
+          "icon": "solar:smile-circle-linear",
+          "icon_color": "#ff2d55"
+        }
+      ],
+      "quiz": [
+        {
+          "arabic": "أَصفر",
+          "transcription": "AS-far",
+          "romanization": "ʾaṣfar",
+          "options": ["orange", "yellow", "purple", "green"],
+          "answer": 1
+        },
+        {
+          "arabic": "بُرتقالي",
+          "transcription": "bur-tu-QA-li",
+          "romanization": "burtuʾāli",
+          "options": ["yellow", "purple", "orange", "red"],
+          "answer": 2
+        },
+        {
+          "arabic": "بَنفسجي",
+          "transcription": "ba-naf-SA-ji",
+          "romanization": "banafsaji",
+          "options": ["blue", "orange", "yellow", "purple"],
+          "answer": 3
+        },
+        {
+          "arabic": "كَبير",
+          "transcription": "ka-BĒR",
+          "romanization": "kabīr",
+          "options": ["small", "pretty", "big / large", "yellow"],
+          "answer": 2
+        },
+        {
+          "arabic": "صَغير",
+          "transcription": "sa-GHĒR",
+          "romanization": "ṣaġīr",
+          "options": ["big", "small / little", "nice", "purple"],
+          "answer": 1
+        },
+        {
+          "arabic": "حِلو",
+          "transcription": "HIL-wu",
+          "romanization": "ḥilwu",
+          "options": ["big", "yellow", "small", "pretty / nice"],
+          "answer": 3
+        }
+      ],
+      "build": [
+        {
+          "sentence": ["أَصفر", "بُرتقالي"],
+          "decoys": ["بَنفسجي", "حِلو", "كَبير"],
+          "english": "Yellow and orange"
+        },
+        {
+          "sentence": ["كَبير", "بَنفسجي"],
+          "decoys": ["أَصفر", "صَغير", "حِلو"],
+          "english": "Big and purple"
+        },
+        {
+          "sentence": ["صَغير", "حِلو"],
+          "decoys": ["بُرتقالي", "كَبير", "بَنفسجي"],
+          "english": "Small and pretty"
+        }
+      ],
+      "speak": {
+        "scenario": "You are describing clothes at a clothing market.",
+        "turns": [
+          {
+            "speaker": "them",
+            "arabic": "إيش لون القميص؟",
+            "romanization": "ʾēš lōn il-ʾamīṣ",
+            "english": "What color is the shirt?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "أَصفر!",
+            "romanization": "ʾaṣfar",
+            "english": "Yellow!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وهاد الفستان؟",
+            "romanization": "w-hād il-fustān",
+            "english": "And this dress?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "بُرتقالي!",
+            "romanization": "burtuʾāli",
+            "english": "Orange!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وهادي الجاكيت؟",
+            "romanization": "w-hādi l-jāket",
+            "english": "And this jacket?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "بَنفسجي!",
+            "romanization": "banafsaji",
+            "english": "Purple!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وإيش حجم البلوزة؟",
+            "romanization": "w-ʾēš ḥajm il-blūze",
+            "english": "And what size is the blouse?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "كَبير!",
+            "romanization": "kabīr",
+            "english": "Big!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وهاد الحجم الثاني؟",
+            "romanization": "w-hād il-ḥajm it-tāni",
+            "english": "And the other size?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "صَغير!",
+            "romanization": "ṣaġīr",
+            "english": "Small!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "إيش رأيك بهاد؟",
+            "romanization": "ʾēš raʾyak b-hād",
+            "english": "What do you think of this?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "حِلو!",
+            "romanization": "ḥilwu",
+            "english": "Pretty / Nice!"
+          }
+        ]
+      },
+      "review": {
+        "all_vocab": [
+          { "arabic": "أَحمر", "transcription": "AH-mar", "romanization": "ʾaḥmar", "english": "red" },
+          { "arabic": "أَزرق", "transcription": "AZ-raʔ", "romanization": "ʾazraʔ", "english": "blue" },
+          { "arabic": "أَخضر", "transcription": "AKH-dar", "romanization": "ʾaḫḍar", "english": "green" },
+          { "arabic": "أَبيض", "transcription": "AB-yaḍ", "romanization": "ʾabyaḍ", "english": "white" },
+          { "arabic": "أَسود", "transcription": "AS-wad", "romanization": "ʾaswad", "english": "black" },
+          { "arabic": "لَون", "transcription": "LŌWN", "romanization": "lōn", "english": "color" },
+          { "arabic": "أَصفر", "transcription": "AS-far", "romanization": "ʾaṣfar", "english": "yellow" },
+          { "arabic": "بُرتقالي", "transcription": "bur-tu-QA-li", "romanization": "burtuʾāli", "english": "orange" },
+          { "arabic": "بَنفسجي", "transcription": "ba-naf-SA-ji", "romanization": "banafsaji", "english": "purple" },
+          { "arabic": "كَبير", "transcription": "ka-BĒR", "romanization": "kabīr", "english": "big / large" },
+          { "arabic": "صَغير", "transcription": "sa-GHĒR", "romanization": "ṣaġīr", "english": "small / little" },
+          { "arabic": "حِلو", "transcription": "HIL-wu", "romanization": "ḥilwu", "english": "pretty / nice" }
+        ]
+      }
+    }
+  ]
+}

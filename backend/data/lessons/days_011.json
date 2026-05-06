@@ -1,0 +1,415 @@
+{
+  "topic": "Days & Routine",
+  "cycles": [
+    {
+      "cycle": 1,
+      "vocab": [
+        {
+          "arabic": "السَّبت",
+          "transcription": "is-SAB-t",
+          "romanization": "is-sabt",
+          "english": "Saturday",
+          "note": "the Palestinian week starts on Sunday; Saturday is a work/school day in Palestine",
+          "icon": "solar:calendar-linear",
+          "icon_color": "#6e6e73"
+        },
+        {
+          "arabic": "الأَحد",
+          "transcription": "il-A-had",
+          "romanization": "il-ʾaḥad",
+          "english": "Sunday",
+          "note": "first work day of the week in Palestine; ق → ʾ shift also affects أحد in some dialects",
+          "icon": "solar:calendar-linear",
+          "icon_color": "#fe4d01"
+        },
+        {
+          "arabic": "الإِتنين",
+          "transcription": "il-it-NĒN",
+          "romanization": "il-ʾitnēn",
+          "english": "Monday",
+          "note": "Palestinian form; MSA الاثنين (al-ʾiṯnayn); إتنين from the number 'two'",
+          "icon": "solar:calendar-linear",
+          "icon_color": "#007aff"
+        },
+        {
+          "arabic": "التُّلاتا",
+          "transcription": "it-tu-LA-ta",
+          "romanization": "it-tulāta",
+          "english": "Tuesday",
+          "note": "Palestinian colloquial; MSA الثلاثاء (al-ṯulāṯāʾ); from the word for 'three'",
+          "icon": "solar:calendar-linear",
+          "icon_color": "#34c759"
+        },
+        {
+          "arabic": "اليَوم",
+          "transcription": "il-YŌM",
+          "romanization": "il-yōm",
+          "english": "today",
+          "note": "also used in expressions: اليوم بدي = 'today I want'; شو في اليوم = 'what's happening today'",
+          "icon": "solar:sun-2-linear",
+          "icon_color": "#ff9f0a"
+        },
+        {
+          "arabic": "بُكرا",
+          "transcription": "BUK-ra",
+          "romanization": "bukra",
+          "english": "tomorrow",
+          "note": "Palestinian/Levantine colloquial; MSA غداً (ġadan); بكرا also used humorously for 'someday/never'",
+          "icon": "solar:sunrise-linear",
+          "icon_color": "#ff9f0a"
+        }
+      ],
+      "quiz": [
+        {
+          "arabic": "السَّبت",
+          "transcription": "is-SAB-t",
+          "romanization": "is-sabt",
+          "options": ["Sunday", "Friday", "Saturday", "Monday"],
+          "answer": 2
+        },
+        {
+          "arabic": "الأَحد",
+          "transcription": "il-A-had",
+          "romanization": "il-ʾaḥad",
+          "options": ["Monday", "Sunday", "Tuesday", "Saturday"],
+          "answer": 1
+        },
+        {
+          "arabic": "الإِتنين",
+          "transcription": "il-it-NĒN",
+          "romanization": "il-ʾitnēn",
+          "options": ["Tuesday", "Sunday", "Monday", "Wednesday"],
+          "answer": 2
+        },
+        {
+          "arabic": "التُّلاتا",
+          "transcription": "it-tu-LA-ta",
+          "romanization": "it-tulāta",
+          "options": ["Monday", "Wednesday", "Saturday", "Tuesday"],
+          "answer": 3
+        },
+        {
+          "arabic": "اليَوم",
+          "transcription": "il-YŌM",
+          "romanization": "il-yōm",
+          "options": ["yesterday", "tomorrow", "today", "this week"],
+          "answer": 2
+        },
+        {
+          "arabic": "بُكرا",
+          "transcription": "BUK-ra",
+          "romanization": "bukra",
+          "options": ["yesterday", "today", "next week", "tomorrow"],
+          "answer": 3
+        }
+      ],
+      "build": [
+        {
+          "sentence": ["السَّبت", "الأَحد"],
+          "decoys": ["اليَوم", "التُّلاتا", "بُكرا"],
+          "english": "Saturday and Sunday"
+        },
+        {
+          "sentence": ["الإِتنين", "التُّلاتا"],
+          "decoys": ["السَّبت", "اليَوم", "الأَحد"],
+          "english": "Monday and Tuesday"
+        },
+        {
+          "sentence": ["اليَوم", "بُكرا"],
+          "decoys": ["السَّبت", "الإِتنين", "الأَحد"],
+          "english": "Today and tomorrow"
+        }
+      ],
+      "speak": {
+        "scenario": "You are discussing the week's schedule with a colleague.",
+        "turns": [
+          {
+            "speaker": "them",
+            "arabic": "إيش يومنا اليوم؟",
+            "romanization": "ʾēš yōmna l-yōm",
+            "english": "What day is it today?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "اليَوم السَّبت!",
+            "romanization": "il-yōm is-sabt",
+            "english": "Today is Saturday!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وبكرا؟",
+            "romanization": "w-bukra",
+            "english": "And tomorrow?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "بُكرا الأَحد!",
+            "romanization": "bukra l-ʾaḥad",
+            "english": "Tomorrow is Sunday!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "والاجتماع؟",
+            "romanization": "w-il-ijtimāʕ",
+            "english": "And the meeting?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "الإِتنين!",
+            "romanization": "il-ʾitnēn",
+            "english": "Monday!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "والتدريب؟",
+            "romanization": "w-it-tadrīb",
+            "english": "And the training?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "التُّلاتا!",
+            "romanization": "it-tulāta",
+            "english": "Tuesday!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وإيش رأيك بالموعد؟",
+            "romanization": "w-ʾēš raʾyak bil-mawʕid",
+            "english": "And what do you think about the appointment?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "اليَوم مش بُكرا!",
+            "romanization": "il-yōm miš bukra",
+            "english": "Today not tomorrow!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "طيب، متى تبدأ؟",
+            "romanization": "ṭayyib, matā tibdaʾ",
+            "english": "Okay, when does it start?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "بُكرا!",
+            "romanization": "bukra",
+            "english": "Tomorrow!"
+          }
+        ]
+      }
+    },
+    {
+      "cycle": 2,
+      "vocab": [
+        {
+          "arabic": "الأَربعا",
+          "transcription": "il-AR-ba-a",
+          "romanization": "il-ʾarbaʕa",
+          "english": "Wednesday",
+          "note": "Palestinian colloquial; MSA الأربعاء; from the word for 'four'",
+          "icon": "solar:calendar-linear",
+          "icon_color": "#ff9f0a"
+        },
+        {
+          "arabic": "الخَميس",
+          "transcription": "il-kha-MĒS",
+          "romanization": "il-ḫamīs",
+          "english": "Thursday",
+          "note": "from the word for 'five'; يوم التعب (day of tiredness) in Palestinian popular saying",
+          "icon": "solar:calendar-linear",
+          "icon_color": "#5856d6"
+        },
+        {
+          "arabic": "الجُمعة",
+          "transcription": "il-JUM-a",
+          "romanization": "il-jumʕa",
+          "english": "Friday",
+          "note": "the weekly day of communal prayer; also the start of the weekend in Palestinian society",
+          "icon": "solar:calendar-linear",
+          "icon_color": "#34c759"
+        },
+        {
+          "arabic": "هالأُسبوع",
+          "transcription": "hal-US-bū'",
+          "romanization": "hal-ʾusbūʕ",
+          "english": "this week",
+          "note": "هال (this) + أسبوع (week); هال- is the Palestinian contraction of هاد الـ (this)",
+          "icon": "solar:calendar-date-linear",
+          "icon_color": "#fe4d01"
+        },
+        {
+          "arabic": "إِمبارِح",
+          "transcription": "im-BA-rih",
+          "romanization": "ʾimbāriḥ",
+          "english": "yesterday",
+          "note": "Palestinian/Levantine form; MSA أمس (ʾams); إمبارح كان = 'yesterday was'",
+          "icon": "solar:history-linear",
+          "icon_color": "#6e6e73"
+        },
+        {
+          "arabic": "كُل يوم",
+          "transcription": "kull-YŌM",
+          "romanization": "kull yōm",
+          "english": "every day",
+          "note": "كل (every/all) + يوم (day); كل يوم بروح = 'I go every day'",
+          "icon": "solar:refresh-circle-linear",
+          "icon_color": "#007aff"
+        }
+      ],
+      "quiz": [
+        {
+          "arabic": "الأَربعا",
+          "transcription": "il-AR-ba-a",
+          "romanization": "il-ʾarbaʕa",
+          "options": ["Thursday", "Tuesday", "Wednesday", "Friday"],
+          "answer": 2
+        },
+        {
+          "arabic": "الخَميس",
+          "transcription": "il-kha-MĒS",
+          "romanization": "il-ḫamīs",
+          "options": ["Friday", "Thursday", "Wednesday", "Saturday"],
+          "answer": 1
+        },
+        {
+          "arabic": "الجُمعة",
+          "transcription": "il-JUM-a",
+          "romanization": "il-jumʕa",
+          "options": ["Thursday", "Saturday", "Friday", "Sunday"],
+          "answer": 2
+        },
+        {
+          "arabic": "هالأُسبوع",
+          "transcription": "hal-US-bū'",
+          "romanization": "hal-ʾusbūʕ",
+          "options": ["last week", "next week", "every week", "this week"],
+          "answer": 3
+        },
+        {
+          "arabic": "إِمبارِح",
+          "transcription": "im-BA-rih",
+          "romanization": "ʾimbāriḥ",
+          "options": ["tomorrow", "today", "yesterday", "this week"],
+          "answer": 2
+        },
+        {
+          "arabic": "كُل يوم",
+          "transcription": "kull-YŌM",
+          "romanization": "kull yōm",
+          "options": ["some days", "once a week", "never", "every day"],
+          "answer": 3
+        }
+      ],
+      "build": [
+        {
+          "sentence": ["الأَربعا", "الخَميس"],
+          "decoys": ["إِمبارِح", "كُل يوم", "هالأُسبوع"],
+          "english": "Wednesday and Thursday"
+        },
+        {
+          "sentence": ["هالأُسبوع", "الجُمعة"],
+          "decoys": ["كُل يوم", "الأَربعا", "إِمبارِح"],
+          "english": "This week on Friday"
+        },
+        {
+          "sentence": ["إِمبارِح", "كُل يوم"],
+          "decoys": ["الجُمعة", "هالأُسبوع", "الخَميس"],
+          "english": "Yesterday, every day"
+        }
+      ],
+      "speak": {
+        "scenario": "You are talking about your weekly schedule with a friend.",
+        "turns": [
+          {
+            "speaker": "them",
+            "arabic": "شو برنامجك هالأسبوع؟",
+            "romanization": "šū barnāmajak hal-ʾusbūʕ",
+            "english": "What's your schedule this week?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "هالأُسبوع مشغول!",
+            "romanization": "hal-ʾusbūʕ mašġūl",
+            "english": "This week I'm busy!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "إيش عندك الأربعا؟",
+            "romanization": "ʾēš ʕindak il-ʾarbaʕa",
+            "english": "What do you have on Wednesday?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "الأَربعا شغل!",
+            "romanization": "il-ʾarbaʕa šuġl",
+            "english": "Wednesday — work!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "والخميس؟",
+            "romanization": "w-il-ḫamīs",
+            "english": "And Thursday?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "الخَميس كمان!",
+            "romanization": "il-ḫamīs kamān",
+            "english": "Thursday too!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "والجمعة؟ في وقت؟",
+            "romanization": "w-il-jumʕa, fī waʔt",
+            "english": "And Friday? Any time?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "الجُمعة!",
+            "romanization": "il-jumʕa",
+            "english": "Friday!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "إيش صار إمبارح؟",
+            "romanization": "ʾēš ṣār ʾimbāriḥ",
+            "english": "What happened yesterday?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "إِمبارِح!",
+            "romanization": "ʾimbāriḥ",
+            "english": "Yesterday! (surprised)"
+          },
+          {
+            "speaker": "them",
+            "arabic": "هيك كل يوم؟",
+            "romanization": "hēk kull yōm",
+            "english": "Like this every day?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "كُل يوم!",
+            "romanization": "kull yōm",
+            "english": "Every day!"
+          }
+        ]
+      },
+      "review": {
+        "all_vocab": [
+          { "arabic": "السَّبت", "transcription": "is-SAB-t", "romanization": "is-sabt", "english": "Saturday" },
+          { "arabic": "الأَحد", "transcription": "il-A-had", "romanization": "il-ʾaḥad", "english": "Sunday" },
+          { "arabic": "الإِتنين", "transcription": "il-it-NĒN", "romanization": "il-ʾitnēn", "english": "Monday" },
+          { "arabic": "التُّلاتا", "transcription": "it-tu-LA-ta", "romanization": "it-tulāta", "english": "Tuesday" },
+          { "arabic": "اليَوم", "transcription": "il-YŌM", "romanization": "il-yōm", "english": "today" },
+          { "arabic": "بُكرا", "transcription": "BUK-ra", "romanization": "bukra", "english": "tomorrow" },
+          { "arabic": "الأَربعا", "transcription": "il-AR-ba-a", "romanization": "il-ʾarbaʕa", "english": "Wednesday" },
+          { "arabic": "الخَميس", "transcription": "il-kha-MĒS", "romanization": "il-ḫamīs", "english": "Thursday" },
+          { "arabic": "الجُمعة", "transcription": "il-JUM-a", "romanization": "il-jumʕa", "english": "Friday" },
+          { "arabic": "هالأُسبوع", "transcription": "hal-US-bū'", "romanization": "hal-ʾusbūʕ", "english": "this week" },
+          { "arabic": "إِمبارِح", "transcription": "im-BA-rih", "romanization": "ʾimbāriḥ", "english": "yesterday" },
+          { "arabic": "كُل يوم", "transcription": "kull-YŌM", "romanization": "kull yōm", "english": "every day" }
+        ]
+      }
+    }
+  ]
+}

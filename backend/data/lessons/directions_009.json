@@ -1,0 +1,415 @@
+{
+  "topic": "Directions",
+  "cycles": [
+    {
+      "cycle": 1,
+      "vocab": [
+        {
+          "arabic": "يَمين",
+          "transcription": "ya-MĒN",
+          "romanization": "yamīn",
+          "english": "right",
+          "note": "also means 'oath/swearing' in MSA; in colloquial Palestinian always means 'right direction'",
+          "icon": "solar:arrow-right-linear",
+          "icon_color": "#007aff"
+        },
+        {
+          "arabic": "شِمال",
+          "transcription": "shi-MAL",
+          "romanization": "šimāl",
+          "english": "left",
+          "note": "also means 'north' in MSA; in Palestinian colloquial this means the direction left",
+          "icon": "solar:arrow-left-linear",
+          "icon_color": "#5856d6"
+        },
+        {
+          "arabic": "دُغري",
+          "transcription": "DUG-ri",
+          "romanization": "duġri",
+          "english": "straight ahead",
+          "note": "Palestinian/Levantine colloquial; from Turkish doğru; very commonly used in directions",
+          "icon": "solar:arrow-up-linear",
+          "icon_color": "#34c759"
+        },
+        {
+          "arabic": "قَريب",
+          "transcription": "a-RĒB",
+          "romanization": "ʾarīb",
+          "english": "near / close",
+          "note": "ق → ʾ in Palestinian; قريب منك = near you; مش بعيد = not far (common equivalent)",
+          "icon": "solar:minimize-square-linear",
+          "icon_color": "#ff9f0a"
+        },
+        {
+          "arabic": "بَعيد",
+          "transcription": "ba-ĒD",
+          "romanization": "baʕīd",
+          "english": "far",
+          "note": "opposite of قريب; بعيد كتير = very far; شوي بعيد = a little far",
+          "icon": "solar:maximize-square-linear",
+          "icon_color": "#ff3b30"
+        },
+        {
+          "arabic": "وين؟",
+          "transcription": "WĒN",
+          "romanization": "wēn",
+          "english": "where?",
+          "note": "Palestinian/Levantine for 'where?'; MSA أين (ʾayna); used in questions and exclamations",
+          "icon": "solar:question-circle-linear",
+          "icon_color": "#6e6e73"
+        }
+      ],
+      "quiz": [
+        {
+          "arabic": "يَمين",
+          "transcription": "ya-MĒN",
+          "romanization": "yamīn",
+          "options": ["left", "straight", "right", "far"],
+          "answer": 2
+        },
+        {
+          "arabic": "شِمال",
+          "transcription": "shi-MAL",
+          "romanization": "šimāl",
+          "options": ["right", "left", "straight", "near"],
+          "answer": 1
+        },
+        {
+          "arabic": "دُغري",
+          "transcription": "DUG-ri",
+          "romanization": "duġri",
+          "options": ["right", "far", "straight ahead", "left"],
+          "answer": 2
+        },
+        {
+          "arabic": "قَريب",
+          "transcription": "a-RĒB",
+          "romanization": "ʾarīb",
+          "options": ["far", "straight", "left", "near / close"],
+          "answer": 3
+        },
+        {
+          "arabic": "بَعيد",
+          "transcription": "ba-ĒD",
+          "romanization": "baʕīd",
+          "options": ["near", "right", "far", "here"],
+          "answer": 2
+        },
+        {
+          "arabic": "وين؟",
+          "transcription": "WĒN",
+          "romanization": "wēn",
+          "options": ["when?", "what?", "who?", "where?"],
+          "answer": 3
+        }
+      ],
+      "build": [
+        {
+          "sentence": ["يَمين", "شِمال"],
+          "decoys": ["دُغري", "بَعيد", "قَريب"],
+          "english": "Right then left"
+        },
+        {
+          "sentence": ["دُغري", "قَريب"],
+          "decoys": ["يَمين", "وين؟", "شِمال"],
+          "english": "Straight ahead, it's near"
+        },
+        {
+          "sentence": ["وين؟", "بَعيد"],
+          "decoys": ["دُغري", "شِمال", "يَمين"],
+          "english": "Where? Far?"
+        }
+      ],
+      "speak": {
+        "scenario": "Someone asks you for directions on the street.",
+        "turns": [
+          {
+            "speaker": "them",
+            "arabic": "لو سمحت، وين المسجد؟",
+            "romanization": "law samaḥt, wēn il-masjid",
+            "english": "Excuse me, where is the mosque?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "يَمين!",
+            "romanization": "yamīn",
+            "english": "Right!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وبعدين؟",
+            "romanization": "w-baʕdēn",
+            "english": "And then?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "شِمال!",
+            "romanization": "šimāl",
+            "english": "Left!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وبعد الإشارة؟",
+            "romanization": "w-baʕd il-ʾišāra",
+            "english": "And after the traffic light?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "دُغري!",
+            "romanization": "duġri",
+            "english": "Straight ahead!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "بعيد؟",
+            "romanization": "baʕīd",
+            "english": "Is it far?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "قَريب!",
+            "romanization": "ʾarīb",
+            "english": "Near!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "أكيد مش بعيد؟",
+            "romanization": "ʾakīd miš baʕīd",
+            "english": "Definitely not far?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "بَعيد شوي!",
+            "romanization": "baʕīd šway",
+            "english": "A little far!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وين بالظبط؟",
+            "romanization": "wēn bil-ḍabṭ",
+            "english": "Where exactly?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "وين المسجد؟",
+            "romanization": "wēn il-masjid",
+            "english": "Where is the mosque? (redirecting)"
+          }
+        ]
+      }
+    },
+    {
+      "cycle": 2,
+      "vocab": [
+        {
+          "arabic": "روح",
+          "transcription": "RŪH",
+          "romanization": "rūḥ",
+          "english": "go! (imperative)",
+          "note": "imperative singular; روحي (rūḥi) to a female; مشي (miši) is also used",
+          "icon": "solar:arrow-up-linear",
+          "icon_color": "#fe4d01"
+        },
+        {
+          "arabic": "رجَع",
+          "transcription": "RI-ja'",
+          "romanization": "rijaʕ",
+          "english": "come back / return",
+          "note": "as imperative: ارجع (irjaʕ) = come back!; as direction: ارجع شوي = go back a bit",
+          "icon": "solar:arrow-left-up-linear",
+          "icon_color": "#5856d6"
+        },
+        {
+          "arabic": "عِند الإِشارة",
+          "transcription": "ind il-i-SHA-ra",
+          "romanization": "ʕind il-ʾišāra",
+          "english": "at the traffic light",
+          "note": "إشارة lit. 'signal'; عند الإشارة is a very common landmark reference in Palestinian directions",
+          "icon": "solar:traffic-economy-linear",
+          "icon_color": "#ff3b30"
+        },
+        {
+          "arabic": "مِن هون",
+          "transcription": "min-HŌN",
+          "romanization": "min hōn",
+          "english": "from here / this way",
+          "note": "common in directions; مشي من هون = walk this way; روح من هون = go this way",
+          "icon": "solar:map-point-linear",
+          "icon_color": "#007aff"
+        },
+        {
+          "arabic": "أَوَّل شارِع",
+          "transcription": "AW-wal SHA-ri'",
+          "romanization": "ʾawwal šāriʕ",
+          "english": "first street",
+          "note": "أول (first) + شارع (street); تاني شارع (tāni šāriʕ) = second street",
+          "icon": "solar:flag-linear",
+          "icon_color": "#ff9f0a"
+        },
+        {
+          "arabic": "إِيش هاد؟",
+          "transcription": "ĒSH-HĀD",
+          "romanization": "ʾēš hād",
+          "english": "what is this?",
+          "note": "إيش is Palestinian for 'what'; ما هاد also used; very frequent question phrase",
+          "icon": "solar:question-circle-linear",
+          "icon_color": "#34c759"
+        }
+      ],
+      "quiz": [
+        {
+          "arabic": "روح",
+          "transcription": "RŪH",
+          "romanization": "rūḥ",
+          "options": ["stop", "turn", "wait", "go!"],
+          "answer": 3
+        },
+        {
+          "arabic": "رجَع",
+          "transcription": "RI-ja'",
+          "romanization": "rijaʕ",
+          "options": ["come back", "go forward", "turn right", "stop"],
+          "answer": 0
+        },
+        {
+          "arabic": "عِند الإِشارة",
+          "transcription": "ind il-i-SHA-ra",
+          "romanization": "ʕind il-ʾišāra",
+          "options": ["at the corner", "at the market", "at the traffic light", "at the mosque"],
+          "answer": 2
+        },
+        {
+          "arabic": "مِن هون",
+          "transcription": "min-HŌN",
+          "romanization": "min hōn",
+          "options": ["from there", "from far away", "from here / this way", "from the right"],
+          "answer": 2
+        },
+        {
+          "arabic": "أَوَّل شارِع",
+          "transcription": "AW-wal SHA-ri'",
+          "romanization": "ʾawwal šāriʕ",
+          "options": ["last street", "second street", "main street", "first street"],
+          "answer": 3
+        },
+        {
+          "arabic": "إِيش هاد؟",
+          "transcription": "ĒSH-HĀD",
+          "romanization": "ʾēš hād",
+          "options": ["who is this?", "where is this?", "when is this?", "what is this?"],
+          "answer": 3
+        }
+      ],
+      "build": [
+        {
+          "sentence": ["روح", "دُغري"],
+          "decoys": ["رجَع", "إِيش هاد؟", "مِن هون"],
+          "english": "Go straight"
+        },
+        {
+          "sentence": ["عِند الإِشارة", "يَمين"],
+          "decoys": ["روح", "مِن هون", "رجَع"],
+          "english": "At the traffic light, right"
+        },
+        {
+          "sentence": ["أَوَّل شارِع", "مِن هون"],
+          "decoys": ["إِيش هاد؟", "رجَع", "عِند الإِشارة"],
+          "english": "First street from here"
+        }
+      ],
+      "speak": {
+        "scenario": "You are guiding a friend to your house by phone.",
+        "turns": [
+          {
+            "speaker": "them",
+            "arabic": "وصلت للشارع الرئيسي، وهلق؟",
+            "romanization": "waṣalt liš-šāriʕ ir-raʾīsi, w-halla'",
+            "english": "I reached the main street, now what?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "روح دُغري!",
+            "romanization": "rūḥ duġri",
+            "english": "Go straight!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "شو بعد كده؟",
+            "romanization": "šū baʕd kida",
+            "english": "What after that?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "عِند الإِشارة يَمين!",
+            "romanization": "ʕind il-ʾišāra yamīn",
+            "english": "At the traffic light, right!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "تجاوزت الإشارة، وبعدين؟",
+            "romanization": "tjāwaztu l-ʾišāra, w-baʕdēn",
+            "english": "I passed the light, and then?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "أَوَّل شارِع شِمال!",
+            "romanization": "ʾawwal šāriʕ šimāl",
+            "english": "First street, left!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "ضعت! من وين بيجي البيت؟",
+            "romanization": "ḍaʕt! min wēn bijī l-bēt",
+            "english": "I'm lost! Where does the house come from?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "مِن هون!",
+            "romanization": "min hōn",
+            "english": "From here / this way!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "فت على الزقاق؟",
+            "romanization": "fitt ʕal-zaʔʔāʔ",
+            "english": "Did I enter the alley?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "رجَع شوي!",
+            "romanization": "rijaʕ šway",
+            "english": "Come back a little!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "هاد البيت؟",
+            "romanization": "hād il-bēt",
+            "english": "Is this the house?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "إِيش هاد؟",
+            "romanization": "ʾēš hād",
+            "english": "What is this? (confused)"
+          }
+        ]
+      },
+      "review": {
+        "all_vocab": [
+          { "arabic": "يَمين", "transcription": "ya-MĒN", "romanization": "yamīn", "english": "right" },
+          { "arabic": "شِمال", "transcription": "shi-MAL", "romanization": "šimāl", "english": "left" },
+          { "arabic": "دُغري", "transcription": "DUG-ri", "romanization": "duġri", "english": "straight ahead" },
+          { "arabic": "قَريب", "transcription": "a-RĒB", "romanization": "ʾarīb", "english": "near / close" },
+          { "arabic": "بَعيد", "transcription": "ba-ĒD", "romanization": "baʕīd", "english": "far" },
+          { "arabic": "وين؟", "transcription": "WĒN", "romanization": "wēn", "english": "where?" },
+          { "arabic": "روح", "transcription": "RŪH", "romanization": "rūḥ", "english": "go! (imperative)" },
+          { "arabic": "رجَع", "transcription": "RI-ja'", "romanization": "rijaʕ", "english": "come back / return" },
+          { "arabic": "عِند الإِشارة", "transcription": "ind il-i-SHA-ra", "romanization": "ʕind il-ʾišāra", "english": "at the traffic light" },
+          { "arabic": "مِن هون", "transcription": "min-HŌN", "romanization": "min hōn", "english": "from here / this way" },
+          { "arabic": "أَوَّل شارِع", "transcription": "AW-wal SHA-ri'", "romanization": "ʾawwal šāriʕ", "english": "first street" },
+          { "arabic": "إِيش هاد؟", "transcription": "ĒSH-HĀD", "romanization": "ʾēš hād", "english": "what is this?" }
+        ]
+      }
+    }
+  ]
+}

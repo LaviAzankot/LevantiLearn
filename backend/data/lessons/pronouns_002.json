@@ -1,0 +1,415 @@
+{
+  "topic": "Pronouns & To Be",
+  "cycles": [
+    {
+      "cycle": 1,
+      "vocab": [
+        {
+          "arabic": "أَنا",
+          "transcription": "A-na",
+          "romanization": "ʾana",
+          "english": "I / me",
+          "note": "first-person singular; same for male and female speakers",
+          "icon": "solar:user-rounded-linear",
+          "icon_color": "#fe4d01"
+        },
+        {
+          "arabic": "إِنتَ",
+          "transcription": "IN-ta",
+          "romanization": "ʾinta",
+          "english": "you (masculine)",
+          "note": "second-person singular masculine; used when speaking to a male",
+          "icon": "solar:user-speak-linear",
+          "icon_color": "#007aff"
+        },
+        {
+          "arabic": "إِنتِ",
+          "transcription": "IN-ti",
+          "romanization": "ʾinti",
+          "english": "you (feminine)",
+          "note": "second-person singular feminine; used when speaking to a female",
+          "icon": "solar:user-speak-rounded-linear",
+          "icon_color": "#ff2d55"
+        },
+        {
+          "arabic": "هُوّ",
+          "transcription": "HUW-wa",
+          "romanization": "huwwa",
+          "english": "he / it (m)",
+          "note": "third-person masculine singular; also used for masculine nouns",
+          "icon": "solar:people-nearby-linear",
+          "icon_color": "#5856d6"
+        },
+        {
+          "arabic": "هِيّ",
+          "transcription": "HIY-ya",
+          "romanization": "hiyya",
+          "english": "she / it (f)",
+          "note": "third-person feminine singular; also used for feminine nouns",
+          "icon": "solar:user-hand-up-linear",
+          "icon_color": "#34c759"
+        },
+        {
+          "arabic": "اِسمي",
+          "transcription": "IS-mi",
+          "romanization": "ismi",
+          "english": "my name",
+          "note": "possessive noun phrase; the standard way to introduce yourself in Palestinian Arabic",
+          "icon": "solar:chat-round-dots-linear",
+          "icon_color": "#ff9f0a"
+        }
+      ],
+      "quiz": [
+        {
+          "arabic": "أَنا",
+          "transcription": "A-na",
+          "romanization": "ʾana",
+          "options": ["you (m)", "I / me", "he", "she"],
+          "answer": 1
+        },
+        {
+          "arabic": "إِنتَ",
+          "transcription": "IN-ta",
+          "romanization": "ʾinta",
+          "options": ["I / me", "she", "you (masculine)", "he"],
+          "answer": 2
+        },
+        {
+          "arabic": "إِنتِ",
+          "transcription": "IN-ti",
+          "romanization": "ʾinti",
+          "options": ["you (feminine)", "you (masculine)", "she", "I"],
+          "answer": 0
+        },
+        {
+          "arabic": "هُوّ",
+          "transcription": "HUW-wa",
+          "romanization": "huwwa",
+          "options": ["she", "I", "he / it (m)", "you (m)"],
+          "answer": 2
+        },
+        {
+          "arabic": "هِيّ",
+          "transcription": "HIY-ya",
+          "romanization": "hiyya",
+          "options": ["he", "you (f)", "I", "she / it (f)"],
+          "answer": 3
+        },
+        {
+          "arabic": "اِسمي",
+          "transcription": "IS-mi",
+          "romanization": "ismi",
+          "options": ["your name", "his name", "her name", "my name"],
+          "answer": 3
+        }
+      ],
+      "build": [
+        {
+          "sentence": ["أَنا", "هُوّ"],
+          "decoys": ["هِيّ", "إِنتَ", "اِسمي"],
+          "english": "It's me (pointing to him)"
+        },
+        {
+          "sentence": ["هِيّ", "إِنتِ"],
+          "decoys": ["هُوّ", "أَنا", "اِسمي"],
+          "english": "Is she you? / She's you"
+        },
+        {
+          "sentence": ["اِسمي", "إِنتَ"],
+          "decoys": ["هِيّ", "هُوّ", "أَنا"],
+          "english": "My name… and you?"
+        }
+      ],
+      "speak": {
+        "scenario": "You are meeting someone new and introducing yourself.",
+        "turns": [
+          {
+            "speaker": "them",
+            "arabic": "مين هاد؟",
+            "romanization": "mīn hād",
+            "english": "Who is that?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "هُوّ!",
+            "romanization": "huwwa",
+            "english": "Him!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "ومين هي؟",
+            "romanization": "w-mīn hiyya",
+            "english": "And who is she?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "هِيّ!",
+            "romanization": "hiyya",
+            "english": "Her!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "إيش اسمك؟",
+            "romanization": "ʾēš ismak",
+            "english": "What's your name?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "اِسمي!",
+            "romanization": "ismi",
+            "english": "My name is…"
+          },
+          {
+            "speaker": "them",
+            "arabic": "مين الكبير هون؟",
+            "romanization": "mīn il-kabīr hōn",
+            "english": "Who's the eldest here?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "أَنا!",
+            "romanization": "ʾana",
+            "english": "Me!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "من فلسطين؟",
+            "romanization": "min Filasṭīn",
+            "english": "From Palestine?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "إِنتَ!",
+            "romanization": "ʾinta",
+            "english": "You (are)!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "ومن مين هادي البنت؟",
+            "romanization": "w-min mīn hādi l-bint",
+            "english": "And who does this girl belong to?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "إِنتِ!",
+            "romanization": "ʾinti",
+            "english": "You (feminine)!"
+          }
+        ]
+      }
+    },
+    {
+      "cycle": 2,
+      "vocab": [
+        {
+          "arabic": "إِحنا",
+          "transcription": "IH-na",
+          "romanization": "ʾiḥna",
+          "english": "we",
+          "note": "first-person plural; Palestinian form — other dialects may say نحنا (niḥna)",
+          "icon": "solar:users-group-two-rounded-linear",
+          "icon_color": "#007aff"
+        },
+        {
+          "arabic": "إِنتو",
+          "transcription": "IN-tu",
+          "romanization": "ʾintu",
+          "english": "you (plural)",
+          "note": "second-person plural; used for a group of people you are addressing",
+          "icon": "solar:users-group-rounded-linear",
+          "icon_color": "#5856d6"
+        },
+        {
+          "arabic": "هُم",
+          "transcription": "HUM",
+          "romanization": "hum",
+          "english": "they",
+          "note": "third-person plural; used for mixed-gender or all-male groups",
+          "icon": "solar:people-two-linear",
+          "icon_color": "#ff9f0a"
+        },
+        {
+          "arabic": "كَمان",
+          "transcription": "ka-MAN",
+          "romanization": "kamān",
+          "english": "also / too",
+          "note": "adverb meaning 'as well'; very common in Palestinian daily speech",
+          "icon": "solar:add-circle-linear",
+          "icon_color": "#34c759"
+        },
+        {
+          "arabic": "مِش",
+          "transcription": "MISH",
+          "romanization": "miš",
+          "english": "not / isn't",
+          "note": "negation particle for nouns and adjectives; ما (mā) negates verbs",
+          "icon": "solar:close-circle-linear",
+          "icon_color": "#ff3b30"
+        },
+        {
+          "arabic": "هاد",
+          "transcription": "HĀD",
+          "romanization": "hād",
+          "english": "this (masculine)",
+          "note": "demonstrative pronoun; feminine form is هادي (hādi); very frequent in speech",
+          "icon": "solar:cursor-linear",
+          "icon_color": "#8e8e93"
+        }
+      ],
+      "quiz": [
+        {
+          "arabic": "إِحنا",
+          "transcription": "IH-na",
+          "romanization": "ʾiḥna",
+          "options": ["they", "you (pl)", "we", "I"],
+          "answer": 2
+        },
+        {
+          "arabic": "إِنتو",
+          "transcription": "IN-tu",
+          "romanization": "ʾintu",
+          "options": ["you (plural)", "we", "they", "you (singular)"],
+          "answer": 0
+        },
+        {
+          "arabic": "هُم",
+          "transcription": "HUM",
+          "romanization": "hum",
+          "options": ["we", "you (pl)", "I", "they"],
+          "answer": 3
+        },
+        {
+          "arabic": "كَمان",
+          "transcription": "ka-MAN",
+          "romanization": "kamān",
+          "options": ["not", "this", "also / too", "only"],
+          "answer": 2
+        },
+        {
+          "arabic": "مِش",
+          "transcription": "MISH",
+          "romanization": "miš",
+          "options": ["also", "this", "yes", "not / isn't"],
+          "answer": 3
+        },
+        {
+          "arabic": "هاد",
+          "transcription": "HĀD",
+          "romanization": "hād",
+          "options": ["that (far)", "they", "this (masculine)", "here"],
+          "answer": 2
+        }
+      ],
+      "build": [
+        {
+          "sentence": ["إِحنا", "كَمان"],
+          "decoys": ["هُم", "إِنتو", "مِش"],
+          "english": "Us too!"
+        },
+        {
+          "sentence": ["هُم", "مِش", "هاد"],
+          "decoys": ["إِحنا", "كَمان", "إِنتو"],
+          "english": "They are not this / They're not like this"
+        },
+        {
+          "sentence": ["إِنتو", "كَمان"],
+          "decoys": ["مِش", "هاد", "هُم"],
+          "english": "You all too!"
+        }
+      ],
+      "speak": {
+        "scenario": "You are talking about a group at a family gathering.",
+        "turns": [
+          {
+            "speaker": "them",
+            "arabic": "مين هاد الرجال؟",
+            "romanization": "mīn hād ir-rijāl",
+            "english": "Who are those men?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "هُم!",
+            "romanization": "hum",
+            "english": "They are!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وإحنا، شو؟",
+            "romanization": "w-ʾiḥna, šū",
+            "english": "And we, what about us?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "إِحنا كَمان!",
+            "romanization": "ʾiḥna kamān",
+            "english": "We too!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "هاد مين؟",
+            "romanization": "hād mīn",
+            "english": "Who's this?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "هاد!",
+            "romanization": "hād",
+            "english": "This one!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وإنتو كمان جايين؟",
+            "romanization": "w-ʾintu kamān jāyyīn",
+            "english": "And you all are coming too?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "إِنتو كَمان!",
+            "romanization": "ʾintu kamān",
+            "english": "You all too!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "هادا صح؟",
+            "romanization": "hāda ṣaḥ",
+            "english": "Is this correct?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "مِش!",
+            "romanization": "miš",
+            "english": "No (it's) not!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "هم مش من هون؟",
+            "romanization": "hum miš min hōn",
+            "english": "They're not from here?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "مِش كَمان!",
+            "romanization": "miš kamān",
+            "english": "Not them either!"
+          }
+        ]
+      },
+      "review": {
+        "all_vocab": [
+          { "arabic": "أَنا", "transcription": "A-na", "romanization": "ʾana", "english": "I / me" },
+          { "arabic": "إِنتَ", "transcription": "IN-ta", "romanization": "ʾinta", "english": "you (masculine)" },
+          { "arabic": "إِنتِ", "transcription": "IN-ti", "romanization": "ʾinti", "english": "you (feminine)" },
+          { "arabic": "هُوّ", "transcription": "HUW-wa", "romanization": "huwwa", "english": "he / it (m)" },
+          { "arabic": "هِيّ", "transcription": "HIY-ya", "romanization": "hiyya", "english": "she / it (f)" },
+          { "arabic": "اِسمي", "transcription": "IS-mi", "romanization": "ismi", "english": "my name" },
+          { "arabic": "إِحنا", "transcription": "IH-na", "romanization": "ʾiḥna", "english": "we" },
+          { "arabic": "إِنتو", "transcription": "IN-tu", "romanization": "ʾintu", "english": "you (plural)" },
+          { "arabic": "هُم", "transcription": "HUM", "romanization": "hum", "english": "they" },
+          { "arabic": "كَمان", "transcription": "ka-MAN", "romanization": "kamān", "english": "also / too" },
+          { "arabic": "مِش", "transcription": "MISH", "romanization": "miš", "english": "not / isn't" },
+          { "arabic": "هاد", "transcription": "HĀD", "romanization": "hād", "english": "this (masculine)" }
+        ]
+      }
+    }
+  ]
+}

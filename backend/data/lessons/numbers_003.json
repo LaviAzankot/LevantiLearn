@@ -1,0 +1,416 @@
+{
+  "topic": "Numbers 1–10",
+  "cycles": [
+    {
+      "cycle": 1,
+      "vocab": [
+        {
+          "arabic": "واحِد",
+          "transcription": "WA-hid",
+          "romanization": "wāḥid",
+          "english": "one",
+          "note": "masculine form; feminine is واحدة (wāḥde) used in telling time",
+          "icon": "solar:star-linear",
+          "icon_color": "#fe4d01"
+        },
+        {
+          "arabic": "تنين",
+          "transcription": "t-NĒN",
+          "romanization": "tnēn",
+          "english": "two",
+          "note": "Palestinian/Levantine colloquial for اثنين; masculine base form",
+          "icon": "solar:eye-linear",
+          "icon_color": "#007aff"
+        },
+        {
+          "arabic": "تلاتة",
+          "transcription": "ta-LA-ta",
+          "romanization": "talāta",
+          "english": "three",
+          "note": "colloquial Palestinian form; MSA ثلاثة — note ث → ت sound shift",
+          "icon": "solar:triangle-linear",
+          "icon_color": "#34c759"
+        },
+        {
+          "arabic": "أَربعة",
+          "transcription": "AR-ba-a",
+          "romanization": "ʾarbaʕa",
+          "english": "four",
+          "note": "Palestinian pronunciation with short ʕ at end; not elided",
+          "icon": "solar:square-linear",
+          "icon_color": "#ff9f0a"
+        },
+        {
+          "arabic": "خَمسة",
+          "transcription": "KHAM-se",
+          "romanization": "ḫamse",
+          "english": "five",
+          "note": "very common; hand with five fingers in Palestinian culture symbolizes protection",
+          "icon": "solar:hand-stars-linear",
+          "icon_color": "#5856d6"
+        },
+        {
+          "arabic": "كَم؟",
+          "transcription": "KAM",
+          "romanization": "kam",
+          "english": "how many? / how much?",
+          "note": "interrogative word used for quantities and prices; precedes noun",
+          "icon": "solar:question-circle-linear",
+          "icon_color": "#6e6e73"
+        }
+      ],
+      "quiz": [
+        {
+          "arabic": "واحِد",
+          "transcription": "WA-hid",
+          "romanization": "wāḥid",
+          "options": ["two", "one", "three", "four"],
+          "answer": 1
+        },
+        {
+          "arabic": "تنين",
+          "transcription": "t-NĒN",
+          "romanization": "tnēn",
+          "options": ["one", "three", "two", "five"],
+          "answer": 2
+        },
+        {
+          "arabic": "تلاتة",
+          "transcription": "ta-LA-ta",
+          "romanization": "talāta",
+          "options": ["four", "three", "two", "five"],
+          "answer": 1
+        },
+        {
+          "arabic": "أَربعة",
+          "transcription": "AR-ba-a",
+          "romanization": "ʾarbaʕa",
+          "options": ["five", "two", "three", "four"],
+          "answer": 3
+        },
+        {
+          "arabic": "خَمسة",
+          "transcription": "KHAM-se",
+          "romanization": "ḫamse",
+          "options": ["three", "four", "five", "one"],
+          "answer": 2
+        },
+        {
+          "arabic": "كَم؟",
+          "transcription": "KAM",
+          "romanization": "kam",
+          "options": ["what?", "where?", "how many?", "who?"],
+          "answer": 2
+        }
+      ],
+      "build": [
+        {
+          "sentence": ["كَم؟", "واحِد"],
+          "decoys": ["تنين", "خَمسة", "أَربعة"],
+          "english": "How many? One!"
+        },
+        {
+          "sentence": ["تنين", "أَربعة"],
+          "decoys": ["واحِد", "كَم؟", "تلاتة"],
+          "english": "Two, four"
+        },
+        {
+          "sentence": ["تلاتة", "خَمسة"],
+          "decoys": ["واحِد", "كَم؟", "أَربعة"],
+          "english": "Three, five"
+        }
+      ],
+      "speak": {
+        "scenario": "A vendor at the market is asking how many items you want.",
+        "turns": [
+          {
+            "speaker": "them",
+            "arabic": "كم بدك؟",
+            "romanization": "kam biddak",
+            "english": "How many do you want?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "واحِد!",
+            "romanization": "wāḥid",
+            "english": "One!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وبكرا كم؟",
+            "romanization": "w-bukra kam",
+            "english": "And tomorrow how many?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "تنين!",
+            "romanization": "tnēn",
+            "english": "Two!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "كم كيلو بدك؟",
+            "romanization": "kam kīlo biddak",
+            "english": "How many kilos do you want?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "تلاتة!",
+            "romanization": "talāta",
+            "english": "Three!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وكم نفر؟",
+            "romanization": "w-kam nafar",
+            "english": "And how many people?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "أَربعة!",
+            "romanization": "ʾarbaʕa",
+            "english": "Four!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "كم دقيقة بدك تنتظر؟",
+            "romanization": "kam daʾīʾa biddak tintaẓir",
+            "english": "How many minutes do you want to wait?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "خَمسة!",
+            "romanization": "ḫamse",
+            "english": "Five!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "شو رأيك، كم بيكفي؟",
+            "romanization": "šū raʾyak, kam biyakfī",
+            "english": "In your opinion, how many is enough?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "كَم؟",
+            "romanization": "kam",
+            "english": "How many? (asking back)"
+          }
+        ]
+      }
+    },
+    {
+      "cycle": 2,
+      "vocab": [
+        {
+          "arabic": "سِتّة",
+          "transcription": "SIT-te",
+          "romanization": "sitte",
+          "english": "six",
+          "note": "note the geminate t (tt) — سِتّة not سِتَة",
+          "icon": "solar:hexagon-linear",
+          "icon_color": "#fe4d01"
+        },
+        {
+          "arabic": "سَبعة",
+          "transcription": "SAB-a",
+          "romanization": "sabʕa",
+          "english": "seven",
+          "note": "the ع is weak but present; Palestinian pronunciation is sabʕa",
+          "icon": "solar:shield-star-linear",
+          "icon_color": "#007aff"
+        },
+        {
+          "arabic": "تمانية",
+          "transcription": "ta-MA-ni-ye",
+          "romanization": "tamāniye",
+          "english": "eight",
+          "note": "colloquial Palestinian form; MSA ثمانية — note ث → ت sound shift",
+          "icon": "solar:infinity-linear",
+          "icon_color": "#34c759"
+        },
+        {
+          "arabic": "تِسعة",
+          "transcription": "TIS-a",
+          "romanization": "tisʕa",
+          "english": "nine",
+          "note": "the ع is pronounced; stress on first syllable",
+          "icon": "solar:moon-stars-linear",
+          "icon_color": "#ff9f0a"
+        },
+        {
+          "arabic": "عَشرة",
+          "transcription": "ASH-ra",
+          "romanization": "ʕašra",
+          "english": "ten",
+          "note": "the ع at the start is a voiced pharyngeal — try to produce it from the throat",
+          "icon": "solar:hand-stars-linear",
+          "icon_color": "#5856d6"
+        },
+        {
+          "arabic": "أَكتر",
+          "transcription": "AK-tar",
+          "romanization": "ʾaktar",
+          "english": "more",
+          "note": "comparative of كتير (many); used after a number to mean 'more than'",
+          "icon": "solar:add-circle-linear",
+          "icon_color": "#6e6e73"
+        }
+      ],
+      "quiz": [
+        {
+          "arabic": "سِتّة",
+          "transcription": "SIT-te",
+          "romanization": "sitte",
+          "options": ["seven", "five", "six", "eight"],
+          "answer": 2
+        },
+        {
+          "arabic": "سَبعة",
+          "transcription": "SAB-a",
+          "romanization": "sabʕa",
+          "options": ["six", "seven", "eight", "nine"],
+          "answer": 1
+        },
+        {
+          "arabic": "تمانية",
+          "transcription": "ta-MA-ni-ye",
+          "romanization": "tamāniye",
+          "options": ["nine", "six", "ten", "eight"],
+          "answer": 3
+        },
+        {
+          "arabic": "تِسعة",
+          "transcription": "TIS-a",
+          "romanization": "tisʕa",
+          "options": ["eight", "ten", "nine", "seven"],
+          "answer": 2
+        },
+        {
+          "arabic": "عَشرة",
+          "transcription": "ASH-ra",
+          "romanization": "ʕašra",
+          "options": ["nine", "eight", "seven", "ten"],
+          "answer": 3
+        },
+        {
+          "arabic": "أَكتر",
+          "transcription": "AK-tar",
+          "romanization": "ʾaktar",
+          "english": "more",
+          "options": ["less", "only", "more", "enough"],
+          "answer": 2
+        }
+      ],
+      "build": [
+        {
+          "sentence": ["سِتّة", "أَكتر"],
+          "decoys": ["تِسعة", "سَبعة", "عَشرة"],
+          "english": "Six or more"
+        },
+        {
+          "sentence": ["سَبعة", "تمانية"],
+          "decoys": ["سِتّة", "أَكتر", "تِسعة"],
+          "english": "Seven, eight"
+        },
+        {
+          "sentence": ["تِسعة", "عَشرة"],
+          "decoys": ["سَبعة", "أَكتر", "تمانية"],
+          "english": "Nine, ten"
+        }
+      ],
+      "speak": {
+        "scenario": "You are playing a counting game with children.",
+        "turns": [
+          {
+            "speaker": "them",
+            "arabic": "واحد، تنين، تلاتة، أربعة، خمسة…",
+            "romanization": "wāḥid, tnēn, talāta, ʾarbaʕa, ḫamse",
+            "english": "One, two, three, four, five…"
+          },
+          {
+            "speaker": "you",
+            "arabic": "سِتّة!",
+            "romanization": "sitte",
+            "english": "Six!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "ممتاز! وبعدين؟",
+            "romanization": "mumtāz! w-baʕdēn",
+            "english": "Excellent! And then?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "سَبعة!",
+            "romanization": "sabʕa",
+            "english": "Seven!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "كمان!",
+            "romanization": "kamān",
+            "english": "Continue!"
+          },
+          {
+            "speaker": "you",
+            "arabic": "تمانية!",
+            "romanization": "tamāniye",
+            "english": "Eight!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وبعد تمانية؟",
+            "romanization": "w-baʕd tamāniye",
+            "english": "And after eight?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "تِسعة!",
+            "romanization": "tisʕa",
+            "english": "Nine!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وآخر واحد؟",
+            "romanization": "w-āḫir wāḥid",
+            "english": "And the last one?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "عَشرة!",
+            "romanization": "ʕašra",
+            "english": "Ten!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "بدك تعد أكتر؟",
+            "romanization": "biddak tiʕidd ʾaktar",
+            "english": "Do you want to count more?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "أَكتر!",
+            "romanization": "ʾaktar",
+            "english": "More!"
+          }
+        ]
+      },
+      "review": {
+        "all_vocab": [
+          { "arabic": "واحِد", "transcription": "WA-hid", "romanization": "wāḥid", "english": "one" },
+          { "arabic": "تنين", "transcription": "t-NĒN", "romanization": "tnēn", "english": "two" },
+          { "arabic": "تلاتة", "transcription": "ta-LA-ta", "romanization": "talāta", "english": "three" },
+          { "arabic": "أَربعة", "transcription": "AR-ba-a", "romanization": "ʾarbaʕa", "english": "four" },
+          { "arabic": "خَمسة", "transcription": "KHAM-se", "romanization": "ḫamse", "english": "five" },
+          { "arabic": "كَم؟", "transcription": "KAM", "romanization": "kam", "english": "how many?" },
+          { "arabic": "سِتّة", "transcription": "SIT-te", "romanization": "sitte", "english": "six" },
+          { "arabic": "سَبعة", "transcription": "SAB-a", "romanization": "sabʕa", "english": "seven" },
+          { "arabic": "تمانية", "transcription": "ta-MA-ni-ye", "romanization": "tamāniye", "english": "eight" },
+          { "arabic": "تِسعة", "transcription": "TIS-a", "romanization": "tisʕa", "english": "nine" },
+          { "arabic": "عَشرة", "transcription": "ASH-ra", "romanization": "ʕašra", "english": "ten" },
+          { "arabic": "أَكتر", "transcription": "AK-tar", "romanization": "ʾaktar", "english": "more" }
+        ]
+      }
+    }
+  ]
+}

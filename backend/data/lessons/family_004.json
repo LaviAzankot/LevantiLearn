@@ -1,0 +1,415 @@
+{
+  "topic": "Family Members",
+  "cycles": [
+    {
+      "cycle": 1,
+      "vocab": [
+        {
+          "arabic": "أَبي",
+          "transcription": "A-bi",
+          "romanization": "ʾabi",
+          "english": "my father",
+          "note": "possessive form; 'the father' is الأب (il-ʾab); used in direct reference",
+          "icon": "solar:user-rounded-linear",
+          "icon_color": "#5856d6"
+        },
+        {
+          "arabic": "أُمّي",
+          "transcription": "UM-mi",
+          "romanization": "ʾummi",
+          "english": "my mother",
+          "note": "possessive form; very warm term of address — Palestinians say أمي to their mother directly",
+          "icon": "solar:user-hand-up-linear",
+          "icon_color": "#ff2d55"
+        },
+        {
+          "arabic": "أَخي",
+          "transcription": "A-khi",
+          "romanization": "ʾaḫi",
+          "english": "my brother",
+          "note": "possessive form; also used as a friendly term of address for any man",
+          "icon": "solar:people-nearby-linear",
+          "icon_color": "#007aff"
+        },
+        {
+          "arabic": "أُختي",
+          "transcription": "UKH-ti",
+          "romanization": "ʾuḫti",
+          "english": "my sister",
+          "note": "possessive form; also used as a friendly term of address for any woman",
+          "icon": "solar:heart-linear",
+          "icon_color": "#ff9f0a"
+        },
+        {
+          "arabic": "بَيتنا",
+          "transcription": "BAY-tna",
+          "romanization": "baytna",
+          "english": "our house / our home",
+          "note": "combined بيت (house) + نا (our); refers to both the physical house and the family home",
+          "icon": "solar:home-linear",
+          "icon_color": "#34c759"
+        },
+        {
+          "arabic": "أَهلي",
+          "transcription": "AH-li",
+          "romanization": "ʾahli",
+          "english": "my family",
+          "note": "refers to the whole family unit; also used as a warm greeting meaning 'welcome' (أهلاً)",
+          "icon": "solar:users-group-two-rounded-linear",
+          "icon_color": "#fe4d01"
+        }
+      ],
+      "quiz": [
+        {
+          "arabic": "أَبي",
+          "transcription": "A-bi",
+          "romanization": "ʾabi",
+          "options": ["my brother", "my father", "my mother", "my family"],
+          "answer": 1
+        },
+        {
+          "arabic": "أُمّي",
+          "transcription": "UM-mi",
+          "romanization": "ʾummi",
+          "options": ["my sister", "my family", "my mother", "our house"],
+          "answer": 2
+        },
+        {
+          "arabic": "أَخي",
+          "transcription": "A-khi",
+          "romanization": "ʾaḫi",
+          "options": ["my father", "my brother", "my sister", "my family"],
+          "answer": 1
+        },
+        {
+          "arabic": "أُختي",
+          "transcription": "UKH-ti",
+          "romanization": "ʾuḫti",
+          "options": ["my brother", "my mother", "my family", "my sister"],
+          "answer": 3
+        },
+        {
+          "arabic": "بَيتنا",
+          "transcription": "BAY-tna",
+          "romanization": "baytna",
+          "options": ["my family", "my father", "our house", "my sister"],
+          "answer": 2
+        },
+        {
+          "arabic": "أَهلي",
+          "transcription": "AH-li",
+          "romanization": "ʾahli",
+          "options": ["my family", "our house", "my brother", "my mother"],
+          "answer": 0
+        }
+      ],
+      "build": [
+        {
+          "sentence": ["أَبي", "أُمّي"],
+          "decoys": ["أَخي", "بَيتنا", "أَهلي"],
+          "english": "My father and my mother"
+        },
+        {
+          "sentence": ["أَخي", "أُختي"],
+          "decoys": ["أَبي", "أَهلي", "بَيتنا"],
+          "english": "My brother and my sister"
+        },
+        {
+          "sentence": ["أَهلي", "بَيتنا"],
+          "decoys": ["أُمّي", "أَخي", "أَبي"],
+          "english": "My family, our house"
+        }
+      ],
+      "speak": {
+        "scenario": "You are showing someone a photo of your family.",
+        "turns": [
+          {
+            "speaker": "them",
+            "arabic": "مين هاد؟",
+            "romanization": "mīn hād",
+            "english": "Who is this?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "أَبي!",
+            "romanization": "ʾabi",
+            "english": "My father!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وهاي؟",
+            "romanization": "w-hāy",
+            "english": "And her?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "أُمّي!",
+            "romanization": "ʾummi",
+            "english": "My mother!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وهاد الشاب؟",
+            "romanization": "w-hād iš-šābb",
+            "english": "And this young man?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "أَخي!",
+            "romanization": "ʾaḫi",
+            "english": "My brother!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وهاي البنت؟",
+            "romanization": "w-hāy il-bint",
+            "english": "And this girl?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "أُختي!",
+            "romanization": "ʾuḫti",
+            "english": "My sister!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وين الصورة من؟",
+            "romanization": "wēn iṣ-ṣūra min",
+            "english": "Where is the photo from?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "بَيتنا!",
+            "romanization": "baytna",
+            "english": "Our home!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "كلكم شو؟",
+            "romanization": "kullkum šū",
+            "english": "What are all of you?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "أَهلي!",
+            "romanization": "ʾahli",
+            "english": "My family!"
+          }
+        ]
+      }
+    },
+    {
+      "cycle": 2,
+      "vocab": [
+        {
+          "arabic": "جَدّي",
+          "transcription": "JAD-di",
+          "romanization": "jaddi",
+          "english": "my grandfather",
+          "note": "note the geminate d (dd); paternal or maternal grandfather — context clarifies",
+          "icon": "solar:user-rounded-linear",
+          "icon_color": "#6e6e73"
+        },
+        {
+          "arabic": "جَدّتي",
+          "transcription": "JAD-dti",
+          "romanization": "jaddti",
+          "english": "my grandmother",
+          "note": "the possessive ي attaches directly to جدة with the ة → ت change",
+          "icon": "solar:heart-linear",
+          "icon_color": "#ff9f0a"
+        },
+        {
+          "arabic": "عَمّي",
+          "transcription": "AM-mi",
+          "romanization": "ʕammi",
+          "english": "my uncle (paternal)",
+          "note": "strictly the father's brother; خالي (ḫāli) is the mother's brother",
+          "icon": "solar:people-nearby-linear",
+          "icon_color": "#007aff"
+        },
+        {
+          "arabic": "عَمّتي",
+          "transcription": "AM-mti",
+          "romanization": "ʕammti",
+          "english": "my aunt (paternal)",
+          "note": "strictly the father's sister; خالتي (ḫālti) is the mother's sister",
+          "icon": "solar:user-hand-up-linear",
+          "icon_color": "#ff2d55"
+        },
+        {
+          "arabic": "ابن عَمّي",
+          "transcription": "ib-NAM-mi",
+          "romanization": "ibn ʕammi",
+          "english": "my (male) cousin",
+          "note": "lit. 'son of my uncle'; female cousin is بنت عمي (bint ʕammi)",
+          "icon": "solar:user-speak-linear",
+          "icon_color": "#5856d6"
+        },
+        {
+          "arabic": "كُلّنا",
+          "transcription": "KUL-lna",
+          "romanization": "kullna",
+          "english": "all of us",
+          "note": "كل (all) + نا (us); common in Palestinian expressions of unity and togetherness",
+          "icon": "solar:users-group-rounded-linear",
+          "icon_color": "#34c759"
+        }
+      ],
+      "quiz": [
+        {
+          "arabic": "جَدّي",
+          "transcription": "JAD-di",
+          "romanization": "jaddi",
+          "options": ["my uncle", "my grandfather", "my cousin", "my father"],
+          "answer": 1
+        },
+        {
+          "arabic": "جَدّتي",
+          "transcription": "JAD-dti",
+          "romanization": "jaddti",
+          "options": ["my grandmother", "my aunt", "my mother", "my sister"],
+          "answer": 0
+        },
+        {
+          "arabic": "عَمّي",
+          "transcription": "AM-mi",
+          "romanization": "ʕammi",
+          "options": ["my grandfather", "my cousin", "my uncle (paternal)", "my brother"],
+          "answer": 2
+        },
+        {
+          "arabic": "عَمّتي",
+          "transcription": "AM-mti",
+          "romanization": "ʕammti",
+          "options": ["my aunt (paternal)", "my grandmother", "my sister", "my mother"],
+          "answer": 0
+        },
+        {
+          "arabic": "ابن عَمّي",
+          "transcription": "ib-NAM-mi",
+          "romanization": "ibn ʕammi",
+          "options": ["my uncle", "my brother", "my grandfather", "my (male) cousin"],
+          "answer": 3
+        },
+        {
+          "arabic": "كُلّنا",
+          "transcription": "KUL-lna",
+          "romanization": "kullna",
+          "options": ["only us", "some of us", "all of us", "none of us"],
+          "answer": 2
+        }
+      ],
+      "build": [
+        {
+          "sentence": ["جَدّي", "جَدّتي"],
+          "decoys": ["عَمّي", "كُلّنا", "ابن عَمّي"],
+          "english": "My grandfather and my grandmother"
+        },
+        {
+          "sentence": ["عَمّي", "عَمّتي"],
+          "decoys": ["جَدّي", "كُلّنا", "ابن عَمّي"],
+          "english": "My uncle and my aunt"
+        },
+        {
+          "sentence": ["كُلّنا", "ابن عَمّي"],
+          "decoys": ["جَدّتي", "عَمّي", "عَمّتي"],
+          "english": "All of us — my cousin too"
+        }
+      ],
+      "speak": {
+        "scenario": "You are describing your extended family at a reunion.",
+        "turns": [
+          {
+            "speaker": "them",
+            "arabic": "مين هاد الزلمة الكبير؟",
+            "romanization": "mīn hād iz-zalame l-kabīr",
+            "english": "Who is that older man?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "جَدّي!",
+            "romanization": "jaddi",
+            "english": "My grandfather!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وهاي السيدة؟",
+            "romanization": "w-hāy is-sayyida",
+            "english": "And that lady?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "جَدّتي!",
+            "romanization": "jaddti",
+            "english": "My grandmother!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "ومين أخو أبوك؟",
+            "romanization": "w-mīn ʾaḫū ʾabūk",
+            "english": "And who is your father's brother?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "عَمّي!",
+            "romanization": "ʕammi",
+            "english": "My uncle!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وأخته؟",
+            "romanization": "w-ʾuḫtu",
+            "english": "And his sister?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "عَمّتي!",
+            "romanization": "ʕammti",
+            "english": "My aunt!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "ومين هاد الشاب الصغير؟",
+            "romanization": "w-mīn hād iš-šābb iṣ-ṣġīr",
+            "english": "And who is that young man?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "ابن عَمّي!",
+            "romanization": "ibn ʕammi",
+            "english": "My cousin!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وكلكم اجتمعتو؟",
+            "romanization": "w-kullkum ijtamaʕtu",
+            "english": "And you all gathered together?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "كُلّنا!",
+            "romanization": "kullna",
+            "english": "All of us!"
+          }
+        ]
+      },
+      "review": {
+        "all_vocab": [
+          { "arabic": "أَبي", "transcription": "A-bi", "romanization": "ʾabi", "english": "my father" },
+          { "arabic": "أُمّي", "transcription": "UM-mi", "romanization": "ʾummi", "english": "my mother" },
+          { "arabic": "أَخي", "transcription": "A-khi", "romanization": "ʾaḫi", "english": "my brother" },
+          { "arabic": "أُختي", "transcription": "UKH-ti", "romanization": "ʾuḫti", "english": "my sister" },
+          { "arabic": "بَيتنا", "transcription": "BAY-tna", "romanization": "baytna", "english": "our house / our home" },
+          { "arabic": "أَهلي", "transcription": "AH-li", "romanization": "ʾahli", "english": "my family" },
+          { "arabic": "جَدّي", "transcription": "JAD-di", "romanization": "jaddi", "english": "my grandfather" },
+          { "arabic": "جَدّتي", "transcription": "JAD-dti", "romanization": "jaddti", "english": "my grandmother" },
+          { "arabic": "عَمّي", "transcription": "AM-mi", "romanization": "ʕammi", "english": "my uncle (paternal)" },
+          { "arabic": "عَمّتي", "transcription": "AM-mti", "romanization": "ʕammti", "english": "my aunt (paternal)" },
+          { "arabic": "ابن عَمّي", "transcription": "ib-NAM-mi", "romanization": "ibn ʕammi", "english": "my (male) cousin" },
+          { "arabic": "كُلّنا", "transcription": "KUL-lna", "romanization": "kullna", "english": "all of us" }
+        ]
+      }
+    }
+  ]
+}

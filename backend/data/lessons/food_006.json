@@ -1,0 +1,415 @@
+{
+  "topic": "Food & Drink Basics",
+  "cycles": [
+    {
+      "cycle": 1,
+      "vocab": [
+        {
+          "arabic": "خُبز",
+          "transcription": "KHUBZ",
+          "romanization": "ḫubz",
+          "english": "bread",
+          "note": "staple of Palestinian diet; usually refers to flat pita bread (خبز عربي)",
+          "icon": "solar:layers-minimalistic-linear",
+          "icon_color": "#ff9f0a"
+        },
+        {
+          "arabic": "مَي",
+          "transcription": "MAY",
+          "romanization": "may",
+          "english": "water",
+          "note": "Palestinian colloquial form of ماء (māʾ); also spelled مي or ماي in informal writing",
+          "icon": "solar:water-linear",
+          "icon_color": "#007aff"
+        },
+        {
+          "arabic": "قَهوة",
+          "transcription": "AH-we",
+          "romanization": "ʾahwe",
+          "english": "coffee",
+          "note": "in Palestinian, ق → ʾ (glottal stop), so قهوة sounds like ʾahwe not qahwa",
+          "icon": "solar:cup-hot-linear",
+          "icon_color": "#6e6e73"
+        },
+        {
+          "arabic": "شاي",
+          "transcription": "SHĀY",
+          "romanization": "šāy",
+          "english": "tea",
+          "note": "very common; Palestinians often add mint (نعنع) or sage (مرمية) to tea",
+          "icon": "solar:tea-cup-linear",
+          "icon_color": "#34c759"
+        },
+        {
+          "arabic": "أَكل",
+          "transcription": "A-kil",
+          "romanization": "ʾakil",
+          "english": "food / eating",
+          "note": "the word for both 'food' (noun) and 'eating' (verbal noun); وقت الأكل = mealtime",
+          "icon": "solar:plate-linear",
+          "icon_color": "#fe4d01"
+        },
+        {
+          "arabic": "حَليب",
+          "transcription": "ha-LĒB",
+          "romanization": "ḥalīb",
+          "english": "milk",
+          "note": "fresh milk; لبن (laban) refers to yogurt or fermented milk — different product",
+          "icon": "solar:bottle-linear",
+          "icon_color": "#8e8e93"
+        }
+      ],
+      "quiz": [
+        {
+          "arabic": "خُبز",
+          "transcription": "KHUBZ",
+          "romanization": "ḫubz",
+          "options": ["water", "milk", "bread", "food"],
+          "answer": 2
+        },
+        {
+          "arabic": "مَي",
+          "transcription": "MAY",
+          "romanization": "may",
+          "options": ["tea", "water", "coffee", "milk"],
+          "answer": 1
+        },
+        {
+          "arabic": "قَهوة",
+          "transcription": "AH-we",
+          "romanization": "ʾahwe",
+          "options": ["milk", "coffee", "tea", "bread"],
+          "answer": 1
+        },
+        {
+          "arabic": "شاي",
+          "transcription": "SHĀY",
+          "romanization": "šāy",
+          "options": ["coffee", "water", "food", "tea"],
+          "answer": 3
+        },
+        {
+          "arabic": "أَكل",
+          "transcription": "A-kil",
+          "romanization": "ʾakil",
+          "options": ["drink", "food / eating", "bread", "milk"],
+          "answer": 1
+        },
+        {
+          "arabic": "حَليب",
+          "transcription": "ha-LĒB",
+          "romanization": "ḥalīb",
+          "options": ["water", "tea", "coffee", "milk"],
+          "answer": 3
+        }
+      ],
+      "build": [
+        {
+          "sentence": ["خُبز", "أَكل"],
+          "decoys": ["شاي", "حَليب", "مَي"],
+          "english": "Bread and food"
+        },
+        {
+          "sentence": ["قَهوة", "شاي"],
+          "decoys": ["خُبز", "أَكل", "حَليب"],
+          "english": "Coffee and tea"
+        },
+        {
+          "sentence": ["مَي", "حَليب"],
+          "decoys": ["قَهوة", "خُبز", "أَكل"],
+          "english": "Water and milk"
+        }
+      ],
+      "speak": {
+        "scenario": "A host is offering you refreshments at their home.",
+        "turns": [
+          {
+            "speaker": "them",
+            "arabic": "بدك شو؟ قهوة ولا شاي؟",
+            "romanization": "biddak šū, ʾahwe willa šāy",
+            "english": "What would you like, coffee or tea?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "قَهوة!",
+            "romanization": "ʾahwe",
+            "english": "Coffee!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وحليب؟",
+            "romanization": "w-ḥalīb",
+            "english": "And milk?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "حَليب!",
+            "romanization": "ḥalīb",
+            "english": "Milk!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "بدك ماي كمان؟",
+            "romanization": "biddak may kamān",
+            "english": "Do you want water too?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "مَي!",
+            "romanization": "may",
+            "english": "Water!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وخبز؟ في خبز طازج!",
+            "romanization": "w-ḫubz, fī ḫubz ṭāzaj",
+            "english": "And bread? There is fresh bread!"
+          },
+          {
+            "speaker": "you",
+            "arabic": "خُبز!",
+            "romanization": "ḫubz",
+            "english": "Bread!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "شاي بدلك؟",
+            "romanization": "šāy baddlak",
+            "english": "Instead of tea?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "شاي!",
+            "romanization": "šāy",
+            "english": "Tea!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وشو كمان من الأكل؟",
+            "romanization": "w-šū kamān min il-ʾakil",
+            "english": "And what else from the food?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "أَكل!",
+            "romanization": "ʾakil",
+            "english": "Food!"
+          }
+        ]
+      }
+    },
+    {
+      "cycle": 2,
+      "vocab": [
+        {
+          "arabic": "حُمّص",
+          "transcription": "HUM-mus",
+          "romanization": "ḥummuṣ",
+          "english": "hummus",
+          "note": "a staple Palestinian dip made from chickpeas; also means 'chickpeas' on their own",
+          "icon": "solar:bowl-spoon-linear",
+          "icon_color": "#ff9f0a"
+        },
+        {
+          "arabic": "فَلافِل",
+          "transcription": "fa-LA-fil",
+          "romanization": "falāfil",
+          "english": "falafel",
+          "note": "fried chickpea balls; a popular street food — Palestinians in Nablus are known for it",
+          "icon": "solar:fire-linear",
+          "icon_color": "#fe4d01"
+        },
+        {
+          "arabic": "بَيضة",
+          "transcription": "BAY-da",
+          "romanization": "bayḍa",
+          "english": "egg",
+          "note": "singular; plural is بيض (bēḍ); common in Palestinian breakfast (فطور)",
+          "icon": "solar:circle-linear",
+          "icon_color": "#ff9f0a"
+        },
+        {
+          "arabic": "خُضار",
+          "transcription": "khu-DAR",
+          "romanization": "ḫuḍār",
+          "english": "vegetables",
+          "note": "collective noun for vegetables; a single vegetable is خضرة (ḫaḍra)",
+          "icon": "solar:leaf-linear",
+          "icon_color": "#34c759"
+        },
+        {
+          "arabic": "لَحمة",
+          "transcription": "LAH-me",
+          "romanization": "laḥme",
+          "english": "meat",
+          "note": "general term for meat; لحمة خروف (lamb) is most traditional in Palestinian cuisine",
+          "icon": "solar:plate-linear",
+          "icon_color": "#ff3b30"
+        },
+        {
+          "arabic": "حَلو",
+          "transcription": "HA-lu",
+          "romanization": "ḥalu",
+          "english": "sweets / dessert",
+          "note": "as a noun means 'sweets'; as adjective means 'sweet'; حلويات = variety of sweets",
+          "icon": "solar:smile-circle-linear",
+          "icon_color": "#ff2d55"
+        }
+      ],
+      "quiz": [
+        {
+          "arabic": "حُمّص",
+          "transcription": "HUM-mus",
+          "romanization": "ḥummuṣ",
+          "options": ["falafel", "hummus", "vegetables", "meat"],
+          "answer": 1
+        },
+        {
+          "arabic": "فَلافِل",
+          "transcription": "fa-LA-fil",
+          "romanization": "falāfil",
+          "options": ["hummus", "egg", "falafel", "sweets"],
+          "answer": 2
+        },
+        {
+          "arabic": "بَيضة",
+          "transcription": "BAY-da",
+          "romanization": "bayḍa",
+          "options": ["vegetables", "meat", "sweets", "egg"],
+          "answer": 3
+        },
+        {
+          "arabic": "خُضار",
+          "transcription": "khu-DAR",
+          "romanization": "ḫuḍār",
+          "options": ["meat", "vegetables", "sweets", "bread"],
+          "answer": 1
+        },
+        {
+          "arabic": "لَحمة",
+          "transcription": "LAH-me",
+          "romanization": "laḥme",
+          "options": ["egg", "sweets", "meat", "vegetables"],
+          "answer": 2
+        },
+        {
+          "arabic": "حَلو",
+          "transcription": "HA-lu",
+          "romanization": "ḥalu",
+          "options": ["bread", "falafel", "meat", "sweets / dessert"],
+          "answer": 3
+        }
+      ],
+      "build": [
+        {
+          "sentence": ["حُمّص", "فَلافِل"],
+          "decoys": ["لَحمة", "حَلو", "بَيضة"],
+          "english": "Hummus and falafel"
+        },
+        {
+          "sentence": ["بَيضة", "خُضار"],
+          "decoys": ["حُمّص", "حَلو", "فَلافِل"],
+          "english": "Egg and vegetables"
+        },
+        {
+          "sentence": ["لَحمة", "حَلو"],
+          "decoys": ["خُضار", "بَيضة", "حُمّص"],
+          "english": "Meat and sweets"
+        }
+      ],
+      "speak": {
+        "scenario": "You are at a Palestinian restaurant ordering lunch.",
+        "turns": [
+          {
+            "speaker": "them",
+            "arabic": "إيش تحب؟ عندنا حمص وفلافل!",
+            "romanization": "ʾēš tḥibb, ʕindna ḥummuṣ w-falāfil",
+            "english": "What do you like? We have hummus and falafel!"
+          },
+          {
+            "speaker": "you",
+            "arabic": "حُمّص!",
+            "romanization": "ḥummuṣ",
+            "english": "Hummus!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وفلافل معه؟",
+            "romanization": "w-falāfil maʕu",
+            "english": "And falafel with it?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "فَلافِل!",
+            "romanization": "falāfil",
+            "english": "Falafel!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وبيضة؟",
+            "romanization": "w-bayḍa",
+            "english": "And an egg?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "بَيضة!",
+            "romanization": "bayḍa",
+            "english": "An egg!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وخضار جانبه؟",
+            "romanization": "w-ḫuḍār jānbu",
+            "english": "And vegetables on the side?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "خُضار!",
+            "romanization": "ḫuḍār",
+            "english": "Vegetables!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وشو من اللحمة؟",
+            "romanization": "w-šū min il-laḥme",
+            "english": "And what from the meat?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "لَحمة!",
+            "romanization": "laḥme",
+            "english": "Meat!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وبعد الأكل؟ في حلو!",
+            "romanization": "w-baʕd il-ʾakil, fī ḥalu",
+            "english": "And after the food? There are sweets!"
+          },
+          {
+            "speaker": "you",
+            "arabic": "حَلو!",
+            "romanization": "ḥalu",
+            "english": "Sweets!"
+          }
+        ]
+      },
+      "review": {
+        "all_vocab": [
+          { "arabic": "خُبز", "transcription": "KHUBZ", "romanization": "ḫubz", "english": "bread" },
+          { "arabic": "مَي", "transcription": "MAY", "romanization": "may", "english": "water" },
+          { "arabic": "قَهوة", "transcription": "AH-we", "romanization": "ʾahwe", "english": "coffee" },
+          { "arabic": "شاي", "transcription": "SHĀY", "romanization": "šāy", "english": "tea" },
+          { "arabic": "أَكل", "transcription": "A-kil", "romanization": "ʾakil", "english": "food / eating" },
+          { "arabic": "حَليب", "transcription": "ha-LĒB", "romanization": "ḥalīb", "english": "milk" },
+          { "arabic": "حُمّص", "transcription": "HUM-mus", "romanization": "ḥummuṣ", "english": "hummus" },
+          { "arabic": "فَلافِل", "transcription": "fa-LA-fil", "romanization": "falāfil", "english": "falafel" },
+          { "arabic": "بَيضة", "transcription": "BAY-da", "romanization": "bayḍa", "english": "egg" },
+          { "arabic": "خُضار", "transcription": "khu-DAR", "romanization": "ḫuḍār", "english": "vegetables" },
+          { "arabic": "لَحمة", "transcription": "LAH-me", "romanization": "laḥme", "english": "meat" },
+          { "arabic": "حَلو", "transcription": "HA-lu", "romanization": "ḥalu", "english": "sweets / dessert" }
+        ]
+      }
+    }
+  ]
+}

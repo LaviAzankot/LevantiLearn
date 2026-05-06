@@ -1,0 +1,415 @@
+{
+  "topic": "Places in the City",
+  "cycles": [
+    {
+      "cycle": 1,
+      "vocab": [
+        {
+          "arabic": "دُكّانة",
+          "transcription": "duk-KA-ne",
+          "romanization": "dukkāne",
+          "english": "shop / store",
+          "note": "Palestinian colloquial; MSA دكان (dukkān); also called محل (maḥall) in some contexts",
+          "icon": "solar:shop-linear",
+          "icon_color": "#ff9f0a"
+        },
+        {
+          "arabic": "مَدرَسة",
+          "transcription": "MAD-ra-se",
+          "romanization": "madrasa",
+          "english": "school",
+          "note": "same in Palestinian and MSA; plural is مدارس (madāris); رحت على المدرسة = went to school",
+          "icon": "solar:book-linear",
+          "icon_color": "#007aff"
+        },
+        {
+          "arabic": "مُستَشفى",
+          "transcription": "mus-tash-FA",
+          "romanization": "mustašfā",
+          "english": "hospital",
+          "note": "stress on last syllable; also عيادة (ʕiyāde) for a small clinic/doctor's office",
+          "icon": "solar:hospital-linear",
+          "icon_color": "#ff3b30"
+        },
+        {
+          "arabic": "شارِع",
+          "transcription": "SHA-ri'",
+          "romanization": "šāriʕ",
+          "english": "street / road",
+          "note": "very common in giving directions; على الشارع = on the street/main road",
+          "icon": "solar:map-arrow-right-linear",
+          "icon_color": "#6e6e73"
+        },
+        {
+          "arabic": "بيت",
+          "transcription": "BĒT",
+          "romanization": "bēt",
+          "english": "house / home",
+          "note": "Palestinian pronunciation: long ē vowel; MSA بَيت (bayt); بيت = both 'house' and 'home'",
+          "icon": "solar:home-linear",
+          "icon_color": "#34c759"
+        },
+        {
+          "arabic": "هون",
+          "transcription": "HŌN",
+          "romanization": "hōn",
+          "english": "here",
+          "note": "Palestinian/Levantine for 'here'; هناك (hunāk) = there; very frequent in directions",
+          "icon": "solar:map-point-linear",
+          "icon_color": "#fe4d01"
+        }
+      ],
+      "quiz": [
+        {
+          "arabic": "دُكّانة",
+          "transcription": "duk-KA-ne",
+          "romanization": "dukkāne",
+          "options": ["hospital", "school", "shop", "street"],
+          "answer": 2
+        },
+        {
+          "arabic": "مَدرَسة",
+          "transcription": "MAD-ra-se",
+          "romanization": "madrasa",
+          "options": ["school", "hospital", "house", "shop"],
+          "answer": 0
+        },
+        {
+          "arabic": "مُستَشفى",
+          "transcription": "mus-tash-FA",
+          "romanization": "mustašfā",
+          "options": ["school", "hospital", "shop", "street"],
+          "answer": 1
+        },
+        {
+          "arabic": "شارِع",
+          "transcription": "SHA-ri'",
+          "romanization": "šāriʕ",
+          "options": ["house", "here", "school", "street"],
+          "answer": 3
+        },
+        {
+          "arabic": "بيت",
+          "transcription": "BĒT",
+          "romanization": "bēt",
+          "options": ["street", "shop", "house / home", "hospital"],
+          "answer": 2
+        },
+        {
+          "arabic": "هون",
+          "transcription": "HŌN",
+          "romanization": "hōn",
+          "options": ["there", "far", "near", "here"],
+          "answer": 3
+        }
+      ],
+      "build": [
+        {
+          "sentence": ["مَدرَسة", "هون"],
+          "decoys": ["بيت", "شارِع", "دُكّانة"],
+          "english": "The school is here"
+        },
+        {
+          "sentence": ["بيت", "شارِع"],
+          "decoys": ["مُستَشفى", "هون", "مَدرَسة"],
+          "english": "House on the street"
+        },
+        {
+          "sentence": ["دُكّانة", "مُستَشفى"],
+          "decoys": ["هون", "شارِع", "بيت"],
+          "english": "Shop and hospital"
+        }
+      ],
+      "speak": {
+        "scenario": "A tourist asks you about places in the neighborhood.",
+        "turns": [
+          {
+            "speaker": "them",
+            "arabic": "وين أقرب دكانة؟",
+            "romanization": "wēn ʾaʾrab dukkāne",
+            "english": "Where is the nearest shop?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "دُكّانة هون!",
+            "romanization": "dukkāne hōn",
+            "english": "Shop here!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وين المدرسة؟",
+            "romanization": "wēn il-madrasa",
+            "english": "Where is the school?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "مَدرَسة!",
+            "romanization": "madrasa",
+            "english": "School! (pointing)"
+          },
+          {
+            "speaker": "them",
+            "arabic": "في مستشفى هون؟",
+            "romanization": "fī mustašfā hōn",
+            "english": "Is there a hospital here?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "مُستَشفى!",
+            "romanization": "mustašfā",
+            "english": "Hospital! (pointing)"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وإيش اسم هاد الشارع؟",
+            "romanization": "w-ʾēš ism hād iš-šāriʕ",
+            "english": "What is the name of this street?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "شارِع!",
+            "romanization": "šāriʕ",
+            "english": "The street!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وأنت من أهل هاد البيت؟",
+            "romanization": "w-ʾinta min ʾahl hād il-bēt",
+            "english": "And are you from this house?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "بيت!",
+            "romanization": "bēt",
+            "english": "House! (confirming)"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وين هاد بالظبط؟",
+            "romanization": "wēn hād bil-ḍabṭ",
+            "english": "Where exactly is this?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "هون!",
+            "romanization": "hōn",
+            "english": "Here!"
+          }
+        ]
+      }
+    },
+    {
+      "cycle": 2,
+      "vocab": [
+        {
+          "arabic": "مَسجِد",
+          "transcription": "MAS-jid",
+          "romanization": "masjid",
+          "english": "mosque",
+          "note": "جامع (jāmiʕ) is also used for a large mosque; both terms are common in Palestinian cities",
+          "icon": "solar:star-shine-linear",
+          "icon_color": "#34c759"
+        },
+        {
+          "arabic": "كَنيسة",
+          "transcription": "ka-NĒ-se",
+          "romanization": "kanīse",
+          "english": "church",
+          "note": "Palestine has many historic churches; كنيسة القيامة (the Church of the Holy Sepulchre) is famous",
+          "icon": "solar:star-rings-linear",
+          "icon_color": "#5856d6"
+        },
+        {
+          "arabic": "سوق",
+          "transcription": "SŪʔ",
+          "romanization": "sūʾ",
+          "english": "market / bazaar",
+          "note": "ق → ʾ (glottal) in Palestinian; covered markets like القدس Old City are called سوق",
+          "icon": "solar:bag-linear",
+          "icon_color": "#ff9f0a"
+        },
+        {
+          "arabic": "مَحَطّة",
+          "transcription": "ma-HAT-te",
+          "romanization": "maḥaṭṭa",
+          "english": "station / stop",
+          "note": "used for bus stops (محطة باص), petrol stations, and transit hubs",
+          "icon": "solar:bus-linear",
+          "icon_color": "#007aff"
+        },
+        {
+          "arabic": "فُندُق",
+          "transcription": "FUN-duʔ",
+          "romanization": "funduʾ",
+          "english": "hotel",
+          "note": "ق → ʾ in Palestinian; also نُزُل (nuzul) for smaller guesthouses in villages",
+          "icon": "solar:buildings-linear",
+          "icon_color": "#6e6e73"
+        },
+        {
+          "arabic": "جَنب",
+          "transcription": "JANB",
+          "romanization": "janb",
+          "english": "next to / beside",
+          "note": "very common preposition in giving directions; جنب البيت = next to the house",
+          "icon": "solar:arrow-right-linear",
+          "icon_color": "#fe4d01"
+        }
+      ],
+      "quiz": [
+        {
+          "arabic": "مَسجِد",
+          "transcription": "MAS-jid",
+          "romanization": "masjid",
+          "options": ["church", "mosque", "market", "hotel"],
+          "answer": 1
+        },
+        {
+          "arabic": "كَنيسة",
+          "transcription": "ka-NĒ-se",
+          "romanization": "kanīse",
+          "options": ["mosque", "station", "church", "hotel"],
+          "answer": 2
+        },
+        {
+          "arabic": "سوق",
+          "transcription": "SŪʔ",
+          "romanization": "sūʾ",
+          "options": ["hotel", "market", "church", "station"],
+          "answer": 1
+        },
+        {
+          "arabic": "مَحَطّة",
+          "transcription": "ma-HAT-te",
+          "romanization": "maḥaṭṭa",
+          "options": ["market", "mosque", "hotel", "station / stop"],
+          "answer": 3
+        },
+        {
+          "arabic": "فُندُق",
+          "transcription": "FUN-duʔ",
+          "romanization": "funduʾ",
+          "options": ["market", "hotel", "church", "station"],
+          "answer": 1
+        },
+        {
+          "arabic": "جَنب",
+          "transcription": "JANB",
+          "romanization": "janb",
+          "options": ["far", "next to / beside", "inside", "above"],
+          "answer": 1
+        }
+      ],
+      "build": [
+        {
+          "sentence": ["مَسجِد", "جَنب", "كَنيسة"],
+          "decoys": ["فُندُق", "سوق", "مَحَطّة"],
+          "english": "Mosque next to the church"
+        },
+        {
+          "sentence": ["سوق", "جَنب", "مَحَطّة"],
+          "decoys": ["كَنيسة", "مَسجِد", "فُندُق"],
+          "english": "Market next to the station"
+        },
+        {
+          "sentence": ["فُندُق", "هون"],
+          "decoys": ["جَنب", "مَسجِد", "كَنيسة"],
+          "english": "Hotel here"
+        }
+      ],
+      "speak": {
+        "scenario": "You are giving directions to a visitor in the Old City.",
+        "turns": [
+          {
+            "speaker": "them",
+            "arabic": "في مسجد قريب من هون؟",
+            "romanization": "fī masjid ʾarīb min hōn",
+            "english": "Is there a mosque nearby?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "مَسجِد!",
+            "romanization": "masjid",
+            "english": "Mosque! (pointing)"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وكنيسة؟",
+            "romanization": "w-kanīse",
+            "english": "And a church?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "كَنيسة هون!",
+            "romanization": "kanīse hōn",
+            "english": "Church here!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وين السوق القديم؟",
+            "romanization": "wēn is-sūʾ il-ʾadīm",
+            "english": "Where is the old market?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "سوق!",
+            "romanization": "sūʾ",
+            "english": "Market! (pointing)"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وين محطة الباص؟",
+            "romanization": "wēn maḥaṭṭet il-bāṣ",
+            "english": "Where is the bus station?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "مَحَطّة!",
+            "romanization": "maḥaṭṭa",
+            "english": "Station! (pointing)"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وفندق كويس؟",
+            "romanization": "w-funduʾ kuwayyes",
+            "english": "And a good hotel?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "فُندُق جَنب السوق!",
+            "romanization": "funduʾ janb is-sūʾ",
+            "english": "Hotel next to the market!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وهاد وين بالظبط؟",
+            "romanization": "w-hād wēn bil-ḍabṭ",
+            "english": "And where exactly is this?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "جَنب الكنيسة!",
+            "romanization": "janb il-kanīse",
+            "english": "Next to the church!"
+          }
+        ]
+      },
+      "review": {
+        "all_vocab": [
+          { "arabic": "دُكّانة", "transcription": "duk-KA-ne", "romanization": "dukkāne", "english": "shop / store" },
+          { "arabic": "مَدرَسة", "transcription": "MAD-ra-se", "romanization": "madrasa", "english": "school" },
+          { "arabic": "مُستَشفى", "transcription": "mus-tash-FA", "romanization": "mustašfā", "english": "hospital" },
+          { "arabic": "شارِع", "transcription": "SHA-ri'", "romanization": "šāriʕ", "english": "street / road" },
+          { "arabic": "بيت", "transcription": "BĒT", "romanization": "bēt", "english": "house / home" },
+          { "arabic": "هون", "transcription": "HŌN", "romanization": "hōn", "english": "here" },
+          { "arabic": "مَسجِد", "transcription": "MAS-jid", "romanization": "masjid", "english": "mosque" },
+          { "arabic": "كَنيسة", "transcription": "ka-NĒ-se", "romanization": "kanīse", "english": "church" },
+          { "arabic": "سوق", "transcription": "SŪʔ", "romanization": "sūʾ", "english": "market / bazaar" },
+          { "arabic": "مَحَطّة", "transcription": "ma-HAT-te", "romanization": "maḥaṭṭa", "english": "station / stop" },
+          { "arabic": "فُندُق", "transcription": "FUN-duʔ", "romanization": "funduʾ", "english": "hotel" },
+          { "arabic": "جَنب", "transcription": "JANB", "romanization": "janb", "english": "next to / beside" }
+        ]
+      }
+    }
+  ]
+}

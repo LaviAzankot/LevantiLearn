@@ -1,0 +1,415 @@
+{
+  "topic": "Ordering at a Café",
+  "cycles": [
+    {
+      "cycle": 1,
+      "vocab": [
+        {
+          "arabic": "بِدّي",
+          "transcription": "BID-di",
+          "romanization": "biddi",
+          "english": "I want",
+          "note": "fixed phrase from بد + ي; the main way to express desire — never use أريد in Palestinian speech",
+          "icon": "solar:hand-heart-linear",
+          "icon_color": "#fe4d01"
+        },
+        {
+          "arabic": "عَطيني",
+          "transcription": "a-TĒ-ni",
+          "romanization": "ʕaṭīni",
+          "english": "give me",
+          "note": "imperative form used for ordering; very direct but normal in café/restaurant context",
+          "icon": "solar:hand-shake-linear",
+          "icon_color": "#007aff"
+        },
+        {
+          "arabic": "كَم بِيكَلِّف؟",
+          "transcription": "kam bi-KAL-lif",
+          "romanization": "kam biyakallif",
+          "english": "how much does it cost?",
+          "note": "full question phrase; بيكلف (biyakallif) is the verb 'to cost' in present tense",
+          "icon": "solar:dollar-minimalistic-linear",
+          "icon_color": "#34c759"
+        },
+        {
+          "arabic": "مِن فَضلَك",
+          "transcription": "min-FAD-lak",
+          "romanization": "min faḍlak",
+          "english": "please (to a male)",
+          "note": "lit. 'from your favor'; to a female: من فضلك (min faḍlik); essential for polite ordering",
+          "icon": "solar:smile-circle-linear",
+          "icon_color": "#5856d6"
+        },
+        {
+          "arabic": "شُكراً",
+          "transcription": "SHUK-ran",
+          "romanization": "šukran",
+          "english": "thank you",
+          "note": "universal Arabic thank you; informal reply is عفواً (ʕafwan) or أهلاً (ʾahlan)",
+          "icon": "solar:heart-linear",
+          "icon_color": "#ff2d55"
+        },
+        {
+          "arabic": "تَفَضَّل",
+          "transcription": "ta-FAD-dal",
+          "romanization": "tafaḍḍal",
+          "english": "here you go / please (offering)",
+          "note": "said when handing something over or welcoming someone; feminine: تفضلي (tafaḍḍali)",
+          "icon": "solar:gift-linear",
+          "icon_color": "#ff9f0a"
+        }
+      ],
+      "quiz": [
+        {
+          "arabic": "بِدّي",
+          "transcription": "BID-di",
+          "romanization": "biddi",
+          "options": ["I have", "I want", "I know", "I go"],
+          "answer": 1
+        },
+        {
+          "arabic": "عَطيني",
+          "transcription": "a-TĒ-ni",
+          "romanization": "ʕaṭīni",
+          "options": ["tell me", "bring me", "give me", "show me"],
+          "answer": 2
+        },
+        {
+          "arabic": "كَم بِيكَلِّف؟",
+          "transcription": "kam bi-KAL-lif",
+          "romanization": "kam biyakallif",
+          "options": ["how much does it cost?", "where is it?", "what is it?", "when is it?"],
+          "answer": 0
+        },
+        {
+          "arabic": "مِن فَضلَك",
+          "transcription": "min-FAD-lak",
+          "romanization": "min faḍlak",
+          "options": ["excuse me", "thank you", "please (to a male)", "sorry"],
+          "answer": 2
+        },
+        {
+          "arabic": "شُكراً",
+          "transcription": "SHUK-ran",
+          "romanization": "šukran",
+          "options": ["sorry", "please", "you're welcome", "thank you"],
+          "answer": 3
+        },
+        {
+          "arabic": "تَفَضَّل",
+          "transcription": "ta-FAD-dal",
+          "romanization": "tafaḍḍal",
+          "options": ["thank you", "here you go", "sorry", "goodbye"],
+          "answer": 1
+        }
+      ],
+      "build": [
+        {
+          "sentence": ["بِدّي", "قَهوة"],
+          "decoys": ["عَطيني", "مِن فَضلَك", "شُكراً"],
+          "english": "I want coffee"
+        },
+        {
+          "sentence": ["عَطيني", "مِن فَضلَك"],
+          "decoys": ["بِدّي", "شُكراً", "تَفَضَّل"],
+          "english": "Give me, please"
+        },
+        {
+          "sentence": ["شُكراً", "تَفَضَّل"],
+          "decoys": ["بِدّي", "عَطيني", "مِن فَضلَك"],
+          "english": "Thank you — here you go"
+        }
+      ],
+      "speak": {
+        "scenario": "You are ordering at a café in Ramallah.",
+        "turns": [
+          {
+            "speaker": "them",
+            "arabic": "أهلاً، شو بتحب؟",
+            "romanization": "ʾahlan, šū btḥibb",
+            "english": "Welcome, what would you like?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "بِدّي قهوة!",
+            "romanization": "biddi ʾahwe",
+            "english": "I want coffee!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "حجم كبير ولا صغير؟",
+            "romanization": "ḥajm kabīr willa ṣaġīr",
+            "english": "Large or small size?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "عَطيني كبير!",
+            "romanization": "ʕaṭīni kabīr",
+            "english": "Give me large!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وشو كمان؟",
+            "romanization": "w-šū kamān",
+            "english": "And what else?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "مِن فَضلَك!",
+            "romanization": "min faḍlak",
+            "english": "Please! (asking politely)"
+          },
+          {
+            "speaker": "them",
+            "arabic": "كم بيكلف؟ عشرة شيكل",
+            "romanization": "kam biyakallif, ʕašra šēkel",
+            "english": "How much? Ten shekels."
+          },
+          {
+            "speaker": "you",
+            "arabic": "كَم بِيكَلِّف؟",
+            "romanization": "kam biyakallif",
+            "english": "How much does it cost?"
+          },
+          {
+            "speaker": "them",
+            "arabic": "تفضل، القهوة جاهزة!",
+            "romanization": "tafaḍḍal, il-ʾahwe jāhze",
+            "english": "Here you go, the coffee is ready!"
+          },
+          {
+            "speaker": "you",
+            "arabic": "شُكراً!",
+            "romanization": "šukran",
+            "english": "Thank you!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "مع السلامة!",
+            "romanization": "maʕ is-salāme",
+            "english": "Goodbye!"
+          },
+          {
+            "speaker": "you",
+            "arabic": "تَفَضَّل!",
+            "romanization": "tafaḍḍal",
+            "english": "Please (returning the gesture)!"
+          }
+        ]
+      }
+    },
+    {
+      "cycle": 2,
+      "vocab": [
+        {
+          "arabic": "شو عِندَكو؟",
+          "transcription": "šū-IN-da-ku",
+          "romanization": "šū ʕindaku",
+          "english": "what do you have?",
+          "note": "عندكو is the Palestinian plural of عندك; used when asking a waiter for the menu",
+          "icon": "solar:list-linear",
+          "icon_color": "#007aff"
+        },
+        {
+          "arabic": "حِلو",
+          "transcription": "HIL-wu",
+          "romanization": "ḥilwu",
+          "english": "sweet / delicious",
+          "note": "used to compliment food; also means 'pretty' for people; very common positive adjective",
+          "icon": "solar:smile-circle-linear",
+          "icon_color": "#ff9f0a"
+        },
+        {
+          "arabic": "ما بِدّي",
+          "transcription": "ma-BID-di",
+          "romanization": "mā biddi",
+          "english": "I don't want",
+          "note": "ما negates بدي; polite way to decline; add من فضلك to soften further",
+          "icon": "solar:close-circle-linear",
+          "icon_color": "#ff3b30"
+        },
+        {
+          "arabic": "الحِساب",
+          "transcription": "il-hi-SAB",
+          "romanization": "il-ḥisāb",
+          "english": "the bill / the check",
+          "note": "used in restaurants and cafés; عطيني الحساب = 'give me the bill please'",
+          "icon": "solar:receipt-linear",
+          "icon_color": "#6e6e73"
+        },
+        {
+          "arabic": "بِكفي",
+          "transcription": "bi-KA-fi",
+          "romanization": "bikafi",
+          "english": "that's enough / it's fine",
+          "note": "from يكفي (to be sufficient); used to stop someone from giving more food or service",
+          "icon": "solar:check-circle-linear",
+          "icon_color": "#34c759"
+        },
+        {
+          "arabic": "مَمنونَك",
+          "transcription": "mam-NO-nak",
+          "romanization": "mamnōnak",
+          "english": "I'm grateful to you",
+          "note": "warmer and more personal than شكراً; feminine: ممنونتك (mamnōntik)",
+          "icon": "solar:heart-shine-linear",
+          "icon_color": "#fe4d01"
+        }
+      ],
+      "quiz": [
+        {
+          "arabic": "شو عِندَكو؟",
+          "transcription": "šū-IN-da-ku",
+          "romanization": "šū ʕindaku",
+          "options": ["where are you?", "what do you have?", "how much?", "what do you want?"],
+          "answer": 1
+        },
+        {
+          "arabic": "حِلو",
+          "transcription": "HIL-wu",
+          "romanization": "ḥilwu",
+          "options": ["bitter", "salty", "sour", "sweet / delicious"],
+          "answer": 3
+        },
+        {
+          "arabic": "ما بِدّي",
+          "transcription": "ma-BID-di",
+          "romanization": "mā biddi",
+          "options": ["I want", "I have", "I don't want", "I don't know"],
+          "answer": 2
+        },
+        {
+          "arabic": "الحِساب",
+          "transcription": "il-hi-SAB",
+          "romanization": "il-ḥisāb",
+          "options": ["the menu", "the waiter", "the table", "the bill"],
+          "answer": 3
+        },
+        {
+          "arabic": "بِكفي",
+          "transcription": "bi-KA-fi",
+          "romanization": "bikafi",
+          "options": ["more please", "that's enough", "not yet", "again"],
+          "answer": 1
+        },
+        {
+          "arabic": "مَمنونَك",
+          "transcription": "mam-NO-nak",
+          "romanization": "mamnōnak",
+          "options": ["excuse me", "sorry", "please", "I'm grateful to you"],
+          "answer": 3
+        }
+      ],
+      "build": [
+        {
+          "sentence": ["شو عِندَكو؟", "حِلو"],
+          "decoys": ["ما بِدّي", "الحِساب", "بِكفي"],
+          "english": "What do you have? Sweet?"
+        },
+        {
+          "sentence": ["ما بِدّي", "أَكتر"],
+          "decoys": ["حِلو", "مَمنونَك", "الحِساب"],
+          "english": "I don't want more"
+        },
+        {
+          "sentence": ["الحِساب", "مَمنونَك"],
+          "decoys": ["بِكفي", "شو عِندَكو؟", "ما بِدّي"],
+          "english": "The bill, I'm grateful"
+        }
+      ],
+      "speak": {
+        "scenario": "You are finishing your meal at a Palestinian café.",
+        "turns": [
+          {
+            "speaker": "them",
+            "arabic": "أهلاً، شو بتحب من عندنا؟",
+            "romanization": "ʾahlan, šū btḥibb min ʕindna",
+            "english": "Welcome, what would you like from us?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "شو عِندَكو؟",
+            "romanization": "šū ʕindaku",
+            "english": "What do you have?"
+          },
+          {
+            "speaker": "them",
+            "arabic": "إيش رأيك بالكنافة؟",
+            "romanization": "ʾēš raʾyak bil-kunāfe",
+            "english": "What do you think of the knafeh?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "حِلو!",
+            "romanization": "ḥilwu",
+            "english": "Sweet / Nice!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "بدك كمان قهوة؟",
+            "romanization": "biddak kamān ʾahwe",
+            "english": "Do you want coffee too?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "ما بِدّي!",
+            "romanization": "mā biddi",
+            "english": "I don't want (any)!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "بدك أكتر؟",
+            "romanization": "biddak ʾaktar",
+            "english": "Do you want more?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "بِكفي!",
+            "romanization": "bikafi",
+            "english": "That's enough!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "حاضر، هاد كل شي؟",
+            "romanization": "ḥāḍir, hād kull šī",
+            "english": "Sure, is that everything?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "الحِساب!",
+            "romanization": "il-ḥisāb",
+            "english": "The bill!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "تفضل، شكراً لمجيئك!",
+            "romanization": "tafaḍḍal, šukran li-majīʾak",
+            "english": "Here you go, thank you for coming!"
+          },
+          {
+            "speaker": "you",
+            "arabic": "مَمنونَك!",
+            "romanization": "mamnōnak",
+            "english": "I'm grateful to you!"
+          }
+        ]
+      },
+      "review": {
+        "all_vocab": [
+          { "arabic": "بِدّي", "transcription": "BID-di", "romanization": "biddi", "english": "I want" },
+          { "arabic": "عَطيني", "transcription": "a-TĒ-ni", "romanization": "ʕaṭīni", "english": "give me" },
+          { "arabic": "كَم بِيكَلِّف؟", "transcription": "kam bi-KAL-lif", "romanization": "kam biyakallif", "english": "how much does it cost?" },
+          { "arabic": "مِن فَضلَك", "transcription": "min-FAD-lak", "romanization": "min faḍlak", "english": "please (to a male)" },
+          { "arabic": "شُكراً", "transcription": "SHUK-ran", "romanization": "šukran", "english": "thank you" },
+          { "arabic": "تَفَضَّل", "transcription": "ta-FAD-dal", "romanization": "tafaḍḍal", "english": "here you go" },
+          { "arabic": "شو عِندَكو؟", "transcription": "šū-IN-da-ku", "romanization": "šū ʕindaku", "english": "what do you have?" },
+          { "arabic": "حِلو", "transcription": "HIL-wu", "romanization": "ḥilwu", "english": "sweet / delicious" },
+          { "arabic": "ما بِدّي", "transcription": "ma-BID-di", "romanization": "mā biddi", "english": "I don't want" },
+          { "arabic": "الحِساب", "transcription": "il-hi-SAB", "romanization": "il-ḥisāb", "english": "the bill" },
+          { "arabic": "بِكفي", "transcription": "bi-KA-fi", "romanization": "bikafi", "english": "that's enough" },
+          { "arabic": "مَمنونَك", "transcription": "mam-NO-nak", "romanization": "mamnōnak", "english": "I'm grateful to you" }
+        ]
+      }
+    }
+  ]
+}

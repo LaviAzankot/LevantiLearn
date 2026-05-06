@@ -1,0 +1,415 @@
+{
+  "topic": "Feelings & States",
+  "cycles": [
+    {
+      "cycle": 1,
+      "vocab": [
+        {
+          "arabic": "تَعبان",
+          "transcription": "ta-BAN",
+          "romanization": "tabʕān",
+          "english": "tired / sick",
+          "note": "feminine: تعبانة (tabʕāne); means both physically tired and mildly ill in Palestinian Arabic",
+          "icon": "solar:sleep-linear",
+          "icon_color": "#6e6e73"
+        },
+        {
+          "arabic": "مَبسوط",
+          "transcription": "mab-SŪT",
+          "romanization": "mabsūṭ",
+          "english": "happy / pleased",
+          "note": "feminine: مبسوطة (mabsūṭa); very common Palestinian expression; stronger than كويس (okay)",
+          "icon": "solar:smile-circle-linear",
+          "icon_color": "#34c759"
+        },
+        {
+          "arabic": "زَعلان",
+          "transcription": "zaʕ-LAN",
+          "romanization": "zaʕlān",
+          "english": "upset / angry",
+          "note": "feminine: زعلانة (zaʕlāne); covers both upset and mildly angry; common in family speech",
+          "icon": "solar:emoji-funny-square-linear",
+          "icon_color": "#ff3b30"
+        },
+        {
+          "arabic": "جوعان",
+          "transcription": "jū-ĀN",
+          "romanization": "jūʕān",
+          "english": "hungry",
+          "note": "feminine: جوعانة (jūʕāne); جعان (jaʕān) is the shortened Palestinian form also heard",
+          "icon": "solar:plate-linear",
+          "icon_color": "#ff9f0a"
+        },
+        {
+          "arabic": "عَطشان",
+          "transcription": "at-SHAN",
+          "romanization": "ʕaṭšān",
+          "english": "thirsty",
+          "note": "feminine: عطشانة (ʕaṭšāne); عطشان على الماي = 'thirsty for water'",
+          "icon": "solar:water-linear",
+          "icon_color": "#007aff"
+        },
+        {
+          "arabic": "مَريض",
+          "transcription": "ma-RĒD",
+          "romanization": "marīḍ",
+          "english": "sick / ill",
+          "note": "feminine: مريضة (marīḍa); more serious than تعبان; مريض كتير = very sick",
+          "icon": "solar:hospital-linear",
+          "icon_color": "#ff3b30"
+        }
+      ],
+      "quiz": [
+        {
+          "arabic": "تَعبان",
+          "transcription": "ta-BAN",
+          "romanization": "tabʕān",
+          "options": ["happy", "angry", "tired / sick", "hungry"],
+          "answer": 2
+        },
+        {
+          "arabic": "مَبسوط",
+          "transcription": "mab-SŪT",
+          "romanization": "mabsūṭ",
+          "options": ["upset", "tired", "sick", "happy / pleased"],
+          "answer": 3
+        },
+        {
+          "arabic": "زَعلان",
+          "transcription": "zaʕ-LAN",
+          "romanization": "zaʕlān",
+          "options": ["happy", "upset / angry", "hungry", "thirsty"],
+          "answer": 1
+        },
+        {
+          "arabic": "جوعان",
+          "transcription": "jū-ĀN",
+          "romanization": "jūʕān",
+          "options": ["thirsty", "sick", "tired", "hungry"],
+          "answer": 3
+        },
+        {
+          "arabic": "عَطشان",
+          "transcription": "at-SHAN",
+          "romanization": "ʕaṭšān",
+          "options": ["hungry", "thirsty", "angry", "happy"],
+          "answer": 1
+        },
+        {
+          "arabic": "مَريض",
+          "transcription": "ma-RĒD",
+          "romanization": "marīḍ",
+          "options": ["tired", "hungry", "sick / ill", "upset"],
+          "answer": 2
+        }
+      ],
+      "build": [
+        {
+          "sentence": ["تَعبان", "مَريض"],
+          "decoys": ["مَبسوط", "جوعان", "زَعلان"],
+          "english": "Tired and sick"
+        },
+        {
+          "sentence": ["جوعان", "عَطشان"],
+          "decoys": ["تَعبان", "مَريض", "مَبسوط"],
+          "english": "Hungry and thirsty"
+        },
+        {
+          "sentence": ["مَبسوط", "مش", "زَعلان"],
+          "decoys": ["عَطشان", "مَريض", "جوعان"],
+          "english": "Happy, not upset"
+        }
+      ],
+      "speak": {
+        "scenario": "A friend is checking in on how you feel after a long day.",
+        "turns": [
+          {
+            "speaker": "them",
+            "arabic": "إيش فيك؟ كويس؟",
+            "romanization": "ʾēš fīk, kuwayyes",
+            "english": "What's wrong? Are you okay?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "تَعبان!",
+            "romanization": "tabʕān",
+            "english": "Tired!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "مريض كمان؟",
+            "romanization": "marīḍ kamān",
+            "english": "Sick too?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "مَريض!",
+            "romanization": "marīḍ",
+            "english": "Sick!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وعشاء؟ جوعان؟",
+            "romanization": "w-ʕašā, jūʕān",
+            "english": "And dinner? Are you hungry?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "جوعان!",
+            "romanization": "jūʕān",
+            "english": "Hungry!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "بدك ماي؟",
+            "romanization": "biddak may",
+            "english": "Do you want water?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "عَطشان!",
+            "romanization": "ʕaṭšān",
+            "english": "Thirsty!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "زعلانني عليك؟",
+            "romanization": "zaʕlānni ʕalēk",
+            "english": "Are you upset with me?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "زَعلان!",
+            "romanization": "zaʕlān",
+            "english": "Upset!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "بس خلص! إيش الأخبار؟ مبسوط؟",
+            "romanization": "bas ḫalaṣ, ʾēš il-ʾaḫbār, mabsūṭ",
+            "english": "But enough! What's up? Happy?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "مَبسوط!",
+            "romanization": "mabsūṭ",
+            "english": "Happy!"
+          }
+        ]
+      }
+    },
+    {
+      "cycle": 2,
+      "vocab": [
+        {
+          "arabic": "خايِف",
+          "transcription": "KHA-yif",
+          "romanization": "ḫāyif",
+          "english": "scared / afraid",
+          "note": "feminine: خايفة (ḫāyfe); خايف من = scared of; very common feeling word",
+          "icon": "solar:danger-triangle-linear",
+          "icon_color": "#ff9f0a"
+        },
+        {
+          "arabic": "مُنبَسِط",
+          "transcription": "mun-ba-SIT",
+          "romanization": "munbasiṭ",
+          "english": "enjoying / in good spirits",
+          "note": "stronger and more active than مبسوط; I am actively enjoying myself right now",
+          "icon": "solar:smile-circle-linear",
+          "icon_color": "#34c759"
+        },
+        {
+          "arabic": "خَجلان",
+          "transcription": "khaj-LAN",
+          "romanization": "ḫajlān",
+          "english": "embarrassed / shy",
+          "note": "feminine: خجلانة (ḫajlāne); also means 'ashamed'; common in social situations",
+          "icon": "solar:user-rounded-linear",
+          "icon_color": "#ff2d55"
+        },
+        {
+          "arabic": "مِتعِب",
+          "transcription": "mit-IB",
+          "romanization": "mitʕib",
+          "english": "exhausted",
+          "note": "more intense than تعبان; feminine: متعبة (mitʕibe); متعب من الشغل = exhausted from work",
+          "icon": "solar:sleep-linear",
+          "icon_color": "#6e6e73"
+        },
+        {
+          "arabic": "بَخير",
+          "transcription": "bi-KHĒR",
+          "romanization": "bi-ḫēr",
+          "english": "fine / doing well",
+          "note": "lit. 'in goodness'; the standard response to كيفك (how are you); equivalent to 'I'm fine'",
+          "icon": "solar:check-circle-linear",
+          "icon_color": "#34c759"
+        },
+        {
+          "arabic": "قَلِقان",
+          "transcription": "ʔa-li-AN",
+          "romanization": "ʾaliʾān",
+          "english": "worried / anxious",
+          "note": "ق → ʾ in Palestinian; feminine: قلقانة; قلقان عليك = worried about you",
+          "icon": "solar:question-square-linear",
+          "icon_color": "#5856d6"
+        }
+      ],
+      "quiz": [
+        {
+          "arabic": "خايِف",
+          "transcription": "KHA-yif",
+          "romanization": "ḫāyif",
+          "options": ["happy", "angry", "scared / afraid", "embarrassed"],
+          "answer": 2
+        },
+        {
+          "arabic": "مُنبَسِط",
+          "transcription": "mun-ba-SIT",
+          "romanization": "munbasiṭ",
+          "options": ["tired", "worried", "bored", "enjoying / in good spirits"],
+          "answer": 3
+        },
+        {
+          "arabic": "خَجلان",
+          "transcription": "khaj-LAN",
+          "romanization": "ḫajlān",
+          "options": ["embarrassed / shy", "scared", "happy", "exhausted"],
+          "answer": 0
+        },
+        {
+          "arabic": "مِتعِب",
+          "transcription": "mit-IB",
+          "romanization": "mitʕib",
+          "options": ["sick", "happy", "exhausted", "worried"],
+          "answer": 2
+        },
+        {
+          "arabic": "بَخير",
+          "transcription": "bi-KHĒR",
+          "romanization": "bi-ḫēr",
+          "options": ["not well", "tired", "fine / doing well", "hungry"],
+          "answer": 2
+        },
+        {
+          "arabic": "قَلِقان",
+          "transcription": "ʔa-li-AN",
+          "romanization": "ʾaliʾān",
+          "options": ["scared", "worried / anxious", "exhausted", "embarrassed"],
+          "answer": 1
+        }
+      ],
+      "build": [
+        {
+          "sentence": ["مُنبَسِط", "مش", "خايِف"],
+          "decoys": ["قَلِقان", "بَخير", "خَجلان"],
+          "english": "Enjoying it, not scared"
+        },
+        {
+          "sentence": ["مِتعِب", "قَلِقان"],
+          "decoys": ["خايِف", "مُنبَسِط", "بَخير"],
+          "english": "Exhausted and worried"
+        },
+        {
+          "sentence": ["بَخير", "خَجلان"],
+          "decoys": ["مِتعِب", "قَلِقان", "خايِف"],
+          "english": "Fine but embarrassed"
+        }
+      ],
+      "speak": {
+        "scenario": "Friends are asking how you felt about a big presentation at work.",
+        "turns": [
+          {
+            "speaker": "them",
+            "arabic": "كيفك بعد العرض؟",
+            "romanization": "kīfak baʕd il-ʕarḍ",
+            "english": "How are you after the presentation?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "بَخير!",
+            "romanization": "bi-ḫēr",
+            "english": "Fine!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "قبل العرض كنت خايف؟",
+            "romanization": "ʾabl il-ʕarḍ kunt ḫāyif",
+            "english": "Before the presentation were you scared?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "خايِف!",
+            "romanization": "ḫāyif",
+            "english": "Scared!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وقلقان كمان؟",
+            "romanization": "w-ʾaliʾān kamān",
+            "english": "And worried too?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "قَلِقان!",
+            "romanization": "ʾaliʾān",
+            "english": "Worried!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وهلق؟",
+            "romanization": "w-halla'",
+            "english": "And now?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "مُنبَسِط!",
+            "romanization": "munbasiṭ",
+            "english": "Enjoying it!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "بس بتشوفك متعب شوي",
+            "romanization": "bas btšūfak mitʕib šway",
+            "english": "But you look a bit exhausted"
+          },
+          {
+            "speaker": "you",
+            "arabic": "مِتعِب!",
+            "romanization": "mitʕib",
+            "english": "Exhausted!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "ليش ما حكيت؟",
+            "romanization": "lēš mā ḥakēt",
+            "english": "Why didn't you say so?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "خَجلان!",
+            "romanization": "ḫajlān",
+            "english": "Embarrassed!"
+          }
+        ]
+      },
+      "review": {
+        "all_vocab": [
+          { "arabic": "تَعبان", "transcription": "ta-BAN", "romanization": "tabʕān", "english": "tired / sick" },
+          { "arabic": "مَبسوط", "transcription": "mab-SŪT", "romanization": "mabsūṭ", "english": "happy / pleased" },
+          { "arabic": "زَعلان", "transcription": "zaʕ-LAN", "romanization": "zaʕlān", "english": "upset / angry" },
+          { "arabic": "جوعان", "transcription": "jū-ĀN", "romanization": "jūʕān", "english": "hungry" },
+          { "arabic": "عَطشان", "transcription": "at-SHAN", "romanization": "ʕaṭšān", "english": "thirsty" },
+          { "arabic": "مَريض", "transcription": "ma-RĒD", "romanization": "marīḍ", "english": "sick / ill" },
+          { "arabic": "خايِف", "transcription": "KHA-yif", "romanization": "ḫāyif", "english": "scared / afraid" },
+          { "arabic": "مُنبَسِط", "transcription": "mun-ba-SIT", "romanization": "munbasiṭ", "english": "enjoying / in good spirits" },
+          { "arabic": "خَجلان", "transcription": "khaj-LAN", "romanization": "ḫajlān", "english": "embarrassed / shy" },
+          { "arabic": "مِتعِب", "transcription": "mit-IB", "romanization": "mitʕib", "english": "exhausted" },
+          { "arabic": "بَخير", "transcription": "bi-KHĒR", "romanization": "bi-ḫēr", "english": "fine / doing well" },
+          { "arabic": "قَلِقان", "transcription": "ʔa-li-AN", "romanization": "ʾaliʾān", "english": "worried / anxious" }
+        ]
+      }
+    }
+  ]
+}

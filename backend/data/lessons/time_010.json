@@ -1,0 +1,416 @@
+{
+  "topic": "Telling Time",
+  "cycles": [
+    {
+      "cycle": 1,
+      "vocab": [
+        {
+          "arabic": "الساعة كَم؟",
+          "transcription": "is-SA-a KAM",
+          "romanization": "is-sāʕa kam",
+          "english": "What time is it?",
+          "note": "lit. 'the clock how many?'; الساعة is feminine so use feminine number forms in answers",
+          "icon": "solar:clock-circle-linear",
+          "icon_color": "#6e6e73"
+        },
+        {
+          "arabic": "واحِدة",
+          "transcription": "WA-hde",
+          "romanization": "wāḥde",
+          "english": "one o'clock",
+          "note": "feminine form of واحد; used because الساعة is grammatically feminine",
+          "icon": "solar:clock-circle-linear",
+          "icon_color": "#fe4d01"
+        },
+        {
+          "arabic": "تِنتين",
+          "transcription": "tin-TĒN",
+          "romanization": "tintēn",
+          "english": "two o'clock",
+          "note": "feminine form of تنين; Palestinian and Levantine form of 'two'",
+          "icon": "solar:clock-circle-linear",
+          "icon_color": "#007aff"
+        },
+        {
+          "arabic": "تلاتة",
+          "transcription": "ta-LA-ta",
+          "romanization": "talāta",
+          "english": "three o'clock",
+          "note": "used without change for hours 3-10; الساعة تلاتة = 'it is three o'clock'",
+          "icon": "solar:clock-circle-linear",
+          "icon_color": "#34c759"
+        },
+        {
+          "arabic": "أَربعة",
+          "transcription": "AR-ba-a",
+          "romanization": "ʾarbaʕa",
+          "english": "four o'clock",
+          "note": "الساعة أربعة = four o'clock; same word as the number four",
+          "icon": "solar:clock-circle-linear",
+          "icon_color": "#ff9f0a"
+        },
+        {
+          "arabic": "خَمسة",
+          "transcription": "KHAM-se",
+          "romanization": "ḫamse",
+          "english": "five o'clock",
+          "note": "الساعة خمسة = five o'clock; same word as the number five",
+          "icon": "solar:clock-circle-linear",
+          "icon_color": "#5856d6"
+        }
+      ],
+      "quiz": [
+        {
+          "arabic": "الساعة كَم؟",
+          "transcription": "is-SA-a KAM",
+          "romanization": "is-sāʕa kam",
+          "options": ["It is one o'clock", "What time is it?", "At what time?", "The clock"],
+          "answer": 1
+        },
+        {
+          "arabic": "واحِدة",
+          "transcription": "WA-hde",
+          "romanization": "wāḥde",
+          "options": ["two o'clock", "one o'clock", "three o'clock", "four o'clock"],
+          "answer": 1
+        },
+        {
+          "arabic": "تِنتين",
+          "transcription": "tin-TĒN",
+          "romanization": "tintēn",
+          "options": ["three o'clock", "one o'clock", "two o'clock", "five o'clock"],
+          "answer": 2
+        },
+        {
+          "arabic": "تلاتة",
+          "transcription": "ta-LA-ta",
+          "romanization": "talāta",
+          "options": ["four o'clock", "two o'clock", "three o'clock", "five o'clock"],
+          "answer": 2
+        },
+        {
+          "arabic": "أَربعة",
+          "transcription": "AR-ba-a",
+          "romanization": "ʾarbaʕa",
+          "options": ["five o'clock", "three o'clock", "four o'clock", "two o'clock"],
+          "answer": 2
+        },
+        {
+          "arabic": "خَمسة",
+          "transcription": "KHAM-se",
+          "romanization": "ḫamse",
+          "options": ["four o'clock", "six o'clock", "three o'clock", "five o'clock"],
+          "answer": 3
+        }
+      ],
+      "build": [
+        {
+          "sentence": ["الساعة كَم؟", "واحِدة"],
+          "decoys": ["تِنتين", "خَمسة", "أَربعة"],
+          "english": "What time? One o'clock!"
+        },
+        {
+          "sentence": ["تِنتين", "تلاتة"],
+          "decoys": ["الساعة كَم؟", "خَمسة", "واحِدة"],
+          "english": "Two o'clock, three o'clock"
+        },
+        {
+          "sentence": ["أَربعة", "خَمسة"],
+          "decoys": ["تلاتة", "واحِدة", "تِنتين"],
+          "english": "Four o'clock, five o'clock"
+        }
+      ],
+      "speak": {
+        "scenario": "You are setting up meeting times with a friend.",
+        "turns": [
+          {
+            "speaker": "them",
+            "arabic": "الساعة كم هلق؟",
+            "romanization": "is-sāʕa kam halla'",
+            "english": "What time is it now?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "الساعة كَم؟",
+            "romanization": "is-sāʕa kam",
+            "english": "What time is it? (asking back)"
+          },
+          {
+            "speaker": "them",
+            "arabic": "قريباً الواحدة!",
+            "romanization": "ʾarīban il-wāḥde",
+            "english": "Almost one!"
+          },
+          {
+            "speaker": "you",
+            "arabic": "واحِدة!",
+            "romanization": "wāḥde",
+            "english": "One o'clock!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "بدنا نلتقي الساعة كم؟",
+            "romanization": "biddna niltaʾī s-sāʕa kam",
+            "english": "What time should we meet?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "تِنتين!",
+            "romanization": "tintēn",
+            "english": "Two o'clock!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "تنتين بكير، ممكن تلاتة؟",
+            "romanization": "tintēn bkīr, mumkin talāta",
+            "english": "Two is early, can we do three?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "تلاتة!",
+            "romanization": "talāta",
+            "english": "Three o'clock!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "والموعد الثاني؟",
+            "romanization": "w-il-mawʕid it-tāni",
+            "english": "And the second appointment?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "أَربعة!",
+            "romanization": "ʾarbaʕa",
+            "english": "Four o'clock!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وآخر موعد اليوم؟",
+            "romanization": "w-āḫir mawʕid il-yōm",
+            "english": "And the last appointment today?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "خَمسة!",
+            "romanization": "ḫamse",
+            "english": "Five o'clock!"
+          }
+        ]
+      }
+    },
+    {
+      "cycle": 2,
+      "vocab": [
+        {
+          "arabic": "ونُص",
+          "transcription": "w-NUS",
+          "romanization": "w-nuṣṣ",
+          "english": "and a half / thirty",
+          "note": "نص (nuṣṣ) = half; الساعة تنتين ونص = half past two / 2:30",
+          "icon": "solar:clock-circle-linear",
+          "icon_color": "#ff9f0a"
+        },
+        {
+          "arabic": "ورُبع",
+          "transcription": "w-RUB",
+          "romanization": "w-rubʕ",
+          "english": "and a quarter / fifteen",
+          "note": "ربع (rubʕ) = quarter; الساعة واحدة وربع = 1:15",
+          "icon": "solar:clock-circle-linear",
+          "icon_color": "#34c759"
+        },
+        {
+          "arabic": "إِلّا رُبع",
+          "transcription": "IL-la RUB",
+          "romanization": "ʾilla rubʕ",
+          "english": "quarter to (the hour)",
+          "note": "lit. 'minus a quarter'; الساعة تنتين إلا ربع = quarter to two = 1:45",
+          "icon": "solar:clock-circle-linear",
+          "icon_color": "#5856d6"
+        },
+        {
+          "arabic": "الصُّبح",
+          "transcription": "is-SUBH",
+          "romanization": "iṣ-ṣubḥ",
+          "english": "in the morning / a.m.",
+          "note": "الساعة تلاتة الصبح = 3:00 a.m.; used up to about 11:00 a.m.",
+          "icon": "solar:sun-2-linear",
+          "icon_color": "#ff9f0a"
+        },
+        {
+          "arabic": "اللَّيل",
+          "transcription": "il-LĒL",
+          "romanization": "il-lēl",
+          "english": "at night / p.m.",
+          "note": "الساعة عشرة الليل = 10:00 p.m.; also مساء (masāʾ) for 'evening'",
+          "icon": "solar:moon-stars-linear",
+          "icon_color": "#5856d6"
+        },
+        {
+          "arabic": "بَدّري",
+          "transcription": "BAD-ri",
+          "romanization": "badri",
+          "english": "early",
+          "note": "opposite of متأخر (mutʾaḫḫir); بدري كتير = too early; هالأيام بدري = it's early these days",
+          "icon": "solar:sunrise-linear",
+          "icon_color": "#ff9f0a"
+        }
+      ],
+      "quiz": [
+        {
+          "arabic": "ونُص",
+          "transcription": "w-NUS",
+          "romanization": "w-nuṣṣ",
+          "english": "and a half",
+          "options": ["and a quarter", "and a half", "minus a quarter", "and five"],
+          "answer": 1
+        },
+        {
+          "arabic": "ورُبع",
+          "transcription": "w-RUB",
+          "romanization": "w-rubʕ",
+          "options": ["and a half", "and a quarter", "quarter to", "and ten"],
+          "answer": 1
+        },
+        {
+          "arabic": "إِلّا رُبع",
+          "transcription": "IL-la RUB",
+          "romanization": "ʾilla rubʕ",
+          "options": ["and a quarter", "and a half", "quarter to", "exactly"],
+          "answer": 2
+        },
+        {
+          "arabic": "الصُّبح",
+          "transcription": "is-SUBH",
+          "romanization": "iṣ-ṣubḥ",
+          "options": ["at night", "in the afternoon", "in the morning", "at noon"],
+          "answer": 2
+        },
+        {
+          "arabic": "اللَّيل",
+          "transcription": "il-LĒL",
+          "romanization": "il-lēl",
+          "options": ["in the morning", "at noon", "in the afternoon", "at night"],
+          "answer": 3
+        },
+        {
+          "arabic": "بَدّري",
+          "transcription": "BAD-ri",
+          "romanization": "badri",
+          "options": ["late", "on time", "early", "soon"],
+          "answer": 2
+        }
+      ],
+      "build": [
+        {
+          "sentence": ["واحِدة", "ونُص"],
+          "decoys": ["اللَّيل", "بَدّري", "ورُبع"],
+          "english": "One thirty / half past one"
+        },
+        {
+          "sentence": ["تِنتين", "إِلّا رُبع"],
+          "decoys": ["الصُّبح", "ونُص", "بَدّري"],
+          "english": "Quarter to two"
+        },
+        {
+          "sentence": ["تلاتة", "الصُّبح"],
+          "decoys": ["إِلّا رُبع", "ورُبع", "اللَّيل"],
+          "english": "Three in the morning"
+        }
+      ],
+      "speak": {
+        "scenario": "You are arranging when to watch a football match together.",
+        "turns": [
+          {
+            "speaker": "them",
+            "arabic": "المباراة الساعة كم؟",
+            "romanization": "il-mubārāt is-sāʕa kam",
+            "english": "What time is the match?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "تِنتين ونُص!",
+            "romanization": "tintēn w-nuṣṣ",
+            "english": "Two thirty!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "الصبح ولا الليل؟",
+            "romanization": "iṣ-ṣubḥ willa l-lēl",
+            "english": "Morning or night?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "اللَّيل!",
+            "romanization": "il-lēl",
+            "english": "At night!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "ومتى بدنا نروح قبلها؟",
+            "romanization": "w-matā biddna nrūḥ ʾabalha",
+            "english": "And when should we go before it?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "تِنتين ورُبع!",
+            "romanization": "tintēn w-rubʕ",
+            "english": "Two fifteen!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "الصبح مرتاح؟",
+            "romanization": "iṣ-ṣubḥ murtāḥ",
+            "english": "Are you rested in the morning?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "الصُّبح!",
+            "romanization": "iṣ-ṣubḥ",
+            "english": "In the morning!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وهالوقت؟ بدري ولا متأخر؟",
+            "romanization": "w-hal-waʔt, badri willa mutʾaḫḫir",
+            "english": "And this time? Early or late?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "بَدّري!",
+            "romanization": "badri",
+            "english": "Early!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "إيمتى بالظبط تبدأ؟",
+            "romanization": "ʾēmta bil-ḍabṭ tibdaʾ",
+            "english": "When exactly does it start?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "تلاتة إِلّا رُبع!",
+            "romanization": "talāta ʾilla rubʕ",
+            "english": "Quarter to three!"
+          }
+        ]
+      },
+      "review": {
+        "all_vocab": [
+          { "arabic": "الساعة كَم؟", "transcription": "is-SA-a KAM", "romanization": "is-sāʕa kam", "english": "What time is it?" },
+          { "arabic": "واحِدة", "transcription": "WA-hde", "romanization": "wāḥde", "english": "one o'clock" },
+          { "arabic": "تِنتين", "transcription": "tin-TĒN", "romanization": "tintēn", "english": "two o'clock" },
+          { "arabic": "تلاتة", "transcription": "ta-LA-ta", "romanization": "talāta", "english": "three o'clock" },
+          { "arabic": "أَربعة", "transcription": "AR-ba-a", "romanization": "ʾarbaʕa", "english": "four o'clock" },
+          { "arabic": "خَمسة", "transcription": "KHAM-se", "romanization": "ḫamse", "english": "five o'clock" },
+          { "arabic": "ونُص", "transcription": "w-NUS", "romanization": "w-nuṣṣ", "english": "and a half / thirty" },
+          { "arabic": "ورُبع", "transcription": "w-RUB", "romanization": "w-rubʕ", "english": "and a quarter / fifteen" },
+          { "arabic": "إِلّا رُبع", "transcription": "IL-la RUB", "romanization": "ʾilla rubʕ", "english": "quarter to" },
+          { "arabic": "الصُّبح", "transcription": "is-SUBH", "romanization": "iṣ-ṣubḥ", "english": "in the morning" },
+          { "arabic": "اللَّيل", "transcription": "il-LĒL", "romanization": "il-lēl", "english": "at night" },
+          { "arabic": "بَدّري", "transcription": "BAD-ri", "romanization": "badri", "english": "early" }
+        ]
+      }
+    }
+  ]
+}
