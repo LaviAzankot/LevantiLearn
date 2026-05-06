@@ -822,33 +822,39 @@ export default function LessonScreen() {
       const words: Record<string, any> = {};
       const stages: any[] = [{ type: 'subject' }];
       for (const cycle of lesson.cycles) {
-        // Vocab → words dict + listen_repeat stages
+        // Build English lookup for this cycle's vocab
+        const vocabEnglish: Record<string, string> = {};
+        cycle.vocab.forEach((w: any) => { vocabEnglish[w.arabic] = w.english; });
+
+        // Vocab → words dict + listen_repeat stages (words only, no phrases)
         cycle.vocab.forEach((w: any, i: number) => {
           const wid = `c${cycle.cycle}_w${i + 1}`;
           words[wid] = { arabic: w.arabic, arabic_plain: w.arabic, translit: w.romanization, english: w.english, icon: w.icon, icon_color: w.icon_color };
           stages.push({ type: 'listen_repeat', word_id: wid });
         });
-        // Listen phrases → listen_repeat (direct, no word_id)
-        for (const p of cycle.listen) {
-          stages.push({ type: 'listen_repeat', arabic: p.arabic, english: p.english, translit: p.romanization, icon: p.icon, icon_color: p.icon_color });
-        }
-        // Quiz → choose_translation
+        // Quiz → choose_translation (one per vocab word)
         for (const q of cycle.quiz) {
           const options = q.options.map((opt: string, i: number) => ({ id: `q_${cycle.cycle}_${i}`, english: opt, correct: i === q.answer, arabic: q.arabic, translit: q.romanization }));
           stages.push({ type: 'choose_translation', arabic: q.arabic, english: q.options[q.answer], translit: q.romanization, options });
         }
-        // Build → sentence_build (bank/correct format)
-        const bWords = cycle.build.sentence.map((ar: string, i: number) => ({ id: `w${i + 1}`, ar, tr: '' }));
-        const bDecoys = cycle.build.decoys.map((ar: string, i: number) => ({ id: `d${i + 1}`, ar, tr: '' }));
-        stages.push({ type: 'sentence_build', english: cycle.build.english, bank: [...bWords, ...bDecoys], correct: bWords.map((w: any) => w.id) });
-        // Speak → speak_the_blank (2 rounds from 4 turns: [them,you, them,you])
+        // Build → sentence_build array (one stage per build entry, with English on bank items)
+        const builds = Array.isArray(cycle.build) ? cycle.build : [cycle.build];
+        builds.forEach((b: any, bi: number) => {
+          const bWords = b.sentence.map((ar: string, i: number) => ({ id: `b${bi}_w${i + 1}`, ar, tr: vocabEnglish[ar] ?? '' }));
+          const bDecoys = b.decoys.map((ar: string, i: number) => ({ id: `b${bi}_d${i + 1}`, ar, tr: vocabEnglish[ar] ?? '' }));
+          stages.push({ type: 'sentence_build', english: b.english, bank: [...bWords, ...bDecoys], correct: bWords.map((w: any) => w.id) });
+        });
+        // Speak → speak_the_blank (dynamic rounds from any even number of turns)
         const turns = cycle.speak.turns;
-        const rounds = [0, 2].map((idx, ri) => ({
-          id: `c${cycle.cycle}_r${ri + 1}`,
-          context: cycle.speak.scenario,
-          prompt: { arabic: turns[idx].arabic, translit: turns[idx].romanization, english: turns[idx].english },
-          answer: { arabic: '___', translit: '___', english: '___', blank: { arabic: turns[idx + 1].arabic, translit: turns[idx + 1].romanization, english: turns[idx + 1].english } },
-        }));
+        const rounds: any[] = [];
+        for (let idx = 0; idx < turns.length - 1; idx += 2) {
+          rounds.push({
+            id: `c${cycle.cycle}_r${Math.floor(idx / 2) + 1}`,
+            context: cycle.speak.scenario,
+            prompt: { arabic: turns[idx].arabic, translit: turns[idx].romanization, english: turns[idx].english },
+            answer: { arabic: '___', translit: '___', english: '___', blank: { arabic: turns[idx + 1].arabic, translit: turns[idx + 1].romanization, english: turns[idx + 1].english } },
+          });
+        }
         stages.push({ type: 'speak_the_blank', rounds });
         // Match pairs at end of each cycle
         stages.push({ type: 'match_pairs', word_ids: cycle.vocab.map((_: any, i: number) => `c${cycle.cycle}_w${i + 1}`) });
@@ -2700,6 +2706,11 @@ export default function LessonScreen() {
                   >
                     {word}
                   </Text>
+                  {!!tr && (
+                    <Text style={[s.sbWordTr, { color: c.label, fontFamily: FONT_UI }]}>
+                      {tr}
+                    </Text>
+                  )}
                 </TouchableOpacity>
               );
             })}

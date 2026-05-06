@@ -17,7 +17,7 @@
           "arabic": "أَهلاً",
           "transcription": "AH-lan",
           "romanization": "ahlan",
-          "english": "Hi / Welcome",
+          "english": "Hi",
           "note": "warmer and slightly more informal than مرحبا",
           "icon": "solar:smile-circle-linear",
           "icon_color": "#007aff"
@@ -35,7 +35,7 @@
           "arabic": "صَباح النور",
           "transcription": "sa-BAH en-NOOR",
           "romanization": "ṣabāḥ an-nūr",
-          "english": "Good morning (reply)",
+          "english": "Good morning reply",
           "note": "the fixed reply to صباح الخير; lit. 'morning of light'",
           "icon": "solar:chat-round-dots-linear",
           "icon_color": "#ff9f0a"
@@ -53,34 +53,8 @@
           "arabic": "مَنيح",
           "transcription": "m-NEEH",
           "romanization": "mnīḥ",
-          "english": "Fine / Good",
+          "english": "Fine",
           "note": "Levantine colloquial; the standard positive reply to كيفك",
-          "icon": "solar:heart-linear",
-          "icon_color": "#34c759"
-        }
-      ],
-      "listen": [
-        {
-          "arabic": "مرحبا! صباح الخير!",
-          "transcription": "mar-HA-ba! sa-BAH el-KHAYR!",
-          "romanization": "marḥabā! ṣabāḥ al-khayr!",
-          "english": "Hello! Good morning!",
-          "icon": "solar:sun-2-linear",
-          "icon_color": "#ff9f0a"
-        },
-        {
-          "arabic": "أهلاً! كيفك؟ منيح؟",
-          "transcription": "AH-lan! KAY-fak? m-NEEH?",
-          "romanization": "ahlan! kīfak? mnīḥ?",
-          "english": "Hi! How are you? Good?",
-          "icon": "solar:smile-circle-linear",
-          "icon_color": "#007aff"
-        },
-        {
-          "arabic": "صباح النور، منيح كتير!",
-          "transcription": "sa-BAH en-NOOR, m-NEEH ka-TEER!",
-          "romanization": "ṣabāḥ an-nūr, mnīḥ ktīr!",
-          "english": "Good morning! Very fine!",
           "icon": "solar:heart-linear",
           "icon_color": "#34c759"
         }
@@ -90,53 +64,136 @@
           "arabic": "مَرحَبا",
           "transcription": "mar-HA-ba",
           "romanization": "marḥabā",
-          "options": ["Hello", "Good morning", "Fine", "How are you?"],
+          "options": ["Hello", "Hi", "Good morning", "How are you?"],
           "answer": 0
+        },
+        {
+          "arabic": "أَهلاً",
+          "transcription": "AH-lan",
+          "romanization": "ahlan",
+          "options": ["Good morning", "Hi", "Fine", "Hello"],
+          "answer": 1
+        },
+        {
+          "arabic": "صَباح الخير",
+          "transcription": "sa-BAH el-KHAYR",
+          "romanization": "ṣabāḥ al-khayr",
+          "options": ["Fine", "Hello", "Good morning", "Hi"],
+          "answer": 2
+        },
+        {
+          "arabic": "صَباح النور",
+          "transcription": "sa-BAH en-NOOR",
+          "romanization": "ṣabāḥ an-nūr",
+          "options": ["Good morning reply", "Hi", "Fine", "Hello"],
+          "answer": 0
+        },
+        {
+          "arabic": "كِيفَك؟",
+          "transcription": "KAY-fak",
+          "romanization": "kīfak",
+          "options": ["Fine", "Hi", "Hello", "How are you?"],
+          "answer": 3
         },
         {
           "arabic": "مَنيح",
           "transcription": "m-NEEH",
           "romanization": "mnīḥ",
-          "options": ["Thank you", "Good morning (reply)", "Fine / Good", "Hi"],
-          "answer": 2
+          "options": ["Hello", "Fine", "Good morning", "Hi"],
+          "answer": 1
         }
       ],
-      "build": {
-        "prompt": "Build: Hello! How are you?",
-        "sentence": ["مَرحَبا", "كِيفَك؟"],
-        "decoys": ["يلا", "شكراً", "مَسا"],
-        "english": "Hello! How are you?"
-      },
+      "build": [
+        {
+          "sentence": ["مَرحَبا", "كِيفَك؟"],
+          "decoys": ["أَهلاً", "مَنيح", "صَباح الخير"],
+          "english": "Hello! How are you?"
+        },
+        {
+          "sentence": ["صَباح الخير", "صَباح النور"],
+          "decoys": ["مَرحَبا", "كِيفَك؟", "أَهلاً"],
+          "english": "Good morning! Good morning reply!"
+        },
+        {
+          "sentence": ["أَهلاً", "مَنيح"],
+          "decoys": ["صَباح النور", "كِيفَك؟", "صَباح الخير"],
+          "english": "Hi! Fine!"
+        }
+      ],
       "speak": {
-        "scenario": "You run into your neighbor on the street in the morning.",
+        "scenario": "You meet your neighbor on the street in the morning.",
         "turns": [
           {
             "speaker": "them",
-            "arabic": "مرحبا! صباح الخير!",
-            "transcription": "mar-HA-ba! sa-BAH el-KHAYR!",
-            "romanization": "marḥabā! ṣabāḥ al-khayr!",
-            "english": "Hello! Good morning!"
+            "arabic": "مرحبا!",
+            "romanization": "marḥabā",
+            "english": "Hello!"
+          },
+          {
+            "speaker": "you",
+            "arabic": "أهلاً!",
+            "romanization": "ahlan",
+            "english": "Hi!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "صباح الخير!",
+            "romanization": "ṣabāḥ al-khayr",
+            "english": "Good morning!"
           },
           {
             "speaker": "you",
             "arabic": "صباح النور!",
-            "transcription": "sa-BAH en-NOOR!",
-            "romanization": "ṣabāḥ an-nūr!",
-            "english": "Good morning!"
+            "romanization": "ṣabāḥ an-nūr",
+            "english": "Good morning reply!"
           },
           {
             "speaker": "them",
-            "arabic": "أهلاً، كيفك؟",
-            "transcription": "AH-lan, KAY-fak?",
-            "romanization": "ahlan, kīfak?",
-            "english": "Hi, how are you?"
+            "arabic": "كيفك؟",
+            "romanization": "kīfak",
+            "english": "How are you?"
           },
           {
             "speaker": "you",
-            "arabic": "منيح، أهلاً!",
-            "transcription": "m-NEEH, AH-lan!",
-            "romanization": "mnīḥ, ahlan!",
-            "english": "Fine, hi!"
+            "arabic": "منيح!",
+            "romanization": "mnīḥ",
+            "english": "Fine!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "أهلاً وسهلاً!",
+            "romanization": "ahlan wa-sahlan",
+            "english": "Welcome!"
+          },
+          {
+            "speaker": "you",
+            "arabic": "مرحبا!",
+            "romanization": "marḥabā",
+            "english": "Hello!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "منيح، وانت؟",
+            "romanization": "mnīḥ, w-inta",
+            "english": "Fine, and you?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "كيفك؟",
+            "romanization": "kīfak",
+            "english": "How are you?"
+          },
+          {
+            "speaker": "them",
+            "arabic": "الساعة بكير!",
+            "romanization": "as-sāʕa bkīr",
+            "english": "It's early!"
+          },
+          {
+            "speaker": "you",
+            "arabic": "صباح الخير!",
+            "romanization": "ṣabāḥ al-khayr",
+            "english": "Good morning!"
           }
         ]
       }
@@ -157,7 +214,7 @@
           "arabic": "يَلا",
           "transcription": "YA-la",
           "romanization": "yalla",
-          "english": "Come on / Bye",
+          "english": "Bye",
           "note": "extremely common Levantine; casual goodbye or 'let's go'",
           "icon": "solar:hand-stars-linear",
           "icon_color": "#fe4d01"
@@ -175,8 +232,8 @@
           "arabic": "عَفواً",
           "transcription": "AF-wan",
           "romanization": "ʕafwan",
-          "english": "You're welcome / Excuse me",
-          "note": "the same word covers both meanings depending on context",
+          "english": "You're welcome",
+          "note": "also means 'excuse me' depending on context",
           "icon": "solar:user-rounded-linear",
           "icon_color": "#007aff"
         },
@@ -199,99 +256,156 @@
           "icon_color": "#5856d6"
         }
       ],
-      "listen": [
-        {
-          "arabic": "يلا، مع السلامة!",
-          "transcription": "YA-la, maʕ es-sa-LA-ma!",
-          "romanization": "yalla, maʕ as-salāma!",
-          "english": "Come on, goodbye!",
-          "icon": "solar:users-group-two-rounded-linear",
-          "icon_color": "#6e6e73"
-        },
-        {
-          "arabic": "شكراً كتير! عفواً!",
-          "transcription": "SHUK-ran ka-TEER! AF-wan!",
-          "romanization": "šukran ktīr! ʕafwan!",
-          "english": "Thank you very much! You're welcome!",
-          "icon": "solar:heart-linear",
-          "icon_color": "#ff2d55"
-        },
-        {
-          "arabic": "آسف، مسا الخير.",
-          "transcription": "AA-sif, ma-SA el-KHAYR.",
-          "romanization": "āsif, masā l-khayr.",
-          "english": "Sorry, good evening.",
-          "icon": "solar:moon-stars-linear",
-          "icon_color": "#5856d6"
-        }
-      ],
       "quiz": [
-        {
-          "arabic": "شُكراً",
-          "transcription": "SHUK-ran",
-          "romanization": "šukran",
-          "options": ["Fine", "Goodbye", "Thank you", "Sorry"],
-          "answer": 2
-        },
         {
           "arabic": "مَع السَّلامة",
           "transcription": "maʕ es-sa-LA-ma",
           "romanization": "maʕ as-salāma",
-          "options": ["Good evening", "Hello", "Goodbye", "Come on"],
+          "options": ["Goodbye", "Bye", "Thank you", "Sorry"],
+          "answer": 0
+        },
+        {
+          "arabic": "يَلا",
+          "transcription": "YA-la",
+          "romanization": "yalla",
+          "options": ["Thank you", "Bye", "Sorry", "Good evening"],
+          "answer": 1
+        },
+        {
+          "arabic": "شُكراً",
+          "transcription": "SHUK-ran",
+          "romanization": "šukran",
+          "options": ["Sorry", "Goodbye", "Thank you", "You're welcome"],
           "answer": 2
+        },
+        {
+          "arabic": "عَفواً",
+          "transcription": "AF-wan",
+          "romanization": "ʕafwan",
+          "options": ["Good evening", "Goodbye", "Sorry", "You're welcome"],
+          "answer": 3
+        },
+        {
+          "arabic": "آسِف",
+          "transcription": "AA-sif",
+          "romanization": "āsif",
+          "options": ["Sorry", "Bye", "Thank you", "Good evening"],
+          "answer": 0
+        },
+        {
+          "arabic": "مَسا الخير",
+          "transcription": "ma-SA el-KHAYR",
+          "romanization": "masā l-khayr",
+          "options": ["Bye", "Thank you", "Sorry", "Good evening"],
+          "answer": 3
         }
       ],
-      "build": {
-        "prompt": "Build: Thank you! Goodbye!",
-        "sentence": ["شُكراً", "مَع السَّلامة"],
-        "decoys": ["مرحبا", "كيفك", "منيح"],
-        "english": "Thank you! Goodbye!"
-      },
+      "build": [
+        {
+          "sentence": ["شُكراً", "مَع السَّلامة"],
+          "decoys": ["يَلا", "عَفواً", "آسِف"],
+          "english": "Thank you! Goodbye!"
+        },
+        {
+          "sentence": ["آسِف", "عَفواً"],
+          "decoys": ["شُكراً", "مَع السَّلامة", "يَلا"],
+          "english": "Sorry! You're welcome!"
+        },
+        {
+          "sentence": ["يَلا", "مَسا الخير"],
+          "decoys": ["آسِف", "شُكراً", "عَفواً"],
+          "english": "Bye! Good evening!"
+        }
+      ],
       "speak": {
         "scenario": "You are leaving a friend's house after a visit.",
         "turns": [
           {
             "speaker": "them",
-            "arabic": "يلا، مرحبا تاني مرة!",
-            "transcription": "YA-la, mar-HA-ba TA-ni MAR-ra!",
-            "romanization": "yalla, marḥabā tānī marra!",
-            "english": "Alright, come back again!"
+            "arabic": "شكراً لمجيئك!",
+            "romanization": "šukran li-majīʕak",
+            "english": "Thanks for coming!"
+          },
+          {
+            "speaker": "you",
+            "arabic": "عفواً!",
+            "romanization": "ʕafwan",
+            "english": "You're welcome!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "مع السلامة!",
+            "romanization": "maʕ as-salāma",
+            "english": "Goodbye!"
+          },
+          {
+            "speaker": "you",
+            "arabic": "يلا!",
+            "romanization": "yalla",
+            "english": "Bye!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "تأخرت كتير!",
+            "romanization": "ta'aḫḫart ktīr",
+            "english": "You're very late!"
+          },
+          {
+            "speaker": "you",
+            "arabic": "آسف!",
+            "romanization": "āsif",
+            "english": "Sorry!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "هاد إلك!",
+            "romanization": "hād ilak",
+            "english": "This is for you!"
+          },
+          {
+            "speaker": "you",
+            "arabic": "شكراً!",
+            "romanization": "šukran",
+            "english": "Thank you!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "رح تروح هلق؟",
+            "romanization": "raḥ trūḥ halla'",
+            "english": "Are you leaving now?"
           },
           {
             "speaker": "you",
             "arabic": "مع السلامة!",
-            "transcription": "maʕ es-sa-LA-ma!",
-            "romanization": "maʕ as-salāma!",
+            "romanization": "maʕ as-salāma",
             "english": "Goodbye!"
           },
           {
             "speaker": "them",
-            "arabic": "شكراً إلك، أهلاً وسهلاً!",
-            "transcription": "SHUK-ran i-LAK, AH-lan wa-SAH-lan!",
-            "romanization": "šukran ilik, ahlan wa-sahlan!",
-            "english": "Thank you, you're welcome anytime!"
+            "arabic": "جيت بعد الضهر؟",
+            "romanization": "jīt baʕd aḍ-ḍuhr",
+            "english": "You came in the afternoon?"
           },
           {
             "speaker": "you",
-            "arabic": "شكراً، يلا!",
-            "transcription": "SHUK-ran, YA-la!",
-            "romanization": "šukran, yalla!",
-            "english": "Thank you, bye!"
+            "arabic": "مسا الخير!",
+            "romanization": "masā l-khayr",
+            "english": "Good evening!"
           }
         ]
       },
       "review": {
         "all_vocab": [
           { "arabic": "مَرحَبا",        "transcription": "mar-HA-ba",         "romanization": "marḥabā",        "english": "Hello" },
-          { "arabic": "أَهلاً",          "transcription": "AH-lan",             "romanization": "ahlan",          "english": "Hi / Welcome" },
+          { "arabic": "أَهلاً",          "transcription": "AH-lan",             "romanization": "ahlan",          "english": "Hi" },
           { "arabic": "صَباح الخير",    "transcription": "sa-BAH el-KHAYR",   "romanization": "ṣabāḥ al-khayr", "english": "Good morning" },
-          { "arabic": "صَباح النور",    "transcription": "sa-BAH en-NOOR",    "romanization": "ṣabāḥ an-nūr",  "english": "Good morning (reply)" },
+          { "arabic": "صَباح النور",    "transcription": "sa-BAH en-NOOR",    "romanization": "ṣabāḥ an-nūr",  "english": "Good morning reply" },
           { "arabic": "كِيفَك؟",         "transcription": "KAY-fak",            "romanization": "kīfak",          "english": "How are you?" },
-          { "arabic": "مَنيح",           "transcription": "m-NEEH",             "romanization": "mnīḥ",           "english": "Fine / Good" },
+          { "arabic": "مَنيح",           "transcription": "m-NEEH",             "romanization": "mnīḥ",           "english": "Fine" },
           { "arabic": "مَع السَّلامة",  "transcription": "maʕ es-sa-LA-ma",   "romanization": "maʕ as-salāma",  "english": "Goodbye" },
-          { "arabic": "يَلا",            "transcription": "YA-la",              "romanization": "yalla",          "english": "Come on / Bye" },
+          { "arabic": "يَلا",            "transcription": "YA-la",              "romanization": "yalla",          "english": "Bye" },
           { "arabic": "شُكراً",          "transcription": "SHUK-ran",           "romanization": "šukran",         "english": "Thank you" },
-          { "arabic": "عَفواً",          "transcription": "AF-wan",             "romanization": "ʕafwan",         "english": "You're welcome / Excuse me" },
+          { "arabic": "عَفواً",          "transcription": "AF-wan",             "romanization": "ʕafwan",         "english": "You're welcome" },
           { "arabic": "آسِف",            "transcription": "AA-sif",             "romanization": "āsif",           "english": "Sorry" },
           { "arabic": "مَسا الخير",     "transcription": "ma-SA el-KHAYR",    "romanization": "masā l-khayr",   "english": "Good evening" }
         ]
