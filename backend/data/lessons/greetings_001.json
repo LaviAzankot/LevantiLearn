@@ -1,414 +1,301 @@
 {
-  "lesson_id": "greetings_001",
-  "topic": "Thank You & Goodbye",
-  "topic_ar": "شكراً وتوديع",
-  "level": "A0",
-  "cefr": "Pre-A1",
-  "communicative_goal": "Say thank you, apologize, and say goodbye in Levantine Arabic",
-  "xp_reward": 50,
-  "estimated_minutes": 35,
-  "phase": 1,
-  "thumbnail_url": "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=600&h=280&fit=crop&auto=format",
-
-  "words": {
-    "w001": {
-      "arabic": "بِخَيْر",
-      "arabic_plain": "بخير",
-      "translit": "bi-khayr",
-      "english": "Fine",
-      "icon": "solar:smile-circle-linear",
-      "icon_color": "#34c759"
-    },
-    "w002": {
-      "arabic": "شُكْراً",
-      "arabic_plain": "شكرا",
-      "translit": "shukran",
-      "english": "Thank you",
-      "icon": "solar:heart-linear",
-      "icon_color": "#ff2d55"
-    },
-    "w003": {
-      "arabic": "عَفْواً",
-      "arabic_plain": "عفوا",
-      "translit": "ʕafwan",
-      "english": "You're welcome",
-      "icon": "solar:hand-stars-linear",
-      "icon_color": "#007aff"
-    },
-    "w004": {
-      "arabic": "آسِف",
-      "arabic_plain": "آسف",
-      "translit": "āsif",
-      "english": "Sorry",
-      "icon": "solar:chat-round-dots-linear",
-      "icon_color": "#ff9f0a"
-    },
-    "w005": {
-      "arabic": "مِن فَضْلَك",
-      "arabic_plain": "من فضلك",
-      "translit": "min faḍlak",
-      "english": "Please",
-      "icon": "solar:user-speak-linear",
-      "icon_color": "#5856d6"
-    },
-    "w006": {
-      "arabic": "مُتشرِّف",
-      "arabic_plain": "متشرف",
-      "translit": "mutasharrif",
-      "english": "Nice to meet you",
-      "icon": "solar:users-group-rounded-linear",
-      "icon_color": "#fe4d01"
-    },
-    "w007": {
-      "arabic": "مَع السَّلامة",
-      "arabic_plain": "مع السلامة",
-      "translit": "maʕ as-salāma",
-      "english": "Goodbye",
-      "icon": "solar:users-group-two-rounded-linear",
-      "icon_color": "#6e6e73"
-    },
-    "w008": {
-      "arabic": "يَلّا",
-      "arabic_plain": "يلا",
-      "translit": "yalla",
-      "english": "Come on / Bye",
-      "icon": "solar:hand-stars-linear",
-      "icon_color": "#fe4d01"
-    },
-    "w009": {
-      "arabic": "تِصبَح عَلى خَيْر",
-      "arabic_plain": "تصبح على خير",
-      "translit": "tiṣbaḥ ʕala khayr",
-      "english": "Good night",
-      "icon": "solar:moon-stars-linear",
-      "icon_color": "#5856d6"
-    },
-    "w010": {
-      "arabic": "إِلى اللِّقاء",
-      "arabic_plain": "إلى اللقاء",
-      "translit": "ila l-liqāʔ",
-      "english": "See you later",
-      "icon": "solar:user-circle-linear",
-      "icon_color": "#007aff"
-    },
-    "w011": {
-      "arabic": "بِشوفَك",
-      "arabic_plain": "بشوفك",
-      "translit": "bshūfak",
-      "english": "I'll see you",
-      "icon": "solar:user-id-linear",
-      "icon_color": "#34c759"
-    },
-    "w012": {
-      "arabic": "الله مَعَك",
-      "arabic_plain": "الله معك",
-      "translit": "allāh maʕak",
-      "english": "Take care",
-      "icon": "solar:heart-linear",
-      "icon_color": "#ff2d55"
-    }
-  },
-
-  "stages": [
-    { "type": "listen_repeat", "word_id": "w001" },
-    { "type": "listen_repeat", "word_id": "w002" },
-    { "type": "listen_repeat", "word_id": "w003" },
-    { "type": "listen_repeat", "word_id": "w004" },
-    { "type": "listen_repeat", "word_id": "w005" },
-    { "type": "listen_repeat", "word_id": "w006" },
-
+  "topic": "Basic Greetings",
+  "cycles": [
     {
-      "type": "choose_translation",
-      "word_id": "w001",
-      "option_ids": ["w001", "w002", "w003", "w004"]
-    },
-    {
-      "type": "choose_translation",
-      "word_id": "w002",
-      "option_ids": ["w001", "w002", "w005", "w006"]
-    },
-    {
-      "type": "choose_translation",
-      "word_id": "w003",
-      "option_ids": ["w001", "w003", "w004", "w005"]
-    },
-    {
-      "type": "choose_translation",
-      "word_id": "w004",
-      "option_ids": ["w002", "w003", "w004", "w006"]
-    },
-    {
-      "type": "choose_translation",
-      "word_id": "w005",
-      "option_ids": ["w001", "w004", "w005", "w006"]
-    },
-    {
-      "type": "choose_translation",
-      "word_id": "w006",
-      "option_ids": ["w002", "w003", "w005", "w006"]
-    },
-
-    {
-      "type": "sentence_build",
-      "english": "Thank you! You're welcome.",
-      "bank": [
-        { "id": "w1", "ar": "شُكْراً", "tr": "shukran" },
-        { "id": "w2", "ar": "عَفْواً", "tr": "ʕafwan" },
-        { "id": "d1", "ar": "آسِف", "tr": "āsif" },
-        { "id": "d2", "ar": "بِخَيْر", "tr": "bi-khayr" }
-      ],
-      "correct": ["w1", "w2"]
-    },
-
-    {
-      "type": "sentence_build",
-      "english": "Sorry, please.",
-      "bank": [
-        { "id": "w1", "ar": "آسِف", "tr": "āsif" },
-        { "id": "w2", "ar": "مِن فَضْلَك", "tr": "min faḍlak" },
-        { "id": "d1", "ar": "شُكْراً", "tr": "shukran" },
-        { "id": "d2", "ar": "مُتشرِّف", "tr": "mutasharrif" }
-      ],
-      "correct": ["w1", "w2"]
-    },
-
-    {
-      "type": "sentence_build",
-      "english": "Nice to meet you. I'm fine.",
-      "bank": [
-        { "id": "w1", "ar": "مُتشرِّف", "tr": "mutasharrif" },
-        { "id": "w2", "ar": "بِخَيْر", "tr": "bi-khayr" },
-        { "id": "d1", "ar": "مِن فَضْلَك", "tr": "min faḍlak" },
-        { "id": "d2", "ar": "عَفْواً", "tr": "ʕafwan" }
-      ],
-      "correct": ["w1", "w2"]
-    },
-
-    {
-      "type": "speak_the_blank",
-      "rounds": [
+      "cycle": 1,
+      "vocab": [
         {
-          "id": "r1",
-          "context": "Your new colleague Ahmed asks how you're doing.",
-          "prompt": {
-            "arabic": "كيف حالك؟",
-            "translit": "kīf ḥālak",
-            "english": "How are you?"
-          },
-          "answer": {
-            "arabic": "___ ، شُكْراً!",
-            "translit": "___, shukran!",
-            "english": "___, thanks!",
-            "blank": {
-              "arabic": "بِخَيْر",
-              "translit": "bi-khayr",
-              "english": "fine"
-            }
-          }
+          "arabic": "مَرحَبا",
+          "transcription": "mar-HA-ba",
+          "romanization": "marḥabā",
+          "english": "Hello",
+          "note": "universal Levantine greeting, used any time of day",
+          "icon": "solar:hand-stars-linear",
+          "icon_color": "#fe4d01"
         },
         {
-          "id": "r2",
-          "context": "You help someone find their lost bag.",
-          "prompt": {
-            "arabic": "شُكْراً كتير!",
-            "translit": "shukran ktīr",
-            "english": "Thank you so much!"
-          },
-          "answer": {
-            "arabic": "___!",
-            "translit": "___!",
-            "english": "___!",
-            "blank": {
-              "arabic": "عَفْواً",
-              "translit": "ʕafwan",
-              "english": "You're welcome"
-            }
-          }
+          "arabic": "أَهلاً",
+          "transcription": "AH-lan",
+          "romanization": "ahlan",
+          "english": "Hi / Welcome",
+          "note": "warmer and slightly more informal than مرحبا",
+          "icon": "solar:smile-circle-linear",
+          "icon_color": "#007aff"
         },
         {
-          "id": "r3",
-          "context": "You meet your friend's mother for the first time.",
-          "prompt": {
-            "arabic": "أنا أم سارة.",
-            "translit": "ana umm Sāra",
-            "english": "I'm Sara's mother."
-          },
-          "answer": {
-            "arabic": "___!",
-            "translit": "___!",
-            "english": "___!",
-            "blank": {
-              "arabic": "مُتشرِّف",
-              "translit": "mutasharrif",
-              "english": "Nice to meet you"
-            }
-          }
+          "arabic": "صَباح الخير",
+          "transcription": "sa-BAH el-KHAYR",
+          "romanization": "ṣabāḥ al-khayr",
+          "english": "Good morning",
+          "note": "lit. 'morning of goodness'; use until around noon",
+          "icon": "solar:sun-2-linear",
+          "icon_color": "#ff9f0a"
+        },
+        {
+          "arabic": "صَباح النور",
+          "transcription": "sa-BAH en-NOOR",
+          "romanization": "ṣabāḥ an-nūr",
+          "english": "Good morning (reply)",
+          "note": "the fixed reply to صباح الخير; lit. 'morning of light'",
+          "icon": "solar:chat-round-dots-linear",
+          "icon_color": "#ff9f0a"
+        },
+        {
+          "arabic": "كِيفَك؟",
+          "transcription": "KAY-fak",
+          "romanization": "kīfak",
+          "english": "How are you?",
+          "note": "to a male; say كِيفِك (kīfik) to a female",
+          "icon": "solar:user-speak-linear",
+          "icon_color": "#5856d6"
+        },
+        {
+          "arabic": "مَنيح",
+          "transcription": "m-NEEH",
+          "romanization": "mnīḥ",
+          "english": "Fine / Good",
+          "note": "Levantine colloquial; the standard positive reply to كيفك",
+          "icon": "solar:heart-linear",
+          "icon_color": "#34c759"
         }
-      ]
-    },
-
-    {
-      "type": "match_pairs",
-      "word_ids": ["w001", "w002", "w003", "w004", "w005", "w006"]
-    },
-
-    { "type": "listen_repeat", "word_id": "w007" },
-    { "type": "listen_repeat", "word_id": "w008" },
-    { "type": "listen_repeat", "word_id": "w009" },
-    { "type": "listen_repeat", "word_id": "w010" },
-    { "type": "listen_repeat", "word_id": "w011" },
-    { "type": "listen_repeat", "word_id": "w012" },
-
-    {
-      "type": "choose_translation",
-      "word_id": "w007",
-      "option_ids": ["w007", "w008", "w009", "w010"]
-    },
-    {
-      "type": "choose_translation",
-      "word_id": "w008",
-      "option_ids": ["w007", "w008", "w011", "w012"]
-    },
-    {
-      "type": "choose_translation",
-      "word_id": "w009",
-      "option_ids": ["w008", "w009", "w010", "w012"]
-    },
-    {
-      "type": "choose_translation",
-      "word_id": "w010",
-      "option_ids": ["w007", "w009", "w010", "w011"]
-    },
-    {
-      "type": "choose_translation",
-      "word_id": "w011",
-      "option_ids": ["w007", "w008", "w011", "w012"]
-    },
-    {
-      "type": "choose_translation",
-      "word_id": "w012",
-      "option_ids": ["w009", "w010", "w011", "w012"]
-    },
-
-    {
-      "type": "sentence_build",
-      "english": "Goodbye! I'll see you.",
-      "bank": [
-        { "id": "w1", "ar": "مَع السَّلامة", "tr": "maʕ as-salāma" },
-        { "id": "w2", "ar": "بِشوفَك", "tr": "bshūfak" },
-        { "id": "d1", "ar": "يَلّا", "tr": "yalla" },
-        { "id": "d2", "ar": "إِلى اللِّقاء", "tr": "ila l-liqāʔ" }
       ],
-      "correct": ["w1", "w2"]
-    },
-
-    {
-      "type": "sentence_build",
-      "english": "Good night! Take care.",
-      "bank": [
-        { "id": "w1", "ar": "تِصبَح عَلى خَيْر", "tr": "tiṣbaḥ ʕala khayr" },
-        { "id": "w2", "ar": "الله مَعَك", "tr": "allāh maʕak" },
-        { "id": "d1", "ar": "مَع السَّلامة", "tr": "maʕ as-salāma" },
-        { "id": "d2", "ar": "بِشوفَك", "tr": "bshūfak" }
-      ],
-      "correct": ["w1", "w2"]
-    },
-
-    {
-      "type": "sentence_build",
-      "english": "Come on! See you later.",
-      "bank": [
-        { "id": "w1", "ar": "يَلّا", "tr": "yalla" },
-        { "id": "w2", "ar": "إِلى اللِّقاء", "tr": "ila l-liqāʔ" },
-        { "id": "d1", "ar": "الله مَعَك", "tr": "allāh maʕak" },
-        { "id": "d2", "ar": "تِصبَح عَلى خَيْر", "tr": "tiṣbaḥ ʕala khayr" }
-      ],
-      "correct": ["w1", "w2"]
-    },
-
-    {
-      "type": "speak_the_blank",
-      "rounds": [
+      "listen": [
         {
-          "id": "r4",
-          "context": "Your friend Layla is leaving your house after dinner.",
-          "prompt": {
-            "arabic": "يلا، لازم أروح.",
-            "translit": "yalla, lāzim arūḥ",
-            "english": "Come on, I have to go."
-          },
-          "answer": {
-            "arabic": "___ يا لايلى!",
-            "translit": "___ ya Lāyla!",
-            "english": "___, Layla!",
-            "blank": {
-              "arabic": "مَع السَّلامة",
-              "translit": "maʕ as-salāma",
-              "english": "Goodbye"
-            }
-          }
+          "arabic": "مرحبا! صباح الخير!",
+          "transcription": "mar-HA-ba! sa-BAH el-KHAYR!",
+          "romanization": "marḥabā! ṣabāḥ al-khayr!",
+          "english": "Hello! Good morning!",
+          "icon": "solar:sun-2-linear",
+          "icon_color": "#ff9f0a"
         },
         {
-          "id": "r5",
-          "context": "It's late and your sister is going to sleep.",
-          "prompt": {
-            "arabic": "أنا رايحة أنام.",
-            "translit": "ana rāyḥa anām",
-            "english": "I'm going to sleep."
-          },
-          "answer": {
-            "arabic": "___!",
-            "translit": "___!",
-            "english": "___!",
-            "blank": {
-              "arabic": "تِصبَح عَلى خَيْر",
-              "translit": "tiṣbaḥ ʕala khayr",
-              "english": "Good night"
-            }
-          }
+          "arabic": "أهلاً! كيفك؟ منيح؟",
+          "transcription": "AH-lan! KAY-fak? m-NEEH?",
+          "romanization": "ahlan! kīfak? mnīḥ?",
+          "english": "Hi! How are you? Good?",
+          "icon": "solar:smile-circle-linear",
+          "icon_color": "#007aff"
         },
         {
-          "id": "r6",
-          "context": "Your neighbor tells you he's traveling tomorrow.",
-          "prompt": {
-            "arabic": "أنا سافر بكرا.",
-            "translit": "ana sāfir bukra",
-            "english": "I'm traveling tomorrow."
-          },
-          "answer": {
-            "arabic": "___!",
-            "translit": "___!",
-            "english": "___!",
-            "blank": {
-              "arabic": "الله مَعَك",
-              "translit": "allāh maʕak",
-              "english": "Take care"
-            }
-          }
+          "arabic": "صباح النور، منيح كتير!",
+          "transcription": "sa-BAH en-NOOR, m-NEEH ka-TEER!",
+          "romanization": "ṣabāḥ an-nūr, mnīḥ ktīr!",
+          "english": "Good morning! Very fine!",
+          "icon": "solar:heart-linear",
+          "icon_color": "#34c759"
         }
-      ]
+      ],
+      "quiz": [
+        {
+          "arabic": "مَرحَبا",
+          "transcription": "mar-HA-ba",
+          "romanization": "marḥabā",
+          "options": ["Hello", "Good morning", "Fine", "How are you?"],
+          "answer": 0
+        },
+        {
+          "arabic": "مَنيح",
+          "transcription": "m-NEEH",
+          "romanization": "mnīḥ",
+          "options": ["Thank you", "Good morning (reply)", "Fine / Good", "Hi"],
+          "answer": 2
+        }
+      ],
+      "build": {
+        "prompt": "Build: Hello! How are you?",
+        "sentence": ["مَرحَبا", "كِيفَك؟"],
+        "decoys": ["يلا", "شكراً", "مَسا"],
+        "english": "Hello! How are you?"
+      },
+      "speak": {
+        "scenario": "You run into your neighbor on the street in the morning.",
+        "turns": [
+          {
+            "speaker": "them",
+            "arabic": "مرحبا! صباح الخير!",
+            "transcription": "mar-HA-ba! sa-BAH el-KHAYR!",
+            "romanization": "marḥabā! ṣabāḥ al-khayr!",
+            "english": "Hello! Good morning!"
+          },
+          {
+            "speaker": "you",
+            "arabic": "صباح النور!",
+            "transcription": "sa-BAH en-NOOR!",
+            "romanization": "ṣabāḥ an-nūr!",
+            "english": "Good morning!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "أهلاً، كيفك؟",
+            "transcription": "AH-lan, KAY-fak?",
+            "romanization": "ahlan, kīfak?",
+            "english": "Hi, how are you?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "منيح، أهلاً!",
+            "transcription": "m-NEEH, AH-lan!",
+            "romanization": "mnīḥ, ahlan!",
+            "english": "Fine, hi!"
+          }
+        ]
+      }
     },
-
     {
-      "type": "match_pairs",
-      "word_ids": ["w007", "w008", "w009", "w010", "w011", "w012"]
+      "cycle": 2,
+      "vocab": [
+        {
+          "arabic": "مَع السَّلامة",
+          "transcription": "maʕ es-sa-LA-ma",
+          "romanization": "maʕ as-salāma",
+          "english": "Goodbye",
+          "note": "said by the one leaving; lit. 'go with safety'",
+          "icon": "solar:users-group-two-rounded-linear",
+          "icon_color": "#6e6e73"
+        },
+        {
+          "arabic": "يَلا",
+          "transcription": "YA-la",
+          "romanization": "yalla",
+          "english": "Come on / Bye",
+          "note": "extremely common Levantine; casual goodbye or 'let's go'",
+          "icon": "solar:hand-stars-linear",
+          "icon_color": "#fe4d01"
+        },
+        {
+          "arabic": "شُكراً",
+          "transcription": "SHUK-ran",
+          "romanization": "šukran",
+          "english": "Thank you",
+          "note": "universal across all Arabic dialects",
+          "icon": "solar:heart-linear",
+          "icon_color": "#ff2d55"
+        },
+        {
+          "arabic": "عَفواً",
+          "transcription": "AF-wan",
+          "romanization": "ʕafwan",
+          "english": "You're welcome / Excuse me",
+          "note": "the same word covers both meanings depending on context",
+          "icon": "solar:user-rounded-linear",
+          "icon_color": "#007aff"
+        },
+        {
+          "arabic": "آسِف",
+          "transcription": "AA-sif",
+          "romanization": "āsif",
+          "english": "Sorry",
+          "note": "male form; a female speaker says آسفة (āsifa)",
+          "icon": "solar:chat-round-dots-linear",
+          "icon_color": "#ff9f0a"
+        },
+        {
+          "arabic": "مَسا الخير",
+          "transcription": "ma-SA el-KHAYR",
+          "romanization": "masā l-khayr",
+          "english": "Good evening",
+          "note": "used from late afternoon; standard reply is مسا النور (masā n-nūr)",
+          "icon": "solar:moon-stars-linear",
+          "icon_color": "#5856d6"
+        }
+      ],
+      "listen": [
+        {
+          "arabic": "يلا، مع السلامة!",
+          "transcription": "YA-la, maʕ es-sa-LA-ma!",
+          "romanization": "yalla, maʕ as-salāma!",
+          "english": "Come on, goodbye!",
+          "icon": "solar:users-group-two-rounded-linear",
+          "icon_color": "#6e6e73"
+        },
+        {
+          "arabic": "شكراً كتير! عفواً!",
+          "transcription": "SHUK-ran ka-TEER! AF-wan!",
+          "romanization": "šukran ktīr! ʕafwan!",
+          "english": "Thank you very much! You're welcome!",
+          "icon": "solar:heart-linear",
+          "icon_color": "#ff2d55"
+        },
+        {
+          "arabic": "آسف، مسا الخير.",
+          "transcription": "AA-sif, ma-SA el-KHAYR.",
+          "romanization": "āsif, masā l-khayr.",
+          "english": "Sorry, good evening.",
+          "icon": "solar:moon-stars-linear",
+          "icon_color": "#5856d6"
+        }
+      ],
+      "quiz": [
+        {
+          "arabic": "شُكراً",
+          "transcription": "SHUK-ran",
+          "romanization": "šukran",
+          "options": ["Fine", "Goodbye", "Thank you", "Sorry"],
+          "answer": 2
+        },
+        {
+          "arabic": "مَع السَّلامة",
+          "transcription": "maʕ es-sa-LA-ma",
+          "romanization": "maʕ as-salāma",
+          "options": ["Good evening", "Hello", "Goodbye", "Come on"],
+          "answer": 2
+        }
+      ],
+      "build": {
+        "prompt": "Build: Thank you! Goodbye!",
+        "sentence": ["شُكراً", "مَع السَّلامة"],
+        "decoys": ["مرحبا", "كيفك", "منيح"],
+        "english": "Thank you! Goodbye!"
+      },
+      "speak": {
+        "scenario": "You are leaving a friend's house after a visit.",
+        "turns": [
+          {
+            "speaker": "them",
+            "arabic": "يلا، مرحبا تاني مرة!",
+            "transcription": "YA-la, mar-HA-ba TA-ni MAR-ra!",
+            "romanization": "yalla, marḥabā tānī marra!",
+            "english": "Alright, come back again!"
+          },
+          {
+            "speaker": "you",
+            "arabic": "مع السلامة!",
+            "transcription": "maʕ es-sa-LA-ma!",
+            "romanization": "maʕ as-salāma!",
+            "english": "Goodbye!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "شكراً إلك، أهلاً وسهلاً!",
+            "transcription": "SHUK-ran i-LAK, AH-lan wa-SAH-lan!",
+            "romanization": "šukran ilik, ahlan wa-sahlan!",
+            "english": "Thank you, you're welcome anytime!"
+          },
+          {
+            "speaker": "you",
+            "arabic": "شكراً، يلا!",
+            "transcription": "SHUK-ran, YA-la!",
+            "romanization": "šukran, yalla!",
+            "english": "Thank you, bye!"
+          }
+        ]
+      },
+      "review": {
+        "all_vocab": [
+          { "arabic": "مَرحَبا",        "transcription": "mar-HA-ba",         "romanization": "marḥabā",        "english": "Hello" },
+          { "arabic": "أَهلاً",          "transcription": "AH-lan",             "romanization": "ahlan",          "english": "Hi / Welcome" },
+          { "arabic": "صَباح الخير",    "transcription": "sa-BAH el-KHAYR",   "romanization": "ṣabāḥ al-khayr", "english": "Good morning" },
+          { "arabic": "صَباح النور",    "transcription": "sa-BAH en-NOOR",    "romanization": "ṣabāḥ an-nūr",  "english": "Good morning (reply)" },
+          { "arabic": "كِيفَك؟",         "transcription": "KAY-fak",            "romanization": "kīfak",          "english": "How are you?" },
+          { "arabic": "مَنيح",           "transcription": "m-NEEH",             "romanization": "mnīḥ",           "english": "Fine / Good" },
+          { "arabic": "مَع السَّلامة",  "transcription": "maʕ es-sa-LA-ma",   "romanization": "maʕ as-salāma",  "english": "Goodbye" },
+          { "arabic": "يَلا",            "transcription": "YA-la",              "romanization": "yalla",          "english": "Come on / Bye" },
+          { "arabic": "شُكراً",          "transcription": "SHUK-ran",           "romanization": "šukran",         "english": "Thank you" },
+          { "arabic": "عَفواً",          "transcription": "AF-wan",             "romanization": "ʕafwan",         "english": "You're welcome / Excuse me" },
+          { "arabic": "آسِف",            "transcription": "AA-sif",             "romanization": "āsif",           "english": "Sorry" },
+          { "arabic": "مَسا الخير",     "transcription": "ma-SA el-KHAYR",    "romanization": "masā l-khayr",   "english": "Good evening" }
+        ]
+      }
     }
-  ],
-
-  "srs_words": [
-    "بِخَيْر",
-    "شُكْراً",
-    "عَفْواً",
-    "آسِف",
-    "مِن فَضْلَك",
-    "مُتشرِّف",
-    "مَع السَّلامة",
-    "يَلّا",
-    "تِصبَح عَلى خَيْر",
-    "إِلى اللِّقاء",
-    "بِشوفَك",
-    "الله مَعَك"
-  ],
-  "next_lesson": "greetings_003",
-  "related_topics": ["food_001", "directions_001"]
+  ]
 }

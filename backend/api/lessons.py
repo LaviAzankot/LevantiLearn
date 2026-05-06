@@ -22,8 +22,7 @@ LESSONS_DIR = os.path.join(os.path.dirname(__file__), "../data/lessons")
 
 LESSON_CATALOG = [
     # ── Phase 1: Survival ─────────────────────────────────────────────────────
-    {"id": "greetings_001",    "topic": "First Hello",          "topic_ar": "أول سلام",        "level": "beginner",     "free": True,  "order": 1,   "phase": 1, "xp_reward": 30, "estimated_minutes": 8},
-    {"id": "greetings_002",    "topic": "More Greetings",       "topic_ar": "تحيات أكثر",      "level": "beginner",     "free": True,  "order": 2,   "phase": 1, "xp_reward": 30, "estimated_minutes": 8},
+    {"id": "greetings_001",    "topic": "Basic Greetings",      "topic_ar": "التحيات الأساسية", "level": "A0",           "free": True,  "order": 1,   "phase": 1, "xp_reward": 50, "estimated_minutes": 30},
     {"id": "numbers_001",      "topic": "Numbers 1–10",         "topic_ar": "أرقام ١–١٠",      "level": "beginner",     "free": True,  "order": 3,   "phase": 1, "xp_reward": 30, "estimated_minutes": 8},
     {"id": "numbers_002",      "topic": "Numbers 11–20",        "topic_ar": "أرقام ١١–٢٠",     "level": "beginner",     "free": True,  "order": 4,   "phase": 1, "xp_reward": 30, "estimated_minutes": 8},
     {"id": "cafe_001",         "topic": "At the Café",          "topic_ar": "في المقهى",       "level": "beginner",     "free": True,  "order": 5,   "phase": 1, "xp_reward": 35, "estimated_minutes": 9},

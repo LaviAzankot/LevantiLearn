@@ -816,8 +816,48 @@ export default function LessonScreen() {
   // ── Lesson expansion ───────────────────────────────────────────────────────
   const expandedLesson = useMemo(() => {
     if (!lesson) return null;
-    const words = lesson.words ?? {};
-    const expandedStages = (lesson.stages ?? []).map((stg: any) => {
+
+    // ── Normalize new `cycles` format to legacy words+stages ─────────────────
+    const src: any = lesson.cycles ? (() => {
+      const words: Record<string, any> = {};
+      const stages: any[] = [{ type: 'subject' }];
+      for (const cycle of lesson.cycles) {
+        // Vocab → words dict + listen_repeat stages
+        cycle.vocab.forEach((w: any, i: number) => {
+          const wid = `c${cycle.cycle}_w${i + 1}`;
+          words[wid] = { arabic: w.arabic, arabic_plain: w.arabic, translit: w.romanization, english: w.english, icon: w.icon, icon_color: w.icon_color };
+          stages.push({ type: 'listen_repeat', word_id: wid });
+        });
+        // Listen phrases → listen_repeat (direct, no word_id)
+        for (const p of cycle.listen) {
+          stages.push({ type: 'listen_repeat', arabic: p.arabic, english: p.english, translit: p.romanization, icon: p.icon, icon_color: p.icon_color });
+        }
+        // Quiz → choose_translation
+        for (const q of cycle.quiz) {
+          const options = q.options.map((opt: string, i: number) => ({ id: `q_${cycle.cycle}_${i}`, english: opt, correct: i === q.answer, arabic: q.arabic, translit: q.romanization }));
+          stages.push({ type: 'choose_translation', arabic: q.arabic, english: q.options[q.answer], translit: q.romanization, options });
+        }
+        // Build → sentence_build (bank/correct format)
+        const bWords = cycle.build.sentence.map((ar: string, i: number) => ({ id: `w${i + 1}`, ar, tr: '' }));
+        const bDecoys = cycle.build.decoys.map((ar: string, i: number) => ({ id: `d${i + 1}`, ar, tr: '' }));
+        stages.push({ type: 'sentence_build', english: cycle.build.english, bank: [...bWords, ...bDecoys], correct: bWords.map((w: any) => w.id) });
+        // Speak → speak_the_blank (2 rounds from 4 turns: [them,you, them,you])
+        const turns = cycle.speak.turns;
+        const rounds = [0, 2].map((idx, ri) => ({
+          id: `c${cycle.cycle}_r${ri + 1}`,
+          context: cycle.speak.scenario,
+          prompt: { arabic: turns[idx].arabic, translit: turns[idx].romanization, english: turns[idx].english },
+          answer: { arabic: '___', translit: '___', english: '___', blank: { arabic: turns[idx + 1].arabic, translit: turns[idx + 1].romanization, english: turns[idx + 1].english } },
+        }));
+        stages.push({ type: 'speak_the_blank', rounds });
+        // Match pairs at end of each cycle
+        stages.push({ type: 'match_pairs', word_ids: cycle.vocab.map((_: any, i: number) => `c${cycle.cycle}_w${i + 1}`) });
+      }
+      return { ...lesson, words, stages };
+    })() : lesson;
+
+    const words = src.words ?? {};
+    const expandedStages = (src.stages ?? []).map((stg: any) => {
       const word = stg.word_id ? words[stg.word_id] : null;
       if (stg.type === "choose_translation") {
         const options = (stg.option_ids ?? stg.options ?? []).map(
@@ -882,7 +922,7 @@ export default function LessonScreen() {
         };
       return stg;
     });
-    return { ...lesson, stages: expandedStages };
+    return { ...src, stages: expandedStages };
   }, [lesson]);
 
   // ── Shuffle ────────────────────────────────────────────────────────────────
@@ -1276,6 +1316,7 @@ export default function LessonScreen() {
         c={c}
         lesson={expandedLesson}
         onHome={() => router.push("/")}
+        onNext={expandedLesson?.next_lesson ? () => router.replace(`/lesson/${expandedLesson.next_lesson}`) : undefined}
       />
     );
 
@@ -5341,7 +5382,7 @@ function ErrorScreen({ c, error, onBack }: any) {
   );
 }
 
-function CompleteScreen({ c, lesson, onHome }: any) {
+function CompleteScreen({ c, lesson, onHome, onNext }: any) {
   return (
     <SafeAreaView
       style={[
@@ -5452,12 +5493,24 @@ function CompleteScreen({ c, lesson, onHome }: any) {
           points earned
         </Text>
       </View>
+      {onNext && (
+        <TouchableOpacity
+          style={[s.actionBtn, { backgroundColor: c.primary, marginTop: 40, alignSelf: 'stretch', flexDirection: 'row', gap: 8 }]}
+          onPress={onNext}
+          activeOpacity={0.87}
+        >
+          <Text style={s.actionBtnText}>Next lesson</Text>
+          <Ionicons name="chevron-forward" size={20} color="#fff" />
+        </TouchableOpacity>
+      )}
       <TouchableOpacity
         style={[
           s.actionBtn,
           {
-            backgroundColor: c.primary,
-            marginTop: 40,
+            backgroundColor: onNext ? c.surface : c.primary,
+            borderWidth: onNext ? 1 : 0,
+            borderColor: c.border,
+            marginTop: onNext ? 12 : 40,
             alignSelf: "stretch",
             flexDirection: "row",
             gap: 8,
@@ -5466,8 +5519,8 @@ function CompleteScreen({ c, lesson, onHome }: any) {
         onPress={onHome}
         activeOpacity={0.87}
       >
-        <Ionicons name="home-outline" size={20} color="#fff" />
-        <Text style={s.actionBtnText}>Back to lessons</Text>
+        <Ionicons name="home-outline" size={20} color={onNext ? c.label : "#fff"} />
+        <Text style={[s.actionBtnText, onNext && { color: c.label }]}>Back to lessons</Text>
       </TouchableOpacity>
     </SafeAreaView>
   );
