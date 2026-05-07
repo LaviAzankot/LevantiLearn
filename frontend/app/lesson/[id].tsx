@@ -833,7 +833,8 @@ export default function LessonScreen() {
     // ── Normalize new `cycles` format to legacy words+stages ─────────────────
     const src: any = lesson.cycles ? (() => {
       const words: Record<string, any> = {};
-      const stages: any[] = [{ type: 'subject' }];
+      const allVocab = lesson.cycles.flatMap((c: any) => c.vocab);
+      const stages: any[] = [{ type: 'subject', topic: lesson.topic, allVocab }];
       for (const cycle of lesson.cycles) {
         // Build romanization lookup for this cycle's vocab
         const vocabRomanization: Record<string, string> = {};
@@ -3641,6 +3642,120 @@ export default function LessonScreen() {
     );
   };
 
+  // ── Lesson intro (shown for all cycles-format lessons) ────────────────────
+  const renderLessonIntro = () => {
+    const stg = currentStage;
+    const vocab: any[] = stg.allVocab ?? [];
+    const topic: string = stg.topic ?? expandedLesson?.topic ?? '';
+
+    // Infer level from lesson id number suffix
+    const suffix = (id ?? '').split('_').pop() ?? '';
+    const order = parseInt(suffix, 10) || 1;
+    const level = order <= 12 ? 'A1' : order <= 24 ? 'A2' : order <= 36 ? 'B1' : 'B2';
+    const levelColor = level === 'A1' ? '#FF9500' : level === 'A2' ? '#4CAF50' : level === 'B1' ? '#2196F3' : '#9C27B0';
+
+    const EXERCISE_LABELS = [
+      { icon: 'ear-outline' as const,       label: 'Listen & Repeat' },
+      { icon: 'help-circle-outline' as const, label: 'Choose the Meaning' },
+      { icon: 'checkmark-circle-outline' as const, label: 'Pick the Word' },
+      { icon: 'apps-outline' as const,      label: 'Match Pairs' },
+      { icon: 'construct-outline' as const, label: 'Build a Sentence' },
+      { icon: 'mic-outline' as const,       label: 'Speak to Fill' },
+    ];
+
+    return (
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{ paddingHorizontal: 24, paddingTop: 4, paddingBottom: 32, gap: 20 }}
+      >
+        {/* Header */}
+        <View style={{ alignItems: 'center', gap: 10, paddingTop: 8 }}>
+          <View style={{ backgroundColor: levelColor + '18', borderRadius: 50, borderWidth: 1, borderColor: levelColor + '40', paddingHorizontal: 14, paddingVertical: 5 }}>
+            <Text style={{ fontSize: 13, fontWeight: '700', fontFamily: FONT_UI_BOLD, color: levelColor, letterSpacing: 0.8 }}>{level} · Palestinian Arabic</Text>
+          </View>
+          <Text style={{ fontSize: 34, fontWeight: '800', fontFamily: FONT_UI_EXTRABOLD, color: '#151515', textAlign: 'center', letterSpacing: -0.6, lineHeight: 40 }}>
+            {topic}
+          </Text>
+          <Text style={{ fontSize: 15, fontWeight: '500', fontFamily: FONT_UI, color: '#9d998e', textAlign: 'center' }}>
+            {vocab.length} new words · 6 exercise types
+          </Text>
+        </View>
+
+        {/* Vocabulary preview */}
+        <View style={{ gap: 8 }}>
+          <Text style={{ fontSize: 13, fontWeight: '700', fontFamily: FONT_UI_BOLD, color: '#9d998e', letterSpacing: 1.2, textTransform: 'uppercase' as any }}>
+            Words you'll learn
+          </Text>
+          {vocab.map((w: any, i: number) => (
+            <TouchableOpacity
+              key={i}
+              onPress={() => playAudio(w.arabic)}
+              activeOpacity={0.8}
+              style={{
+                backgroundColor: '#ffffff',
+                borderRadius: 16,
+                borderWidth: 1,
+                borderColor: '#efeeeb',
+                paddingVertical: 14,
+                paddingHorizontal: 16,
+                flexDirection: 'row',
+                alignItems: 'center',
+                gap: 14,
+                shadowColor: '#151515',
+                shadowOpacity: 0.04,
+                shadowOffset: { width: 0, height: 2 },
+                shadowRadius: 8,
+                elevation: 1,
+              }}
+            >
+              {/* Icon circle */}
+              <View style={{ width: 44, height: 44, borderRadius: 22, backgroundColor: '#faf9f6', borderWidth: 1, borderColor: '#efeeeb', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                <WordIcon icon={w.icon ?? 'book'} iconColor={w.icon_color ?? '#9d998e'} size={28} />
+              </View>
+              {/* Text */}
+              <View style={{ flex: 1, gap: 2 }}>
+                <View style={{ flexDirection: 'row', alignItems: 'baseline', gap: 8 }}>
+                  <Text style={{ fontSize: 22, fontWeight: '700', fontFamily: FONT_AR, color: '#151515', writingDirection: 'rtl' as any }}>{w.arabic}</Text>
+                  {!!w.romanization && (
+                    <Text style={{ fontSize: 13, fontStyle: 'italic', fontFamily: FONT_UI, color: '#9d998e' }}>{w.romanization}</Text>
+                  )}
+                </View>
+                <Text style={{ fontSize: 14, fontWeight: '500', fontFamily: FONT_UI, color: '#68665f' }}>{w.english}</Text>
+              </View>
+              {/* Play hint */}
+              <Ionicons name="volume-medium-outline" size={18} color="#d8d5cd" />
+            </TouchableOpacity>
+          ))}
+        </View>
+
+        {/* What you'll practice */}
+        <View style={{ gap: 8 }}>
+          <Text style={{ fontSize: 13, fontWeight: '700', fontFamily: FONT_UI_BOLD, color: '#9d998e', letterSpacing: 1.2, textTransform: 'uppercase' as any }}>
+            What you'll practice
+          </Text>
+          <View style={{ backgroundColor: '#ffffff', borderRadius: 16, borderWidth: 1, borderColor: '#efeeeb', padding: 4 }}>
+            {EXERCISE_LABELS.map((ex, i) => (
+              <View
+                key={i}
+                style={{
+                  flexDirection: 'row', alignItems: 'center', gap: 12,
+                  paddingVertical: 10, paddingHorizontal: 12,
+                  borderBottomWidth: i < EXERCISE_LABELS.length - 1 ? 1 : 0,
+                  borderBottomColor: '#f4f3f0',
+                }}
+              >
+                <View style={{ width: 32, height: 32, borderRadius: 10, backgroundColor: '#fe4d0112', alignItems: 'center', justifyContent: 'center' }}>
+                  <Ionicons name={ex.icon} size={16} color="#fe4d01" />
+                </View>
+                <Text style={{ fontSize: 14, fontWeight: '600', fontFamily: FONT_UI, color: '#46443f' }}>{ex.label}</Text>
+              </View>
+            ))}
+          </View>
+        </View>
+      </ScrollView>
+    );
+  };
+
   // ── Subject (read-only intro lesson) renderer ────────────────────────────
   const renderSubject = () => {
     const SC = {
@@ -5290,6 +5405,8 @@ export default function LessonScreen() {
         <Animated.View style={{ flex: 1, opacity: stageOpacity }}>
           {currentStage?.type === "speak_the_blank" ? (
             renderSpeakTheBlank()
+          ) : currentStage?.type === "subject" && currentStage?.allVocab ? (
+            renderLessonIntro()
           ) : currentStage?.type === "subject" ? (
             renderSubject()
           ) : (
