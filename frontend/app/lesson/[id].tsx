@@ -5629,6 +5629,7 @@ const s = StyleSheet.create({
     textAlign: "center",
     marginBottom: 6,
     paddingHorizontal: 12,
+    alignSelf: "stretch",
   },
   freqBadge: {
     borderRadius: 50,
@@ -5706,6 +5707,7 @@ const s = StyleSheet.create({
     marginTop: 4,
     marginBottom: 2,
     letterSpacing: 0.1,
+    alignSelf: "stretch",
   },
   hebrewHint: {
     fontSize: 15,
