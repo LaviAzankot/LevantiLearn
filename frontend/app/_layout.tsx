@@ -18,6 +18,7 @@ import {
   PlusJakartaSans_800ExtraBold,
 } from '@expo-google-fonts/plus-jakarta-sans';
 import { useAuthStore } from '../src/store/authStore';
+import { audioService } from '../src/services/AudioService';
 
 export default function RootLayout() {
   const scheme      = useColorScheme();
@@ -39,9 +40,10 @@ export default function RootLayout() {
     PlusJakartaSans_800ExtraBold,
   });
 
-  // Initialize Supabase session once on mount
+  // Initialize Supabase session and AudioService once on mount
   useEffect(() => {
     initialize();
+    audioService.init().catch(e => console.warn('[AudioService] init failed:', e));
   }, []);
 
   // Route protection — redirect based on auth state

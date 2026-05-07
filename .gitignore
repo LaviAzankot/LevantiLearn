@@ -25,6 +25,17 @@ firebase-service-account.json
 # Generated TTS audio cache — recreated automatically, no need to track
 backend/data/audio_cache/
 
+# Azure-generated audio files — run scripts/generate-audio.ts to regenerate
+# The map files (audio_map.json, text_map.json, audioRequireMap.ts) ARE tracked
+frontend/src/assets/audio/**/*.mp3
+frontend/src/assets/audio/.checkpoint.json
+frontend/src/assets/audio/.failed.json
+frontend/src/assets/audio/.status.json
+frontend/src/assets/audio/.stop
+
+# Script dependencies (install with npm install in scripts/)
+scripts/node_modules/
+
 # Local Claude Code settings (may contain machine-specific config)
 .claude/settings.local.json
 

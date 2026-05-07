@@ -26,6 +26,7 @@ import { Audio } from "expo-av";
 import { SvgXml } from "react-native-svg";
 import * as FileSystem from "expo-file-system";
 import { pickAvatarsForLesson, getAvatar } from "../../src/assets/avatars";
+import { audioService } from "../../src/services/AudioService";
 
 // ── Design tokens ─────────────────────────────────────────────────────────────
 const COLORS = {
@@ -682,10 +683,14 @@ export default function LessonScreen() {
       await stopCurrentAudio();
       setAudioProgress(0.01);
       try {
-        const url = `${API}/api/tts/synthesize?text=${encodeURIComponent(text)}`;
         await Audio.setAudioModeAsync({ playsInSilentModeIOS: true });
+        // Prefer local pre-generated file; fall back to backend TTS
+        const localMod = audioService.getModuleForText(text);
+        const source: Parameters<typeof Audio.Sound.createAsync>[0] = localMod !== null
+          ? (localMod as any)
+          : { uri: `${API}/api/tts/synthesize?text=${encodeURIComponent(text)}` };
         const { sound } = await Audio.Sound.createAsync(
-          { uri: url },
+          source,
           { shouldPlay: true },
           (status: any) => {
             if (!status.isLoaded) return;

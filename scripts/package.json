@@ -1,0 +1,17 @@
+{
+  "name": "levantilearn-scripts",
+  "version": "1.0.0",
+  "description": "Build scripts for LevantiLearn",
+  "scripts": {
+    "generate-audio": "ts-node generate-audio.ts",
+    "generate-audio:serve": "ts-node generate-audio.ts --serve"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.0",
+    "ts-node": "^10.9.2",
+    "typescript": "~5.3.3"
+  }
+}
