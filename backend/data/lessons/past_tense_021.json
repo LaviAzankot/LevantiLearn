@@ -1,0 +1,415 @@
+{
+  "topic": "Past Tense Verbs",
+  "cycles": [
+    {
+      "cycle": 1,
+      "vocab": [
+        {
+          "arabic": "رُحت",
+          "transcription": "RUHT",
+          "romanization": "ruḥt",
+          "english": "I went",
+          "note": "past tense 1st person singular of راح (to go); رحت عالسوق = I went to the market",
+          "icon": "solar:history-linear",
+          "icon_color": "#5856d6"
+        },
+        {
+          "arabic": "أَكَلت",
+          "transcription": "a-KALT",
+          "romanization": "ʾakalt",
+          "english": "I ate",
+          "note": "past tense 1st person singular of أكل; أكلت كتير = I ate a lot",
+          "icon": "solar:plate-linear",
+          "icon_color": "#ff9f0a"
+        },
+        {
+          "arabic": "شِرِبت",
+          "transcription": "shi-RIBT",
+          "romanization": "širibt",
+          "english": "I drank",
+          "note": "past tense 1st person singular of شرب; شربت قهوة = I drank coffee",
+          "icon": "solar:cup-hot-linear",
+          "icon_color": "#007aff"
+        },
+        {
+          "arabic": "نِمت",
+          "transcription": "NIMT",
+          "romanization": "nimt",
+          "english": "I slept",
+          "note": "past tense 1st person singular of نام; نمت بدري = I slept early",
+          "icon": "solar:sleep-linear",
+          "icon_color": "#5856d6"
+        },
+        {
+          "arabic": "رَجَعت",
+          "transcription": "ra-JAAT",
+          "romanization": "rajaʕt",
+          "english": "I came back / I returned",
+          "note": "past tense 1st person singular of رجع; رجعت عالبيت = I went back home",
+          "icon": "solar:arrow-left-up-linear",
+          "icon_color": "#34c759"
+        },
+        {
+          "arabic": "صَار",
+          "transcription": "SĀR",
+          "romanization": "ṣār",
+          "english": "it happened / it became",
+          "note": "3rd person singular masculine past; versatile verb: شو صار؟ = what happened?",
+          "icon": "solar:time-square-linear",
+          "icon_color": "#ff9f0a"
+        }
+      ],
+      "quiz": [
+        {
+          "arabic": "رُحت",
+          "transcription": "RUHT",
+          "romanization": "ruḥt",
+          "options": ["I go", "I will go", "I went", "I come"],
+          "answer": 2
+        },
+        {
+          "arabic": "أَكَلت",
+          "transcription": "a-KALT",
+          "romanization": "ʾakalt",
+          "options": ["I eat", "I ate", "I will eat", "I cooked"],
+          "answer": 1
+        },
+        {
+          "arabic": "شِرِبت",
+          "transcription": "shi-RIBT",
+          "romanization": "širibt",
+          "options": ["I will drink", "I drink", "I drank", "I bought"],
+          "answer": 2
+        },
+        {
+          "arabic": "نِمت",
+          "transcription": "NIMT",
+          "romanization": "nimt",
+          "options": ["I wake up", "I rest", "I will sleep", "I slept"],
+          "answer": 3
+        },
+        {
+          "arabic": "رَجَعت",
+          "transcription": "ra-JAAT",
+          "romanization": "rajaʕt",
+          "options": ["I leave", "I came back", "I arrived", "I travel"],
+          "answer": 1
+        },
+        {
+          "arabic": "صَار",
+          "transcription": "SĀR",
+          "romanization": "ṣār",
+          "options": ["it starts", "it ends", "it happened / became", "it goes"],
+          "answer": 2
+        }
+      ],
+      "build": [
+        {
+          "sentence": ["رُحت", "أَكَلت"],
+          "decoys": ["نِمت", "صَار", "رَجَعت"],
+          "english": "I went and ate"
+        },
+        {
+          "sentence": ["شِرِبت", "نِمت"],
+          "decoys": ["رُحت", "صَار", "أَكَلت"],
+          "english": "I drank and slept"
+        },
+        {
+          "sentence": ["صَار", "رَجَعت"],
+          "decoys": ["أَكَلت", "نِمت", "شِرِبت"],
+          "english": "It happened — I came back"
+        }
+      ],
+      "speak": {
+        "scenario": "You are telling a friend about your day yesterday.",
+        "turns": [
+          {
+            "speaker": "them",
+            "arabic": "وين رحت إمبارح؟",
+            "romanization": "wēn ruḥt ʾimbāriḥ",
+            "english": "Where did you go yesterday?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "رُحت السوق!",
+            "romanization": "ruḥt is-sūʾ",
+            "english": "I went to the market!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وأكلت شو؟",
+            "romanization": "w-ʾakalt šū",
+            "english": "And what did you eat?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "أَكَلت حمص!",
+            "romanization": "ʾakalt ḥummuṣ",
+            "english": "I ate hummus!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وشربت شو؟",
+            "romanization": "w-širibt šū",
+            "english": "And what did you drink?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "شِرِبت قهوة!",
+            "romanization": "širibt ʾahwe",
+            "english": "I drank coffee!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "إمتى نمت؟",
+            "romanization": "ʾēmta nimt",
+            "english": "When did you sleep?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "نِمت بدري!",
+            "romanization": "nimt badri",
+            "english": "I slept early!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "ورجعت البيت إمتى؟",
+            "romanization": "w-rajaʕt il-bēt ʾēmta",
+            "english": "And when did you come home?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "رَجَعت الليل!",
+            "romanization": "rajaʕt il-lēl",
+            "english": "I came back at night!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "شو صار بعدين؟",
+            "romanization": "šū ṣār baʕdēn",
+            "english": "What happened after?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "صَار كتير!",
+            "romanization": "ṣār ktīr",
+            "english": "A lot happened!"
+          }
+        ]
+      }
+    },
+    {
+      "cycle": 2,
+      "vocab": [
+        {
+          "arabic": "شَتَغَلت",
+          "transcription": "shta-GALT",
+          "romanization": "štagalt",
+          "english": "I worked",
+          "note": "past tense 1st person singular of شتغل; شتغلت كتير = I worked a lot",
+          "icon": "solar:briefcase-linear",
+          "icon_color": "#5856d6"
+        },
+        {
+          "arabic": "دَرَست",
+          "transcription": "da-RAST",
+          "romanization": "darast",
+          "english": "I studied",
+          "note": "past tense 1st person singular of درس; درست عربي = I studied Arabic",
+          "icon": "solar:book-linear",
+          "icon_color": "#007aff"
+        },
+        {
+          "arabic": "لَعَبت",
+          "transcription": "la-ABT",
+          "romanization": "laʕabt",
+          "english": "I played",
+          "note": "past tense 1st person singular of لعب; لعبت كرة = I played football",
+          "icon": "solar:football-linear",
+          "icon_color": "#34c759"
+        },
+        {
+          "arabic": "قَرَيت",
+          "transcription": "ʔa-RĒT",
+          "romanization": "ʾarēt",
+          "english": "I read",
+          "note": "past tense 1st person singular; ق → ʾ; قريت كتاب = I read a book",
+          "icon": "solar:book-open-linear",
+          "icon_color": "#ff9f0a"
+        },
+        {
+          "arabic": "كَتَبت",
+          "transcription": "ka-TABT",
+          "romanization": "katabt",
+          "english": "I wrote",
+          "note": "past tense 1st person singular of كتب; كتبت رسالة = I wrote a message",
+          "icon": "solar:pen-new-square-linear",
+          "icon_color": "#fe4d01"
+        },
+        {
+          "arabic": "حَكَيت",
+          "transcription": "ha-KĒT",
+          "romanization": "ḥakēt",
+          "english": "I spoke / I said",
+          "note": "past tense 1st person singular of حكى; حكيت معه = I talked with him",
+          "icon": "solar:chat-round-dots-linear",
+          "icon_color": "#6e6e73"
+        }
+      ],
+      "quiz": [
+        {
+          "arabic": "شَتَغَلت",
+          "transcription": "shta-GALT",
+          "romanization": "štagalt",
+          "options": ["I study", "I worked", "I play", "I go"],
+          "answer": 1
+        },
+        {
+          "arabic": "دَرَست",
+          "transcription": "da-RAST",
+          "romanization": "darast",
+          "options": ["I worked", "I read", "I studied", "I wrote"],
+          "answer": 2
+        },
+        {
+          "arabic": "لَعَبت",
+          "transcription": "la-ABT",
+          "romanization": "laʕabt",
+          "options": ["I ran", "I won", "I played", "I lost"],
+          "answer": 2
+        },
+        {
+          "arabic": "قَرَيت",
+          "transcription": "ʔa-RĒT",
+          "romanization": "ʾarēt",
+          "options": ["I wrote", "I read", "I studied", "I spoke"],
+          "answer": 1
+        },
+        {
+          "arabic": "كَتَبت",
+          "transcription": "ka-TABT",
+          "romanization": "katabt",
+          "options": ["I read", "I spoke", "I drew", "I wrote"],
+          "answer": 3
+        },
+        {
+          "arabic": "حَكَيت",
+          "transcription": "ha-KĒT",
+          "romanization": "ḥakēt",
+          "options": ["I listened", "I heard", "I spoke / said", "I asked"],
+          "answer": 2
+        }
+      ],
+      "build": [
+        {
+          "sentence": ["شَتَغَلت", "دَرَست"],
+          "decoys": ["حَكَيت", "كَتَبت", "لَعَبت"],
+          "english": "I worked and studied"
+        },
+        {
+          "sentence": ["قَرَيت", "كَتَبت"],
+          "decoys": ["دَرَست", "لَعَبت", "شَتَغَلت"],
+          "english": "I read and wrote"
+        },
+        {
+          "sentence": ["لَعَبت", "حَكَيت"],
+          "decoys": ["كَتَبت", "قَرَيت", "دَرَست"],
+          "english": "I played and talked"
+        }
+      ],
+      "speak": {
+        "scenario": "You are summarizing what you did over the weekend.",
+        "turns": [
+          {
+            "speaker": "them",
+            "arabic": "شو عملت هالأسبوع؟",
+            "romanization": "šū ʕamalt hal-ʾusbūʕ",
+            "english": "What did you do this week?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "شَتَغَلت كتير!",
+            "romanization": "štagalt ktīr",
+            "english": "I worked a lot!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "ودرست؟",
+            "romanization": "w-darast",
+            "english": "And studied?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "دَرَست عربي!",
+            "romanization": "darast ʕarabi",
+            "english": "I studied Arabic!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "ولعبت كرة؟",
+            "romanization": "w-laʕabt kura",
+            "english": "And played football?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "لَعَبت الجمعة!",
+            "romanization": "laʕabt il-jumʕa",
+            "english": "I played on Friday!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وقريت شو؟",
+            "romanization": "w-ʾarēt šū",
+            "english": "And what did you read?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "قَرَيت كتاب!",
+            "romanization": "ʾarēt ktāb",
+            "english": "I read a book!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وكتبت شو؟",
+            "romanization": "w-katabt šū",
+            "english": "And what did you write?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "كَتَبت رسايل!",
+            "romanization": "katabt rasāyil",
+            "english": "I wrote messages!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وحكيت مع حدا؟",
+            "romanization": "w-ḥakēt maʕ ḥada",
+            "english": "And did you talk to anyone?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "حَكَيت مع أهلي!",
+            "romanization": "ḥakēt maʕ ʾahli",
+            "english": "I talked with my family!"
+          }
+        ]
+      },
+      "review": {
+        "all_vocab": [
+          { "arabic": "رُحت", "transcription": "RUHT", "romanization": "ruḥt", "english": "I went" },
+          { "arabic": "أَكَلت", "transcription": "a-KALT", "romanization": "ʾakalt", "english": "I ate" },
+          { "arabic": "شِرِبت", "transcription": "shi-RIBT", "romanization": "širibt", "english": "I drank" },
+          { "arabic": "نِمت", "transcription": "NIMT", "romanization": "nimt", "english": "I slept" },
+          { "arabic": "رَجَعت", "transcription": "ra-JAAT", "romanization": "rajaʕt", "english": "I came back" },
+          { "arabic": "صَار", "transcription": "SĀR", "romanization": "ṣār", "english": "it happened" },
+          { "arabic": "شَتَغَلت", "transcription": "shta-GALT", "romanization": "štagalt", "english": "I worked" },
+          { "arabic": "دَرَست", "transcription": "da-RAST", "romanization": "darast", "english": "I studied" },
+          { "arabic": "لَعَبت", "transcription": "la-ABT", "romanization": "laʕabt", "english": "I played" },
+          { "arabic": "قَرَيت", "transcription": "ʔa-RĒT", "romanization": "ʾarēt", "english": "I read" },
+          { "arabic": "كَتَبت", "transcription": "ka-TABT", "romanization": "katabt", "english": "I wrote" },
+          { "arabic": "حَكَيت", "transcription": "ha-KĒT", "romanization": "ḥakēt", "english": "I spoke / said" }
+        ]
+      }
+    }
+  ]
+}

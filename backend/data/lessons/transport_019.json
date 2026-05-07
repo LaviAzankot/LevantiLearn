@@ -1,0 +1,415 @@
+{
+  "topic": "Transport",
+  "cycles": [
+    {
+      "cycle": 1,
+      "vocab": [
+        {
+          "arabic": "سَيّارة",
+          "transcription": "say-YA-ra",
+          "romanization": "sayyāra",
+          "english": "car",
+          "note": "very common transport; بالسيارة = by car; سيارتي = my car",
+          "icon": "solar:car-linear",
+          "icon_color": "#5856d6"
+        },
+        {
+          "arabic": "باص",
+          "transcription": "BĀS",
+          "romanization": "bāṣ",
+          "english": "bus",
+          "note": "from English 'bus'; محطة الباص = bus station; خط الباص = bus line",
+          "icon": "solar:bus-linear",
+          "icon_color": "#007aff"
+        },
+        {
+          "arabic": "تاكسي",
+          "transcription": "TAK-si",
+          "romanization": "taksi",
+          "english": "taxi",
+          "note": "shared taxis (سرفيس) are common in Palestine; they follow fixed routes",
+          "icon": "solar:taxi-linear",
+          "icon_color": "#ff9f0a"
+        },
+        {
+          "arabic": "مَشي",
+          "transcription": "MA-shi",
+          "romanization": "maši",
+          "english": "walking / on foot",
+          "note": "also used as a casual 'okay/let's go'; بمشي = I walk; مشي هون = walk here",
+          "icon": "solar:walking-linear",
+          "icon_color": "#34c759"
+        },
+        {
+          "arabic": "مَحَطّة",
+          "transcription": "ma-HAT-te",
+          "romanization": "maḥaṭṭa",
+          "english": "station / stop",
+          "note": "bus stop or transit station; محطة الباص = bus stop; محطة القطار = train station",
+          "icon": "solar:map-point-linear",
+          "icon_color": "#fe4d01"
+        },
+        {
+          "arabic": "كَم الأُجرة؟",
+          "transcription": "kam il-UJ-ra",
+          "romanization": "kam il-ʾujra",
+          "english": "what's the fare?",
+          "note": "أجرة (ʾujra) = fare/transport fee; the standard question in taxis and buses",
+          "icon": "solar:dollar-minimalistic-linear",
+          "icon_color": "#6e6e73"
+        }
+      ],
+      "quiz": [
+        {
+          "arabic": "سَيّارة",
+          "transcription": "say-YA-ra",
+          "romanization": "sayyāra",
+          "options": ["bus", "bicycle", "car", "taxi"],
+          "answer": 2
+        },
+        {
+          "arabic": "باص",
+          "transcription": "BĀS",
+          "romanization": "bāṣ",
+          "options": ["car", "train", "bus", "taxi"],
+          "answer": 2
+        },
+        {
+          "arabic": "تاكسي",
+          "transcription": "TAK-si",
+          "romanization": "taksi",
+          "options": ["bus", "taxi", "car", "subway"],
+          "answer": 1
+        },
+        {
+          "arabic": "مَشي",
+          "transcription": "MA-shi",
+          "romanization": "maši",
+          "options": ["driving", "cycling", "running", "walking"],
+          "answer": 3
+        },
+        {
+          "arabic": "مَحَطّة",
+          "transcription": "ma-HAT-te",
+          "romanization": "maḥaṭṭa",
+          "options": ["road", "station / stop", "terminal", "garage"],
+          "answer": 1
+        },
+        {
+          "arabic": "كَم الأُجرة؟",
+          "transcription": "kam il-UJ-ra",
+          "romanization": "kam il-ʾujra",
+          "options": ["where does it go?", "when does it leave?", "is it direct?", "what's the fare?"],
+          "answer": 3
+        }
+      ],
+      "build": [
+        {
+          "sentence": ["تاكسي", "كَم الأُجرة؟"],
+          "decoys": ["سَيّارة", "مَحَطّة", "مَشي"],
+          "english": "Taxi — what's the fare?"
+        },
+        {
+          "sentence": ["باص", "مَحَطّة"],
+          "decoys": ["مَشي", "كَم الأُجرة؟", "سَيّارة"],
+          "english": "Bus at the station"
+        },
+        {
+          "sentence": ["مَشي", "مِش", "بَعيد"],
+          "decoys": ["تاكسي", "مَحَطّة", "باص"],
+          "english": "Walking — not far"
+        }
+      ],
+      "speak": {
+        "scenario": "You are trying to get to Ramallah from Jerusalem.",
+        "turns": [
+          {
+            "speaker": "them",
+            "arabic": "كيف رح تروح؟",
+            "romanization": "kēf raḥ trūḥ",
+            "english": "How will you go?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "باص!",
+            "romanization": "bāṣ",
+            "english": "Bus!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "ولا سيارة؟",
+            "romanization": "willa sayyāra",
+            "english": "Or by car?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "سَيّارة أحسن!",
+            "romanization": "sayyāra ʾaḥsan",
+            "english": "Car is better!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "في تاكسي من هون؟",
+            "romanization": "fī taksi min hōn",
+            "english": "Is there a taxi from here?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "تاكسي هون!",
+            "romanization": "taksi hōn",
+            "english": "Taxi here!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "كم الأجرة للتاكسي؟",
+            "romanization": "kam il-ʾujra lit-taksi",
+            "english": "What's the taxi fare?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "كَم الأُجرة؟",
+            "romanization": "kam il-ʾujra",
+            "english": "What's the fare?"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وين المحطة؟",
+            "romanization": "wēn il-maḥaṭṭa",
+            "english": "Where is the station?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "مَحَطّة هون!",
+            "romanization": "maḥaṭṭa hōn",
+            "english": "Station here!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "المسافة بعيدة؟",
+            "romanization": "il-masāfe baʕīde",
+            "english": "Is the distance far?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "مَشي قريب!",
+            "romanization": "maši ʾarīb",
+            "english": "Walking close!"
+          }
+        ]
+      }
+    },
+    {
+      "cycle": 2,
+      "vocab": [
+        {
+          "arabic": "وَصَّلني",
+          "transcription": "was-SAL-ni",
+          "romanization": "waṣṣalni",
+          "english": "take me / give me a ride",
+          "note": "imperative of وصّل + ni (me); can you give me a lift? = ممكن توصلني؟",
+          "icon": "solar:car-2-linear",
+          "icon_color": "#fe4d01"
+        },
+        {
+          "arabic": "مَوقِف",
+          "transcription": "MAW-if",
+          "romanization": "mawʾif",
+          "english": "parking / transport stand",
+          "note": "ق → ʾ; both parking lot and bus/taxi stand in Palestinian Arabic",
+          "icon": "solar:map-point-bold-linear",
+          "icon_color": "#5856d6"
+        },
+        {
+          "arabic": "رَوح وَجي",
+          "transcription": "roh wa-JĒ",
+          "romanization": "rōḥ w-jī",
+          "english": "round trip",
+          "note": "lit. 'go and come'; used when booking transport or buying tickets",
+          "icon": "solar:arrow-left-right-linear",
+          "icon_color": "#007aff"
+        },
+        {
+          "arabic": "زَحمة",
+          "transcription": "ZAH-me",
+          "romanization": "zaḥme",
+          "english": "traffic jam / crowded",
+          "note": "very common in Palestinian cities; في زحمة = there's traffic; زحمة كتير = very congested",
+          "icon": "solar:traffic-economy-linear",
+          "icon_color": "#ff3b30"
+        },
+        {
+          "arabic": "سِرفيس",
+          "transcription": "SIR-fis",
+          "romanization": "sirfis",
+          "english": "shared taxi",
+          "note": "from French 'service'; fixed-route shared taxi unique to Palestinian/Levantine transport",
+          "icon": "solar:car-linear",
+          "icon_color": "#ff9f0a"
+        },
+        {
+          "arabic": "نِزِّلني",
+          "transcription": "niz-ZIL-ni",
+          "romanization": "nizzilni",
+          "english": "drop me off here",
+          "note": "imperative of نزّل + ni; نزّلني هون = drop me off here; common in taxis and shared transport",
+          "icon": "solar:map-arrow-down-linear",
+          "icon_color": "#34c759"
+        }
+      ],
+      "quiz": [
+        {
+          "arabic": "وَصَّلني",
+          "transcription": "was-SAL-ni",
+          "romanization": "waṣṣalni",
+          "options": ["pick me up", "wait for me", "take me / give me a ride", "follow me"],
+          "answer": 2
+        },
+        {
+          "arabic": "مَوقِف",
+          "transcription": "MAW-if",
+          "romanization": "mawʾif",
+          "options": ["road", "traffic light", "parking / transport stand", "station"],
+          "answer": 2
+        },
+        {
+          "arabic": "رَوح وَجي",
+          "transcription": "roh wa-JĒ",
+          "romanization": "rōḥ w-jī",
+          "options": ["one way", "round trip", "direct route", "express"],
+          "answer": 1
+        },
+        {
+          "arabic": "زَحمة",
+          "transcription": "ZAH-me",
+          "romanization": "zaḥme",
+          "options": ["empty road", "highway", "traffic jam", "shortcut"],
+          "answer": 2
+        },
+        {
+          "arabic": "سِرفيس",
+          "transcription": "SIR-fis",
+          "romanization": "sirfis",
+          "options": ["private taxi", "bus", "shared taxi", "train"],
+          "answer": 2
+        },
+        {
+          "arabic": "نِزِّلني",
+          "transcription": "niz-ZIL-ni",
+          "romanization": "nizzilni",
+          "options": ["take me", "wait here", "drop me off", "turn here"],
+          "answer": 2
+        }
+      ],
+      "build": [
+        {
+          "sentence": ["وَصَّلني", "مَحَطّة"],
+          "decoys": ["زَحمة", "سِرفيس", "مَوقِف"],
+          "english": "Take me to the station"
+        },
+        {
+          "sentence": ["سِرفيس", "رَوح وَجي"],
+          "decoys": ["نِزِّلني", "مَوقِف", "زَحمة"],
+          "english": "Shared taxi round trip"
+        },
+        {
+          "sentence": ["زَحمة", "نِزِّلني", "هون"],
+          "decoys": ["مَوقِف", "سِرفيس", "رَوح وَجي"],
+          "english": "Traffic — drop me off here"
+        }
+      ],
+      "speak": {
+        "scenario": "You are negotiating a taxi ride in a busy Palestinian city.",
+        "turns": [
+          {
+            "speaker": "them",
+            "arabic": "تاكسي! وين رايح؟",
+            "romanization": "taksi! wēn rāyiḥ",
+            "english": "Taxi! Where are you going?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "وَصَّلني المدينة!",
+            "romanization": "waṣṣalni l-madīne",
+            "english": "Take me to the city!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "روح وجي ولا طرف وحد؟",
+            "romanization": "rōḥ w-jī willa ṭaraf wāḥid",
+            "english": "Round trip or one way?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "رَوح وَجي!",
+            "romanization": "rōḥ w-jī",
+            "english": "Round trip!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "في زحمة هلق بالشارع",
+            "romanization": "fī zaḥme halla' biš-šāriʕ",
+            "english": "There's traffic on the street now"
+          },
+          {
+            "speaker": "you",
+            "arabic": "زَحمة كتير!",
+            "romanization": "zaḥme ktīr",
+            "english": "A lot of traffic!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "في سرفيس رايح نفس المكان",
+            "romanization": "fī sirfis rāyiḥ nafs il-makān",
+            "english": "There's a shared taxi going to the same place"
+          },
+          {
+            "speaker": "you",
+            "arabic": "سِرفيس أحسن!",
+            "romanization": "sirfis ʾaḥsan",
+            "english": "Shared taxi is better!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "مين الموقف؟",
+            "romanization": "mēn il-mawʾif",
+            "english": "Where is the stand?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "مَوقِف هون!",
+            "romanization": "mawʾif hōn",
+            "english": "Stand here!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وصلنا! وين بدك تنزل؟",
+            "romanization": "waṣalna! wēn biddak tinzal",
+            "english": "We arrived! Where do you want to get off?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "نِزِّلني هون!",
+            "romanization": "nizzilni hōn",
+            "english": "Drop me off here!"
+          }
+        ]
+      },
+      "review": {
+        "all_vocab": [
+          { "arabic": "سَيّارة", "transcription": "say-YA-ra", "romanization": "sayyāra", "english": "car" },
+          { "arabic": "باص", "transcription": "BĀS", "romanization": "bāṣ", "english": "bus" },
+          { "arabic": "تاكسي", "transcription": "TAK-si", "romanization": "taksi", "english": "taxi" },
+          { "arabic": "مَشي", "transcription": "MA-shi", "romanization": "maši", "english": "walking / on foot" },
+          { "arabic": "مَحَطّة", "transcription": "ma-HAT-te", "romanization": "maḥaṭṭa", "english": "station / stop" },
+          { "arabic": "كَم الأُجرة؟", "transcription": "kam il-UJ-ra", "romanization": "kam il-ʾujra", "english": "what's the fare?" },
+          { "arabic": "وَصَّلني", "transcription": "was-SAL-ni", "romanization": "waṣṣalni", "english": "take me / give me a ride" },
+          { "arabic": "مَوقِف", "transcription": "MAW-if", "romanization": "mawʾif", "english": "parking / transport stand" },
+          { "arabic": "رَوح وَجي", "transcription": "roh wa-JĒ", "romanization": "rōḥ w-jī", "english": "round trip" },
+          { "arabic": "زَحمة", "transcription": "ZAH-me", "romanization": "zaḥme", "english": "traffic jam / crowded" },
+          { "arabic": "سِرفيس", "transcription": "SIR-fis", "romanization": "sirfis", "english": "shared taxi" },
+          { "arabic": "نِزِّلني", "transcription": "niz-ZIL-ni", "romanization": "nizzilni", "english": "drop me off here" }
+        ]
+      }
+    }
+  ]
+}

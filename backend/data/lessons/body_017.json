@@ -1,0 +1,415 @@
+{
+  "topic": "Body Parts & Health",
+  "cycles": [
+    {
+      "cycle": 1,
+      "vocab": [
+        {
+          "arabic": "راس",
+          "transcription": "RĀS",
+          "romanization": "rās",
+          "english": "head",
+          "note": "وجع الراس = headache; الراس بيدوخ = my head is spinning; very common body part reference",
+          "icon": "solar:user-rounded-linear",
+          "icon_color": "#5856d6"
+        },
+        {
+          "arabic": "إيد",
+          "transcription": "ĒD",
+          "romanization": "ʾīd",
+          "english": "hand / arm",
+          "note": "Palestinian colloquial; covers both hand and arm; يسلموا إيديك = bless your hands (compliment)",
+          "icon": "solar:hand-linear",
+          "icon_color": "#ff9f0a"
+        },
+        {
+          "arabic": "رِجل",
+          "transcription": "RIJ-il",
+          "romanization": "rijil",
+          "english": "foot / leg",
+          "note": "Palestinian pronunciation; covers both foot and leg; وجع الرجل = leg/foot pain",
+          "icon": "solar:arrow-down-linear",
+          "icon_color": "#34c759"
+        },
+        {
+          "arabic": "عَين",
+          "transcription": "ĀYN",
+          "romanization": "ʕayn",
+          "english": "eye",
+          "note": "dual: عينين (ʕaynēn) = two eyes; also means 'spring of water' and 'essence'",
+          "icon": "solar:eye-linear",
+          "icon_color": "#007aff"
+        },
+        {
+          "arabic": "إِذن",
+          "transcription": "ID-in",
+          "romanization": "ʾidin",
+          "english": "ear",
+          "note": "Palestinian form; dual: إذنين (ʾidnēn); also means 'permission' in MSA",
+          "icon": "solar:ear-linear",
+          "icon_color": "#fe4d01"
+        },
+        {
+          "arabic": "عِندي وَجع",
+          "transcription": "IN-di WA-ja'",
+          "romanization": "ʕindi wajaʕ",
+          "english": "I have pain / I'm hurting",
+          "note": "عندي وجع في = I have pain in [body part]; the standard way to describe symptoms",
+          "icon": "solar:hospital-linear",
+          "icon_color": "#ff3b30"
+        }
+      ],
+      "quiz": [
+        {
+          "arabic": "راس",
+          "transcription": "RĀS",
+          "romanization": "rās",
+          "options": ["eye", "hand", "head", "ear"],
+          "answer": 2
+        },
+        {
+          "arabic": "إيد",
+          "transcription": "ĒD",
+          "romanization": "ʾīd",
+          "options": ["foot", "hand / arm", "head", "eye"],
+          "answer": 1
+        },
+        {
+          "arabic": "رِجل",
+          "transcription": "RIJ-il",
+          "romanization": "rijil",
+          "options": ["hand", "foot / leg", "ear", "head"],
+          "answer": 1
+        },
+        {
+          "arabic": "عَين",
+          "transcription": "ĀYN",
+          "romanization": "ʕayn",
+          "options": ["ear", "hand", "foot", "eye"],
+          "answer": 3
+        },
+        {
+          "arabic": "إِذن",
+          "transcription": "ID-in",
+          "romanization": "ʾidin",
+          "options": ["eye", "head", "ear", "foot"],
+          "answer": 2
+        },
+        {
+          "arabic": "عِندي وَجع",
+          "transcription": "IN-di WA-ja'",
+          "romanization": "ʕindi wajaʕ",
+          "options": ["I am fine", "I have pain", "I am tired", "I am sick"],
+          "answer": 1
+        }
+      ],
+      "build": [
+        {
+          "sentence": ["عِندي وَجع", "راس"],
+          "decoys": ["إيد", "عَين", "رِجل"],
+          "english": "I have a headache"
+        },
+        {
+          "sentence": ["إيد", "رِجل"],
+          "decoys": ["راس", "إِذن", "عِندي وَجع"],
+          "english": "Hand and foot"
+        },
+        {
+          "sentence": ["عَين", "إِذن"],
+          "decoys": ["عِندي وَجع", "راس", "رِجل"],
+          "english": "Eye and ear"
+        }
+      ],
+      "speak": {
+        "scenario": "You are describing where you feel pain to a friend.",
+        "turns": [
+          {
+            "speaker": "them",
+            "arabic": "إيش فيك؟",
+            "romanization": "ʾēš fīk",
+            "english": "What's wrong with you?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "عِندي وَجع!",
+            "romanization": "ʕindi wajaʕ",
+            "english": "I have pain!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وين بيوجعك؟",
+            "romanization": "wēn biyūjaʕak",
+            "english": "Where does it hurt?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "راس بيوجعني!",
+            "romanization": "rās biyūjaʕni",
+            "english": "My head hurts!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وإيدك؟",
+            "romanization": "w-ʾīdak",
+            "english": "And your hand?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "إيد كمان!",
+            "romanization": "ʾīd kamān",
+            "english": "Hand too!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "والرجل؟",
+            "romanization": "w-ir-rijil",
+            "english": "And the leg?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "رِجل بيوجعني!",
+            "romanization": "rijil biyūjaʕni",
+            "english": "My leg hurts!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وعيونك؟",
+            "romanization": "w-ʕuyūnak",
+            "english": "And your eyes?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "عَين كمان!",
+            "romanization": "ʕayn kamān",
+            "english": "Eye too!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وآذانك كمان؟",
+            "romanization": "w-ādānak kamān",
+            "english": "And your ears too?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "إِذن بيوجعني!",
+            "romanization": "ʾidin biyūjaʕni",
+            "english": "My ear hurts!"
+          }
+        ]
+      }
+    },
+    {
+      "cycle": 2,
+      "vocab": [
+        {
+          "arabic": "بَطن",
+          "transcription": "BAT-in",
+          "romanization": "baṭin",
+          "english": "stomach / belly",
+          "note": "وجع البطن = stomachache; بطني بيوجعني = my stomach hurts",
+          "icon": "solar:plate-linear",
+          "icon_color": "#ff9f0a"
+        },
+        {
+          "arabic": "ضَهر",
+          "transcription": "DA-her",
+          "romanization": "ḍahar",
+          "english": "back",
+          "note": "ض is emphatic D; وجع الظهر = back pain; common complaint especially in older Palestinians",
+          "icon": "solar:user-rounded-linear",
+          "icon_color": "#6e6e73"
+        },
+        {
+          "arabic": "قَلب",
+          "transcription": "ʔALB",
+          "romanization": "ʾalb",
+          "english": "heart",
+          "note": "ق → ʾ in Palestinian; used both medically and metaphorically: قلبي بيوجعني = my heart hurts (emotional)",
+          "icon": "solar:heart-linear",
+          "icon_color": "#ff3b30"
+        },
+        {
+          "arabic": "سِنّة",
+          "transcription": "SIN-ne",
+          "romanization": "sinne",
+          "english": "tooth",
+          "note": "Palestinian for one tooth; plural أسنان (ʾasnān); وجع السنان = toothache",
+          "icon": "solar:smile-circle-linear",
+          "icon_color": "#8e8e93"
+        },
+        {
+          "arabic": "إِصبَع",
+          "transcription": "IS-ba'",
+          "romanization": "ʾisbaʕ",
+          "english": "finger / toe",
+          "note": "ق → ʾ; covers both fingers and toes; إصبع إيد = finger; إصبع رجل = toe",
+          "icon": "solar:hand-linear",
+          "icon_color": "#007aff"
+        },
+        {
+          "arabic": "حَرارة",
+          "transcription": "ha-RA-ra",
+          "romanization": "ḥarāra",
+          "english": "fever / temperature",
+          "note": "عندي حرارة = I have a fever; قياس الحرارة = taking temperature; common illness symptom",
+          "icon": "solar:thermometer-linear",
+          "icon_color": "#ff3b30"
+        }
+      ],
+      "quiz": [
+        {
+          "arabic": "بَطن",
+          "transcription": "BAT-in",
+          "romanization": "baṭin",
+          "options": ["back", "chest", "stomach / belly", "shoulder"],
+          "answer": 2
+        },
+        {
+          "arabic": "ضَهر",
+          "transcription": "DA-her",
+          "romanization": "ḍahar",
+          "options": ["chest", "back", "stomach", "knee"],
+          "answer": 1
+        },
+        {
+          "arabic": "قَلب",
+          "transcription": "ʔALB",
+          "romanization": "ʾalb",
+          "options": ["lung", "liver", "kidney", "heart"],
+          "answer": 3
+        },
+        {
+          "arabic": "سِنّة",
+          "transcription": "SIN-ne",
+          "romanization": "sinne",
+          "options": ["lip", "tongue", "tooth", "nose"],
+          "answer": 2
+        },
+        {
+          "arabic": "إِصبَع",
+          "transcription": "IS-ba'",
+          "romanization": "ʾisbaʕ",
+          "options": ["hand", "arm", "finger / toe", "wrist"],
+          "answer": 2
+        },
+        {
+          "arabic": "حَرارة",
+          "transcription": "ha-RA-ra",
+          "romanization": "ḥarāra",
+          "options": ["cough", "fever / temperature", "headache", "nausea"],
+          "answer": 1
+        }
+      ],
+      "build": [
+        {
+          "sentence": ["عِندي وَجع", "بَطن"],
+          "decoys": ["حَرارة", "قَلب", "ضَهر"],
+          "english": "I have a stomachache"
+        },
+        {
+          "sentence": ["حَرارة", "مِش", "مَعقول"],
+          "decoys": ["بَطن", "سِنّة", "إِصبَع"],
+          "english": "The fever is not reasonable"
+        },
+        {
+          "sentence": ["قَلب", "ضَهر"],
+          "decoys": ["إِصبَع", "حَرارة", "سِنّة"],
+          "english": "Heart and back"
+        }
+      ],
+      "speak": {
+        "scenario": "You are describing your symptoms at a clinic.",
+        "turns": [
+          {
+            "speaker": "them",
+            "arabic": "وين بيوجعك؟",
+            "romanization": "wēn biyūjaʕak",
+            "english": "Where does it hurt?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "بَطن بيوجعني!",
+            "romanization": "baṭin biyūjaʕni",
+            "english": "My stomach hurts!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "والظهر؟",
+            "romanization": "w-iḍ-ḍahar",
+            "english": "And your back?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "ضَهر كمان!",
+            "romanization": "ḍahar kamān",
+            "english": "Back too!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "والقلب؟",
+            "romanization": "w-il-ʾalb",
+            "english": "And the heart?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "قَلب بيوجعني!",
+            "romanization": "ʾalb biyūjaʕni",
+            "english": "My heart hurts!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "والأسنان؟",
+            "romanization": "w-il-ʾasnān",
+            "english": "And the teeth?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "سِنّة بيوجعني!",
+            "romanization": "sinne biyūjaʕni",
+            "english": "A tooth hurts!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وعندك حرارة؟",
+            "romanization": "w-ʕindak ḥarāra",
+            "english": "And do you have a fever?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "حَرارة عالية!",
+            "romanization": "ḥarāra ʕālye",
+            "english": "High fever!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وهاد الإصبع؟",
+            "romanization": "w-hād il-ʾisbaʕ",
+            "english": "And this finger?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "إِصبَع كمان!",
+            "romanization": "ʾisbaʕ kamān",
+            "english": "Finger too!"
+          }
+        ]
+      },
+      "review": {
+        "all_vocab": [
+          { "arabic": "راس", "transcription": "RĀS", "romanization": "rās", "english": "head" },
+          { "arabic": "إيد", "transcription": "ĒD", "romanization": "ʾīd", "english": "hand / arm" },
+          { "arabic": "رِجل", "transcription": "RIJ-il", "romanization": "rijil", "english": "foot / leg" },
+          { "arabic": "عَين", "transcription": "ĀYN", "romanization": "ʕayn", "english": "eye" },
+          { "arabic": "إِذن", "transcription": "ID-in", "romanization": "ʾidin", "english": "ear" },
+          { "arabic": "عِندي وَجع", "transcription": "IN-di WA-ja'", "romanization": "ʕindi wajaʕ", "english": "I have pain" },
+          { "arabic": "بَطن", "transcription": "BAT-in", "romanization": "baṭin", "english": "stomach / belly" },
+          { "arabic": "ضَهر", "transcription": "DA-her", "romanization": "ḍahar", "english": "back" },
+          { "arabic": "قَلب", "transcription": "ʔALB", "romanization": "ʾalb", "english": "heart" },
+          { "arabic": "سِنّة", "transcription": "SIN-ne", "romanization": "sinne", "english": "tooth" },
+          { "arabic": "إِصبَع", "transcription": "IS-ba'", "romanization": "ʾisbaʕ", "english": "finger / toe" },
+          { "arabic": "حَرارة", "transcription": "ha-RA-ra", "romanization": "ḥarāra", "english": "fever / temperature" }
+        ]
+      }
+    }
+  ]
+}

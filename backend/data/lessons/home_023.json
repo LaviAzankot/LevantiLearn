@@ -1,0 +1,415 @@
+{
+  "topic": "House & Furniture",
+  "cycles": [
+    {
+      "cycle": 1,
+      "vocab": [
+        {
+          "arabic": "غُرفة",
+          "transcription": "GHUR-fe",
+          "romanization": "ġurfe",
+          "english": "room",
+          "note": "غرفة نوم = bedroom; غرفة جلوس = living room; كم غرفة؟ = how many rooms?",
+          "icon": "solar:home-2-linear",
+          "icon_color": "#ff9f0a"
+        },
+        {
+          "arabic": "صالة",
+          "transcription": "SĀ-le",
+          "romanization": "ṣāle",
+          "english": "living room / hall",
+          "note": "the main communal room; الصالة where guests are received; can also refer to a wedding hall",
+          "icon": "solar:sofa-linear",
+          "icon_color": "#007aff"
+        },
+        {
+          "arabic": "مَطبَخ",
+          "transcription": "MAT-bakh",
+          "romanization": "maṭbaḫ",
+          "english": "kitchen",
+          "note": "from طبخ (to cook); في المطبخ = in the kitchen; used same in Palestinian and MSA",
+          "icon": "solar:chef-hat-minimalistic-linear",
+          "icon_color": "#fe4d01"
+        },
+        {
+          "arabic": "حَمّام",
+          "transcription": "ham-MĀM",
+          "romanization": "ḥammām",
+          "english": "bathroom",
+          "note": "covers both toilet and bathroom; in Palestine بيت التواليت is also used for toilet specifically",
+          "icon": "solar:water-linear",
+          "icon_color": "#5856d6"
+        },
+        {
+          "arabic": "سَرير",
+          "transcription": "sa-RĒR",
+          "romanization": "sarīr",
+          "english": "bed",
+          "note": "السرير الكبير = double bed; نمت على السرير = I slept on the bed",
+          "icon": "solar:sleep-linear",
+          "icon_color": "#6e6e73"
+        },
+        {
+          "arabic": "شَقّة",
+          "transcription": "SHAK-ke",
+          "romanization": "šaʔʔa",
+          "english": "apartment / flat",
+          "note": "most urban Palestinians live in شقق (apartments); بيستأجر شقة = he rents an apartment",
+          "icon": "solar:buildings-linear",
+          "icon_color": "#34c759"
+        }
+      ],
+      "quiz": [
+        {
+          "arabic": "غُرفة",
+          "transcription": "GHUR-fe",
+          "romanization": "ġurfe",
+          "options": ["kitchen", "bathroom", "room", "hall"],
+          "answer": 2
+        },
+        {
+          "arabic": "صالة",
+          "transcription": "SĀ-le",
+          "romanization": "ṣāle",
+          "options": ["kitchen", "bedroom", "living room", "bathroom"],
+          "answer": 2
+        },
+        {
+          "arabic": "مَطبَخ",
+          "transcription": "MAT-bakh",
+          "romanization": "maṭbaḫ",
+          "options": ["bedroom", "kitchen", "hallway", "bathroom"],
+          "answer": 1
+        },
+        {
+          "arabic": "حَمّام",
+          "transcription": "ham-MĀM",
+          "romanization": "ḥammām",
+          "options": ["bedroom", "kitchen", "living room", "bathroom"],
+          "answer": 3
+        },
+        {
+          "arabic": "سَرير",
+          "transcription": "sa-RĒR",
+          "romanization": "sarīr",
+          "options": ["table", "chair", "sofa", "bed"],
+          "answer": 3
+        },
+        {
+          "arabic": "شَقّة",
+          "transcription": "SHAK-ke",
+          "romanization": "šaʔʔa",
+          "options": ["house", "shop", "apartment", "office"],
+          "answer": 2
+        }
+      ],
+      "build": [
+        {
+          "sentence": ["شَقّة", "كبيرة"],
+          "decoys": ["غُرفة", "حَمّام", "مَطبَخ"],
+          "english": "A big apartment"
+        },
+        {
+          "sentence": ["مَطبَخ", "صالة"],
+          "decoys": ["سَرير", "شَقّة", "حَمّام"],
+          "english": "Kitchen and living room"
+        },
+        {
+          "sentence": ["غُرفة", "سَرير", "حَمّام"],
+          "decoys": ["مَطبَخ", "صالة", "شَقّة"],
+          "english": "Room with bed and bathroom"
+        }
+      ],
+      "speak": {
+        "scenario": "You are showing someone around your new apartment.",
+        "turns": [
+          {
+            "speaker": "them",
+            "arabic": "وين الشقة؟",
+            "romanization": "wēn iš-šaʔʔa",
+            "english": "Where is the apartment?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "شَقّة حِلوة!",
+            "romanization": "šaʔʔa ḥilwe",
+            "english": "A nice apartment!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "فيها كم غرفة؟",
+            "romanization": "fīha kam ġurfe",
+            "english": "How many rooms does it have?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "غُرفتين وصالة!",
+            "romanization": "ġurfetēn w-ṣāle",
+            "english": "Two rooms and a living room!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "والمطبخ؟",
+            "romanization": "w-il-maṭbaḫ",
+            "english": "And the kitchen?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "مَطبَخ كبير!",
+            "romanization": "maṭbaḫ kabīr",
+            "english": "A big kitchen!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "والحمام؟",
+            "romanization": "w-il-ḥammām",
+            "english": "And the bathroom?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "حَمّام جديد!",
+            "romanization": "ḥammām jdīd",
+            "english": "A new bathroom!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وفي غرفة نوم؟",
+            "romanization": "w-fī ġurfet nōm",
+            "english": "And is there a bedroom?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "صالة وغُرفة!",
+            "romanization": "ṣāle w-ġurfe",
+            "english": "Living room and bedroom!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وين النوم؟",
+            "romanization": "wēn in-nōm",
+            "english": "Where is the sleeping area?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "سَرير هون!",
+            "romanization": "sarīr hōn",
+            "english": "Bed here!"
+          }
+        ]
+      }
+    },
+    {
+      "cycle": 2,
+      "vocab": [
+        {
+          "arabic": "طاولة",
+          "transcription": "TĀ-wi-le",
+          "romanization": "ṭāwile",
+          "english": "table",
+          "note": "from Turkish; طاولة طعام = dining table; طاولة صغيرة = small table",
+          "icon": "solar:square-linear",
+          "icon_color": "#ff9f0a"
+        },
+        {
+          "arabic": "كُرسي",
+          "transcription": "KUR-si",
+          "romanization": "kursi",
+          "english": "chair",
+          "note": "plural: كراسي (karāsi); اقعد على الكرسي = sit on the chair; كرسي مريح = comfortable chair",
+          "icon": "solar:armchair-linear",
+          "icon_color": "#5856d6"
+        },
+        {
+          "arabic": "تِلفِزيون",
+          "transcription": "til-fi-ZYŌN",
+          "romanization": "tilfizyon",
+          "english": "television",
+          "note": "central piece of furniture in Palestinian homes; بشوف التلفزيون = watching TV",
+          "icon": "solar:tv-linear",
+          "icon_color": "#6e6e73"
+        },
+        {
+          "arabic": "باب",
+          "transcription": "BĀB",
+          "romanization": "bāb",
+          "english": "door",
+          "note": "افتح الباب = open the door; باب البيت = the house door; باب المطبخ = kitchen door",
+          "icon": "solar:door-linear",
+          "icon_color": "#fe4d01"
+        },
+        {
+          "arabic": "شُبّاك",
+          "transcription": "SHUB-bak",
+          "romanization": "šubbāk",
+          "english": "window",
+          "note": "plural: شبابيك (šabābīk); افتح الشباك = open the window; شباك كبير = big window",
+          "icon": "solar:window-linear",
+          "icon_color": "#007aff"
+        },
+        {
+          "arabic": "مُرتَّب",
+          "transcription": "mur-TAB",
+          "romanization": "murattab",
+          "english": "tidy / organized",
+          "note": "adjective; البيت مرتب = the house is tidy; مش مرتب = untidy; also means 'arranged'",
+          "icon": "solar:check-circle-linear",
+          "icon_color": "#34c759"
+        }
+      ],
+      "quiz": [
+        {
+          "arabic": "طاولة",
+          "transcription": "TĀ-wi-le",
+          "romanization": "ṭāwile",
+          "options": ["bed", "sofa", "chair", "table"],
+          "answer": 3
+        },
+        {
+          "arabic": "كُرسي",
+          "transcription": "KUR-si",
+          "romanization": "kursi",
+          "options": ["bed", "table", "chair", "sofa"],
+          "answer": 2
+        },
+        {
+          "arabic": "تِلفِزيون",
+          "transcription": "til-fi-ZYŌN",
+          "romanization": "tilfizyon",
+          "options": ["computer", "telephone", "television", "radio"],
+          "answer": 2
+        },
+        {
+          "arabic": "باب",
+          "transcription": "BĀB",
+          "romanization": "bāb",
+          "options": ["window", "wall", "floor", "door"],
+          "answer": 3
+        },
+        {
+          "arabic": "شُبّاك",
+          "transcription": "SHUB-bak",
+          "romanization": "šubbāk",
+          "options": ["door", "roof", "window", "floor"],
+          "answer": 2
+        },
+        {
+          "arabic": "مُرتَّب",
+          "transcription": "mur-TAB",
+          "romanization": "murattab",
+          "options": ["messy", "tidy / organized", "empty", "broken"],
+          "answer": 1
+        }
+      ],
+      "build": [
+        {
+          "sentence": ["طاولة", "كُرسي"],
+          "decoys": ["تِلفِزيون", "مُرتَّب", "شُبّاك"],
+          "english": "Table and chair"
+        },
+        {
+          "sentence": ["باب", "شُبّاك"],
+          "decoys": ["كُرسي", "مُرتَّب", "تِلفِزيون"],
+          "english": "Door and window"
+        },
+        {
+          "sentence": ["البيت", "مُرتَّب"],
+          "decoys": ["باب", "طاولة", "شُبّاك"],
+          "english": "The house is tidy"
+        }
+      ],
+      "speak": {
+        "scenario": "A guest is looking at your home for the first time.",
+        "turns": [
+          {
+            "speaker": "them",
+            "arabic": "البيت مرتب كتير!",
+            "romanization": "il-bēt murattab ktīr",
+            "english": "The house is very tidy!"
+          },
+          {
+            "speaker": "you",
+            "arabic": "مُرتَّب شكراً!",
+            "romanization": "murattab šukran",
+            "english": "Tidy, thank you!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "إيش هاد التلفزيون الكبير؟",
+            "romanization": "ʾēš hād it-tilfizyon il-kabīr",
+            "english": "What's this big television?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "تِلفِزيون جديد!",
+            "romanization": "tilfizyon jdīd",
+            "english": "New television!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وين الطاولة؟",
+            "romanization": "wēn iṭ-ṭāwile",
+            "english": "Where is the table?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "طاولة هون!",
+            "romanization": "ṭāwile hōn",
+            "english": "Table here!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "افتح الشباك؟",
+            "romanization": "iftaḥ iš-šubbāk",
+            "english": "Open the window?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "شُبّاك مفتوح!",
+            "romanization": "šubbāk maftūḥ",
+            "english": "Window is open!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "والباب؟",
+            "romanization": "w-il-bāb",
+            "english": "And the door?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "باب مفتوح كمان!",
+            "romanization": "bāb maftūḥ kamān",
+            "english": "Door also open!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "في كراسي؟",
+            "romanization": "fī karāsi",
+            "english": "Are there chairs?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "كُرسي، تفضل!",
+            "romanization": "kursi, tafaḍḍal",
+            "english": "Chair, please sit!"
+          }
+        ]
+      },
+      "review": {
+        "all_vocab": [
+          { "arabic": "غُرفة", "transcription": "GHUR-fe", "romanization": "ġurfe", "english": "room" },
+          { "arabic": "صالة", "transcription": "SĀ-le", "romanization": "ṣāle", "english": "living room" },
+          { "arabic": "مَطبَخ", "transcription": "MAT-bakh", "romanization": "maṭbaḫ", "english": "kitchen" },
+          { "arabic": "حَمّام", "transcription": "ham-MĀM", "romanization": "ḥammām", "english": "bathroom" },
+          { "arabic": "سَرير", "transcription": "sa-RĒR", "romanization": "sarīr", "english": "bed" },
+          { "arabic": "شَقّة", "transcription": "SHAK-ke", "romanization": "šaʔʔa", "english": "apartment" },
+          { "arabic": "طاولة", "transcription": "TĀ-wi-le", "romanization": "ṭāwile", "english": "table" },
+          { "arabic": "كُرسي", "transcription": "KUR-si", "romanization": "kursi", "english": "chair" },
+          { "arabic": "تِلفِزيون", "transcription": "til-fi-ZYŌN", "romanization": "tilfizyon", "english": "television" },
+          { "arabic": "باب", "transcription": "BĀB", "romanization": "bāb", "english": "door" },
+          { "arabic": "شُبّاك", "transcription": "SHUB-bak", "romanization": "šubbāk", "english": "window" },
+          { "arabic": "مُرتَّب", "transcription": "mur-TAB", "romanization": "murattab", "english": "tidy / organized" }
+        ]
+      }
+    }
+  ]
+}

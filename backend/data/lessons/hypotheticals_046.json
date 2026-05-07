@@ -1,0 +1,415 @@
+{
+  "topic": "Hypotheticals & Wishes",
+  "cycles": [
+    {
+      "cycle": 1,
+      "vocab": [
+        {
+          "arabic": "يا رَيت",
+          "transcription": "ya-RĒT",
+          "romanization": "yā rēt",
+          "english": "I wish / if only",
+          "note": "expresses longing for something unattainable; يا ريت كنت هناك = I wish I were there",
+          "icon": "solar:star-rings-linear",
+          "icon_color": "#5856d6"
+        },
+        {
+          "arabic": "لو كان عِندي",
+          "transcription": "LO KĀN IN-di",
+          "romanization": "lo kān ʕindi",
+          "english": "if I had",
+          "note": "counterfactual; لو كان عندي فلوس = if I had money; expresses what would be different",
+          "icon": "solar:question-circle-linear",
+          "icon_color": "#ff9f0a"
+        },
+        {
+          "arabic": "بِتمَنّى لو",
+          "transcription": "bit-MAN-na LO",
+          "romanization": "bitmannā lo",
+          "english": "I wish that",
+          "note": "بتمنى (I wish) + لو (that/if); بتمنى لو كنت هناك = I wish I were there",
+          "icon": "solar:sunrise-linear",
+          "icon_color": "#34c759"
+        },
+        {
+          "arabic": "كان مُمكِن",
+          "transcription": "KĀN MUM-kin",
+          "romanization": "kān mumkin",
+          "english": "it could have been / it was possible",
+          "note": "past modal; كان ممكن إنه يصير = it could have happened",
+          "icon": "solar:question-square-linear",
+          "icon_color": "#007aff"
+        },
+        {
+          "arabic": "لو مِش هيك",
+          "transcription": "LO mish HĒK",
+          "romanization": "lo miš hēk",
+          "english": "if it weren't like this",
+          "note": "counterfactual criticism; لو مش هيك كنت رحت = if it weren't like this I would have gone",
+          "icon": "solar:close-square-linear",
+          "icon_color": "#ff3b30"
+        },
+        {
+          "arabic": "لَيتَني كُنت",
+          "transcription": "LĒ-ta-ni KUNT",
+          "romanization": "lētani kunt",
+          "english": "I wish I had been",
+          "note": "ليتني (I wish/if only I) + كنت (I had been); literary but used in emotional Palestinian speech",
+          "icon": "solar:history-linear",
+          "icon_color": "#6e6e73"
+        }
+      ],
+      "quiz": [
+        {
+          "arabic": "يا رَيت",
+          "transcription": "ya-RĒT",
+          "romanization": "yā rēt",
+          "options": ["thank God", "if only / I wish", "God willing", "maybe"],
+          "answer": 1
+        },
+        {
+          "arabic": "لو كان عِندي",
+          "transcription": "LO KĀN IN-di",
+          "romanization": "lo kān ʕindi",
+          "options": ["since I had", "when I had", "if I had", "after I had"],
+          "answer": 2
+        },
+        {
+          "arabic": "بِتمَنّى لو",
+          "transcription": "bit-MAN-na LO",
+          "romanization": "bitmannā lo",
+          "options": ["I hope that", "I know that", "I wish that", "I expect that"],
+          "answer": 2
+        },
+        {
+          "arabic": "كان مُمكِن",
+          "transcription": "KĀN MUM-kin",
+          "romanization": "kān mumkin",
+          "options": ["it will be possible", "it is possible", "it could have been possible", "it was impossible"],
+          "answer": 2
+        },
+        {
+          "arabic": "لو مِش هيك",
+          "transcription": "LO mish HĒK",
+          "romanization": "lo miš hēk",
+          "options": ["since it's like this", "if it were like this", "if it weren't like this", "although like this"],
+          "answer": 2
+        },
+        {
+          "arabic": "لَيتَني كُنت",
+          "transcription": "LĒ-ta-ni KUNT",
+          "romanization": "lētani kunt",
+          "options": ["I am glad I was", "I wish I had been", "I know I was", "I hope I will be"],
+          "answer": 1
+        }
+      ],
+      "build": [
+        {
+          "sentence": ["يا رَيت", "لو كان عِندي"],
+          "decoys": ["لَيتَني كُنت", "كان مُمكِن", "لو مِش هيك"],
+          "english": "I wish — if only I had"
+        },
+        {
+          "sentence": ["بِتمَنّى لو", "كان مُمكِن"],
+          "decoys": ["يا رَيت", "لَيتَني كُنت", "لو مِش هيك"],
+          "english": "I wish — it could have been"
+        },
+        {
+          "sentence": ["لو مِش هيك", "لَيتَني كُنت"],
+          "decoys": ["كان مُمكِن", "بِتمَنّى لو", "لو كان عِندي"],
+          "english": "If it weren't like this — I wish I had been"
+        }
+      ],
+      "speak": {
+        "scenario": "You and a friend are reflecting on missed opportunities.",
+        "turns": [
+          {
+            "speaker": "them",
+            "arabic": "يا ريت رحنا على الرحلة",
+            "romanization": "yā rēt riḥna ʕal-riḥle",
+            "english": "I wish we had gone on the trip"
+          },
+          {
+            "speaker": "you",
+            "arabic": "يا رَيت!",
+            "romanization": "yā rēt",
+            "english": "I wish!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "لو كان عندك وقت، كنت تيجي؟",
+            "romanization": "lo kān ʕindak waʔt, kunt tījī",
+            "english": "If you had time, would you have come?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "لو كان عِندي وقت!",
+            "romanization": "lo kān ʕindi waʔt",
+            "english": "If I had time!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وبتمنى لو صار هيك؟",
+            "romanization": "w-bitmannā lo ṣār hēk",
+            "english": "And do you wish it had happened?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "بِتمَنّى لو رحنا!",
+            "romanization": "bitmannā lo riḥna",
+            "english": "I wish we had gone!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "كان ممكن يصير؟",
+            "romanization": "kān mumkin yiṣīr",
+            "english": "Could it have happened?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "كان مُمكِن!",
+            "romanization": "kān mumkin",
+            "english": "It could have been!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "لو مش هيك الظروف؟",
+            "romanization": "lo miš hēk iẓ-ẓurūf",
+            "english": "If the circumstances weren't like this?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "لو مِش هيك، رحت!",
+            "romanization": "lo miš hēk, ruḥt",
+            "english": "If it weren't like this, I'd go!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "يعني ليتك كنت هناك؟",
+            "romanization": "yaʕni lētak kunt hunāk",
+            "english": "Meaning you wish you had been there?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "لَيتَني كُنت!",
+            "romanization": "lētani kunt",
+            "english": "I wish I had been!"
+          }
+        ]
+      }
+    },
+    {
+      "cycle": 2,
+      "vocab": [
+        {
+          "arabic": "لو أَعرَف",
+          "transcription": "LO a-RIF",
+          "romanization": "lo ʾaʕrif",
+          "english": "if I knew / I wish I knew",
+          "note": "counterfactual; لو أعرف كنت ما رحت = if I had known I wouldn't have gone",
+          "icon": "solar:brain-linear",
+          "icon_color": "#5856d6"
+        },
+        {
+          "arabic": "يا رَيتني",
+          "transcription": "ya-RĒT-ni",
+          "romanization": "yā rētni",
+          "english": "I wish I were / had",
+          "note": "يا ريت + ني (me); يا ريتني كنت هناك = I wish I were there; strong personal regret",
+          "icon": "solar:user-rounded-linear",
+          "icon_color": "#ff9f0a"
+        },
+        {
+          "arabic": "بالعَكس",
+          "transcription": "bil-AK-is",
+          "romanization": "bil-ʕaks",
+          "english": "on the contrary",
+          "note": "not a hypothetical but common when correcting assumptions; بالعكس، بحبها = on the contrary, I love it",
+          "icon": "solar:arrows-right-down-linear",
+          "icon_color": "#ff3b30"
+        },
+        {
+          "arabic": "لو أَعلَم",
+          "transcription": "LO a-LAM",
+          "romanization": "lo ʾaʕlam",
+          "english": "if I only knew (formal)",
+          "note": "more literary than لو أعرف; لو أعلم = if only I knew; used in reflective monologue",
+          "icon": "solar:question-square-linear",
+          "icon_color": "#6e6e73"
+        },
+        {
+          "arabic": "مَن يَدري",
+          "transcription": "MAN yad-RĒ",
+          "romanization": "man yadrī",
+          "english": "who knows",
+          "note": "expression of uncertainty about the future; من يدري ماذا سيحدث = who knows what will happen",
+          "icon": "solar:question-circle-linear",
+          "icon_color": "#007aff"
+        },
+        {
+          "arabic": "في يوم مِن الأيام",
+          "transcription": "FĪ YŌM min il-AY-yam",
+          "romanization": "fī yōm min il-ʾayyām",
+          "english": "one day (in the future)",
+          "note": "hopeful expression about a future possibility; في يوم من الأيام بروح = one day I'll go",
+          "icon": "solar:sunrise-linear",
+          "icon_color": "#34c759"
+        }
+      ],
+      "quiz": [
+        {
+          "arabic": "لو أَعرَف",
+          "transcription": "LO a-RIF",
+          "romanization": "lo ʾaʕrif",
+          "options": ["since I know", "when I knew", "if I knew", "because I know"],
+          "answer": 2
+        },
+        {
+          "arabic": "يا رَيتني",
+          "transcription": "ya-RĒT-ni",
+          "romanization": "yā rētni",
+          "options": ["I'm glad I was", "I know I was", "I wish I were / had", "I hope I will be"],
+          "answer": 2
+        },
+        {
+          "arabic": "بالعَكس",
+          "transcription": "bil-AK-is",
+          "romanization": "bil-ʕaks",
+          "options": ["exactly", "in addition", "on the contrary", "also"],
+          "answer": 2
+        },
+        {
+          "arabic": "لو أَعلَم",
+          "transcription": "LO a-LAM",
+          "romanization": "lo ʾaʕlam",
+          "options": ["when I learned", "if I only knew", "since I know", "after knowing"],
+          "answer": 1
+        },
+        {
+          "arabic": "مَن يَدري",
+          "transcription": "MAN yad-RĒ",
+          "romanization": "man yadrī",
+          "options": ["everybody knows", "I know for sure", "nobody knows for sure / who knows", "we will know"],
+          "answer": 2
+        },
+        {
+          "arabic": "في يوم مِن الأيام",
+          "transcription": "FĪ YŌM min il-AY-yam",
+          "romanization": "fī yōm min il-ʾayyām",
+          "options": ["a few days ago", "every single day", "in those days", "one day (in the future)"],
+          "answer": 3
+        }
+      ],
+      "build": [
+        {
+          "sentence": ["يا رَيتني", "لو أَعرَف"],
+          "decoys": ["مَن يَدري", "بالعَكس", "في يوم مِن الأيام"],
+          "english": "I wish I had — if I knew"
+        },
+        {
+          "sentence": ["بالعَكس", "مَن يَدري"],
+          "decoys": ["لو أَعلَم", "يا رَيتني", "في يوم مِن الأيام"],
+          "english": "On the contrary — who knows"
+        },
+        {
+          "sentence": ["في يوم مِن الأيام", "لو أَعلَم"],
+          "decoys": ["بالعَكس", "يا رَيتني", "مَن يَدري"],
+          "english": "One day — if only I knew"
+        }
+      ],
+      "speak": {
+        "scenario": "You are talking with a mentor about future possibilities.",
+        "turns": [
+          {
+            "speaker": "them",
+            "arabic": "يا ريتك كنت فعلت هيك قبل",
+            "romanization": "yā rētak kunt faʕalt hēk ʾabl",
+            "english": "I wish you had done this before"
+          },
+          {
+            "speaker": "you",
+            "arabic": "يا رَيتني كمان!",
+            "romanization": "yā rētni kamān",
+            "english": "I wish I had too!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "لو أعرف كنت قلتلك",
+            "romanization": "lo ʾaʕrif kunt ʾultillak",
+            "english": "If I had known I would have told you"
+          },
+          {
+            "speaker": "you",
+            "arabic": "لو أَعرَف أنا كمان!",
+            "romanization": "lo ʾaʕrif ʾana kamān",
+            "english": "If I had known too!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "أو بالعكس مش صح؟",
+            "romanization": "ʾaw bil-ʕaks miš ṣaḥ",
+            "english": "Or on the contrary, it's not right?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "بالعَكس، صح!",
+            "romanization": "bil-ʕaks, ṣaḥ",
+            "english": "On the contrary — correct!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "لو أعلم الغيب...",
+            "romanization": "lo ʾaʕlam il-ġayb",
+            "english": "If I only knew the unseen..."
+          },
+          {
+            "speaker": "you",
+            "arabic": "لو أَعلَم!",
+            "romanization": "lo ʾaʕlam",
+            "english": "If only I knew!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "ومن يدري؟",
+            "romanization": "w-man yadrī",
+            "english": "And who knows?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "مَن يَدري فعلاً!",
+            "romanization": "man yadrī fiʕlan",
+            "english": "Who knows indeed!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "بس في يوم من الأيام؟",
+            "romanization": "bas fī yōm min il-ʾayyām",
+            "english": "But one day?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "في يوم مِن الأيام، إن شا الله!",
+            "romanization": "fī yōm min il-ʾayyām, ʾin šā llāh",
+            "english": "One day, God willing!"
+          }
+        ]
+      },
+      "review": {
+        "all_vocab": [
+          { "arabic": "يا رَيت", "transcription": "ya-RĒT", "romanization": "yā rēt", "english": "I wish / if only" },
+          { "arabic": "لو كان عِندي", "transcription": "LO KĀN IN-di", "romanization": "lo kān ʕindi", "english": "if I had" },
+          { "arabic": "بِتمَنّى لو", "transcription": "bit-MAN-na LO", "romanization": "bitmannā lo", "english": "I wish that" },
+          { "arabic": "كان مُمكِن", "transcription": "KĀN MUM-kin", "romanization": "kān mumkin", "english": "it could have been" },
+          { "arabic": "لو مِش هيك", "transcription": "LO mish HĒK", "romanization": "lo miš hēk", "english": "if it weren't like this" },
+          { "arabic": "لَيتَني كُنت", "transcription": "LĒ-ta-ni KUNT", "romanization": "lētani kunt", "english": "I wish I had been" },
+          { "arabic": "لو أَعرَف", "transcription": "LO a-RIF", "romanization": "lo ʾaʕrif", "english": "if I knew" },
+          { "arabic": "يا رَيتني", "transcription": "ya-RĒT-ni", "romanization": "yā rētni", "english": "I wish I were / had" },
+          { "arabic": "بالعَكس", "transcription": "bil-AK-is", "romanization": "bil-ʕaks", "english": "on the contrary" },
+          { "arabic": "لو أَعلَم", "transcription": "LO a-LAM", "romanization": "lo ʾaʕlam", "english": "if I only knew" },
+          { "arabic": "مَن يَدري", "transcription": "MAN yad-RĒ", "romanization": "man yadrī", "english": "who knows" },
+          { "arabic": "في يوم مِن الأيام", "transcription": "FĪ YŌM min il-AY-yam", "romanization": "fī yōm min il-ʾayyām", "english": "one day (in the future)" }
+        ]
+      }
+    }
+  ]
+}

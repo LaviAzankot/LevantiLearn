@@ -1,0 +1,416 @@
+{
+  "topic": "Shopping",
+  "cycles": [
+    {
+      "cycle": 1,
+      "vocab": [
+        {
+          "arabic": "غالي",
+          "transcription": "GHĀ-li",
+          "romanization": "ġāli",
+          "english": "expensive",
+          "note": "feminine: غالية (ġālye); كتير غالي = very expensive; ما هو غالي = it's not expensive",
+          "icon": "solar:dollar-minimalistic-linear",
+          "icon_color": "#ff3b30"
+        },
+        {
+          "arabic": "رَخيص",
+          "transcription": "ra-KHĒS",
+          "romanization": "raḫīṣ",
+          "english": "cheap / affordable",
+          "note": "feminine: رخيصة (raḫīṣa); مش رخيص = not cheap; sometimes رخيص means 'of poor quality'",
+          "icon": "solar:tag-price-linear",
+          "icon_color": "#34c759"
+        },
+        {
+          "arabic": "بِدّي هاد",
+          "transcription": "BID-di HĀD",
+          "romanization": "biddi hād",
+          "english": "I want this",
+          "note": "هاد = this (m); بدي هادي = I want this (f); standard shopping phrase in Palestinian markets",
+          "icon": "solar:hand-heart-linear",
+          "icon_color": "#fe4d01"
+        },
+        {
+          "arabic": "كَم لِيرة؟",
+          "transcription": "kam LĒ-ra",
+          "romanization": "kam līra",
+          "english": "how many shekels? / how much?",
+          "note": "لِيرة is used colloquially for the Israeli shekel in Palestinian areas; also كم شيكل",
+          "icon": "solar:dollar-minimalistic-linear",
+          "icon_color": "#ff9f0a"
+        },
+        {
+          "arabic": "بِفكِّر",
+          "transcription": "bi-FAK-kir",
+          "romanization": "bifakkir",
+          "english": "I'm thinking / I'll think about it",
+          "note": "1st person present of فكر; used to politely delay a decision while shopping",
+          "icon": "solar:brain-linear",
+          "icon_color": "#5856d6"
+        },
+        {
+          "arabic": "مُمتاز",
+          "transcription": "mum-TAZ",
+          "romanization": "mumtāz",
+          "english": "excellent / great",
+          "note": "used to express satisfaction with a product or price; also used as 'great!' in general speech",
+          "icon": "solar:star-shine-linear",
+          "icon_color": "#ff9f0a"
+        }
+      ],
+      "quiz": [
+        {
+          "arabic": "غالي",
+          "transcription": "GHĀ-li",
+          "romanization": "ġāli",
+          "options": ["cheap", "new", "expensive", "old"],
+          "answer": 2
+        },
+        {
+          "arabic": "رَخيص",
+          "transcription": "ra-KHĒS",
+          "romanization": "raḫīṣ",
+          "options": ["expensive", "cheap / affordable", "big", "good"],
+          "answer": 1
+        },
+        {
+          "arabic": "بِدّي هاد",
+          "transcription": "BID-di HĀD",
+          "romanization": "biddi hād",
+          "options": ["I want that", "I don't want", "I want this", "give me this"],
+          "answer": 2
+        },
+        {
+          "arabic": "كَم لِيرة؟",
+          "transcription": "kam LĒ-ra",
+          "romanization": "kam līra",
+          "options": ["how much?", "what is it?", "is it expensive?", "give me a discount"],
+          "answer": 0
+        },
+        {
+          "arabic": "بِفكِّر",
+          "transcription": "bi-FAK-kir",
+          "romanization": "bifakkir",
+          "english": "I'm thinking",
+          "options": ["I know", "I want", "I'm thinking", "I understand"],
+          "answer": 2
+        },
+        {
+          "arabic": "مُمتاز",
+          "transcription": "mum-TAZ",
+          "romanization": "mumtāz",
+          "options": ["okay", "bad", "expensive", "excellent"],
+          "answer": 3
+        }
+      ],
+      "build": [
+        {
+          "sentence": ["بِدّي هاد", "كَم لِيرة؟"],
+          "decoys": ["غالي", "مُمتاز", "رَخيص"],
+          "english": "I want this — how much?"
+        },
+        {
+          "sentence": ["غالي", "مِش", "رَخيص"],
+          "decoys": ["مُمتاز", "بِدّي هاد", "بِفكِّر"],
+          "english": "Expensive, not cheap"
+        },
+        {
+          "sentence": ["رَخيص", "مُمتاز"],
+          "decoys": ["كَم لِيرة؟", "غالي", "بِفكِّر"],
+          "english": "Cheap — excellent!"
+        }
+      ],
+      "speak": {
+        "scenario": "You are bargaining at a clothing market in Ramallah.",
+        "turns": [
+          {
+            "speaker": "them",
+            "arabic": "أهلاً، شو بتحب؟",
+            "romanization": "ʾahlan, šū btḥibb",
+            "english": "Welcome, what would you like?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "بِدّي هاد!",
+            "romanization": "biddi hād",
+            "english": "I want this!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "بخمسين شيكل",
+            "romanization": "b-ḫamsīn šēkel",
+            "english": "For fifty shekels"
+          },
+          {
+            "speaker": "you",
+            "arabic": "كَم لِيرة؟",
+            "romanization": "kam līra",
+            "english": "How many shekels?"
+          },
+          {
+            "speaker": "them",
+            "arabic": "خمسين بس!",
+            "romanization": "ḫamsīn bas",
+            "english": "Only fifty!"
+          },
+          {
+            "speaker": "you",
+            "arabic": "غالي!",
+            "romanization": "ġāli",
+            "english": "Expensive!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "أحسن سعر! جودة عالية!",
+            "romanization": "ʾaḥsan siʕr, jōde ʕālye",
+            "english": "Best price! High quality!"
+          },
+          {
+            "speaker": "you",
+            "arabic": "رَخيص؟",
+            "romanization": "raḫīṣ",
+            "english": "Cheap?"
+          },
+          {
+            "speaker": "them",
+            "arabic": "أربعين نهائي!",
+            "romanization": "ʾarbaʕīn nihāʾi",
+            "english": "Forty final!"
+          },
+          {
+            "speaker": "you",
+            "arabic": "بِفكِّر!",
+            "romanization": "bifakkir",
+            "english": "I'm thinking!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "خمسة وثلاثين؟ آخر سعر!",
+            "romanization": "ḫamse w-talātīn, āḫir siʕr",
+            "english": "Thirty five? Final price!"
+          },
+          {
+            "speaker": "you",
+            "arabic": "مُمتاز!",
+            "romanization": "mumtāz",
+            "english": "Excellent!"
+          }
+        ]
+      }
+    },
+    {
+      "cycle": 2,
+      "vocab": [
+        {
+          "arabic": "بَعطيك",
+          "transcription": "ba-TĒ-ak",
+          "romanization": "baʕṭīk",
+          "english": "I'll give you",
+          "note": "1st person present of أعطى + object suffix ك (you m); vendor promising something",
+          "icon": "solar:gift-linear",
+          "icon_color": "#007aff"
+        },
+        {
+          "arabic": "ما عِندي فَكّة",
+          "transcription": "mā-IN-di FAK-ke",
+          "romanization": "mā ʕindi fakke",
+          "english": "I don't have change",
+          "note": "فكة (fakke) = small change; very common situation at Palestinian markets",
+          "icon": "solar:wallet-linear",
+          "icon_color": "#ff9f0a"
+        },
+        {
+          "arabic": "مُمكِن أَشوف؟",
+          "transcription": "mum-kin a-SHŪF",
+          "romanization": "mumkin ʾašūf",
+          "english": "Can I see? / May I look?",
+          "note": "ممكن + verb = 'may I/can I'; أشوف = I see; polite request to examine a product",
+          "icon": "solar:eye-linear",
+          "icon_color": "#5856d6"
+        },
+        {
+          "arabic": "حَيّاك",
+          "transcription": "hay-YAK",
+          "romanization": "ḥayyāk",
+          "english": "welcome! / go ahead!",
+          "note": "lit. 'may God keep you alive'; used as a warm welcome or 'please, go ahead'",
+          "icon": "solar:smile-circle-linear",
+          "icon_color": "#34c759"
+        },
+        {
+          "arabic": "بِبعَث",
+          "transcription": "bi-BAT",
+          "romanization": "bibʕat",
+          "english": "I send / I'll send",
+          "note": "1st person present of بعث; ببعثلك = I'll send it to you; online shopping context",
+          "icon": "solar:delivery-linear",
+          "icon_color": "#fe4d01"
+        },
+        {
+          "arabic": "خَلَص",
+          "transcription": "kha-LAS",
+          "romanization": "ḫalaṣ",
+          "english": "done! / finished! / that's it!",
+          "note": "extremely versatile Palestinian/Levantine word; means 'done', 'enough', 'it's over', 'okay then'",
+          "icon": "solar:check-circle-linear",
+          "icon_color": "#34c759"
+        }
+      ],
+      "quiz": [
+        {
+          "arabic": "بَعطيك",
+          "transcription": "ba-TĒ-ak",
+          "romanization": "baʕṭīk",
+          "options": ["you give me", "I'll give you", "he gives", "I gave you"],
+          "answer": 1
+        },
+        {
+          "arabic": "ما عِندي فَكّة",
+          "transcription": "mā-IN-di FAK-ke",
+          "romanization": "mā ʕindi fakke",
+          "options": ["I have change", "I don't have change", "no discount", "too expensive"],
+          "answer": 1
+        },
+        {
+          "arabic": "مُمكِن أَشوف؟",
+          "transcription": "mum-kin a-SHŪF",
+          "romanization": "mumkin ʾašūf",
+          "options": ["may I buy?", "can I see?", "can I try?", "may I ask?"],
+          "answer": 1
+        },
+        {
+          "arabic": "حَيّاك",
+          "transcription": "hay-YAK",
+          "romanization": "ḥayyāk",
+          "options": ["goodbye", "thank you", "welcome / go ahead", "sorry"],
+          "answer": 2
+        },
+        {
+          "arabic": "بِبعَث",
+          "transcription": "bi-BAT",
+          "romanization": "bibʕat",
+          "options": ["I receive", "I buy", "I send", "I deliver"],
+          "answer": 2
+        },
+        {
+          "arabic": "خَلَص",
+          "transcription": "kha-LAS",
+          "romanization": "ḫalaṣ",
+          "options": ["more please", "done / finished", "not yet", "continue"],
+          "answer": 1
+        }
+      ],
+      "build": [
+        {
+          "sentence": ["مُمكِن أَشوف؟", "حَيّاك"],
+          "decoys": ["خَلَص", "بَعطيك", "بِبعَث"],
+          "english": "Can I see? — Go ahead!"
+        },
+        {
+          "sentence": ["ما عِندي فَكّة", "بَعطيك"],
+          "decoys": ["حَيّاك", "مُمكِن أَشوف؟", "خَلَص"],
+          "english": "I don't have change — I'll give you"
+        },
+        {
+          "sentence": ["بِبعَث", "خَلَص"],
+          "decoys": ["ما عِندي فَكّة", "حَيّاك", "بَعطيك"],
+          "english": "I'll send it — done!"
+        }
+      ],
+      "speak": {
+        "scenario": "You are completing a purchase at a Palestinian market stall.",
+        "turns": [
+          {
+            "speaker": "them",
+            "arabic": "أهلاً وسهلاً! شو بدك؟",
+            "romanization": "ʾahlan wa-sahlan, šū biddak",
+            "english": "Welcome! What do you want?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "مُمكِن أَشوف؟",
+            "romanization": "mumkin ʾašūf",
+            "english": "Can I see?"
+          },
+          {
+            "speaker": "them",
+            "arabic": "حياك! تفضل!",
+            "romanization": "ḥayyāk, tafaḍḍal",
+            "english": "Go ahead! Please!"
+          },
+          {
+            "speaker": "you",
+            "arabic": "حَيّاك!",
+            "romanization": "ḥayyāk",
+            "english": "Thank you! (returning courtesy)"
+          },
+          {
+            "speaker": "them",
+            "arabic": "خذ واحد بعطيك الثاني بهدية!",
+            "romanization": "ḫud wāḥid baʕṭīk it-tāni b-hadiyye",
+            "english": "Take one and I'll give you the second as a gift!"
+          },
+          {
+            "speaker": "you",
+            "arabic": "بَعطيك العشرين!",
+            "romanization": "baʕṭīk il-ʕišrīn",
+            "english": "I'll give you twenty!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "ما عندي فكة لأربعين",
+            "romanization": "mā ʕindi fakke l-ʾarbaʕīn",
+            "english": "I don't have change for forty"
+          },
+          {
+            "speaker": "you",
+            "arabic": "ما عِندي فَكّة!",
+            "romanization": "mā ʕindi fakke",
+            "english": "I don't have change!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "بوصلك بالديليفري؟",
+            "romanization": "b-waṣṣillak bil-dilivri",
+            "english": "Shall I deliver it to you?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "بِبعَث؟",
+            "romanization": "bibʕat",
+            "english": "You'll send it?"
+          },
+          {
+            "speaker": "them",
+            "arabic": "طيب، اتفقنا!",
+            "romanization": "ṭayyib, ittafaʾna",
+            "english": "Okay, we agreed!"
+          },
+          {
+            "speaker": "you",
+            "arabic": "خَلَص!",
+            "romanization": "ḫalaṣ",
+            "english": "Done!"
+          }
+        ]
+      },
+      "review": {
+        "all_vocab": [
+          { "arabic": "غالي", "transcription": "GHĀ-li", "romanization": "ġāli", "english": "expensive" },
+          { "arabic": "رَخيص", "transcription": "ra-KHĒS", "romanization": "raḫīṣ", "english": "cheap / affordable" },
+          { "arabic": "بِدّي هاد", "transcription": "BID-di HĀD", "romanization": "biddi hād", "english": "I want this" },
+          { "arabic": "كَم لِيرة؟", "transcription": "kam LĒ-ra", "romanization": "kam līra", "english": "how many shekels?" },
+          { "arabic": "بِفكِّر", "transcription": "bi-FAK-kir", "romanization": "bifakkir", "english": "I'm thinking" },
+          { "arabic": "مُمتاز", "transcription": "mum-TAZ", "romanization": "mumtāz", "english": "excellent / great" },
+          { "arabic": "بَعطيك", "transcription": "ba-TĒ-ak", "romanization": "baʕṭīk", "english": "I'll give you" },
+          { "arabic": "ما عِندي فَكّة", "transcription": "mā-IN-di FAK-ke", "romanization": "mā ʕindi fakke", "english": "I don't have change" },
+          { "arabic": "مُمكِن أَشوف؟", "transcription": "mum-kin a-SHŪF", "romanization": "mumkin ʾašūf", "english": "can I see?" },
+          { "arabic": "حَيّاك", "transcription": "hay-YAK", "romanization": "ḥayyāk", "english": "welcome / go ahead" },
+          { "arabic": "بِبعَث", "transcription": "bi-BAT", "romanization": "bibʕat", "english": "I send / I'll send" },
+          { "arabic": "خَلَص", "transcription": "kha-LAS", "romanization": "ḫalaṣ", "english": "done / finished" }
+        ]
+      }
+    }
+  ]
+}

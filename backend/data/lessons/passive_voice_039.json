@@ -1,0 +1,415 @@
+{
+  "topic": "Passive Voice & Impersonal",
+  "cycles": [
+    {
+      "cycle": 1,
+      "vocab": [
+        {
+          "arabic": "اِنكَسَر",
+          "transcription": "in-KA-sar",
+          "romanization": "inkassar",
+          "english": "it broke / it got broken",
+          "note": "انـ prefix marks passive/reflexive in Palestinian Arabic; no agent needed",
+          "icon": "solar:danger-triangle-linear",
+          "icon_color": "#ff3b30"
+        },
+        {
+          "arabic": "اِنفَتَح",
+          "transcription": "in-FA-tah",
+          "romanization": "infataḥ",
+          "english": "it opened / it got opened",
+          "note": "passive of فتح (to open); الباب انفتح = the door opened (by itself or by someone)",
+          "icon": "solar:door-linear",
+          "icon_color": "#007aff"
+        },
+        {
+          "arabic": "اِنبَنى",
+          "transcription": "in-BA-na",
+          "romanization": "inbana",
+          "english": "it was built",
+          "note": "passive of بنى (to build); البيت انبنى = the house was built",
+          "icon": "solar:buildings-linear",
+          "icon_color": "#5856d6"
+        },
+        {
+          "arabic": "بِيتقال",
+          "transcription": "bi-it-ĀL",
+          "romanization": "biytʾāl",
+          "english": "it is said / they say",
+          "note": "impersonal passive; بيتقال إنه = it is said that; replaces specifying who said it",
+          "icon": "solar:microphone-linear",
+          "icon_color": "#6e6e73"
+        },
+        {
+          "arabic": "بِيتعمَل",
+          "transcription": "bi-it-A-mal",
+          "romanization": "biytʕamal",
+          "english": "it is done / it gets done",
+          "note": "impersonal present passive; هيك بيتعمل = that's how it's done; هاد ما بيتعمل = that's not done",
+          "icon": "solar:play-circle-linear",
+          "icon_color": "#34c759"
+        },
+        {
+          "arabic": "مَعروف",
+          "transcription": "ma-RŪF",
+          "romanization": "maʕrūf",
+          "english": "known / well-known",
+          "note": "passive participle of عرف; هاد معروف = that is well-known; مش معروف = unknown",
+          "icon": "solar:eye-linear",
+          "icon_color": "#ff9f0a"
+        }
+      ],
+      "quiz": [
+        {
+          "arabic": "اِنكَسَر",
+          "transcription": "in-KA-sar",
+          "romanization": "inkassar",
+          "options": ["it was repaired", "it was found", "it broke / got broken", "it was lost"],
+          "answer": 2
+        },
+        {
+          "arabic": "اِنفَتَح",
+          "transcription": "in-FA-tah",
+          "romanization": "infataḥ",
+          "options": ["it closed", "it was locked", "it was broken", "it opened / got opened"],
+          "answer": 3
+        },
+        {
+          "arabic": "اِنبَنى",
+          "transcription": "in-BA-na",
+          "romanization": "inbana",
+          "options": ["it was demolished", "it was sold", "it was built", "it was rented"],
+          "answer": 2
+        },
+        {
+          "arabic": "بِيتقال",
+          "transcription": "bi-it-ĀL",
+          "romanization": "biytʾāl",
+          "options": ["I say", "he says", "we say", "it is said"],
+          "answer": 3
+        },
+        {
+          "arabic": "بِيتعمَل",
+          "transcription": "bi-it-A-mal",
+          "romanization": "biytʕamal",
+          "options": ["I do it", "he does it", "it is done / gets done", "we do it"],
+          "answer": 2
+        },
+        {
+          "arabic": "مَعروف",
+          "transcription": "ma-RŪF",
+          "romanization": "maʕrūf",
+          "options": ["unknown", "forgotten", "known / well-known", "visible"],
+          "answer": 2
+        }
+      ],
+      "build": [
+        {
+          "sentence": ["اِنكَسَر", "الباب"],
+          "decoys": ["اِنفَتَح", "مَعروف", "بِيتقال"],
+          "english": "The door broke"
+        },
+        {
+          "sentence": ["بِيتقال", "إِنَّه", "مَعروف"],
+          "decoys": ["اِنبَنى", "اِنكَسَر", "بِيتعمَل"],
+          "english": "It is said that it's well-known"
+        },
+        {
+          "sentence": ["اِنفَتَح", "بِيتعمَل", "هيك"],
+          "decoys": ["مَعروف", "اِنبَنى", "بِيتقال"],
+          "english": "It opened — it's done like this"
+        }
+      ],
+      "speak": {
+        "scenario": "You are reporting what happened to the community center.",
+        "turns": [
+          {
+            "speaker": "them",
+            "arabic": "شو صار بالمركز؟",
+            "romanization": "šū ṣār bil-markaz",
+            "english": "What happened to the center?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "اِنكَسَر الزجاج!",
+            "romanization": "inkassar iz-zujāj",
+            "english": "The glass broke!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "والباب؟",
+            "romanization": "w-il-bāb",
+            "english": "And the door?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "اِنفَتَح لحاله!",
+            "romanization": "infataḥ laḥālu",
+            "english": "It opened by itself!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وهاد المبنى، امتى انبنى؟",
+            "romanization": "w-hād il-mabnā, ʾēmta inbana",
+            "english": "And this building — when was it built?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "اِنبَنى زمان!",
+            "romanization": "inbana zamān",
+            "english": "It was built a long time ago!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وبيتقال إيش عنه؟",
+            "romanization": "w-biytʾāl ʾēš ʕannu",
+            "english": "And what is said about it?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "بِيتقال مشكلة كبيرة!",
+            "romanization": "biytʾāl muškilā kabīra",
+            "english": "It is said it's a big problem!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وهيك بيتعمل؟",
+            "romanization": "w-hēk biytʕamal",
+            "english": "And is this how it's done?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "مش هيك بِيتعمَل!",
+            "romanization": "miš hēk biytʕamal",
+            "english": "Not done like this!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "هاد معروف؟",
+            "romanization": "hād maʕrūf",
+            "english": "Is this well-known?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "مَعروف للجميع!",
+            "romanization": "maʕrūf lil-jamīʕ",
+            "english": "Known to everyone!"
+          }
+        ]
+      }
+    },
+    {
+      "cycle": 2,
+      "vocab": [
+        {
+          "arabic": "ما تِنسى",
+          "transcription": "mā TIN-sa",
+          "romanization": "mā tinsa",
+          "english": "don't forget",
+          "note": "ما + 2nd person present = negative imperative; ما تنسى تيجي = don't forget to come",
+          "icon": "solar:warning-circle-linear",
+          "icon_color": "#ff9f0a"
+        },
+        {
+          "arabic": "لازِم يِتصَلَّح",
+          "transcription": "LA-zim yi-tsal-LAH",
+          "romanization": "lāzim yitsallaḥ",
+          "english": "it needs to be fixed",
+          "note": "لازم (must) + passive present; لازم يتصلح هاد = this needs to be fixed",
+          "icon": "solar:screwdriver-minimalistic-linear",
+          "icon_color": "#5856d6"
+        },
+        {
+          "arabic": "بِده وَقت",
+          "transcription": "BID-du WAʔT",
+          "romanization": "biddu waʔt",
+          "english": "it takes time",
+          "note": "بده (needs/wants it, m) + وقت (time); very common impersonal expression",
+          "icon": "solar:clock-circle-linear",
+          "icon_color": "#6e6e73"
+        },
+        {
+          "arabic": "اِتقَرَّر",
+          "transcription": "it-ʔar-RAR",
+          "romanization": "itʾarrar",
+          "english": "it was decided",
+          "note": "passive Form V of قرر; اتقرر إنه = it was decided that; formal/official context",
+          "icon": "solar:document-text-linear",
+          "icon_color": "#007aff"
+        },
+        {
+          "arabic": "مَمنوع",
+          "transcription": "mam-NŪ'",
+          "romanization": "mamnūʕ",
+          "english": "prohibited / not allowed",
+          "note": "ق → ʾ; passive participle; ممنوع الدخول = entry prohibited; ممنوع التصوير = no photography",
+          "icon": "solar:forbidden-circle-linear",
+          "icon_color": "#ff3b30"
+        },
+        {
+          "arabic": "مَطلوب",
+          "transcription": "mat-LŪB",
+          "romanization": "maṭlūb",
+          "english": "required / needed / wanted",
+          "note": "passive participle of طلب; مطلوب منك = required of you; مطلوب من الكل = everyone must",
+          "icon": "solar:check-circle-linear",
+          "icon_color": "#34c759"
+        }
+      ],
+      "quiz": [
+        {
+          "arabic": "ما تِنسى",
+          "transcription": "mā TIN-sa",
+          "romanization": "mā tinsa",
+          "options": ["remember", "you forgot", "don't forget", "you remember"],
+          "answer": 2
+        },
+        {
+          "arabic": "لازِم يِتصَلَّح",
+          "transcription": "LA-zim yi-tsal-LAH",
+          "romanization": "lāzim yitsallaḥ",
+          "options": ["it was fixed", "it can be fixed", "it needs to be fixed", "it won't be fixed"],
+          "answer": 2
+        },
+        {
+          "arabic": "بِده وَقت",
+          "transcription": "BID-du WAʔT",
+          "romanization": "biddu waʔt",
+          "options": ["it's fast", "it's done", "it takes time", "it's finished"],
+          "answer": 2
+        },
+        {
+          "arabic": "اِتقَرَّر",
+          "transcription": "it-ʔar-RAR",
+          "romanization": "itʾarrar",
+          "options": ["it was suggested", "it was refused", "it was discussed", "it was decided"],
+          "answer": 3
+        },
+        {
+          "arabic": "مَمنوع",
+          "transcription": "mam-NŪ'",
+          "romanization": "mamnūʕ",
+          "options": ["allowed", "required", "prohibited", "possible"],
+          "answer": 2
+        },
+        {
+          "arabic": "مَطلوب",
+          "transcription": "mat-LŪB",
+          "romanization": "maṭlūb",
+          "options": ["optional", "forbidden", "required / needed", "available"],
+          "answer": 2
+        }
+      ],
+      "build": [
+        {
+          "sentence": ["لازِم يِتصَلَّح", "بِده وَقت"],
+          "decoys": ["مَمنوع", "اِتقَرَّر", "مَطلوب"],
+          "english": "It needs to be fixed — it takes time"
+        },
+        {
+          "sentence": ["اِتقَرَّر", "مَمنوع"],
+          "decoys": ["بِده وَقت", "مَطلوب", "ما تِنسى"],
+          "english": "It was decided — prohibited"
+        },
+        {
+          "sentence": ["ما تِنسى", "مَطلوب"],
+          "decoys": ["اِتقَرَّر", "لازِم يِتصَلَّح", "مَمنوع"],
+          "english": "Don't forget — it's required"
+        }
+      ],
+      "speak": {
+        "scenario": "You are discussing repairs and rules at a community building.",
+        "turns": [
+          {
+            "speaker": "them",
+            "arabic": "الباب محتاج تصليح؟",
+            "romanization": "il-bāb muḥtāj taṣlīḥ",
+            "english": "Does the door need repair?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "لازِم يِتصَلَّح!",
+            "romanization": "lāzim yitsallaḥ",
+            "english": "It needs to be fixed!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وكم بده وقت؟",
+            "romanization": "w-kam biddu waʔt",
+            "english": "And how long will it take?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "بِده وَقت كتير!",
+            "romanization": "biddu waʔt ktīr",
+            "english": "It takes a lot of time!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "واتقرر شو؟",
+            "romanization": "w-itʾarrar šū",
+            "english": "And what was decided?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "اِتقَرَّر نصلح!",
+            "romanization": "itʾarrar niṣalliḥ",
+            "english": "It was decided to fix it!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "في أشياء ممنوعة؟",
+            "romanization": "fī ʾašyāʾ mamnūʕa",
+            "english": "Are there prohibited things?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "مَمنوع الدخول بعد الظهر!",
+            "romanization": "mamnūʕ id-duḫūl baʕd iḍ-ḍuhr",
+            "english": "Entry prohibited after noon!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وإيش مطلوب من الكل؟",
+            "romanization": "w-ʾēš maṭlūb min il-kull",
+            "english": "And what is required from everyone?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "مَطلوب هوية!",
+            "romanization": "maṭlūb hawiyye",
+            "english": "ID is required!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "ما تنسى شي؟",
+            "romanization": "mā tinsa šī",
+            "english": "Don't forget anything?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "ما تِنسى الهوية!",
+            "romanization": "mā tinsa l-hawiyye",
+            "english": "Don't forget the ID!"
+          }
+        ]
+      },
+      "review": {
+        "all_vocab": [
+          { "arabic": "اِنكَسَر", "transcription": "in-KA-sar", "romanization": "inkassar", "english": "it broke / got broken" },
+          { "arabic": "اِنفَتَح", "transcription": "in-FA-tah", "romanization": "infataḥ", "english": "it opened / got opened" },
+          { "arabic": "اِنبَنى", "transcription": "in-BA-na", "romanization": "inbana", "english": "it was built" },
+          { "arabic": "بِيتقال", "transcription": "bi-it-ĀL", "romanization": "biytʾāl", "english": "it is said" },
+          { "arabic": "بِيتعمَل", "transcription": "bi-it-A-mal", "romanization": "biytʕamal", "english": "it is done" },
+          { "arabic": "مَعروف", "transcription": "ma-RŪF", "romanization": "maʕrūf", "english": "known / well-known" },
+          { "arabic": "ما تِنسى", "transcription": "mā TIN-sa", "romanization": "mā tinsa", "english": "don't forget" },
+          { "arabic": "لازِم يِتصَلَّح", "transcription": "LA-zim yi-tsal-LAH", "romanization": "lāzim yitsallaḥ", "english": "it needs to be fixed" },
+          { "arabic": "بِده وَقت", "transcription": "BID-du WAʔT", "romanization": "biddu waʔt", "english": "it takes time" },
+          { "arabic": "اِتقَرَّر", "transcription": "it-ʔar-RAR", "romanization": "itʾarrar", "english": "it was decided" },
+          { "arabic": "مَمنوع", "transcription": "mam-NŪ'", "romanization": "mamnūʕ", "english": "prohibited / not allowed" },
+          { "arabic": "مَطلوب", "transcription": "mat-LŪB", "romanization": "maṭlūb", "english": "required / needed" }
+        ]
+      }
+    }
+  ]
+}

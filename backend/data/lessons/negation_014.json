@@ -1,0 +1,415 @@
+{
+  "topic": "Negation",
+  "cycles": [
+    {
+      "cycle": 1,
+      "vocab": [
+        {
+          "arabic": "ما بَروح",
+          "transcription": "mā ba-RŪH",
+          "romanization": "mā barūḥ",
+          "english": "I don't go",
+          "note": "ما negates verbs; wraps around the verb: ما + verb + (ش optional); Palestinian pattern",
+          "icon": "solar:close-circle-linear",
+          "icon_color": "#ff3b30"
+        },
+        {
+          "arabic": "ما بآكُل",
+          "transcription": "mā bā-KUL",
+          "romanization": "mā bāʾkul",
+          "english": "I don't eat",
+          "note": "negation of بآكل; ما + verb is the standard Palestinian negation for verbs",
+          "icon": "solar:close-circle-linear",
+          "icon_color": "#ff9f0a"
+        },
+        {
+          "arabic": "مِش",
+          "transcription": "MISH",
+          "romanization": "miš",
+          "english": "not / isn't (non-verbal)",
+          "note": "negates nouns, adjectives, and pronouns — not verbs; مش تعبان = not tired",
+          "icon": "solar:close-square-linear",
+          "icon_color": "#ff3b30"
+        },
+        {
+          "arabic": "مِش هون",
+          "transcription": "mish-HŌN",
+          "romanization": "miš hōn",
+          "english": "not here",
+          "note": "very common phrase; used to say someone or something is absent; مش هون = not here/gone",
+          "icon": "solar:map-point-remove-linear",
+          "icon_color": "#6e6e73"
+        },
+        {
+          "arabic": "لأ",
+          "transcription": "LA",
+          "romanization": "laʾ",
+          "english": "no",
+          "note": "Palestinian colloquial 'no'; MSA لا (lā); note the glottal stop at the end",
+          "icon": "solar:forbidden-circle-linear",
+          "icon_color": "#ff3b30"
+        },
+        {
+          "arabic": "أَبداً",
+          "transcription": "ab-DAN",
+          "romanization": "ʾabdan",
+          "english": "never / not at all",
+          "note": "emphatic negation; ما بروح أبدا = I never go; مش أبدا = absolutely not",
+          "icon": "solar:forbidden-2-linear",
+          "icon_color": "#5856d6"
+        }
+      ],
+      "quiz": [
+        {
+          "arabic": "ما بَروح",
+          "transcription": "mā ba-RŪH",
+          "romanization": "mā barūḥ",
+          "options": ["I go", "I don't go", "I went", "I will go"],
+          "answer": 1
+        },
+        {
+          "arabic": "ما بآكُل",
+          "transcription": "mā bā-KUL",
+          "romanization": "mā bāʾkul",
+          "options": ["I eat", "I don't eat", "I cooked", "I will eat"],
+          "answer": 1
+        },
+        {
+          "arabic": "مِش",
+          "transcription": "MISH",
+          "romanization": "miš",
+          "options": ["yes", "maybe", "not / isn't", "always"],
+          "answer": 2
+        },
+        {
+          "arabic": "مِش هون",
+          "transcription": "mish-HŌN",
+          "romanization": "miš hōn",
+          "options": ["right here", "over there", "not here", "nearby"],
+          "answer": 2
+        },
+        {
+          "arabic": "لأ",
+          "transcription": "LA",
+          "romanization": "laʾ",
+          "options": ["yes", "maybe", "no", "okay"],
+          "answer": 2
+        },
+        {
+          "arabic": "أَبداً",
+          "transcription": "ab-DAN",
+          "romanization": "ʾabdan",
+          "options": ["sometimes", "always", "often", "never / not at all"],
+          "answer": 3
+        }
+      ],
+      "build": [
+        {
+          "sentence": ["ما بَروح", "هون"],
+          "decoys": ["مِش", "لأ", "أَبداً"],
+          "english": "I don't go here"
+        },
+        {
+          "sentence": ["مِش", "تَعبان"],
+          "decoys": ["لأ", "ما بآكُل", "أَبداً"],
+          "english": "Not tired"
+        },
+        {
+          "sentence": ["لأ", "أَبداً"],
+          "decoys": ["مِش هون", "ما بَروح", "مِش"],
+          "english": "No, never!"
+        }
+      ],
+      "speak": {
+        "scenario": "You are declining invitations politely at a gathering.",
+        "turns": [
+          {
+            "speaker": "them",
+            "arabic": "بتيجي معنا؟",
+            "romanization": "btijī maʕna",
+            "english": "Are you coming with us?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "لأ!",
+            "romanization": "laʾ",
+            "english": "No!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "بتروح على البيت؟",
+            "romanization": "btrūḥ ʕal-bēt",
+            "english": "Are you going home?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "ما بَروح!",
+            "romanization": "mā barūḥ",
+            "english": "I don't go / I'm not going!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وبتاكل معنا؟",
+            "romanization": "w-btāʾkul maʕna",
+            "english": "And will you eat with us?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "ما بآكُل!",
+            "romanization": "mā bāʾkul",
+            "english": "I don't eat / I'm not eating!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "تعبان؟",
+            "romanization": "tabʕān",
+            "english": "Tired?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "مِش تعبان!",
+            "romanization": "miš tabʕān",
+            "english": "Not tired!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "هون في البيت؟",
+            "romanization": "hōn fī l-bēt",
+            "english": "Here in the house?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "مِش هون!",
+            "romanization": "miš hōn",
+            "english": "Not here!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وبتيجي أي يوم؟",
+            "romanization": "w-btijī ʾay yōm",
+            "english": "And you'll come any day?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "أَبداً!",
+            "romanization": "ʾabdan",
+            "english": "Never!"
+          }
+        ]
+      }
+    },
+    {
+      "cycle": 2,
+      "vocab": [
+        {
+          "arabic": "ما عِندي",
+          "transcription": "mā-IN-di",
+          "romanization": "mā ʕindi",
+          "english": "I don't have",
+          "note": "negation of عندي (I have); ما عندي فلوس = I don't have money",
+          "icon": "solar:wallet-linear",
+          "icon_color": "#ff3b30"
+        },
+        {
+          "arabic": "ما في",
+          "transcription": "mā-FĪ",
+          "romanization": "mā fī",
+          "english": "there isn't / there aren't",
+          "note": "ما في خبز = there is no bread; ما في أحد = there is nobody; very common phrase",
+          "icon": "solar:close-circle-linear",
+          "icon_color": "#6e6e73"
+        },
+        {
+          "arabic": "مِش عارِف",
+          "transcription": "mish-Ā-rif",
+          "romanization": "miš ʕārif",
+          "english": "I don't know",
+          "note": "lit. 'not knowing'; feminine: مش عارفة (miš ʕārfe); the most common expression for 'I don't know'",
+          "icon": "solar:question-square-linear",
+          "icon_color": "#5856d6"
+        },
+        {
+          "arabic": "مِش كتير",
+          "transcription": "mish-ka-TĒR",
+          "romanization": "miš ktīr",
+          "english": "not a lot / not much",
+          "note": "كتير (ktīr) = a lot; مش كتير = not much; commonly used to express moderation",
+          "icon": "solar:minimize-square-linear",
+          "icon_color": "#ff9f0a"
+        },
+        {
+          "arabic": "مِش مَعِي",
+          "transcription": "mish-ma-ĒE",
+          "romanization": "miš maʕī",
+          "english": "I don't have it on me / not with me",
+          "note": "مش معي = it's not with me (e.g. the phone, the keys); lit. 'not with me'",
+          "icon": "solar:hand-linear",
+          "icon_color": "#007aff"
+        },
+        {
+          "arabic": "ما بِفهَم",
+          "transcription": "mā bif-HAM",
+          "romanization": "mā bifham",
+          "english": "I don't understand",
+          "note": "1st person present negative of فهم (to understand); used in language learning often!",
+          "icon": "solar:chat-square-remove-linear",
+          "icon_color": "#ff3b30"
+        }
+      ],
+      "quiz": [
+        {
+          "arabic": "ما عِندي",
+          "transcription": "mā-IN-di",
+          "romanization": "mā ʕindi",
+          "options": ["I have", "I want", "I don't have", "I got"],
+          "answer": 2
+        },
+        {
+          "arabic": "ما في",
+          "transcription": "mā-FĪ",
+          "romanization": "mā fī",
+          "options": ["there is", "maybe", "there isn't", "a lot"],
+          "answer": 2
+        },
+        {
+          "arabic": "مِش عارِف",
+          "transcription": "mish-Ā-rif",
+          "romanization": "miš ʕārif",
+          "options": ["I know", "I understand", "I don't know", "I forgot"],
+          "answer": 2
+        },
+        {
+          "arabic": "مِش كتير",
+          "transcription": "mish-ka-TĒR",
+          "romanization": "miš ktīr",
+          "options": ["a lot", "too much", "not a lot", "very much"],
+          "answer": 2
+        },
+        {
+          "arabic": "مِش مَعِي",
+          "transcription": "mish-ma-ĒE",
+          "romanization": "miš maʕī",
+          "options": ["with me", "not with me", "for me", "from me"],
+          "answer": 1
+        },
+        {
+          "arabic": "ما بِفهَم",
+          "transcription": "mā bif-HAM",
+          "romanization": "mā bifham",
+          "options": ["I understand", "I hear", "I don't understand", "I forgot"],
+          "answer": 2
+        }
+      ],
+      "build": [
+        {
+          "sentence": ["ما عِندي", "فلوس"],
+          "decoys": ["ما في", "مِش عارِف", "مِش مَعِي"],
+          "english": "I don't have money"
+        },
+        {
+          "sentence": ["ما في", "مَي"],
+          "decoys": ["ما بِفهَم", "مِش كتير", "ما عِندي"],
+          "english": "There's no water"
+        },
+        {
+          "sentence": ["ما بِفهَم", "مِش عارِف"],
+          "decoys": ["ما في", "مِش مَعِي", "مِش كتير"],
+          "english": "I don't understand, I don't know"
+        }
+      ],
+      "speak": {
+        "scenario": "You are dealing with a misunderstanding at a market.",
+        "turns": [
+          {
+            "speaker": "them",
+            "arabic": "عندك دراهم؟",
+            "romanization": "ʕindak drāhim",
+            "english": "Do you have money?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "ما عِندي!",
+            "romanization": "mā ʕindi",
+            "english": "I don't have (any)!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "في خبز عندنا؟",
+            "romanization": "fī ḫubz ʕindna",
+            "english": "Is there bread at ours?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "ما في!",
+            "romanization": "mā fī",
+            "english": "There isn't!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وين المحل؟ بتعرف؟",
+            "romanization": "wēn il-maḥall, btaʕrif",
+            "english": "Where's the shop? Do you know?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "مِش عارِف!",
+            "romanization": "miš ʕārif",
+            "english": "I don't know!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "كتير بتيجي هون؟",
+            "romanization": "ktīr btijī hōn",
+            "english": "Do you come here often?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "مِش كتير!",
+            "romanization": "miš ktīr",
+            "english": "Not a lot!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "معك الهاتف؟",
+            "romanization": "maʕak il-hātif",
+            "english": "Do you have the phone with you?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "مِش مَعِي!",
+            "romanization": "miš maʕī",
+            "english": "Not with me!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "فاهم شو بقول؟",
+            "romanization": "fāhim šū biʾūl",
+            "english": "Do you understand what I'm saying?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "ما بِفهَم!",
+            "romanization": "mā bifham",
+            "english": "I don't understand!"
+          }
+        ]
+      },
+      "review": {
+        "all_vocab": [
+          { "arabic": "ما بَروح", "transcription": "mā ba-RŪH", "romanization": "mā barūḥ", "english": "I don't go" },
+          { "arabic": "ما بآكُل", "transcription": "mā bā-KUL", "romanization": "mā bāʾkul", "english": "I don't eat" },
+          { "arabic": "مِش", "transcription": "MISH", "romanization": "miš", "english": "not / isn't" },
+          { "arabic": "مِش هون", "transcription": "mish-HŌN", "romanization": "miš hōn", "english": "not here" },
+          { "arabic": "لأ", "transcription": "LA", "romanization": "laʾ", "english": "no" },
+          { "arabic": "أَبداً", "transcription": "ab-DAN", "romanization": "ʾabdan", "english": "never / not at all" },
+          { "arabic": "ما عِندي", "transcription": "mā-IN-di", "romanization": "mā ʕindi", "english": "I don't have" },
+          { "arabic": "ما في", "transcription": "mā-FĪ", "romanization": "mā fī", "english": "there isn't" },
+          { "arabic": "مِش عارِف", "transcription": "mish-Ā-rif", "romanization": "miš ʕārif", "english": "I don't know" },
+          { "arabic": "مِش كتير", "transcription": "mish-ka-TĒR", "romanization": "miš ktīr", "english": "not a lot" },
+          { "arabic": "مِش مَعِي", "transcription": "mish-ma-ĒE", "romanization": "miš maʕī", "english": "not with me" },
+          { "arabic": "ما بِفهَم", "transcription": "mā bif-HAM", "romanization": "mā bifham", "english": "I don't understand" }
+        ]
+      }
+    }
+  ]
+}

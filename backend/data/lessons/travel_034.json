@@ -1,0 +1,415 @@
+{
+  "topic": "Travel & Tourism",
+  "cycles": [
+    {
+      "cycle": 1,
+      "vocab": [
+        {
+          "arabic": "جَواز",
+          "transcription": "ja-WĀZ",
+          "romanization": "jawāz",
+          "english": "passport",
+          "note": "جواز السفر = passport (lit. 'travel permit'); عندي جواز = I have a passport",
+          "icon": "solar:document-linear",
+          "icon_color": "#5856d6"
+        },
+        {
+          "arabic": "فيزا",
+          "transcription": "FĒ-za",
+          "romanization": "fīza",
+          "english": "visa",
+          "note": "بدي فيزا = I need a visa; فيزا سياحية = tourist visa; from French/English",
+          "icon": "solar:document-add-linear",
+          "icon_color": "#007aff"
+        },
+        {
+          "arabic": "مَطار",
+          "transcription": "ma-TĀR",
+          "romanization": "maṭār",
+          "english": "airport",
+          "note": "from طار (to fly); الطيران من المطار = flying from the airport",
+          "icon": "solar:airplane-linear",
+          "icon_color": "#34c759"
+        },
+        {
+          "arabic": "رِحلة",
+          "transcription": "RIH-le",
+          "romanization": "riḥle",
+          "english": "trip / journey",
+          "note": "رحلة حلوة = a nice trip; الرحلة كم ساعة؟ = how many hours is the journey?",
+          "icon": "solar:suitcase-linear",
+          "icon_color": "#ff9f0a"
+        },
+        {
+          "arabic": "فُندُق",
+          "transcription": "FUN-duʔ",
+          "romanization": "funduʾ",
+          "english": "hotel",
+          "note": "ق → ʾ; عندي حجز بالفندق = I have a hotel reservation",
+          "icon": "solar:buildings-linear",
+          "icon_color": "#6e6e73"
+        },
+        {
+          "arabic": "سَفَرت",
+          "transcription": "sa-FART",
+          "romanization": "safart",
+          "english": "I traveled",
+          "note": "past tense 1st person; سافرت عالأردن = I traveled to Jordan",
+          "icon": "solar:airplane-linear",
+          "icon_color": "#fe4d01"
+        }
+      ],
+      "quiz": [
+        {
+          "arabic": "جَواز",
+          "transcription": "ja-WĀZ",
+          "romanization": "jawāz",
+          "options": ["ticket", "visa", "passport", "ID card"],
+          "answer": 2
+        },
+        {
+          "arabic": "فيزا",
+          "transcription": "FĒ-za",
+          "romanization": "fīza",
+          "options": ["passport", "ticket", "visa", "permit"],
+          "answer": 2
+        },
+        {
+          "arabic": "مَطار",
+          "transcription": "ma-TĀR",
+          "romanization": "maṭār",
+          "options": ["bus station", "port", "airport", "train station"],
+          "answer": 2
+        },
+        {
+          "arabic": "رِحلة",
+          "transcription": "RIH-le",
+          "romanization": "riḥle",
+          "options": ["vacation", "destination", "trip / journey", "holiday"],
+          "answer": 2
+        },
+        {
+          "arabic": "فُندُق",
+          "transcription": "FUN-duʔ",
+          "romanization": "funduʾ",
+          "options": ["restaurant", "guesthouse", "hotel", "hostel"],
+          "answer": 2
+        },
+        {
+          "arabic": "سَفَرت",
+          "transcription": "sa-FART",
+          "romanization": "safart",
+          "options": ["I arrived", "I returned", "I traveled", "I flew"],
+          "answer": 2
+        }
+      ],
+      "build": [
+        {
+          "sentence": ["جَواز", "فيزا"],
+          "decoys": ["رِحلة", "مَطار", "سَفَرت"],
+          "english": "Passport and visa"
+        },
+        {
+          "sentence": ["سَفَرت", "رِحلة", "حِلوة"],
+          "decoys": ["جَواز", "فُندُق", "مَطار"],
+          "english": "I traveled — a nice trip"
+        },
+        {
+          "sentence": ["مَطار", "فُندُق"],
+          "decoys": ["سَفَرت", "رِحلة", "فيزا"],
+          "english": "Airport and hotel"
+        }
+      ],
+      "speak": {
+        "scenario": "You are checking in at a hotel after your flight.",
+        "turns": [
+          {
+            "speaker": "them",
+            "arabic": "أهلاً، عندك حجز؟",
+            "romanization": "ʾahlan, ʕindak ḥajz",
+            "english": "Welcome, do you have a reservation?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "فُندُق حجز!",
+            "romanization": "funduʾ ḥajz",
+            "english": "Hotel reservation!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "معك جواز السفر؟",
+            "romanization": "maʕak jawāz is-safar",
+            "english": "Do you have your passport?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "جَواز هون!",
+            "romanization": "jawāz hōn",
+            "english": "Passport here!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وجيت بفيزا سياحية؟",
+            "romanization": "w-jīt b-fīza siyāḥiyye",
+            "english": "And you came with a tourist visa?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "فيزا سياحية!",
+            "romanization": "fīza siyāḥiyye",
+            "english": "Tourist visa!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "من أي مطار وصلت؟",
+            "romanization": "min ʾayy maṭār waṣalt",
+            "english": "From which airport did you arrive?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "مَطار عمّان!",
+            "romanization": "maṭār ʕammān",
+            "english": "Amman airport!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "كيف كانت الرحلة؟",
+            "romanization": "kēf kānat ir-riḥle",
+            "english": "How was the trip?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "رِحلة حِلوة!",
+            "romanization": "riḥle ḥilwe",
+            "english": "Nice trip!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وجيت من بعيد؟",
+            "romanization": "w-jīt min baʕīd",
+            "english": "And did you come from far?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "سَفَرت كتير!",
+            "romanization": "safart ktīr",
+            "english": "I traveled a lot!"
+          }
+        ]
+      }
+    },
+    {
+      "cycle": 2,
+      "vocab": [
+        {
+          "arabic": "حَجَزت",
+          "transcription": "ha-JAZZT",
+          "romanization": "ḥajazzt",
+          "english": "I booked",
+          "note": "past tense; حجزت تذكرة = I booked a ticket; حجزت فندق = I booked a hotel",
+          "icon": "solar:calendar-add-linear",
+          "icon_color": "#007aff"
+        },
+        {
+          "arabic": "شَنطة",
+          "transcription": "SHAN-ta",
+          "romanization": "šanṭa",
+          "english": "bag / suitcase",
+          "note": "شنطة كبيرة = large suitcase; شنطة اليد = hand bag; حطيت الشنطة = I put the bag",
+          "icon": "solar:suitcase-linear",
+          "icon_color": "#ff9f0a"
+        },
+        {
+          "arabic": "ضايِع",
+          "transcription": "DĀ-yi'",
+          "romanization": "ḍāyiʕ",
+          "english": "lost",
+          "note": "ق → ʾ; أنا ضايع = I'm lost; الشنطة ضايعة = the bag is lost; ضعت = I got lost",
+          "icon": "solar:map-point-remove-linear",
+          "icon_color": "#ff3b30"
+        },
+        {
+          "arabic": "خَريطة",
+          "transcription": "kha-RĒ-ta",
+          "romanization": "ḫarīṭa",
+          "english": "map",
+          "note": "خريطة المدينة = city map; في خريطة؟ = is there a map?; from الخريطة (the map)",
+          "icon": "solar:map-linear",
+          "icon_color": "#34c759"
+        },
+        {
+          "arabic": "مَعلومة",
+          "transcription": "ma-LŪ-me",
+          "romanization": "maʕlūme",
+          "english": "piece of information",
+          "note": "plural: معلومات (maʕlūmāt); محتاج معلومة = I need information; معلومة مهمة = important info",
+          "icon": "solar:info-circle-linear",
+          "icon_color": "#5856d6"
+        },
+        {
+          "arabic": "سِياحة",
+          "transcription": "si-YĀ-ha",
+          "romanization": "siyāḥa",
+          "english": "tourism",
+          "note": "سياحة داخلية = domestic tourism; فلسطين بتستاهل سياحة = Palestine deserves tourism",
+          "icon": "solar:camera-linear",
+          "icon_color": "#fe4d01"
+        }
+      ],
+      "quiz": [
+        {
+          "arabic": "حَجَزت",
+          "transcription": "ha-JAZZT",
+          "romanization": "ḥajazzt",
+          "options": ["I cancelled", "I arrived", "I traveled", "I booked"],
+          "answer": 3
+        },
+        {
+          "arabic": "شَنطة",
+          "transcription": "SHAN-ta",
+          "romanization": "šanṭa",
+          "options": ["ticket", "passport", "bag / suitcase", "ID"],
+          "answer": 2
+        },
+        {
+          "arabic": "ضايِع",
+          "transcription": "DĀ-yi'",
+          "romanization": "ḍāyiʕ",
+          "options": ["arrived", "found", "lost", "arrived late"],
+          "answer": 2
+        },
+        {
+          "arabic": "خَريطة",
+          "transcription": "kha-RĒ-ta",
+          "romanization": "ḫarīṭa",
+          "options": ["compass", "directions", "map", "guide"],
+          "answer": 2
+        },
+        {
+          "arabic": "مَعلومة",
+          "transcription": "ma-LŪ-me",
+          "romanization": "maʕlūme",
+          "options": ["question", "problem", "answer", "piece of information"],
+          "answer": 3
+        },
+        {
+          "arabic": "سِياحة",
+          "transcription": "si-YĀ-ha",
+          "romanization": "siyāḥa",
+          "options": ["business trip", "migration", "tourism", "travel documents"],
+          "answer": 2
+        }
+      ],
+      "build": [
+        {
+          "sentence": ["حَجَزت", "فُندُق"],
+          "decoys": ["ضايِع", "خَريطة", "سِياحة"],
+          "english": "I booked a hotel"
+        },
+        {
+          "sentence": ["ضايِع", "شَنطة"],
+          "decoys": ["سِياحة", "حَجَزت", "مَعلومة"],
+          "english": "Lost — the bag"
+        },
+        {
+          "sentence": ["سِياحة", "مَعلومة", "خَريطة"],
+          "decoys": ["ضايِع", "شَنطة", "حَجَزت"],
+          "english": "Tourism — information and map"
+        }
+      ],
+      "speak": {
+        "scenario": "You are at a tourism information desk, planning your visit.",
+        "turns": [
+          {
+            "speaker": "them",
+            "arabic": "أهلاً، بتحب السياحة؟",
+            "romanization": "ʾahlan, btḥibb is-siyāḥa",
+            "english": "Welcome, do you like tourism?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "سِياحة فلسطين مهمة!",
+            "romanization": "siyāḥat Filasṭīn muhimme",
+            "english": "Palestinian tourism is important!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "حجزت فندق؟",
+            "romanization": "ḥajazzt funduʾ",
+            "english": "Did you book a hotel?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "حَجَزت بالقدس!",
+            "romanization": "ḥajazzt bil-ʾuds",
+            "english": "I booked in Jerusalem!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وشنطتك وين؟",
+            "romanization": "w-šanṭtak wēn",
+            "english": "And where is your bag?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "شَنطة بالفندق!",
+            "romanization": "šanṭa bil-funduʾ",
+            "english": "Bag at the hotel!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "ضعت؟",
+            "romanization": "ḍaʕt",
+            "english": "Did you get lost?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "ضايِع شوي!",
+            "romanization": "ḍāyiʕ šway",
+            "english": "A little lost!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "عندك خريطة؟",
+            "romanization": "ʕindak ḫarīṭa",
+            "english": "Do you have a map?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "خَريطة بحتاج!",
+            "romanization": "ḫarīṭa bḥtāj",
+            "english": "I need a map!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وبدك معلومات عن المنطقة؟",
+            "romanization": "w-biddak maʕlūmāt ʕan il-manṭiʾa",
+            "english": "And do you want information about the area?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "مَعلومة كتير بدي!",
+            "romanization": "maʕlūme ktīr biddi",
+            "english": "I want lots of information!"
+          }
+        ]
+      },
+      "review": {
+        "all_vocab": [
+          { "arabic": "جَواز", "transcription": "ja-WĀZ", "romanization": "jawāz", "english": "passport" },
+          { "arabic": "فيزا", "transcription": "FĒ-za", "romanization": "fīza", "english": "visa" },
+          { "arabic": "مَطار", "transcription": "ma-TĀR", "romanization": "maṭār", "english": "airport" },
+          { "arabic": "رِحلة", "transcription": "RIH-le", "romanization": "riḥle", "english": "trip / journey" },
+          { "arabic": "فُندُق", "transcription": "FUN-duʔ", "romanization": "funduʾ", "english": "hotel" },
+          { "arabic": "سَفَرت", "transcription": "sa-FART", "romanization": "safart", "english": "I traveled" },
+          { "arabic": "حَجَزت", "transcription": "ha-JAZZT", "romanization": "ḥajazzt", "english": "I booked" },
+          { "arabic": "شَنطة", "transcription": "SHAN-ta", "romanization": "šanṭa", "english": "bag / suitcase" },
+          { "arabic": "ضايِع", "transcription": "DĀ-yi'", "romanization": "ḍāyiʕ", "english": "lost" },
+          { "arabic": "خَريطة", "transcription": "kha-RĒ-ta", "romanization": "ḫarīṭa", "english": "map" },
+          { "arabic": "مَعلومة", "transcription": "ma-LŪ-me", "romanization": "maʕlūme", "english": "piece of information" },
+          { "arabic": "سِياحة", "transcription": "si-YĀ-ha", "romanization": "siyāḥa", "english": "tourism" }
+        ]
+      }
+    }
+  ]
+}

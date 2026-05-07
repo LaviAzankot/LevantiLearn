@@ -1,0 +1,415 @@
+{
+  "topic": "News & Current Events",
+  "cycles": [
+    {
+      "cycle": 1,
+      "vocab": [
+        {
+          "arabic": "أَخبار",
+          "transcription": "akh-BAR",
+          "romanization": "ʾaḫbār",
+          "english": "news",
+          "note": "plural of خبر (news item); شفت الأخبار؟ = did you watch the news?; إيش الأخبار = what's up?",
+          "icon": "solar:newspaper-linear",
+          "icon_color": "#6e6e73"
+        },
+        {
+          "arabic": "مُشكِلة",
+          "transcription": "MUSH-ki-le",
+          "romanization": "muškilā",
+          "english": "problem",
+          "note": "very common word; في مشكلة = there's a problem; حلت المشكلة = the problem was solved",
+          "icon": "solar:danger-triangle-linear",
+          "icon_color": "#ff3b30"
+        },
+        {
+          "arabic": "حَل",
+          "transcription": "HALL",
+          "romanization": "ḥall",
+          "english": "solution",
+          "note": "both noun (solution) and verb past (حل = he solved); في حل = there's a solution",
+          "icon": "solar:check-circle-linear",
+          "icon_color": "#34c759"
+        },
+        {
+          "arabic": "حُكومة",
+          "transcription": "hu-KŪ-me",
+          "romanization": "ḥukūme",
+          "english": "government",
+          "note": "الحكومة = the government; حكومة فلسطينية = Palestinian government/authority",
+          "icon": "solar:buildings-3-linear",
+          "icon_color": "#5856d6"
+        },
+        {
+          "arabic": "ناس",
+          "transcription": "NĀS",
+          "romanization": "nās",
+          "english": "people",
+          "note": "collective; ناس كتير = many people; عند الناس = among the people; هالناس = these people",
+          "icon": "solar:users-group-two-rounded-linear",
+          "icon_color": "#007aff"
+        },
+        {
+          "arabic": "مَهِمّ",
+          "transcription": "ma-HIMM",
+          "romanization": "mahimm",
+          "english": "important",
+          "note": "very common adjective; مهم كتير = very important; إيش الأهم = what's most important",
+          "icon": "solar:shield-check-linear",
+          "icon_color": "#fe4d01"
+        }
+      ],
+      "quiz": [
+        {
+          "arabic": "أَخبار",
+          "transcription": "akh-BAR",
+          "romanization": "ʾaḫbār",
+          "options": ["radio", "television", "news", "magazine"],
+          "answer": 2
+        },
+        {
+          "arabic": "مُشكِلة",
+          "transcription": "MUSH-ki-le",
+          "romanization": "muškilā",
+          "options": ["solution", "success", "problem", "result"],
+          "answer": 2
+        },
+        {
+          "arabic": "حَل",
+          "transcription": "HALL",
+          "romanization": "ḥall",
+          "options": ["problem", "question", "decision", "solution"],
+          "answer": 3
+        },
+        {
+          "arabic": "حُكومة",
+          "transcription": "hu-KŪ-me",
+          "romanization": "ḥukūme",
+          "options": ["parliament", "president", "government", "ministry"],
+          "answer": 2
+        },
+        {
+          "arabic": "ناس",
+          "transcription": "NĀS",
+          "romanization": "nās",
+          "options": ["children", "women", "men", "people"],
+          "answer": 3
+        },
+        {
+          "arabic": "مَهِمّ",
+          "transcription": "ma-HIMM",
+          "romanization": "mahimm",
+          "options": ["interesting", "difficult", "old", "important"],
+          "answer": 3
+        }
+      ],
+      "build": [
+        {
+          "sentence": ["مُشكِلة", "مَهِمّ"],
+          "decoys": ["حَل", "أَخبار", "ناس"],
+          "english": "An important problem"
+        },
+        {
+          "sentence": ["حُكومة", "حَل", "مُشكِلة"],
+          "decoys": ["مَهِمّ", "ناس", "أَخبار"],
+          "english": "Government solution to the problem"
+        },
+        {
+          "sentence": ["ناس", "أَخبار", "مَهِمّ"],
+          "decoys": ["حَل", "حُكومة", "مُشكِلة"],
+          "english": "People — important news"
+        }
+      ],
+      "speak": {
+        "scenario": "You are discussing the local news with a neighbor.",
+        "turns": [
+          {
+            "speaker": "them",
+            "arabic": "شفت الأخبار اليوم؟",
+            "romanization": "šift il-ʾaḫbār il-yōm",
+            "english": "Did you see the news today?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "أَخبار كتير!",
+            "romanization": "ʾaḫbār ktīr",
+            "english": "A lot of news!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "في مشكلة كبيرة",
+            "romanization": "fī muškilā kabīra",
+            "english": "There's a big problem"
+          },
+          {
+            "speaker": "you",
+            "arabic": "مُشكِلة كبيرة!",
+            "romanization": "muškilā kabīra",
+            "english": "A big problem!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وما في حل؟",
+            "romanization": "w-mā fī ḥall",
+            "english": "And there's no solution?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "في حَل!",
+            "romanization": "fī ḥall",
+            "english": "There is a solution!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وإيش رأي الحكومة؟",
+            "romanization": "w-ʾēš raʾy il-ḥukūme",
+            "english": "And what does the government think?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "حُكومة صامتة!",
+            "romanization": "ḥukūme ṣāmite",
+            "english": "Government is silent!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وإيش بتقول الناس؟",
+            "romanization": "w-ʾēš btʾūl in-nās",
+            "english": "And what are people saying?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "ناس زعلانين!",
+            "romanization": "nās zaʕlānīn",
+            "english": "People are upset!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وإيش الأهم هلق؟",
+            "romanization": "w-ʾēš il-ʾahamm halla'",
+            "english": "And what's most important now?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "مَهِمّ نفهم!",
+            "romanization": "mahimm nifham",
+            "english": "Important to understand!"
+          }
+        ]
+      }
+    },
+    {
+      "cycle": 2,
+      "vocab": [
+        {
+          "arabic": "مَوضوع",
+          "transcription": "maw-DŪ'",
+          "romanization": "mawḍūʕ",
+          "english": "topic / subject",
+          "note": "ق → ʾ; موضوع مهم = important topic; هاد الموضوع = this topic/matter",
+          "icon": "solar:chat-round-dots-linear",
+          "icon_color": "#5856d6"
+        },
+        {
+          "arabic": "وَضع",
+          "transcription": "WAD-",
+          "romanization": "waḍʕ",
+          "english": "situation / condition",
+          "note": "الوضع كيف؟ = how's the situation?; وضع صعب = difficult situation; very common in news discussions",
+          "icon": "solar:map-point-linear",
+          "icon_color": "#ff9f0a"
+        },
+        {
+          "arabic": "أَهَمّ شي",
+          "transcription": "a-HAMM SHĒ",
+          "romanization": "ʾahamm šī",
+          "english": "the most important thing",
+          "note": "elative form; أهم شي هو الحل = the most important thing is the solution",
+          "icon": "solar:star-shine-linear",
+          "icon_color": "#fe4d01"
+        },
+        {
+          "arabic": "بِيقولوا إِنَّه",
+          "transcription": "bi-ŪL-lu IN-nu",
+          "romanization": "biyʾūlu ʾinnu",
+          "english": "they say that",
+          "note": "3rd person plural present + إنه (that); used to report news: بيقولوا إنه = they say that",
+          "icon": "solar:microphone-linear",
+          "icon_color": "#6e6e73"
+        },
+        {
+          "arabic": "صَحيح",
+          "transcription": "sa-HĒH",
+          "romanization": "ṣaḥīḥ",
+          "english": "true / correct",
+          "note": "هاد صحيح = that's true; ما صحيح = not true; هل هاد صحيح؟ = is this true?",
+          "icon": "solar:check-circle-linear",
+          "icon_color": "#34c759"
+        },
+        {
+          "arabic": "خَبَر كِذِب",
+          "transcription": "KHA-bar KI-zib",
+          "romanization": "ḫabar kidib",
+          "english": "fake news",
+          "note": "خبر (news) + كذب (lie); very relevant in modern Palestinian media consumption",
+          "icon": "solar:close-circle-linear",
+          "icon_color": "#ff3b30"
+        }
+      ],
+      "quiz": [
+        {
+          "arabic": "مَوضوع",
+          "transcription": "maw-DŪ'",
+          "romanization": "mawḍūʕ",
+          "options": ["problem", "solution", "topic / subject", "news"],
+          "answer": 2
+        },
+        {
+          "arabic": "وَضع",
+          "transcription": "WAD-",
+          "romanization": "waḍʕ",
+          "options": ["topic", "decision", "situation / condition", "idea"],
+          "answer": 2
+        },
+        {
+          "arabic": "أَهَمّ شي",
+          "transcription": "a-HAMM SHĒ",
+          "romanization": "ʾahamm šī",
+          "options": ["a good thing", "the worst thing", "the most important thing", "something new"],
+          "answer": 2
+        },
+        {
+          "arabic": "بِيقولوا إِنَّه",
+          "transcription": "bi-ŪL-lu IN-nu",
+          "romanization": "biyʾūlu ʾinnu",
+          "options": ["I say that", "we say that", "you say that", "they say that"],
+          "answer": 3
+        },
+        {
+          "arabic": "صَحيح",
+          "transcription": "sa-HĒH",
+          "romanization": "ṣaḥīḥ",
+          "options": ["false", "unclear", "true / correct", "maybe"],
+          "answer": 2
+        },
+        {
+          "arabic": "خَبَر كِذِب",
+          "transcription": "KHA-bar KI-zib",
+          "romanization": "ḫabar kidib",
+          "options": ["important news", "old news", "fake news", "breaking news"],
+          "answer": 2
+        }
+      ],
+      "build": [
+        {
+          "sentence": ["مَوضوع", "مَهِمّ"],
+          "decoys": ["وَضع", "صَحيح", "خَبَر كِذِب"],
+          "english": "An important topic"
+        },
+        {
+          "sentence": ["بِيقولوا إِنَّه", "صَحيح"],
+          "decoys": ["مَوضوع", "أَهَمّ شي", "خَبَر كِذِب"],
+          "english": "They say it's true"
+        },
+        {
+          "sentence": ["أَهَمّ شي", "وَضع"],
+          "decoys": ["خَبَر كِذِب", "بِيقولوا إِنَّه", "صَحيح"],
+          "english": "The most important thing — the situation"
+        }
+      ],
+      "speak": {
+        "scenario": "You are discussing a viral news story with colleagues.",
+        "turns": [
+          {
+            "speaker": "them",
+            "arabic": "شفت الخبر الجديد؟",
+            "romanization": "šift il-ḫabar il-jdīd",
+            "english": "Did you see the new story?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "مَوضوع إيش؟",
+            "romanization": "mawḍūʕ ʾēš",
+            "english": "What topic?"
+          },
+          {
+            "speaker": "them",
+            "arabic": "الوضع صعب كتير",
+            "romanization": "il-waḍʕ ṣaʕb ktīr",
+            "english": "The situation is very difficult"
+          },
+          {
+            "speaker": "you",
+            "arabic": "وَضع صعب فعلاً!",
+            "romanization": "waḍʕ ṣaʕb fiʕlan",
+            "english": "Truly a difficult situation!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وبيقولوا إنه في حل",
+            "romanization": "w-biyʾūlu ʾinnu fī ḥall",
+            "english": "And they say there's a solution"
+          },
+          {
+            "speaker": "you",
+            "arabic": "بِيقولوا إِنَّه كتير!",
+            "romanization": "biyʾūlu ʾinnu ktīr",
+            "english": "They say a lot!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "هاد صحيح؟",
+            "romanization": "hād ṣaḥīḥ",
+            "english": "Is this true?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "مش صَحيح!",
+            "romanization": "miš ṣaḥīḥ",
+            "english": "Not true!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "خبر كذب؟",
+            "romanization": "ḫabar kidib",
+            "english": "Fake news?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "خَبَر كِذِب كتير!",
+            "romanization": "ḫabar kidib ktīr",
+            "english": "A lot of fake news!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وإيش الأهم هلق؟",
+            "romanization": "w-ʾēš il-ʾahamm halla'",
+            "english": "And what's the most important thing now?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "أَهَمّ شي الحقيقة!",
+            "romanization": "ʾahamm šī il-ḥaʾīʾa",
+            "english": "The most important thing is the truth!"
+          }
+        ]
+      },
+      "review": {
+        "all_vocab": [
+          { "arabic": "أَخبار", "transcription": "akh-BAR", "romanization": "ʾaḫbār", "english": "news" },
+          { "arabic": "مُشكِلة", "transcription": "MUSH-ki-le", "romanization": "muškilā", "english": "problem" },
+          { "arabic": "حَل", "transcription": "HALL", "romanization": "ḥall", "english": "solution" },
+          { "arabic": "حُكومة", "transcription": "hu-KŪ-me", "romanization": "ḥukūme", "english": "government" },
+          { "arabic": "ناس", "transcription": "NĀS", "romanization": "nās", "english": "people" },
+          { "arabic": "مَهِمّ", "transcription": "ma-HIMM", "romanization": "mahimm", "english": "important" },
+          { "arabic": "مَوضوع", "transcription": "maw-DŪ'", "romanization": "mawḍūʕ", "english": "topic / subject" },
+          { "arabic": "وَضع", "transcription": "WAD-", "romanization": "waḍʕ", "english": "situation / condition" },
+          { "arabic": "أَهَمّ شي", "transcription": "a-HAMM SHĒ", "romanization": "ʾahamm šī", "english": "the most important thing" },
+          { "arabic": "بِيقولوا إِنَّه", "transcription": "bi-ŪL-lu IN-nu", "romanization": "biyʾūlu ʾinnu", "english": "they say that" },
+          { "arabic": "صَحيح", "transcription": "sa-HĒH", "romanization": "ṣaḥīḥ", "english": "true / correct" },
+          { "arabic": "خَبَر كِذِب", "transcription": "KHA-bar KI-zib", "romanization": "ḫabar kidib", "english": "fake news" }
+        ]
+      }
+    }
+  ]
+}

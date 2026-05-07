@@ -1,0 +1,415 @@
+{
+  "topic": "Education",
+  "cycles": [
+    {
+      "cycle": 1,
+      "vocab": [
+        {
+          "arabic": "مَدرَسة",
+          "transcription": "MAD-ra-se",
+          "romanization": "madrasa",
+          "english": "school",
+          "note": "used for primary and secondary education; بيروح على المدرسة = he goes to school",
+          "icon": "solar:book-linear",
+          "icon_color": "#007aff"
+        },
+        {
+          "arabic": "جامِعة",
+          "transcription": "JĀ-mi-a",
+          "romanization": "jāmiʕa",
+          "english": "university",
+          "note": "ع at end is soft; بتدرس بالجامعة = she studies at university; جامعة بيرزيت = Birzeit University",
+          "icon": "solar:graduation-cap-linear",
+          "icon_color": "#5856d6"
+        },
+        {
+          "arabic": "أُستاذ",
+          "transcription": "us-TAZ",
+          "romanization": "ʾustāz",
+          "english": "teacher / professor",
+          "note": "feminine: أستاذة (ʾustāze); used for both school teachers and university professors",
+          "icon": "solar:user-speak-linear",
+          "icon_color": "#ff9f0a"
+        },
+        {
+          "arabic": "اِمتِحان",
+          "transcription": "im-ti-HAN",
+          "romanization": "imtiḥān",
+          "english": "exam / test",
+          "note": "عندي امتحان = I have an exam; نجحت في الامتحان = I passed the exam",
+          "icon": "solar:document-linear",
+          "icon_color": "#ff3b30"
+        },
+        {
+          "arabic": "عَلامة",
+          "transcription": "a-LA-me",
+          "romanization": "ʕalāme",
+          "english": "grade / mark",
+          "note": "علامتي كتير كويسة = my grade is very good; قديش علامتك؟ = what's your grade?",
+          "icon": "solar:star-shine-linear",
+          "icon_color": "#34c759"
+        },
+        {
+          "arabic": "نَجَحت",
+          "transcription": "na-JAHT",
+          "romanization": "najaḥt",
+          "english": "I passed / I succeeded",
+          "note": "past tense; نجحت بالامتحان = I passed the exam; نجحت بالجامعة = I graduated successfully",
+          "icon": "solar:check-circle-linear",
+          "icon_color": "#34c759"
+        }
+      ],
+      "quiz": [
+        {
+          "arabic": "مَدرَسة",
+          "transcription": "MAD-ra-se",
+          "romanization": "madrasa",
+          "options": ["hospital", "market", "school", "library"],
+          "answer": 2
+        },
+        {
+          "arabic": "جامِعة",
+          "transcription": "JĀ-mi-a",
+          "romanization": "jāmiʕa",
+          "options": ["school", "institute", "university", "academy"],
+          "answer": 2
+        },
+        {
+          "arabic": "أُستاذ",
+          "transcription": "us-TAZ",
+          "romanization": "ʾustāz",
+          "options": ["student", "manager", "teacher / professor", "director"],
+          "answer": 2
+        },
+        {
+          "arabic": "اِمتِحان",
+          "transcription": "im-ti-HAN",
+          "romanization": "imtiḥān",
+          "options": ["homework", "class", "exam / test", "subject"],
+          "answer": 2
+        },
+        {
+          "arabic": "عَلامة",
+          "transcription": "a-LA-me",
+          "romanization": "ʕalāme",
+          "options": ["homework", "question", "subject", "grade / mark"],
+          "answer": 3
+        },
+        {
+          "arabic": "نَجَحت",
+          "transcription": "na-JAHT",
+          "romanization": "najaḥt",
+          "options": ["I failed", "I studied", "I graduated", "I passed / succeeded"],
+          "answer": 3
+        }
+      ],
+      "build": [
+        {
+          "sentence": ["أُستاذ", "مَدرَسة"],
+          "decoys": ["عَلامة", "نَجَحت", "اِمتِحان"],
+          "english": "School teacher"
+        },
+        {
+          "sentence": ["اِمتِحان", "جامِعة"],
+          "decoys": ["نَجَحت", "مَدرَسة", "عَلامة"],
+          "english": "University exam"
+        },
+        {
+          "sentence": ["نَجَحت", "عَلامة", "كويسة"],
+          "decoys": ["أُستاذ", "اِمتِحان", "مَدرَسة"],
+          "english": "I passed with a good grade"
+        }
+      ],
+      "speak": {
+        "scenario": "You are talking about your studies with a relative.",
+        "turns": [
+          {
+            "speaker": "them",
+            "arabic": "لسا بالمدرسة؟",
+            "romanization": "lissa bil-madrasa",
+            "english": "Are you still in school?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "مَدرَسة خلصت!",
+            "romanization": "madrasa ḫalaṣt",
+            "english": "I finished school!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وهلق بالجامعة؟",
+            "romanization": "w-halla' bil-jāmiʕa",
+            "english": "And now at university?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "جامِعة بيرزيت!",
+            "romanization": "jāmiʕat Birzeit",
+            "english": "Birzeit University!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وأستاذك كيف؟",
+            "romanization": "w-ʾustāzak kēf",
+            "english": "And how is your professor?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "أُستاذ ممتاز!",
+            "romanization": "ʾustāz mumtāz",
+            "english": "Excellent professor!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "عندك امتحانات؟",
+            "romanization": "ʕindak imtiḥānāt",
+            "english": "Do you have exams?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "اِمتِحان بكرا!",
+            "romanization": "imtiḥān bukra",
+            "english": "Exam tomorrow!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وعلاماتك كيف؟",
+            "romanization": "w-ʕalāmātak kēf",
+            "english": "And how are your grades?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "عَلامة كويسة!",
+            "romanization": "ʕalāme kuwayyes",
+            "english": "Good grade!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "ونجحت بالسنة؟",
+            "romanization": "w-najaḥt bis-sane",
+            "english": "And did you pass the year?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "نَجَحت الحمد لله!",
+            "romanization": "najaḥt il-ḥamdu lillāh",
+            "english": "I passed, thank God!"
+          }
+        ]
+      }
+    },
+    {
+      "cycle": 2,
+      "vocab": [
+        {
+          "arabic": "تَخَرَّجت",
+          "transcription": "ta-khar-RAJT",
+          "romanization": "taḫarrjt",
+          "english": "I graduated",
+          "note": "past tense Form V; تخرجت من الجامعة = I graduated from university",
+          "icon": "solar:graduation-cap-linear",
+          "icon_color": "#5856d6"
+        },
+        {
+          "arabic": "تَخَصُّص",
+          "transcription": "ta-khas-SUS",
+          "romanization": "taḫaṣṣuṣ",
+          "english": "specialization / major",
+          "note": "إيش تخصصك؟ = what's your major?; تخصص في الهندسة = specializing in engineering",
+          "icon": "solar:book-open-linear",
+          "icon_color": "#007aff"
+        },
+        {
+          "arabic": "صَف",
+          "transcription": "SAF",
+          "romanization": "ṣaff",
+          "english": "class / grade level",
+          "note": "صف تاسع = 9th grade; في الصف = in class; صف أول = first grade",
+          "icon": "solar:people-two-linear",
+          "icon_color": "#ff9f0a"
+        },
+        {
+          "arabic": "كِتاب",
+          "transcription": "ki-TĀB",
+          "romanization": "kitāb",
+          "english": "book",
+          "note": "plural: كتب (kutub); كتاب درس = textbook; بقرا كتاب = I'm reading a book",
+          "icon": "solar:book-linear",
+          "icon_color": "#34c759"
+        },
+        {
+          "arabic": "واجِب",
+          "transcription": "WĀ-jib",
+          "romanization": "wājib",
+          "english": "homework",
+          "note": "أنجزت الواجب = I finished the homework; ما عملت الواجب = I didn't do the homework",
+          "icon": "solar:pen-new-square-linear",
+          "icon_color": "#fe4d01"
+        },
+        {
+          "arabic": "رَسَبت",
+          "transcription": "ra-SABT",
+          "romanization": "rasabt",
+          "english": "I failed",
+          "note": "past tense; رسبت بالامتحان = I failed the exam; opposite of نجحت",
+          "icon": "solar:close-circle-linear",
+          "icon_color": "#ff3b30"
+        }
+      ],
+      "quiz": [
+        {
+          "arabic": "تَخَرَّجت",
+          "transcription": "ta-khar-RAJT",
+          "romanization": "taḫarrjt",
+          "options": ["I enrolled", "I studied", "I graduated", "I transferred"],
+          "answer": 2
+        },
+        {
+          "arabic": "تَخَصُّص",
+          "transcription": "ta-khas-SUS",
+          "romanization": "taḫaṣṣuṣ",
+          "options": ["degree", "grade", "semester", "specialization / major"],
+          "answer": 3
+        },
+        {
+          "arabic": "صَف",
+          "transcription": "SAF",
+          "romanization": "ṣaff",
+          "options": ["subject", "class / grade level", "teacher", "school"],
+          "answer": 1
+        },
+        {
+          "arabic": "كِتاب",
+          "transcription": "ki-TĀB",
+          "romanization": "kitāb",
+          "options": ["notebook", "pencil", "book", "desk"],
+          "answer": 2
+        },
+        {
+          "arabic": "واجِب",
+          "transcription": "WĀ-jib",
+          "romanization": "wājib",
+          "options": ["exam", "project", "homework", "quiz"],
+          "answer": 2
+        },
+        {
+          "arabic": "رَسَبت",
+          "transcription": "ra-SABT",
+          "romanization": "rasabt",
+          "options": ["I passed", "I studied hard", "I failed", "I graduated"],
+          "answer": 2
+        }
+      ],
+      "build": [
+        {
+          "sentence": ["تَخَرَّجت", "جامِعة"],
+          "decoys": ["رَسَبت", "واجِب", "صَف"],
+          "english": "I graduated from university"
+        },
+        {
+          "sentence": ["كِتاب", "واجِب"],
+          "decoys": ["تَخَصُّص", "رَسَبت", "صَف"],
+          "english": "Book and homework"
+        },
+        {
+          "sentence": ["تَخَصُّص", "صَف"],
+          "decoys": ["كِتاب", "رَسَبت", "واجِب"],
+          "english": "Major and class level"
+        }
+      ],
+      "speak": {
+        "scenario": "You are catching up with a university friend you haven't seen in years.",
+        "turns": [
+          {
+            "speaker": "them",
+            "arabic": "تخرجت من الجامعة؟",
+            "romanization": "taḫarrjt min il-jāmiʕa",
+            "english": "Did you graduate from university?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "تَخَرَّجت الصيف!",
+            "romanization": "taḫarrjt iṣ-ṣāf",
+            "english": "I graduated in the summer!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وإيش تخصصك؟",
+            "romanization": "w-ʾēš taḫaṣṣuṣak",
+            "english": "And what's your major?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "تَخَصُّص هندسة!",
+            "romanization": "taḫaṣṣuṣ handase",
+            "english": "Engineering specialization!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وأخوك في أيه صف؟",
+            "romanization": "w-ʾaḫūk fī ʾayy ṣaff",
+            "english": "And your brother — what grade is he in?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "صَف عاشر!",
+            "romanization": "ṣaff ʕāšir",
+            "english": "Tenth grade!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وبقرا كتب كتير؟",
+            "romanization": "w-biʾra kutub ktīr",
+            "english": "And does he read a lot of books?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "كِتاب كل يوم!",
+            "romanization": "kitāb kull yōm",
+            "english": "A book every day!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وواجباته؟",
+            "romanization": "w-wājibātu",
+            "english": "And his homework?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "واجِب دايماً!",
+            "romanization": "wājib dāyman",
+            "english": "Homework always!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "يعني بالآخر نجح ولا رسب؟",
+            "romanization": "yaʕni bil-āḫir najaḥ willa rasab",
+            "english": "So in the end did he pass or fail?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "مش رَسَبت!",
+            "romanization": "miš rasabt",
+            "english": "I didn't fail!"
+          }
+        ]
+      },
+      "review": {
+        "all_vocab": [
+          { "arabic": "مَدرَسة", "transcription": "MAD-ra-se", "romanization": "madrasa", "english": "school" },
+          { "arabic": "جامِعة", "transcription": "JĀ-mi-a", "romanization": "jāmiʕa", "english": "university" },
+          { "arabic": "أُستاذ", "transcription": "us-TAZ", "romanization": "ʾustāz", "english": "teacher / professor" },
+          { "arabic": "اِمتِحان", "transcription": "im-ti-HAN", "romanization": "imtiḥān", "english": "exam / test" },
+          { "arabic": "عَلامة", "transcription": "a-LA-me", "romanization": "ʕalāme", "english": "grade / mark" },
+          { "arabic": "نَجَحت", "transcription": "na-JAHT", "romanization": "najaḥt", "english": "I passed / succeeded" },
+          { "arabic": "تَخَرَّجت", "transcription": "ta-khar-RAJT", "romanization": "taḫarrjt", "english": "I graduated" },
+          { "arabic": "تَخَصُّص", "transcription": "ta-khas-SUS", "romanization": "taḫaṣṣuṣ", "english": "specialization / major" },
+          { "arabic": "صَف", "transcription": "SAF", "romanization": "ṣaff", "english": "class / grade level" },
+          { "arabic": "كِتاب", "transcription": "ki-TĀB", "romanization": "kitāb", "english": "book" },
+          { "arabic": "واجِب", "transcription": "WĀ-jib", "romanization": "wājib", "english": "homework" },
+          { "arabic": "رَسَبت", "transcription": "ra-SABT", "romanization": "rasabt", "english": "I failed" }
+        ]
+      }
+    }
+  ]
+}

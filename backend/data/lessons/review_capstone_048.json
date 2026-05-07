@@ -1,0 +1,415 @@
+{
+  "topic": "Capstone Review",
+  "cycles": [
+    {
+      "cycle": 1,
+      "vocab": [
+        {
+          "arabic": "مَرحَبا كيفَك؟",
+          "transcription": "mar-HA-ba KAY-fak",
+          "romanization": "marḥabā kīfak",
+          "english": "Hello, how are you?",
+          "note": "A1 review: combining greeting and question; the standard opening exchange",
+          "icon": "solar:hand-stars-linear",
+          "icon_color": "#fe4d01"
+        },
+        {
+          "arabic": "بِحِبّ أَتعَلَّم",
+          "transcription": "bi-HIB at-al-LAM",
+          "romanization": "biḥibb ʾataʕallam",
+          "english": "I love to learn",
+          "note": "A2 review: بحب (I like) + Form V verb; combines preference with learning activity",
+          "icon": "solar:book-open-linear",
+          "icon_color": "#007aff"
+        },
+        {
+          "arabic": "رُحت وإِنتَ رَح تيجي",
+          "transcription": "RUHT w-IN-ta raH TĒ-ji",
+          "romanization": "ruḥt w-ʾinta raḥ tījī",
+          "english": "I went and you will come",
+          "note": "A2 review: contrasting past and future in one sentence; tests tense mastery",
+          "icon": "solar:history-linear",
+          "icon_color": "#5856d6"
+        },
+        {
+          "arabic": "ما كُنت عارِف، بَس هَلَّق عارِف",
+          "transcription": "mā KUNT ĀR-if, bas ha-LAʔ ĀR-if",
+          "romanization": "mā kunt ʕārif, bas hallaʾ ʕārif",
+          "english": "I didn't know, but now I know",
+          "note": "B1 review: negative past state + contrast with present; typical narrative pivot",
+          "icon": "solar:brain-linear",
+          "icon_color": "#ff9f0a"
+        },
+        {
+          "arabic": "إِذا عِندي وَقت، رَح أَروح",
+          "transcription": "I-za IN-di WAʔT, raH a-RŪH",
+          "romanization": "ʾiza ʕindi waʔt, raḥ ʾarūḥ",
+          "english": "If I have time, I will go",
+          "note": "B1 review: conditional with future result; key pattern for planning discussions",
+          "icon": "solar:question-circle-linear",
+          "icon_color": "#34c759"
+        },
+        {
+          "arabic": "بِرأيي، الأَهَمّ الكَرامة",
+          "transcription": "bi-RAʾ-yi, il-a-HAMM il-ka-RĀ-me",
+          "romanization": "bi-raʾyi, il-ʾahamm il-karāme",
+          "english": "In my opinion, dignity is most important",
+          "note": "B2 review: opinion marker + superlative + abstract concept; combines multiple B-level patterns",
+          "icon": "solar:star-shine-linear",
+          "icon_color": "#ff9f0a"
+        }
+      ],
+      "quiz": [
+        {
+          "arabic": "مَرحَبا كيفَك؟",
+          "transcription": "mar-HA-ba KAY-fak",
+          "romanization": "marḥabā kīfak",
+          "options": ["Goodbye, how are you?", "Hello, how are you?", "Good morning, fine?", "Hi, what's your name?"],
+          "answer": 1
+        },
+        {
+          "arabic": "بِحِبّ أَتعَلَّم",
+          "transcription": "bi-HIB at-al-LAM",
+          "romanization": "biḥibb ʾataʕallam",
+          "options": ["I hate to learn", "I must learn", "I love to learn", "I need to learn"],
+          "answer": 2
+        },
+        {
+          "arabic": "رُحت وإِنتَ رَح تيجي",
+          "transcription": "RUHT w-IN-ta raH TĒ-ji",
+          "romanization": "ruḥt w-ʾinta raḥ tījī",
+          "options": ["I went and you came", "I will go and you are coming", "I went and you will come", "We both went"],
+          "answer": 2
+        },
+        {
+          "arabic": "ما كُنت عارِف، بَس هَلَّق عارِف",
+          "transcription": "mā KUNT ĀR-if, bas ha-LAʔ ĀR-if",
+          "romanization": "mā kunt ʕārif, bas hallaʾ ʕārif",
+          "options": ["I knew before but not now", "I didn't know, but now I know", "I still don't know", "I'm learning"],
+          "answer": 1
+        },
+        {
+          "arabic": "إِذا عِندي وَقت، رَح أَروح",
+          "transcription": "I-za IN-di WAʔT, raH a-RŪH",
+          "romanization": "ʾiza ʕindi waʔt, raḥ ʾarūḥ",
+          "options": ["When I went, there was time", "If I have time, I will go", "Because I have time, I went", "Although I have time, I won't go"],
+          "answer": 1
+        },
+        {
+          "arabic": "بِرأيي، الأَهَمّ الكَرامة",
+          "transcription": "bi-RAʾ-yi, il-a-HAMM il-ka-RĀ-me",
+          "romanization": "bi-raʾyi, il-ʾahamm il-karāme",
+          "options": ["In your opinion, dignity is least important", "In my opinion, dignity is most important", "According to them, dignity is important", "In our view, dignity is mentioned"],
+          "answer": 1
+        }
+      ],
+      "build": [
+        {
+          "sentence": ["مَرحَبا", "كيفَك؟", "مَنيح"],
+          "decoys": ["بِحِبّ أَتعَلَّم", "إِذا عِندي وَقت", "الكَرامة"],
+          "english": "Hello — how are you? — fine"
+        },
+        {
+          "sentence": ["رُحت", "وبَعدَين", "رَجَعت"],
+          "decoys": ["بِرأيي", "ما كُنت عارِف", "رَح أَروح"],
+          "english": "I went — and then — I came back"
+        },
+        {
+          "sentence": ["إِذا", "عِندي وَقت", "رَح أَروح"],
+          "decoys": ["الكَرامة", "مَرحَبا", "بِحِبّ أَتعَلَّم"],
+          "english": "If I have time, I will go"
+        }
+      ],
+      "speak": {
+        "scenario": "A final comprehensive conversation covering all lesson topics.",
+        "turns": [
+          {
+            "speaker": "them",
+            "arabic": "مرحبا! كيفك؟",
+            "romanization": "marḥabā, kīfak",
+            "english": "Hello! How are you?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "مَرحَبا كيفَك؟",
+            "romanization": "marḥabā kīfak",
+            "english": "Hello, how are you?"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وبتحب تتعلم عربي؟",
+            "romanization": "w-btḥibb titʕallam ʕarabi",
+            "english": "And do you love learning Arabic?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "بِحِبّ أَتعَلَّم كتير!",
+            "romanization": "biḥibb ʾataʕallam ktīr",
+            "english": "I love to learn a lot!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وين رحت اليوم؟",
+            "romanization": "wēn ruḥt il-yōm",
+            "english": "Where did you go today?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "رُحت وإِنتَ رَح تيجي!",
+            "romanization": "ruḥt w-ʾinta raḥ tījī",
+            "english": "I went and you will come!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "كنت عارف هاد قبل؟",
+            "romanization": "kunt ʕārif hād ʾabl",
+            "english": "Did you know this before?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "ما كُنت عارِف، بَس هَلَّق عارِف!",
+            "romanization": "mā kunt ʕārif, bas hallaʾ ʕārif",
+            "english": "I didn't know, but now I know!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "ورح تيجي الأسبوع الجاي؟",
+            "romanization": "w-raḥ tījī l-ʾusbūʕ il-jāyy",
+            "english": "And will you come next week?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "إِذا عِندي وَقت، رَح أَروح!",
+            "romanization": "ʾiza ʕindi waʔt, raḥ ʾarūḥ",
+            "english": "If I have time, I will go!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وإيش الأهم عندك؟",
+            "romanization": "w-ʾēš il-ʾahamm ʕindak",
+            "english": "And what is most important to you?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "بِرأيي، الأَهَمّ الكَرامة!",
+            "romanization": "bi-raʾyi, il-ʾahamm il-karāme",
+            "english": "In my opinion, dignity is most important!"
+          }
+        ]
+      }
+    },
+    {
+      "cycle": 2,
+      "vocab": [
+        {
+          "arabic": "يا رَيت تَعلَّمنا أَكتر",
+          "transcription": "ya-RĒT ta-AL-lam-na AK-tar",
+          "romanization": "yā rēt taʕallimna ʾaktar",
+          "english": "I wish we had learned more",
+          "note": "B2 review: hypothetical + Form V past plural; reflective closing sentiment",
+          "icon": "solar:star-rings-linear",
+          "icon_color": "#5856d6"
+        },
+        {
+          "arabic": "مِن وِجهة نَظري، الأَهَمّ",
+          "transcription": "min WIJ-hat NAZ-ri, il-a-HAMM",
+          "romanization": "min wijhet naẓri, il-ʾahamm",
+          "english": "from my point of view, the most important",
+          "note": "B2 review: formal opinion expression + superlative; complex opinion structure",
+          "icon": "solar:eye-linear",
+          "icon_color": "#007aff"
+        },
+        {
+          "arabic": "انبَسَطت معكم",
+          "transcription": "in-ba-SATT MA-kum",
+          "romanization": "inbasaṭt maʕkum",
+          "english": "I enjoyed being with you all",
+          "note": "A2–B1 review: past tense of Form VII + plural object pronoun; warm farewell",
+          "icon": "solar:smile-circle-linear",
+          "icon_color": "#34c759"
+        },
+        {
+          "arabic": "في يَوم مِن الأَيّام، رَح أَروح",
+          "transcription": "FĪ YŌM min il-AY-yam, raH a-RŪH",
+          "romanization": "fī yōm min il-ʾayyām, raḥ ʾarūḥ",
+          "english": "one day, I will go",
+          "note": "B2 review: hopeful future expression; combines temporal idiom with future tense",
+          "icon": "solar:sunrise-linear",
+          "icon_color": "#ff9f0a"
+        },
+        {
+          "arabic": "بالنِّهاية، اِتعَلَّمنا كتير",
+          "transcription": "bin-ni-HĀ-ye, it-AL-lam-na ka-TĒR",
+          "romanization": "bin-nihāye, itʕallimna ktīr",
+          "english": "in the end, we learned a lot",
+          "note": "capstone closing: narrative close + Form V past + adverb; comprehensive wrap-up",
+          "icon": "solar:check-circle-linear",
+          "icon_color": "#34c759"
+        },
+        {
+          "arabic": "شُكراً وأَلف مَبروك",
+          "transcription": "SHUK-ran w-ALF mab-RŪK",
+          "romanization": "šukran w-ʾalf mabrūk",
+          "english": "thank you and congratulations",
+          "note": "capstone closing: combining thank you with Palestinian congratulations phrase",
+          "icon": "solar:heart-shine-linear",
+          "icon_color": "#fe4d01"
+        }
+      ],
+      "quiz": [
+        {
+          "arabic": "يا رَيت تَعلَّمنا أَكتر",
+          "transcription": "ya-RĒT ta-AL-lam-na AK-tar",
+          "romanization": "yā rēt taʕallimna ʾaktar",
+          "options": ["I'm glad we learned more", "I wish we had learned more", "We will learn more", "We should learn more"],
+          "answer": 1
+        },
+        {
+          "arabic": "مِن وِجهة نَظري، الأَهَمّ",
+          "transcription": "min WIJ-hat NAZ-ri, il-a-HAMM",
+          "romanization": "min wijhet naẓri, il-ʾahamm",
+          "options": ["in your point of view", "according to experts", "from my point of view, most important", "in their opinion"],
+          "answer": 2
+        },
+        {
+          "arabic": "انبَسَطت معكم",
+          "transcription": "in-ba-SATT MA-kum",
+          "romanization": "inbasaṭt maʕkum",
+          "options": ["I was bored with you all", "I'll enjoy with you all", "I enjoyed being with you all", "I learned with you all"],
+          "answer": 2
+        },
+        {
+          "arabic": "في يَوم مِن الأَيّام، رَح أَروح",
+          "transcription": "FĪ YŌM min il-AY-yam, raH a-RŪH",
+          "romanization": "fī yōm min il-ʾayyām, raḥ ʾarūḥ",
+          "options": ["once upon a time I went", "one day, I will go", "on that day I went", "these days I go"],
+          "answer": 1
+        },
+        {
+          "arabic": "بالنِّهاية، اِتعَلَّمنا كتير",
+          "transcription": "bin-ni-HĀ-ye, it-AL-lam-na ka-TĒR",
+          "romanization": "bin-nihāye, itʕallimna ktīr",
+          "options": ["at the beginning we learned little", "in the end we learned nothing", "in the end, we learned a lot", "eventually we will learn"],
+          "answer": 2
+        },
+        {
+          "arabic": "شُكراً وأَلف مَبروك",
+          "transcription": "SHUK-ran w-ALF mab-RŪK",
+          "romanization": "šukran w-ʾalf mabrūk",
+          "options": ["sorry and congratulations", "please and thank you", "goodbye and good luck", "thank you and congratulations"],
+          "answer": 3
+        }
+      ],
+      "build": [
+        {
+          "sentence": ["انبَسَطت معكم", "شُكراً"],
+          "decoys": ["يا رَيت تَعلَّمنا أَكتر", "بالنِّهاية", "مِن وِجهة نَظري"],
+          "english": "I enjoyed being with you all — thank you"
+        },
+        {
+          "sentence": ["بالنِّهاية", "اِتعَلَّمنا كتير"],
+          "decoys": ["أَلف مَبروك", "في يَوم مِن الأَيّام", "يا رَيت تَعلَّمنا أَكتر"],
+          "english": "In the end — we learned a lot"
+        },
+        {
+          "sentence": ["شُكراً", "وأَلف مَبروك"],
+          "decoys": ["بالنِّهاية", "انبَسَطت معكم", "يا رَيت تَعلَّمنا أَكتر"],
+          "english": "Thank you and congratulations"
+        }
+      ],
+      "speak": {
+        "scenario": "You are completing your final Arabic lesson and reflecting on your journey.",
+        "turns": [
+          {
+            "speaker": "them",
+            "arabic": "كيف كانت تجربتك مع العربية؟",
+            "romanization": "kēf kānat tajribtak maʕ il-ʕarabiyye",
+            "english": "How was your experience with Arabic?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "انبَسَطت معكم!",
+            "romanization": "inbasaṭt maʕkum",
+            "english": "I enjoyed being with you all!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وإيش تمنيت؟",
+            "romanization": "w-ʾēš tmannēt",
+            "english": "And what did you wish?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "يا رَيت تَعلَّمنا أَكتر!",
+            "romanization": "yā rēt taʕallimna ʾaktar",
+            "english": "I wish we had learned more!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وإيش الأهم عندك؟",
+            "romanization": "w-ʾēš il-ʾahamm ʕindak",
+            "english": "And what's most important to you?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "مِن وِجهة نَظري، الأَهَمّ التواصل!",
+            "romanization": "min wijhet naẓri, il-ʾahamm it-tawāṣul",
+            "english": "From my point of view, communication is most important!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "ورح تواصل بالعربي؟",
+            "romanization": "w-raḥ twāṣil bil-ʕarabi",
+            "english": "And will you communicate in Arabic?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "في يَوم مِن الأَيّام، رَح أَروح!",
+            "romanization": "fī yōm min il-ʾayyām, raḥ ʾarūḥ",
+            "english": "One day, I will go!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وبالنهاية؟",
+            "romanization": "w-bin-nihāye",
+            "english": "And in the end?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "بالنِّهاية، اِتعَلَّمنا كتير!",
+            "romanization": "bin-nihāye, itʕallimna ktīr",
+            "english": "In the end, we learned a lot!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "ألف مبروك على إنهاء الكورس!",
+            "romanization": "ʾalf mabrūk ʕala ʾinhāʾ il-kōrs",
+            "english": "Congratulations on finishing the course!"
+          },
+          {
+            "speaker": "you",
+            "arabic": "شُكراً وأَلف مَبروك!",
+            "romanization": "šukran w-ʾalf mabrūk",
+            "english": "Thank you and congratulations!"
+          }
+        ]
+      },
+      "review": {
+        "all_vocab": [
+          { "arabic": "مَرحَبا كيفَك؟", "transcription": "mar-HA-ba KAY-fak", "romanization": "marḥabā kīfak", "english": "hello, how are you?" },
+          { "arabic": "بِحِبّ أَتعَلَّم", "transcription": "bi-HIB at-al-LAM", "romanization": "biḥibb ʾataʕallam", "english": "I love to learn" },
+          { "arabic": "رُحت وإِنتَ رَح تيجي", "transcription": "RUHT w-IN-ta raH TĒ-ji", "romanization": "ruḥt w-ʾinta raḥ tījī", "english": "I went and you will come" },
+          { "arabic": "ما كُنت عارِف، بَس هَلَّق عارِف", "transcription": "mā KUNT ĀR-if, bas ha-LAʔ ĀR-if", "romanization": "mā kunt ʕārif, bas hallaʾ ʕārif", "english": "I didn't know, but now I know" },
+          { "arabic": "إِذا عِندي وَقت، رَح أَروح", "transcription": "I-za IN-di WAʔT, raH a-RŪH", "romanization": "ʾiza ʕindi waʔt, raḥ ʾarūḥ", "english": "if I have time, I will go" },
+          { "arabic": "بِرأيي، الأَهَمّ الكَرامة", "transcription": "bi-RAʾ-yi, il-a-HAMM il-ka-RĀ-me", "romanization": "bi-raʾyi, il-ʾahamm il-karāme", "english": "in my opinion, dignity is most important" },
+          { "arabic": "يا رَيت تَعلَّمنا أَكتر", "transcription": "ya-RĒT ta-AL-lam-na AK-tar", "romanization": "yā rēt taʕallimna ʾaktar", "english": "I wish we had learned more" },
+          { "arabic": "مِن وِجهة نَظري، الأَهَمّ", "transcription": "min WIJ-hat NAZ-ri, il-a-HAMM", "romanization": "min wijhet naẓri, il-ʾahamm", "english": "from my point of view, most important" },
+          { "arabic": "انبَسَطت معكم", "transcription": "in-ba-SATT MA-kum", "romanization": "inbasaṭt maʕkum", "english": "I enjoyed being with you all" },
+          { "arabic": "في يَوم مِن الأَيّام، رَح أَروح", "transcription": "FĪ YŌM min il-AY-yam, raH a-RŪH", "romanization": "fī yōm min il-ʾayyām, raḥ ʾarūḥ", "english": "one day, I will go" },
+          { "arabic": "بالنِّهاية، اِتعَلَّمنا كتير", "transcription": "bin-ni-HĀ-ye, it-AL-lam-na ka-TĒR", "romanization": "bin-nihāye, itʕallimna ktīr", "english": "in the end, we learned a lot" },
+          { "arabic": "شُكراً وأَلف مَبروك", "transcription": "SHUK-ran w-ALF mab-RŪK", "romanization": "šukran w-ʾalf mabrūk", "english": "thank you and congratulations" }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,415 @@
+{
+  "topic": "Giving Opinions",
+  "cycles": [
+    {
+      "cycle": 1,
+      "vocab": [
+        {
+          "arabic": "بِفكِّر",
+          "transcription": "bi-FAK-kir",
+          "romanization": "bifakkir",
+          "english": "I think",
+          "note": "1st person present of فكّر; بفكر إنه = I think that; used before opinions",
+          "icon": "solar:brain-linear",
+          "icon_color": "#5856d6"
+        },
+        {
+          "arabic": "بِرأيي",
+          "transcription": "bi-RAʾ-yi",
+          "romanization": "bi-raʾyi",
+          "english": "in my opinion",
+          "note": "lit. 'in my view'; very common opener before stating an opinion; ب + رأي + ي",
+          "icon": "solar:chat-round-dots-linear",
+          "icon_color": "#007aff"
+        },
+        {
+          "arabic": "بَشوف",
+          "transcription": "ba-SHŪF",
+          "romanization": "bašūf",
+          "english": "I see / I think (informal)",
+          "note": "lit. 'I see'; used informally to share an opinion; بشوف إنه = I see that / I think that",
+          "icon": "solar:eye-linear",
+          "icon_color": "#34c759"
+        },
+        {
+          "arabic": "صَح",
+          "transcription": "SAH",
+          "romanization": "ṣaḥ",
+          "english": "correct / right",
+          "note": "ص is emphatic; هاد صح = that's correct; مش صح = wrong/incorrect; very common",
+          "icon": "solar:check-circle-linear",
+          "icon_color": "#34c759"
+        },
+        {
+          "arabic": "غَلَط",
+          "transcription": "gha-LAT",
+          "romanization": "ġalaṭ",
+          "english": "wrong / mistake",
+          "note": "noun and adjective; هاد غلط = that's wrong; عمل غلطة = made a mistake",
+          "icon": "solar:close-circle-linear",
+          "icon_color": "#ff3b30"
+        },
+        {
+          "arabic": "رأيَك إيش؟",
+          "transcription": "raʾ-YAK ĒSH",
+          "romanization": "raʾyak ʾēš",
+          "english": "what do you think?",
+          "note": "رأيك (your opinion) + إيش (what); very common conversation opener to invite opinion",
+          "icon": "solar:question-circle-linear",
+          "icon_color": "#ff9f0a"
+        }
+      ],
+      "quiz": [
+        {
+          "arabic": "بِفكِّر",
+          "transcription": "bi-FAK-kir",
+          "romanization": "bifakkir",
+          "options": ["I know", "I think", "I feel", "I believe"],
+          "answer": 1
+        },
+        {
+          "arabic": "بِرأيي",
+          "transcription": "bi-RAʾ-yi",
+          "romanization": "bi-raʾyi",
+          "options": ["in your opinion", "in his opinion", "in my opinion", "according to"],
+          "answer": 2
+        },
+        {
+          "arabic": "بَشوف",
+          "transcription": "ba-SHŪF",
+          "romanization": "bašūf",
+          "options": ["I hear", "I know", "I see / think", "I understand"],
+          "answer": 2
+        },
+        {
+          "arabic": "صَح",
+          "transcription": "SAH",
+          "romanization": "ṣaḥ",
+          "options": ["wrong", "maybe", "correct / right", "sometimes"],
+          "answer": 2
+        },
+        {
+          "arabic": "غَلَط",
+          "transcription": "gha-LAT",
+          "romanization": "ġalaṭ",
+          "options": ["correct", "maybe", "wrong / mistake", "unclear"],
+          "answer": 2
+        },
+        {
+          "arabic": "رأيَك إيش؟",
+          "transcription": "raʾ-YAK ĒSH",
+          "romanization": "raʾyak ʾēš",
+          "options": ["do you know?", "can you help?", "what do you think?", "are you sure?"],
+          "answer": 2
+        }
+      ],
+      "build": [
+        {
+          "sentence": ["بِرأيي", "صَح"],
+          "decoys": ["بِفكِّر", "غَلَط", "بَشوف"],
+          "english": "In my opinion, correct"
+        },
+        {
+          "sentence": ["بِفكِّر", "مش", "غَلَط"],
+          "decoys": ["بِرأيي", "رأيَك إيش؟", "صَح"],
+          "english": "I think it's not wrong"
+        },
+        {
+          "sentence": ["رأيَك إيش؟", "بَشوف"],
+          "decoys": ["غَلَط", "صَح", "بِرأيي"],
+          "english": "What do you think? I see…"
+        }
+      ],
+      "speak": {
+        "scenario": "You are having a discussion about a political topic with a friend.",
+        "turns": [
+          {
+            "speaker": "them",
+            "arabic": "رأيك في هاد الموضوع؟",
+            "romanization": "raʾyak fī hād il-mawḍūʕ",
+            "english": "What's your opinion on this topic?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "بِرأيي مهم!",
+            "romanization": "bi-raʾyi muhimm",
+            "english": "In my opinion, it's important!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وبتفكر هاد صح؟",
+            "romanization": "w-btfakkir hād ṣaḥ",
+            "english": "And do you think this is correct?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "بِفكِّر صَح!",
+            "romanization": "bifakkir ṣaḥ",
+            "english": "I think correct!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "أنا بشوف غير هيك",
+            "romanization": "ʾana bašūf ġēr hēk",
+            "english": "I see it differently"
+          },
+          {
+            "speaker": "you",
+            "arabic": "بَشوف كمان!",
+            "romanization": "bašūf kamān",
+            "english": "I see too! (agreeing)"
+          },
+          {
+            "speaker": "them",
+            "arabic": "هاد غلط برأيك؟",
+            "romanization": "hād ġalaṭ b-raʾyak",
+            "english": "Is this wrong in your opinion?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "غَلَط كبير!",
+            "romanization": "ġalaṭ kabīr",
+            "english": "A big mistake!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وهاد صح؟",
+            "romanization": "w-hād ṣaḥ",
+            "english": "And this is correct?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "صَح كتير!",
+            "romanization": "ṣaḥ ktīr",
+            "english": "Very correct!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "إجمالاً رأيك إيش؟",
+            "romanization": "ʾijmālan raʾyak ʾēš",
+            "english": "Overall, what do you think?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "رأيَك إيش؟",
+            "romanization": "raʾyak ʾēš",
+            "english": "What do YOU think?"
+          }
+        ]
+      }
+    },
+    {
+      "cycle": 2,
+      "vocab": [
+        {
+          "arabic": "مُوافِق",
+          "transcription": "mu-Ā-fiʔ",
+          "romanization": "muwāfiʾ",
+          "english": "I agree",
+          "note": "ق → ʾ; adjective/participle; أنا موافق = I agree; موافقة (f) for female speaker",
+          "icon": "solar:check-circle-linear",
+          "icon_color": "#34c759"
+        },
+        {
+          "arabic": "مِش مُوافِق",
+          "transcription": "mish mu-Ā-fiʔ",
+          "romanization": "miš muwāfiʾ",
+          "english": "I disagree",
+          "note": "negation of موافق; أنا مش موافق على هاد = I don't agree with this",
+          "icon": "solar:close-circle-linear",
+          "icon_color": "#ff3b30"
+        },
+        {
+          "arabic": "بَتَّفِق مَعَك",
+          "transcription": "bat-ta-FIʔ MA-ak",
+          "romanization": "battafiʾ maʕak",
+          "english": "I agree with you",
+          "note": "1st person present of Form VIII اتفق; emphasizes active agreement",
+          "icon": "solar:hand-shake-linear",
+          "icon_color": "#007aff"
+        },
+        {
+          "arabic": "مُمكِن يِكون",
+          "transcription": "MUM-kin yi-KŪN",
+          "romanization": "mumkin yikūn",
+          "english": "it could be / it's possible",
+          "note": "expressing uncertainty; ممكن يكون صح = it could be correct; softer than أكيد (certain)",
+          "icon": "solar:question-circle-linear",
+          "icon_color": "#6e6e73"
+        },
+        {
+          "arabic": "أَكيد",
+          "transcription": "a-KĒD",
+          "romanization": "ʾakīd",
+          "english": "definitely / sure",
+          "note": "ق → ʾ; أكيد = certainly; used to confirm: أكيد صح = definitely correct; أكيد؟ = are you sure?",
+          "icon": "solar:shield-check-linear",
+          "icon_color": "#34c759"
+        },
+        {
+          "arabic": "مِش مَعقول",
+          "transcription": "mish maʕ-ŪL",
+          "romanization": "miš maʕʾūl",
+          "english": "unbelievable / unreasonable",
+          "note": "lit. 'not reasonable'; very common Palestinian exclamation of disbelief or surprise",
+          "icon": "solar:danger-triangle-linear",
+          "icon_color": "#ff9f0a"
+        }
+      ],
+      "quiz": [
+        {
+          "arabic": "مُوافِق",
+          "transcription": "mu-Ā-fiʔ",
+          "romanization": "muwāfiʾ",
+          "options": ["I disagree", "I think", "I agree", "I'm sure"],
+          "answer": 2
+        },
+        {
+          "arabic": "مِش مُوافِق",
+          "transcription": "mish mu-Ā-fiʔ",
+          "romanization": "miš muwāfiʾ",
+          "options": ["I agree", "I disagree", "I'm not sure", "I don't know"],
+          "answer": 1
+        },
+        {
+          "arabic": "بَتَّفِق مَعَك",
+          "transcription": "bat-ta-FIʔ MA-ak",
+          "romanization": "battafiʾ maʕak",
+          "options": ["I disagree with you", "I agree with you", "I understand you", "I help you"],
+          "answer": 1
+        },
+        {
+          "arabic": "مُمكِن يِكون",
+          "transcription": "MUM-kin yi-KŪN",
+          "romanization": "mumkin yikūn",
+          "options": ["definitely", "never", "it could be", "it must be"],
+          "answer": 2
+        },
+        {
+          "arabic": "أَكيد",
+          "transcription": "a-KĒD",
+          "romanization": "ʾakīd",
+          "options": ["maybe", "never", "definitely / sure", "sometimes"],
+          "answer": 2
+        },
+        {
+          "arabic": "مِش مَعقول",
+          "transcription": "mish maʕ-ŪL",
+          "romanization": "miš maʕʾūl",
+          "options": ["that's reasonable", "good idea", "unbelievable", "I agree"],
+          "answer": 2
+        }
+      ],
+      "build": [
+        {
+          "sentence": ["مُوافِق", "أَكيد"],
+          "decoys": ["مِش مُوافِق", "مُمكِن يِكون", "مِش مَعقول"],
+          "english": "I definitely agree"
+        },
+        {
+          "sentence": ["مِش مُوافِق", "مِش مَعقول"],
+          "decoys": ["بَتَّفِق مَعَك", "أَكيد", "مُوافِق"],
+          "english": "I disagree — unbelievable!"
+        },
+        {
+          "sentence": ["بَتَّفِق مَعَك", "مُمكِن يِكون"],
+          "decoys": ["أَكيد", "مِش مُوافِق", "مِش مَعقول"],
+          "english": "I agree with you — it could be"
+        }
+      ],
+      "speak": {
+        "scenario": "You are debating a news story with a colleague.",
+        "turns": [
+          {
+            "speaker": "them",
+            "arabic": "موافق على هاد القرار؟",
+            "romanization": "muwāfiʾ ʕalā hād il-ʾarār",
+            "english": "Do you agree with this decision?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "مُوافِق كتير!",
+            "romanization": "muwāfiʾ ktīr",
+            "english": "I strongly agree!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "أنا مش موافق",
+            "romanization": "ʾana miš muwāfiʾ",
+            "english": "I disagree"
+          },
+          {
+            "speaker": "you",
+            "arabic": "مِش مُوافِق؟",
+            "romanization": "miš muwāfiʾ",
+            "english": "You disagree?"
+          },
+          {
+            "speaker": "them",
+            "arabic": "أكيد مش موافق",
+            "romanization": "ʾakīd miš muwāfiʾ",
+            "english": "Definitely disagree"
+          },
+          {
+            "speaker": "you",
+            "arabic": "أَكيد؟",
+            "romanization": "ʾakīd",
+            "english": "Definitely?"
+          },
+          {
+            "speaker": "them",
+            "arabic": "ممكن تفهم وجهة نظري؟",
+            "romanization": "mumkin tifham wujhat naẓari",
+            "english": "Can you understand my point of view?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "بَتَّفِق مَعَك شوي!",
+            "romanization": "battafiʾ maʕak šway",
+            "english": "I agree with you a little!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "مش ممكن يكون صح هيك",
+            "romanization": "miš mumkin yikūn ṣaḥ hēk",
+            "english": "It can't be right like this"
+          },
+          {
+            "speaker": "you",
+            "arabic": "مُمكِن يِكون!",
+            "romanization": "mumkin yikūn",
+            "english": "It could be!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "مش معقول بصراحة",
+            "romanization": "miš maʕʾūl b-ṣarāḥa",
+            "english": "Unbelievable honestly"
+          },
+          {
+            "speaker": "you",
+            "arabic": "مِش مَعقول فعلاً!",
+            "romanization": "miš maʕʾūl fiʕlan",
+            "english": "Truly unbelievable!"
+          }
+        ]
+      },
+      "review": {
+        "all_vocab": [
+          { "arabic": "بِفكِّر", "transcription": "bi-FAK-kir", "romanization": "bifakkir", "english": "I think" },
+          { "arabic": "بِرأيي", "transcription": "bi-RAʾ-yi", "romanization": "bi-raʾyi", "english": "in my opinion" },
+          { "arabic": "بَشوف", "transcription": "ba-SHŪF", "romanization": "bašūf", "english": "I see / think" },
+          { "arabic": "صَح", "transcription": "SAH", "romanization": "ṣaḥ", "english": "correct / right" },
+          { "arabic": "غَلَط", "transcription": "gha-LAT", "romanization": "ġalaṭ", "english": "wrong / mistake" },
+          { "arabic": "رأيَك إيش؟", "transcription": "raʾ-YAK ĒSH", "romanization": "raʾyak ʾēš", "english": "what do you think?" },
+          { "arabic": "مُوافِق", "transcription": "mu-Ā-fiʔ", "romanization": "muwāfiʾ", "english": "I agree" },
+          { "arabic": "مِش مُوافِق", "transcription": "mish mu-Ā-fiʔ", "romanization": "miš muwāfiʾ", "english": "I disagree" },
+          { "arabic": "بَتَّفِق مَعَك", "transcription": "bat-ta-FIʔ MA-ak", "romanization": "battafiʾ maʕak", "english": "I agree with you" },
+          { "arabic": "مُمكِن يِكون", "transcription": "MUM-kin yi-KŪN", "romanization": "mumkin yikūn", "english": "it could be" },
+          { "arabic": "أَكيد", "transcription": "a-KĒD", "romanization": "ʾakīd", "english": "definitely / sure" },
+          { "arabic": "مِش مَعقول", "transcription": "mish maʕ-ŪL", "romanization": "miš maʕʾūl", "english": "unbelievable" }
+        ]
+      }
+    }
+  ]
+}

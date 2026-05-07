@@ -1,0 +1,418 @@
+{
+  "topic": "Palestinian Culture & Customs",
+  "cycles": [
+    {
+      "cycle": 1,
+      "vocab": [
+        {
+          "arabic": "عَزيمة",
+          "transcription": "a-ZĒ-me",
+          "romanization": "ʕazīme",
+          "english": "invitation to eat",
+          "note": "specifically an invitation to a meal at someone's home; عزمتني عالعشا = she invited me for dinner",
+          "icon": "solar:plate-linear",
+          "icon_color": "#ff9f0a"
+        },
+        {
+          "arabic": "ضِيافة",
+          "transcription": "di-YĀ-fe",
+          "romanization": "ḍiyāfe",
+          "english": "hospitality",
+          "note": "a core Palestinian value; الضيافة الفلسطينية = Palestinian hospitality; بيت الضيافة = guesthouse",
+          "icon": "solar:home-linear",
+          "icon_color": "#fe4d01"
+        },
+        {
+          "arabic": "عيد",
+          "transcription": "ĒD",
+          "romanization": "ʕīd",
+          "english": "holiday / feast",
+          "note": "عيد الفطر = Eid al-Fitr; عيد الأضحى = Eid al-Adha; كل عام وإنتم بخير = greetings",
+          "icon": "solar:star-shine-linear",
+          "icon_color": "#5856d6"
+        },
+        {
+          "arabic": "رَمَضان",
+          "transcription": "ra-ma-DAN",
+          "romanization": "ramaḍān",
+          "english": "Ramadan",
+          "note": "the holy month of fasting; رمضان كريم = Ramadan greetings; السحور والإفطار = pre-dawn and iftar meals",
+          "icon": "solar:moon-stars-linear",
+          "icon_color": "#5856d6"
+        },
+        {
+          "arabic": "أَهل",
+          "transcription": "AHL",
+          "romanization": "ʾahl",
+          "english": "family / people (of)",
+          "note": "أهل البيت = the household; أهلي = my family; أهل المنطقة = people of the area",
+          "icon": "solar:users-group-two-rounded-linear",
+          "icon_color": "#007aff"
+        },
+        {
+          "arabic": "عادات",
+          "transcription": "a-DĀT",
+          "romanization": "ʕādāt",
+          "english": "customs / traditions",
+          "note": "plural of عادة (habit/custom); العادات الفلسطينية = Palestinian customs; عادة قديمة = old tradition",
+          "icon": "solar:book-linear",
+          "icon_color": "#34c759"
+        }
+      ],
+      "quiz": [
+        {
+          "arabic": "عَزيمة",
+          "transcription": "a-ZĒ-me",
+          "romanization": "ʕazīme",
+          "options": ["a gift", "a party", "invitation to eat", "a greeting"],
+          "answer": 2
+        },
+        {
+          "arabic": "ضِيافة",
+          "transcription": "di-YĀ-fe",
+          "romanization": "ḍiyāfe",
+          "options": ["generosity", "culture", "hospitality", "customs"],
+          "answer": 2
+        },
+        {
+          "arabic": "عيد",
+          "transcription": "ĒD",
+          "romanization": "ʕīd",
+          "english": "holiday / feast",
+          "options": ["festival", "holiday / feast", "prayer", "custom"],
+          "answer": 1
+        },
+        {
+          "arabic": "رَمَضان",
+          "transcription": "ra-ma-DAN",
+          "romanization": "ramaḍān",
+          "options": ["a holiday", "a festival", "a custom", "Ramadan"],
+          "answer": 3
+        },
+        {
+          "arabic": "أَهل",
+          "transcription": "AHL",
+          "romanization": "ʾahl",
+          "english": "family / people",
+          "options": ["relatives", "friends", "family / people of", "neighbors"],
+          "answer": 2
+        },
+        {
+          "arabic": "عادات",
+          "transcription": "a-DĀT",
+          "romanization": "ʕādāt",
+          "options": ["languages", "holidays", "customs / traditions", "religions"],
+          "answer": 2
+        }
+      ],
+      "build": [
+        {
+          "sentence": ["عَزيمة", "ضِيافة"],
+          "decoys": ["رَمَضان", "عادات", "أَهل"],
+          "english": "Dinner invitation — hospitality"
+        },
+        {
+          "sentence": ["رَمَضان", "عيد"],
+          "decoys": ["ضِيافة", "أَهل", "عادات"],
+          "english": "Ramadan and Eid"
+        },
+        {
+          "sentence": ["أَهل", "عادات", "قَديمة"],
+          "decoys": ["عيد", "رَمَضان", "عَزيمة"],
+          "english": "Family — old customs"
+        }
+      ],
+      "speak": {
+        "scenario": "A foreign friend is asking you about Palestinian customs.",
+        "turns": [
+          {
+            "speaker": "them",
+            "arabic": "شو العادات عندكم؟",
+            "romanization": "šū il-ʕādāt ʕindkum",
+            "english": "What are your customs?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "عادات كتيرة!",
+            "romanization": "ʕādāt ktīre",
+            "english": "Many customs!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وإيش الضيافة عندكم؟",
+            "romanization": "w-ʾēš iḍ-ḍiyāfe ʕindkum",
+            "english": "And what is hospitality like for you?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "ضِيافة كبيرة!",
+            "romanization": "ḍiyāfe kabīra",
+            "english": "Big hospitality!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وبتعزموا كتير؟",
+            "romanization": "w-btʕazzmū ktīr",
+            "english": "And do you invite a lot?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "عَزيمة كل يوم!",
+            "romanization": "ʕazīme kull yōm",
+            "english": "Invitations every day!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وبرمضان؟ كيف؟",
+            "romanization": "w-b-ramaḍān, kēf",
+            "english": "And in Ramadan? How is it?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "رَمَضان رائع!",
+            "romanization": "ramaḍān rāʾiʕ",
+            "english": "Ramadan is wonderful!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وبالعيد شو بتعملوا؟",
+            "romanization": "w-bil-ʕīd šū btʕamlū",
+            "english": "And on the Eid what do you do?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "عيد مع الأهل!",
+            "romanization": "ʕīd maʕ il-ʾahl",
+            "english": "Eid with the family!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وأهلك كيف الكل؟",
+            "romanization": "w-ʾahlak kēf il-kull",
+            "english": "And how is all your family?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "أَهل منيح!",
+            "romanization": "ʾahl mnīḥ",
+            "english": "Family is well!"
+          }
+        ]
+      }
+    },
+    {
+      "cycle": 2,
+      "vocab": [
+        {
+          "arabic": "فَرَح",
+          "transcription": "fa-RAH",
+          "romanization": "faraḥ",
+          "english": "wedding / joyful event",
+          "note": "also means 'happiness/joy'; يحضر الفرح = attend the wedding; بلد الفرح = city of weddings",
+          "icon": "solar:heart-shine-linear",
+          "icon_color": "#ff2d55"
+        },
+        {
+          "arabic": "عَزاء",
+          "transcription": "a-ZĀ",
+          "romanization": "ʕazāʾ",
+          "english": "condolences / mourning visit",
+          "note": "بقدم العزاء = I offer condolences; بيت العزاء = mourning house; المعزى = the bereaved",
+          "icon": "solar:people-nearby-linear",
+          "icon_color": "#6e6e73"
+        },
+        {
+          "arabic": "تَهاني",
+          "transcription": "ta-HĀ-ni",
+          "romanization": "tahāni",
+          "english": "congratulations",
+          "note": "plural of تهنئة; ألف مبروك = a thousand congratulations; تهاني بالعيد = Eid congratulations",
+          "icon": "solar:star-shine-linear",
+          "icon_color": "#ff9f0a"
+        },
+        {
+          "arabic": "إِن شا الله",
+          "transcription": "in-SHA-LAH",
+          "romanization": "ʾin šā llāh",
+          "english": "God willing (cultural marker)",
+          "note": "used everywhere from polite deflection to genuine hope; deeply embedded in Palestinian speech",
+          "icon": "solar:star-rings-linear",
+          "icon_color": "#5856d6"
+        },
+        {
+          "arabic": "الحَمد لله",
+          "transcription": "il-HAM-du-LIL-lah",
+          "romanization": "il-ḥamdu lillāh",
+          "english": "praise be to God / thank God",
+          "note": "said after hardship or blessing; response to كيفك; الحمد لله على كل حال = thank God for everything",
+          "icon": "solar:heart-linear",
+          "icon_color": "#34c759"
+        },
+        {
+          "arabic": "أَلف مَبروك",
+          "transcription": "ALF mab-RŪK",
+          "romanization": "ʾalf mabrūk",
+          "english": "congratulations! (lit. a thousand blessings)",
+          "note": "the standard Palestinian congratulations phrase for marriages, births, promotions",
+          "icon": "solar:star-shine-linear",
+          "icon_color": "#ff9f0a"
+        }
+      ],
+      "quiz": [
+        {
+          "arabic": "فَرَح",
+          "transcription": "fa-RAH",
+          "romanization": "faraḥ",
+          "english": "wedding / joyful event",
+          "options": ["funeral", "graduation", "wedding", "party"],
+          "answer": 2
+        },
+        {
+          "arabic": "عَزاء",
+          "transcription": "a-ZĀ",
+          "romanization": "ʕazāʾ",
+          "options": ["celebration", "wedding", "condolences", "invitation"],
+          "answer": 2
+        },
+        {
+          "arabic": "تَهاني",
+          "transcription": "ta-HĀ-ni",
+          "romanization": "tahāni",
+          "options": ["apologies", "condolences", "greetings", "congratulations"],
+          "answer": 3
+        },
+        {
+          "arabic": "إِن شا الله",
+          "transcription": "in-SHA-LAH",
+          "romanization": "ʾin šā llāh",
+          "options": ["thank God", "praise God", "if God wills", "God is great"],
+          "answer": 2
+        },
+        {
+          "arabic": "الحَمد لله",
+          "transcription": "il-HAM-du-LIL-lah",
+          "romanization": "il-ḥamdu lillāh",
+          "options": ["God willing", "God is great", "praise be to God", "in God's name"],
+          "answer": 2
+        },
+        {
+          "arabic": "أَلف مَبروك",
+          "transcription": "ALF mab-RŪK",
+          "romanization": "ʾalf mabrūk",
+          "options": ["sorry for your loss", "good luck", "congratulations!", "welcome"],
+          "answer": 2
+        }
+      ],
+      "build": [
+        {
+          "sentence": ["فَرَح", "تَهاني", "أَلف مَبروك"],
+          "decoys": ["عَزاء", "الحَمد لله", "إِن شا الله"],
+          "english": "Wedding — congratulations — a thousand blessings"
+        },
+        {
+          "sentence": ["عَزاء", "الحَمد لله"],
+          "decoys": ["فَرَح", "تَهاني", "أَلف مَبروك"],
+          "english": "Condolences — praise God"
+        },
+        {
+          "sentence": ["إِن شا الله", "فَرَح"],
+          "decoys": ["عَزاء", "تَهاني", "الحَمد لله"],
+          "english": "God willing — a wedding"
+        }
+      ],
+      "speak": {
+        "scenario": "You are talking about a neighbor's recent wedding and a loss in the community.",
+        "turns": [
+          {
+            "speaker": "them",
+            "arabic": "سمعت عن الفرح؟",
+            "romanization": "simiʕt ʕan il-faraḥ",
+            "english": "Did you hear about the wedding?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "فَرَح حِلو!",
+            "romanization": "faraḥ ḥilwu",
+            "english": "A nice wedding!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وبعثتلهم تهاني؟",
+            "romanization": "w-baʕattillhum tahāni",
+            "english": "And did you send them congratulations?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "تَهاني كتير!",
+            "romanization": "tahāni ktīr",
+            "english": "Many congratulations!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وألف مبروك قلت؟",
+            "romanization": "w-ʾalf mabrūk ʾult",
+            "english": "And did you say a thousand blessings?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "أَلف مَبروك!",
+            "romanization": "ʾalf mabrūk",
+            "english": "A thousand blessings!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وللعزاء رحت؟",
+            "romanization": "w-lil-ʕazāʾ ruḥt",
+            "english": "And did you go to the condolences?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "عَزاء مهم نروح!",
+            "romanization": "ʕazāʾ muhimm nrūḥ",
+            "english": "Important to attend the condolences!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وكيف حال أهل المتوفي؟",
+            "romanization": "w-kēf ḥāl ʾahl il-mutawaffī",
+            "english": "And how is the family of the deceased?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "الحَمد لله صابرين!",
+            "romanization": "il-ḥamdu lillāh ṣābirīn",
+            "english": "Praise God, they are patient!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "إن شاء الله بتتحسن أحوالهم",
+            "romanization": "ʾin šā llāh btitḥassan ʾaḥwālhum",
+            "english": "God willing their situation improves"
+          },
+          {
+            "speaker": "you",
+            "arabic": "إِن شا الله!",
+            "romanization": "ʾin šā llāh",
+            "english": "God willing!"
+          }
+        ]
+      },
+      "review": {
+        "all_vocab": [
+          { "arabic": "عَزيمة", "transcription": "a-ZĒ-me", "romanization": "ʕazīme", "english": "invitation to eat" },
+          { "arabic": "ضِيافة", "transcription": "di-YĀ-fe", "romanization": "ḍiyāfe", "english": "hospitality" },
+          { "arabic": "عيد", "transcription": "ĒD", "romanization": "ʕīd", "english": "holiday / feast" },
+          { "arabic": "رَمَضان", "transcription": "ra-ma-DAN", "romanization": "ramaḍān", "english": "Ramadan" },
+          { "arabic": "أَهل", "transcription": "AHL", "romanization": "ʾahl", "english": "family / people of" },
+          { "arabic": "عادات", "transcription": "a-DĀT", "romanization": "ʕādāt", "english": "customs / traditions" },
+          { "arabic": "فَرَح", "transcription": "fa-RAH", "romanization": "faraḥ", "english": "wedding / joyful event" },
+          { "arabic": "عَزاء", "transcription": "a-ZĀ", "romanization": "ʕazāʾ", "english": "condolences" },
+          { "arabic": "تَهاني", "transcription": "ta-HĀ-ni", "romanization": "tahāni", "english": "congratulations" },
+          { "arabic": "إِن شا الله", "transcription": "in-SHA-LAH", "romanization": "ʾin šā llāh", "english": "God willing" },
+          { "arabic": "الحَمد لله", "transcription": "il-HAM-du-LIL-lah", "romanization": "il-ḥamdu lillāh", "english": "praise be to God" },
+          { "arabic": "أَلف مَبروك", "transcription": "ALF mab-RŪK", "romanization": "ʾalf mabrūk", "english": "congratulations!" }
+        ]
+      }
+    }
+  ]
+}

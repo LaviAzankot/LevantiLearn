@@ -1,0 +1,415 @@
+{
+  "topic": "Environment & Sustainability",
+  "cycles": [
+    {
+      "cycle": 1,
+      "vocab": [
+        {
+          "arabic": "بِيئة",
+          "transcription": "BĒ-a",
+          "romanization": "bīʾa",
+          "english": "environment",
+          "note": "البيئة الفلسطينية = Palestinian environment; حماية البيئة = environmental protection",
+          "icon": "solar:leaf-linear",
+          "icon_color": "#34c759"
+        },
+        {
+          "arabic": "تَلَوُّث",
+          "transcription": "ta-LAW-wut",
+          "romanization": "talawwuṯ",
+          "english": "pollution",
+          "note": "تلوث الهواء = air pollution; تلوث الماء = water pollution; مشكلة التلوث = the pollution problem",
+          "icon": "solar:cloud-linear",
+          "icon_color": "#6e6e73"
+        },
+        {
+          "arabic": "طاقة",
+          "transcription": "TĀ-ʔe",
+          "romanization": "ṭāʾa",
+          "english": "energy",
+          "note": "ق → ʾ; طاقة شمسية = solar energy; طاقة نظيفة = clean energy; popular in Palestinian solar projects",
+          "icon": "solar:sun-2-linear",
+          "icon_color": "#ff9f0a"
+        },
+        {
+          "arabic": "مَي",
+          "transcription": "MAY",
+          "romanization": "may",
+          "english": "water",
+          "note": "essential resource issue for Palestinians; أزمة المي = water crisis; توفير المي = water conservation",
+          "icon": "solar:water-linear",
+          "icon_color": "#007aff"
+        },
+        {
+          "arabic": "طَبيعة",
+          "transcription": "ta-BĒ-a",
+          "romanization": "ṭabīʕa",
+          "english": "nature",
+          "note": "فلسطين طبيعتها حلوة = Palestine's nature is beautiful; الطبيعة والبيئة = nature and environment",
+          "icon": "solar:leaf-linear",
+          "icon_color": "#34c759"
+        },
+        {
+          "arabic": "نَظيف",
+          "transcription": "na-ZĒF",
+          "romanization": "naẓīf",
+          "english": "clean",
+          "note": "feminine: نظيفة (naẓīfe); هواء نظيف = clean air; ابقى نظيف = stay clean (imperative)",
+          "icon": "solar:check-circle-linear",
+          "icon_color": "#34c759"
+        }
+      ],
+      "quiz": [
+        {
+          "arabic": "بِيئة",
+          "transcription": "BĒ-a",
+          "romanization": "bīʾa",
+          "options": ["nature", "pollution", "environment", "climate"],
+          "answer": 2
+        },
+        {
+          "arabic": "تَلَوُّث",
+          "transcription": "ta-LAW-wut",
+          "romanization": "talawwuṯ",
+          "options": ["clean air", "pollution", "nature", "water"],
+          "answer": 1
+        },
+        {
+          "arabic": "طاقة",
+          "transcription": "TĀ-ʔe",
+          "romanization": "ṭāʾa",
+          "options": ["water", "environment", "energy", "climate"],
+          "answer": 2
+        },
+        {
+          "arabic": "مَي",
+          "transcription": "MAY",
+          "romanization": "may",
+          "options": ["air", "energy", "nature", "water"],
+          "answer": 3
+        },
+        {
+          "arabic": "طَبيعة",
+          "transcription": "ta-BĒ-a",
+          "romanization": "ṭabīʕa",
+          "options": ["pollution", "city", "nature", "weather"],
+          "answer": 2
+        },
+        {
+          "arabic": "نَظيف",
+          "transcription": "na-ZĒF",
+          "romanization": "naẓīf",
+          "options": ["dirty", "old", "clean", "new"],
+          "answer": 2
+        }
+      ],
+      "build": [
+        {
+          "sentence": ["بِيئة", "نَظيف"],
+          "decoys": ["تَلَوُّث", "طاقة", "مَي"],
+          "english": "Clean environment"
+        },
+        {
+          "sentence": ["تَلَوُّث", "مَي", "مشكلة"],
+          "decoys": ["طَبيعة", "نَظيف", "طاقة"],
+          "english": "Water pollution — a problem"
+        },
+        {
+          "sentence": ["طاقة", "طَبيعة"],
+          "decoys": ["نَظيف", "بِيئة", "مَي"],
+          "english": "Energy from nature"
+        }
+      ],
+      "speak": {
+        "scenario": "You are discussing environmental issues in Palestine.",
+        "turns": [
+          {
+            "speaker": "them",
+            "arabic": "إيش أكبر مشكلة بيئية؟",
+            "romanization": "ʾēš ʾakbar muškilā bīʾiyye",
+            "english": "What is the biggest environmental problem?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "بِيئة تعبانة!",
+            "romanization": "bīʾa tabʕāne",
+            "english": "The environment is suffering!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "والتلوث؟",
+            "romanization": "w-it-talawwuṯ",
+            "english": "And pollution?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "تَلَوُّث كبير!",
+            "romanization": "talawwuṯ kabīr",
+            "english": "Huge pollution!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وأزمة المي؟",
+            "romanization": "w-ʾazmet il-may",
+            "english": "And the water crisis?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "مَي قليل!",
+            "romanization": "may ʾalīl",
+            "english": "Little water!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وإيش الحل؟ طاقة شمسية؟",
+            "romanization": "w-ʾēš il-ḥall, ṭāʾa šamsiyye",
+            "english": "And what's the solution? Solar energy?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "طاقة شمسية مهمة!",
+            "romanization": "ṭāʾa šamsiyye muhimme",
+            "english": "Solar energy is important!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "والطبيعة كيف؟",
+            "romanization": "w-iṭ-ṭabīʕa kēf",
+            "english": "And nature — how is it?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "طَبيعة حِلوة بس تعبانة!",
+            "romanization": "ṭabīʕa ḥilwe bas tabʕāne",
+            "english": "Beautiful nature but suffering!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وبدنا بيئة نظيفة؟",
+            "romanization": "w-biddna bīʾa naẓīfe",
+            "english": "And we want a clean environment?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "نَظيف ضروري!",
+            "romanization": "naẓīf ḍarūri",
+            "english": "Clean is essential!"
+          }
+        ]
+      }
+    },
+    {
+      "cycle": 2,
+      "vocab": [
+        {
+          "arabic": "تَغيير المَناخ",
+          "transcription": "ta-GHĒR il-MA-nakh",
+          "romanization": "taġyīr il-manāḫ",
+          "english": "climate change",
+          "note": "lit. 'changing of the climate'; increasingly discussed in Palestinian environmental discourse",
+          "icon": "solar:wind-linear",
+          "icon_color": "#5856d6"
+        },
+        {
+          "arabic": "إعادة تَدوير",
+          "transcription": "i-ĀD-it ta-DŪR",
+          "romanization": "ʾiʕādet tadwīr",
+          "english": "recycling",
+          "note": "lit. 'returning to circulation'; إعادة تدوير النفايات = waste recycling",
+          "icon": "solar:refresh-circle-linear",
+          "icon_color": "#34c759"
+        },
+        {
+          "arabic": "حَل",
+          "transcription": "HALL",
+          "romanization": "ḥall",
+          "english": "solution",
+          "note": "بحث عن حل = looking for a solution; الحل في يدنا = the solution is in our hands",
+          "icon": "solar:check-circle-linear",
+          "icon_color": "#34c759"
+        },
+        {
+          "arabic": "مُستَقبَل",
+          "transcription": "mus-TAK-bal",
+          "romanization": "mustaqbal",
+          "english": "future",
+          "note": "ق → ʾ; مستقبل الأولاد = children's future; مستقبل البيئة = environmental future",
+          "icon": "solar:star-shine-linear",
+          "icon_color": "#ff9f0a"
+        },
+        {
+          "arabic": "وَعي",
+          "transcription": "WA-i",
+          "romanization": "waʕī",
+          "english": "awareness",
+          "note": "رفع الوعي = raising awareness; وعي بيئي = environmental awareness",
+          "icon": "solar:eye-linear",
+          "icon_color": "#007aff"
+        },
+        {
+          "arabic": "نُشارِك",
+          "transcription": "nu-SHA-rik",
+          "romanization": "nušārik",
+          "english": "we participate / we contribute",
+          "note": "1st person plural present of شارك; نشارك في الحل = we contribute to the solution",
+          "icon": "solar:users-group-two-rounded-linear",
+          "icon_color": "#fe4d01"
+        }
+      ],
+      "quiz": [
+        {
+          "arabic": "تَغيير المَناخ",
+          "transcription": "ta-GHĒR il-MA-nakh",
+          "romanization": "taġyīr il-manāḫ",
+          "options": ["weather forecast", "climate change", "seasonal change", "temperature"],
+          "answer": 1
+        },
+        {
+          "arabic": "إعادة تَدوير",
+          "transcription": "i-ĀD-it ta-DŪR",
+          "romanization": "ʾiʕādet tadwīr",
+          "options": ["wasting", "producing", "recycling", "burning"],
+          "answer": 2
+        },
+        {
+          "arabic": "حَل",
+          "transcription": "HALL",
+          "romanization": "ḥall",
+          "options": ["problem", "idea", "solution", "action"],
+          "answer": 2
+        },
+        {
+          "arabic": "مُستَقبَل",
+          "transcription": "mus-TAK-bal",
+          "romanization": "mustaqbal",
+          "options": ["past", "present", "future", "history"],
+          "answer": 2
+        },
+        {
+          "arabic": "وَعي",
+          "transcription": "WA-i",
+          "romanization": "waʕī",
+          "options": ["knowledge", "fear", "awareness", "information"],
+          "answer": 2
+        },
+        {
+          "arabic": "نُشارِك",
+          "transcription": "nu-SHA-rik",
+          "romanization": "nušārik",
+          "options": ["they participate", "you participate", "we participate", "I participate"],
+          "answer": 2
+        }
+      ],
+      "build": [
+        {
+          "sentence": ["تَغيير المَناخ", "مشكلة", "كبيرة"],
+          "decoys": ["وَعي", "حَل", "مُستَقبَل"],
+          "english": "Climate change is a big problem"
+        },
+        {
+          "sentence": ["إعادة تَدوير", "حَل"],
+          "decoys": ["مُستَقبَل", "تَغيير المَناخ", "نُشارِك"],
+          "english": "Recycling is a solution"
+        },
+        {
+          "sentence": ["نُشارِك", "وَعي", "مُستَقبَل"],
+          "decoys": ["حَل", "إعادة تَدوير", "تَغيير المَناخ"],
+          "english": "We participate — awareness — future"
+        }
+      ],
+      "speak": {
+        "scenario": "You are at a community environmental workshop.",
+        "turns": [
+          {
+            "speaker": "them",
+            "arabic": "تعرف عن تغيير المناخ؟",
+            "romanization": "taʕrif ʕan taġyīr il-manāḫ",
+            "english": "Do you know about climate change?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "تَغيير المَناخ مشكلة كبيرة!",
+            "romanization": "taġyīr il-manāḫ muškilā kabīra",
+            "english": "Climate change is a big problem!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وإعادة التدوير؟ بتعمل؟",
+            "romanization": "w-ʾiʕādet it-tadwīr, btʕamal",
+            "english": "And recycling? Do you do it?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "إعادة تَدوير مهمة!",
+            "romanization": "ʾiʕādet tadwīr muhimme",
+            "english": "Recycling is important!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وإيش الحل برأيك؟",
+            "romanization": "w-ʾēš il-ḥall b-raʾyak",
+            "english": "And what's the solution in your opinion?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "حَل جماعي!",
+            "romanization": "ḥall jamāʕi",
+            "english": "A collective solution!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وللمستقبل؟",
+            "romanization": "w-lil-mustaqbal",
+            "english": "And for the future?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "مُستَقبَل أحسن إن شا الله!",
+            "romanization": "mustaqbal ʾaḥsan ʾin šā llāh",
+            "english": "A better future, God willing!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وعندك وعي بيئي؟",
+            "romanization": "w-ʕindak waʕī bīʾi",
+            "english": "And do you have environmental awareness?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "وَعي لازم عند الكل!",
+            "romanization": "waʕī lāzim ʕind il-kull",
+            "english": "Awareness is necessary for everyone!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "ونشارك في الحل؟",
+            "romanization": "w-nušārik fī l-ḥall",
+            "english": "And shall we contribute to the solution?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "نُشارِك كلنا!",
+            "romanization": "nušārik kullna",
+            "english": "We all participate!"
+          }
+        ]
+      },
+      "review": {
+        "all_vocab": [
+          { "arabic": "بِيئة", "transcription": "BĒ-a", "romanization": "bīʾa", "english": "environment" },
+          { "arabic": "تَلَوُّث", "transcription": "ta-LAW-wut", "romanization": "talawwuṯ", "english": "pollution" },
+          { "arabic": "طاقة", "transcription": "TĀ-ʔe", "romanization": "ṭāʾa", "english": "energy" },
+          { "arabic": "مَي", "transcription": "MAY", "romanization": "may", "english": "water" },
+          { "arabic": "طَبيعة", "transcription": "ta-BĒ-a", "romanization": "ṭabīʕa", "english": "nature" },
+          { "arabic": "نَظيف", "transcription": "na-ZĒF", "romanization": "naẓīf", "english": "clean" },
+          { "arabic": "تَغيير المَناخ", "transcription": "ta-GHĒR il-MA-nakh", "romanization": "taġyīr il-manāḫ", "english": "climate change" },
+          { "arabic": "إعادة تَدوير", "transcription": "i-ĀD-it ta-DŪR", "romanization": "ʾiʕādet tadwīr", "english": "recycling" },
+          { "arabic": "حَل", "transcription": "HALL", "romanization": "ḥall", "english": "solution" },
+          { "arabic": "مُستَقبَل", "transcription": "mus-TAK-bal", "romanization": "mustaqbal", "english": "future" },
+          { "arabic": "وَعي", "transcription": "WA-i", "romanization": "waʕī", "english": "awareness" },
+          { "arabic": "نُشارِك", "transcription": "nu-SHA-rik", "romanization": "nušārik", "english": "we participate" }
+        ]
+      }
+    }
+  ]
+}

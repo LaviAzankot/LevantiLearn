@@ -1,0 +1,415 @@
+{
+  "topic": "Present Tense Verbs",
+  "cycles": [
+    {
+      "cycle": 1,
+      "vocab": [
+        {
+          "arabic": "بَروح",
+          "transcription": "ba-RŪH",
+          "romanization": "barūḥ",
+          "english": "I go",
+          "note": "1st person singular present; بـ prefix marks ongoing/habitual action in Palestinian Arabic",
+          "icon": "solar:arrow-up-linear",
+          "icon_color": "#fe4d01"
+        },
+        {
+          "arabic": "بآكُل",
+          "transcription": "bā-KUL",
+          "romanization": "bāʾkul",
+          "english": "I eat",
+          "note": "1st person singular present; root أكل (ʾkl); بآكل خبز = I eat bread",
+          "icon": "solar:plate-linear",
+          "icon_color": "#ff9f0a"
+        },
+        {
+          "arabic": "بِشرَب",
+          "transcription": "bish-RAB",
+          "romanization": "bišrab",
+          "english": "I drink",
+          "note": "1st person singular present; root شرب (šrb); بشرب قهوة = I drink coffee",
+          "icon": "solar:cup-hot-linear",
+          "icon_color": "#007aff"
+        },
+        {
+          "arabic": "بِنام",
+          "transcription": "bi-NAM",
+          "romanization": "binām",
+          "english": "I sleep",
+          "note": "1st person singular present; root نوم (nwm); بنام بدري = I sleep early",
+          "icon": "solar:sleep-linear",
+          "icon_color": "#5856d6"
+        },
+        {
+          "arabic": "بِصحى",
+          "transcription": "bis-HA",
+          "romanization": "biṣḥa",
+          "english": "I wake up",
+          "note": "1st person singular present; root صحا (ṣḥā); بصحى متأخر = I wake up late",
+          "icon": "solar:sunrise-linear",
+          "icon_color": "#ff9f0a"
+        },
+        {
+          "arabic": "بِحِبّ",
+          "transcription": "bi-HIB",
+          "romanization": "biḥibb",
+          "english": "I like / I love",
+          "note": "1st person singular present; the double consonant bb is important; بحب = I love",
+          "icon": "solar:heart-linear",
+          "icon_color": "#ff2d55"
+        }
+      ],
+      "quiz": [
+        {
+          "arabic": "بَروح",
+          "transcription": "ba-RŪH",
+          "romanization": "barūḥ",
+          "options": ["I come", "I go", "I return", "I stay"],
+          "answer": 1
+        },
+        {
+          "arabic": "بآكُل",
+          "transcription": "bā-KUL",
+          "romanization": "bāʾkul",
+          "options": ["I cook", "I drink", "I eat", "I buy"],
+          "answer": 2
+        },
+        {
+          "arabic": "بِشرَب",
+          "transcription": "bish-RAB",
+          "romanization": "bišrab",
+          "options": ["I eat", "I drink", "I sleep", "I cook"],
+          "answer": 1
+        },
+        {
+          "arabic": "بِنام",
+          "transcription": "bi-NAM",
+          "romanization": "binām",
+          "options": ["I wake up", "I rest", "I sit", "I sleep"],
+          "answer": 3
+        },
+        {
+          "arabic": "بِصحى",
+          "transcription": "bis-HA",
+          "romanization": "biṣḥa",
+          "options": ["I sleep", "I wake up", "I go", "I come"],
+          "answer": 1
+        },
+        {
+          "arabic": "بِحِبّ",
+          "transcription": "bi-HIB",
+          "romanization": "biḥibb",
+          "options": ["I hate", "I know", "I want", "I like / love"],
+          "answer": 3
+        }
+      ],
+      "build": [
+        {
+          "sentence": ["بَروح", "بآكُل"],
+          "decoys": ["بِنام", "بِحِبّ", "بِشرَب"],
+          "english": "I go and eat"
+        },
+        {
+          "sentence": ["بِشرَب", "قَهوة"],
+          "decoys": ["بَروح", "بِنام", "بِصحى"],
+          "english": "I drink coffee"
+        },
+        {
+          "sentence": ["بِصحى", "بِنام"],
+          "decoys": ["بِحِبّ", "بآكُل", "بَروح"],
+          "english": "I wake up and sleep"
+        }
+      ],
+      "speak": {
+        "scenario": "You are telling a new friend about your daily routine.",
+        "turns": [
+          {
+            "speaker": "them",
+            "arabic": "شو بتعمل الصبح؟",
+            "romanization": "šū btʕamal iṣ-ṣubḥ",
+            "english": "What do you do in the morning?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "بِصحى!",
+            "romanization": "biṣḥa",
+            "english": "I wake up!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وبعدين؟",
+            "romanization": "w-baʕdēn",
+            "english": "And then?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "بآكُل!",
+            "romanization": "bāʾkul",
+            "english": "I eat!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وبشرب شو؟",
+            "romanization": "w-bišrab šū",
+            "english": "And you drink what?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "بِشرَب قهوة!",
+            "romanization": "bišrab ʾahwe",
+            "english": "I drink coffee!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وبعدين بتروح وين؟",
+            "romanization": "w-baʕdēn btrūḥ wēn",
+            "english": "And then where do you go?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "بَروح الشغل!",
+            "romanization": "barūḥ iš-šuġl",
+            "english": "I go to work!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وإيش بتحب تعمل؟",
+            "romanization": "w-ʾēš btḥibb tʕamal",
+            "english": "And what do you like to do?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "بِحِبّ الأكل!",
+            "romanization": "biḥibb il-ʾakil",
+            "english": "I love eating!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وبالليل؟",
+            "romanization": "w-bil-lēl",
+            "english": "And at night?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "بِنام بدري!",
+            "romanization": "binām badri",
+            "english": "I sleep early!"
+          }
+        ]
+      }
+    },
+    {
+      "cycle": 2,
+      "vocab": [
+        {
+          "arabic": "بِشتَغِل",
+          "transcription": "bish-ta-GIL",
+          "romanization": "bištagil",
+          "english": "I work",
+          "note": "1st person singular present; Form X of شغل; بشتغل في = I work at/in",
+          "icon": "solar:briefcase-linear",
+          "icon_color": "#5856d6"
+        },
+        {
+          "arabic": "بِدرُس",
+          "transcription": "bid-RUS",
+          "romanization": "bidrus",
+          "english": "I study",
+          "note": "1st person singular present; root درس (drs); بدرس عربي = I study Arabic",
+          "icon": "solar:book-linear",
+          "icon_color": "#007aff"
+        },
+        {
+          "arabic": "بِلعَب",
+          "transcription": "bil-AB",
+          "romanization": "bilʕab",
+          "english": "I play",
+          "note": "1st person singular present; root لعب (lʕb); بلعب كرة = I play football",
+          "icon": "solar:football-linear",
+          "icon_color": "#34c759"
+        },
+        {
+          "arabic": "بِقرا",
+          "transcription": "biʔ-RA",
+          "romanization": "biʾra",
+          "english": "I read",
+          "note": "1st person singular present; ق → ʾ in Palestinian; root قرأ (qrʾ)",
+          "icon": "solar:book-open-linear",
+          "icon_color": "#ff9f0a"
+        },
+        {
+          "arabic": "بِكتُب",
+          "transcription": "bik-TUB",
+          "romanization": "biktub",
+          "english": "I write",
+          "note": "1st person singular present; root كتب (ktb); بكتب رسالة = I write a message",
+          "icon": "solar:pen-new-square-linear",
+          "icon_color": "#fe4d01"
+        },
+        {
+          "arabic": "بِحكي",
+          "transcription": "bih-KI",
+          "romanization": "biḥki",
+          "english": "I speak / I talk",
+          "note": "1st person singular present; بحكي عربي = I speak Arabic; very common Palestinian verb",
+          "icon": "solar:chat-round-dots-linear",
+          "icon_color": "#6e6e73"
+        }
+      ],
+      "quiz": [
+        {
+          "arabic": "بِشتَغِل",
+          "transcription": "bish-ta-GIL",
+          "romanization": "bištagil",
+          "options": ["I study", "I play", "I work", "I go"],
+          "answer": 2
+        },
+        {
+          "arabic": "بِدرُس",
+          "transcription": "bid-RUS",
+          "romanization": "bidrus",
+          "options": ["I read", "I write", "I work", "I study"],
+          "answer": 3
+        },
+        {
+          "arabic": "بِلعَب",
+          "transcription": "bil-AB",
+          "romanization": "bilʕab",
+          "options": ["I run", "I play", "I work", "I rest"],
+          "answer": 1
+        },
+        {
+          "arabic": "بِقرا",
+          "transcription": "biʔ-RA",
+          "romanization": "biʾra",
+          "options": ["I write", "I speak", "I read", "I study"],
+          "answer": 2
+        },
+        {
+          "arabic": "بِكتُب",
+          "transcription": "bik-TUB",
+          "romanization": "biktub",
+          "options": ["I read", "I write", "I study", "I speak"],
+          "answer": 1
+        },
+        {
+          "arabic": "بِحكي",
+          "transcription": "bih-KI",
+          "romanization": "biḥki",
+          "options": ["I listen", "I read", "I write", "I speak / talk"],
+          "answer": 3
+        }
+      ],
+      "build": [
+        {
+          "sentence": ["بِشتَغِل", "بِدرُس"],
+          "decoys": ["بِلعَب", "بِحكي", "بِكتُب"],
+          "english": "I work and study"
+        },
+        {
+          "sentence": ["بِقرا", "بِكتُب"],
+          "decoys": ["بِشتَغِل", "بِلعَب", "بِدرُس"],
+          "english": "I read and write"
+        },
+        {
+          "sentence": ["بِلعَب", "بِحكي"],
+          "decoys": ["بِدرُس", "بِقرا", "بِشتَغِل"],
+          "english": "I play and talk"
+        }
+      ],
+      "speak": {
+        "scenario": "You are describing how you spend your week to a language partner.",
+        "turns": [
+          {
+            "speaker": "them",
+            "arabic": "وين بتشتغل؟",
+            "romanization": "wēn btištagil",
+            "english": "Where do you work?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "بِشتَغِل هون!",
+            "romanization": "bištagil hōn",
+            "english": "I work here!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وبتدرس كمان؟",
+            "romanization": "w-btidrus kamān",
+            "english": "And do you study too?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "بِدرُس عربي!",
+            "romanization": "bidrus ʕarabi",
+            "english": "I study Arabic!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وبوقت الفراغ؟",
+            "romanization": "w-b-waʔt il-farāġ",
+            "english": "And in your free time?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "بِلعَب كرة!",
+            "romanization": "bilʕab kura",
+            "english": "I play football!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وبتقرا؟",
+            "romanization": "w-btiʾra",
+            "english": "And do you read?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "بِقرا كتير!",
+            "romanization": "biʾra ktīr",
+            "english": "I read a lot!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وبتكتب مقالات؟",
+            "romanization": "w-btiktub maʾālāt",
+            "english": "And do you write articles?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "بِكتُب رسايل!",
+            "romanization": "biktub rasāyil",
+            "english": "I write messages!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وعربي بتحكي؟",
+            "romanization": "w-ʕarabi btḥki",
+            "english": "And Arabic — do you speak it?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "بِحكي عربي!",
+            "romanization": "biḥki ʕarabi",
+            "english": "I speak Arabic!"
+          }
+        ]
+      },
+      "review": {
+        "all_vocab": [
+          { "arabic": "بَروح", "transcription": "ba-RŪH", "romanization": "barūḥ", "english": "I go" },
+          { "arabic": "بآكُل", "transcription": "bā-KUL", "romanization": "bāʾkul", "english": "I eat" },
+          { "arabic": "بِشرَب", "transcription": "bish-RAB", "romanization": "bišrab", "english": "I drink" },
+          { "arabic": "بِنام", "transcription": "bi-NAM", "romanization": "binām", "english": "I sleep" },
+          { "arabic": "بِصحى", "transcription": "bis-HA", "romanization": "biṣḥa", "english": "I wake up" },
+          { "arabic": "بِحِبّ", "transcription": "bi-HIB", "romanization": "biḥibb", "english": "I like / I love" },
+          { "arabic": "بِشتَغِل", "transcription": "bish-ta-GIL", "romanization": "bištagil", "english": "I work" },
+          { "arabic": "بِدرُس", "transcription": "bid-RUS", "romanization": "bidrus", "english": "I study" },
+          { "arabic": "بِلعَب", "transcription": "bil-AB", "romanization": "bilʕab", "english": "I play" },
+          { "arabic": "بِقرا", "transcription": "biʔ-RA", "romanization": "biʾra", "english": "I read" },
+          { "arabic": "بِكتُب", "transcription": "bik-TUB", "romanization": "biktub", "english": "I write" },
+          { "arabic": "بِحكي", "transcription": "bih-KI", "romanization": "biḥki", "english": "I speak / talk" }
+        ]
+      }
+    }
+  ]
+}

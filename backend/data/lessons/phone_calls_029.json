@@ -1,0 +1,415 @@
+{
+  "topic": "Phone & Messaging",
+  "cycles": [
+    {
+      "cycle": 1,
+      "vocab": [
+        {
+          "arabic": "أَلو",
+          "transcription": "a-LŪ",
+          "romanization": "ʾalū",
+          "english": "hello (on phone)",
+          "note": "from French/English 'hello'; the universal phone greeting in Palestinian Arabic",
+          "icon": "solar:phone-linear",
+          "icon_color": "#34c759"
+        },
+        {
+          "arabic": "مين مَعي؟",
+          "transcription": "mēn MA-i",
+          "romanization": "mēn maʕī",
+          "english": "who is this? (on phone)",
+          "note": "lit. 'who is with me?'; the standard way to ask who is calling in Palestinian Arabic",
+          "icon": "solar:question-circle-linear",
+          "icon_color": "#007aff"
+        },
+        {
+          "arabic": "انبَسَطت",
+          "transcription": "in-ba-SATT",
+          "romanization": "inbasaṭt",
+          "english": "I enjoyed / I'm glad",
+          "note": "past tense 1st person; said when ending a call: انبسطت فيك = nice to talk to you",
+          "icon": "solar:smile-circle-linear",
+          "icon_color": "#ff9f0a"
+        },
+        {
+          "arabic": "بِتسمَعني؟",
+          "transcription": "bit-SA-ma-ni",
+          "romanization": "bitsmaʕni",
+          "english": "can you hear me?",
+          "note": "very common when signal is poor; 2nd person present masculine",
+          "icon": "solar:ear-linear",
+          "icon_color": "#5856d6"
+        },
+        {
+          "arabic": "هاتِفي",
+          "transcription": "HA-ti-fi",
+          "romanization": "hātifi",
+          "english": "my phone",
+          "note": "هاتف (phone) + ي (my); also موبايلي (mōbāyli) = my mobile; both used in Palestinian Arabic",
+          "icon": "solar:phone-linear",
+          "icon_color": "#fe4d01"
+        },
+        {
+          "arabic": "مَشغول",
+          "transcription": "mash-GHŪL",
+          "romanization": "mašġūl",
+          "english": "busy",
+          "note": "هاتفك مشغول = your phone is busy; أنا مشغول = I'm busy",
+          "icon": "solar:close-circle-linear",
+          "icon_color": "#ff3b30"
+        }
+      ],
+      "quiz": [
+        {
+          "arabic": "أَلو",
+          "transcription": "a-LŪ",
+          "romanization": "ʾalū",
+          "options": ["goodbye", "please", "hello (on phone)", "thank you"],
+          "answer": 2
+        },
+        {
+          "arabic": "مين مَعي؟",
+          "transcription": "mēn MA-i",
+          "romanization": "mēn maʕī",
+          "options": ["where are you?", "who is this?", "how are you?", "what do you want?"],
+          "answer": 1
+        },
+        {
+          "arabic": "انبَسَطت",
+          "transcription": "in-ba-SATT",
+          "romanization": "inbasaṭt",
+          "options": ["I was bored", "I was sad", "I was tired", "I enjoyed / I'm glad"],
+          "answer": 3
+        },
+        {
+          "arabic": "بِتسمَعني؟",
+          "transcription": "bit-SA-ma-ni",
+          "romanization": "bitsmaʕni",
+          "options": ["do you see me?", "are you there?", "can you hear me?", "can you call me?"],
+          "answer": 2
+        },
+        {
+          "arabic": "هاتِفي",
+          "transcription": "HA-ti-fi",
+          "romanization": "hātifi",
+          "options": ["your phone", "his phone", "the phone", "my phone"],
+          "answer": 3
+        },
+        {
+          "arabic": "مَشغول",
+          "transcription": "mash-GHŪL",
+          "romanization": "mašġūl",
+          "options": ["free", "available", "busy", "quiet"],
+          "answer": 2
+        }
+      ],
+      "build": [
+        {
+          "sentence": ["أَلو", "مين مَعي؟"],
+          "decoys": ["هاتِفي", "مَشغول", "انبَسَطت"],
+          "english": "Hello, who is this?"
+        },
+        {
+          "sentence": ["بِتسمَعني؟", "هاتِفي"],
+          "decoys": ["أَلو", "انبَسَطت", "مين مَعي؟"],
+          "english": "Can you hear me? My phone…"
+        },
+        {
+          "sentence": ["مَشغول", "انبَسَطت"],
+          "decoys": ["بِتسمَعني؟", "أَلو", "هاتِفي"],
+          "english": "Busy — I enjoyed talking"
+        }
+      ],
+      "speak": {
+        "scenario": "You are on a phone call that has a bad connection.",
+        "turns": [
+          {
+            "speaker": "them",
+            "arabic": "ألو، مين معي؟",
+            "romanization": "ʾalū, mēn maʕī",
+            "english": "Hello, who is this?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "أَلو!",
+            "romanization": "ʾalū",
+            "english": "Hello!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "بتسمعني؟ الخط ضعيف",
+            "romanization": "bitsmaʕni, il-ḫaṭṭ ḍaʕīf",
+            "english": "Can you hear me? The line is weak"
+          },
+          {
+            "speaker": "you",
+            "arabic": "بِتسمَعني؟",
+            "romanization": "bitsmaʕni",
+            "english": "Can you hear me?"
+          },
+          {
+            "speaker": "them",
+            "arabic": "الهاتف بيصوت كتير",
+            "romanization": "il-hātif biṣūt ktīr",
+            "english": "The phone is very noisy"
+          },
+          {
+            "speaker": "you",
+            "arabic": "هاتِفي مشكلة!",
+            "romanization": "hātifi muškilā",
+            "english": "My phone has a problem!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "أنا مشغول هلق",
+            "romanization": "ʾana mašġūl halla'",
+            "english": "I'm busy right now"
+          },
+          {
+            "speaker": "you",
+            "arabic": "مَشغول؟",
+            "romanization": "mašġūl",
+            "english": "Busy?"
+          },
+          {
+            "speaker": "them",
+            "arabic": "أنا مين؟ نسيت؟",
+            "romanization": "ʾana mēn, nasīt",
+            "english": "Who am I? You forgot?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "مين مَعي؟",
+            "romanization": "mēn maʕī",
+            "english": "Who is this?"
+          },
+          {
+            "speaker": "them",
+            "arabic": "خلص، إلى اللقاء!",
+            "romanization": "ḫalaṣ, ʾila l-liʾāʾ",
+            "english": "Done, goodbye!"
+          },
+          {
+            "speaker": "you",
+            "arabic": "انبَسَطت!",
+            "romanization": "inbasaṭt",
+            "english": "Nice to talk!"
+          }
+        ]
+      }
+    },
+    {
+      "cycle": 2,
+      "vocab": [
+        {
+          "arabic": "إيش بَقول؟",
+          "transcription": "ĒSH ba-ŪL",
+          "romanization": "ʾēš baʾūl",
+          "english": "what do I say? / how do I put it?",
+          "note": "lit. 'what do I say?'; used as a filler when thinking of what to say; very common pause",
+          "icon": "solar:chat-round-dots-linear",
+          "icon_color": "#6e6e73"
+        },
+        {
+          "arabic": "بَعَثتِلَّك",
+          "transcription": "ba-AT-ti-LAK",
+          "romanization": "baʕattillak",
+          "english": "I sent you (a message)",
+          "note": "past tense; بعثتلك واتساب = I sent you a WhatsApp; بعثتلها = I sent her",
+          "icon": "solar:delivery-linear",
+          "icon_color": "#007aff"
+        },
+        {
+          "arabic": "واتساب",
+          "transcription": "WĀT-sap",
+          "romanization": "wātsab",
+          "english": "WhatsApp",
+          "note": "the primary messaging app in Palestine; بعتلك واتساب = I sent you a WhatsApp",
+          "icon": "solar:chat-line-linear",
+          "icon_color": "#34c759"
+        },
+        {
+          "arabic": "مَرفوع",
+          "transcription": "mar-FŪ'",
+          "romanization": "marfūʕ",
+          "english": "not answering / lifted",
+          "note": "ق → ʾ; الهاتف مرفوع = the phone is not answering (lit. 'lifted/raised')",
+          "icon": "solar:phone-linear",
+          "icon_color": "#ff9f0a"
+        },
+        {
+          "arabic": "رَجِّعلي",
+          "transcription": "raj-JI'-li",
+          "romanization": "rajjiʕli",
+          "english": "call me back",
+          "note": "imperative Form II of رجع + ل + ي; رجعلي لما تفرغ = call me back when you're free",
+          "icon": "solar:phone-calling-linear",
+          "icon_color": "#fe4d01"
+        },
+        {
+          "arabic": "نَتواصَل",
+          "transcription": "nt-WĀ-sal",
+          "romanization": "ntwāṣal",
+          "english": "we'll be in touch",
+          "note": "1st person plural present of Form VI; خلينا نتواصل = let's stay in touch",
+          "icon": "solar:users-group-two-rounded-linear",
+          "icon_color": "#5856d6"
+        }
+      ],
+      "quiz": [
+        {
+          "arabic": "إيش بَقول؟",
+          "transcription": "ĒSH ba-ŪL",
+          "romanization": "ʾēš baʾūl",
+          "options": ["what do you say?", "what do I say?", "what did he say?", "say something"],
+          "answer": 1
+        },
+        {
+          "arabic": "بَعَثتِلَّك",
+          "transcription": "ba-AT-ti-LAK",
+          "romanization": "baʕattillak",
+          "options": ["call me", "I'll send you", "I sent you", "you sent me"],
+          "answer": 2
+        },
+        {
+          "arabic": "واتساب",
+          "transcription": "WĀT-sap",
+          "romanization": "wātsab",
+          "options": ["a phone call", "an email", "WhatsApp", "a voicemail"],
+          "answer": 2
+        },
+        {
+          "arabic": "مَرفوع",
+          "transcription": "mar-FŪ'",
+          "romanization": "marfūʕ",
+          "options": ["answered", "busy", "not answering", "switched off"],
+          "answer": 2
+        },
+        {
+          "arabic": "رَجِّعلي",
+          "transcription": "raj-JI'-li",
+          "romanization": "rajjiʕli",
+          "options": ["pick up", "hang up", "call me back", "text me"],
+          "answer": 2
+        },
+        {
+          "arabic": "نَتواصَل",
+          "transcription": "nt-WĀ-sal",
+          "romanization": "ntwāṣal",
+          "options": ["we stop talking", "we'll be in touch", "we met", "we'll call"],
+          "answer": 1
+        }
+      ],
+      "build": [
+        {
+          "sentence": ["بَعَثتِلَّك", "واتساب"],
+          "decoys": ["رَجِّعلي", "مَرفوع", "نَتواصَل"],
+          "english": "I sent you a WhatsApp"
+        },
+        {
+          "sentence": ["مَرفوع", "رَجِّعلي"],
+          "decoys": ["واتساب", "إيش بَقول؟", "نَتواصَل"],
+          "english": "Not answering — call me back"
+        },
+        {
+          "sentence": ["إيش بَقول؟", "نَتواصَل"],
+          "decoys": ["مَرفوع", "بَعَثتِلَّك", "رَجِّعلي"],
+          "english": "How do I put it? We'll stay in touch"
+        }
+      ],
+      "speak": {
+        "scenario": "You are coordinating plans with a friend over the phone.",
+        "turns": [
+          {
+            "speaker": "them",
+            "arabic": "بعتلك واتساب!",
+            "romanization": "baʕtillak wātsab",
+            "english": "I sent you a WhatsApp!"
+          },
+          {
+            "speaker": "you",
+            "arabic": "بَعَثتِلَّك كمان!",
+            "romanization": "baʕattillak kamān",
+            "english": "I sent you too!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "واتساب وصل؟",
+            "romanization": "wātsab wiṣil",
+            "english": "Did the WhatsApp arrive?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "واتساب وصل!",
+            "romanization": "wātsab wiṣil",
+            "english": "WhatsApp arrived!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "هاتف سامر مرفوع",
+            "romanization": "hātif Sāmir marfūʕ",
+            "english": "Samer's phone is not answering"
+          },
+          {
+            "speaker": "you",
+            "arabic": "مَرفوع دايماً!",
+            "romanization": "marfūʕ dāyman",
+            "english": "Always not answering!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "رجعله بعدين",
+            "romanization": "rajjiʕlu baʕdēn",
+            "english": "Call him back later"
+          },
+          {
+            "speaker": "you",
+            "arabic": "رَجِّعلي بكرا!",
+            "romanization": "rajjiʕli bukra",
+            "english": "Call me back tomorrow!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وإيش بقول له؟",
+            "romanization": "w-ʾēš baʾūl lu",
+            "english": "And what do I say to him?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "إيش بَقول؟",
+            "romanization": "ʾēš baʾūl",
+            "english": "What do I say?"
+          },
+          {
+            "speaker": "them",
+            "arabic": "خلينا نتواصل بعدين",
+            "romanization": "ḫallīna ntwāṣal baʕdēn",
+            "english": "Let's be in touch later"
+          },
+          {
+            "speaker": "you",
+            "arabic": "نَتواصَل!",
+            "romanization": "ntwāṣal",
+            "english": "We'll be in touch!"
+          }
+        ]
+      },
+      "review": {
+        "all_vocab": [
+          { "arabic": "أَلو", "transcription": "a-LŪ", "romanization": "ʾalū", "english": "hello (on phone)" },
+          { "arabic": "مين مَعي؟", "transcription": "mēn MA-i", "romanization": "mēn maʕī", "english": "who is this?" },
+          { "arabic": "انبَسَطت", "transcription": "in-ba-SATT", "romanization": "inbasaṭt", "english": "I enjoyed / I'm glad" },
+          { "arabic": "بِتسمَعني؟", "transcription": "bit-SA-ma-ni", "romanization": "bitsmaʕni", "english": "can you hear me?" },
+          { "arabic": "هاتِفي", "transcription": "HA-ti-fi", "romanization": "hātifi", "english": "my phone" },
+          { "arabic": "مَشغول", "transcription": "mash-GHŪL", "romanization": "mašġūl", "english": "busy" },
+          { "arabic": "إيش بَقول؟", "transcription": "ĒSH ba-ŪL", "romanization": "ʾēš baʾūl", "english": "what do I say?" },
+          { "arabic": "بَعَثتِلَّك", "transcription": "ba-AT-ti-LAK", "romanization": "baʕattillak", "english": "I sent you" },
+          { "arabic": "واتساب", "transcription": "WĀT-sap", "romanization": "wātsab", "english": "WhatsApp" },
+          { "arabic": "مَرفوع", "transcription": "mar-FŪ'", "romanization": "marfūʕ", "english": "not answering" },
+          { "arabic": "رَجِّعلي", "transcription": "raj-JI'-li", "romanization": "rajjiʕli", "english": "call me back" },
+          { "arabic": "نَتواصَل", "transcription": "nt-WĀ-sal", "romanization": "ntwāṣal", "english": "we'll be in touch" }
+        ]
+      }
+    }
+  ]
+}

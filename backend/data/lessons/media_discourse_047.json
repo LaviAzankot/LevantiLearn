@@ -1,0 +1,415 @@
+{
+  "topic": "Media & Discourse Markers",
+  "cycles": [
+    {
+      "cycle": 1,
+      "vocab": [
+        {
+          "arabic": "بِحَسَب",
+          "transcription": "bi-HA-sab",
+          "romanization": "bi-ḥasab",
+          "english": "according to",
+          "note": "بحسب المصادر = according to sources; بحسب التقارير = according to reports; more colloquial than وفقاً لـ",
+          "icon": "solar:newspaper-linear",
+          "icon_color": "#6e6e73"
+        },
+        {
+          "arabic": "مِن المُتَوَقَّع",
+          "transcription": "min il-mu-ta-WAK-ka'",
+          "romanization": "min il-mutawaqaʕ",
+          "english": "it is expected that",
+          "note": "from the passive participle of توقع; من المتوقع أن = it is expected that; media language",
+          "icon": "solar:clock-circle-linear",
+          "icon_color": "#5856d6"
+        },
+        {
+          "arabic": "أَشار إِلى",
+          "transcription": "a-SHĀR i-LA",
+          "romanization": "ʾašār ʾilā",
+          "english": "indicated / pointed to",
+          "note": "past tense 3rd person; أشار إلى أن = indicated that; news reporting verb",
+          "icon": "solar:arrow-right-up-linear",
+          "icon_color": "#007aff"
+        },
+        {
+          "arabic": "وأَضاف",
+          "transcription": "w-a-DĀF",
+          "romanization": "w-ʾaḍāf",
+          "english": "and added",
+          "note": "news article connector; وأضاف المتحدث = and the spokesperson added; reporting continued speech",
+          "icon": "solar:add-circle-linear",
+          "icon_color": "#34c759"
+        },
+        {
+          "arabic": "مَصدَر",
+          "transcription": "MAS-dar",
+          "romanization": "maṣdar",
+          "english": "source",
+          "note": "مصادر موثوقة = reliable sources; مصدر مجهول = anonymous source; journalism vocabulary",
+          "icon": "solar:document-linear",
+          "icon_color": "#ff9f0a"
+        },
+        {
+          "arabic": "في السِّياق ذاتِه",
+          "transcription": "fī is-si-YĀK ZĀ-ti-hi",
+          "romanization": "fī s-siyāq ḏātih",
+          "english": "in the same context",
+          "note": "formal media connector; في السياق ذاته = in the same context; academic/journalistic usage",
+          "icon": "solar:link-circle-linear",
+          "icon_color": "#5856d6"
+        }
+      ],
+      "quiz": [
+        {
+          "arabic": "بِحَسَب",
+          "transcription": "bi-HA-sab",
+          "romanization": "bi-ḥasab",
+          "options": ["despite", "in contrast", "according to", "apart from"],
+          "answer": 2
+        },
+        {
+          "arabic": "مِن المُتَوَقَّع",
+          "transcription": "min il-mu-ta-WAK-ka'",
+          "romanization": "min il-mutawaqaʕ",
+          "options": ["it is known that", "it is expected that", "it is confirmed that", "it is denied that"],
+          "answer": 1
+        },
+        {
+          "arabic": "أَشار إِلى",
+          "transcription": "a-SHĀR i-LA",
+          "romanization": "ʾašār ʾilā",
+          "options": ["denied", "confirmed", "indicated / pointed to", "questioned"],
+          "answer": 2
+        },
+        {
+          "arabic": "وأَضاف",
+          "transcription": "w-a-DĀF",
+          "romanization": "w-ʾaḍāf",
+          "options": ["and denied", "and removed", "and agreed", "and added"],
+          "answer": 3
+        },
+        {
+          "arabic": "مَصدَر",
+          "transcription": "MAS-dar",
+          "romanization": "maṣdar",
+          "options": ["journalist", "report", "source", "statement"],
+          "answer": 2
+        },
+        {
+          "arabic": "في السِّياق ذاتِه",
+          "transcription": "fī is-si-YĀK ZĀ-ti-hi",
+          "romanization": "fī s-siyāq ḏātih",
+          "options": ["in a different context", "in the same context", "out of context", "in another case"],
+          "answer": 1
+        }
+      ],
+      "build": [
+        {
+          "sentence": ["بِحَسَب", "مَصدَر", "موثوق"],
+          "decoys": ["أَشار إِلى", "وأَضاف", "مِن المُتَوَقَّع"],
+          "english": "According to a reliable source"
+        },
+        {
+          "sentence": ["أَشار إِلى", "وأَضاف"],
+          "decoys": ["مَصدَر", "في السِّياق ذاتِه", "بِحَسَب"],
+          "english": "Indicated — and added"
+        },
+        {
+          "sentence": ["في السِّياق ذاتِه", "مِن المُتَوَقَّع"],
+          "decoys": ["وأَضاف", "بِحَسَب", "أَشار إِلى"],
+          "english": "In the same context — it is expected"
+        }
+      ],
+      "speak": {
+        "scenario": "You are reporting on a local news story for a community newsletter.",
+        "turns": [
+          {
+            "speaker": "them",
+            "arabic": "شو المعلومات اللي عندك؟",
+            "romanization": "šū il-maʕlūmāt illi ʕindak",
+            "english": "What information do you have?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "بِحَسَب المصادر!",
+            "romanization": "bi-ḥasab il-maṣādir",
+            "english": "According to sources!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "ومن المتوقع إيش؟",
+            "romanization": "w-min il-mutawaqaʕ ʾēš",
+            "english": "And what is expected?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "مِن المُتَوَقَّع تغييرات!",
+            "romanization": "min il-mutawaqaʕ taġyīrāt",
+            "english": "Changes are expected!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وأشار أحد لهيك؟",
+            "romanization": "w-ʾašār ʾaḥad l-hēk",
+            "english": "Did anyone indicate this?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "أَشار إِلى هيك المسؤول!",
+            "romanization": "ʾašār ʾilā hēk il-masʾūl",
+            "english": "The official indicated this!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وأضاف إيش؟",
+            "romanization": "w-ʾaḍāf ʾēš",
+            "english": "And what did he add?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "وأَضاف إنه مهم!",
+            "romanization": "w-ʾaḍāf ʾinnu muhimm",
+            "english": "And added that it's important!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "ومن المصدر؟",
+            "romanization": "w-min il-maṣdar",
+            "english": "And from the source?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "مَصدَر موثوق!",
+            "romanization": "maṣdar mawṯūʾ",
+            "english": "A reliable source!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وفي السياق ذاته؟",
+            "romanization": "w-fī s-siyāq ḏātih",
+            "english": "And in the same context?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "في السِّياق ذاتِه، صار كتير!",
+            "romanization": "fī s-siyāq ḏātih, ṣār ktīr",
+            "english": "In the same context, much happened!"
+          }
+        ]
+      }
+    },
+    {
+      "cycle": 2,
+      "vocab": [
+        {
+          "arabic": "في المُقابَل",
+          "transcription": "fī il-mu-KĀ-bal",
+          "romanization": "fī l-muʾābil",
+          "english": "in contrast / on the other hand",
+          "note": "news discourse connector; في المقابل، أكد = in contrast, he confirmed",
+          "icon": "solar:arrows-right-down-linear",
+          "icon_color": "#ff3b30"
+        },
+        {
+          "arabic": "أَكَّد على",
+          "transcription": "AK-kad A-la",
+          "romanization": "ʾakkad ʕala",
+          "english": "emphasized / confirmed",
+          "note": "Form II past; أكد على أهمية = emphasized the importance of; news reporting verb",
+          "icon": "solar:shield-check-linear",
+          "icon_color": "#34c759"
+        },
+        {
+          "arabic": "وَفق ما أَفادَت",
+          "transcription": "WAF-ʔ ma a-FĀ-dat",
+          "romanization": "wafʾ mā ʾafādat",
+          "english": "according to what was reported",
+          "note": "formal news phrase; وفق ما أفادت المصادر = according to what sources reported",
+          "icon": "solar:newspaper-linear",
+          "icon_color": "#6e6e73"
+        },
+        {
+          "arabic": "بَيَّن أَنَّه",
+          "transcription": "bay-YAN AN-nu",
+          "romanization": "bayyān ʾannu",
+          "english": "clarified that",
+          "note": "Form II past of بين; بين أنه = clarified that; used in press statements",
+          "icon": "solar:eye-linear",
+          "icon_color": "#007aff"
+        },
+        {
+          "arabic": "إِلى جانِب",
+          "transcription": "i-LA JĀ-nib",
+          "romanization": "ʾilā jānib",
+          "english": "alongside / in addition to",
+          "note": "إلى جانب ذلك = alongside that; additive discourse connector in media Arabic",
+          "icon": "solar:add-circle-linear",
+          "icon_color": "#5856d6"
+        },
+        {
+          "arabic": "لا سِيَّما",
+          "transcription": "lā SIY-ya-ma",
+          "romanization": "lā siyyamā",
+          "english": "especially / particularly",
+          "note": "literary/formal emphasis; لا سيما في فلسطين = especially in Palestine; academic register",
+          "icon": "solar:star-shine-linear",
+          "icon_color": "#ff9f0a"
+        }
+      ],
+      "quiz": [
+        {
+          "arabic": "في المُقابَل",
+          "transcription": "fī il-mu-KĀ-bal",
+          "romanization": "fī l-muʾābil",
+          "options": ["additionally", "in conclusion", "in contrast / on the other hand", "importantly"],
+          "answer": 2
+        },
+        {
+          "arabic": "أَكَّد على",
+          "transcription": "AK-kad A-la",
+          "romanization": "ʾakkad ʕala",
+          "options": ["denied", "questioned", "emphasized / confirmed", "suggested"],
+          "answer": 2
+        },
+        {
+          "arabic": "وَفق ما أَفادَت",
+          "transcription": "WAF-ʔ ma a-FĀ-dat",
+          "romanization": "wafʾ mā ʾafādat",
+          "options": ["after what was reported", "according to what was reported", "despite what was reported", "before what was reported"],
+          "answer": 1
+        },
+        {
+          "arabic": "بَيَّن أَنَّه",
+          "transcription": "bay-YAN AN-nu",
+          "romanization": "bayyān ʾannu",
+          "options": ["denied that", "stated that", "clarified that", "questioned that"],
+          "answer": 2
+        },
+        {
+          "arabic": "إِلى جانِب",
+          "transcription": "i-LA JĀ-nib",
+          "romanization": "ʾilā jānib",
+          "options": ["instead of", "without", "alongside / in addition to", "despite"],
+          "answer": 2
+        },
+        {
+          "arabic": "لا سِيَّما",
+          "transcription": "lā SIY-ya-ma",
+          "romanization": "lā siyyamā",
+          "options": ["not at all", "especially / particularly", "rarely", "completely"],
+          "answer": 1
+        }
+      ],
+      "build": [
+        {
+          "sentence": ["أَكَّد على", "في المُقابَل"],
+          "decoys": ["لا سِيَّما", "إِلى جانِب", "بَيَّن أَنَّه"],
+          "english": "Emphasized — in contrast"
+        },
+        {
+          "sentence": ["وَفق ما أَفادَت", "بَيَّن أَنَّه"],
+          "decoys": ["في المُقابَل", "لا سِيَّما", "إِلى جانِب"],
+          "english": "According to reports — clarified that"
+        },
+        {
+          "sentence": ["إِلى جانِب", "لا سِيَّما"],
+          "decoys": ["أَكَّد على", "وَفق ما أَفادَت", "في المُقابَل"],
+          "english": "Alongside — especially"
+        }
+      ],
+      "speak": {
+        "scenario": "You are summarizing a press conference for a news outlet.",
+        "turns": [
+          {
+            "speaker": "them",
+            "arabic": "إيش قال المسؤول؟",
+            "romanization": "ʾēš ʾāl il-masʾūl",
+            "english": "What did the official say?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "أَكَّد على الأهمية!",
+            "romanization": "ʾakkad ʕal-ʾahammiyye",
+            "english": "Emphasized the importance!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وفي المقابل؟",
+            "romanization": "w-fī l-muʾābil",
+            "english": "And in contrast?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "في المُقابَل، معارضة!",
+            "romanization": "fī l-muʾābil, muʕāraḍa",
+            "english": "In contrast — opposition!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وماذا أفادت المصادر؟",
+            "romanization": "w-māḏā ʾafādat il-maṣādir",
+            "english": "And what did sources report?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "وَفق ما أَفادَت المصادر، صعب!",
+            "romanization": "wafʾ mā ʾafādat il-maṣādir, ṣaʕb",
+            "english": "According to sources — difficult!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وبين المسؤول إيش؟",
+            "romanization": "w-bayyan il-masʾūl ʾēš",
+            "english": "And what did the official clarify?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "بَيَّن أَنَّه مهم!",
+            "romanization": "bayyān ʾannu muhimm",
+            "english": "Clarified that it's important!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وإلى جانب هاد؟",
+            "romanization": "w-ʾilā jānib hād",
+            "english": "And alongside this?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "إِلى جانِب هاد، كتير!",
+            "romanization": "ʾilā jānib hād, ktīr",
+            "english": "Alongside this — a lot!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "ولا سيما؟",
+            "romanization": "w-lā siyyamā",
+            "english": "And especially?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "لا سِيَّما فلسطين!",
+            "romanization": "lā siyyamā Filasṭīn",
+            "english": "Especially Palestine!"
+          }
+        ]
+      },
+      "review": {
+        "all_vocab": [
+          { "arabic": "بِحَسَب", "transcription": "bi-HA-sab", "romanization": "bi-ḥasab", "english": "according to" },
+          { "arabic": "مِن المُتَوَقَّع", "transcription": "min il-mu-ta-WAK-ka'", "romanization": "min il-mutawaqaʕ", "english": "it is expected that" },
+          { "arabic": "أَشار إِلى", "transcription": "a-SHĀR i-LA", "romanization": "ʾašār ʾilā", "english": "indicated / pointed to" },
+          { "arabic": "وأَضاف", "transcription": "w-a-DĀF", "romanization": "w-ʾaḍāf", "english": "and added" },
+          { "arabic": "مَصدَر", "transcription": "MAS-dar", "romanization": "maṣdar", "english": "source" },
+          { "arabic": "في السِّياق ذاتِه", "transcription": "fī is-si-YĀK ZĀ-ti-hi", "romanization": "fī s-siyāq ḏātih", "english": "in the same context" },
+          { "arabic": "في المُقابَل", "transcription": "fī il-mu-KĀ-bal", "romanization": "fī l-muʾābil", "english": "in contrast" },
+          { "arabic": "أَكَّد على", "transcription": "AK-kad A-la", "romanization": "ʾakkad ʕala", "english": "emphasized / confirmed" },
+          { "arabic": "وَفق ما أَفادَت", "transcription": "WAF-ʔ ma a-FĀ-dat", "romanization": "wafʾ mā ʾafādat", "english": "according to what was reported" },
+          { "arabic": "بَيَّن أَنَّه", "transcription": "bay-YAN AN-nu", "romanization": "bayyān ʾannu", "english": "clarified that" },
+          { "arabic": "إِلى جانِب", "transcription": "i-LA JĀ-nib", "romanization": "ʾilā jānib", "english": "alongside / in addition to" },
+          { "arabic": "لا سِيَّما", "transcription": "lā SIY-ya-ma", "romanization": "lā siyyamā", "english": "especially / particularly" }
+        ]
+      }
+    }
+  ]
+}

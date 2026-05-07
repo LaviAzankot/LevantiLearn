@@ -1,0 +1,415 @@
+{
+  "topic": "At the Doctor",
+  "cycles": [
+    {
+      "cycle": 1,
+      "vocab": [
+        {
+          "arabic": "عِندي وَجع",
+          "transcription": "IN-di WA-ja'",
+          "romanization": "ʕindi wajaʕ",
+          "english": "I have pain",
+          "note": "the standard opener when describing symptoms; عندي وجع في + body part is the full phrase",
+          "icon": "solar:hospital-linear",
+          "icon_color": "#ff3b30"
+        },
+        {
+          "arabic": "وين بِيوجَعَك؟",
+          "transcription": "wēn bi-YŪ-ja-ak",
+          "romanization": "wēn biyūjaʕak",
+          "english": "Where does it hurt?",
+          "note": "doctor's question; 3rd person verb with 2nd person object; feminine: بيوجعك (same form)",
+          "icon": "solar:stethoscope-linear",
+          "icon_color": "#5856d6"
+        },
+        {
+          "arabic": "دَوا",
+          "transcription": "DA-wa",
+          "romanization": "dawa",
+          "english": "medicine / medication",
+          "note": "Palestinian colloquial; MSA دواء (dawāʾ); بحتاج دوا = I need medicine",
+          "icon": "solar:pill-linear",
+          "icon_color": "#007aff"
+        },
+        {
+          "arabic": "حَرارة",
+          "transcription": "ha-RA-ra",
+          "romanization": "ḥarāra",
+          "english": "fever",
+          "note": "عندي حرارة = I have a fever; الحرارة عالية = the temperature is high",
+          "icon": "solar:thermometer-linear",
+          "icon_color": "#ff3b30"
+        },
+        {
+          "arabic": "دُكتور",
+          "transcription": "duk-TŪR",
+          "romanization": "duktūr",
+          "english": "doctor",
+          "note": "used for all genders with title; دكتورة for female doctors; بروح على الدكتور = I go to the doctor",
+          "icon": "solar:user-speak-linear",
+          "icon_color": "#34c759"
+        },
+        {
+          "arabic": "عِيادة",
+          "transcription": "i-YĀ-de",
+          "romanization": "ʕiyāde",
+          "english": "clinic / doctor's office",
+          "note": "smaller than مستشفى (hospital); also used for any specialized outpatient service",
+          "icon": "solar:hospital-linear",
+          "icon_color": "#ff9f0a"
+        }
+      ],
+      "quiz": [
+        {
+          "arabic": "عِندي وَجع",
+          "transcription": "IN-di WA-ja'",
+          "romanization": "ʕindi wajaʕ",
+          "options": ["I am fine", "I have a fever", "I have pain", "I am tired"],
+          "answer": 2
+        },
+        {
+          "arabic": "وين بِيوجَعَك؟",
+          "transcription": "wēn bi-YŪ-ja-ak",
+          "romanization": "wēn biyūjaʕak",
+          "options": ["Are you sick?", "Where does it hurt?", "What do you have?", "When did it start?"],
+          "answer": 1
+        },
+        {
+          "arabic": "دَوا",
+          "transcription": "DA-wa",
+          "romanization": "dawa",
+          "options": ["injection", "hospital", "medicine", "prescription"],
+          "answer": 2
+        },
+        {
+          "arabic": "حَرارة",
+          "transcription": "ha-RA-ra",
+          "romanization": "ḥarāra",
+          "options": ["cough", "pain", "fever", "tiredness"],
+          "answer": 2
+        },
+        {
+          "arabic": "دُكتور",
+          "transcription": "duk-TŪR",
+          "romanization": "duktūr",
+          "options": ["nurse", "pharmacist", "patient", "doctor"],
+          "answer": 3
+        },
+        {
+          "arabic": "عِيادة",
+          "transcription": "i-YĀ-de",
+          "romanization": "ʕiyāde",
+          "options": ["hospital", "pharmacy", "clinic / doctor's office", "lab"],
+          "answer": 2
+        }
+      ],
+      "build": [
+        {
+          "sentence": ["دُكتور", "عِيادة"],
+          "decoys": ["دَوا", "حَرارة", "عِندي وَجع"],
+          "english": "The doctor's clinic"
+        },
+        {
+          "sentence": ["عِندي وَجع", "حَرارة"],
+          "decoys": ["دُكتور", "عِيادة", "وين بِيوجَعَك؟"],
+          "english": "I have pain and fever"
+        },
+        {
+          "sentence": ["وين بِيوجَعَك؟", "دَوا"],
+          "decoys": ["عِيادة", "حَرارة", "دُكتور"],
+          "english": "Where does it hurt? Here's medicine"
+        }
+      ],
+      "speak": {
+        "scenario": "You are at the clinic describing your symptoms to the doctor.",
+        "turns": [
+          {
+            "speaker": "them",
+            "arabic": "أهلاً، إيش الشكوى؟",
+            "romanization": "ʾahlan, ʾēš iš-šakwā",
+            "english": "Welcome, what's the complaint?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "عِندي وَجع!",
+            "romanization": "ʕindi wajaʕ",
+            "english": "I have pain!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وين بيوجعك بالظبط؟",
+            "romanization": "wēn biyūjaʕak bil-ḍabṭ",
+            "english": "Where exactly does it hurt?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "وين بِيوجَعَك؟",
+            "romanization": "wēn biyūjaʕak",
+            "english": "Where does it hurt? (confused)"
+          },
+          {
+            "speaker": "them",
+            "arabic": "عندك حرارة؟",
+            "romanization": "ʕindak ḥarāra",
+            "english": "Do you have a fever?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "حَرارة كتير!",
+            "romanization": "ḥarāra ktīr",
+            "english": "High fever!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "محتاج دوا",
+            "romanization": "muḥtāj dawa",
+            "english": "You need medicine"
+          },
+          {
+            "speaker": "you",
+            "arabic": "دَوا كويس!",
+            "romanization": "dawa kuwayyes",
+            "english": "Good medicine!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "روح على الدكتور المتخصص",
+            "romanization": "rūḥ ʕal-duktūr il-mutaḫaṣṣiṣ",
+            "english": "Go to the specialist doctor"
+          },
+          {
+            "speaker": "you",
+            "arabic": "دُكتور هون؟",
+            "romanization": "duktūr hōn",
+            "english": "Doctor here?"
+          },
+          {
+            "speaker": "them",
+            "arabic": "في عيادة جنب المستشفى",
+            "romanization": "fī ʕiyāde janb il-mustašfā",
+            "english": "There's a clinic next to the hospital"
+          },
+          {
+            "speaker": "you",
+            "arabic": "عِيادة قريب!",
+            "romanization": "ʕiyāde ʾarīb",
+            "english": "Clinic nearby!"
+          }
+        ]
+      }
+    },
+    {
+      "cycle": 2,
+      "vocab": [
+        {
+          "arabic": "لازِم",
+          "transcription": "LA-zim",
+          "romanization": "lāzim",
+          "english": "must / have to",
+          "note": "modal word; لازم + verb = must do; لازم تروح = you must go; very common in instructions",
+          "icon": "solar:shield-warning-linear",
+          "icon_color": "#ff3b30"
+        },
+        {
+          "arabic": "مَمنوع",
+          "transcription": "mam-NŪ'",
+          "romanization": "mamnūʕ",
+          "english": "forbidden / not allowed",
+          "note": "ق → ʾ; ممنوع تشتغل = you're not allowed to work; ممنوع used on signs too",
+          "icon": "solar:forbidden-circle-linear",
+          "icon_color": "#ff9f0a"
+        },
+        {
+          "arabic": "يَومين",
+          "transcription": "yaw-MĒN",
+          "romanization": "yawmēn",
+          "english": "two days",
+          "note": "dual form of يوم; used in medical contexts: رتاح يومين = rest for two days",
+          "icon": "solar:calendar-linear",
+          "icon_color": "#6e6e73"
+        },
+        {
+          "arabic": "مَرتين باليَوم",
+          "transcription": "mar-TĒN bil-YŌM",
+          "romanization": "martēn bil-yōm",
+          "english": "twice a day",
+          "note": "مرة (marra) = once; مرتين = twice; ثلاث مرات (talāt marrāt) = three times; dosage phrase",
+          "icon": "solar:pill-linear",
+          "icon_color": "#007aff"
+        },
+        {
+          "arabic": "رتاح",
+          "transcription": "ri-TAH",
+          "romanization": "ritāḥ",
+          "english": "rest! (imperative)",
+          "note": "imperative singular of راح يرتاح; لازم ترتاح = you must rest; also a name",
+          "icon": "solar:sleep-linear",
+          "icon_color": "#5856d6"
+        },
+        {
+          "arabic": "إِن شا الله",
+          "transcription": "in-SHA-LAH",
+          "romanization": "ʾin šā llāh",
+          "english": "God willing / hopefully",
+          "note": "used constantly in Palestinian daily speech; expresses hope, uncertainty, or polite deflection",
+          "icon": "solar:star-shine-linear",
+          "icon_color": "#ff9f0a"
+        }
+      ],
+      "quiz": [
+        {
+          "arabic": "لازِم",
+          "transcription": "LA-zim",
+          "romanization": "lāzim",
+          "options": ["maybe", "can", "must / have to", "want"],
+          "answer": 2
+        },
+        {
+          "arabic": "مَمنوع",
+          "transcription": "mam-NŪ'",
+          "romanization": "mamnūʕ",
+          "options": ["allowed", "forbidden / not allowed", "required", "possible"],
+          "answer": 1
+        },
+        {
+          "arabic": "يَومين",
+          "transcription": "yaw-MĒN",
+          "romanization": "yawmēn",
+          "options": ["one day", "three days", "a week", "two days"],
+          "answer": 3
+        },
+        {
+          "arabic": "مَرتين باليَوم",
+          "transcription": "mar-TĒN bil-YŌM",
+          "romanization": "martēn bil-yōm",
+          "options": ["once a day", "twice a week", "twice a day", "three times a day"],
+          "answer": 2
+        },
+        {
+          "arabic": "رتاح",
+          "transcription": "ri-TAH",
+          "romanization": "ritāḥ",
+          "options": ["work!", "go!", "rest!", "eat!"],
+          "answer": 2
+        },
+        {
+          "arabic": "إِن شا الله",
+          "transcription": "in-SHA-LAH",
+          "romanization": "ʾin šā llāh",
+          "options": ["thank God", "praise God", "God willing / hopefully", "as God wills"],
+          "answer": 2
+        }
+      ],
+      "build": [
+        {
+          "sentence": ["لازِم", "رتاح", "يَومين"],
+          "decoys": ["مَمنوع", "دَوا", "مَرتين باليَوم"],
+          "english": "You must rest for two days"
+        },
+        {
+          "sentence": ["مَمنوع", "شُغل"],
+          "decoys": ["لازِم", "رتاح", "إِن شا الله"],
+          "english": "Work is forbidden"
+        },
+        {
+          "sentence": ["دَوا", "مَرتين باليَوم"],
+          "decoys": ["يَومين", "مَمنوع", "رتاح"],
+          "english": "Medicine twice a day"
+        }
+      ],
+      "speak": {
+        "scenario": "The doctor is giving you discharge instructions.",
+        "turns": [
+          {
+            "speaker": "them",
+            "arabic": "لازم تاخد الدوا",
+            "romanization": "lāzim tāḫud id-dawa",
+            "english": "You must take the medicine"
+          },
+          {
+            "speaker": "you",
+            "arabic": "لازِم؟",
+            "romanization": "lāzim",
+            "english": "Must?"
+          },
+          {
+            "speaker": "them",
+            "arabic": "آه لازم! ومرتين باليوم",
+            "romanization": "ʾāh lāzim, w-martēn bil-yōm",
+            "english": "Yes, must! And twice a day"
+          },
+          {
+            "speaker": "you",
+            "arabic": "مَرتين باليَوم!",
+            "romanization": "martēn bil-yōm",
+            "english": "Twice a day!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وممنوع تشتغل",
+            "romanization": "w-mamnūʕ tištagil",
+            "english": "And you're not allowed to work"
+          },
+          {
+            "speaker": "you",
+            "arabic": "مَمنوع؟",
+            "romanization": "mamnūʕ",
+            "english": "Forbidden?"
+          },
+          {
+            "speaker": "them",
+            "arabic": "آه، لازم ترتاح يومين",
+            "romanization": "ʾāh, lāzim tirtāḥ yawmēn",
+            "english": "Yes, you must rest for two days"
+          },
+          {
+            "speaker": "you",
+            "arabic": "يَومين!",
+            "romanization": "yawmēn",
+            "english": "Two days!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "ارتاح وبتتحسن",
+            "romanization": "irtāḥ w-btitḥassan",
+            "english": "Rest and you'll get better"
+          },
+          {
+            "speaker": "you",
+            "arabic": "رتاح!",
+            "romanization": "ritāḥ",
+            "english": "Rest!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "بتتحسن إن شاء الله",
+            "romanization": "btitḥassan ʾin šā llāh",
+            "english": "You'll get better, God willing"
+          },
+          {
+            "speaker": "you",
+            "arabic": "إِن شا الله!",
+            "romanization": "ʾin šā llāh",
+            "english": "God willing!"
+          }
+        ]
+      },
+      "review": {
+        "all_vocab": [
+          { "arabic": "عِندي وَجع", "transcription": "IN-di WA-ja'", "romanization": "ʕindi wajaʕ", "english": "I have pain" },
+          { "arabic": "وين بِيوجَعَك؟", "transcription": "wēn bi-YŪ-ja-ak", "romanization": "wēn biyūjaʕak", "english": "where does it hurt?" },
+          { "arabic": "دَوا", "transcription": "DA-wa", "romanization": "dawa", "english": "medicine" },
+          { "arabic": "حَرارة", "transcription": "ha-RA-ra", "romanization": "ḥarāra", "english": "fever" },
+          { "arabic": "دُكتور", "transcription": "duk-TŪR", "romanization": "duktūr", "english": "doctor" },
+          { "arabic": "عِيادة", "transcription": "i-YĀ-de", "romanization": "ʕiyāde", "english": "clinic" },
+          { "arabic": "لازِم", "transcription": "LA-zim", "romanization": "lāzim", "english": "must / have to" },
+          { "arabic": "مَمنوع", "transcription": "mam-NŪ'", "romanization": "mamnūʕ", "english": "forbidden / not allowed" },
+          { "arabic": "يَومين", "transcription": "yaw-MĒN", "romanization": "yawmēn", "english": "two days" },
+          { "arabic": "مَرتين باليَوم", "transcription": "mar-TĒN bil-YŌM", "romanization": "martēn bil-yōm", "english": "twice a day" },
+          { "arabic": "رتاح", "transcription": "ri-TAH", "romanization": "ritāḥ", "english": "rest! (imperative)" },
+          { "arabic": "إِن شا الله", "transcription": "in-SHA-LAH", "romanization": "ʾin šā llāh", "english": "God willing" }
+        ]
+      }
+    }
+  ]
+}

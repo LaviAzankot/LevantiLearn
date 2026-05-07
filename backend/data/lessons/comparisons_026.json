@@ -1,0 +1,415 @@
+{
+  "topic": "Comparisons",
+  "cycles": [
+    {
+      "cycle": 1,
+      "vocab": [
+        {
+          "arabic": "أَحسَن مِن",
+          "transcription": "AH-san MIN",
+          "romanization": "ʾaḥsan min",
+          "english": "better than",
+          "note": "أحسن is the comparative of كويس/منيح; أحسن مني = better than me",
+          "icon": "solar:arrow-right-up-linear",
+          "icon_color": "#34c759"
+        },
+        {
+          "arabic": "أَكبَر مِن",
+          "transcription": "AK-bar MIN",
+          "romanization": "ʾakbar min",
+          "english": "bigger than / older than",
+          "note": "comparative of كبير; أكبر منك = bigger/older than you",
+          "icon": "solar:maximize-square-linear",
+          "icon_color": "#5856d6"
+        },
+        {
+          "arabic": "أَرخَص",
+          "transcription": "AR-khas",
+          "romanization": "ʾarḫaṣ",
+          "english": "cheaper",
+          "note": "comparative of رخيص; هاد أرخص = this is cheaper; أرخص من = cheaper than",
+          "icon": "solar:tag-price-linear",
+          "icon_color": "#34c759"
+        },
+        {
+          "arabic": "أَغلى",
+          "transcription": "AG-la",
+          "romanization": "ʾaġlā",
+          "english": "more expensive",
+          "note": "comparative of غالي; هاد أغلى = this is more expensive; أغلى من = more expensive than",
+          "icon": "solar:dollar-minimalistic-linear",
+          "icon_color": "#ff3b30"
+        },
+        {
+          "arabic": "أَحسَن شي",
+          "transcription": "AH-san SHĒ",
+          "romanization": "ʾaḥsan šī",
+          "english": "the best thing",
+          "note": "elative form with شي; أحسن شي في فلسطين = the best thing in Palestine",
+          "icon": "solar:star-shine-linear",
+          "icon_color": "#ff9f0a"
+        },
+        {
+          "arabic": "أَصعَب",
+          "transcription": "AS-ab",
+          "romanization": "ʾaṣʕab",
+          "english": "harder / more difficult",
+          "note": "comparative of صعب (difficult); هاد أصعب = this is harder; أصعب درس = hardest lesson",
+          "icon": "solar:danger-triangle-linear",
+          "icon_color": "#ff9f0a"
+        }
+      ],
+      "quiz": [
+        {
+          "arabic": "أَحسَن مِن",
+          "transcription": "AH-san MIN",
+          "romanization": "ʾaḥsan min",
+          "options": ["worse than", "same as", "better than", "different from"],
+          "answer": 2
+        },
+        {
+          "arabic": "أَكبَر مِن",
+          "transcription": "AK-bar MIN",
+          "romanization": "ʾakbar min",
+          "options": ["smaller than", "same as", "older than", "bigger / older than"],
+          "answer": 3
+        },
+        {
+          "arabic": "أَرخَص",
+          "transcription": "AR-khas",
+          "romanization": "ʾarḫaṣ",
+          "options": ["more expensive", "same price", "cheaper", "free"],
+          "answer": 2
+        },
+        {
+          "arabic": "أَغلى",
+          "transcription": "AG-la",
+          "romanization": "ʾaġlā",
+          "options": ["cheaper", "free", "same price", "more expensive"],
+          "answer": 3
+        },
+        {
+          "arabic": "أَحسَن شي",
+          "transcription": "AH-san SHĒ",
+          "romanization": "ʾaḥsan šī",
+          "options": ["a good thing", "the worst thing", "the best thing", "something better"],
+          "answer": 2
+        },
+        {
+          "arabic": "أَصعَب",
+          "transcription": "AS-ab",
+          "romanization": "ʾaṣʕab",
+          "options": ["easier", "harder", "same difficulty", "impossible"],
+          "answer": 1
+        }
+      ],
+      "build": [
+        {
+          "sentence": ["أَحسَن مِن", "هاد"],
+          "decoys": ["أَغلى", "أَصعَب", "أَرخَص"],
+          "english": "Better than this"
+        },
+        {
+          "sentence": ["أَرخَص", "أَحسَن شي"],
+          "decoys": ["أَكبَر مِن", "أَغلى", "أَصعَب"],
+          "english": "Cheaper — that's the best thing"
+        },
+        {
+          "sentence": ["أَغلى", "مش", "أَحسَن مِن"],
+          "decoys": ["أَصعَب", "أَرخَص", "أَحسَن شي"],
+          "english": "More expensive isn't better"
+        }
+      ],
+      "speak": {
+        "scenario": "You are comparing two apartments before renting one.",
+        "turns": [
+          {
+            "speaker": "them",
+            "arabic": "إيش رأيك بالشقتين؟",
+            "romanization": "ʾēš raʾyak biš-šaʔʔetēn",
+            "english": "What do you think of the two apartments?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "أَحسَن مِن بعضهم!",
+            "romanization": "ʾaḥsan min baʕḍhum",
+            "english": "Better than each other!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "هاد أكبر من الثاني؟",
+            "romanization": "hād ʾakbar min it-tāni",
+            "english": "Is this one bigger than the other?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "أَكبَر مِن الثاني!",
+            "romanization": "ʾakbar min it-tāni",
+            "english": "Bigger than the other one!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وأغلى؟",
+            "romanization": "w-ʾaġlā",
+            "english": "And more expensive?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "أَغلى شوي!",
+            "romanization": "ʾaġlā šway",
+            "english": "A little more expensive!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "والثاني أرخص؟",
+            "romanization": "w-it-tāni ʾarḫaṣ",
+            "english": "And the other one is cheaper?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "أَرخَص كتير!",
+            "romanization": "ʾarḫaṣ ktīr",
+            "english": "Much cheaper!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وإيش أصعب، البعيد؟",
+            "romanization": "w-ʾēš ʾaṣʕab, il-baʕīd",
+            "english": "And what's harder, the far one?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "أَصعَب وصول!",
+            "romanization": "ʾaṣʕab wuṣūl",
+            "english": "Harder to access!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "طيب، إيش أحسن شي فيه؟",
+            "romanization": "ṭayyib, ʾēš ʾaḥsan šī fī",
+            "english": "Okay, what's the best thing about it?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "أَحسَن شي السعر!",
+            "romanization": "ʾaḥsan šī is-siʕr",
+            "english": "The best thing is the price!"
+          }
+        ]
+      }
+    },
+    {
+      "cycle": 2,
+      "vocab": [
+        {
+          "arabic": "زَيّ",
+          "transcription": "ZAY",
+          "romanization": "zayy",
+          "english": "like / same as",
+          "note": "very versatile; زي ما قلت = as I said; زيك = like you; very common in Palestinian speech",
+          "icon": "solar:arrow-left-right-linear",
+          "icon_color": "#007aff"
+        },
+        {
+          "arabic": "نَفس الشي",
+          "transcription": "NAFS ish-SHĒ",
+          "romanization": "nafs iš-šī",
+          "english": "the same thing",
+          "note": "نفس (same) + الشي (the thing); نفس الشي بالنسبة لي = same thing for me",
+          "icon": "solar:copy-linear",
+          "icon_color": "#5856d6"
+        },
+        {
+          "arabic": "مِش زَيّ",
+          "transcription": "mish ZAY",
+          "romanization": "miš zayy",
+          "english": "different / not like",
+          "note": "مش زي بعض = different from each other; مش زيك = not like you",
+          "icon": "solar:arrows-right-down-linear",
+          "icon_color": "#ff3b30"
+        },
+        {
+          "arabic": "قَدّ إيش؟",
+          "transcription": "ʔadd ĒSH",
+          "romanization": "ʾadd ʾēš",
+          "english": "how much / how big?",
+          "note": "ق → ʾ; قد = size/extent; قد إيش الفرق؟ = how big is the difference?",
+          "icon": "solar:question-circle-linear",
+          "icon_color": "#ff9f0a"
+        },
+        {
+          "arabic": "أَسهَل",
+          "transcription": "AS-hal",
+          "romanization": "ʾashal",
+          "english": "easier",
+          "note": "comparative of سهل (easy); هاد أسهل = this is easier; أسهل من = easier than",
+          "icon": "solar:check-circle-linear",
+          "icon_color": "#34c759"
+        },
+        {
+          "arabic": "أَهَمّ",
+          "transcription": "a-HAMM",
+          "romanization": "ʾahamm",
+          "english": "more important",
+          "note": "comparative of مهم (important); أهم شي = the most important thing",
+          "icon": "solar:star-shine-linear",
+          "icon_color": "#fe4d01"
+        }
+      ],
+      "quiz": [
+        {
+          "arabic": "زَيّ",
+          "transcription": "ZAY",
+          "romanization": "zayy",
+          "options": ["different from", "like / same as", "more than", "better than"],
+          "answer": 1
+        },
+        {
+          "arabic": "نَفس الشي",
+          "transcription": "NAFS ish-SHĒ",
+          "romanization": "nafs iš-šī",
+          "options": ["a different thing", "the opposite thing", "the same thing", "a better thing"],
+          "answer": 2
+        },
+        {
+          "arabic": "مِش زَيّ",
+          "transcription": "mish ZAY",
+          "romanization": "miš zayy",
+          "options": ["the same", "similar", "different / not like", "better"],
+          "answer": 2
+        },
+        {
+          "arabic": "قَدّ إيش؟",
+          "transcription": "ʔadd ĒSH",
+          "romanization": "ʾadd ʾēš",
+          "options": ["why?", "how much / how big?", "who?", "when?"],
+          "answer": 1
+        },
+        {
+          "arabic": "أَسهَل",
+          "transcription": "AS-hal",
+          "romanization": "ʾashal",
+          "options": ["harder", "impossible", "easier", "same difficulty"],
+          "answer": 2
+        },
+        {
+          "arabic": "أَهَمّ",
+          "transcription": "a-HAMM",
+          "romanization": "ʾahamm",
+          "options": ["less important", "unimportant", "more important", "the same importance"],
+          "answer": 2
+        }
+      ],
+      "build": [
+        {
+          "sentence": ["زَيّ", "نَفس الشي"],
+          "decoys": ["أَهَمّ", "مِش زَيّ", "أَسهَل"],
+          "english": "Like — the same thing"
+        },
+        {
+          "sentence": ["مِش زَيّ", "أَسهَل"],
+          "decoys": ["زَيّ", "أَهَمّ", "قَدّ إيش؟"],
+          "english": "Different — easier"
+        },
+        {
+          "sentence": ["أَهَمّ", "قَدّ إيش؟"],
+          "decoys": ["نَفس الشي", "مِش زَيّ", "أَسهَل"],
+          "english": "More important — by how much?"
+        }
+      ],
+      "speak": {
+        "scenario": "You are comparing two language learning methods.",
+        "turns": [
+          {
+            "speaker": "them",
+            "arabic": "إيش الفرق بين الطريقتين؟",
+            "romanization": "ʾēš il-farʾ bēn iṭ-ṭarīʾetēn",
+            "english": "What's the difference between the two methods?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "مِش زَيّ بعض!",
+            "romanization": "miš zayy baʕḍ",
+            "english": "They're different!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "بس النتيجة نفس الشي؟",
+            "romanization": "bas in-natīje nafs iš-šī",
+            "english": "But the result is the same thing?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "نَفس الشي!",
+            "romanization": "nafs iš-šī",
+            "english": "The same thing!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وهاد أسهل؟",
+            "romanization": "w-hād ʾashal",
+            "english": "And this one is easier?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "أَسهَل كتير!",
+            "romanization": "ʾashal ktīr",
+            "english": "Much easier!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وقد إيش الفرق؟",
+            "romanization": "w-ʾadd ʾēš il-farʾ",
+            "english": "And how big is the difference?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "قَدّ إيش؟",
+            "romanization": "ʾadd ʾēš",
+            "english": "How much? (asking back)"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وإيش أهم؟",
+            "romanization": "w-ʾēš ʾahamm",
+            "english": "And what's more important?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "أَهَمّ شي الممارسة!",
+            "romanization": "ʾahamm šī il-mumārasa",
+            "english": "The most important thing is practice!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وهم زي بعض؟",
+            "romanization": "w-hum zayy baʕḍ",
+            "english": "And are they similar?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "زَيّ بعضهم!",
+            "romanization": "zayy baʕḍhum",
+            "english": "Similar to each other!"
+          }
+        ]
+      },
+      "review": {
+        "all_vocab": [
+          { "arabic": "أَحسَن مِن", "transcription": "AH-san MIN", "romanization": "ʾaḥsan min", "english": "better than" },
+          { "arabic": "أَكبَر مِن", "transcription": "AK-bar MIN", "romanization": "ʾakbar min", "english": "bigger / older than" },
+          { "arabic": "أَرخَص", "transcription": "AR-khas", "romanization": "ʾarḫaṣ", "english": "cheaper" },
+          { "arabic": "أَغلى", "transcription": "AG-la", "romanization": "ʾaġlā", "english": "more expensive" },
+          { "arabic": "أَحسَن شي", "transcription": "AH-san SHĒ", "romanization": "ʾaḥsan šī", "english": "the best thing" },
+          { "arabic": "أَصعَب", "transcription": "AS-ab", "romanization": "ʾaṣʕab", "english": "harder / more difficult" },
+          { "arabic": "زَيّ", "transcription": "ZAY", "romanization": "zayy", "english": "like / same as" },
+          { "arabic": "نَفس الشي", "transcription": "NAFS ish-SHĒ", "romanization": "nafs iš-šī", "english": "the same thing" },
+          { "arabic": "مِش زَيّ", "transcription": "mish ZAY", "romanization": "miš zayy", "english": "different / not like" },
+          { "arabic": "قَدّ إيش؟", "transcription": "ʔadd ĒSH", "romanization": "ʾadd ʾēš", "english": "how much / how big?" },
+          { "arabic": "أَسهَل", "transcription": "AS-hal", "romanization": "ʾashal", "english": "easier" },
+          { "arabic": "أَهَمّ", "transcription": "a-HAMM", "romanization": "ʾahamm", "english": "more important" }
+        ]
+      }
+    }
+  ]
+}

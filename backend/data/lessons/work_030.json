@@ -1,0 +1,415 @@
+{
+  "topic": "Work & Jobs",
+  "cycles": [
+    {
+      "cycle": 1,
+      "vocab": [
+        {
+          "arabic": "شُغل",
+          "transcription": "SHUGHL",
+          "romanization": "šuġl",
+          "english": "work / job",
+          "note": "the general word for work; بشتغل = I work; شغلي = my job; رُحت على الشغل = went to work",
+          "icon": "solar:briefcase-linear",
+          "icon_color": "#5856d6"
+        },
+        {
+          "arabic": "مُوَظَّف",
+          "transcription": "mu-WAD-daf",
+          "romanization": "muwaẓẓaf",
+          "english": "employee / office worker",
+          "note": "feminine: موظفة (muwaẓẓafe); موظف حكومي = government employee; common career category",
+          "icon": "solar:user-speak-linear",
+          "icon_color": "#007aff"
+        },
+        {
+          "arabic": "مُدير",
+          "transcription": "mu-DĒR",
+          "romanization": "mudīr",
+          "english": "manager / director",
+          "note": "feminine: مديرة (mudīra); مديري = my manager; مدير المدرسة = school principal",
+          "icon": "solar:users-group-two-rounded-linear",
+          "icon_color": "#fe4d01"
+        },
+        {
+          "arabic": "راتِب",
+          "transcription": "RĀ-tib",
+          "romanization": "rātib",
+          "english": "salary",
+          "note": "راتب عالي = high salary; راتب منيح = good salary; استلمت الراتب = received the salary",
+          "icon": "solar:dollar-minimalistic-linear",
+          "icon_color": "#34c759"
+        },
+        {
+          "arabic": "دَوام",
+          "transcription": "da-WĀM",
+          "romanization": "dawām",
+          "english": "work hours / shift",
+          "note": "دوام الصبح = morning shift; خلص الدوام = the shift ended; دوامي من ثمانية = my hours start at 8",
+          "icon": "solar:clock-circle-linear",
+          "icon_color": "#ff9f0a"
+        },
+        {
+          "arabic": "خَلَّص",
+          "transcription": "khal-LAS",
+          "romanization": "ḫallaṣ",
+          "english": "finished / done",
+          "note": "past tense of خلّص (to finish); خلصت الشغل = I finished work; خلصنا = we're done",
+          "icon": "solar:check-circle-linear",
+          "icon_color": "#34c759"
+        }
+      ],
+      "quiz": [
+        {
+          "arabic": "شُغل",
+          "transcription": "SHUGHL",
+          "romanization": "šuġl",
+          "options": ["school", "work / job", "hospital", "market"],
+          "answer": 1
+        },
+        {
+          "arabic": "مُوَظَّف",
+          "transcription": "mu-WAD-daf",
+          "romanization": "muwaẓẓaf",
+          "options": ["manager", "customer", "employee", "doctor"],
+          "answer": 2
+        },
+        {
+          "arabic": "مُدير",
+          "transcription": "mu-DĒR",
+          "romanization": "mudīr",
+          "options": ["employee", "customer", "colleague", "manager"],
+          "answer": 3
+        },
+        {
+          "arabic": "راتِب",
+          "transcription": "RĀ-tib",
+          "romanization": "rātib",
+          "options": ["vacation", "overtime", "salary", "promotion"],
+          "answer": 2
+        },
+        {
+          "arabic": "دَوام",
+          "transcription": "da-WĀM",
+          "romanization": "dawām",
+          "options": ["holiday", "meeting", "work hours / shift", "break"],
+          "answer": 2
+        },
+        {
+          "arabic": "خَلَّص",
+          "transcription": "khal-LAS",
+          "romanization": "ḫallaṣ",
+          "options": ["started", "continued", "finished / done", "postponed"],
+          "answer": 2
+        }
+      ],
+      "build": [
+        {
+          "sentence": ["مُدير", "شُغل"],
+          "decoys": ["راتِب", "دَوام", "خَلَّص"],
+          "english": "Work manager"
+        },
+        {
+          "sentence": ["دَوام", "خَلَّص"],
+          "decoys": ["شُغل", "مُوَظَّف", "راتِب"],
+          "english": "Shift finished"
+        },
+        {
+          "sentence": ["مُوَظَّف", "راتِب", "كويس"],
+          "decoys": ["مُدير", "دَوام", "شُغل"],
+          "english": "Employee with a good salary"
+        }
+      ],
+      "speak": {
+        "scenario": "You are telling a friend about your new job.",
+        "turns": [
+          {
+            "speaker": "them",
+            "arabic": "وين تشتغل هلق؟",
+            "romanization": "wēn tištagil halla'",
+            "english": "Where do you work now?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "شُغل جديد!",
+            "romanization": "šuġl jdīd",
+            "english": "New job!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "موظف ولا مدير؟",
+            "romanization": "muwaẓẓaf willa mudīr",
+            "english": "Employee or manager?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "مُوَظَّف هلق!",
+            "romanization": "muwaẓẓaf halla'",
+            "english": "Employee for now!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "ومديرك كيف؟",
+            "romanization": "w-mudīrak kēf",
+            "english": "And how is your manager?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "مُدير لطيف!",
+            "romanization": "mudīr laṭīf",
+            "english": "Kind manager!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "والراتب؟",
+            "romanization": "w-ir-rātib",
+            "english": "And the salary?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "راتِب منيح!",
+            "romanization": "rātib mnīḥ",
+            "english": "Good salary!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "ودوامك قديش؟",
+            "romanization": "w-dawāmak ʾaddēš",
+            "english": "And what are your work hours?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "دَوام طويل!",
+            "romanization": "dawām ṭawīl",
+            "english": "Long hours!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "إمتى بتخلص اليوم؟",
+            "romanization": "ʾēmta btḫallaṣ il-yōm",
+            "english": "When do you finish today?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "خَلَّصت!",
+            "romanization": "ḫallaṣt",
+            "english": "Done / Finished!"
+          }
+        ]
+      }
+    },
+    {
+      "cycle": 2,
+      "vocab": [
+        {
+          "arabic": "اِجتِماع",
+          "transcription": "ij-ti-MĀ'",
+          "romanization": "ijtimāʕ",
+          "english": "meeting",
+          "note": "ق → ʾ; عندي اجتماع = I have a meeting; اجتماع مهم = important meeting",
+          "icon": "solar:users-group-two-rounded-linear",
+          "icon_color": "#5856d6"
+        },
+        {
+          "arabic": "مَشروع",
+          "transcription": "mash-RŪ'",
+          "romanization": "mašrūʕ",
+          "english": "project",
+          "note": "ق → ʾ; مشروع كبير = big project; شتغلت على المشروع = I worked on the project",
+          "icon": "solar:chart-linear",
+          "icon_color": "#007aff"
+        },
+        {
+          "arabic": "إِجازة",
+          "transcription": "i-JĀ-ze",
+          "romanization": "ʾijāze",
+          "english": "vacation / day off",
+          "note": "طلبت إجازة = I requested a day off; إجازة سنوية = annual leave; أنا بإجازة = I'm on vacation",
+          "icon": "solar:sun-2-linear",
+          "icon_color": "#ff9f0a"
+        },
+        {
+          "arabic": "تَأَخَّرت",
+          "transcription": "ta-AKH-khurt",
+          "romanization": "taʾaḫḫart",
+          "english": "I was late",
+          "note": "past tense Form V 1st person; تأخرت على الشغل = I was late to work",
+          "icon": "solar:clock-circle-linear",
+          "icon_color": "#ff3b30"
+        },
+        {
+          "arabic": "شَغلة",
+          "transcription": "SHAG-le",
+          "romanization": "šaġle",
+          "english": "task / thing to do",
+          "note": "colloquial diminutive; عندي شغلة = I have something to do; شغلة صغيرة = a small task",
+          "icon": "solar:list-linear",
+          "icon_color": "#34c759"
+        },
+        {
+          "arabic": "مَسؤول",
+          "transcription": "mas-ŪL",
+          "romanization": "masʾūl",
+          "english": "responsible / in charge",
+          "note": "ق → ʾ; أنا المسؤول = I'm in charge; مسؤول عن = responsible for",
+          "icon": "solar:shield-check-linear",
+          "icon_color": "#fe4d01"
+        }
+      ],
+      "quiz": [
+        {
+          "arabic": "اِجتِماع",
+          "transcription": "ij-ti-MĀ'",
+          "romanization": "ijtimāʕ",
+          "options": ["interview", "meeting", "training", "seminar"],
+          "answer": 1
+        },
+        {
+          "arabic": "مَشروع",
+          "transcription": "mash-RŪ'",
+          "romanization": "mašrūʕ",
+          "options": ["meeting", "task", "project", "salary"],
+          "answer": 2
+        },
+        {
+          "arabic": "إِجازة",
+          "transcription": "i-JĀ-ze",
+          "romanization": "ʾijāze",
+          "options": ["overtime", "promotion", "vacation / day off", "meeting"],
+          "answer": 2
+        },
+        {
+          "arabic": "تَأَخَّرت",
+          "transcription": "ta-AKH-khurt",
+          "romanization": "taʾaḫḫart",
+          "options": ["I was early", "I was on time", "I was late", "I was absent"],
+          "answer": 2
+        },
+        {
+          "arabic": "شَغلة",
+          "transcription": "SHAG-le",
+          "romanization": "šaġle",
+          "options": ["free time", "break", "task / thing to do", "shift"],
+          "answer": 2
+        },
+        {
+          "arabic": "مَسؤول",
+          "transcription": "mas-ŪL",
+          "romanization": "masʾūl",
+          "options": ["employee", "customer", "visitor", "responsible / in charge"],
+          "answer": 3
+        }
+      ],
+      "build": [
+        {
+          "sentence": ["اِجتِماع", "مَشروع"],
+          "decoys": ["إِجازة", "تَأَخَّرت", "شَغلة"],
+          "english": "Meeting about the project"
+        },
+        {
+          "sentence": ["تَأَخَّرت", "لِأَنَّه", "شَغلة"],
+          "decoys": ["مَسؤول", "إِجازة", "اِجتِماع"],
+          "english": "I was late because of a task"
+        },
+        {
+          "sentence": ["مَسؤول", "إِجازة"],
+          "decoys": ["شَغلة", "تَأَخَّرت", "مَشروع"],
+          "english": "Responsible one is on vacation"
+        }
+      ],
+      "speak": {
+        "scenario": "You are explaining to your manager why you were late to a meeting.",
+        "turns": [
+          {
+            "speaker": "them",
+            "arabic": "ليش تأخرت على الاجتماع؟",
+            "romanization": "lēš taʾaḫḫart ʕal-ijtimāʕ",
+            "english": "Why were you late to the meeting?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "تَأَخَّرت آسف!",
+            "romanization": "taʾaḫḫart āsif",
+            "english": "I was late, sorry!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "الاجتماع مهم جداً",
+            "romanization": "il-ijtimāʕ muhimm jiddan",
+            "english": "The meeting is very important"
+          },
+          {
+            "speaker": "you",
+            "arabic": "اِجتِماع مهم!",
+            "romanization": "ijtimāʕ muhimm",
+            "english": "Important meeting!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "المشروع إيش صار فيه؟",
+            "romanization": "il-mašrūʕ ʾēš ṣār fī",
+            "english": "What happened with the project?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "مَشروع خلص!",
+            "romanization": "mašrūʕ ḫalaṣ",
+            "english": "Project is done!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وكنت مسؤول عنه؟",
+            "romanization": "w-kunt masʾūl ʕannu",
+            "english": "And were you responsible for it?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "مَسؤول أنا!",
+            "romanization": "masʾūl ʾana",
+            "english": "I'm responsible!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "عندك شغلات تانية؟",
+            "romanization": "ʕindak šaġlāt tānye",
+            "english": "Do you have other tasks?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "شَغلة كتير!",
+            "romanization": "šaġle ktīr",
+            "english": "Lots to do!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "بدك إجازة؟",
+            "romanization": "biddak ʾijāze",
+            "english": "Do you want a day off?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "إِجازة بدي!",
+            "romanization": "ʾijāze biddi",
+            "english": "I want a day off!"
+          }
+        ]
+      },
+      "review": {
+        "all_vocab": [
+          { "arabic": "شُغل", "transcription": "SHUGHL", "romanization": "šuġl", "english": "work / job" },
+          { "arabic": "مُوَظَّف", "transcription": "mu-WAD-daf", "romanization": "muwaẓẓaf", "english": "employee" },
+          { "arabic": "مُدير", "transcription": "mu-DĒR", "romanization": "mudīr", "english": "manager" },
+          { "arabic": "راتِب", "transcription": "RĀ-tib", "romanization": "rātib", "english": "salary" },
+          { "arabic": "دَوام", "transcription": "da-WĀM", "romanization": "dawām", "english": "work hours / shift" },
+          { "arabic": "خَلَّص", "transcription": "khal-LAS", "romanization": "ḫallaṣ", "english": "finished / done" },
+          { "arabic": "اِجتِماع", "transcription": "ij-ti-MĀ'", "romanization": "ijtimāʕ", "english": "meeting" },
+          { "arabic": "مَشروع", "transcription": "mash-RŪ'", "romanization": "mašrūʕ", "english": "project" },
+          { "arabic": "إِجازة", "transcription": "i-JĀ-ze", "romanization": "ʾijāze", "english": "vacation / day off" },
+          { "arabic": "تَأَخَّرت", "transcription": "ta-AKH-khurt", "romanization": "taʾaḫḫart", "english": "I was late" },
+          { "arabic": "شَغلة", "transcription": "SHAG-le", "romanization": "šaġle", "english": "task / thing to do" },
+          { "arabic": "مَسؤول", "transcription": "mas-ŪL", "romanization": "masʾūl", "english": "responsible / in charge" }
+        ]
+      }
+    }
+  ]
+}

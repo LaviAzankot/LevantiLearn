@@ -1,0 +1,415 @@
+{
+  "topic": "Abstract Concepts",
+  "cycles": [
+    {
+      "cycle": 1,
+      "vocab": [
+        {
+          "arabic": "حُرِّية",
+          "transcription": "hur-RĒ-ye",
+          "romanization": "ḥurriyye",
+          "english": "freedom",
+          "note": "deeply resonant word in Palestinian political and cultural discourse",
+          "icon": "solar:star-rings-linear",
+          "icon_color": "#5856d6"
+        },
+        {
+          "arabic": "عَدالة",
+          "transcription": "a-DĀ-le",
+          "romanization": "ʕadāle",
+          "english": "justice",
+          "note": "العدالة الاجتماعية = social justice; بنطالب بالعدالة = we demand justice",
+          "icon": "solar:shield-check-linear",
+          "icon_color": "#007aff"
+        },
+        {
+          "arabic": "مُساواة",
+          "transcription": "mu-SĀ-wā",
+          "romanization": "musāwāt",
+          "english": "equality",
+          "note": "from ساوى (to equalize); المساواة بين الناس = equality between people",
+          "icon": "solar:arrow-left-right-linear",
+          "icon_color": "#34c759"
+        },
+        {
+          "arabic": "حُقوق",
+          "transcription": "hu-ŪK",
+          "romanization": "ḥuʾūʾ",
+          "english": "rights",
+          "note": "ق → ʾ; plural of حق (right/truth); حقوق الإنسان = human rights",
+          "icon": "solar:document-linear",
+          "icon_color": "#fe4d01"
+        },
+        {
+          "arabic": "مَسؤولِيّة",
+          "transcription": "mas-ū-LĒ-ye",
+          "romanization": "masʾūliyye",
+          "english": "responsibility",
+          "note": "من مسؤولية = it's the responsibility of; تحمل المسؤولية = take responsibility",
+          "icon": "solar:shield-warning-linear",
+          "icon_color": "#ff9f0a"
+        },
+        {
+          "arabic": "كَرامة",
+          "transcription": "ka-RĀ-me",
+          "romanization": "karāme",
+          "english": "dignity",
+          "note": "a central concept in Palestinian identity; كرامة فلسطين = Palestinian dignity",
+          "icon": "solar:star-shine-linear",
+          "icon_color": "#ff9f0a"
+        }
+      ],
+      "quiz": [
+        {
+          "arabic": "حُرِّية",
+          "transcription": "hur-RĒ-ye",
+          "romanization": "ḥurriyye",
+          "options": ["justice", "equality", "freedom", "rights"],
+          "answer": 2
+        },
+        {
+          "arabic": "عَدالة",
+          "transcription": "a-DĀ-le",
+          "romanization": "ʕadāle",
+          "options": ["freedom", "justice", "equality", "dignity"],
+          "answer": 1
+        },
+        {
+          "arabic": "مُساواة",
+          "transcription": "mu-SĀ-wā",
+          "romanization": "musāwāt",
+          "options": ["rights", "equality", "freedom", "responsibility"],
+          "answer": 1
+        },
+        {
+          "arabic": "حُقوق",
+          "transcription": "hu-ŪK",
+          "romanization": "ḥuʾūʾ",
+          "options": ["duties", "laws", "rights", "responsibilities"],
+          "answer": 2
+        },
+        {
+          "arabic": "مَسؤولِيّة",
+          "transcription": "mas-ū-LĒ-ye",
+          "romanization": "masʾūliyye",
+          "options": ["freedom", "right", "duty", "responsibility"],
+          "answer": 3
+        },
+        {
+          "arabic": "كَرامة",
+          "transcription": "ka-RĀ-me",
+          "romanization": "karāme",
+          "options": ["courage", "power", "dignity", "respect"],
+          "answer": 2
+        }
+      ],
+      "build": [
+        {
+          "sentence": ["حُرِّية", "عَدالة"],
+          "decoys": ["مُساواة", "كَرامة", "حُقوق"],
+          "english": "Freedom and justice"
+        },
+        {
+          "sentence": ["حُقوق", "مَسؤولِيّة"],
+          "decoys": ["حُرِّية", "كَرامة", "عَدالة"],
+          "english": "Rights and responsibility"
+        },
+        {
+          "sentence": ["كَرامة", "مُساواة"],
+          "decoys": ["مَسؤولِيّة", "حُقوق", "عَدالة"],
+          "english": "Dignity and equality"
+        }
+      ],
+      "speak": {
+        "scenario": "You are participating in a community discussion about values.",
+        "turns": [
+          {
+            "speaker": "them",
+            "arabic": "إيش أهم شي بالنسبة لك؟",
+            "romanization": "ʾēš ʾahamm šī b-in-nisbe lak",
+            "english": "What's the most important thing for you?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "حُرِّية مهمة!",
+            "romanization": "ḥurriyye muhimme",
+            "english": "Freedom is important!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وإيش رأيك بالعدالة؟",
+            "romanization": "w-ʾēš raʾyak bil-ʕadāle",
+            "english": "And what do you think about justice?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "عَدالة لازم!",
+            "romanization": "ʕadāle lāzim",
+            "english": "Justice is necessary!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "والمساواة؟",
+            "romanization": "w-il-musāwāt",
+            "english": "And equality?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "مُساواة حق!",
+            "romanization": "musāwāt ḥaʾʾ",
+            "english": "Equality is a right!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وحقوق الإنسان؟",
+            "romanization": "w-ḥuʾūʾ il-ʾinsān",
+            "english": "And human rights?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "حُقوق أساسية!",
+            "romanization": "ḥuʾūʾ ʾasāsiyye",
+            "english": "Fundamental rights!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "ومين مسؤول؟",
+            "romanization": "w-mīn masʾūl",
+            "english": "And who is responsible?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "مَسؤولِيّة الكل!",
+            "romanization": "masʾūliyyet il-kull",
+            "english": "Everyone's responsibility!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "والكرامة؟",
+            "romanization": "w-il-karāme",
+            "english": "And dignity?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "كَرامة فوق كل شي!",
+            "romanization": "karāme fōʾ kull šī",
+            "english": "Dignity above all!"
+          }
+        ]
+      }
+    },
+    {
+      "cycle": 2,
+      "vocab": [
+        {
+          "arabic": "أَمَل",
+          "transcription": "A-mal",
+          "romanization": "ʾamal",
+          "english": "hope",
+          "note": "في أمل = there is hope; ما في أمل = hopeless; also a Palestinian female name",
+          "icon": "solar:sunrise-linear",
+          "icon_color": "#ff9f0a"
+        },
+        {
+          "arabic": "خَوف",
+          "transcription": "KHŌF",
+          "romanization": "ḫōf",
+          "english": "fear",
+          "note": "خوف من = fear of; من غير خوف = fearlessly; بخاف = I'm afraid",
+          "icon": "solar:danger-triangle-linear",
+          "icon_color": "#ff3b30"
+        },
+        {
+          "arabic": "ثِقة",
+          "transcription": "TI-ʔe",
+          "romanization": "tiʾa",
+          "english": "trust / confidence",
+          "note": "ق → ʾ; عندي ثقة = I have trust; ثقة بالنفس = self-confidence",
+          "icon": "solar:hand-shake-linear",
+          "icon_color": "#34c759"
+        },
+        {
+          "arabic": "اِحتِرام",
+          "transcription": "ih-ti-RĀM",
+          "romanization": "iḥtirām",
+          "english": "respect",
+          "note": "باحترام = with respect; بستاهل احترام = deserves respect; very important social value",
+          "icon": "solar:star-shine-linear",
+          "icon_color": "#5856d6"
+        },
+        {
+          "arabic": "قِيمة",
+          "transcription": "ʔĒ-me",
+          "romanization": "ʾīme",
+          "english": "value",
+          "note": "ق → ʾ; plural: قيم (ʾiyam); قيمة عالية = high value; قيم أخلاقية = moral values",
+          "icon": "solar:book-linear",
+          "icon_color": "#007aff"
+        },
+        {
+          "arabic": "مُجتَمَع",
+          "transcription": "muj-ta-MA'",
+          "romanization": "mujtamaʕ",
+          "english": "community / society",
+          "note": "ع at end; المجتمع الفلسطيني = Palestinian community; مجتمع قوي = strong society",
+          "icon": "solar:users-group-rounded-linear",
+          "icon_color": "#fe4d01"
+        }
+      ],
+      "quiz": [
+        {
+          "arabic": "أَمَل",
+          "transcription": "A-mal",
+          "romanization": "ʾamal",
+          "options": ["fear", "sadness", "hope", "anger"],
+          "answer": 2
+        },
+        {
+          "arabic": "خَوف",
+          "transcription": "KHŌF",
+          "romanization": "ḫōf",
+          "options": ["hope", "fear", "joy", "peace"],
+          "answer": 1
+        },
+        {
+          "arabic": "ثِقة",
+          "transcription": "TI-ʔe",
+          "romanization": "tiʾa",
+          "options": ["doubt", "trust / confidence", "fear", "weakness"],
+          "answer": 1
+        },
+        {
+          "arabic": "اِحتِرام",
+          "transcription": "ih-ti-RĀM",
+          "romanization": "iḥtirām",
+          "options": ["love", "fear", "respect", "power"],
+          "answer": 2
+        },
+        {
+          "arabic": "قِيمة",
+          "transcription": "ʔĒ-me",
+          "romanization": "ʾīme",
+          "options": ["price", "number", "value", "type"],
+          "answer": 2
+        },
+        {
+          "arabic": "مُجتَمَع",
+          "transcription": "muj-ta-MA'",
+          "romanization": "mujtamaʕ",
+          "options": ["government", "country", "family", "community / society"],
+          "answer": 3
+        }
+      ],
+      "build": [
+        {
+          "sentence": ["أَمَل", "ثِقة"],
+          "decoys": ["خَوف", "قِيمة", "مُجتَمَع"],
+          "english": "Hope and trust"
+        },
+        {
+          "sentence": ["اِحتِرام", "قِيمة"],
+          "decoys": ["أَمَل", "خَوف", "ثِقة"],
+          "english": "Respect is a value"
+        },
+        {
+          "sentence": ["مُجتَمَع", "مِش", "خَوف"],
+          "decoys": ["اِحتِرام", "أَمَل", "ثِقة"],
+          "english": "Community — not fear"
+        }
+      ],
+      "speak": {
+        "scenario": "You are reflecting on what drives your community.",
+        "turns": [
+          {
+            "speaker": "them",
+            "arabic": "إيش بيحرك المجتمع؟",
+            "romanization": "ʾēš biḥarrik il-mujtamaʕ",
+            "english": "What drives the community?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "أَمَل وثِقة!",
+            "romanization": "ʾamal w-tiʾa",
+            "english": "Hope and trust!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وفي خوف؟",
+            "romanization": "w-fī ḫōf",
+            "english": "And is there fear?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "خَوف بس أمل أكتر!",
+            "romanization": "ḫōf bas ʾamal ʾaktar",
+            "english": "Fear, but more hope!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وعندك ثقة بالمستقبل؟",
+            "romanization": "w-ʕindak tiʾa bil-mustaqbal",
+            "english": "And do you trust the future?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "ثِقة كبيرة!",
+            "romanization": "tiʾa kabīra",
+            "english": "Great trust!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "والاحترام؟ موجود؟",
+            "romanization": "w-il-iḥtirām, mawjūd",
+            "english": "And respect? Is it there?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "اِحتِرام لازم!",
+            "romanization": "iḥtirām lāzim",
+            "english": "Respect is necessary!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وإيش أهم قيمة؟",
+            "romanization": "w-ʾēš ʾahamm ʾīme",
+            "english": "And what is the most important value?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "قِيمة الكرامة!",
+            "romanization": "ʾīmet il-karāme",
+            "english": "The value of dignity!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وهاد المجتمع كيف؟",
+            "romanization": "w-hād il-mujtamaʕ kēf",
+            "english": "And how is this community?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "مُجتَمَع قوي!",
+            "romanization": "mujtamaʕ ʾawiyy",
+            "english": "A strong community!"
+          }
+        ]
+      },
+      "review": {
+        "all_vocab": [
+          { "arabic": "حُرِّية", "transcription": "hur-RĒ-ye", "romanization": "ḥurriyye", "english": "freedom" },
+          { "arabic": "عَدالة", "transcription": "a-DĀ-le", "romanization": "ʕadāle", "english": "justice" },
+          { "arabic": "مُساواة", "transcription": "mu-SĀ-wā", "romanization": "musāwāt", "english": "equality" },
+          { "arabic": "حُقوق", "transcription": "hu-ŪK", "romanization": "ḥuʾūʾ", "english": "rights" },
+          { "arabic": "مَسؤولِيّة", "transcription": "mas-ū-LĒ-ye", "romanization": "masʾūliyye", "english": "responsibility" },
+          { "arabic": "كَرامة", "transcription": "ka-RĀ-me", "romanization": "karāme", "english": "dignity" },
+          { "arabic": "أَمَل", "transcription": "A-mal", "romanization": "ʾamal", "english": "hope" },
+          { "arabic": "خَوف", "transcription": "KHŌF", "romanization": "ḫōf", "english": "fear" },
+          { "arabic": "ثِقة", "transcription": "TI-ʔe", "romanization": "tiʾa", "english": "trust / confidence" },
+          { "arabic": "اِحتِرام", "transcription": "ih-ti-RĀM", "romanization": "iḥtirām", "english": "respect" },
+          { "arabic": "قِيمة", "transcription": "ʔĒ-me", "romanization": "ʾīme", "english": "value" },
+          { "arabic": "مُجتَمَع", "transcription": "muj-ta-MA'", "romanization": "mujtamaʕ", "english": "community / society" }
+        ]
+      }
+    }
+  ]
+}

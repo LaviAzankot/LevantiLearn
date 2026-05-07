@@ -1,0 +1,415 @@
+{
+  "topic": "Conditionals (If/When)",
+  "cycles": [
+    {
+      "cycle": 1,
+      "vocab": [
+        {
+          "arabic": "إِذا رُحت",
+          "transcription": "I-za RUHT",
+          "romanization": "ʾiza ruḥt",
+          "english": "if you go",
+          "note": "إذا (if) + رحت (you went); the past form in Arabic marks a condition, not past action",
+          "icon": "solar:question-circle-linear",
+          "icon_color": "#5856d6"
+        },
+        {
+          "arabic": "إِذا عِندَك وَقت",
+          "transcription": "I-za IN-dak WAʔT",
+          "romanization": "ʾiza ʕindak waʔt",
+          "english": "if you have time",
+          "note": "common conditional opener for invitations or requests; polite and flexible",
+          "icon": "solar:clock-circle-linear",
+          "icon_color": "#007aff"
+        },
+        {
+          "arabic": "لو كُنت",
+          "transcription": "LO KUNT",
+          "romanization": "lo kunt",
+          "english": "if I were / if I had been",
+          "note": "لو (if/were) for hypothetical conditions; لو كنت غني = if I were rich",
+          "icon": "solar:star-linear",
+          "icon_color": "#ff9f0a"
+        },
+        {
+          "arabic": "ما صار",
+          "transcription": "mā SĀR",
+          "romanization": "mā ṣār",
+          "english": "it didn't happen",
+          "note": "past negative; ما صار إشي = nothing happened; ما صار هيك = that didn't happen",
+          "icon": "solar:close-circle-linear",
+          "icon_color": "#ff3b30"
+        },
+        {
+          "arabic": "بِدي أَعرَف",
+          "transcription": "BID-di a-RIIF",
+          "romanization": "biddi ʾaʕrif",
+          "english": "I want to know",
+          "note": "بدي (I want) + أعرف (I know); used in conditional questions: بدي أعرف إذا = I want to know if",
+          "icon": "solar:question-square-linear",
+          "icon_color": "#34c759"
+        },
+        {
+          "arabic": "بِستاهِل",
+          "transcription": "bi-STA-hil",
+          "romanization": "bistāhil",
+          "english": "worth it / deserves",
+          "note": "1st person present; bistāhil = it's worth it; استاهلت = you deserved it",
+          "icon": "solar:star-shine-linear",
+          "icon_color": "#ff9f0a"
+        }
+      ],
+      "quiz": [
+        {
+          "arabic": "إِذا رُحت",
+          "transcription": "I-za RUHT",
+          "romanization": "ʾiza ruḥt",
+          "options": ["when you went", "because you went", "if you go", "after you go"],
+          "answer": 2
+        },
+        {
+          "arabic": "إِذا عِندَك وَقت",
+          "transcription": "I-za IN-dak WAʔT",
+          "romanization": "ʾiza ʕindak waʔt",
+          "options": ["because you have time", "if you have time", "when you have time", "while you have time"],
+          "answer": 1
+        },
+        {
+          "arabic": "لو كُنت",
+          "transcription": "LO KUNT",
+          "romanization": "lo kunt",
+          "options": ["since I am", "when I was", "if I were / had been", "after I was"],
+          "answer": 2
+        },
+        {
+          "arabic": "ما صار",
+          "transcription": "mā SĀR",
+          "romanization": "mā ṣār",
+          "options": ["it happened", "it will happen", "it didn't happen", "nothing happened yet"],
+          "answer": 2
+        },
+        {
+          "arabic": "بِدي أَعرَف",
+          "transcription": "BID-di a-RIIF",
+          "romanization": "biddi ʾaʕrif",
+          "options": ["I know", "I don't know", "I want to know", "I knew"],
+          "answer": 2
+        },
+        {
+          "arabic": "بِستاهِل",
+          "transcription": "bi-STA-hil",
+          "romanization": "bistāhil",
+          "options": ["not worth it", "too expensive", "worth it / deserves", "impossible"],
+          "answer": 2
+        }
+      ],
+      "build": [
+        {
+          "sentence": ["إِذا رُحت", "بِستاهِل"],
+          "decoys": ["لو كُنت", "ما صار", "بِدي أَعرَف"],
+          "english": "If you go, it's worth it"
+        },
+        {
+          "sentence": ["لو كُنت", "غَنيّ", "رُحت"],
+          "decoys": ["بِدي أَعرَف", "ما صار", "إِذا عِندَك وَقت"],
+          "english": "If I were rich I'd go"
+        },
+        {
+          "sentence": ["إِذا عِندَك وَقت", "بِدي أَعرَف"],
+          "decoys": ["لو كُنت", "بِستاهِل", "ما صار"],
+          "english": "If you have time, I want to know"
+        }
+      ],
+      "speak": {
+        "scenario": "You are inviting a friend to join you on a trip.",
+        "turns": [
+          {
+            "speaker": "them",
+            "arabic": "في رحلة الأسبوع الجاي",
+            "romanization": "fī riḥle l-ʾusbūʕ il-jāyy",
+            "english": "There's a trip next week"
+          },
+          {
+            "speaker": "you",
+            "arabic": "إِذا عِندَك وَقت، تعا!",
+            "romanization": "ʾiza ʕindak waʔt, taʕa",
+            "english": "If you have time, come!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وإذا رحت، شو رح يصير؟",
+            "romanization": "w-ʾiza ruḥt, šū raḥ yiṣīr",
+            "english": "And if I go, what will happen?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "إِذا رُحت، مبسوط!",
+            "romanization": "ʾiza ruḥt, mabsūṭ",
+            "english": "If you go, happy!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "لو كنت متفرغ كنت أجيت",
+            "romanization": "lo kunt mutfarriġ kunt ʾajīt",
+            "english": "If I were free I would have come"
+          },
+          {
+            "speaker": "you",
+            "arabic": "لو كُنت حر!",
+            "romanization": "lo kunt ḥurr",
+            "english": "If I were free!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وإيش صار العام الماضي؟",
+            "romanization": "w-ʾēš ṣār il-ʕām il-māḍi",
+            "english": "And what happened last year?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "ما صار إشي!",
+            "romanization": "mā ṣār ʾiši",
+            "english": "Nothing happened!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "بدي أعرف، بستاهل؟",
+            "romanization": "biddi ʾaʕrif, bistāhil",
+            "english": "I want to know, is it worth it?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "بِدي أَعرَف كمان!",
+            "romanization": "biddi ʾaʕrif kamān",
+            "english": "I want to know too!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "هاد بستاهل يعني؟",
+            "romanization": "hād bistāhil yaʕni",
+            "english": "This is worth it then?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "بِستاهِل كتير!",
+            "romanization": "bistāhil ktīr",
+            "english": "Very worth it!"
+          }
+        ]
+      }
+    },
+    {
+      "cycle": 2,
+      "vocab": [
+        {
+          "arabic": "لَمّا تِيجي",
+          "transcription": "LAM-ma TĒ-ji",
+          "romanization": "lamma tījī",
+          "english": "when you come",
+          "note": "temporal conditional; لما تيجي، أخبرك = when you come, I'll tell you",
+          "icon": "solar:clock-circle-linear",
+          "icon_color": "#007aff"
+        },
+        {
+          "arabic": "لَمّا خَلَّصت",
+          "transcription": "LAM-ma khal-LAST",
+          "romanization": "lamma ḫallaṣt",
+          "english": "when I finished",
+          "note": "lamma (when) + ḫallaṣt (I finished); refers to a completed action that triggered another",
+          "icon": "solar:history-linear",
+          "icon_color": "#34c759"
+        },
+        {
+          "arabic": "بِشرط إِنَّه",
+          "transcription": "bi-SHRT IN-nu",
+          "romanization": "b-išarṭ ʾinnu",
+          "english": "on the condition that",
+          "note": "شرط (condition) as a conjunction; بشرط إنه تيجي = on the condition that you come",
+          "icon": "solar:shield-check-linear",
+          "icon_color": "#5856d6"
+        },
+        {
+          "arabic": "لو ما كان",
+          "transcription": "LO mā KĀN",
+          "romanization": "lo mā kān",
+          "english": "if it weren't for",
+          "note": "counterfactual; لو ما كان هو = if it weren't for him; expresses gratitude or near-miss",
+          "icon": "solar:star-rings-linear",
+          "icon_color": "#ff9f0a"
+        },
+        {
+          "arabic": "لازِم تِفهَم",
+          "transcription": "LA-zim tif-HAM",
+          "romanization": "lāzim tifham",
+          "english": "you must understand",
+          "note": "لازم + verb 2nd person; used to emphasize importance of understanding a condition",
+          "icon": "solar:brain-linear",
+          "icon_color": "#fe4d01"
+        },
+        {
+          "arabic": "إِلّا إِذا",
+          "transcription": "IL-la I-za",
+          "romanization": "ʾilla ʾiza",
+          "english": "unless",
+          "note": "إلا (except/unless) + إذا (if); إلا إذا تيجي = unless you come",
+          "icon": "solar:close-square-linear",
+          "icon_color": "#ff3b30"
+        }
+      ],
+      "quiz": [
+        {
+          "arabic": "لَمّا تِيجي",
+          "transcription": "LAM-ma TĒ-ji",
+          "romanization": "lamma tījī",
+          "options": ["if you come", "since you came", "when you come", "after you come"],
+          "answer": 2
+        },
+        {
+          "arabic": "لَمّا خَلَّصت",
+          "transcription": "LAM-ma khal-LAST",
+          "romanization": "lamma ḫallaṣt",
+          "options": ["before I finished", "when I finished", "if I finish", "while finishing"],
+          "answer": 1
+        },
+        {
+          "arabic": "بِشرط إِنَّه",
+          "transcription": "bi-SHRT IN-nu",
+          "romanization": "b-išarṭ ʾinnu",
+          "options": ["because", "although", "on the condition that", "unless"],
+          "answer": 2
+        },
+        {
+          "arabic": "لو ما كان",
+          "transcription": "LO mā KĀN",
+          "romanization": "lo mā kān",
+          "options": ["because of him", "if it weren't for", "since it was", "when there was"],
+          "answer": 1
+        },
+        {
+          "arabic": "لازِم تِفهَم",
+          "transcription": "LA-zim tif-HAM",
+          "romanization": "lāzim tifham",
+          "options": ["try to understand", "I understand", "you must understand", "you don't understand"],
+          "answer": 2
+        },
+        {
+          "arabic": "إِلّا إِذا",
+          "transcription": "IL-la I-za",
+          "romanization": "ʾilla ʾiza",
+          "options": ["if only", "even if", "unless", "although"],
+          "answer": 2
+        }
+      ],
+      "build": [
+        {
+          "sentence": ["لَمّا تِيجي", "أَحكيلك"],
+          "decoys": ["إِلّا إِذا", "لو ما كان", "بِشرط إِنَّه"],
+          "english": "When you come, I'll tell you"
+        },
+        {
+          "sentence": ["بِشرط إِنَّه", "لازِم تِفهَم"],
+          "decoys": ["لَمّا خَلَّصت", "لو ما كان", "إِلّا إِذا"],
+          "english": "On condition that — you must understand"
+        },
+        {
+          "sentence": ["إِلّا إِذا", "لَمّا خَلَّصت"],
+          "decoys": ["بِشرط إِنَّه", "لازِم تِفهَم", "لو ما كان"],
+          "english": "Unless — when I finished"
+        }
+      ],
+      "speak": {
+        "scenario": "You are negotiating terms of a deal with a business partner.",
+        "turns": [
+          {
+            "speaker": "them",
+            "arabic": "متى رح تيجي؟",
+            "romanization": "matā raḥ tījī",
+            "english": "When will you come?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "لَمّا تِيجي أنت أول!",
+            "romanization": "lamma tījī ʾinta ʾawwal",
+            "english": "When you come first!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "لما خلصت الاجتماع، وين رحت؟",
+            "romanization": "lamma ḫallaṣt il-ijtimāʕ, wēn ruḥt",
+            "english": "When you finished the meeting, where did you go?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "لَمّا خَلَّصت، رُحت!",
+            "romanization": "lamma ḫallaṣt, ruḥt",
+            "english": "When I finished, I went!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "أنا موافق بشرط إنه تدفع أول",
+            "romanization": "ʾana muwāfiʾ b-išarṭ ʾinnu tdfaʕ ʾawwal",
+            "english": "I agree on condition that you pay first"
+          },
+          {
+            "speaker": "you",
+            "arabic": "بِشرط إِنَّه كمان!",
+            "romanization": "b-išarṭ ʾinnu kamān",
+            "english": "On condition too!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "لو ما كان هو، ما صارت الصفقة",
+            "romanization": "lo mā kān huwwa, mā ṣārat iṣ-ṣafʾa",
+            "english": "If it weren't for him, the deal wouldn't have happened"
+          },
+          {
+            "speaker": "you",
+            "arabic": "لو ما كان كتير مهم!",
+            "romanization": "lo mā kān ktīr muhimm",
+            "english": "If it weren't for — very important!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "لازم تفهم الشروط",
+            "romanization": "lāzim tifham iš-šurūṭ",
+            "english": "You must understand the terms"
+          },
+          {
+            "speaker": "you",
+            "arabic": "لازِم تِفهَم!",
+            "romanization": "lāzim tifham",
+            "english": "You must understand!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "مش موافق إلا إذا تنازلت",
+            "romanization": "miš muwāfiʾ ʾilla ʾiza tnāzalt",
+            "english": "I won't agree unless you concede"
+          },
+          {
+            "speaker": "you",
+            "arabic": "إِلّا إِذا أنا!",
+            "romanization": "ʾilla ʾiza ʾana",
+            "english": "Unless me — agreed!"
+          }
+        ]
+      },
+      "review": {
+        "all_vocab": [
+          { "arabic": "إِذا رُحت", "transcription": "I-za RUHT", "romanization": "ʾiza ruḥt", "english": "if you go" },
+          { "arabic": "إِذا عِندَك وَقت", "transcription": "I-za IN-dak WAʔT", "romanization": "ʾiza ʕindak waʔt", "english": "if you have time" },
+          { "arabic": "لو كُنت", "transcription": "LO KUNT", "romanization": "lo kunt", "english": "if I were" },
+          { "arabic": "ما صار", "transcription": "mā SĀR", "romanization": "mā ṣār", "english": "it didn't happen" },
+          { "arabic": "بِدي أَعرَف", "transcription": "BID-di a-RIIF", "romanization": "biddi ʾaʕrif", "english": "I want to know" },
+          { "arabic": "بِستاهِل", "transcription": "bi-STA-hil", "romanization": "bistāhil", "english": "worth it / deserves" },
+          { "arabic": "لَمّا تِيجي", "transcription": "LAM-ma TĒ-ji", "romanization": "lamma tījī", "english": "when you come" },
+          { "arabic": "لَمّا خَلَّصت", "transcription": "LAM-ma khal-LAST", "romanization": "lamma ḫallaṣt", "english": "when I finished" },
+          { "arabic": "بِشرط إِنَّه", "transcription": "bi-SHRT IN-nu", "romanization": "b-išarṭ ʾinnu", "english": "on the condition that" },
+          { "arabic": "لو ما كان", "transcription": "LO mā KĀN", "romanization": "lo mā kān", "english": "if it weren't for" },
+          { "arabic": "لازِم تِفهَم", "transcription": "LA-zim tif-HAM", "romanization": "lāzim tifham", "english": "you must understand" },
+          { "arabic": "إِلّا إِذا", "transcription": "IL-la I-za", "romanization": "ʾilla ʾiza", "english": "unless" }
+        ]
+      }
+    }
+  ]
+}

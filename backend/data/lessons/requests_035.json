@@ -1,0 +1,415 @@
+{
+  "topic": "Making Requests Politely",
+  "cycles": [
+    {
+      "cycle": 1,
+      "vocab": [
+        {
+          "arabic": "مُمكِن تُساعِدني؟",
+          "transcription": "MUM-kin tu-SĀ-id-ni",
+          "romanization": "mumkin tusāʕidni",
+          "english": "can you help me?",
+          "note": "ممكن + verb 2nd person = polite request; the standard way to ask for help",
+          "icon": "solar:hand-heart-linear",
+          "icon_color": "#fe4d01"
+        },
+        {
+          "arabic": "لو سَمَحت",
+          "transcription": "lo sa-MAHT",
+          "romanization": "lo samaḥt",
+          "english": "excuse me / if you don't mind",
+          "note": "from سمح (to permit); lit. 'if you permitted'; used before requests or to get attention",
+          "icon": "solar:smile-circle-linear",
+          "icon_color": "#007aff"
+        },
+        {
+          "arabic": "بِتقدَر؟",
+          "transcription": "bit-ʔA-dar",
+          "romanization": "bitʾadar",
+          "english": "can you? / are you able to?",
+          "note": "from قدر (to be able); ق → ʾ; بتقدر تيجي؟ = can you come?",
+          "icon": "solar:question-circle-linear",
+          "icon_color": "#5856d6"
+        },
+        {
+          "arabic": "إِذا بِتريد",
+          "transcription": "I-za bit-RĒD",
+          "romanization": "ʾiza bitrīd",
+          "english": "if you want / if you like",
+          "note": "polite conditional opener; إذا بتريد = if you want; softens requests and invitations",
+          "icon": "solar:heart-linear",
+          "icon_color": "#34c759"
+        },
+        {
+          "arabic": "بِدّي أَطلُب",
+          "transcription": "BID-di AT-lub",
+          "romanization": "biddi ʾaṭlub",
+          "english": "I'd like to request",
+          "note": "بدي (I want) + أطلب (I request); formal phrasing for requests in office/service contexts",
+          "icon": "solar:document-add-linear",
+          "icon_color": "#ff9f0a"
+        },
+        {
+          "arabic": "مَمنون",
+          "transcription": "mam-NŪN",
+          "romanization": "mamnūn",
+          "english": "grateful / thankful",
+          "note": "أنا ممنون = I am grateful; ممنون كتير = very thankful; warmer than شكراً",
+          "icon": "solar:heart-shine-linear",
+          "icon_color": "#ff2d55"
+        }
+      ],
+      "quiz": [
+        {
+          "arabic": "مُمكِن تُساعِدني؟",
+          "transcription": "MUM-kin tu-SĀ-id-ni",
+          "romanization": "mumkin tusāʕidni",
+          "options": ["do you need help?", "can I help you?", "can you help me?", "help me please"],
+          "answer": 2
+        },
+        {
+          "arabic": "لو سَمَحت",
+          "transcription": "lo sa-MAHT",
+          "romanization": "lo samaḥt",
+          "options": ["thank you", "sorry", "excuse me / if you don't mind", "please (for food)"],
+          "answer": 2
+        },
+        {
+          "arabic": "بِتقدَر؟",
+          "transcription": "bit-ʔA-dar",
+          "romanization": "bitʾadar",
+          "options": ["do you want?", "can you?", "will you?", "are you sure?"],
+          "answer": 1
+        },
+        {
+          "arabic": "إِذا بِتريد",
+          "transcription": "I-za bit-RĒD",
+          "romanization": "ʾiza bitrīd",
+          "options": ["because you want", "if you want", "although you want", "since you want"],
+          "answer": 1
+        },
+        {
+          "arabic": "بِدّي أَطلُب",
+          "transcription": "BID-di AT-lub",
+          "romanization": "biddi ʾaṭlub",
+          "options": ["I'll accept", "I'll refuse", "I'd like to request", "I'll decide"],
+          "answer": 2
+        },
+        {
+          "arabic": "مَمنون",
+          "transcription": "mam-NŪN",
+          "romanization": "mamnūn",
+          "options": ["sorry", "pleased to meet you", "goodbye", "grateful / thankful"],
+          "answer": 3
+        }
+      ],
+      "build": [
+        {
+          "sentence": ["لو سَمَحت", "مُمكِن تُساعِدني؟"],
+          "decoys": ["مَمنون", "بِتقدَر؟", "إِذا بِتريد"],
+          "english": "Excuse me, can you help me?"
+        },
+        {
+          "sentence": ["بِتقدَر؟", "إِذا بِتريد"],
+          "decoys": ["مُمكِن تُساعِدني؟", "مَمنون", "لو سَمَحت"],
+          "english": "Can you? If you want"
+        },
+        {
+          "sentence": ["بِدّي أَطلُب", "مَمنون"],
+          "decoys": ["لو سَمَحت", "إِذا بِتريد", "بِتقدَر؟"],
+          "english": "I'd like to request — grateful"
+        }
+      ],
+      "speak": {
+        "scenario": "You need help finding an office in a government building.",
+        "turns": [
+          {
+            "speaker": "them",
+            "arabic": "أهلاً، في شي بقدر أساعدك؟",
+            "romanization": "ʾahlan, fī šī biʾdar ʾusāʕdak",
+            "english": "Welcome, is there something I can help you with?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "لو سَمَحت!",
+            "romanization": "lo samaḥt",
+            "english": "Excuse me!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "تفضل!",
+            "romanization": "tafaḍḍal",
+            "english": "Go ahead!"
+          },
+          {
+            "speaker": "you",
+            "arabic": "مُمكِن تُساعِدني؟",
+            "romanization": "mumkin tusāʕidni",
+            "english": "Can you help me?"
+          },
+          {
+            "speaker": "them",
+            "arabic": "أكيد! بتقدر تسألني",
+            "romanization": "ʾakīd, bitʾadar tisʾalni",
+            "english": "Of course! You can ask me"
+          },
+          {
+            "speaker": "you",
+            "arabic": "بِتقدَر تدلني على المكتب؟",
+            "romanization": "bitʾadar tdillni ʕal-maktab",
+            "english": "Can you show me where the office is?"
+          },
+          {
+            "speaker": "them",
+            "arabic": "إذا بتريد، تعا معي",
+            "romanization": "ʾiza bitrīd, taʕa maʕī",
+            "english": "If you want, come with me"
+          },
+          {
+            "speaker": "you",
+            "arabic": "إِذا بِتريد، شكراً!",
+            "romanization": "ʾiza bitrīd, šukran",
+            "english": "If you don't mind, thank you!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وبدك تطلب شي ثاني؟",
+            "romanization": "w-biddak tṭlub šī tāni",
+            "english": "And do you want to request something else?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "بِدّي أَطلُب معلومة!",
+            "romanization": "biddi ʾaṭlub maʕlūme",
+            "english": "I'd like to request some information!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "حياك، أي وقت!",
+            "romanization": "ḥayyāk, ʾayy waʔt",
+            "english": "You're welcome, anytime!"
+          },
+          {
+            "speaker": "you",
+            "arabic": "مَمنون كتير!",
+            "romanization": "mamnūn ktīr",
+            "english": "Very grateful!"
+          }
+        ]
+      }
+    },
+    {
+      "cycle": 2,
+      "vocab": [
+        {
+          "arabic": "شاطِر",
+          "transcription": "SHĀT-ir",
+          "romanization": "šāṭir",
+          "english": "well done! / good job!",
+          "note": "used to praise someone; شاطر كتير = very well done; يا شاطر = bravo!",
+          "icon": "solar:star-shine-linear",
+          "icon_color": "#ff9f0a"
+        },
+        {
+          "arabic": "أَنا مَمنونَك",
+          "transcription": "A-na mam-NŪ-nak",
+          "romanization": "ʾana mamnūnak",
+          "english": "I'm grateful to you",
+          "note": "personal form of ممنون; مننتك (mninak) is the shortened colloquial form",
+          "icon": "solar:heart-shine-linear",
+          "icon_color": "#ff2d55"
+        },
+        {
+          "arabic": "لو ما في زَحمة",
+          "transcription": "lo mā FĪ ZAH-me",
+          "romanization": "lo mā fī zaḥme",
+          "english": "if it's not too much trouble",
+          "note": "lit. 'if there's no crowding/burden'; polite qualifier before a request",
+          "icon": "solar:users-group-rounded-linear",
+          "icon_color": "#6e6e73"
+        },
+        {
+          "arabic": "حاضِر",
+          "transcription": "HĀ-dir",
+          "romanization": "ḥāḍir",
+          "english": "sure / at your service",
+          "note": "lit. 'present/ready'; very common Palestinian affirmative response to a request",
+          "icon": "solar:check-circle-linear",
+          "icon_color": "#34c759"
+        },
+        {
+          "arabic": "مِن دواعي سُروري",
+          "transcription": "min da-WĀ-i su-RŪ-ri",
+          "romanization": "min dawāʕī surūri",
+          "english": "with pleasure / my pleasure",
+          "note": "formal register; lit. 'from the causes of my happiness'; used in business/formal contexts",
+          "icon": "solar:smile-circle-linear",
+          "icon_color": "#5856d6"
+        },
+        {
+          "arabic": "آسِف على الإِزعاج",
+          "transcription": "Ā-sif AL iz-ĀJ",
+          "romanization": "āsif ʕal-ʾizʕāj",
+          "english": "sorry for the trouble",
+          "note": "standard polite apology when making a request or inconveniencing someone",
+          "icon": "solar:chat-round-dots-linear",
+          "icon_color": "#ff9f0a"
+        }
+      ],
+      "quiz": [
+        {
+          "arabic": "شاطِر",
+          "transcription": "SHĀT-ir",
+          "romanization": "šāṭir",
+          "options": ["smart", "well done!", "good", "correct"],
+          "answer": 1
+        },
+        {
+          "arabic": "أَنا مَمنونَك",
+          "transcription": "A-na mam-NŪ-nak",
+          "romanization": "ʾana mamnūnak",
+          "options": ["I'm sorry", "I'm grateful to you", "I'm happy for you", "I thank you"],
+          "answer": 1
+        },
+        {
+          "arabic": "لو ما في زَحمة",
+          "transcription": "lo mā FĪ ZAH-me",
+          "romanization": "lo mā fī zaḥme",
+          "options": ["if it's busy", "because there's no crowd", "if it's not too much trouble", "when it's quiet"],
+          "answer": 2
+        },
+        {
+          "arabic": "حاضِر",
+          "transcription": "HĀ-dir",
+          "romanization": "ḥāḍir",
+          "options": ["later", "not now", "sure / at your service", "maybe"],
+          "answer": 2
+        },
+        {
+          "arabic": "مِن دواعي سُروري",
+          "transcription": "min da-WĀ-i su-RŪ-ri",
+          "romanization": "min dawāʕī surūri",
+          "options": ["I'm sorry", "I'm not interested", "with pleasure", "as you wish"],
+          "answer": 2
+        },
+        {
+          "arabic": "آسِف على الإِزعاج",
+          "transcription": "Ā-sif AL iz-ĀJ",
+          "romanization": "āsif ʕal-ʾizʕāj",
+          "options": ["I apologize for being late", "sorry for the trouble", "excuse me for interrupting", "I'm sorry to hear that"],
+          "answer": 1
+        }
+      ],
+      "build": [
+        {
+          "sentence": ["لو ما في زَحمة", "مُمكِن تُساعِدني؟"],
+          "decoys": ["حاضِر", "أَنا مَمنونَك", "شاطِر"],
+          "english": "If it's not too much trouble, can you help me?"
+        },
+        {
+          "sentence": ["حاضِر", "مِن دواعي سُروري"],
+          "decoys": ["آسِف على الإِزعاج", "لو ما في زَحمة", "شاطِر"],
+          "english": "Sure — with pleasure"
+        },
+        {
+          "sentence": ["آسِف على الإِزعاج", "أَنا مَمنونَك"],
+          "decoys": ["حاضِر", "شاطِر", "مِن دواعي سُروري"],
+          "english": "Sorry for the trouble — I'm grateful"
+        }
+      ],
+      "speak": {
+        "scenario": "You are asking a colleague to cover your shift.",
+        "turns": [
+          {
+            "speaker": "them",
+            "arabic": "كيفك؟ في شي؟",
+            "romanization": "kīfak, fī šī",
+            "english": "How are you? Is there something?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "لو ما في زَحمة عليك!",
+            "romanization": "lo mā fī zaḥme ʕalēk",
+            "english": "If it's not too much trouble!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "تفضل، شو في؟",
+            "romanization": "tafaḍḍal, šū fī",
+            "english": "Go ahead, what is it?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "مُمكِن تُساعِدني؟",
+            "romanization": "mumkin tusāʕidni",
+            "english": "Can you help me?"
+          },
+          {
+            "speaker": "them",
+            "arabic": "حاضر، شو بدك؟",
+            "romanization": "ḥāḍir, šū biddak",
+            "english": "Sure, what do you want?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "حاضِر شكراً!",
+            "romanization": "ḥāḍir šukran",
+            "english": "Thanks for being ready!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "من دواعي سروري!",
+            "romanization": "min dawāʕī surūri",
+            "english": "With pleasure!"
+          },
+          {
+            "speaker": "you",
+            "arabic": "مِن دواعي سُروري!",
+            "romanization": "min dawāʕī surūri",
+            "english": "My pleasure too!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وأنا شاطر هيك؟",
+            "romanization": "w-ʾana šāṭir hēk",
+            "english": "And am I a good person for this?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "شاطِر كتير!",
+            "romanization": "šāṭir ktīr",
+            "english": "Very well done!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "ما في داعي تنبسط",
+            "romanization": "mā fī dāʕī tinbasaṭ",
+            "english": "No need to thank me"
+          },
+          {
+            "speaker": "you",
+            "arabic": "أَنا مَمنونَك وآسف على الإِزعاج!",
+            "romanization": "ʾana mamnūnak w-āsif ʕal-ʾizʕāj",
+            "english": "I'm grateful and sorry for the trouble!"
+          }
+        ]
+      },
+      "review": {
+        "all_vocab": [
+          { "arabic": "مُمكِن تُساعِدني؟", "transcription": "MUM-kin tu-SĀ-id-ni", "romanization": "mumkin tusāʕidni", "english": "can you help me?" },
+          { "arabic": "لو سَمَحت", "transcription": "lo sa-MAHT", "romanization": "lo samaḥt", "english": "excuse me / if you don't mind" },
+          { "arabic": "بِتقدَر؟", "transcription": "bit-ʔA-dar", "romanization": "bitʾadar", "english": "can you?" },
+          { "arabic": "إِذا بِتريد", "transcription": "I-za bit-RĒD", "romanization": "ʾiza bitrīd", "english": "if you want" },
+          { "arabic": "بِدّي أَطلُب", "transcription": "BID-di AT-lub", "romanization": "biddi ʾaṭlub", "english": "I'd like to request" },
+          { "arabic": "مَمنون", "transcription": "mam-NŪN", "romanization": "mamnūn", "english": "grateful" },
+          { "arabic": "شاطِر", "transcription": "SHĀT-ir", "romanization": "šāṭir", "english": "well done!" },
+          { "arabic": "أَنا مَمنونَك", "transcription": "A-na mam-NŪ-nak", "romanization": "ʾana mamnūnak", "english": "I'm grateful to you" },
+          { "arabic": "لو ما في زَحمة", "transcription": "lo mā FĪ ZAH-me", "romanization": "lo mā fī zaḥme", "english": "if it's not too much trouble" },
+          { "arabic": "حاضِر", "transcription": "HĀ-dir", "romanization": "ḥāḍir", "english": "sure / at your service" },
+          { "arabic": "مِن دواعي سُروري", "transcription": "min da-WĀ-i su-RŪ-ri", "romanization": "min dawāʕī surūri", "english": "with pleasure" },
+          { "arabic": "آسِف على الإِزعاج", "transcription": "Ā-sif AL iz-ĀJ", "romanization": "āsif ʕal-ʾizʕāj", "english": "sorry for the trouble" }
+        ]
+      }
+    }
+  ]
+}

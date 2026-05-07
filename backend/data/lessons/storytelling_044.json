@@ -1,0 +1,416 @@
+{
+  "topic": "Storytelling & Narrative Flow",
+  "cycles": [
+    {
+      "cycle": 1,
+      "vocab": [
+        {
+          "arabic": "في مَرّة",
+          "transcription": "FĪ MAR-re",
+          "romanization": "fī marre",
+          "english": "once / one time",
+          "note": "classic story opener; في مرة كان في = once there was; equivalent to 'once upon a time'",
+          "icon": "solar:book-open-linear",
+          "icon_color": "#5856d6"
+        },
+        {
+          "arabic": "كان في ناس",
+          "transcription": "KĀN FĪ NĀS",
+          "romanization": "kān fī nās",
+          "english": "there were people",
+          "note": "classic Arabic story opening; sets a scene; كان في رجل = there was a man",
+          "icon": "solar:users-group-two-rounded-linear",
+          "icon_color": "#007aff"
+        },
+        {
+          "arabic": "وبَعد شَوي",
+          "transcription": "w-BAD SHAW-i",
+          "romanization": "w-baʕd šaway",
+          "english": "and after a while",
+          "note": "narrative time marker; شوي = a little; used to advance the story timeline",
+          "icon": "solar:clock-circle-linear",
+          "icon_color": "#ff9f0a"
+        },
+        {
+          "arabic": "ما تَوَقَّع",
+          "transcription": "mā ta-WAK-ka'",
+          "romanization": "mā tawaqaʕ",
+          "english": "he didn't expect",
+          "note": "3rd person masculine past negative; ما توقع هيك = he didn't expect this",
+          "icon": "solar:danger-triangle-linear",
+          "icon_color": "#ff3b30"
+        },
+        {
+          "arabic": "آخِر الحِكاية",
+          "transcription": "Ā-khir il-hi-KĀ-ye",
+          "romanization": "āḫir il-ḥikāye",
+          "english": "the end of the story",
+          "note": "ḥikāye = story/tale; آخر الحكاية = the conclusion; used to wrap up a narrative",
+          "icon": "solar:check-circle-linear",
+          "icon_color": "#34c759"
+        },
+        {
+          "arabic": "المُهِمّ",
+          "transcription": "il-mu-HIMM",
+          "romanization": "il-muhimm",
+          "english": "the important thing / anyway",
+          "note": "used as a discourse marker to get to the point; المهم إنه = the important thing is that",
+          "icon": "solar:star-shine-linear",
+          "icon_color": "#fe4d01"
+        }
+      ],
+      "quiz": [
+        {
+          "arabic": "في مَرّة",
+          "transcription": "FĪ MAR-re",
+          "romanization": "fī marre",
+          "options": ["always", "never", "once / one time", "many times"],
+          "answer": 2
+        },
+        {
+          "arabic": "كان في ناس",
+          "transcription": "KĀN FĪ NĀS",
+          "romanization": "kān fī nās",
+          "options": ["there are people", "there will be people", "there were people", "there might be people"],
+          "answer": 2
+        },
+        {
+          "arabic": "وبَعد شَوي",
+          "transcription": "w-BAD SHAW-i",
+          "romanization": "w-baʕd šaway",
+          "options": ["before a while", "a long time ago", "at the same time", "and after a while"],
+          "answer": 3
+        },
+        {
+          "arabic": "ما تَوَقَّع",
+          "transcription": "mā ta-WAK-ka'",
+          "romanization": "mā tawaqaʕ",
+          "options": ["he expected", "she didn't expect", "they expected", "he didn't expect"],
+          "answer": 3
+        },
+        {
+          "arabic": "آخِر الحِكاية",
+          "transcription": "Ā-khir il-hi-KĀ-ye",
+          "romanization": "āḫir il-ḥikāye",
+          "options": ["the middle of the story", "the beginning of the story", "the end of the story", "the best part"],
+          "answer": 2
+        },
+        {
+          "arabic": "المُهِمّ",
+          "transcription": "il-mu-HIMM",
+          "romanization": "il-muhimm",
+          "options": ["by the way", "the important thing", "in contrast", "also"],
+          "answer": 1
+        }
+      ],
+      "build": [
+        {
+          "sentence": ["في مَرّة", "كان في ناس"],
+          "decoys": ["المُهِمّ", "ما تَوَقَّع", "وبَعد شَوي"],
+          "english": "Once, there were people"
+        },
+        {
+          "sentence": ["وبَعد شَوي", "ما تَوَقَّع"],
+          "decoys": ["في مَرّة", "المُهِمّ", "آخِر الحِكاية"],
+          "english": "And after a while — he didn't expect"
+        },
+        {
+          "sentence": ["المُهِمّ", "آخِر الحِكاية"],
+          "decoys": ["وبَعد شَوي", "في مَرّة", "كان في ناس"],
+          "english": "The important thing — the end of the story"
+        }
+      ],
+      "speak": {
+        "scenario": "You are telling a story to entertain a group of children.",
+        "turns": [
+          {
+            "speaker": "them",
+            "arabic": "حكيلنا قصة!",
+            "romanization": "ḥakīlna ʾiṣṣa",
+            "english": "Tell us a story!"
+          },
+          {
+            "speaker": "you",
+            "arabic": "في مَرّة!",
+            "romanization": "fī marre",
+            "english": "Once upon a time!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وإيش كان في؟",
+            "romanization": "w-ʾēš kān fī",
+            "english": "And what was there?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "كان في ناس كتير!",
+            "romanization": "kān fī nās ktīr",
+            "english": "There were many people!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وبعدين؟",
+            "romanization": "w-baʕdēn",
+            "english": "And then?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "وبَعد شَوي، فجأة!",
+            "romanization": "w-baʕd šaway, fajʾa",
+            "english": "And after a while — suddenly!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وشو صار؟",
+            "romanization": "w-šū ṣār",
+            "english": "And what happened?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "ما تَوَقَّع أحد!",
+            "romanization": "mā tawaqaʕ ʾaḥad",
+            "english": "Nobody expected it!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وإيش المهم؟",
+            "romanization": "w-ʾēš il-muhimm",
+            "english": "And what's the important part?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "المُهِمّ الدرس!",
+            "romanization": "il-muhimm id-dars",
+            "english": "The important thing is the lesson!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وآخر الحكاية؟",
+            "romanization": "w-āḫir il-ḥikāye",
+            "english": "And the end of the story?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "آخِر الحِكاية حِلو!",
+            "romanization": "āḫir il-ḥikāye ḥilwu",
+            "english": "The end of the story is nice!"
+          }
+        ]
+      }
+    },
+    {
+      "cycle": 2,
+      "vocab": [
+        {
+          "arabic": "فَجأة",
+          "transcription": "FAJ-a",
+          "romanization": "fajʾa",
+          "english": "suddenly",
+          "note": "key dramatic pivot word in Arabic storytelling; فجأة صار = suddenly it happened",
+          "icon": "solar:bolt-circle-linear",
+          "icon_color": "#ff9f0a"
+        },
+        {
+          "arabic": "ما تَوَقَّعت",
+          "transcription": "mā ta-WAK-kat",
+          "romanization": "mā tawaqaʕt",
+          "english": "I didn't expect",
+          "note": "1st person singular past; ما توقعت إنه يصير هيك = I didn't expect it to happen like this",
+          "icon": "solar:danger-triangle-linear",
+          "icon_color": "#5856d6"
+        },
+        {
+          "arabic": "حِكاية",
+          "transcription": "hi-KĀ-ye",
+          "romanization": "ḥikāye",
+          "english": "story / tale",
+          "note": "حكاية حلوة = a nice story; حكيلي حكايتك = tell me your story",
+          "icon": "solar:book-open-linear",
+          "icon_color": "#007aff"
+        },
+        {
+          "arabic": "شَخصِيّة",
+          "transcription": "shakh-SI-ye",
+          "romanization": "šaḫṣiyye",
+          "english": "character / personality",
+          "note": "in storytelling: شخصية رئيسية = main character; also 'personality' in character assessment",
+          "icon": "solar:user-rounded-linear",
+          "icon_color": "#ff9f0a"
+        },
+        {
+          "arabic": "الدَّرس",
+          "transcription": "id-DARS",
+          "romanization": "id-dars",
+          "english": "the lesson / the moral",
+          "note": "درس القصة = the moral of the story; الدرس اللي تعلمته = the lesson I learned",
+          "icon": "solar:graduation-cap-linear",
+          "icon_color": "#34c759"
+        },
+        {
+          "arabic": "بالنِّهاية",
+          "transcription": "bin-ni-HĀ-ye",
+          "romanization": "bin-nihāye",
+          "english": "in the end / finally",
+          "note": "narrative closer; بالنهاية خلص كل شي = in the end everything was done",
+          "icon": "solar:check-circle-linear",
+          "icon_color": "#34c759"
+        }
+      ],
+      "quiz": [
+        {
+          "arabic": "فَجأة",
+          "transcription": "FAJ-a",
+          "romanization": "fajʾa",
+          "options": ["slowly", "quietly", "suddenly", "gradually"],
+          "answer": 2
+        },
+        {
+          "arabic": "ما تَوَقَّعت",
+          "transcription": "mā ta-WAK-kat",
+          "romanization": "mā tawaqaʕt",
+          "options": ["I expected", "I was surprised", "I didn't expect", "I hoped"],
+          "answer": 2
+        },
+        {
+          "arabic": "حِكاية",
+          "transcription": "hi-KĀ-ye",
+          "romanization": "ḥikāye",
+          "english": "story",
+          "options": ["news", "poem", "story / tale", "conversation"],
+          "answer": 2
+        },
+        {
+          "arabic": "شَخصِيّة",
+          "transcription": "shakh-SI-ye",
+          "romanization": "šaḫṣiyye",
+          "options": ["event", "place", "time", "character / personality"],
+          "answer": 3
+        },
+        {
+          "arabic": "الدَّرس",
+          "transcription": "id-DARS",
+          "romanization": "id-dars",
+          "options": ["the story", "the question", "the lesson / moral", "the title"],
+          "answer": 2
+        },
+        {
+          "arabic": "بالنِّهاية",
+          "transcription": "bin-ni-HĀ-ye",
+          "romanization": "bin-nihāye",
+          "options": ["at the beginning", "in the middle", "in the end / finally", "throughout"],
+          "answer": 2
+        }
+      ],
+      "build": [
+        {
+          "sentence": ["فَجأة", "ما تَوَقَّعت"],
+          "decoys": ["الدَّرس", "شَخصِيّة", "حِكاية"],
+          "english": "Suddenly — I didn't expect it"
+        },
+        {
+          "sentence": ["حِكاية", "شَخصِيّة"],
+          "decoys": ["بالنِّهاية", "فَجأة", "الدَّرس"],
+          "english": "Story and character"
+        },
+        {
+          "sentence": ["بالنِّهاية", "الدَّرس"],
+          "decoys": ["ما تَوَقَّعت", "حِكاية", "شَخصِيّة"],
+          "english": "In the end — the lesson"
+        }
+      ],
+      "speak": {
+        "scenario": "You are telling a colleague about a surprising experience.",
+        "turns": [
+          {
+            "speaker": "them",
+            "arabic": "شو حكايتك مع هاد الشخص؟",
+            "romanization": "šū ḥikāytak maʕ hād iš-šaḫṣ",
+            "english": "What's your story with this person?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "حِكاية طويلة!",
+            "romanization": "ḥikāye ṭawīle",
+            "english": "Long story!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وشو صار فجأة؟",
+            "romanization": "w-šū ṣār fajʾa",
+            "english": "And what happened suddenly?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "فَجأة صار إشي!",
+            "romanization": "fajʾa ṣār ʾiši",
+            "english": "Suddenly something happened!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "ما توقعت؟",
+            "romanization": "mā tawaqaʕt",
+            "english": "You didn't expect it?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "ما تَوَقَّعت أبداً!",
+            "romanization": "mā tawaqaʕt ʾabdan",
+            "english": "I didn't expect at all!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وشو شخصيته؟",
+            "romanization": "w-šū šaḫṣiyyatu",
+            "english": "And what's his character like?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "شَخصِيّة غريبة!",
+            "romanization": "šaḫṣiyye ġarībe",
+            "english": "Strange character!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وإيش الدرس؟",
+            "romanization": "w-ʾēš id-dars",
+            "english": "And what's the lesson?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "الدَّرس مهم!",
+            "romanization": "id-dars muhimm",
+            "english": "The lesson is important!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وبالنهاية؟",
+            "romanization": "w-bin-nihāye",
+            "english": "And in the end?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "بالنِّهاية، انتهى كل شي!",
+            "romanization": "bin-nihāye, intaha kull šī",
+            "english": "In the end, everything ended!"
+          }
+        ]
+      },
+      "review": {
+        "all_vocab": [
+          { "arabic": "في مَرّة", "transcription": "FĪ MAR-re", "romanization": "fī marre", "english": "once / one time" },
+          { "arabic": "كان في ناس", "transcription": "KĀN FĪ NĀS", "romanization": "kān fī nās", "english": "there were people" },
+          { "arabic": "وبَعد شَوي", "transcription": "w-BAD SHAW-i", "romanization": "w-baʕd šaway", "english": "and after a while" },
+          { "arabic": "ما تَوَقَّع", "transcription": "mā ta-WAK-ka'", "romanization": "mā tawaqaʕ", "english": "he didn't expect" },
+          { "arabic": "آخِر الحِكاية", "transcription": "Ā-khir il-hi-KĀ-ye", "romanization": "āḫir il-ḥikāye", "english": "the end of the story" },
+          { "arabic": "المُهِمّ", "transcription": "il-mu-HIMM", "romanization": "il-muhimm", "english": "the important thing" },
+          { "arabic": "فَجأة", "transcription": "FAJ-a", "romanization": "fajʾa", "english": "suddenly" },
+          { "arabic": "ما تَوَقَّعت", "transcription": "mā ta-WAK-kat", "romanization": "mā tawaqaʕt", "english": "I didn't expect" },
+          { "arabic": "حِكاية", "transcription": "hi-KĀ-ye", "romanization": "ḥikāye", "english": "story / tale" },
+          { "arabic": "شَخصِيّة", "transcription": "shakh-SI-ye", "romanization": "šaḫṣiyye", "english": "character / personality" },
+          { "arabic": "الدَّرس", "transcription": "id-DARS", "romanization": "id-dars", "english": "the lesson / moral" },
+          { "arabic": "بالنِّهاية", "transcription": "bin-ni-HĀ-ye", "romanization": "bin-nihāye", "english": "in the end / finally" }
+        ]
+      }
+    }
+  ]
+}

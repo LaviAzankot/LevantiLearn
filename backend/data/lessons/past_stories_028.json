@@ -1,0 +1,416 @@
+{
+  "topic": "Narrating Past Events",
+  "cycles": [
+    {
+      "cycle": 1,
+      "vocab": [
+        {
+          "arabic": "كُنت",
+          "transcription": "KUNT",
+          "romanization": "kunt",
+          "english": "I was",
+          "note": "past tense of كان (to be); كنت صغير = I was young; كنت تعبان = I was tired",
+          "icon": "solar:history-linear",
+          "icon_color": "#5856d6"
+        },
+        {
+          "arabic": "كان في",
+          "transcription": "KĀN FĪ",
+          "romanization": "kān fī",
+          "english": "there was",
+          "note": "kān (was) + fī (there); كان في ناس = there were people; كان في مشكلة = there was a problem",
+          "icon": "solar:time-square-linear",
+          "icon_color": "#6e6e73"
+        },
+        {
+          "arabic": "صار",
+          "transcription": "SĀR",
+          "romanization": "ṣār",
+          "english": "happened / occurred",
+          "note": "past tense 3rd person m; شو صار؟ = what happened?; صار إشي = something happened",
+          "icon": "solar:danger-triangle-linear",
+          "icon_color": "#ff9f0a"
+        },
+        {
+          "arabic": "لَمّا كُنت",
+          "transcription": "LAM-ma KUNT",
+          "romanization": "lamma kunt",
+          "english": "when I was",
+          "note": "لما (when) + كنت (I was); lamma kunt ṣaġīr = when I was young; sets a past scene",
+          "icon": "solar:history-2-linear",
+          "icon_color": "#ff9f0a"
+        },
+        {
+          "arabic": "وبَعدَين",
+          "transcription": "w-BAD-ēn",
+          "romanization": "w-baʕdēn",
+          "english": "and then",
+          "note": "narrative sequence marker; essential for storytelling in Palestinian Arabic",
+          "icon": "solar:arrow-right-down-linear",
+          "icon_color": "#34c759"
+        },
+        {
+          "arabic": "قَبل ما",
+          "transcription": "ʔABL MA",
+          "romanization": "ʾabl ma",
+          "english": "before",
+          "note": "ق → ʾ; قبل ما يصير هيك = before this happened; used to provide context",
+          "icon": "solar:arrow-left-linear",
+          "icon_color": "#007aff"
+        }
+      ],
+      "quiz": [
+        {
+          "arabic": "كُنت",
+          "transcription": "KUNT",
+          "romanization": "kunt",
+          "options": ["I am", "I will be", "I was", "I become"],
+          "answer": 2
+        },
+        {
+          "arabic": "كان في",
+          "transcription": "KĀN FĪ",
+          "romanization": "kān fī",
+          "options": ["there is", "there was", "there will be", "there might be"],
+          "answer": 1
+        },
+        {
+          "arabic": "صار",
+          "transcription": "SĀR",
+          "romanization": "ṣār",
+          "options": ["will happen", "is happening", "happened", "usually happens"],
+          "answer": 2
+        },
+        {
+          "arabic": "لَمّا كُنت",
+          "transcription": "LAM-ma KUNT",
+          "romanization": "lamma kunt",
+          "options": ["when I will be", "when I am", "when I was", "if I were"],
+          "answer": 2
+        },
+        {
+          "arabic": "وبَعدَين",
+          "transcription": "w-BAD-ēn",
+          "romanization": "w-baʕdēn",
+          "options": ["before that", "at the same time", "and then", "instead"],
+          "answer": 2
+        },
+        {
+          "arabic": "قَبل ما",
+          "transcription": "ʔABL MA",
+          "romanization": "ʾabl ma",
+          "english": "before",
+          "options": ["after", "when", "before", "until"],
+          "answer": 2
+        }
+      ],
+      "build": [
+        {
+          "sentence": ["لَمّا كُنت", "صَغير", "صار"],
+          "decoys": ["وبَعدَين", "قَبل ما", "كان في"],
+          "english": "When I was young, it happened"
+        },
+        {
+          "sentence": ["كان في", "مشكلة", "وبَعدَين"],
+          "decoys": ["كُنت", "صار", "قَبل ما"],
+          "english": "There was a problem, and then"
+        },
+        {
+          "sentence": ["قَبل ما", "يصير", "كُنت"],
+          "decoys": ["وبَعدَين", "صار", "لَمّا كُنت"],
+          "english": "Before it happened, I was"
+        }
+      ],
+      "speak": {
+        "scenario": "You are telling your friend a story about a past trip.",
+        "turns": [
+          {
+            "speaker": "them",
+            "arabic": "حكيلي عن رحلتك",
+            "romanization": "ḥakīli ʕan riḥltak",
+            "english": "Tell me about your trip"
+          },
+          {
+            "speaker": "you",
+            "arabic": "كُنت في القدس!",
+            "romanization": "kunt fī l-ʾuds",
+            "english": "I was in Jerusalem!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وكان في ناس كتير؟",
+            "romanization": "w-kān fī nās ktīr",
+            "english": "And were there lots of people?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "كان في كتير!",
+            "romanization": "kān fī ktīr",
+            "english": "There were a lot!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وشو صار بعدين؟",
+            "romanization": "w-šū ṣār baʕdēn",
+            "english": "And what happened after?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "صار إشي غريب!",
+            "romanization": "ṣār ʾiši ġarīb",
+            "english": "Something strange happened!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "لما كنت هناك شو حسيت؟",
+            "romanization": "lamma kunt hunāk šū ḥasēt",
+            "english": "When you were there how did you feel?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "لَمّا كُنت هناك، مبسوط!",
+            "romanization": "lamma kunt hunāk, mabsūṭ",
+            "english": "When I was there, happy!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وبعدين؟",
+            "romanization": "w-baʕdēn",
+            "english": "And then?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "وبَعدَين رجعت!",
+            "romanization": "w-baʕdēn rajaʕt",
+            "english": "And then I came back!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وقبل ما تيجي كان في مشكلة؟",
+            "romanization": "w-ʾabl ma tijī kān fī muškilā",
+            "english": "And before coming was there a problem?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "قَبل ما أروح!",
+            "romanization": "ʾabl ma ʾarūḥ",
+            "english": "Before I went!"
+          }
+        ]
+      }
+    },
+    {
+      "cycle": 2,
+      "vocab": [
+        {
+          "arabic": "بَعد ما",
+          "transcription": "BAD MA",
+          "romanization": "baʕd ma",
+          "english": "after",
+          "note": "بعد ما خلصت = after I finished; بعد ما صار = after it happened; narrative sequencer",
+          "icon": "solar:arrow-right-linear",
+          "icon_color": "#34c759"
+        },
+        {
+          "arabic": "فَجأة",
+          "transcription": "FAJ-a",
+          "romanization": "fajʾa",
+          "english": "suddenly",
+          "note": "narrative pivot word; فجأة صار = suddenly it happened; very common in Palestinian storytelling",
+          "icon": "solar:bolt-circle-linear",
+          "icon_color": "#ff9f0a"
+        },
+        {
+          "arabic": "قَدِّيش صار؟",
+          "transcription": "ʔad-DISH SĀR",
+          "romanization": "ʾaddēš ṣār",
+          "english": "how long has it been?",
+          "note": "قديش (how long) + صار; قديش صار لك هون؟ = how long have you been here?",
+          "icon": "solar:clock-circle-linear",
+          "icon_color": "#6e6e73"
+        },
+        {
+          "arabic": "كَمان",
+          "transcription": "ka-MAN",
+          "romanization": "kamān",
+          "english": "also / at the same time",
+          "note": "here used as 'additionally / too'; وكمان صار = and also it happened",
+          "icon": "solar:add-circle-linear",
+          "icon_color": "#007aff"
+        },
+        {
+          "arabic": "بِدايَة",
+          "transcription": "bi-DĀ-ye",
+          "romanization": "bidāye",
+          "english": "beginning / at first",
+          "note": "من البداية = from the beginning; في البداية = at first; narrative opener",
+          "icon": "solar:flag-linear",
+          "icon_color": "#fe4d01"
+        },
+        {
+          "arabic": "نِهاية",
+          "transcription": "ni-HĀ-ye",
+          "romanization": "nihāye",
+          "english": "end / finally",
+          "note": "بالنهاية = in the end / finally; used to conclude a story or sequence of events",
+          "icon": "solar:check-circle-linear",
+          "icon_color": "#5856d6"
+        }
+      ],
+      "quiz": [
+        {
+          "arabic": "بَعد ما",
+          "transcription": "BAD MA",
+          "romanization": "baʕd ma",
+          "options": ["before", "when", "after", "although"],
+          "answer": 2
+        },
+        {
+          "arabic": "فَجأة",
+          "transcription": "FAJ-a",
+          "romanization": "fajʾa",
+          "options": ["slowly", "gradually", "sometimes", "suddenly"],
+          "answer": 3
+        },
+        {
+          "arabic": "قَدِّيش صار؟",
+          "transcription": "ʔad-DISH SĀR",
+          "romanization": "ʾaddēš ṣār",
+          "options": ["what happened?", "how long has it been?", "why did it happen?", "when did it start?"],
+          "answer": 1
+        },
+        {
+          "arabic": "كَمان",
+          "transcription": "ka-MAN",
+          "romanization": "kamān",
+          "options": ["never", "also / too", "instead", "before"],
+          "answer": 1
+        },
+        {
+          "arabic": "بِدايَة",
+          "transcription": "bi-DĀ-ye",
+          "romanization": "bidāye",
+          "options": ["end", "middle", "beginning", "summary"],
+          "answer": 2
+        },
+        {
+          "arabic": "نِهاية",
+          "transcription": "ni-HĀ-ye",
+          "romanization": "nihāye",
+          "options": ["beginning", "middle", "end / finally", "suddenly"],
+          "answer": 2
+        }
+      ],
+      "build": [
+        {
+          "sentence": ["بِدايَة", "كان في", "مشكلة"],
+          "decoys": ["فَجأة", "نِهاية", "بَعد ما"],
+          "english": "At the beginning, there was a problem"
+        },
+        {
+          "sentence": ["فَجأة", "صار", "إشي"],
+          "decoys": ["بِدايَة", "قَدِّيش صار؟", "كَمان"],
+          "english": "Suddenly something happened"
+        },
+        {
+          "sentence": ["بَعد ما", "خَلَص", "نِهاية"],
+          "decoys": ["فَجأة", "بِدايَة", "قَدِّيش صار؟"],
+          "english": "After it ended — finally"
+        }
+      ],
+      "speak": {
+        "scenario": "You are recounting a dramatic story to a group of friends.",
+        "turns": [
+          {
+            "speaker": "them",
+            "arabic": "شو صار بالبداية؟",
+            "romanization": "šū ṣār bil-bidāye",
+            "english": "What happened at the beginning?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "بِدايَة كان في مشكلة!",
+            "romanization": "bidāye kān fī muškilā",
+            "english": "At the beginning there was a problem!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وبعد ما صار إيش؟",
+            "romanization": "w-baʕd ma ṣār ʾēš",
+            "english": "And after that what happened?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "بَعد ما حكيت، حلت!",
+            "romanization": "baʕd ma ḥakēt, ḥallet",
+            "english": "After I talked, it was resolved!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "فجأة؟",
+            "romanization": "fajʾa",
+            "english": "Suddenly?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "فَجأة كمان!",
+            "romanization": "fajʾa kamān",
+            "english": "Suddenly too!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وقديش صار؟",
+            "romanization": "w-ʾaddēš ṣār",
+            "english": "And how long did it take?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "قَدِّيش صار؟",
+            "romanization": "ʾaddēš ṣār",
+            "english": "How long? (echoing)"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وكان في كمان ناس تانيين؟",
+            "romanization": "w-kān fī kamān nās tāniyyīn",
+            "english": "And were there also other people?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "كَمان ناس كتير!",
+            "romanization": "kamān nās ktīr",
+            "english": "Also many people!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وبالنهاية؟",
+            "romanization": "w-bin-nihāye",
+            "english": "And in the end?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "نِهاية منيح!",
+            "romanization": "nihāye mnīḥ",
+            "english": "A good ending!"
+          }
+        ]
+      },
+      "review": {
+        "all_vocab": [
+          { "arabic": "كُنت", "transcription": "KUNT", "romanization": "kunt", "english": "I was" },
+          { "arabic": "كان في", "transcription": "KĀN FĪ", "romanization": "kān fī", "english": "there was" },
+          { "arabic": "صار", "transcription": "SĀR", "romanization": "ṣār", "english": "happened" },
+          { "arabic": "لَمّا كُنت", "transcription": "LAM-ma KUNT", "romanization": "lamma kunt", "english": "when I was" },
+          { "arabic": "وبَعدَين", "transcription": "w-BAD-ēn", "romanization": "w-baʕdēn", "english": "and then" },
+          { "arabic": "قَبل ما", "transcription": "ʔABL MA", "romanization": "ʾabl ma", "english": "before" },
+          { "arabic": "بَعد ما", "transcription": "BAD MA", "romanization": "baʕd ma", "english": "after" },
+          { "arabic": "فَجأة", "transcription": "FAJ-a", "romanization": "fajʾa", "english": "suddenly" },
+          { "arabic": "قَدِّيش صار؟", "transcription": "ʔad-DISH SĀR", "romanization": "ʾaddēš ṣār", "english": "how long has it been?" },
+          { "arabic": "كَمان", "transcription": "ka-MAN", "romanization": "kamān", "english": "also / at the same time" },
+          { "arabic": "بِدايَة", "transcription": "bi-DĀ-ye", "romanization": "bidāye", "english": "beginning / at first" },
+          { "arabic": "نِهاية", "transcription": "ni-HĀ-ye", "romanization": "nihāye", "english": "end / finally" }
+        ]
+      }
+    }
+  ]
+}

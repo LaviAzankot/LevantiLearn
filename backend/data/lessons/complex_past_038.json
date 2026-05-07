@@ -1,0 +1,415 @@
+{
+  "topic": "Complex Past Narration",
+  "cycles": [
+    {
+      "cycle": 1,
+      "vocab": [
+        {
+          "arabic": "كُنت عم بـ",
+          "transcription": "KUNT am bi-",
+          "romanization": "kunt ʕam bi-",
+          "english": "I was doing (past continuous)",
+          "note": "كنت + عم + present verb = past continuous; كنت عم باكل = I was eating",
+          "icon": "solar:history-linear",
+          "icon_color": "#5856d6"
+        },
+        {
+          "arabic": "ما كُنت عارِف",
+          "transcription": "mā KUNT ĀR-if",
+          "romanization": "mā kunt ʕārif",
+          "english": "I didn't know",
+          "note": "ما + كنت (wasn't) + عارف (knowing) = I didn't know; past stative negative",
+          "icon": "solar:close-circle-linear",
+          "icon_color": "#ff3b30"
+        },
+        {
+          "arabic": "لَحظة ما",
+          "transcription": "LAH-zat MA",
+          "romanization": "laḥzat mā",
+          "english": "at the moment when",
+          "note": "لحظة (moment) + ما (that/when); لحظة ما وصلت = at the moment I arrived",
+          "icon": "solar:clock-circle-linear",
+          "icon_color": "#ff9f0a"
+        },
+        {
+          "arabic": "تَفاجأت",
+          "transcription": "ta-fā-JAT",
+          "romanization": "tafājaʾt",
+          "english": "I was surprised",
+          "note": "past tense Form V 1st person; تفاجأت لما رأيته = I was surprised when I saw him",
+          "icon": "solar:bolt-circle-linear",
+          "icon_color": "#ff9f0a"
+        },
+        {
+          "arabic": "ما تَوَقَّعت",
+          "transcription": "mā ta-WAK-kat",
+          "romanization": "mā tawaqaʕt",
+          "english": "I didn't expect",
+          "note": "ما + توقعت (I expected); ما توقعت هيك = I didn't expect this",
+          "icon": "solar:danger-triangle-linear",
+          "icon_color": "#5856d6"
+        },
+        {
+          "arabic": "طَلِعت عليّ",
+          "transcription": "TA-li-at a-LĒ",
+          "romanization": "ṭaliʕat ʕalayy",
+          "english": "it turned out for me",
+          "note": "lit. 'it came up on me'; طلعت عليه = it turned out to be his; common narrative expression",
+          "icon": "solar:star-linear",
+          "icon_color": "#34c759"
+        }
+      ],
+      "quiz": [
+        {
+          "arabic": "كُنت عم بـ",
+          "transcription": "KUNT am bi-",
+          "romanization": "kunt ʕam bi-",
+          "options": ["I will be doing", "I was doing", "I am doing", "I used to do"],
+          "answer": 1
+        },
+        {
+          "arabic": "ما كُنت عارِف",
+          "transcription": "mā KUNT ĀR-if",
+          "romanization": "mā kunt ʕārif",
+          "options": ["I knew", "I don't know", "I didn't know", "I'll know"],
+          "answer": 2
+        },
+        {
+          "arabic": "لَحظة ما",
+          "transcription": "LAH-zat MA",
+          "romanization": "laḥzat mā",
+          "options": ["a long time ago", "at the moment when", "a little while", "before that"],
+          "answer": 1
+        },
+        {
+          "arabic": "تَفاجأت",
+          "transcription": "ta-fā-JAT",
+          "romanization": "tafājaʾt",
+          "options": ["I was scared", "I was happy", "I was surprised", "I was confused"],
+          "answer": 2
+        },
+        {
+          "arabic": "ما تَوَقَّعت",
+          "transcription": "mā ta-WAK-kat",
+          "romanization": "mā tawaqaʕt",
+          "options": ["I expected", "I didn't expect", "I hoped", "I planned"],
+          "answer": 1
+        },
+        {
+          "arabic": "طَلِعت عليّ",
+          "transcription": "TA-li-at a-LĒ",
+          "romanization": "ṭaliʕat ʕalayy",
+          "options": ["it went against me", "it turned out for me", "it happened to me", "it fell on me"],
+          "answer": 1
+        }
+      ],
+      "build": [
+        {
+          "sentence": ["كُنت عم بـ", "أَحكي", "لَحظة ما"],
+          "decoys": ["تَفاجأت", "ما تَوَقَّعت", "ما كُنت عارِف"],
+          "english": "I was speaking — at the moment when"
+        },
+        {
+          "sentence": ["ما كُنت عارِف", "تَفاجأت"],
+          "decoys": ["لَحظة ما", "طَلِعت عليّ", "كُنت عم بـ"],
+          "english": "I didn't know — I was surprised"
+        },
+        {
+          "sentence": ["ما تَوَقَّعت", "طَلِعت عليّ"],
+          "decoys": ["كُنت عم بـ", "لَحظة ما", "تَفاجأت"],
+          "english": "I didn't expect — it turned out"
+        }
+      ],
+      "speak": {
+        "scenario": "You are telling the story of an unexpected encounter.",
+        "turns": [
+          {
+            "speaker": "them",
+            "arabic": "شو صار؟",
+            "romanization": "šū ṣār",
+            "english": "What happened?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "كُنت عم بأمشي!",
+            "romanization": "kunt ʕam bamši",
+            "english": "I was walking!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وبعدين؟",
+            "romanization": "w-baʕdēn",
+            "english": "And then?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "لَحظة ما شفته!",
+            "romanization": "laḥzat mā šiftu",
+            "english": "At the moment I saw him!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "كنت عارف إنه هناك؟",
+            "romanization": "kunt ʕārif ʾinnu hunāk",
+            "english": "Did you know he was there?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "ما كُنت عارِف!",
+            "romanization": "mā kunt ʕārif",
+            "english": "I didn't know!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وتفاجأت؟",
+            "romanization": "w-tafājaʾt",
+            "english": "And were you surprised?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "تَفاجأت كتير!",
+            "romanization": "tafājaʾt ktīr",
+            "english": "Very surprised!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "توقعت هيك؟",
+            "romanization": "tawaqaʕt hēk",
+            "english": "Did you expect this?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "ما تَوَقَّعت أبداً!",
+            "romanization": "mā tawaqaʕt ʾabdan",
+            "english": "I didn't expect at all!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وطلع شو؟",
+            "romanization": "w-ṭaliʕ šū",
+            "english": "And what did it turn out to be?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "طَلِعت عليّ مفاجأة!",
+            "romanization": "ṭaliʕat ʕalayy mufājaʾa",
+            "english": "It turned out to be a surprise!"
+          }
+        ]
+      }
+    },
+    {
+      "cycle": 2,
+      "vocab": [
+        {
+          "arabic": "قَبل ما يَصير",
+          "transcription": "ʔABL ma yi-SĒR",
+          "romanization": "ʾabl ma yiṣīr",
+          "english": "before it happened",
+          "note": "before + that + it happened; used in narrative sequence",
+          "icon": "solar:arrow-left-linear",
+          "icon_color": "#007aff"
+        },
+        {
+          "arabic": "بَعد ما خَلَص",
+          "transcription": "BAD ma kha-LAS",
+          "romanization": "baʕd ma ḫalaṣ",
+          "english": "after it finished",
+          "note": "after + it finished; marks transition to post-event narration",
+          "icon": "solar:arrow-right-linear",
+          "icon_color": "#34c759"
+        },
+        {
+          "arabic": "حَكى إِنَّه",
+          "transcription": "HA-ka IN-nu",
+          "romanization": "ḥaka ʾinnu",
+          "english": "he said that",
+          "note": "past tense of حكى + إنه; reporting speech; بقول إنه = he says that (present)",
+          "icon": "solar:chat-round-dots-linear",
+          "icon_color": "#5856d6"
+        },
+        {
+          "arabic": "ما حَدا عَرِف",
+          "transcription": "mā HA-da a-RIF",
+          "romanization": "mā ḥada ʕarif",
+          "english": "nobody knew",
+          "note": "ما (not) + حدا (anyone) + عرف (knew); very common in narrative suspense",
+          "icon": "solar:close-circle-linear",
+          "icon_color": "#ff3b30"
+        },
+        {
+          "arabic": "صار مَعي",
+          "transcription": "SĀR MA-i",
+          "romanization": "ṣār maʕī",
+          "english": "it happened to me",
+          "note": "صار (happened) + معي (with me); colloquial way to say 'it happened to me'",
+          "icon": "solar:time-square-linear",
+          "icon_color": "#ff9f0a"
+        },
+        {
+          "arabic": "بالآخِر",
+          "transcription": "bil-Ā-khir",
+          "romanization": "bil-āḫir",
+          "english": "in the end / finally",
+          "note": "بالآخر خلص = in the end it was done; closing narrative expression",
+          "icon": "solar:check-circle-linear",
+          "icon_color": "#34c759"
+        }
+      ],
+      "quiz": [
+        {
+          "arabic": "قَبل ما يَصير",
+          "transcription": "ʔABL ma yi-SĒR",
+          "romanization": "ʾabl ma yiṣīr",
+          "options": ["after it happened", "while it happened", "before it happened", "if it happened"],
+          "answer": 2
+        },
+        {
+          "arabic": "بَعد ما خَلَص",
+          "transcription": "BAD ma kha-LAS",
+          "romanization": "baʕd ma ḫalaṣ",
+          "options": ["before it ended", "while it was ending", "after it finished", "until it ended"],
+          "answer": 2
+        },
+        {
+          "arabic": "حَكى إِنَّه",
+          "transcription": "HA-ka IN-nu",
+          "romanization": "ḥaka ʾinnu",
+          "options": ["I said that", "we said that", "he said that", "she said that"],
+          "answer": 2
+        },
+        {
+          "arabic": "ما حَدا عَرِف",
+          "transcription": "mā HA-da a-RIF",
+          "romanization": "mā ḥada ʕarif",
+          "options": ["everybody knew", "someone knew", "nobody knew", "most people knew"],
+          "answer": 2
+        },
+        {
+          "arabic": "صار مَعي",
+          "transcription": "SĀR MA-i",
+          "romanization": "ṣār maʕī",
+          "options": ["I did it", "it happened to me", "I was with it", "I watched it"],
+          "answer": 1
+        },
+        {
+          "arabic": "بالآخِر",
+          "transcription": "bil-Ā-khir",
+          "romanization": "bil-āḫir",
+          "options": ["at the start", "in the middle", "in the end / finally", "from the beginning"],
+          "answer": 2
+        }
+      ],
+      "build": [
+        {
+          "sentence": ["قَبل ما يَصير", "ما حَدا عَرِف"],
+          "decoys": ["بالآخِر", "حَكى إِنَّه", "صار مَعي"],
+          "english": "Before it happened — nobody knew"
+        },
+        {
+          "sentence": ["حَكى إِنَّه", "صار مَعي"],
+          "decoys": ["بَعد ما خَلَص", "قَبل ما يَصير", "بالآخِر"],
+          "english": "He said it happened to me"
+        },
+        {
+          "sentence": ["بَعد ما خَلَص", "بالآخِر"],
+          "decoys": ["صار مَعي", "ما حَدا عَرِف", "حَكى إِنَّه"],
+          "english": "After it finished — in the end"
+        }
+      ],
+      "speak": {
+        "scenario": "You are recounting a surprising story from your past.",
+        "turns": [
+          {
+            "speaker": "them",
+            "arabic": "قبل ما يصير إيش كنت تعمل؟",
+            "romanization": "ʾabl ma yiṣīr ʾēš kunt tʕamal",
+            "english": "Before it happened what were you doing?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "قَبل ما يَصير كنت أشتغل!",
+            "romanization": "ʾabl ma yiṣīr kunt ʾaštagil",
+            "english": "Before it happened I was working!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وما حدا عرف؟",
+            "romanization": "w-mā ḥada ʕarif",
+            "english": "And nobody knew?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "ما حَدا عَرِف!",
+            "romanization": "mā ḥada ʕarif",
+            "english": "Nobody knew!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وحكى لك أحد؟",
+            "romanization": "w-ḥaka lak ʾaḥad",
+            "english": "And did someone tell you?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "حَكى إِنَّه صار إشي!",
+            "romanization": "ḥaka ʾinnu ṣār ʾiši",
+            "english": "He said something happened!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "صار معك؟",
+            "romanization": "ṣār maʕak",
+            "english": "It happened to you?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "صار مَعي فعلاً!",
+            "romanization": "ṣār maʕī fiʕlan",
+            "english": "It happened to me truly!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وبعد ما خلص؟",
+            "romanization": "w-baʕd ma ḫalaṣ",
+            "english": "And after it finished?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "بَعد ما خَلَص، ارتحت!",
+            "romanization": "baʕd ma ḫalaṣ, irtaḥt",
+            "english": "After it finished, I rested!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وبالآخر شو؟",
+            "romanization": "w-bil-āḫir šū",
+            "english": "And in the end what?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "بالآخِر، خلص!",
+            "romanization": "bil-āḫir, ḫalaṣ",
+            "english": "In the end — done!"
+          }
+        ]
+      },
+      "review": {
+        "all_vocab": [
+          { "arabic": "كُنت عم بـ", "transcription": "KUNT am bi-", "romanization": "kunt ʕam bi-", "english": "I was doing" },
+          { "arabic": "ما كُنت عارِف", "transcription": "mā KUNT ĀR-if", "romanization": "mā kunt ʕārif", "english": "I didn't know" },
+          { "arabic": "لَحظة ما", "transcription": "LAH-zat MA", "romanization": "laḥzat mā", "english": "at the moment when" },
+          { "arabic": "تَفاجأت", "transcription": "ta-fā-JAT", "romanization": "tafājaʾt", "english": "I was surprised" },
+          { "arabic": "ما تَوَقَّعت", "transcription": "mā ta-WAK-kat", "romanization": "mā tawaqaʕt", "english": "I didn't expect" },
+          { "arabic": "طَلِعت عليّ", "transcription": "TA-li-at a-LĒ", "romanization": "ṭaliʕat ʕalayy", "english": "it turned out for me" },
+          { "arabic": "قَبل ما يَصير", "transcription": "ʔABL ma yi-SĒR", "romanization": "ʾabl ma yiṣīr", "english": "before it happened" },
+          { "arabic": "بَعد ما خَلَص", "transcription": "BAD ma kha-LAS", "romanization": "baʕd ma ḫalaṣ", "english": "after it finished" },
+          { "arabic": "حَكى إِنَّه", "transcription": "HA-ka IN-nu", "romanization": "ḥaka ʾinnu", "english": "he said that" },
+          { "arabic": "ما حَدا عَرِف", "transcription": "mā HA-da a-RIF", "romanization": "mā ḥada ʕarif", "english": "nobody knew" },
+          { "arabic": "صار مَعي", "transcription": "SĀR MA-i", "romanization": "ṣār maʕī", "english": "it happened to me" },
+          { "arabic": "بالآخِر", "transcription": "bil-Ā-khir", "romanization": "bil-āḫir", "english": "in the end / finally" }
+        ]
+      }
+    }
+  ]
+}

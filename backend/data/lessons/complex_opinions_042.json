@@ -1,0 +1,415 @@
+{
+  "topic": "Complex Opinions & Debate",
+  "cycles": [
+    {
+      "cycle": 1,
+      "vocab": [
+        {
+          "arabic": "مِن جِهة",
+          "transcription": "min JI-he",
+          "romanization": "min jihe",
+          "english": "on one hand",
+          "note": "من جهة = on one hand; من جهة ثانية = on the other hand; balanced argumentation",
+          "icon": "solar:arrow-right-linear",
+          "icon_color": "#007aff"
+        },
+        {
+          "arabic": "مِن جِهة تانية",
+          "transcription": "min JI-he TĀ-ni-ye",
+          "romanization": "min jihe tāniye",
+          "english": "on the other hand",
+          "note": "the counterpart to من جهة; essential for presenting balanced arguments",
+          "icon": "solar:arrow-left-linear",
+          "icon_color": "#5856d6"
+        },
+        {
+          "arabic": "بالنِّسبة لي",
+          "transcription": "bin-NIS-be LĒ",
+          "romanization": "bin-nisbe lī",
+          "english": "as for me / in my case",
+          "note": "lit. 'in relation to me'; used to personalize an opinion; بالنسبة لك = as for you",
+          "icon": "solar:user-rounded-linear",
+          "icon_color": "#fe4d01"
+        },
+        {
+          "arabic": "اللي بِعتَقِدُه",
+          "transcription": "IL-li bi-ta-ki-DU",
+          "romanization": "illi biʕtaqidu",
+          "english": "what I believe",
+          "note": "اللي (that which) + بعتقده (I believe it); formal belief expression",
+          "icon": "solar:brain-linear",
+          "icon_color": "#ff9f0a"
+        },
+        {
+          "arabic": "ما بِنكِر",
+          "transcription": "mā BIN-kir",
+          "romanization": "mā binkir",
+          "english": "I can't deny / admittedly",
+          "note": "ما (not) + بنكر (I deny); used to concede a point: ما بنكر إنه = I admit that",
+          "icon": "solar:check-circle-linear",
+          "icon_color": "#34c759"
+        },
+        {
+          "arabic": "في ناس بِيقولوا",
+          "transcription": "FĪ NĀS bi-ŪL-lu",
+          "romanization": "fī nās biyʾūlu",
+          "english": "some people say",
+          "note": "used to present opposing views without endorsing them; academic and conversational",
+          "icon": "solar:users-group-two-rounded-linear",
+          "icon_color": "#6e6e73"
+        }
+      ],
+      "quiz": [
+        {
+          "arabic": "مِن جِهة",
+          "transcription": "min JI-he",
+          "romanization": "min jihe",
+          "options": ["from far", "on the other hand", "on one hand", "from above"],
+          "answer": 2
+        },
+        {
+          "arabic": "مِن جِهة تانية",
+          "transcription": "min JI-he TĀ-ni-ye",
+          "romanization": "min jihe tāniye",
+          "options": ["from a second source", "on one hand", "on the other hand", "from a different place"],
+          "answer": 2
+        },
+        {
+          "arabic": "بالنِّسبة لي",
+          "transcription": "bin-NIS-be LĒ",
+          "romanization": "bin-nisbe lī",
+          "options": ["as for you", "as for them", "as for us", "as for me"],
+          "answer": 3
+        },
+        {
+          "arabic": "اللي بِعتَقِدُه",
+          "transcription": "IL-li bi-ta-ki-DU",
+          "romanization": "illi biʕtaqidu",
+          "options": ["what I know", "what I heard", "what I believe", "what I think is obvious"],
+          "answer": 2
+        },
+        {
+          "arabic": "ما بِنكِر",
+          "transcription": "mā BIN-kir",
+          "romanization": "mā binkir",
+          "options": ["I deny", "I admit / can't deny", "I argue", "I confirm"],
+          "answer": 1
+        },
+        {
+          "arabic": "في ناس بِيقولوا",
+          "transcription": "FĪ NĀS bi-ŪL-lu",
+          "romanization": "fī nās biyʾūlu",
+          "options": ["everyone says", "no one says", "some people say", "the experts say"],
+          "answer": 2
+        }
+      ],
+      "build": [
+        {
+          "sentence": ["مِن جِهة", "مِن جِهة تانية"],
+          "decoys": ["في ناس بِيقولوا", "ما بِنكِر", "بالنِّسبة لي"],
+          "english": "On one hand — on the other hand"
+        },
+        {
+          "sentence": ["بالنِّسبة لي", "اللي بِعتَقِدُه"],
+          "decoys": ["مِن جِهة", "في ناس بِيقولوا", "ما بِنكِر"],
+          "english": "As for me — what I believe"
+        },
+        {
+          "sentence": ["ما بِنكِر", "في ناس بِيقولوا"],
+          "decoys": ["بالنِّسبة لي", "مِن جِهة تانية", "اللي بِعتَقِدُه"],
+          "english": "I can't deny — some people say"
+        }
+      ],
+      "speak": {
+        "scenario": "You are making a case in a structured debate.",
+        "turns": [
+          {
+            "speaker": "them",
+            "arabic": "إيش رأيك بهاد الموضوع؟",
+            "romanization": "ʾēš raʾyak b-hād il-mawḍūʕ",
+            "english": "What's your opinion on this topic?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "بالنِّسبة لي، مهم!",
+            "romanization": "bin-nisbe lī, muhimm",
+            "english": "As for me, it's important!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وفي ناس مش موافقين",
+            "romanization": "w-fī nās miš muwāfiʾīn",
+            "english": "And some people disagree"
+          },
+          {
+            "speaker": "you",
+            "arabic": "في ناس بِيقولوا غير هيك!",
+            "romanization": "fī nās biyʾūlu ġēr hēk",
+            "english": "Some people say differently!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "من جهة هيك، بس من جهة تانية؟",
+            "romanization": "min jihe hēk, bas min jihe tāniye",
+            "english": "On one hand like this, but on the other hand?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "مِن جِهة مهم، مِن جِهة تانية صعب!",
+            "romanization": "min jihe muhimm, min jihe tāniye ṣaʕb",
+            "english": "On one hand important, on the other hand difficult!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "واللي بتعتقده؟",
+            "romanization": "w-illi btʕtaqidu",
+            "english": "And what you believe?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "اللي بِعتَقِدُه، صح!",
+            "romanization": "illi biʕtaqidu, ṣaḥ",
+            "english": "What I believe — it's right!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "بتنكر إنه في مشاكل؟",
+            "romanization": "btinkir ʾinnu fī mašākil",
+            "english": "Do you deny there are problems?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "ما بِنكِر في مشاكل!",
+            "romanization": "mā binkir fī mašākil",
+            "english": "I can't deny there are problems!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وناس كتير مش موافقين؟",
+            "romanization": "w-nās ktīr miš muwāfiʾīn",
+            "english": "And many people don't agree?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "في ناس بِيقولوا مش هيك!",
+            "romanization": "fī nās biyʾūlu miš hēk",
+            "english": "Some people say not like this!"
+          }
+        ]
+      }
+    },
+    {
+      "cycle": 2,
+      "vocab": [
+        {
+          "arabic": "مِن وِجهة نَظري",
+          "transcription": "min WIJ-hat NAZ-ri",
+          "romanization": "min wijhet naẓri",
+          "english": "from my point of view",
+          "note": "lit. 'from my viewpoint'; formal debate expression",
+          "icon": "solar:eye-linear",
+          "icon_color": "#5856d6"
+        },
+        {
+          "arabic": "في المُقابِل",
+          "transcription": "fī il-mu-KĀ-bil",
+          "romanization": "fī l-muʾābil",
+          "english": "on the contrary / in contrast",
+          "note": "used to introduce a contrasting point; في المقابل، بشوف إنه = in contrast, I see that",
+          "icon": "solar:arrows-right-down-linear",
+          "icon_color": "#ff3b30"
+        },
+        {
+          "arabic": "بَصراحة",
+          "transcription": "bi-sa-RĀ-ha",
+          "romanization": "bi-ṣarāḥa",
+          "english": "frankly / to be honest",
+          "note": "lit. 'in frankness'; بصراحة ما بحب = frankly I don't like; very common honesty marker",
+          "icon": "solar:chat-round-dots-linear",
+          "icon_color": "#007aff"
+        },
+        {
+          "arabic": "مِن ناحية",
+          "transcription": "min NĀ-hi-ye",
+          "romanization": "min nāḥiye",
+          "english": "in terms of / from the angle of",
+          "note": "من ناحية اقتصادية = economically speaking; من ناحية ثانية = from another angle",
+          "icon": "solar:arrow-right-up-linear",
+          "icon_color": "#34c759"
+        },
+        {
+          "arabic": "خُلاصة القَول",
+          "transcription": "khu-LĀ-set il-ŌL",
+          "romanization": "ḫulāṣet il-ʾōl",
+          "english": "in conclusion / to sum up",
+          "note": "lit. 'essence of the saying'; formal conclusion marker for arguments and essays",
+          "icon": "solar:check-circle-linear",
+          "icon_color": "#34c759"
+        },
+        {
+          "arabic": "وِجهة نَظر",
+          "transcription": "WIJ-het NAZ-ar",
+          "romanization": "wijhet naẓar",
+          "english": "point of view / perspective",
+          "note": "اختلاف وجهات النظر = difference of opinion; وجهة نظر مهمة = an important viewpoint",
+          "icon": "solar:eye-linear",
+          "icon_color": "#ff9f0a"
+        }
+      ],
+      "quiz": [
+        {
+          "arabic": "مِن وِجهة نَظري",
+          "transcription": "min WIJ-hat NAZ-ri",
+          "romanization": "min wijhet naẓri",
+          "options": ["in their opinion", "from my point of view", "according to experts", "as you see"],
+          "answer": 1
+        },
+        {
+          "arabic": "في المُقابِل",
+          "transcription": "fī il-mu-KĀ-bil",
+          "romanization": "fī l-muʾābil",
+          "options": ["additionally", "in conclusion", "on the contrary", "importantly"],
+          "answer": 2
+        },
+        {
+          "arabic": "بَصراحة",
+          "transcription": "bi-sa-RĀ-ha",
+          "romanization": "bi-ṣarāḥa",
+          "options": ["maybe", "obviously", "frankly / to be honest", "interestingly"],
+          "answer": 2
+        },
+        {
+          "arabic": "مِن ناحية",
+          "transcription": "min NĀ-hi-ye",
+          "romanization": "min nāḥiye",
+          "options": ["from a distance", "in terms of / from the angle of", "from a direction", "nearby"],
+          "answer": 1
+        },
+        {
+          "arabic": "خُلاصة القَول",
+          "transcription": "khu-LĀ-set il-ŌL",
+          "romanization": "ḫulāṣet il-ʾōl",
+          "options": ["first of all", "most importantly", "on the other hand", "in conclusion"],
+          "answer": 3
+        },
+        {
+          "arabic": "وِجهة نَظر",
+          "transcription": "WIJ-het NAZ-ar",
+          "romanization": "wijhet naẓar",
+          "options": ["way of looking", "opinion poll", "point of view", "perspective change"],
+          "answer": 2
+        }
+      ],
+      "build": [
+        {
+          "sentence": ["مِن وِجهة نَظري", "بَصراحة"],
+          "decoys": ["خُلاصة القَول", "في المُقابِل", "مِن ناحية"],
+          "english": "From my point of view — frankly"
+        },
+        {
+          "sentence": ["في المُقابِل", "مِن ناحية"],
+          "decoys": ["وِجهة نَظر", "مِن وِجهة نَظري", "خُلاصة القَول"],
+          "english": "On the contrary — in terms of"
+        },
+        {
+          "sentence": ["خُلاصة القَول", "وِجهة نَظر"],
+          "decoys": ["بَصراحة", "مِن ناحية", "في المُقابِل"],
+          "english": "In conclusion — a point of view"
+        }
+      ],
+      "speak": {
+        "scenario": "You are presenting your final argument in a debate.",
+        "turns": [
+          {
+            "speaker": "them",
+            "arabic": "إيش رأيك النهائي؟",
+            "romanization": "ʾēš raʾyak in-nihāʾi",
+            "english": "What's your final opinion?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "مِن وِجهة نَظري، مهم كتير!",
+            "romanization": "min wijhet naẓri, muhimm ktīr",
+            "english": "From my point of view, very important!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وفي المقابل؟",
+            "romanization": "w-fī l-muʾābil",
+            "english": "And on the contrary?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "في المُقابِل في نقاط ضعف!",
+            "romanization": "fī l-muʾābil fī nuʾāṭ ḍaʕf",
+            "english": "On the contrary there are weaknesses!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وبصراحة؟",
+            "romanization": "w-bi-ṣarāḥa",
+            "english": "And frankly?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "بَصراحة، صعب!",
+            "romanization": "bi-ṣarāḥa, ṣaʕb",
+            "english": "Frankly, it's difficult!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "ومن ناحية اقتصادية؟",
+            "romanization": "w-min nāḥiye iʾtiṣādiyye",
+            "english": "And from an economic angle?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "مِن ناحية المصلحة!",
+            "romanization": "min nāḥiye l-maslaḥa",
+            "english": "From the angle of interest!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "ووجهة نظرك ثابتة؟",
+            "romanization": "w-wijhet naẓrak tābite",
+            "english": "And is your perspective firm?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "وِجهة نَظر واضحة!",
+            "romanization": "wijhet naẓar wāḍiḥa",
+            "english": "A clear perspective!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "خلاصة القول؟",
+            "romanization": "ḫulāṣet il-ʾōl",
+            "english": "In conclusion?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "خُلاصة القَول، نتفق!",
+            "romanization": "ḫulāṣet il-ʾōl, nitfiʾ",
+            "english": "In conclusion — let's agree!"
+          }
+        ]
+      },
+      "review": {
+        "all_vocab": [
+          { "arabic": "مِن جِهة", "transcription": "min JI-he", "romanization": "min jihe", "english": "on one hand" },
+          { "arabic": "مِن جِهة تانية", "transcription": "min JI-he TĀ-ni-ye", "romanization": "min jihe tāniye", "english": "on the other hand" },
+          { "arabic": "بالنِّسبة لي", "transcription": "bin-NIS-be LĒ", "romanization": "bin-nisbe lī", "english": "as for me" },
+          { "arabic": "اللي بِعتَقِدُه", "transcription": "IL-li bi-ta-ki-DU", "romanization": "illi biʕtaqidu", "english": "what I believe" },
+          { "arabic": "ما بِنكِر", "transcription": "mā BIN-kir", "romanization": "mā binkir", "english": "I can't deny" },
+          { "arabic": "في ناس بِيقولوا", "transcription": "FĪ NĀS bi-ŪL-lu", "romanization": "fī nās biyʾūlu", "english": "some people say" },
+          { "arabic": "مِن وِجهة نَظري", "transcription": "min WIJ-hat NAZ-ri", "romanization": "min wijhet naẓri", "english": "from my point of view" },
+          { "arabic": "في المُقابِل", "transcription": "fī il-mu-KĀ-bil", "romanization": "fī l-muʾābil", "english": "on the contrary" },
+          { "arabic": "بَصراحة", "transcription": "bi-sa-RĀ-ha", "romanization": "bi-ṣarāḥa", "english": "frankly" },
+          { "arabic": "مِن ناحية", "transcription": "min NĀ-hi-ye", "romanization": "min nāḥiye", "english": "in terms of" },
+          { "arabic": "خُلاصة القَول", "transcription": "khu-LĀ-set il-ŌL", "romanization": "ḫulāṣet il-ʾōl", "english": "in conclusion" },
+          { "arabic": "وِجهة نَظر", "transcription": "WIJ-het NAZ-ar", "romanization": "wijhet naẓar", "english": "point of view" }
+        ]
+      }
+    }
+  ]
+}

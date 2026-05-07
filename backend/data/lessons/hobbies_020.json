@@ -1,0 +1,415 @@
+{
+  "topic": "Hobbies & Free Time",
+  "cycles": [
+    {
+      "cycle": 1,
+      "vocab": [
+        {
+          "arabic": "بِحِبّ",
+          "transcription": "bi-HIB",
+          "romanization": "biḥibb",
+          "english": "I like / I love",
+          "note": "1st person present; double consonant bb; used before nouns and verbs: بحب + noun/verb",
+          "icon": "solar:heart-linear",
+          "icon_color": "#ff2d55"
+        },
+        {
+          "arabic": "ما بِحِبّ",
+          "transcription": "mā bi-HIB",
+          "romanization": "mā biḥibb",
+          "english": "I don't like",
+          "note": "negation of بحب; ما بحب + thing = I don't like + thing",
+          "icon": "solar:close-circle-linear",
+          "icon_color": "#ff3b30"
+        },
+        {
+          "arabic": "بِفضِّل",
+          "transcription": "bi-FAD-dil",
+          "romanization": "bifaḍḍil",
+          "english": "I prefer",
+          "note": "1st person present of فضّل; بفضل هاد على هاد = I prefer this over that",
+          "icon": "solar:star-shine-linear",
+          "icon_color": "#ff9f0a"
+        },
+        {
+          "arabic": "وَقت الفَراغ",
+          "transcription": "waʔt il-fa-RĀG",
+          "romanization": "waʔt il-farāġ",
+          "english": "free time",
+          "note": "lit. 'time of emptiness/leisure'; شو بتعمل بوقت فراغك؟ = what do you do in your free time?",
+          "icon": "solar:sun-2-linear",
+          "icon_color": "#34c759"
+        },
+        {
+          "arabic": "رِياضة",
+          "transcription": "ri-YĀ-da",
+          "romanization": "riyāḍa",
+          "english": "sport / exercise",
+          "note": "general word for sports and physical exercise; بمارس رياضة = I do sports",
+          "icon": "solar:football-linear",
+          "icon_color": "#5856d6"
+        },
+        {
+          "arabic": "تَعلَّمت",
+          "transcription": "ta-AL-lamt",
+          "romanization": "taʕallamat",
+          "english": "I learned",
+          "note": "past tense 1st person singular; Form V; تعلمت عربي = I learned Arabic",
+          "icon": "solar:book-linear",
+          "icon_color": "#007aff"
+        }
+      ],
+      "quiz": [
+        {
+          "arabic": "بِحِبّ",
+          "transcription": "bi-HIB",
+          "romanization": "biḥibb",
+          "options": ["I hate", "I want", "I like / love", "I know"],
+          "answer": 2
+        },
+        {
+          "arabic": "ما بِحِبّ",
+          "transcription": "mā bi-HIB",
+          "romanization": "mā biḥibb",
+          "options": ["I like", "I don't like", "I love", "I want"],
+          "answer": 1
+        },
+        {
+          "arabic": "بِفضِّل",
+          "transcription": "bi-FAD-dil",
+          "romanization": "bifaḍḍil",
+          "options": ["I hate", "I want", "I need", "I prefer"],
+          "answer": 3
+        },
+        {
+          "arabic": "وَقت الفَراغ",
+          "transcription": "waʔt il-fa-RĀG",
+          "romanization": "waʔt il-farāġ",
+          "options": ["work time", "meal time", "travel time", "free time"],
+          "answer": 3
+        },
+        {
+          "arabic": "رِياضة",
+          "transcription": "ri-YĀ-da",
+          "romanization": "riyāḍa",
+          "options": ["music", "reading", "sport / exercise", "cooking"],
+          "answer": 2
+        },
+        {
+          "arabic": "تَعلَّمت",
+          "transcription": "ta-AL-lamt",
+          "romanization": "taʕallamat",
+          "options": ["I teach", "I study", "I learned", "I practice"],
+          "answer": 2
+        }
+      ],
+      "build": [
+        {
+          "sentence": ["بِحِبّ", "رِياضة"],
+          "decoys": ["ما بِحِبّ", "بِفضِّل", "تَعلَّمت"],
+          "english": "I like sport"
+        },
+        {
+          "sentence": ["بِفضِّل", "وَقت الفَراغ"],
+          "decoys": ["رِياضة", "تَعلَّمت", "ما بِحِبّ"],
+          "english": "I prefer free time"
+        },
+        {
+          "sentence": ["تَعلَّمت", "ما بِحِبّ"],
+          "decoys": ["بِحِبّ", "رِياضة", "بِفضِّل"],
+          "english": "I learned — I didn't like it"
+        }
+      ],
+      "speak": {
+        "scenario": "You are talking about your hobbies with a new friend.",
+        "turns": [
+          {
+            "speaker": "them",
+            "arabic": "شو بتحب تعمل بوقت فراغك؟",
+            "romanization": "šū btḥibb tʕamal b-waʔt farāġak",
+            "english": "What do you like to do in your free time?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "بِحِبّ الرياضة!",
+            "romanization": "biḥibb ir-riyāḍa",
+            "english": "I like sport!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وبتفضل شو؟",
+            "romanization": "w-btfaḍḍil šū",
+            "english": "And what do you prefer?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "بِفضِّل المشي!",
+            "romanization": "bifaḍḍil il-maši",
+            "english": "I prefer walking!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وإيش ما بتحب؟",
+            "romanization": "w-ʾēš mā btḥibb",
+            "english": "And what don't you like?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "ما بِحِبّ الإزعاج!",
+            "romanization": "mā biḥibb il-ʾizʕāj",
+            "english": "I don't like noise/disturbance!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وبوقت فراغك؟",
+            "romanization": "w-b-waʔt farāġak",
+            "english": "And in your free time?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "وَقت الفَراغ مهم!",
+            "romanization": "waʔt il-farāġ muhimm",
+            "english": "Free time is important!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وبتعلم شو؟",
+            "romanization": "w-btitʕallamat šū",
+            "english": "And what are you learning?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "بِحِبّ أَتعَلَّم!",
+            "romanization": "biḥibb ʾataʕallam",
+            "english": "I like to learn!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وقبل كده؟",
+            "romanization": "w-ʾabl kida",
+            "english": "And before?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "تَعلَّمت كتير!",
+            "romanization": "taʕallamat ktīr",
+            "english": "I learned a lot!"
+          }
+        ]
+      }
+    },
+    {
+      "cycle": 2,
+      "vocab": [
+        {
+          "arabic": "مُوسيقى",
+          "transcription": "mū-SĪ-ʔa",
+          "romanization": "mūsīʾā",
+          "english": "music",
+          "note": "ق → ʾ; بسمع موسيقى = I listen to music; موسيقى عربية = Arabic music",
+          "icon": "solar:music-notes-linear",
+          "icon_color": "#5856d6"
+        },
+        {
+          "arabic": "مُطالَعة",
+          "transcription": "mu-TA-la-a",
+          "romanization": "muṭālaʕa",
+          "english": "reading (as hobby)",
+          "note": "from طالع (to read); specifically reading for pleasure; بحب المطالعة = I like reading",
+          "icon": "solar:book-open-linear",
+          "icon_color": "#007aff"
+        },
+        {
+          "arabic": "تِلفِزيون",
+          "transcription": "til-fi-ZYŌN",
+          "romanization": "tilfizyon",
+          "english": "television / TV",
+          "note": "بشوف التلفزيون = I watch television; كتير تلفزيون = a lot of TV",
+          "icon": "solar:tv-linear",
+          "icon_color": "#6e6e73"
+        },
+        {
+          "arabic": "سينِما",
+          "transcription": "SĒ-ni-ma",
+          "romanization": "sīnima",
+          "english": "cinema / movies",
+          "note": "also refers to a movie/film; بروح عالسينما = I go to the cinema",
+          "icon": "solar:video-linear",
+          "icon_color": "#ff9f0a"
+        },
+        {
+          "arabic": "سَفَر",
+          "transcription": "SA-far",
+          "romanization": "safar",
+          "english": "travel / traveling",
+          "note": "verbal noun of سافر (to travel); بحب السفر = I love traveling",
+          "icon": "solar:suitcase-linear",
+          "icon_color": "#fe4d01"
+        },
+        {
+          "arabic": "طَبَخ",
+          "transcription": "TA-bakh",
+          "romanization": "ṭabaḫ",
+          "english": "cooking",
+          "note": "verbal noun of طبخ (to cook); بحب الطبخ = I love cooking; الطبخ الفلسطيني حلو = Palestinian food is great",
+          "icon": "solar:chef-hat-minimalistic-linear",
+          "icon_color": "#ff9f0a"
+        }
+      ],
+      "quiz": [
+        {
+          "arabic": "مُوسيقى",
+          "transcription": "mū-SĪ-ʔa",
+          "romanization": "mūsīʾā",
+          "options": ["art", "cinema", "sport", "music"],
+          "answer": 3
+        },
+        {
+          "arabic": "مُطالَعة",
+          "transcription": "mu-TA-la-a",
+          "romanization": "muṭālaʕa",
+          "options": ["writing", "studying", "reading", "teaching"],
+          "answer": 2
+        },
+        {
+          "arabic": "تِلفِزيون",
+          "transcription": "til-fi-ZYŌN",
+          "romanization": "tilfizyon",
+          "options": ["radio", "computer", "television", "phone"],
+          "answer": 2
+        },
+        {
+          "arabic": "سينِما",
+          "transcription": "SĒ-ni-ma",
+          "romanization": "sīnima",
+          "options": ["theatre", "concert", "cinema", "gallery"],
+          "answer": 2
+        },
+        {
+          "arabic": "سَفَر",
+          "transcription": "SA-far",
+          "romanization": "safar",
+          "options": ["rest", "work", "study", "travel"],
+          "answer": 3
+        },
+        {
+          "arabic": "طَبَخ",
+          "transcription": "TA-bakh",
+          "romanization": "ṭabaḫ",
+          "options": ["eating", "shopping", "cleaning", "cooking"],
+          "answer": 3
+        }
+      ],
+      "build": [
+        {
+          "sentence": ["بِحِبّ", "مُوسيقى"],
+          "decoys": ["سَفَر", "تِلفِزيون", "طَبَخ"],
+          "english": "I like music"
+        },
+        {
+          "sentence": ["مُطالَعة", "سينِما"],
+          "decoys": ["مُوسيقى", "طَبَخ", "سَفَر"],
+          "english": "Reading and cinema"
+        },
+        {
+          "sentence": ["بِفضِّل", "سَفَر"],
+          "decoys": ["تِلفِزيون", "مُطالَعة", "طَبَخ"],
+          "english": "I prefer travel"
+        }
+      ],
+      "speak": {
+        "scenario": "You are discussing weekend plans with colleagues.",
+        "turns": [
+          {
+            "speaker": "them",
+            "arabic": "إيش نشاطاتك هالأسبوع؟",
+            "romanization": "ʾēš našāṭātak hal-ʾusbūʕ",
+            "english": "What are your activities this week?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "مُوسيقى وطبخ!",
+            "romanization": "mūsīʾā w-ṭabaḫ",
+            "english": "Music and cooking!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "بتحب القراءة؟",
+            "romanization": "btḥibb il-ʾirāʾa",
+            "english": "Do you like reading?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "مُطالَعة كتير!",
+            "romanization": "muṭālaʕa ktīr",
+            "english": "A lot of reading!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "والتلفزيون؟",
+            "romanization": "w-it-tilfizyon",
+            "english": "And TV?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "تِلفِزيون شوي!",
+            "romanization": "tilfizyon šway",
+            "english": "A little TV!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وبتروح عالسينما؟",
+            "romanization": "w-btrūḥ ʕas-sīnima",
+            "english": "And do you go to the cinema?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "سينِما بحب!",
+            "romanization": "sīnima biḥibb",
+            "english": "Cinema I like!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وبحب السفر؟",
+            "romanization": "w-btḥibb is-safar",
+            "english": "And do you like to travel?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "سَفَر أحسن شي!",
+            "romanization": "safar ʾaḥsan šī",
+            "english": "Travel is the best thing!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وإيش بفضلك؟",
+            "romanization": "w-ʾēš bifaḍḍlak",
+            "english": "And what do you prefer?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "بِفضِّل الطَبَخ!",
+            "romanization": "bifaḍḍil iṭ-ṭabaḫ",
+            "english": "I prefer cooking!"
+          }
+        ]
+      },
+      "review": {
+        "all_vocab": [
+          { "arabic": "بِحِبّ", "transcription": "bi-HIB", "romanization": "biḥibb", "english": "I like / love" },
+          { "arabic": "ما بِحِبّ", "transcription": "mā bi-HIB", "romanization": "mā biḥibb", "english": "I don't like" },
+          { "arabic": "بِفضِّل", "transcription": "bi-FAD-dil", "romanization": "bifaḍḍil", "english": "I prefer" },
+          { "arabic": "وَقت الفَراغ", "transcription": "waʔt il-fa-RĀG", "romanization": "waʔt il-farāġ", "english": "free time" },
+          { "arabic": "رِياضة", "transcription": "ri-YĀ-da", "romanization": "riyāḍa", "english": "sport / exercise" },
+          { "arabic": "تَعلَّمت", "transcription": "ta-AL-lamt", "romanization": "taʕallamat", "english": "I learned" },
+          { "arabic": "مُوسيقى", "transcription": "mū-SĪ-ʔa", "romanization": "mūsīʾā", "english": "music" },
+          { "arabic": "مُطالَعة", "transcription": "mu-TA-la-a", "romanization": "muṭālaʕa", "english": "reading (hobby)" },
+          { "arabic": "تِلفِزيون", "transcription": "til-fi-ZYŌN", "romanization": "tilfizyon", "english": "television" },
+          { "arabic": "سينِما", "transcription": "SĒ-ni-ma", "romanization": "sīnima", "english": "cinema" },
+          { "arabic": "سَفَر", "transcription": "SA-far", "romanization": "safar", "english": "travel" },
+          { "arabic": "طَبَخ", "transcription": "TA-bakh", "romanization": "ṭabaḫ", "english": "cooking" }
+        ]
+      }
+    }
+  ]
+}

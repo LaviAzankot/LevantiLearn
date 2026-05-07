@@ -1,0 +1,416 @@
+{
+  "topic": "Describing People",
+  "cycles": [
+    {
+      "cycle": 1,
+      "vocab": [
+        {
+          "arabic": "طَويل",
+          "transcription": "ta-WĒL",
+          "romanization": "ṭawīl",
+          "english": "tall / long",
+          "note": "feminine: طويلة (ṭawīle); used for both height (tall) and length (long)",
+          "icon": "solar:maximize-square-linear",
+          "icon_color": "#5856d6"
+        },
+        {
+          "arabic": "قَصير",
+          "transcription": "ʔa-SĒR",
+          "romanization": "ʾaṣīr",
+          "english": "short",
+          "note": "ق → ʾ; feminine: قصيرة (ʾaṣīra); used for height and length; opposite of طويل",
+          "icon": "solar:minimize-square-linear",
+          "icon_color": "#ff9f0a"
+        },
+        {
+          "arabic": "حِلو",
+          "transcription": "HIL-wu",
+          "romanization": "ḥilwu",
+          "english": "handsome / pretty",
+          "note": "feminine: حلوة (ḥilwe); the most common compliment for appearance in Palestinian Arabic",
+          "icon": "solar:smile-circle-linear",
+          "icon_color": "#ff2d55"
+        },
+        {
+          "arabic": "شاطِر",
+          "transcription": "SHĀT-ir",
+          "romanization": "šāṭir",
+          "english": "smart / skilled / good",
+          "note": "feminine: شاطرة (šāṭra); covers both intelligence and skill; شاطر في الدراسة = good at studying",
+          "icon": "solar:star-shine-linear",
+          "icon_color": "#ff9f0a"
+        },
+        {
+          "arabic": "كَبير",
+          "transcription": "ka-BĒR",
+          "romanization": "kabīr",
+          "english": "old / big / senior",
+          "note": "for age: كم عمره؟ هو كبير = How old is he? He's old; also means 'important person'",
+          "icon": "solar:user-rounded-linear",
+          "icon_color": "#6e6e73"
+        },
+        {
+          "arabic": "زَيّ بَعضهم",
+          "transcription": "zay-BAD-hum",
+          "romanization": "zayy baʕḍhum",
+          "english": "similar / like each other",
+          "note": "lit. 'like each other'; used to describe resemblance; زيهم = like them",
+          "icon": "solar:people-nearby-linear",
+          "icon_color": "#007aff"
+        }
+      ],
+      "quiz": [
+        {
+          "arabic": "طَويل",
+          "transcription": "ta-WĒL",
+          "romanization": "ṭawīl",
+          "options": ["short", "fat", "tall / long", "thin"],
+          "answer": 2
+        },
+        {
+          "arabic": "قَصير",
+          "transcription": "ʔa-SĒR",
+          "romanization": "ʾaṣīr",
+          "options": ["tall", "short", "big", "old"],
+          "answer": 1
+        },
+        {
+          "arabic": "حِلو",
+          "transcription": "HIL-wu",
+          "romanization": "ḥilwu",
+          "options": ["ugly", "old", "handsome / pretty", "tall"],
+          "answer": 2
+        },
+        {
+          "arabic": "شاطِر",
+          "transcription": "SHĀT-ir",
+          "romanization": "šāṭir",
+          "options": ["lazy", "smart / skilled", "short", "quiet"],
+          "answer": 1
+        },
+        {
+          "arabic": "كَبير",
+          "transcription": "ka-BĒR",
+          "romanization": "kabīr",
+          "options": ["young", "tall", "small", "old / big"],
+          "answer": 3
+        },
+        {
+          "arabic": "زَيّ بَعضهم",
+          "transcription": "zay-BAD-hum",
+          "romanization": "zayy baʕḍhum",
+          "options": ["different", "similar / like each other", "opposite", "strangers"],
+          "answer": 1
+        }
+      ],
+      "build": [
+        {
+          "sentence": ["طَويل", "حِلو"],
+          "decoys": ["قَصير", "كَبير", "شاطِر"],
+          "english": "Tall and handsome"
+        },
+        {
+          "sentence": ["شاطِر", "مش", "قَصير"],
+          "decoys": ["زَيّ بَعضهم", "طَويل", "حِلو"],
+          "english": "Smart, not short"
+        },
+        {
+          "sentence": ["زَيّ بَعضهم", "كَبير"],
+          "decoys": ["شاطِر", "طَويل", "حِلو"],
+          "english": "Similar — both old"
+        }
+      ],
+      "speak": {
+        "scenario": "You are describing someone at a family gathering.",
+        "turns": [
+          {
+            "speaker": "them",
+            "arabic": "إيش شكله؟",
+            "romanization": "ʾēš šaklu",
+            "english": "What does he look like?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "طَويل كتير!",
+            "romanization": "ṭawīl ktīr",
+            "english": "Very tall!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وهي؟",
+            "romanization": "w-hiyya",
+            "english": "And she?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "قَصيرة وحِلوة!",
+            "romanization": "ʾaṣīra w-ḥilwe",
+            "english": "Short and pretty!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وهو شاطر؟",
+            "romanization": "w-huwwa šāṭir",
+            "english": "And is he smart?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "شاطِر كتير!",
+            "romanization": "šāṭir ktīr",
+            "english": "Very smart!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وعمره كم؟ كبير؟",
+            "romanization": "w-ʕumru kam, kabīr",
+            "english": "And how old is he? Old?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "كَبير شوي!",
+            "romanization": "kabīr šway",
+            "english": "A little old!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "يشبه أخوه؟",
+            "romanization": "yišbah ʾaḫū",
+            "english": "Does he look like his brother?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "زَيّ بَعضهم كتير!",
+            "romanization": "zayy baʕḍhum ktīr",
+            "english": "Very similar!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "والثاني أيضاً حلو؟",
+            "romanization": "w-it-tāni ʾayḍan ḥilwu",
+            "english": "And the other one is also handsome?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "حِلو كمان!",
+            "romanization": "ḥilwu kamān",
+            "english": "Handsome too!"
+          }
+        ]
+      }
+    },
+    {
+      "cycle": 2,
+      "vocab": [
+        {
+          "arabic": "شَعر",
+          "transcription": "SHA-ar",
+          "romanization": "šaʕar",
+          "english": "hair",
+          "note": "شعر طويل = long hair; شعر أسود = black hair; very common in descriptions",
+          "icon": "solar:user-rounded-linear",
+          "icon_color": "#6e6e73"
+        },
+        {
+          "arabic": "عُيون",
+          "transcription": "u-YŪN",
+          "romanization": "ʕuyūn",
+          "english": "eyes (plural)",
+          "note": "plural of عين; عيون خضر = green eyes; عيون حلوة = beautiful eyes",
+          "icon": "solar:eye-linear",
+          "icon_color": "#007aff"
+        },
+        {
+          "arabic": "هادي",
+          "transcription": "HĀ-di",
+          "romanization": "hādi",
+          "english": "calm / quiet",
+          "note": "feminine same: هادية (hādye); هادي مش صاخب = calm not loud; positive character trait",
+          "icon": "solar:sleep-linear",
+          "icon_color": "#34c759"
+        },
+        {
+          "arabic": "صاخِب",
+          "transcription": "SĀ-khib",
+          "romanization": "ṣāḫib",
+          "english": "loud / noisy",
+          "note": "describes someone who is boisterous; also describes a noisy environment",
+          "icon": "solar:microphone-linear",
+          "icon_color": "#ff3b30"
+        },
+        {
+          "arabic": "لَطيف",
+          "transcription": "la-TĒF",
+          "romanization": "laṭīf",
+          "english": "kind / nice",
+          "note": "feminine: لطيفة (laṭīfe); the ideal compliment for someone's character; بتعامل لطيف = nice treatment",
+          "icon": "solar:heart-linear",
+          "icon_color": "#ff2d55"
+        },
+        {
+          "arabic": "أَكبَر مِنّي",
+          "transcription": "AK-bar MIN-ni",
+          "romanization": "ʾakbar minni",
+          "english": "older than me",
+          "note": "أكبر = comparative of كبير; مني = than me; أصغر مني (ʾaṣġar minni) = younger than me",
+          "icon": "solar:users-group-two-rounded-linear",
+          "icon_color": "#5856d6"
+        }
+      ],
+      "quiz": [
+        {
+          "arabic": "شَعر",
+          "transcription": "SHA-ar",
+          "romanization": "šaʕar",
+          "english": "hair",
+          "options": ["eyes", "face", "hair", "skin"],
+          "answer": 2
+        },
+        {
+          "arabic": "عُيون",
+          "transcription": "u-YŪN",
+          "romanization": "ʕuyūn",
+          "options": ["ears", "eyes", "hands", "feet"],
+          "answer": 1
+        },
+        {
+          "arabic": "هادي",
+          "transcription": "HĀ-di",
+          "romanization": "hādi",
+          "options": ["loud", "lazy", "angry", "calm / quiet"],
+          "answer": 3
+        },
+        {
+          "arabic": "صاخِب",
+          "transcription": "SĀ-khib",
+          "romanization": "ṣāḫib",
+          "options": ["quiet", "kind", "loud / noisy", "calm"],
+          "answer": 2
+        },
+        {
+          "arabic": "لَطيف",
+          "transcription": "la-TĒF",
+          "romanization": "laṭīf",
+          "options": ["rude", "kind / nice", "strict", "shy"],
+          "answer": 1
+        },
+        {
+          "arabic": "أَكبَر مِنّي",
+          "transcription": "AK-bar MIN-ni",
+          "romanization": "ʾakbar minni",
+          "options": ["younger than me", "the same age", "older than me", "much taller"],
+          "answer": 2
+        }
+      ],
+      "build": [
+        {
+          "sentence": ["شَعر", "أَسود"],
+          "decoys": ["عُيون", "لَطيف", "هادي"],
+          "english": "Black hair"
+        },
+        {
+          "sentence": ["لَطيف", "مِش", "صاخِب"],
+          "decoys": ["هادي", "شَعر", "عُيون"],
+          "english": "Kind, not loud"
+        },
+        {
+          "sentence": ["أَكبَر مِنّي", "هادي"],
+          "decoys": ["شَعر", "صاخِب", "عُيون"],
+          "english": "Older than me and calm"
+        }
+      ],
+      "speak": {
+        "scenario": "You are describing a friend to help someone recognize them.",
+        "turns": [
+          {
+            "speaker": "them",
+            "arabic": "كيف بعرفه؟",
+            "romanization": "kēf baʕrifū",
+            "english": "How do I recognize him?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "شَعر طويل!",
+            "romanization": "šaʕar ṭawīl",
+            "english": "Long hair!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وعيونه؟",
+            "romanization": "w-ʕuyūnu",
+            "english": "And his eyes?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "عُيون زُرقا!",
+            "romanization": "ʕuyūn zurʾa",
+            "english": "Blue eyes!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وطبعه إيش؟",
+            "romanization": "w-ṭabʕu ʾēš",
+            "english": "And his character?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "لَطيف كتير!",
+            "romanization": "laṭīf ktīr",
+            "english": "Very kind!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وهادي ولا صاخب؟",
+            "romanization": "w-hādi willa ṣāḫib",
+            "english": "And calm or loud?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "هادي دايماً!",
+            "romanization": "hādi dāyman",
+            "english": "Always calm!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وعمره كم؟",
+            "romanization": "w-ʕumru kam",
+            "english": "And how old is he?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "أَكبَر مِنّي!",
+            "romanization": "ʾakbar minni",
+            "english": "Older than me!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وصاخب أحيانا؟",
+            "romanization": "w-ṣāḫib ʾaḥyānan",
+            "english": "And loud sometimes?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "مش صاخِب أبدا!",
+            "romanization": "miš ṣāḫib ʾabdan",
+            "english": "Never loud!"
+          }
+        ]
+      },
+      "review": {
+        "all_vocab": [
+          { "arabic": "طَويل", "transcription": "ta-WĒL", "romanization": "ṭawīl", "english": "tall / long" },
+          { "arabic": "قَصير", "transcription": "ʔa-SĒR", "romanization": "ʾaṣīr", "english": "short" },
+          { "arabic": "حِلو", "transcription": "HIL-wu", "romanization": "ḥilwu", "english": "handsome / pretty" },
+          { "arabic": "شاطِر", "transcription": "SHĀT-ir", "romanization": "šāṭir", "english": "smart / skilled" },
+          { "arabic": "كَبير", "transcription": "ka-BĒR", "romanization": "kabīr", "english": "old / big / senior" },
+          { "arabic": "زَيّ بَعضهم", "transcription": "zay-BAD-hum", "romanization": "zayy baʕḍhum", "english": "similar / like each other" },
+          { "arabic": "شَعر", "transcription": "SHA-ar", "romanization": "šaʕar", "english": "hair" },
+          { "arabic": "عُيون", "transcription": "u-YŪN", "romanization": "ʕuyūn", "english": "eyes" },
+          { "arabic": "هادي", "transcription": "HĀ-di", "romanization": "hādi", "english": "calm / quiet" },
+          { "arabic": "صاخِب", "transcription": "SĀ-khib", "romanization": "ṣāḫib", "english": "loud / noisy" },
+          { "arabic": "لَطيف", "transcription": "la-TĒF", "romanization": "laṭīf", "english": "kind / nice" },
+          { "arabic": "أَكبَر مِنّي", "transcription": "AK-bar MIN-ni", "romanization": "ʾakbar minni", "english": "older than me" }
+        ]
+      }
+    }
+  ]
+}

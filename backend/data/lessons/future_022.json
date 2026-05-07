@@ -1,0 +1,415 @@
+{
+  "topic": "Future Tense",
+  "cycles": [
+    {
+      "cycle": 1,
+      "vocab": [
+        {
+          "arabic": "رَح أَروح",
+          "transcription": "raH a-RŪH",
+          "romanization": "raḥ ʾarūḥ",
+          "english": "I will go",
+          "note": "رح + present verb = future; رح is the Palestinian future marker (not سوف/سـ from MSA)",
+          "icon": "solar:arrow-up-linear",
+          "icon_color": "#fe4d01"
+        },
+        {
+          "arabic": "رَح آكُل",
+          "transcription": "raH Ā-kul",
+          "romanization": "raḥ ʾākul",
+          "english": "I will eat",
+          "note": "رح + 1st person present; رح آكل بكرا = I will eat tomorrow",
+          "icon": "solar:plate-linear",
+          "icon_color": "#ff9f0a"
+        },
+        {
+          "arabic": "رَح أَشتَغِل",
+          "transcription": "raH ash-ta-GIL",
+          "romanization": "raḥ ʾaštagil",
+          "english": "I will work",
+          "note": "future of اشتغل; رح أشتغل غداً = I will work tomorrow",
+          "icon": "solar:briefcase-linear",
+          "icon_color": "#5856d6"
+        },
+        {
+          "arabic": "رَح أَحكي",
+          "transcription": "raH ah-KI",
+          "romanization": "raḥ ʾaḥki",
+          "english": "I will speak / I will tell",
+          "note": "future of حكى; رح أحكيلك = I will tell you",
+          "icon": "solar:chat-round-dots-linear",
+          "icon_color": "#007aff"
+        },
+        {
+          "arabic": "رَح أَجي",
+          "transcription": "raH a-JĒ",
+          "romanization": "raḥ ʾajī",
+          "english": "I will come",
+          "note": "future of جاء/يجي; رح أجي بكرا = I will come tomorrow",
+          "icon": "solar:arrow-down-linear",
+          "icon_color": "#34c759"
+        },
+        {
+          "arabic": "مَتى؟",
+          "transcription": "MA-ta",
+          "romanization": "matā",
+          "english": "when?",
+          "note": "used for both past (متى رحت؟ = when did you go?) and future (متى رح تيجي؟ = when will you come?)",
+          "icon": "solar:question-circle-linear",
+          "icon_color": "#6e6e73"
+        }
+      ],
+      "quiz": [
+        {
+          "arabic": "رَح أَروح",
+          "transcription": "raH a-RŪH",
+          "romanization": "raḥ ʾarūḥ",
+          "options": ["I went", "I go", "I will go", "I want to go"],
+          "answer": 2
+        },
+        {
+          "arabic": "رَح آكُل",
+          "transcription": "raH Ā-kul",
+          "romanization": "raḥ ʾākul",
+          "options": ["I ate", "I will eat", "I eat", "I want to eat"],
+          "answer": 1
+        },
+        {
+          "arabic": "رَح أَشتَغِل",
+          "transcription": "raH ash-ta-GIL",
+          "romanization": "raḥ ʾaštagil",
+          "options": ["I worked", "I work", "I want to work", "I will work"],
+          "answer": 3
+        },
+        {
+          "arabic": "رَح أَحكي",
+          "transcription": "raH ah-KI",
+          "romanization": "raḥ ʾaḥki",
+          "options": ["I spoke", "I will speak", "I speak", "I am speaking"],
+          "answer": 1
+        },
+        {
+          "arabic": "رَح أَجي",
+          "transcription": "raH a-JĒ",
+          "romanization": "raḥ ʾajī",
+          "options": ["I came", "I come", "I will come", "I want to come"],
+          "answer": 2
+        },
+        {
+          "arabic": "مَتى؟",
+          "transcription": "MA-ta",
+          "romanization": "matā",
+          "options": ["where?", "who?", "what?", "when?"],
+          "answer": 3
+        }
+      ],
+      "build": [
+        {
+          "sentence": ["رَح أَروح", "بُكرا"],
+          "decoys": ["رَح أَجي", "مَتى؟", "رَح آكُل"],
+          "english": "I will go tomorrow"
+        },
+        {
+          "sentence": ["رَح أَشتَغِل", "رَح أَحكي"],
+          "decoys": ["مَتى؟", "رَح أَجي", "رَح آكُل"],
+          "english": "I will work and speak"
+        },
+        {
+          "sentence": ["مَتى؟", "رَح أَجي"],
+          "decoys": ["رَح أَروح", "رَح أَشتَغِل", "رَح آكُل"],
+          "english": "When? I will come"
+        }
+      ],
+      "speak": {
+        "scenario": "You are making plans for tomorrow with a friend.",
+        "turns": [
+          {
+            "speaker": "them",
+            "arabic": "إيش رح تعمل بكرا؟",
+            "romanization": "ʾēš raḥ tʕamal bukra",
+            "english": "What will you do tomorrow?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "رَح أَروح الشغل!",
+            "romanization": "raḥ ʾarūḥ iš-šuġl",
+            "english": "I will go to work!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "ورح تاكل وين؟",
+            "romanization": "w-raḥ tāʾkul wēn",
+            "english": "And where will you eat?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "رَح آكُل هون!",
+            "romanization": "raḥ ʾākul hōn",
+            "english": "I will eat here!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "متى رح تشتغل؟",
+            "romanization": "matā raḥ tištagil",
+            "english": "When will you work?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "رَح أَشتَغِل الصبح!",
+            "romanization": "raḥ ʾaštagil iṣ-ṣubḥ",
+            "english": "I will work in the morning!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "ورح تحكيني كيف صار؟",
+            "romanization": "w-raḥ tḥakīni kēf ṣār",
+            "english": "And will you tell me how it goes?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "رَح أَحكي!",
+            "romanization": "raḥ ʾaḥki",
+            "english": "I will tell!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "متى رح تيجي عندنا؟",
+            "romanization": "matā raḥ tījī ʕindna",
+            "english": "When will you come to us?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "رَح أَجي بكرا!",
+            "romanization": "raḥ ʾajī bukra",
+            "english": "I will come tomorrow!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "أكيد رح تيجي؟",
+            "romanization": "ʾakīd raḥ tījī",
+            "english": "You'll definitely come?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "مَتى؟",
+            "romanization": "matā",
+            "english": "When? (asking for details)"
+          }
+        ]
+      }
+    },
+    {
+      "cycle": 2,
+      "vocab": [
+        {
+          "arabic": "بِدّي أَروح",
+          "transcription": "BID-di a-RŪH",
+          "romanization": "biddi ʾarūḥ",
+          "english": "I want to go",
+          "note": "بدي + verb = want to do; softer than رح (I will); expresses intention/desire not certainty",
+          "icon": "solar:hand-heart-linear",
+          "icon_color": "#fe4d01"
+        },
+        {
+          "arabic": "بِدّي أَتعَلَّم",
+          "transcription": "BID-di at-al-LAM",
+          "romanization": "biddi ʾataʕallam",
+          "english": "I want to learn",
+          "note": "بدي + Form V verb; بدي أتعلم عربي = I want to learn Arabic",
+          "icon": "solar:book-linear",
+          "icon_color": "#007aff"
+        },
+        {
+          "arabic": "بِدّي أَشوف",
+          "transcription": "BID-di a-SHŪF",
+          "romanization": "biddi ʾašūf",
+          "english": "I want to see",
+          "note": "بدي أشوف = I want to see/visit; ق → ʾ in أشوف from root شاف",
+          "icon": "solar:eye-linear",
+          "icon_color": "#5856d6"
+        },
+        {
+          "arabic": "مُحتاج",
+          "transcription": "muh-TĀJ",
+          "romanization": "muḥtāj",
+          "english": "I need / I'm in need",
+          "note": "adjective/participle; محتاج + noun/verb = need; feminine: محتاجة (muḥtāje)",
+          "icon": "solar:hand-heart-linear",
+          "icon_color": "#34c759"
+        },
+        {
+          "arabic": "رَح أَكون",
+          "transcription": "raH a-KŪN",
+          "romanization": "raḥ ʾakūn",
+          "english": "I will be",
+          "note": "future of كان (to be); رح أكون مبسوط = I will be happy; important for planning phrases",
+          "icon": "solar:star-linear",
+          "icon_color": "#ff9f0a"
+        },
+        {
+          "arabic": "إِن شا الله",
+          "transcription": "in-SHA-LAH",
+          "romanization": "ʾin šā llāh",
+          "english": "God willing / hopefully",
+          "note": "paired constantly with future plans in Palestinian speech; رح أيجي إن شاء الله",
+          "icon": "solar:star-shine-linear",
+          "icon_color": "#ff9f0a"
+        }
+      ],
+      "quiz": [
+        {
+          "arabic": "بِدّي أَروح",
+          "transcription": "BID-di a-RŪH",
+          "romanization": "biddi ʾarūḥ",
+          "options": ["I will go", "I went", "I want to go", "I must go"],
+          "answer": 2
+        },
+        {
+          "arabic": "بِدّي أَتعَلَّم",
+          "transcription": "BID-di at-al-LAM",
+          "romanization": "biddi ʾataʕallam",
+          "options": ["I learned", "I want to learn", "I study", "I teach"],
+          "answer": 1
+        },
+        {
+          "arabic": "بِدّي أَشوف",
+          "transcription": "BID-di a-SHŪF",
+          "romanization": "biddi ʾašūf",
+          "options": ["I want to buy", "I want to hear", "I want to see", "I want to know"],
+          "answer": 2
+        },
+        {
+          "arabic": "مُحتاج",
+          "transcription": "muh-TĀJ",
+          "romanization": "muḥtāj",
+          "options": ["I have", "I want", "I got", "I need"],
+          "answer": 3
+        },
+        {
+          "arabic": "رَح أَكون",
+          "transcription": "raH a-KŪN",
+          "romanization": "raḥ ʾakūn",
+          "options": ["I was", "I am", "I will be", "I want to be"],
+          "answer": 2
+        },
+        {
+          "arabic": "إِن شا الله",
+          "transcription": "in-SHA-LAH",
+          "romanization": "ʾin šā llāh",
+          "options": ["thank God", "praise God", "if only", "God willing"],
+          "answer": 3
+        }
+      ],
+      "build": [
+        {
+          "sentence": ["بِدّي أَروح", "إِن شا الله"],
+          "decoys": ["مُحتاج", "رَح أَكون", "بِدّي أَشوف"],
+          "english": "I want to go, God willing"
+        },
+        {
+          "sentence": ["مُحتاج", "بِدّي أَتعَلَّم"],
+          "decoys": ["إِن شا الله", "بِدّي أَروح", "رَح أَكون"],
+          "english": "I need — I want to learn"
+        },
+        {
+          "sentence": ["رَح أَكون", "بِدّي أَشوف"],
+          "decoys": ["مُحتاج", "إِن شا الله", "بِدّي أَتعَلَّم"],
+          "english": "I will be — I want to see"
+        }
+      ],
+      "speak": {
+        "scenario": "You are sharing your goals and future plans with a language teacher.",
+        "turns": [
+          {
+            "speaker": "them",
+            "arabic": "إيش بدك تعمل؟",
+            "romanization": "ʾēš biddak tʕamal",
+            "english": "What do you want to do?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "بِدّي أَتعَلَّم عربي!",
+            "romanization": "biddi ʾataʕallam ʕarabi",
+            "english": "I want to learn Arabic!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وبدك تروح فلسطين؟",
+            "romanization": "w-biddak trūḥ Filasṭīn",
+            "english": "And do you want to go to Palestine?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "بِدّي أَروح كتير!",
+            "romanization": "biddi ʾarūḥ ktīr",
+            "english": "I really want to go!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وبدك تشوف إيش؟",
+            "romanization": "w-biddak tšūf ʾēš",
+            "english": "And what do you want to see?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "بِدّي أَشوف القدس!",
+            "romanization": "biddi ʾašūf il-ʾuds",
+            "english": "I want to see Jerusalem!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "شو محتاج لهيك رحلة؟",
+            "romanization": "šū muḥtāj l-hēk riḥla",
+            "english": "What do you need for such a trip?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "مُحتاج عربي!",
+            "romanization": "muḥtāj ʕarabi",
+            "english": "I need Arabic!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وشو رح تكون بعد سنة؟",
+            "romanization": "w-šū raḥ tkūn baʕd sane",
+            "english": "And what will you be after a year?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "رَح أَكون شاطر!",
+            "romanization": "raḥ ʾakūn šāṭir",
+            "english": "I will be skillful!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "إن شاء الله بتنجح!",
+            "romanization": "ʾin šā llāh btunjaḥ",
+            "english": "God willing you'll succeed!"
+          },
+          {
+            "speaker": "you",
+            "arabic": "إِن شا الله!",
+            "romanization": "ʾin šā llāh",
+            "english": "God willing!"
+          }
+        ]
+      },
+      "review": {
+        "all_vocab": [
+          { "arabic": "رَح أَروح", "transcription": "raH a-RŪH", "romanization": "raḥ ʾarūḥ", "english": "I will go" },
+          { "arabic": "رَح آكُل", "transcription": "raH Ā-kul", "romanization": "raḥ ʾākul", "english": "I will eat" },
+          { "arabic": "رَح أَشتَغِل", "transcription": "raH ash-ta-GIL", "romanization": "raḥ ʾaštagil", "english": "I will work" },
+          { "arabic": "رَح أَحكي", "transcription": "raH ah-KI", "romanization": "raḥ ʾaḥki", "english": "I will speak" },
+          { "arabic": "رَح أَجي", "transcription": "raH a-JĒ", "romanization": "raḥ ʾajī", "english": "I will come" },
+          { "arabic": "مَتى؟", "transcription": "MA-ta", "romanization": "matā", "english": "when?" },
+          { "arabic": "بِدّي أَروح", "transcription": "BID-di a-RŪH", "romanization": "biddi ʾarūḥ", "english": "I want to go" },
+          { "arabic": "بِدّي أَتعَلَّم", "transcription": "BID-di at-al-LAM", "romanization": "biddi ʾataʕallam", "english": "I want to learn" },
+          { "arabic": "بِدّي أَشوف", "transcription": "BID-di a-SHŪF", "romanization": "biddi ʾašūf", "english": "I want to see" },
+          { "arabic": "مُحتاج", "transcription": "muh-TĀJ", "romanization": "muḥtāj", "english": "I need / in need" },
+          { "arabic": "رَح أَكون", "transcription": "raH a-KŪN", "romanization": "raḥ ʾakūn", "english": "I will be" },
+          { "arabic": "إِن شا الله", "transcription": "in-SHA-LAH", "romanization": "ʾin šā llāh", "english": "God willing" }
+        ]
+      }
+    }
+  ]
+}

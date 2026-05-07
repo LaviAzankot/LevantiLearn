@@ -1,0 +1,415 @@
+{
+  "topic": "Palestinian Idioms & Expressions",
+  "cycles": [
+    {
+      "cycle": 1,
+      "vocab": [
+        {
+          "arabic": "يِسلَموا إيديك",
+          "transcription": "yis-LA-mu ĒD-ik",
+          "romanization": "yislamu ʾīdīk",
+          "english": "bless your hands (thank you for your work)",
+          "note": "lit. 'may your hands be saved'; said after someone does work for you or makes food",
+          "icon": "solar:hand-linear",
+          "icon_color": "#fe4d01"
+        },
+        {
+          "arabic": "ما شاء الله",
+          "transcription": "mā-SHĀL-lah",
+          "romanization": "māšāllāh",
+          "english": "Masha'Allah (expression of admiration)",
+          "note": "lit. 'what God wills'; said to praise and protect from evil eye; very frequent",
+          "icon": "solar:star-shine-linear",
+          "icon_color": "#ff9f0a"
+        },
+        {
+          "arabic": "عَ راسي",
+          "transcription": "a-RĀ-si",
+          "romanization": "ʕa rāsi",
+          "english": "with pleasure / on my head",
+          "note": "lit. 'on my head'; used to accept an honor or request; عا راسي وعينيه = absolutely",
+          "icon": "solar:user-rounded-linear",
+          "icon_color": "#5856d6"
+        },
+        {
+          "arabic": "الله يعطيك العافية",
+          "transcription": "AL-lah yi-TĒ-ak il-A-fi-ye",
+          "romanization": "allāh yʕṭīk il-ʕāfiye",
+          "english": "God give you health (thank you)",
+          "note": "said to someone who has worked hard; reply: الله يعافيك (God grant you health)",
+          "icon": "solar:heart-linear",
+          "icon_color": "#34c759"
+        },
+        {
+          "arabic": "زَيّ الفُل",
+          "transcription": "zay il-FULL",
+          "romanization": "zayy il-full",
+          "english": "doing great / like jasmine",
+          "note": "lit. 'like jasmine flowers'; expression of being excellent or things going perfectly",
+          "icon": "solar:flower-linear",
+          "icon_color": "#ff2d55"
+        },
+        {
+          "arabic": "ما في مِنَّك",
+          "transcription": "mā FĪ MIN-nak",
+          "romanization": "mā fī minnak",
+          "english": "there's none like you (you're the best)",
+          "note": "lit. 'there is none from you'; high praise in Palestinian culture",
+          "icon": "solar:star-shine-linear",
+          "icon_color": "#ff9f0a"
+        }
+      ],
+      "quiz": [
+        {
+          "arabic": "يِسلَموا إيديك",
+          "transcription": "yis-LA-mu ĒD-ik",
+          "romanization": "yislamu ʾīdīk",
+          "options": ["goodbye", "bless your hands", "good morning", "well done"],
+          "answer": 1
+        },
+        {
+          "arabic": "ما شاء الله",
+          "transcription": "mā-SHĀL-lah",
+          "romanization": "māšāllāh",
+          "options": ["thank God", "God willing", "admiration expression", "praise God"],
+          "answer": 2
+        },
+        {
+          "arabic": "عَ راسي",
+          "transcription": "a-RĀ-si",
+          "romanization": "ʕa rāsi",
+          "options": ["over my head", "with great pleasure", "on my shoulders", "at my expense"],
+          "answer": 1
+        },
+        {
+          "arabic": "الله يعطيك العافية",
+          "transcription": "AL-lah yi-TĒ-ak il-A-fi-ye",
+          "romanization": "allāh yʕṭīk il-ʕāfiye",
+          "options": ["God protect you", "God give you health", "God bless you", "God guide you"],
+          "answer": 1
+        },
+        {
+          "arabic": "زَيّ الفُل",
+          "transcription": "zay il-FULL",
+          "romanization": "zayy il-full",
+          "options": ["like a flower", "doing great / excellent", "like jasmine", "beautiful like"],
+          "answer": 1
+        },
+        {
+          "arabic": "ما في مِنَّك",
+          "transcription": "mā FĪ MIN-nak",
+          "romanization": "mā fī minnak",
+          "options": ["nobody beats you", "you are something", "there's none like you", "you are great"],
+          "answer": 2
+        }
+      ],
+      "build": [
+        {
+          "sentence": ["ما شاء الله", "زَيّ الفُل"],
+          "decoys": ["يِسلَموا إيديك", "عَ راسي", "ما في مِنَّك"],
+          "english": "Masha'Allah — doing great"
+        },
+        {
+          "sentence": ["الله يعطيك العافية", "يِسلَموا إيديك"],
+          "decoys": ["زَيّ الفُل", "ما شاء الله", "عَ راسي"],
+          "english": "God give you health — bless your hands"
+        },
+        {
+          "sentence": ["عَ راسي", "ما في مِنَّك"],
+          "decoys": ["الله يعطيك العافية", "زَيّ الفُل", "يِسلَموا إيديك"],
+          "english": "With pleasure — there's none like you"
+        }
+      ],
+      "speak": {
+        "scenario": "A host has cooked a feast and you are complimenting them.",
+        "turns": [
+          {
+            "speaker": "them",
+            "arabic": "أهلاً وسهلاً، تفضلوا!",
+            "romanization": "ʾahlan wa-sahlan, tafaḍḍalū",
+            "english": "Welcome, please come in!"
+          },
+          {
+            "speaker": "you",
+            "arabic": "ما شاء الله!",
+            "romanization": "māšāllāh",
+            "english": "Masha'Allah!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "كل وإنبسط!",
+            "romanization": "kul w-inbasiṭ",
+            "english": "Eat and enjoy!"
+          },
+          {
+            "speaker": "you",
+            "arabic": "يِسلَموا إيديك!",
+            "romanization": "yislamu ʾīdīk",
+            "english": "Bless your hands!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "تسلم!",
+            "romanization": "tislam",
+            "english": "Thank you!"
+          },
+          {
+            "speaker": "you",
+            "arabic": "الله يعطيك العافية!",
+            "romanization": "allāh yʕṭīk il-ʕāfiye",
+            "english": "God give you health!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "كيف الطعام؟",
+            "romanization": "kēf iṭ-ṭaʕām",
+            "english": "How's the food?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "زَيّ الفُل!",
+            "romanization": "zayy il-full",
+            "english": "Excellent!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وعلى خاطرك كل شي؟",
+            "romanization": "w-ʕala ḫāṭrak kull šī",
+            "english": "Everything to your liking?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "عَ راسي كله!",
+            "romanization": "ʕa rāsi kullu",
+            "english": "All with great pleasure!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "شكراً لمجيئك!",
+            "romanization": "šukran li-majīʾak",
+            "english": "Thank you for coming!"
+          },
+          {
+            "speaker": "you",
+            "arabic": "ما في مِنَّك!",
+            "romanization": "mā fī minnak",
+            "english": "There's none like you!"
+          }
+        ]
+      }
+    },
+    {
+      "cycle": 2,
+      "vocab": [
+        {
+          "arabic": "كُلّ عام وإِنتو بِخير",
+          "transcription": "kull AM w-IN-tu bi-KHĒR",
+          "romanization": "kull ʕām w-intu b-ḫēr",
+          "english": "Happy holidays / every year may you be well",
+          "note": "standard holiday greeting; reply: وإنتو بخير (w-intu b-ḫēr) or وأنت بخير",
+          "icon": "solar:star-shine-linear",
+          "icon_color": "#ff9f0a"
+        },
+        {
+          "arabic": "إِيدَك أَطوَل",
+          "transcription": "ĒD-ak AT-wal",
+          "romanization": "ʾīdak ʾaṭwal",
+          "english": "may your hand be long (you're generous)",
+          "note": "said to someone generous; lit. 'your hand is longer' = you're more generous",
+          "icon": "solar:hand-linear",
+          "icon_color": "#fe4d01"
+        },
+        {
+          "arabic": "رَبِّنا يِسَتُر",
+          "transcription": "RAB-bi-na yi-SA-tur",
+          "romanization": "rabbina yisatur",
+          "english": "God protect us",
+          "note": "said when worried or as protection from bad news; lit. 'Our Lord cover/shield us'",
+          "icon": "solar:shield-check-linear",
+          "icon_color": "#5856d6"
+        },
+        {
+          "arabic": "على مهلَك",
+          "transcription": "a-LA MAH-lak",
+          "romanization": "ʕala mahlak",
+          "english": "take it easy / slowly",
+          "note": "lit. 'at your leisure'; used to ask someone to slow down or relax",
+          "icon": "solar:sleep-linear",
+          "icon_color": "#34c759"
+        },
+        {
+          "arabic": "اِتعَلَّمت مَعَك",
+          "transcription": "it-AL-lamt MA-ak",
+          "romanization": "itʕallamat maʕak",
+          "english": "I learned from you",
+          "note": "Form V past + معك; compliment meaning 'you taught me / I learned from being with you'",
+          "icon": "solar:graduation-cap-linear",
+          "icon_color": "#007aff"
+        },
+        {
+          "arabic": "بالعافية",
+          "transcription": "bil-A-fi-ye",
+          "romanization": "bil-ʕāfiye",
+          "english": "enjoy it / bon appétit",
+          "note": "said to someone eating, bathing, or after any physical activity; lit. 'with health'",
+          "icon": "solar:smile-circle-linear",
+          "icon_color": "#ff2d55"
+        }
+      ],
+      "quiz": [
+        {
+          "arabic": "كُلّ عام وإِنتو بِخير",
+          "transcription": "kull AM w-IN-tu bi-KHĒR",
+          "romanization": "kull ʕām w-intu b-ḫēr",
+          "options": ["goodbye", "good morning", "happy holidays / every year well", "congratulations"],
+          "answer": 2
+        },
+        {
+          "arabic": "إِيدَك أَطوَل",
+          "transcription": "ĒD-ak AT-wal",
+          "romanization": "ʾīdak ʾaṭwal",
+          "options": ["you have long arms", "you are generous", "your reach is far", "bless your hands"],
+          "answer": 1
+        },
+        {
+          "arabic": "رَبِّنا يِسَتُر",
+          "transcription": "RAB-bi-na yi-SA-tur",
+          "romanization": "rabbina yisatur",
+          "options": ["God guide us", "God forgive us", "God protect us", "God help us"],
+          "answer": 2
+        },
+        {
+          "arabic": "على مهلَك",
+          "transcription": "a-LA MAH-lak",
+          "romanization": "ʕala mahlak",
+          "options": ["hurry up", "be careful", "take it easy", "pay attention"],
+          "answer": 2
+        },
+        {
+          "arabic": "اِتعَلَّمت مَعَك",
+          "transcription": "it-AL-lamt MA-ak",
+          "romanization": "itʕallamat maʕak",
+          "options": ["we studied together", "I taught you", "you taught me", "I learned from you"],
+          "answer": 3
+        },
+        {
+          "arabic": "بالعافية",
+          "transcription": "bil-A-fi-ye",
+          "romanization": "bil-ʕāfiye",
+          "options": ["goodbye", "enjoy it / bon appétit", "thank you", "please"],
+          "answer": 1
+        }
+      ],
+      "build": [
+        {
+          "sentence": ["كُلّ عام وإِنتو بِخير", "بالعافية"],
+          "decoys": ["رَبِّنا يِسَتُر", "على مهلَك", "إِيدَك أَطوَل"],
+          "english": "Happy holidays — enjoy it"
+        },
+        {
+          "sentence": ["إِيدَك أَطوَل", "اِتعَلَّمت مَعَك"],
+          "decoys": ["على مهلَك", "رَبِّنا يِسَتُر", "بالعافية"],
+          "english": "You're generous — I learned from you"
+        },
+        {
+          "sentence": ["رَبِّنا يِسَتُر", "على مهلَك"],
+          "decoys": ["اِتعَلَّمت مَعَك", "كُلّ عام وإِنتو بِخير", "إِيدَك أَطوَل"],
+          "english": "God protect us — take it easy"
+        }
+      ],
+      "speak": {
+        "scenario": "You are celebrating Eid with a Palestinian family.",
+        "turns": [
+          {
+            "speaker": "them",
+            "arabic": "عيد مبارك!",
+            "romanization": "ʕīd mubārak",
+            "english": "Blessed Eid!"
+          },
+          {
+            "speaker": "you",
+            "arabic": "كُلّ عام وإِنتو بِخير!",
+            "romanization": "kull ʕām w-intu b-ḫēr",
+            "english": "Happy holidays!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "تفضل، اتفطر معنا",
+            "romanization": "tafaḍḍal, itfaṭṭar maʕna",
+            "english": "Please, have breakfast with us"
+          },
+          {
+            "speaker": "you",
+            "arabic": "بالعافية!",
+            "romanization": "bil-ʕāfiye",
+            "english": "Enjoy it!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وكرمك أكتر!",
+            "romanization": "w-karmak ʾaktar",
+            "english": "And you're even more generous!"
+          },
+          {
+            "speaker": "you",
+            "arabic": "إِيدَك أَطوَل!",
+            "romanization": "ʾīdak ʾaṭwal",
+            "english": "You're the generous one!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "ربنا يستر، في أخبار صعبة",
+            "romanization": "rabbina yisatur, fī ʾaḫbār ṣaʕbe",
+            "english": "God protect us, there's difficult news"
+          },
+          {
+            "speaker": "you",
+            "arabic": "رَبِّنا يِسَتُر!",
+            "romanization": "rabbina yisatur",
+            "english": "God protect us!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "على مهلك، خبرني بعدين",
+            "romanization": "ʕala mahlak, ḫabberni baʕdēn",
+            "english": "Take it easy, tell me later"
+          },
+          {
+            "speaker": "you",
+            "arabic": "على مهلَك أنت!",
+            "romanization": "ʕala mahlak ʾinta",
+            "english": "You take it easy!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "تعلمنا كتير منك",
+            "romanization": "taʕallimna ktīr minnak",
+            "english": "We learned a lot from you"
+          },
+          {
+            "speaker": "you",
+            "arabic": "اِتعَلَّمت مِنكم!",
+            "romanization": "itʕallamat minkum",
+            "english": "I learned from all of you!"
+          }
+        ]
+      },
+      "review": {
+        "all_vocab": [
+          { "arabic": "يِسلَموا إيديك", "transcription": "yis-LA-mu ĒD-ik", "romanization": "yislamu ʾīdīk", "english": "bless your hands" },
+          { "arabic": "ما شاء الله", "transcription": "mā-SHĀL-lah", "romanization": "māšāllāh", "english": "Masha'Allah" },
+          { "arabic": "عَ راسي", "transcription": "a-RĀ-si", "romanization": "ʕa rāsi", "english": "with pleasure" },
+          { "arabic": "الله يعطيك العافية", "transcription": "AL-lah yi-TĒ-ak il-A-fi-ye", "romanization": "allāh yʕṭīk il-ʕāfiye", "english": "God give you health" },
+          { "arabic": "زَيّ الفُل", "transcription": "zay il-FULL", "romanization": "zayy il-full", "english": "doing great" },
+          { "arabic": "ما في مِنَّك", "transcription": "mā FĪ MIN-nak", "romanization": "mā fī minnak", "english": "there's none like you" },
+          { "arabic": "كُلّ عام وإِنتو بِخير", "transcription": "kull AM w-IN-tu bi-KHĒR", "romanization": "kull ʕām w-intu b-ḫēr", "english": "happy holidays" },
+          { "arabic": "إِيدَك أَطوَل", "transcription": "ĒD-ak AT-wal", "romanization": "ʾīdak ʾaṭwal", "english": "you're generous" },
+          { "arabic": "رَبِّنا يِسَتُر", "transcription": "RAB-bi-na yi-SA-tur", "romanization": "rabbina yisatur", "english": "God protect us" },
+          { "arabic": "على مهلَك", "transcription": "a-LA MAH-lak", "romanization": "ʕala mahlak", "english": "take it easy" },
+          { "arabic": "اِتعَلَّمت مَعَك", "transcription": "it-AL-lamt MA-ak", "romanization": "itʕallamat maʕak", "english": "I learned from you" },
+          { "arabic": "بالعافية", "transcription": "bil-A-fi-ye", "romanization": "bil-ʕāfiye", "english": "enjoy it / bon appétit" }
+        ]
+      }
+    }
+  ]
+}

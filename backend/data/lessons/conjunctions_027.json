@@ -1,0 +1,415 @@
+{
+  "topic": "Conjunctions & Linking",
+  "cycles": [
+    {
+      "cycle": 1,
+      "vocab": [
+        {
+          "arabic": "لِأَنَّه",
+          "transcription": "li-ANN-u",
+          "romanization": "liʾannu",
+          "english": "because",
+          "note": "subordinating conjunction; لأنه بدي = because I want; connects reason to main clause",
+          "icon": "solar:link-circle-linear",
+          "icon_color": "#5856d6"
+        },
+        {
+          "arabic": "عَشان",
+          "transcription": "a-SHAN",
+          "romanization": "ʕašān",
+          "english": "in order to / because",
+          "note": "Palestinian/Levantine colloquial; عشان أروح = in order to go; عشان كده = because of that",
+          "icon": "solar:arrow-right-linear",
+          "icon_color": "#007aff"
+        },
+        {
+          "arabic": "بَس",
+          "transcription": "BAS",
+          "romanization": "bas",
+          "english": "but / only / enough",
+          "note": "extremely versatile; بس = but; بس هيك = just like that; بس! = enough! all same word",
+          "icon": "solar:close-square-linear",
+          "icon_color": "#ff9f0a"
+        },
+        {
+          "arabic": "وبَعدَين",
+          "transcription": "w-BAD-ēn",
+          "romanization": "w-baʕdēn",
+          "english": "and then / afterwards",
+          "note": "و (and) + بعدين (afterwards); used to sequence events in narration",
+          "icon": "solar:arrow-right-down-linear",
+          "icon_color": "#34c759"
+        },
+        {
+          "arabic": "لَمّا",
+          "transcription": "LAM-ma",
+          "romanization": "lamma",
+          "english": "when (in past/future)",
+          "note": "temporal conjunction; لما رحت = when I went; لما تيجي = when you come",
+          "icon": "solar:clock-circle-linear",
+          "icon_color": "#ff9f0a"
+        },
+        {
+          "arabic": "بَسَبَب",
+          "transcription": "bi-sa-BAB",
+          "romanization": "bi-sabab",
+          "english": "because of",
+          "note": "preposition; بسبب الزحمة = because of the traffic; بسبب هاد = because of this",
+          "icon": "solar:danger-triangle-linear",
+          "icon_color": "#ff3b30"
+        }
+      ],
+      "quiz": [
+        {
+          "arabic": "لِأَنَّه",
+          "transcription": "li-ANN-u",
+          "romanization": "liʾannu",
+          "options": ["although", "if", "because", "when"],
+          "answer": 2
+        },
+        {
+          "arabic": "عَشان",
+          "transcription": "a-SHAN",
+          "romanization": "ʕašān",
+          "options": ["although", "but", "in order to / because", "unless"],
+          "answer": 2
+        },
+        {
+          "arabic": "بَس",
+          "transcription": "BAS",
+          "romanization": "bas",
+          "options": ["and", "so", "because", "but / only"],
+          "answer": 3
+        },
+        {
+          "arabic": "وبَعدَين",
+          "transcription": "w-BAD-ēn",
+          "romanization": "w-baʕdēn",
+          "options": ["before that", "meanwhile", "and then", "although"],
+          "answer": 2
+        },
+        {
+          "arabic": "لَمّا",
+          "transcription": "LAM-ma",
+          "romanization": "lamma",
+          "options": ["if", "when", "because", "although"],
+          "answer": 1
+        },
+        {
+          "arabic": "بَسَبَب",
+          "transcription": "bi-sa-BAB",
+          "romanization": "bi-sabab",
+          "options": ["despite", "in front of", "because of", "behind"],
+          "answer": 2
+        }
+      ],
+      "build": [
+        {
+          "sentence": ["رُحت", "لِأَنَّه", "بِدّي"],
+          "decoys": ["بَس", "لَمّا", "عَشان"],
+          "english": "I went because I wanted"
+        },
+        {
+          "sentence": ["عَشان", "أَتعَلَّم", "لَمّا"],
+          "decoys": ["بَسَبَب", "وبَعدَين", "بَس"],
+          "english": "In order to learn — when"
+        },
+        {
+          "sentence": ["وبَعدَين", "بَس", "رَجَعت"],
+          "decoys": ["لِأَنَّه", "لَمّا", "بَسَبَب"],
+          "english": "And then, but, I came back"
+        }
+      ],
+      "speak": {
+        "scenario": "You are explaining why you were late to a meeting.",
+        "turns": [
+          {
+            "speaker": "them",
+            "arabic": "ليش تأخرت؟",
+            "romanization": "lēš taʾaḫḫart",
+            "english": "Why were you late?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "لِأَنَّه في زحمة!",
+            "romanization": "liʾannu fī zaḥme",
+            "english": "Because there's traffic!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وليش ما أخذت تاكسي؟",
+            "romanization": "w-lēš mā ʾaḫazt taksi",
+            "english": "And why didn't you take a taxi?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "عَشان أَوَفِّر!",
+            "romanization": "ʕašān ʾawaffir",
+            "english": "In order to save money!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وبعدين؟",
+            "romanization": "w-baʕdēn",
+            "english": "And then?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "وبَعدَين مشيت!",
+            "romanization": "w-baʕdēn mašīt",
+            "english": "And then I walked!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "بس وصلت؟",
+            "romanization": "bas waṣalt",
+            "english": "But you arrived?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "بَس تأخرت!",
+            "romanization": "bas taʾaḫḫart",
+            "english": "But I was late!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "لما تيجي بكرا؟",
+            "romanization": "lamma tijī bukra",
+            "english": "When you come tomorrow?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "لَمّا أصحى بدري!",
+            "romanization": "lamma ʾaṣḥa badri",
+            "english": "When I wake up early!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وبسبب إيش كل هاد؟",
+            "romanization": "w-bi-sabab ʾēš kull hād",
+            "english": "And because of what all this?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "بَسَبَب الزحمة!",
+            "romanization": "bi-sabab iz-zaḥme",
+            "english": "Because of the traffic!"
+          }
+        ]
+      }
+    },
+    {
+      "cycle": 2,
+      "vocab": [
+        {
+          "arabic": "إِذا",
+          "transcription": "I-za",
+          "romanization": "ʾiza",
+          "english": "if",
+          "note": "conditional conjunction; إذا رحت = if you go; إذا بدك = if you want",
+          "icon": "solar:question-circle-linear",
+          "icon_color": "#5856d6"
+        },
+        {
+          "arabic": "وإِلّا",
+          "transcription": "w-IL-la",
+          "romanization": "w-ʾilla",
+          "english": "otherwise / or else",
+          "note": "و + إلا; used after a condition: اعمل هيك وإلا بتخسر = do this or else you'll lose",
+          "icon": "solar:danger-triangle-linear",
+          "icon_color": "#ff3b30"
+        },
+        {
+          "arabic": "مَع إِنَّه",
+          "transcription": "maʕ IN-nu",
+          "romanization": "maʕ ʾinnu",
+          "english": "although / even though",
+          "note": "lit. 'with that'; مع إنه صعب = although it's difficult; concessive conjunction",
+          "icon": "solar:arrows-right-down-linear",
+          "icon_color": "#6e6e73"
+        },
+        {
+          "arabic": "رَغم إِنَّه",
+          "transcription": "RAGHM IN-nu",
+          "romanization": "raġm ʾinnu",
+          "english": "despite the fact that",
+          "note": "stronger than مع إنه; رغم إنه تعبان = despite being tired",
+          "icon": "solar:shield-warning-linear",
+          "icon_color": "#ff9f0a"
+        },
+        {
+          "arabic": "يَعني",
+          "transcription": "YAA-ni",
+          "romanization": "yaʕni",
+          "english": "meaning / I mean / like",
+          "note": "ubiquitous filler/connector; يعني = 'I mean', 'that is', 'so to speak'; used constantly in Palestinian speech",
+          "icon": "solar:chat-round-dots-linear",
+          "icon_color": "#007aff"
+        },
+        {
+          "arabic": "طَيَّب",
+          "transcription": "TAY-yab",
+          "romanization": "ṭayyab",
+          "english": "okay / alright (connector)",
+          "note": "used as a discourse connector to acknowledge and move on; طيب وبعدين؟ = okay and then?",
+          "icon": "solar:check-circle-linear",
+          "icon_color": "#34c759"
+        }
+      ],
+      "quiz": [
+        {
+          "arabic": "إِذا",
+          "transcription": "I-za",
+          "romanization": "ʾiza",
+          "options": ["when", "because", "if", "although"],
+          "answer": 2
+        },
+        {
+          "arabic": "وإِلّا",
+          "transcription": "w-IL-la",
+          "romanization": "w-ʾilla",
+          "options": ["and then", "because", "otherwise / or else", "although"],
+          "answer": 2
+        },
+        {
+          "arabic": "مَع إِنَّه",
+          "transcription": "maʕ IN-nu",
+          "romanization": "maʕ ʾinnu",
+          "options": ["because of", "if", "otherwise", "although / even though"],
+          "answer": 3
+        },
+        {
+          "arabic": "رَغم إِنَّه",
+          "transcription": "RAGHM IN-nu",
+          "romanization": "raġm ʾinnu",
+          "options": ["because", "when", "despite the fact that", "in order to"],
+          "answer": 2
+        },
+        {
+          "arabic": "يَعني",
+          "transcription": "YAA-ni",
+          "romanization": "yaʕni",
+          "options": ["maybe", "never", "meaning / I mean", "always"],
+          "answer": 2
+        },
+        {
+          "arabic": "طَيَّب",
+          "transcription": "TAY-yab",
+          "romanization": "ṭayyab",
+          "options": ["no", "maybe", "never", "okay / alright"],
+          "answer": 3
+        }
+      ],
+      "build": [
+        {
+          "sentence": ["إِذا", "رُحت", "وإِلّا"],
+          "decoys": ["يَعني", "طَيَّب", "رَغم إِنَّه"],
+          "english": "If you go, otherwise"
+        },
+        {
+          "sentence": ["مَع إِنَّه", "صَعب", "رَغم إِنَّه"],
+          "decoys": ["إِذا", "يَعني", "وإِلّا"],
+          "english": "Although it's hard, despite"
+        },
+        {
+          "sentence": ["طَيَّب", "يَعني", "أَكيد"],
+          "decoys": ["مَع إِنَّه", "رَغم إِنَّه", "إِذا"],
+          "english": "Okay, I mean, definitely"
+        }
+      ],
+      "speak": {
+        "scenario": "You are giving advice to a friend considering a new job.",
+        "turns": [
+          {
+            "speaker": "them",
+            "arabic": "إيش بنصحني؟",
+            "romanization": "ʾēš btuṣḥni",
+            "english": "What do you advise me?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "إِذا بتحب الشغل، روح!",
+            "romanization": "ʾiza btḥibb iš-šuġl, rūḥ",
+            "english": "If you like the work, go!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وإلا شو؟",
+            "romanization": "w-ʾilla šū",
+            "english": "Otherwise what?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "وإِلّا ابحث عن غيره!",
+            "romanization": "w-ʾilla ibḥat ʕan ġēru",
+            "english": "Otherwise look for another one!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "مع إنه الراتب كويس",
+            "romanization": "maʕ ʾinnu ir-rātib kuwayyes",
+            "english": "Although the salary is good"
+          },
+          {
+            "speaker": "you",
+            "arabic": "مَع إِنَّه كويس، بس!",
+            "romanization": "maʕ ʾinnu kuwayyes, bas",
+            "english": "Although it's good, still!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "ورغم إنه بعيد؟",
+            "romanization": "w-raġm ʾinnu baʕīd",
+            "english": "And despite it being far?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "رَغم إِنَّه بعيد!",
+            "romanization": "raġm ʾinnu baʕīd",
+            "english": "Despite being far!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "يعني شو بتقول؟",
+            "romanization": "yaʕni šū btʾūl",
+            "english": "I mean what are you saying?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "يَعني جرب!",
+            "romanization": "yaʕni jarrib",
+            "english": "I mean, try it!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "طيب اتفقنا؟",
+            "romanization": "ṭayyab ittafaʾna",
+            "english": "Okay agreed?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "طَيَّب!",
+            "romanization": "ṭayyab",
+            "english": "Okay!"
+          }
+        ]
+      },
+      "review": {
+        "all_vocab": [
+          { "arabic": "لِأَنَّه", "transcription": "li-ANN-u", "romanization": "liʾannu", "english": "because" },
+          { "arabic": "عَشان", "transcription": "a-SHAN", "romanization": "ʕašān", "english": "in order to / because" },
+          { "arabic": "بَس", "transcription": "BAS", "romanization": "bas", "english": "but / only" },
+          { "arabic": "وبَعدَين", "transcription": "w-BAD-ēn", "romanization": "w-baʕdēn", "english": "and then" },
+          { "arabic": "لَمّا", "transcription": "LAM-ma", "romanization": "lamma", "english": "when" },
+          { "arabic": "بَسَبَب", "transcription": "bi-sa-BAB", "romanization": "bi-sabab", "english": "because of" },
+          { "arabic": "إِذا", "transcription": "I-za", "romanization": "ʾiza", "english": "if" },
+          { "arabic": "وإِلّا", "transcription": "w-IL-la", "romanization": "w-ʾilla", "english": "otherwise / or else" },
+          { "arabic": "مَع إِنَّه", "transcription": "maʕ IN-nu", "romanization": "maʕ ʾinnu", "english": "although / even though" },
+          { "arabic": "رَغم إِنَّه", "transcription": "RAGHM IN-nu", "romanization": "raġm ʾinnu", "english": "despite the fact that" },
+          { "arabic": "يَعني", "transcription": "YAA-ni", "romanization": "yaʕni", "english": "meaning / I mean" },
+          { "arabic": "طَيَّب", "transcription": "TAY-yab", "romanization": "ṭayyab", "english": "okay / alright" }
+        ]
+      }
+    }
+  ]
+}

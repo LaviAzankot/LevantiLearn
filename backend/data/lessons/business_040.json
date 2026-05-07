@@ -1,0 +1,416 @@
+{
+  "topic": "Business & Negotiation",
+  "cycles": [
+    {
+      "cycle": 1,
+      "vocab": [
+        {
+          "arabic": "عَرض",
+          "transcription": "ARD",
+          "romanization": "ʕarḍ",
+          "english": "offer / proposal",
+          "note": "ض is emphatic; عرض تجاري = business offer; عندي عرض = I have an offer",
+          "icon": "solar:document-add-linear",
+          "icon_color": "#007aff"
+        },
+        {
+          "arabic": "عَقد",
+          "transcription": "AʔD",
+          "romanization": "ʕaʾd",
+          "english": "contract",
+          "note": "ق → ʾ; وقّعنا العقد = we signed the contract; عقد عمل = work contract",
+          "icon": "solar:document-text-linear",
+          "icon_color": "#5856d6"
+        },
+        {
+          "arabic": "اِتِّفاق",
+          "transcription": "it-ti-FĀ'",
+          "romanization": "ittifāʾ",
+          "english": "agreement / deal",
+          "note": "ق → ʾ; وصلنا لاتفاق = we reached an agreement; اتفاق مبدئي = preliminary agreement",
+          "icon": "solar:hand-shake-linear",
+          "icon_color": "#34c759"
+        },
+        {
+          "arabic": "سِعر",
+          "transcription": "SI-ir",
+          "romanization": "siʕr",
+          "english": "price",
+          "note": "السعر النهائي = final price; سعر مناسب = suitable price; كم السعر؟ = what's the price?",
+          "icon": "solar:dollar-minimalistic-linear",
+          "icon_color": "#ff9f0a"
+        },
+        {
+          "arabic": "شُروط",
+          "transcription": "shu-RŪT",
+          "romanization": "šurūṭ",
+          "english": "conditions / terms",
+          "note": "plural of شرط; الشروط مناسبة = the terms are suitable; شروط صعبة = tough conditions",
+          "icon": "solar:list-linear",
+          "icon_color": "#fe4d01"
+        },
+        {
+          "arabic": "نَتفَق",
+          "transcription": "nit-FI'",
+          "romanization": "nitfiʾ",
+          "english": "let's agree / we agree",
+          "note": "1st person plural present/jussive; نتفق على السعر = let's agree on the price",
+          "icon": "solar:check-circle-linear",
+          "icon_color": "#34c759"
+        }
+      ],
+      "quiz": [
+        {
+          "arabic": "عَرض",
+          "transcription": "ARD",
+          "romanization": "ʕarḍ",
+          "options": ["demand", "contract", "offer / proposal", "price"],
+          "answer": 2
+        },
+        {
+          "arabic": "عَقد",
+          "transcription": "AʔD",
+          "romanization": "ʕaʾd",
+          "options": ["offer", "agreement", "price", "contract"],
+          "answer": 3
+        },
+        {
+          "arabic": "اِتِّفاق",
+          "transcription": "it-ti-FĀ'",
+          "romanization": "ittifāʾ",
+          "options": ["disagreement", "contract", "agreement / deal", "offer"],
+          "answer": 2
+        },
+        {
+          "arabic": "سِعر",
+          "transcription": "SI-ir",
+          "romanization": "siʕr",
+          "english": "price",
+          "options": ["cost", "discount", "value", "price"],
+          "answer": 3
+        },
+        {
+          "arabic": "شُروط",
+          "transcription": "shu-RŪT",
+          "romanization": "šurūṭ",
+          "options": ["rights", "prices", "conditions / terms", "offers"],
+          "answer": 2
+        },
+        {
+          "arabic": "نَتفَق",
+          "transcription": "nit-FI'",
+          "romanization": "nitfiʾ",
+          "options": ["we disagree", "let's agree", "they agree", "we must agree"],
+          "answer": 1
+        }
+      ],
+      "build": [
+        {
+          "sentence": ["عَرض", "سِعر", "مناسب"],
+          "decoys": ["عَقد", "شُروط", "اِتِّفاق"],
+          "english": "An offer with a suitable price"
+        },
+        {
+          "sentence": ["شُروط", "عَقد"],
+          "decoys": ["نَتفَق", "سِعر", "عَرض"],
+          "english": "Contract terms"
+        },
+        {
+          "sentence": ["نَتفَق", "اِتِّفاق"],
+          "decoys": ["شُروط", "عَقد", "عَرض"],
+          "english": "Let's agree — on a deal"
+        }
+      ],
+      "speak": {
+        "scenario": "You are in a business negotiation meeting.",
+        "turns": [
+          {
+            "speaker": "them",
+            "arabic": "عندنا عرض جديد",
+            "romanization": "ʕindna ʕarḍ jdīd",
+            "english": "We have a new offer"
+          },
+          {
+            "speaker": "you",
+            "arabic": "عَرض إيش؟",
+            "romanization": "ʕarḍ ʾēš",
+            "english": "What kind of offer?"
+          },
+          {
+            "speaker": "them",
+            "arabic": "السعر منيح",
+            "romanization": "is-siʕr mnīḥ",
+            "english": "The price is good"
+          },
+          {
+            "speaker": "you",
+            "arabic": "سِعر كم؟",
+            "romanization": "siʕr kam",
+            "english": "What price?"
+          },
+          {
+            "speaker": "them",
+            "arabic": "والشروط مناسبة",
+            "romanization": "w-iš-šurūṭ munāsibe",
+            "english": "And the terms are suitable"
+          },
+          {
+            "speaker": "you",
+            "arabic": "شُروط صعبة!",
+            "romanization": "šurūṭ ṣaʕbe",
+            "english": "Tough terms!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "رح نوقع العقد اليوم؟",
+            "romanization": "raḥ nūʾiʕ il-ʕaʾd il-yōm",
+            "english": "Will we sign the contract today?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "عَقد بدري!",
+            "romanization": "ʕaʾd badri",
+            "english": "Contract is too soon!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وعلى الاتفاق؟",
+            "romanization": "w-ʕal-ittifāʾ",
+            "english": "And on the agreement?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "اِتِّفاق مبدئي!",
+            "romanization": "ittifāʾ mabdaʾi",
+            "english": "Preliminary agreement!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "نتفق هلق؟",
+            "romanization": "nitfiʾ halla'",
+            "english": "Shall we agree now?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "نَتفَق بكرا!",
+            "romanization": "nitfiʾ bukra",
+            "english": "We'll agree tomorrow!"
+          }
+        ]
+      }
+    },
+    {
+      "cycle": 2,
+      "vocab": [
+        {
+          "arabic": "تَفاوَضنا",
+          "transcription": "ta-fā-WAD-na",
+          "romanization": "tafāwaḍna",
+          "english": "we negotiated",
+          "note": "past Form VI 1st person plural; تفاوضنا على السعر = we negotiated on the price",
+          "icon": "solar:chat-round-dots-linear",
+          "icon_color": "#5856d6"
+        },
+        {
+          "arabic": "مِش مُمكِن",
+          "transcription": "mish MUM-kin",
+          "romanization": "miš mumkin",
+          "english": "impossible / not possible",
+          "note": "firm rejection phrase in negotiation; مش ممكن أقبل هيك = impossible to accept this",
+          "icon": "solar:close-circle-linear",
+          "icon_color": "#ff3b30"
+        },
+        {
+          "arabic": "نَتَّفِق على",
+          "transcription": "nat-ta-FI' A-la",
+          "romanization": "nattafiʾ ʕala",
+          "english": "let's agree on",
+          "note": "Form VIII; we negotiate to agree on a specific point; نتفق على سعر = agree on a price",
+          "icon": "solar:check-circle-linear",
+          "icon_color": "#34c759"
+        },
+        {
+          "arabic": "هامِش",
+          "transcription": "HĀ-miš",
+          "romanization": "hāmiš",
+          "english": "margin / flexibility",
+          "note": "في هامش = there's room/flexibility; هامش ربح = profit margin; هامش للتفاوض = room to negotiate",
+          "icon": "solar:arrow-left-right-linear",
+          "icon_color": "#007aff"
+        },
+        {
+          "arabic": "مَصلَحة",
+          "transcription": "mas-LA-ha",
+          "romanization": "maslaḥa",
+          "english": "interest / benefit",
+          "note": "مصلحة مشتركة = shared interest; في مصلحتك = it's in your interest",
+          "icon": "solar:star-shine-linear",
+          "icon_color": "#ff9f0a"
+        },
+        {
+          "arabic": "خَسارة",
+          "transcription": "kha-SĀ-ra",
+          "romanization": "ḫasāra",
+          "english": "loss / a pity",
+          "note": "يا خسارة = what a pity / what a shame; خسارة مالية = financial loss",
+          "icon": "solar:danger-triangle-linear",
+          "icon_color": "#ff3b30"
+        }
+      ],
+      "quiz": [
+        {
+          "arabic": "تَفاوَضنا",
+          "transcription": "ta-fā-WAD-na",
+          "romanization": "tafāwaḍna",
+          "options": ["we agreed", "we disagreed", "we negotiated", "we signed"],
+          "answer": 2
+        },
+        {
+          "arabic": "مِش مُمكِن",
+          "transcription": "mish MUM-kin",
+          "romanization": "miš mumkin",
+          "options": ["maybe possible", "definitely possible", "impossible", "somewhat possible"],
+          "answer": 2
+        },
+        {
+          "arabic": "نَتَّفِق على",
+          "transcription": "nat-ta-FI' A-la",
+          "romanization": "nattafiʾ ʕala",
+          "options": ["disagree on", "discuss about", "let's agree on", "negotiate over"],
+          "answer": 2
+        },
+        {
+          "arabic": "هامِش",
+          "transcription": "HĀ-miš",
+          "romanization": "hāmiš",
+          "options": ["limit", "rule", "margin / flexibility", "condition"],
+          "answer": 2
+        },
+        {
+          "arabic": "مَصلَحة",
+          "transcription": "mas-LA-ha",
+          "romanization": "maslaḥa",
+          "options": ["loss", "rule", "interest / benefit", "problem"],
+          "answer": 2
+        },
+        {
+          "arabic": "خَسارة",
+          "transcription": "kha-SĀ-ra",
+          "romanization": "ḫasāra",
+          "options": ["profit", "gain", "value", "loss / a pity"],
+          "answer": 3
+        }
+      ],
+      "build": [
+        {
+          "sentence": ["تَفاوَضنا", "هامِش"],
+          "decoys": ["خَسارة", "مِش مُمكِن", "مَصلَحة"],
+          "english": "We negotiated a margin"
+        },
+        {
+          "sentence": ["مَصلَحة", "نَتَّفِق على"],
+          "decoys": ["تَفاوَضنا", "خَسارة", "هامِش"],
+          "english": "Mutual interest — let's agree on it"
+        },
+        {
+          "sentence": ["مِش مُمكِن", "خَسارة"],
+          "decoys": ["هامِش", "تَفاوَضنا", "نَتَّفِق على"],
+          "english": "Impossible — that's a loss"
+        }
+      ],
+      "speak": {
+        "scenario": "You are concluding a difficult negotiation.",
+        "turns": [
+          {
+            "speaker": "them",
+            "arabic": "تفاوضنا كتير هيك",
+            "romanization": "tafāwaḍna ktīr hēk",
+            "english": "We've negotiated a lot like this"
+          },
+          {
+            "speaker": "you",
+            "arabic": "تَفاوَضنا كتير!",
+            "romanization": "tafāwaḍna ktīr",
+            "english": "We've negotiated a lot!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "هاد السعر مش ممكن",
+            "romanization": "hād is-siʕr miš mumkin",
+            "english": "This price is impossible"
+          },
+          {
+            "speaker": "you",
+            "arabic": "مِش مُمكِن قبوله!",
+            "romanization": "miš mumkin ʾabūlu",
+            "english": "Impossible to accept!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "إيش تقترح؟",
+            "romanization": "ʾēš tʾtariḥ",
+            "english": "What do you propose?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "نَتَّفِق على سعر!",
+            "romanization": "nattafiʾ ʕala siʕr",
+            "english": "Let's agree on a price!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "في هامش تفاوض؟",
+            "romanization": "fī hāmiš tafāwuḍ",
+            "english": "Is there room to negotiate?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "هامِش شوي!",
+            "romanization": "hāmiš šway",
+            "english": "A little flexibility!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وإيش مصلحتك؟",
+            "romanization": "w-ʾēš maslaḥtak",
+            "english": "And what is your interest?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "مَصلَحة مشتركة!",
+            "romanization": "maslaḥa muštarake",
+            "english": "Shared interest!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "يعني الصفقة خسارة؟",
+            "romanization": "yaʕni iṣ-ṣafʾa ḫasāra",
+            "english": "So the deal is a loss?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "يا خَسارة لو ما اتفقنا!",
+            "romanization": "ya ḫasāra lo mā ttafaʾna",
+            "english": "What a pity if we didn't agree!"
+          }
+        ]
+      },
+      "review": {
+        "all_vocab": [
+          { "arabic": "عَرض", "transcription": "ARD", "romanization": "ʕarḍ", "english": "offer / proposal" },
+          { "arabic": "عَقد", "transcription": "AʔD", "romanization": "ʕaʾd", "english": "contract" },
+          { "arabic": "اِتِّفاق", "transcription": "it-ti-FĀ'", "romanization": "ittifāʾ", "english": "agreement / deal" },
+          { "arabic": "سِعر", "transcription": "SI-ir", "romanization": "siʕr", "english": "price" },
+          { "arabic": "شُروط", "transcription": "shu-RŪT", "romanization": "šurūṭ", "english": "conditions / terms" },
+          { "arabic": "نَتفَق", "transcription": "nit-FI'", "romanization": "nitfiʾ", "english": "let's agree" },
+          { "arabic": "تَفاوَضنا", "transcription": "ta-fā-WAD-na", "romanization": "tafāwaḍna", "english": "we negotiated" },
+          { "arabic": "مِش مُمكِن", "transcription": "mish MUM-kin", "romanization": "miš mumkin", "english": "impossible" },
+          { "arabic": "نَتَّفِق على", "transcription": "nat-ta-FI' A-la", "romanization": "nattafiʾ ʕala", "english": "let's agree on" },
+          { "arabic": "هامِش", "transcription": "HĀ-miš", "romanization": "hāmiš", "english": "margin / flexibility" },
+          { "arabic": "مَصلَحة", "transcription": "mas-LA-ha", "romanization": "maslaḥa", "english": "interest / benefit" },
+          { "arabic": "خَسارة", "transcription": "kha-SĀ-ra", "romanization": "ḫasāra", "english": "loss / a pity" }
+        ]
+      }
+    }
+  ]
+}

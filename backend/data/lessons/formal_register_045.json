@@ -1,0 +1,415 @@
+{
+  "topic": "Formal Speech & Register",
+  "cycles": [
+    {
+      "cycle": 1,
+      "vocab": [
+        {
+          "arabic": "أَوَدّ أَن",
+          "transcription": "a-WADD AN",
+          "romanization": "ʾawadd ʾan",
+          "english": "I would like to",
+          "note": "formal expression of desire; أود أن أقول = I would like to say; used in speeches and letters",
+          "icon": "solar:document-text-linear",
+          "icon_color": "#5856d6"
+        },
+        {
+          "arabic": "يَسعَدني",
+          "transcription": "ya-SAD-ni",
+          "romanization": "yasʕadni",
+          "english": "it pleases me / I'm glad to",
+          "note": "lit. 'it makes me happy'; يسعدني أن = I'm pleased to; formal speech opener",
+          "icon": "solar:smile-circle-linear",
+          "icon_color": "#34c759"
+        },
+        {
+          "arabic": "نَتشَرَّف",
+          "transcription": "nit-shar-RAF",
+          "romanization": "nitsharraf",
+          "english": "we are honored",
+          "note": "1st person plural Form V of شرف; نتشرف بحضوركم = we are honored by your presence",
+          "icon": "solar:star-shine-linear",
+          "icon_color": "#ff9f0a"
+        },
+        {
+          "arabic": "بِخُصوص",
+          "transcription": "bi-khu-SŪS",
+          "romanization": "bi-ḫuṣūṣ",
+          "english": "regarding / concerning",
+          "note": "بخصوص هاد الموضوع = regarding this topic; formal connector used in letters and meetings",
+          "icon": "solar:arrow-right-linear",
+          "icon_color": "#007aff"
+        },
+        {
+          "arabic": "مُتشَكِّر",
+          "transcription": "mut-shak-KIR",
+          "romanization": "mutšakkir",
+          "english": "grateful (formal)",
+          "note": "formal alternative to شكراً; أنا متشكر = I am (formally) grateful",
+          "icon": "solar:heart-shine-linear",
+          "icon_color": "#ff2d55"
+        },
+        {
+          "arabic": "تَفَضَّلوا",
+          "transcription": "ta-fad-DA-lu",
+          "romanization": "tafaḍḍalū",
+          "english": "please (formal plural invitation)",
+          "note": "plural of تفضل; تفضلوا بالدخول = please come in; said to groups in formal settings",
+          "icon": "solar:gift-linear",
+          "icon_color": "#fe4d01"
+        }
+      ],
+      "quiz": [
+        {
+          "arabic": "أَوَدّ أَن",
+          "transcription": "a-WADD AN",
+          "romanization": "ʾawadd ʾan",
+          "options": ["I must", "I can", "I would like to", "I will"],
+          "answer": 2
+        },
+        {
+          "arabic": "يَسعَدني",
+          "transcription": "ya-SAD-ni",
+          "romanization": "yasʕadni",
+          "options": ["it saddens me", "it pleases me", "I'm surprised", "I prefer"],
+          "answer": 1
+        },
+        {
+          "arabic": "نَتشَرَّف",
+          "transcription": "nit-shar-RAF",
+          "romanization": "nitsharraf",
+          "options": ["we disagree", "we participate", "we are honored", "we accept"],
+          "answer": 2
+        },
+        {
+          "arabic": "بِخُصوص",
+          "transcription": "bi-khu-SŪS",
+          "romanization": "bi-ḫuṣūṣ",
+          "options": ["because of", "instead of", "regarding / concerning", "despite"],
+          "answer": 2
+        },
+        {
+          "arabic": "مُتشَكِّر",
+          "transcription": "mut-shak-KIR",
+          "romanization": "mutšakkir",
+          "options": ["apologetic", "grateful (formal)", "respectful", "honored"],
+          "answer": 1
+        },
+        {
+          "arabic": "تَفَضَّلوا",
+          "transcription": "ta-fad-DA-lu",
+          "romanization": "tafaḍḍalū",
+          "options": ["goodbye (formal)", "please help us", "please (formal invitation)", "go ahead alone"],
+          "answer": 2
+        }
+      ],
+      "build": [
+        {
+          "sentence": ["يَسعَدني", "نَتشَرَّف"],
+          "decoys": ["مُتشَكِّر", "أَوَدّ أَن", "بِخُصوص"],
+          "english": "It pleases me — we are honored"
+        },
+        {
+          "sentence": ["بِخُصوص", "أَوَدّ أَن"],
+          "decoys": ["تَفَضَّلوا", "نَتشَرَّف", "يَسعَدني"],
+          "english": "Regarding — I would like to"
+        },
+        {
+          "sentence": ["تَفَضَّلوا", "مُتشَكِّر"],
+          "decoys": ["بِخُصوص", "يَسعَدني", "أَوَدّ أَن"],
+          "english": "Please come in — grateful"
+        }
+      ],
+      "speak": {
+        "scenario": "You are opening a formal community event as the host.",
+        "turns": [
+          {
+            "speaker": "them",
+            "arabic": "هل يمكنك أن تفتتح الحفل؟",
+            "romanization": "hal yumkinak ʾan taftatiḥ il-ḥafl",
+            "english": "Can you open the ceremony?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "يَسعَدني!",
+            "romanization": "yasʕadni",
+            "english": "It pleases me!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وكيف تبدأ؟",
+            "romanization": "w-kēf tibdaʾ",
+            "english": "And how do you start?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "أَوَدّ أَن أرحب بكم!",
+            "romanization": "ʾawadd ʾan ʾuraḥḥib bikum",
+            "english": "I would like to welcome you!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وهل نتشرف بحضوركم؟",
+            "romanization": "w-hal nitsharraf bi-ḥuḍūrikum",
+            "english": "And are we honored by your presence?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "نَتشَرَّف دايماً!",
+            "romanization": "nitsharraf dāyman",
+            "english": "We are always honored!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وبخصوص البرنامج؟",
+            "romanization": "w-bi-ḫuṣūṣ il-barnāmaj",
+            "english": "And regarding the program?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "بِخُصوص البرنامج، جاهز!",
+            "romanization": "bi-ḫuṣūṣ il-barnāmaj, jāhiz",
+            "english": "Regarding the program — ready!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وللضيوف؟",
+            "romanization": "w-liḍ-ḍuyūf",
+            "english": "And for the guests?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "تَفَضَّلوا!",
+            "romanization": "tafaḍḍalū",
+            "english": "Please come in!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وأنت؟ متشكر؟",
+            "romanization": "w-ʾinta, mutšakkir",
+            "english": "And you? Grateful?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "مُتشَكِّر جداً!",
+            "romanization": "mutšakkir jiddan",
+            "english": "Very grateful!"
+          }
+        ]
+      }
+    },
+    {
+      "cycle": 2,
+      "vocab": [
+        {
+          "arabic": "وَفقاً لِـ",
+          "transcription": "WAF-ʔan LI-",
+          "romanization": "wafʾan li-",
+          "english": "according to",
+          "note": "ق → ʾ; وفقاً للقانون = according to the law; formal/academic usage",
+          "icon": "solar:document-linear",
+          "icon_color": "#007aff"
+        },
+        {
+          "arabic": "مِن المُهِمّ",
+          "transcription": "min il-mu-HIMM",
+          "romanization": "min il-muhimm",
+          "english": "it is important that",
+          "note": "from + the important; من المهم أن نفهم = it is important that we understand",
+          "icon": "solar:shield-warning-linear",
+          "icon_color": "#ff9f0a"
+        },
+        {
+          "arabic": "أَرجو أَن",
+          "transcription": "AR-ju AN",
+          "romanization": "ʾarju ʾan",
+          "english": "I hope that / I request that",
+          "note": "أرجو (I hope/request) + أن; أرجو أن تفهم = I hope you understand; formal request",
+          "icon": "solar:star-linear",
+          "icon_color": "#5856d6"
+        },
+        {
+          "arabic": "في ضَوء",
+          "transcription": "fī DAW",
+          "romanization": "fī ḍawʾ",
+          "english": "in light of",
+          "note": "ض is emphatic; في ضوء هاد الوضع = in light of this situation; formal/academic expression",
+          "icon": "solar:sun-2-linear",
+          "icon_color": "#ff9f0a"
+        },
+        {
+          "arabic": "نَأمُل أَن",
+          "transcription": "NA-mul AN",
+          "romanization": "naʾmul ʾan",
+          "english": "we hope that",
+          "note": "1st plural of أمل + أن; used in formal letters and announcements",
+          "icon": "solar:sunrise-linear",
+          "icon_color": "#34c759"
+        },
+        {
+          "arabic": "خالِص التَّقدير",
+          "transcription": "KHĀ-lis it-taʔ-DĒR",
+          "romanization": "ḫāliṣ it-taʾdīr",
+          "english": "sincerely / with utmost respect",
+          "note": "formal letter closing; خالص التقدير والاحترام = with the utmost respect and esteem",
+          "icon": "solar:heart-shine-linear",
+          "icon_color": "#fe4d01"
+        }
+      ],
+      "quiz": [
+        {
+          "arabic": "وَفقاً لِـ",
+          "transcription": "WAF-ʔan LI-",
+          "romanization": "wafʾan li-",
+          "options": ["contrary to", "despite", "according to", "in addition to"],
+          "answer": 2
+        },
+        {
+          "arabic": "مِن المُهِمّ",
+          "transcription": "min il-mu-HIMM",
+          "romanization": "min il-muhimm",
+          "options": ["it is possible that", "it is known that", "it is important that", "it is clear that"],
+          "answer": 2
+        },
+        {
+          "arabic": "أَرجو أَن",
+          "transcription": "AR-ju AN",
+          "romanization": "ʾarju ʾan",
+          "options": ["I know that", "I think that", "I insist that", "I hope / request that"],
+          "answer": 3
+        },
+        {
+          "arabic": "في ضَوء",
+          "transcription": "fī DAW",
+          "romanization": "fī ḍawʾ",
+          "options": ["in spite of", "in front of", "in light of", "behind"],
+          "answer": 2
+        },
+        {
+          "arabic": "نَأمُل أَن",
+          "transcription": "NA-mul AN",
+          "romanization": "naʾmul ʾan",
+          "options": ["we know that", "we fear that", "we deny that", "we hope that"],
+          "answer": 3
+        },
+        {
+          "arabic": "خالِص التَّقدير",
+          "transcription": "KHĀ-lis it-taʔ-DĒR",
+          "romanization": "ḫāliṣ it-taʾdīr",
+          "options": ["best regards", "sincerely / with utmost respect", "yours faithfully", "with gratitude"],
+          "answer": 1
+        }
+      ],
+      "build": [
+        {
+          "sentence": ["وَفقاً لِـ", "مِن المُهِمّ"],
+          "decoys": ["نَأمُل أَن", "خالِص التَّقدير", "في ضَوء"],
+          "english": "According to — it is important that"
+        },
+        {
+          "sentence": ["في ضَوء", "أَرجو أَن"],
+          "decoys": ["وَفقاً لِـ", "خالِص التَّقدير", "مِن المُهِمّ"],
+          "english": "In light of — I hope that"
+        },
+        {
+          "sentence": ["نَأمُل أَن", "خالِص التَّقدير"],
+          "decoys": ["في ضَوء", "أَرجو أَن", "وَفقاً لِـ"],
+          "english": "We hope that — with utmost respect"
+        }
+      ],
+      "speak": {
+        "scenario": "You are presenting a formal report to a committee.",
+        "turns": [
+          {
+            "speaker": "them",
+            "arabic": "ابدأ تقريرك من فضلك",
+            "romanization": "ibdaʾ taʾrīrak min faḍlak",
+            "english": "Please begin your report"
+          },
+          {
+            "speaker": "you",
+            "arabic": "وَفقاً لِلبيانات!",
+            "romanization": "wafʾan lil-bayānāt",
+            "english": "According to the data!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وإيش الأهم؟",
+            "romanization": "w-ʾēš il-ʾahamm",
+            "english": "And what's most important?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "مِن المُهِمّ أن نفهم!",
+            "romanization": "min il-muhimm ʾan nifham",
+            "english": "It is important that we understand!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وفي ضوء النتائج؟",
+            "romanization": "w-fī ḍawʾ in-natāʾij",
+            "english": "And in light of the results?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "في ضَوء النتائج، واضح!",
+            "romanization": "fī ḍawʾ in-natāʾij, wāḍiḥ",
+            "english": "In light of the results — it's clear!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وماذا تطلب منا؟",
+            "romanization": "w-māḏā taṭlub minnā",
+            "english": "And what do you request from us?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "أَرجو أَن تدعموا!",
+            "romanization": "ʾarju ʾan tadʕamū",
+            "english": "I hope that you support!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "ونحن؟ إيش نأمل؟",
+            "romanization": "w-naḥnu, ʾēš naʾmul",
+            "english": "And we? What do we hope?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "نَأمُل أَن ننجح!",
+            "romanization": "naʾmul ʾan ninjaḥ",
+            "english": "We hope that we succeed!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "شكراً على تقريرك",
+            "romanization": "šukran ʕala taʾrīrak",
+            "english": "Thank you for your report"
+          },
+          {
+            "speaker": "you",
+            "arabic": "خالِص التَّقدير!",
+            "romanization": "ḫāliṣ it-taʾdīr",
+            "english": "With utmost respect!"
+          }
+        ]
+      },
+      "review": {
+        "all_vocab": [
+          { "arabic": "أَوَدّ أَن", "transcription": "a-WADD AN", "romanization": "ʾawadd ʾan", "english": "I would like to" },
+          { "arabic": "يَسعَدني", "transcription": "ya-SAD-ni", "romanization": "yasʕadni", "english": "it pleases me" },
+          { "arabic": "نَتشَرَّف", "transcription": "nit-shar-RAF", "romanization": "nitsharraf", "english": "we are honored" },
+          { "arabic": "بِخُصوص", "transcription": "bi-khu-SŪS", "romanization": "bi-ḫuṣūṣ", "english": "regarding / concerning" },
+          { "arabic": "مُتشَكِّر", "transcription": "mut-shak-KIR", "romanization": "mutšakkir", "english": "grateful (formal)" },
+          { "arabic": "تَفَضَّلوا", "transcription": "ta-fad-DA-lu", "romanization": "tafaḍḍalū", "english": "please (formal invitation)" },
+          { "arabic": "وَفقاً لِـ", "transcription": "WAF-ʔan LI-", "romanization": "wafʾan li-", "english": "according to" },
+          { "arabic": "مِن المُهِمّ", "transcription": "min il-mu-HIMM", "romanization": "min il-muhimm", "english": "it is important that" },
+          { "arabic": "أَرجو أَن", "transcription": "AR-ju AN", "romanization": "ʾarju ʾan", "english": "I hope / request that" },
+          { "arabic": "في ضَوء", "transcription": "fī DAW", "romanization": "fī ḍawʾ", "english": "in light of" },
+          { "arabic": "نَأمُل أَن", "transcription": "NA-mul AN", "romanization": "naʾmul ʾan", "english": "we hope that" },
+          { "arabic": "خالِص التَّقدير", "transcription": "KHĀ-lis it-taʔ-DĒR", "romanization": "ḫāliṣ it-taʾdīr", "english": "sincerely / with utmost respect" }
+        ]
+      }
+    }
+  ]
+}

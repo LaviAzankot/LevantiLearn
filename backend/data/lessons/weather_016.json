@@ -1,0 +1,415 @@
+{
+  "topic": "Weather & Seasons",
+  "cycles": [
+    {
+      "cycle": 1,
+      "vocab": [
+        {
+          "arabic": "حَرّ",
+          "transcription": "HARR",
+          "romanization": "ḥarr",
+          "english": "hot / heat",
+          "note": "both noun (the heat) and adjective (hot); الجو حار = the weather is hot; حرّ كتير = very hot",
+          "icon": "solar:sun-2-linear",
+          "icon_color": "#ff3b30"
+        },
+        {
+          "arabic": "بَرَد",
+          "transcription": "BA-rad",
+          "romanization": "barad",
+          "english": "cold / cold weather",
+          "note": "both noun and adjective; الجو بارد = the weather is cold; also بَرد = I have a cold",
+          "icon": "solar:snowflake-linear",
+          "icon_color": "#007aff"
+        },
+        {
+          "arabic": "شِتا",
+          "transcription": "SHI-ta",
+          "romanization": "šita",
+          "english": "winter / rain",
+          "note": "Palestinian/Levantine for winter; also means 'rain' in colloquial (شتا نازل = it's raining)",
+          "icon": "solar:cloud-rain-linear",
+          "icon_color": "#5856d6"
+        },
+        {
+          "arabic": "صَيف",
+          "transcription": "SĀF",
+          "romanization": "ṣāf",
+          "english": "summer",
+          "note": "Palestinian pronunciation has long ā vowel; بالصيف = in the summer; الصيف حار = summer is hot",
+          "icon": "solar:sun-2-linear",
+          "icon_color": "#ff9f0a"
+        },
+        {
+          "arabic": "بِتمَطَّر",
+          "transcription": "bit-mat-TAR",
+          "romanization": "bitmaṭṭar",
+          "english": "it is raining",
+          "note": "3rd person m. present; lit. 'it rains'; بتمطر كتير هالشتا = it's raining a lot this winter",
+          "icon": "solar:cloud-rain-linear",
+          "icon_color": "#007aff"
+        },
+        {
+          "arabic": "الجَوّ",
+          "transcription": "il-JAW",
+          "romanization": "il-jaww",
+          "english": "the weather",
+          "note": "الجو إيش؟ = what's the weather?; commonly used as 'weather' in Palestinian Arabic",
+          "icon": "solar:cloud-linear",
+          "icon_color": "#6e6e73"
+        }
+      ],
+      "quiz": [
+        {
+          "arabic": "حَرّ",
+          "transcription": "HARR",
+          "romanization": "ḥarr",
+          "options": ["cold", "rainy", "hot", "windy"],
+          "answer": 2
+        },
+        {
+          "arabic": "بَرَد",
+          "transcription": "BA-rad",
+          "romanization": "barad",
+          "options": ["hot", "cold", "sunny", "summer"],
+          "answer": 1
+        },
+        {
+          "arabic": "شِتا",
+          "transcription": "SHI-ta",
+          "romanization": "šita",
+          "options": ["summer", "spring", "autumn", "winter / rain"],
+          "answer": 3
+        },
+        {
+          "arabic": "صَيف",
+          "transcription": "SĀF",
+          "romanization": "ṣāf",
+          "options": ["winter", "autumn", "summer", "spring"],
+          "answer": 2
+        },
+        {
+          "arabic": "بِتمَطَّر",
+          "transcription": "bit-mat-TAR",
+          "romanization": "bitmaṭṭar",
+          "options": ["it is sunny", "it is cold", "it is windy", "it is raining"],
+          "answer": 3
+        },
+        {
+          "arabic": "الجَوّ",
+          "transcription": "il-JAW",
+          "romanization": "il-jaww",
+          "options": ["the sun", "the clouds", "the rain", "the weather"],
+          "answer": 3
+        }
+      ],
+      "build": [
+        {
+          "sentence": ["الجَوّ", "حَرّ"],
+          "decoys": ["شِتا", "بِتمَطَّر", "بَرَد"],
+          "english": "The weather is hot"
+        },
+        {
+          "sentence": ["شِتا", "بِتمَطَّر"],
+          "decoys": ["صَيف", "الجَوّ", "حَرّ"],
+          "english": "Winter — it's raining"
+        },
+        {
+          "sentence": ["صَيف", "مِش", "بَرَد"],
+          "decoys": ["الجَوّ", "شِتا", "بِتمَطَّر"],
+          "english": "Summer — not cold"
+        }
+      ],
+      "speak": {
+        "scenario": "You are chatting about the weather with a neighbor.",
+        "turns": [
+          {
+            "speaker": "them",
+            "arabic": "إيش الجو اليوم؟",
+            "romanization": "ʾēš il-jaww il-yōm",
+            "english": "What's the weather like today?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "الجَوّ حَرّ!",
+            "romanization": "il-jaww ḥarr",
+            "english": "The weather is hot!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "بالشتا كان برد",
+            "romanization": "biš-šita kān barad",
+            "english": "In winter it was cold"
+          },
+          {
+            "speaker": "you",
+            "arabic": "بَرَد كتير!",
+            "romanization": "barad ktīr",
+            "english": "Very cold!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "بتحب الشتا؟",
+            "romanization": "btḥibb iš-šita",
+            "english": "Do you like winter?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "شِتا حِلو!",
+            "romanization": "šita ḥilwu",
+            "english": "Winter is nice!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وبتمطر كتير هون؟",
+            "romanization": "w-bitmaṭṭar ktīr hōn",
+            "english": "And does it rain a lot here?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "بِتمَطَّر كتير!",
+            "romanization": "bitmaṭṭar ktīr",
+            "english": "It rains a lot!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وبالصيف؟",
+            "romanization": "w-biṣ-ṣāf",
+            "english": "And in summer?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "صَيف حَرّ!",
+            "romanization": "ṣāf ḥarr",
+            "english": "Summer is hot!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "إيش الجو المفضل عندك؟",
+            "romanization": "ʾēš il-jaww il-mufaḍḍal ʕindak",
+            "english": "What's your favorite weather?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "الجَوّ بارد!",
+            "romanization": "il-jaww bārid",
+            "english": "Cold weather!"
+          }
+        ]
+      }
+    },
+    {
+      "cycle": 2,
+      "vocab": [
+        {
+          "arabic": "رَبيع",
+          "transcription": "ra-BĒ'",
+          "romanization": "rabīʕ",
+          "english": "spring",
+          "note": "the season with flowers and moderate temperature; Palestinian spring is known for wildflowers",
+          "icon": "solar:flower-linear",
+          "icon_color": "#34c759"
+        },
+        {
+          "arabic": "خَريف",
+          "transcription": "kha-RĒF",
+          "romanization": "ḫarīf",
+          "english": "autumn / fall",
+          "note": "the harvest season; الخريف بفلسطين = autumn in Palestine brings olive harvest season",
+          "icon": "solar:leaf-linear",
+          "icon_color": "#ff9f0a"
+        },
+        {
+          "arabic": "غُيوم",
+          "transcription": "ġhu-YŪM",
+          "romanization": "ġuyūm",
+          "english": "clouds",
+          "note": "plural of غيمة (ġēme = cloud); في غيوم = there are clouds; غيوم كتير = very cloudy",
+          "icon": "solar:cloud-linear",
+          "icon_color": "#6e6e73"
+        },
+        {
+          "arabic": "شَمس",
+          "transcription": "SHAMS",
+          "romanization": "šams",
+          "english": "sun / sunshine",
+          "note": "الشمس طالعة = the sun is out; في شمس = it's sunny; شمس حارة = hot sun",
+          "icon": "solar:sun-2-linear",
+          "icon_color": "#ff9f0a"
+        },
+        {
+          "arabic": "رِيح",
+          "transcription": "RĒH",
+          "romanization": "rīḥ",
+          "english": "wind",
+          "note": "في ريح = it's windy; ريح باردة = cold wind; also can mean 'smell/odor' in other contexts",
+          "icon": "solar:wind-linear",
+          "icon_color": "#007aff"
+        },
+        {
+          "arabic": "مَعقول",
+          "transcription": "maʕ-ŪL",
+          "romanization": "maʕʾūl",
+          "english": "reasonable / acceptable (weather)",
+          "note": "general adjective meaning 'acceptable/reasonable'; الجو معقول = the weather is decent",
+          "icon": "solar:check-circle-linear",
+          "icon_color": "#34c759"
+        }
+      ],
+      "quiz": [
+        {
+          "arabic": "رَبيع",
+          "transcription": "ra-BĒ'",
+          "romanization": "rabīʕ",
+          "options": ["autumn", "winter", "summer", "spring"],
+          "answer": 3
+        },
+        {
+          "arabic": "خَريف",
+          "transcription": "kha-RĒF",
+          "romanization": "ḫarīf",
+          "options": ["spring", "summer", "autumn", "winter"],
+          "answer": 2
+        },
+        {
+          "arabic": "غُيوم",
+          "transcription": "ġhu-YŪM",
+          "romanization": "ġuyūm",
+          "options": ["sun", "rain", "wind", "clouds"],
+          "answer": 3
+        },
+        {
+          "arabic": "شَمس",
+          "transcription": "SHAMS",
+          "romanization": "šams",
+          "options": ["clouds", "rain", "wind", "sun"],
+          "answer": 3
+        },
+        {
+          "arabic": "رِيح",
+          "transcription": "RĒH",
+          "romanization": "rīḥ",
+          "options": ["rain", "sun", "wind", "snow"],
+          "answer": 2
+        },
+        {
+          "arabic": "مَعقول",
+          "transcription": "maʕ-ŪL",
+          "romanization": "maʕʾūl",
+          "options": ["terrible", "excellent", "reasonable / acceptable", "awful"],
+          "answer": 2
+        }
+      ],
+      "build": [
+        {
+          "sentence": ["رَبيع", "شَمس"],
+          "decoys": ["غُيوم", "رِيح", "خَريف"],
+          "english": "Spring sunshine"
+        },
+        {
+          "sentence": ["خَريف", "غُيوم"],
+          "decoys": ["رَبيع", "مَعقول", "شَمس"],
+          "english": "Autumn clouds"
+        },
+        {
+          "sentence": ["رِيح", "مَعقول"],
+          "decoys": ["غُيوم", "رَبيع", "شَمس"],
+          "english": "Wind — that's reasonable"
+        }
+      ],
+      "speak": {
+        "scenario": "You are planning an outdoor event and discussing the forecast.",
+        "turns": [
+          {
+            "speaker": "them",
+            "arabic": "إيش الجو بالربيع هون؟",
+            "romanization": "ʾēš il-jaww bir-rabīʕ hōn",
+            "english": "What's the weather like in spring here?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "رَبيع حِلو!",
+            "romanization": "rabīʕ ḥilwu",
+            "english": "Spring is nice!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وبالخريف؟",
+            "romanization": "w-bil-ḫarīf",
+            "english": "And in autumn?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "خَريف مُمتاز!",
+            "romanization": "ḫarīf mumtāz",
+            "english": "Autumn is excellent!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "في غيوم هاليوم؟",
+            "romanization": "fī ġuyūm hal-yōm",
+            "english": "Are there clouds today?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "غُيوم كتير!",
+            "romanization": "ġuyūm ktīr",
+            "english": "A lot of clouds!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "بس في شمس؟",
+            "romanization": "bas fī šams",
+            "english": "But is there sun?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "شَمس هلق!",
+            "romanization": "šams halla'",
+            "english": "Sun now!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "وريح؟",
+            "romanization": "w-rīḥ",
+            "english": "And wind?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "رِيح بسيطة!",
+            "romanization": "rīḥ basīṭa",
+            "english": "A little wind!"
+          },
+          {
+            "speaker": "them",
+            "arabic": "إجمالاً الجو كيف؟",
+            "romanization": "ʾijmālan il-jaww kīf",
+            "english": "Overall how is the weather?"
+          },
+          {
+            "speaker": "you",
+            "arabic": "مَعقول!",
+            "romanization": "maʕʾūl",
+            "english": "Reasonable!"
+          }
+        ]
+      },
+      "review": {
+        "all_vocab": [
+          { "arabic": "حَرّ", "transcription": "HARR", "romanization": "ḥarr", "english": "hot / heat" },
+          { "arabic": "بَرَد", "transcription": "BA-rad", "romanization": "barad", "english": "cold" },
+          { "arabic": "شِتا", "transcription": "SHI-ta", "romanization": "šita", "english": "winter / rain" },
+          { "arabic": "صَيف", "transcription": "SĀF", "romanization": "ṣāf", "english": "summer" },
+          { "arabic": "بِتمَطَّر", "transcription": "bit-mat-TAR", "romanization": "bitmaṭṭar", "english": "it is raining" },
+          { "arabic": "الجَوّ", "transcription": "il-JAW", "romanization": "il-jaww", "english": "the weather" },
+          { "arabic": "رَبيع", "transcription": "ra-BĒ'", "romanization": "rabīʕ", "english": "spring" },
+          { "arabic": "خَريف", "transcription": "kha-RĒF", "romanization": "ḫarīf", "english": "autumn / fall" },
+          { "arabic": "غُيوم", "transcription": "ġhu-YŪM", "romanization": "ġuyūm", "english": "clouds" },
+          { "arabic": "شَمس", "transcription": "SHAMS", "romanization": "šams", "english": "sun / sunshine" },
+          { "arabic": "رِيح", "transcription": "RĒH", "romanization": "rīḥ", "english": "wind" },
+          { "arabic": "مَعقول", "transcription": "maʕ-ŪL", "romanization": "maʕʾūl", "english": "reasonable / acceptable" }
+        ]
+      }
+    }
+  ]
+}
