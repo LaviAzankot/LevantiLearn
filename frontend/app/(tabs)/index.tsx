@@ -17,7 +17,7 @@ import { getAvatar } from '../../src/assets/avatars';
 
 type Lesson = {
   id: string; topic: string; topic_ar: string;
-  level: 'beginner' | 'intermediate' | 'advanced';
+  level: string;
   free: boolean; locked: boolean; order: number;
   xp_reward?: number; estimated_minutes?: number; completed?: boolean;
 };
@@ -48,26 +48,21 @@ const C = {
 
 type IoniconName = React.ComponentProps<typeof Ionicons>['name'];
 
-// ── Category definitions ───────────────────────────────────────────────────────
-type Category = {
+// ── Level groups ───────────────────────────────────────────────────────────────
+type LevelGroup = {
   id: string; title: string; description: string;
   icon: IoniconName; color: string; cardLight: string; cardDark: string;
 };
 
-const CATEGORIES: Category[] = [
-  { id: 'greetings',  title: 'Greetings',    description: 'Start every conversation the Arabic way',              icon: 'hand-right',        color: '#FF9500', cardLight: '#ffe8cc', cardDark: '#2e2010' },
-  { id: 'food',       title: 'Food & Eating', description: 'Order like a local at any restaurant or market',      icon: 'pizza',             color: '#FF6B35', cardLight: '#ffdeb8', cardDark: '#2c1e0a' },
-  { id: 'directions', title: 'Directions',   description: 'Find your way and ask for help in the streets',       icon: 'location',          color: '#E87A2F', cardLight: '#ffeedd', cardDark: '#2e2210' },
-  { id: 'shopping',   title: 'Shopping',     description: 'Bargain and buy with confidence at the souk',        icon: 'bag',               color: '#E67E22', cardLight: '#ffe4c4', cardDark: '#2d1f0c' },
-  { id: 'family',     title: 'Family',       description: 'Talk about relatives and build real connections',     icon: 'people',            color: '#D4A017', cardLight: '#ffecb3', cardDark: '#2e240a' },
-  { id: 'travel',     title: 'Travel',       description: 'Navigate airports, hotels and new cities',           icon: 'airplane',          color: '#FF9500', cardLight: '#fff4dd', cardDark: '#30260e' },
-  { id: 'numbers',    title: 'Numbers',      description: 'Count, tell time and handle money',                  icon: 'calculator',        color: '#E8A020', cardLight: '#ffe9c2', cardDark: '#2e230c' },
-  { id: 'colors',     title: 'Colors',       description: 'Describe the world around you in Arabic',            icon: 'color-palette',     color: '#CC8800', cardLight: '#fff0d4', cardDark: '#302610' },
-  { id: 'emergency',  title: 'Emergency',    description: 'Stay safe with essential phrases for urgent moments', icon: 'medkit',            color: '#D4541A', cardLight: '#fff6e0', cardDark: '#322811' },
-  { id: 'culture',    title: 'Culture',      description: 'Understand Arab traditions and expressions',           icon: 'school',            color: '#C97432', cardLight: '#ffe7c7', cardDark: '#2d1f0e' },
+const LEVEL_GROUPS: LevelGroup[] = [
+  { id: 'A1', title: 'A1 — Survival',      description: 'Greetings, numbers, family, colors, directions and more',  icon: 'star',         color: '#FF9500', cardLight: '#ffe8cc', cardDark: '#2e2010' },
+  { id: 'A2', title: 'A2 — Daily Life',    description: 'Verbs, shopping, body parts, transport, past and future',  icon: 'school',       color: '#4CAF50', cardLight: '#e6f4ea', cardDark: '#0d2212' },
+  { id: 'B1', title: 'B1 — Conversations', description: 'Opinions, stories, work, travel, conditionals and more',   icon: 'chatbubbles',  color: '#2196F3', cardLight: '#e3f2fd', cardDark: '#071929' },
+  { id: 'B2', title: 'B2 — Fluency',       description: 'Abstract ideas, passive voice, idioms, media discourse',   icon: 'trophy',       color: '#9C27B0', cardLight: '#f3e5f5', cardDark: '#180a1e' },
 ];
 
 const LEVEL_LABEL: Record<string, string> = {
+  A1: 'A1', A2: 'A2', B1: 'B1', B2: 'B2',
   beginner: 'Beginner', intermediate: 'Intermediate', advanced: 'Advanced',
 };
 
@@ -117,13 +112,13 @@ export default function HomeTab() {
 
   const onRefresh = () => { setRefreshing(true); load(); };
 
-  const lessonsForCat = (catId: string) =>
-    lessons.filter(l => l.id.startsWith(catId));
+  const lessonsForLevel = (levelId: string) =>
+    lessons.filter(l => l.level === levelId);
 
-  const visibleCategories = CATEGORIES.filter(cat => lessonsForCat(cat.id).length > 0);
-  const displayCategories = filter
-    ? visibleCategories.filter(cat => cat.id === filter)
-    : visibleCategories;
+  const visibleGroups  = LEVEL_GROUPS.filter(g => lessonsForLevel(g.id).length > 0);
+  const displayGroups  = filter
+    ? visibleGroups.filter(g => g.id === filter)
+    : visibleGroups;
 
   const nextLesson = lessons.find(l => !l.locked && !l.completed) ?? lessons[0];
 
@@ -214,26 +209,26 @@ export default function HomeTab() {
           contentContainerStyle={s.filterRow}
         >
           <FilterPill
-            label="All Topics" active={filter === null}
+            label="All Levels" active={filter === null}
             color={c.primary} c={c}
             onPress={() => setFilter(null)}
           />
-          {visibleCategories.map(cat => (
+          {visibleGroups.map(g => (
             <FilterPill
-              key={cat.id}
-              label={cat.title} icon={cat.icon}
-              active={filter === cat.id} color={cat.color} c={c}
-              onPress={() => setFilter(cat.id)}
+              key={g.id}
+              label={g.title} icon={g.icon}
+              active={filter === g.id} color={g.color} c={c}
+              onPress={() => setFilter(g.id)}
             />
           ))}
         </ScrollView>
 
-        {/* ── Topic sections ───────────────────────────────────────────────── */}
-        {displayCategories.map(cat => (
-          <View key={cat.id} style={s.topicSection}>
+        {/* ── Level sections ───────────────────────────────────────────────── */}
+        {displayGroups.map(grp => (
+          <View key={grp.id} style={s.topicSection}>
             <View style={s.sectionIntro}>
-              <Text style={[s.sectionTitle, { color: c.text  }]}>{cat.title}</Text>
-              <Text style={[s.sectionDesc,  { color: c.label }]}>{cat.description}</Text>
+              <Text style={[s.sectionTitle, { color: c.text  }]}>{grp.title}</Text>
+              <Text style={[s.sectionDesc,  { color: c.label }]}>{grp.description}</Text>
             </View>
 
             <ScrollView
@@ -241,12 +236,12 @@ export default function HomeTab() {
               showsHorizontalScrollIndicator={false}
               contentContainerStyle={s.lessonRow}
             >
-              {lessonsForCat(cat.id).map(lesson => {
+              {lessonsForLevel(grp.id).map(lesson => {
                 const avatarIdx = ((lesson.order - 1) % 23) + 1;
                 const isLocked  = lesson.locked;
                 const isDone    = lesson.completed;
                 const isCurrent = lesson.id === nextLesson?.id;
-                const cardBg    = scheme === 'dark' ? cat.cardDark : cat.cardLight;
+                const cardBg    = scheme === 'dark' ? grp.cardDark : grp.cardLight;
 
                 return (
                   <TouchableOpacity
@@ -282,8 +277,8 @@ export default function HomeTab() {
                       </View>
                       {lesson.xp_reward != null && (
                         <View style={s.cardTag}>
-                          <Ionicons name="flash" size={11} color={cat.color} />
-                          <Text style={[s.cardTagText, { color: cat.color }]}>{lesson.xp_reward} XP</Text>
+                          <Ionicons name="flash" size={11} color={grp.color} />
+                          <Text style={[s.cardTagText, { color: grp.color }]}>{lesson.xp_reward} XP</Text>
                         </View>
                       )}
                     </View>
