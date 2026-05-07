@@ -835,9 +835,9 @@ export default function LessonScreen() {
       const words: Record<string, any> = {};
       const stages: any[] = [{ type: 'subject' }];
       for (const cycle of lesson.cycles) {
-        // Build English lookup for this cycle's vocab
-        const vocabEnglish: Record<string, string> = {};
-        cycle.vocab.forEach((w: any) => { vocabEnglish[w.arabic] = w.english; });
+        // Build romanization lookup for this cycle's vocab
+        const vocabRomanization: Record<string, string> = {};
+        cycle.vocab.forEach((w: any) => { vocabRomanization[w.arabic] = w.romanization ?? w.transcription ?? ''; });
 
         // Vocab → words dict + listen_repeat stages (words only, no phrases)
         cycle.vocab.forEach((w: any, i: number) => {
@@ -850,11 +850,11 @@ export default function LessonScreen() {
           const options = q.options.map((opt: string, i: number) => ({ id: `q_${cycle.cycle}_${i}`, english: opt, correct: i === q.answer, arabic: q.arabic, translit: q.romanization }));
           stages.push({ type: 'choose_translation', arabic: q.arabic, english: q.options[q.answer], translit: q.romanization, options });
         }
-        // Build → sentence_build array (one stage per build entry, with English on bank items)
+        // Build → sentence_build array (romanization on bank items)
         const builds = Array.isArray(cycle.build) ? cycle.build : [cycle.build];
         builds.forEach((b: any, bi: number) => {
-          const bWords = b.sentence.map((ar: string, i: number) => ({ id: `b${bi}_w${i + 1}`, ar, tr: vocabEnglish[ar] ?? '' }));
-          const bDecoys = b.decoys.map((ar: string, i: number) => ({ id: `b${bi}_d${i + 1}`, ar, tr: vocabEnglish[ar] ?? '' }));
+          const bWords = b.sentence.map((ar: string, i: number) => ({ id: `b${bi}_w${i + 1}`, ar, tr: vocabRomanization[ar] ?? '' }));
+          const bDecoys = b.decoys.map((ar: string, i: number) => ({ id: `b${bi}_d${i + 1}`, ar, tr: vocabRomanization[ar] ?? '' }));
           stages.push({ type: 'sentence_build', english: b.english, bank: [...bWords, ...bDecoys], correct: bWords.map((w: any) => w.id) });
         });
         // Speak → speak_the_blank (dynamic rounds from any even number of turns)
@@ -1932,6 +1932,9 @@ export default function LessonScreen() {
         </View>
 
         <Text style={[s.wordCardArabic, { color: c.text }]}>{stg.arabic}</Text>
+        {!!stg.translit && (
+          <Text style={[s.romanizText, { color: c.label }]}>{stg.translit}</Text>
+        )}
         <Text style={[s.hebrewText, { color: c.label }]}>
           {stg.english ?? ""}
         </Text>
@@ -2024,6 +2027,9 @@ export default function LessonScreen() {
           >
             {stg.arabic}
           </Text>
+          {!!stg.translit && (
+            <Text style={[s.romanizText, { color: "#9d998e" }]}>{stg.translit}</Text>
+          )}
           {isLocked && (
             <Text
               style={{
@@ -2207,6 +2213,11 @@ export default function LessonScreen() {
                 >
                   {opt.arabic}
                 </Text>
+                {!!opt.translit && (
+                  <Text style={[s.romanizText, { color: isCorrect ? c.primary : isWrong ? c.wrong : c.label }]}>
+                    {opt.translit}
+                  </Text>
+                )}
                 {isCorrect && (
                   <Ionicons
                     name="checkmark-circle"
@@ -2294,6 +2305,11 @@ export default function LessonScreen() {
                   >
                     {p.arabic}
                   </Text>
+                  {!!p.translit && (
+                    <Text style={[s.romanizText, { color: isLeftSelected ? 'rgba(255,255,255,0.75)' : c.label }]}>
+                      {p.translit}
+                    </Text>
+                  )}
                 </TouchableOpacity>
                 {rightPair && (
                   <TouchableOpacity
@@ -5689,6 +5705,15 @@ const s = StyleSheet.create({
     fontWeight: "600",
     textAlign: "center",
     marginBottom: 28,
+  },
+  romanizText: {
+    fontSize: 14,
+    fontWeight: "500",
+    fontStyle: "italic",
+    textAlign: "center",
+    marginTop: 4,
+    marginBottom: 2,
+    letterSpacing: 0.1,
   },
   hebrewHint: {
     fontSize: 15,
