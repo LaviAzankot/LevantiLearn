@@ -3648,110 +3648,144 @@ export default function LessonScreen() {
     const vocab: any[] = stg.allVocab ?? [];
     const topic: string = stg.topic ?? expandedLesson?.topic ?? '';
 
-    // Infer level from lesson id number suffix
     const suffix = (id ?? '').split('_').pop() ?? '';
     const order = parseInt(suffix, 10) || 1;
     const level = order <= 12 ? 'A1' : order <= 24 ? 'A2' : order <= 36 ? 'B1' : 'B2';
     const levelColor = level === 'A1' ? '#FF9500' : level === 'A2' ? '#4CAF50' : level === 'B1' ? '#2196F3' : '#9C27B0';
 
-    const EXERCISE_LABELS = [
-      { icon: 'ear-outline' as const,       label: 'Listen & Repeat' },
-      { icon: 'help-circle-outline' as const, label: 'Choose the Meaning' },
-      { icon: 'checkmark-circle-outline' as const, label: 'Pick the Word' },
-      { icon: 'apps-outline' as const,      label: 'Match Pairs' },
-      { icon: 'construct-outline' as const, label: 'Build a Sentence' },
-      { icon: 'mic-outline' as const,       label: 'Speak to Fill' },
+    // Same color tokens as renderSubject
+    const SC = {
+      ink: '#151515', inkSoft: '#46443f', muted: '#9d998e', muted2: '#b9b5ab',
+      hair: '#ece9e2', surface: '#faf9f6', card: '#ffffff',
+      accent: '#fe4d01', accentWash: '#fff7f1',
+      cool: '#738ce6', coolDeep: '#3d57b8', coolWash: 'rgba(115,140,230,0.08)',
+    };
+
+    // Same sub-components as renderSubject
+    const SubCard = ({ children, style = {} }: any) => (
+      <View style={[{ backgroundColor: SC.card, borderWidth: 1, borderColor: SC.hair, borderRadius: 20, padding: 20, shadowColor: '#151515', shadowOpacity: 0.04, shadowOffset: { width: 0, height: 6 }, shadowRadius: 18, elevation: 2 }, style]}>
+        {children}
+      </View>
+    );
+    const SubEyebrow = ({ text, color = SC.accent }: any) => (
+      <Text style={{ fontFamily: FONT_UI_BOLD, fontSize: 12, fontWeight: '700', letterSpacing: 1.6, textTransform: 'uppercase' as any, color }}>{text}</Text>
+    );
+    const SubSectionTitle = ({ kicker, kickerColor, title, sub }: any) => (
+      <View style={{ gap: 6, marginBottom: 18 }}>
+        <SubEyebrow text={kicker} color={kickerColor} />
+        <Text style={{ fontFamily: FONT_UI_EXTRABOLD, fontSize: 30, fontWeight: '800', color: SC.ink, letterSpacing: -0.4, lineHeight: 36 }}>{title}</Text>
+        {sub && <Text style={{ fontFamily: FONT_UI, fontSize: 15, fontWeight: '500', color: SC.muted, lineHeight: 22 }}>{sub}</Text>}
+      </View>
+    );
+    const InfoRow = ({ tone, title: t2, body }: any) => {
+      const isWarm = tone === 'warm';
+      return (
+        <View style={{ flexDirection: 'row', gap: 12, alignItems: 'flex-start', paddingVertical: 10 }}>
+          <View style={{ width: 28, height: 28, borderRadius: 14, flexShrink: 0, backgroundColor: isWarm ? SC.accentWash : SC.coolWash, alignItems: 'center', justifyContent: 'center' }}>
+            <Text style={{ fontFamily: FONT_UI_EXTRABOLD, fontSize: 13, fontWeight: '800', color: isWarm ? SC.accent : SC.coolDeep }}>·</Text>
+          </View>
+          <View style={{ flex: 1, gap: 3 }}>
+            <Text style={{ fontFamily: FONT_UI_BOLD, fontSize: 15, fontWeight: '700', color: SC.ink }}>{t2}</Text>
+            <Text style={{ fontFamily: FONT_UI, fontSize: 14, fontWeight: '500', color: SC.muted, lineHeight: 20 }}>{body}</Text>
+          </View>
+        </View>
+      );
+    };
+    const PlayPill = ({ wid, arabicText }: any) => {
+      const playing = subjectPlayingId === wid;
+      return (
+        <TouchableOpacity
+          onPress={() => { setSubjectPlayingId(wid); playAudio(arabicText, () => setSubjectPlayingId(null)); }}
+          activeOpacity={0.8}
+          style={{ width: 40, height: 40, borderRadius: 999, alignItems: 'center', justifyContent: 'center', flexShrink: 0, backgroundColor: playing ? SC.accent : SC.card, shadowColor: playing ? SC.accent : '#151515', shadowOpacity: playing ? 0.35 : 0.06, shadowOffset: { width: 0, height: 1 }, shadowRadius: 2, borderWidth: 1, borderColor: SC.hair }}
+        >
+          <Ionicons name={playing ? 'volume-high' : 'volume-medium-outline'} size={18} color={playing ? '#ffffff' : SC.inkSoft} />
+        </TouchableOpacity>
+      );
+    };
+
+    const EXERCISES = [
+      { tone: 'warm', title: 'Listen & Repeat',    body: 'Hear each word spoken aloud, then say it yourself into the mic.' },
+      { tone: 'cool', title: 'Choose the Meaning', body: 'Pick the correct English translation from four options.' },
+      { tone: 'warm', title: 'Pick the Word',      body: 'Two Arabic options — choose the one that matches the English.' },
+      { tone: 'cool', title: 'Match Pairs',        body: 'Connect every Arabic word to its English meaning before time runs out.' },
+      { tone: 'warm', title: 'Build a Sentence',   body: 'Arrange word blocks in the right order to form a full sentence.' },
+      { tone: 'cool', title: 'Speak to Fill',      body: 'A conversation has a missing word — say it aloud to complete it.' },
     ];
 
     return (
-      <ScrollView
-        showsVerticalScrollIndicator={false}
-        contentContainerStyle={{ paddingHorizontal: 24, paddingTop: 4, paddingBottom: 32, gap: 20 }}
-      >
-        {/* Header */}
-        <View style={{ alignItems: 'center', gap: 10, paddingTop: 8 }}>
-          <View style={{ backgroundColor: levelColor + '18', borderRadius: 50, borderWidth: 1, borderColor: levelColor + '40', paddingHorizontal: 14, paddingVertical: 5 }}>
-            <Text style={{ fontSize: 13, fontWeight: '700', fontFamily: FONT_UI_BOLD, color: levelColor, letterSpacing: 0.8 }}>{level} · Palestinian Arabic</Text>
+      <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingHorizontal: 20, paddingTop: 4, paddingBottom: 32, gap: 16 }}>
+
+        {/* ── Section 1: Overview ─────────────────────────────────────────── */}
+        <SubCard style={{ gap: 0 }}>
+          <View style={{ flexDirection: 'row', alignItems: 'center', gap: 10, marginBottom: 16 }}>
+            <View style={{ backgroundColor: levelColor + '18', borderRadius: 50, borderWidth: 1, borderColor: levelColor + '40', paddingHorizontal: 12, paddingVertical: 4 }}>
+              <Text style={{ fontFamily: FONT_UI_BOLD, fontSize: 12, fontWeight: '700', color: levelColor, letterSpacing: 0.8 }}>{level}</Text>
+            </View>
+            <Text style={{ fontFamily: FONT_UI_BOLD, fontSize: 12, fontWeight: '700', letterSpacing: 1.4, textTransform: 'uppercase' as any, color: SC.muted }}>Palestinian Arabic</Text>
           </View>
-          <Text style={{ fontSize: 34, fontWeight: '800', fontFamily: FONT_UI_EXTRABOLD, color: '#151515', textAlign: 'center', letterSpacing: -0.6, lineHeight: 40 }}>
-            {topic}
-          </Text>
-          <Text style={{ fontSize: 15, fontWeight: '500', fontFamily: FONT_UI, color: '#9d998e', textAlign: 'center' }}>
-            {vocab.length} new words · 6 exercise types
-          </Text>
-        </View>
+          <SubSectionTitle
+            kicker={`01 · This lesson`}
+            kickerColor={SC.accent}
+            title={topic}
+            sub={`You'll learn ${vocab.length} new words and practise them across 6 different exercise types.`}
+          />
+          <InfoRow tone="warm" title="Say it like a local" body="All words are in Palestinian Levantine dialect — the Arabic spoken in everyday life, not textbooks." />
+          <InfoRow tone="cool" title="Tap any word to hear it" body="On the vocabulary list below every word is tappable — hear its pronunciation before you start." />
+        </SubCard>
 
-        {/* Vocabulary preview */}
-        <View style={{ gap: 8 }}>
-          <Text style={{ fontSize: 13, fontWeight: '700', fontFamily: FONT_UI_BOLD, color: '#9d998e', letterSpacing: 1.2, textTransform: 'uppercase' as any }}>
-            Words you'll learn
-          </Text>
-          {vocab.map((w: any, i: number) => (
-            <TouchableOpacity
-              key={i}
-              onPress={() => playAudio(w.arabic)}
-              activeOpacity={0.8}
-              style={{
-                backgroundColor: '#ffffff',
-                borderRadius: 16,
-                borderWidth: 1,
-                borderColor: '#efeeeb',
-                paddingVertical: 14,
-                paddingHorizontal: 16,
-                flexDirection: 'row',
-                alignItems: 'center',
-                gap: 14,
-                shadowColor: '#151515',
-                shadowOpacity: 0.04,
-                shadowOffset: { width: 0, height: 2 },
-                shadowRadius: 8,
-                elevation: 1,
-              }}
-            >
-              {/* Icon circle */}
-              <View style={{ width: 44, height: 44, borderRadius: 22, backgroundColor: '#faf9f6', borderWidth: 1, borderColor: '#efeeeb', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                <WordIcon icon={w.icon ?? 'book'} iconColor={w.icon_color ?? '#9d998e'} size={28} />
-              </View>
-              {/* Text */}
-              <View style={{ flex: 1, gap: 2 }}>
-                <View style={{ flexDirection: 'row', alignItems: 'baseline', gap: 8 }}>
-                  <Text style={{ fontSize: 22, fontWeight: '700', fontFamily: FONT_AR, color: '#151515', writingDirection: 'rtl' as any }}>{w.arabic}</Text>
-                  {!!w.romanization && (
-                    <Text style={{ fontSize: 13, fontStyle: 'italic', fontFamily: FONT_UI, color: '#9d998e' }}>{w.romanization}</Text>
-                  )}
-                </View>
-                <Text style={{ fontSize: 14, fontWeight: '500', fontFamily: FONT_UI, color: '#68665f' }}>{w.english}</Text>
-              </View>
-              {/* Play hint */}
-              <Ionicons name="volume-medium-outline" size={18} color="#d8d5cd" />
-            </TouchableOpacity>
-          ))}
-        </View>
-
-        {/* What you'll practice */}
-        <View style={{ gap: 8 }}>
-          <Text style={{ fontSize: 13, fontWeight: '700', fontFamily: FONT_UI_BOLD, color: '#9d998e', letterSpacing: 1.2, textTransform: 'uppercase' as any }}>
-            What you'll practice
-          </Text>
-          <View style={{ backgroundColor: '#ffffff', borderRadius: 16, borderWidth: 1, borderColor: '#efeeeb', padding: 4 }}>
-            {EXERCISE_LABELS.map((ex, i) => (
+        {/* ── Section 2: Vocabulary ───────────────────────────────────────── */}
+        <SubCard style={{ gap: 0 }}>
+          <SubSectionTitle
+            kicker={`02 · Vocabulary · ${vocab.length} words`}
+            kickerColor={SC.cool}
+            title="Words you'll learn"
+            sub="Tap the speaker button to hear any word before you start."
+          />
+          <View style={{ gap: 0 }}>
+            {vocab.map((w: any, i: number) => (
               <View
                 key={i}
                 style={{
-                  flexDirection: 'row', alignItems: 'center', gap: 12,
-                  paddingVertical: 10, paddingHorizontal: 12,
-                  borderBottomWidth: i < EXERCISE_LABELS.length - 1 ? 1 : 0,
-                  borderBottomColor: '#f4f3f0',
+                  flexDirection: 'row', alignItems: 'center', gap: 14,
+                  paddingVertical: 12,
+                  borderTopWidth: i === 0 ? 0 : 1, borderTopColor: SC.hair,
                 }}
               >
-                <View style={{ width: 32, height: 32, borderRadius: 10, backgroundColor: '#fe4d0112', alignItems: 'center', justifyContent: 'center' }}>
-                  <Ionicons name={ex.icon} size={16} color="#fe4d01" />
+                {/* Icon */}
+                <View style={{ width: 42, height: 42, borderRadius: 21, backgroundColor: SC.surface, borderWidth: 1, borderColor: SC.hair, alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                  <WordIcon icon={w.icon ?? 'book'} iconColor={w.icon_color ?? SC.muted} size={26} />
                 </View>
-                <Text style={{ fontSize: 14, fontWeight: '600', fontFamily: FONT_UI, color: '#46443f' }}>{ex.label}</Text>
+                {/* Text */}
+                <View style={{ flex: 1, gap: 1 }}>
+                  <Text style={{ fontFamily: FONT_AR, fontSize: 22, fontWeight: '700', color: SC.ink, alignSelf: 'stretch' }}>{w.arabic}</Text>
+                  {!!w.romanization && (
+                    <Text style={{ fontFamily: FONT_UI, fontSize: 13, fontStyle: 'italic', color: SC.muted }}>{w.romanization}</Text>
+                  )}
+                  <Text style={{ fontFamily: FONT_UI, fontSize: 14, fontWeight: '500', color: SC.inkSoft }}>{w.english}</Text>
+                </View>
+                {/* Play */}
+                <PlayPill wid={`intro_${i}`} arabicText={w.arabic} />
               </View>
             ))}
           </View>
-        </View>
+        </SubCard>
+
+        {/* ── Section 3: Practice plan ────────────────────────────────────── */}
+        <SubCard style={{ gap: 0 }}>
+          <SubSectionTitle
+            kicker="03 · Practice plan"
+            kickerColor={SC.accent}
+            title="6 exercise types"
+            sub="Each type trains a different skill — listening, recall, speaking."
+          />
+          {EXERCISES.map((ex, i) => (
+            <View key={i} style={{ borderTopWidth: i === 0 ? 0 : 1, borderTopColor: SC.hair }}>
+              <InfoRow tone={ex.tone as any} title={ex.title} body={ex.body} />
+            </View>
+          ))}
+        </SubCard>
+
       </ScrollView>
     );
   };
