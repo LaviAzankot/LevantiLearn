@@ -3651,17 +3651,16 @@ export default function LessonScreen() {
     const suffix = (id ?? '').split('_').pop() ?? '';
     const order = parseInt(suffix, 10) || 1;
     const level = order <= 12 ? 'A1' : order <= 24 ? 'A2' : order <= 36 ? 'B1' : 'B2';
-    const levelColor = level === 'A1' ? '#FF9500' : level === 'A2' ? '#4CAF50' : level === 'B1' ? '#2196F3' : '#9C27B0';
 
-    // Same color tokens as renderSubject
+    // Identical color tokens to renderSubject
     const SC = {
-      ink: '#151515', inkSoft: '#46443f', muted: '#9d998e', muted2: '#b9b5ab',
+      ink: '#151515', inkSoft: '#46443f', muted: '#9d998e',
       hair: '#ece9e2', surface: '#faf9f6', card: '#ffffff',
       accent: '#fe4d01', accentWash: '#fff7f1',
       cool: '#738ce6', coolDeep: '#3d57b8', coolWash: 'rgba(115,140,230,0.08)',
     };
 
-    // Same sub-components as renderSubject
+    // ── Same sub-components as renderSubject ──────────────────────────────
     const SubCard = ({ children, style = {} }: any) => (
       <View style={[{ backgroundColor: SC.card, borderWidth: 1, borderColor: SC.hair, borderRadius: 20, padding: 20, shadowColor: '#151515', shadowOpacity: 0.04, shadowOffset: { width: 0, height: 6 }, shadowRadius: 18, elevation: 2 }, style]}>
         {children}
@@ -3703,87 +3702,110 @@ export default function LessonScreen() {
         </TouchableOpacity>
       );
     };
+    // ── Gender variant parser ─────────────────────────────────────────────
+    // Extracts feminine Arabic+romanization from notes like:
+    //   "feminine: تعبانة (tabʕāne); ..."
+    //   "say كِيفِك (kīfik) to a female"
+    const parseFemVariant = (note: string): { arabic: string; rom: string } | null => {
+      const m1 = note.match(/feminine:\s*([؀-ۿً-ٟ\s]+)\s*\(([^)]+)\)/);
+      if (m1) return { arabic: m1[1].trim(), rom: m1[2].trim() };
+      const m2 = note.match(/say\s*([؀-ۿً-ٟ\s]+)\s*\(([^)]+)\)\s*to a female/i);
+      if (m2) return { arabic: m2[1].trim(), rom: m2[2].trim() };
+      return null;
+    };
+    const stripVariant = (note: string) =>
+      note.replace(/feminine:\s*[؀-ۿً-ٟ\s]+\([^)]+\)[;,]?\s*/i, '')
+          .replace(/say\s*[؀-ۿً-ٟ\s]+\([^)]+\)\s*to a female[;,]?\s*/i, '')
+          .replace(/^[;,]\s*/, '').trim();
 
-    const EXERCISES = [
-      { tone: 'warm', title: 'Listen & Repeat',    body: 'Hear each word spoken aloud, then say it yourself into the mic.' },
-      { tone: 'cool', title: 'Choose the Meaning', body: 'Pick the correct English translation from four options.' },
-      { tone: 'warm', title: 'Pick the Word',      body: 'Two Arabic options — choose the one that matches the English.' },
-      { tone: 'cool', title: 'Match Pairs',        body: 'Connect every Arabic word to its English meaning before time runs out.' },
-      { tone: 'warm', title: 'Build a Sentence',   body: 'Arrange word blocks in the right order to form a full sentence.' },
-      { tone: 'cool', title: 'Speak to Fill',      body: 'A conversation has a missing word — say it aloud to complete it.' },
+    // Detect if any word has gender variants (to set section subtitle)
+    const hasGendered = vocab.some(w => parseFemVariant(w.note ?? '') !== null);
+
+    // ── Background InfoRows derived from lesson content ───────────────────
+    const bgRows: { tone: string; title: string; body: string }[] = [
+      { tone: 'warm', title: 'Palestinian dialect', body: 'All words are everyday Palestinian Levantine Arabic — the living spoken dialect, not textbook Modern Standard Arabic.' },
     ];
+    if (hasGendered)
+      bgRows.push({ tone: 'cool', title: 'Gender matters', body: 'Some words change form depending on whether you\'re speaking to a man or a woman. Both forms are shown below.' });
+    else
+      bgRows.push({ tone: 'cool', title: 'Tap to hear', body: 'Every word row has a speaker button — tap it to hear the pronunciation before you practise.' });
+    // Add a note from the first word if it's grammatically informative
+    const firstGramNote = vocab.find(w => w.note && w.note.length > 30 && !parseFemVariant(w.note));
+    if (firstGramNote)
+      bgRows.push({ tone: 'warm', title: 'Grammar note', body: firstGramNote.note });
 
     return (
       <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingHorizontal: 20, paddingTop: 4, paddingBottom: 32, gap: 16 }}>
 
-        {/* ── Section 1: Overview ─────────────────────────────────────────── */}
-        <SubCard style={{ gap: 0 }}>
-          <View style={{ flexDirection: 'row', alignItems: 'center', gap: 10, marginBottom: 16 }}>
-            <View style={{ backgroundColor: levelColor + '18', borderRadius: 50, borderWidth: 1, borderColor: levelColor + '40', paddingHorizontal: 12, paddingVertical: 4 }}>
-              <Text style={{ fontFamily: FONT_UI_BOLD, fontSize: 12, fontWeight: '700', color: levelColor, letterSpacing: 0.8 }}>{level}</Text>
-            </View>
-            <Text style={{ fontFamily: FONT_UI_BOLD, fontSize: 12, fontWeight: '700', letterSpacing: 1.4, textTransform: 'uppercase' as any, color: SC.muted }}>Palestinian Arabic</Text>
-          </View>
+        {/* ── Section 1: Background ───────────────────────────────────────── */}
+        <SubCard style={{ gap: 16 }}>
           <SubSectionTitle
-            kicker={`01 · This lesson`}
+            kicker={`01 · ${level} · Background`}
             kickerColor={SC.accent}
             title={topic}
-            sub={`You'll learn ${vocab.length} new words and practise them across 6 different exercise types.`}
+            sub={`${vocab.length} new words in Palestinian Levantine Arabic.`}
           />
-          <InfoRow tone="warm" title="Say it like a local" body="All words are in Palestinian Levantine dialect — the Arabic spoken in everyday life, not textbooks." />
-          <InfoRow tone="cool" title="Tap any word to hear it" body="On the vocabulary list below every word is tappable — hear its pronunciation before you start." />
+          {bgRows.map((r, i) => <InfoRow key={i} tone={r.tone} title={r.title} body={r.body} />)}
         </SubCard>
 
         {/* ── Section 2: Vocabulary ───────────────────────────────────────── */}
-        <SubCard style={{ gap: 0 }}>
+        <SubCard style={{ gap: 16 }}>
           <SubSectionTitle
             kicker={`02 · Vocabulary · ${vocab.length} words`}
-            kickerColor={SC.cool}
-            title="Words you'll learn"
-            sub="Tap the speaker button to hear any word before you start."
-          />
-          <View style={{ gap: 0 }}>
-            {vocab.map((w: any, i: number) => (
-              <View
-                key={i}
-                style={{
-                  flexDirection: 'row', alignItems: 'center', gap: 14,
-                  paddingVertical: 12,
-                  borderTopWidth: i === 0 ? 0 : 1, borderTopColor: SC.hair,
-                }}
-              >
-                {/* Icon */}
-                <View style={{ width: 42, height: 42, borderRadius: 21, backgroundColor: SC.surface, borderWidth: 1, borderColor: SC.hair, alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                  <WordIcon icon={w.icon ?? 'book'} iconColor={w.icon_color ?? SC.muted} size={26} />
-                </View>
-                {/* Text */}
-                <View style={{ flex: 1, gap: 1 }}>
-                  <Text style={{ fontFamily: FONT_AR, fontSize: 22, fontWeight: '700', color: SC.ink, alignSelf: 'stretch' }}>{w.arabic}</Text>
-                  {!!w.romanization && (
-                    <Text style={{ fontFamily: FONT_UI, fontSize: 13, fontStyle: 'italic', color: SC.muted }}>{w.romanization}</Text>
-                  )}
-                  <Text style={{ fontFamily: FONT_UI, fontSize: 14, fontWeight: '500', color: SC.inkSoft }}>{w.english}</Text>
-                </View>
-                {/* Play */}
-                <PlayPill wid={`intro_${i}`} arabicText={w.arabic} />
-              </View>
-            ))}
-          </View>
-        </SubCard>
-
-        {/* ── Section 3: Practice plan ────────────────────────────────────── */}
-        <SubCard style={{ gap: 0 }}>
-          <SubSectionTitle
-            kicker="03 · Practice plan"
             kickerColor={SC.accent}
-            title="6 exercise types"
-            sub="Each type trains a different skill — listening, recall, speaking."
+            title={hasGendered ? 'Words — male & female forms' : 'Words in this lesson'}
+            sub={hasGendered
+              ? 'Some words have separate forms for addressing a man or a woman. Both are shown.'
+              : 'Tap the speaker icon to hear each word. Notes explain usage and grammar.'}
           />
-          {EXERCISES.map((ex, i) => (
-            <View key={i} style={{ borderTopWidth: i === 0 ? 0 : 1, borderTopColor: SC.hair }}>
-              <InfoRow tone={ex.tone as any} title={ex.title} body={ex.body} />
-            </View>
-          ))}
+          <View>
+            {vocab.map((w: any, i: number) => {
+              const femVariant = parseFemVariant(w.note ?? '');
+              const cleanNote = stripVariant(w.note ?? '');
+              const isLast = i === vocab.length - 1;
+
+              if (femVariant) {
+                // Gendered word — show male+female side-by-side cards (like GreetingsSection)
+                return (
+                  <View key={i} style={{ paddingVertical: 18, paddingHorizontal: 4, borderBottomWidth: isLast ? 0 : 1, borderBottomColor: SC.hair, gap: 10 }}>
+                    <Text style={{ fontFamily: FONT_UI_BOLD, fontSize: 17, fontWeight: '700', color: SC.inkSoft }}>{w.english}</Text>
+                    {!!cleanNote && <Text style={{ fontFamily: FONT_UI, fontSize: 14, fontWeight: '500', color: SC.muted, lineHeight: 20 }}>{cleanNote}</Text>}
+                    {/* Male form */}
+                    <View style={{ flexDirection: 'row', gap: 12, alignItems: 'center', backgroundColor: SC.coolWash, borderRadius: 14, padding: 14 }}>
+                      <PlayPill wid={`v_${i}_m`} arabicText={w.arabic} />
+                      <View style={{ flex: 1, gap: 4 }}>
+                        <Text style={{ fontFamily: FONT_AR, fontSize: 30, fontWeight: '600', color: SC.ink, lineHeight: 40, alignSelf: 'stretch' }}>{w.arabic}</Text>
+                        {!!w.romanization && <Text style={{ fontFamily: FONT_UI, fontSize: 13, fontStyle: 'italic', color: SC.muted }}>{w.romanization}</Text>}
+                        <Text style={{ fontFamily: FONT_UI_BOLD, fontSize: 12, fontWeight: '700', letterSpacing: 0.8, textTransform: 'uppercase' as any, color: SC.coolDeep }}>to a man</Text>
+                      </View>
+                    </View>
+                    {/* Female form */}
+                    <View style={{ flexDirection: 'row', gap: 12, alignItems: 'center', backgroundColor: SC.accentWash, borderRadius: 14, padding: 14 }}>
+                      <PlayPill wid={`v_${i}_f`} arabicText={femVariant.arabic} />
+                      <View style={{ flex: 1, gap: 4 }}>
+                        <Text style={{ fontFamily: FONT_AR, fontSize: 30, fontWeight: '600', color: SC.ink, lineHeight: 40, alignSelf: 'stretch' }}>{femVariant.arabic}</Text>
+                        <Text style={{ fontFamily: FONT_UI, fontSize: 13, fontStyle: 'italic', color: SC.muted }}>{femVariant.rom}</Text>
+                        <Text style={{ fontFamily: FONT_UI_BOLD, fontSize: 12, fontWeight: '700', letterSpacing: 0.8, textTransform: 'uppercase' as any, color: SC.accent }}>to a woman</Text>
+                      </View>
+                    </View>
+                  </View>
+                );
+              }
+
+              // Non-gendered word — single row (like non-gendered greeting row)
+              return (
+                <View key={i} style={{ flexDirection: 'row', gap: 14, alignItems: 'center', paddingVertical: 18, paddingHorizontal: 4, borderBottomWidth: isLast ? 0 : 1, borderBottomColor: SC.hair }}>
+                  <PlayPill wid={`v_${i}`} arabicText={w.arabic} />
+                  <View style={{ flex: 1, gap: 5 }}>
+                    <Text style={{ fontFamily: FONT_AR, fontSize: 30, fontWeight: '600', color: SC.ink, lineHeight: 40, alignSelf: 'stretch' }}>{w.arabic}</Text>
+                    {!!w.romanization && <Text style={{ fontFamily: FONT_UI, fontSize: 13, fontStyle: 'italic', color: SC.muted }}>{w.romanization}</Text>}
+                    <Text style={{ fontFamily: FONT_UI_BOLD, fontSize: 17, fontWeight: '700', color: SC.inkSoft }}>{w.english}</Text>
+                    {!!cleanNote && <Text style={{ fontFamily: FONT_UI, fontSize: 14, fontWeight: '500', color: SC.muted, lineHeight: 20 }}>{cleanNote}</Text>}
+                  </View>
+                </View>
+              );
+            })}
+          </View>
         </SubCard>
 
       </ScrollView>
