@@ -1752,7 +1752,14 @@ export default function LessonScreen() {
           <WordIcon icon={stg.icon} iconColor={stg.icon_color} size={148} />
         </TouchableOpacity>
 
-        <Text style={[s.wordCardArabic, { color: c.text }]}>{stg.arabic}</Text>
+        <Text
+          style={[s.wordCardArabic, { color: c.text }]}
+          adjustsFontSizeToFit
+          minimumFontScale={0.5}
+          numberOfLines={2}
+        >
+          {stg.arabic}
+        </Text>
         <Text style={[s.hebrewText, { color: c.label }]}>
           {stg.english ?? ""}
         </Text>
@@ -1931,7 +1938,14 @@ export default function LessonScreen() {
           </TouchableOpacity>
         </View>
 
-        <Text style={[s.wordCardArabic, { color: c.text }]}>{stg.arabic}</Text>
+        <Text
+          style={[s.wordCardArabic, { color: c.text }]}
+          adjustsFontSizeToFit
+          minimumFontScale={0.5}
+          numberOfLines={2}
+        >
+          {stg.arabic}
+        </Text>
         {!!stg.translit && (
           <Text style={[s.romanizText, { color: c.label }]}>{stg.translit}</Text>
         )}
@@ -2020,10 +2034,10 @@ export default function LessonScreen() {
             </View>
           </TouchableOpacity>
           <Text
-            style={[
-              s.chooseArabicLarge,
-              { color: "#151515", fontFamily: FONT_AR },
-            ]}
+            style={[s.chooseArabicLarge, { color: "#151515", fontFamily: FONT_AR }]}
+            adjustsFontSizeToFit
+            minimumFontScale={0.45}
+            numberOfLines={2}
           >
             {stg.arabic}
           </Text>
@@ -2204,12 +2218,10 @@ export default function LessonScreen() {
                 activeOpacity={1}
               >
                 <Text
-                  style={[
-                    s.writeChipText,
-                    {
-                      color: isCorrect ? c.primary : isWrong ? c.wrong : c.text,
-                    },
-                  ]}
+                  style={[s.writeChipText, { color: isCorrect ? c.primary : isWrong ? c.wrong : c.text }]}
+                  adjustsFontSizeToFit
+                  minimumFontScale={0.5}
+                  numberOfLines={2}
                 >
                   {opt.arabic}
                 </Text>
@@ -2219,11 +2231,7 @@ export default function LessonScreen() {
                   </Text>
                 )}
                 {isCorrect && (
-                  <Ionicons
-                    name="checkmark-circle"
-                    size={20}
-                    color={c.primary}
-                  />
+                  <Ionicons name="checkmark-circle" size={20} color={c.primary} />
                 )}
               </TouchableOpacity>
             );
@@ -2302,6 +2310,9 @@ export default function LessonScreen() {
                 >
                   <Text
                     style={[s.matchAr, { color: leftTxt, fontFamily: FONT_AR }]}
+                    adjustsFontSizeToFit
+                    minimumFontScale={0.5}
+                    numberOfLines={2}
                   >
                     {p.arabic}
                   </Text>
@@ -5637,6 +5648,7 @@ const s = StyleSheet.create({
     textAlign: "center",
     lineHeight: 80,
     marginBottom: 6,
+    flexShrink: 1,
   },
   freqBadge: {
     borderRadius: 50,
@@ -5761,8 +5773,8 @@ const s = StyleSheet.create({
     paddingHorizontal: 24,
     alignItems: "center",
     justifyContent: "center",
-    flexDirection: "row",
-    gap: 8,
+    flexDirection: "column",
+    gap: 2,
     shadowColor: "#a0846a",
     shadowOpacity: 0.09,
     shadowOffset: { width: 0, height: 3 },
@@ -5826,7 +5838,6 @@ const s = StyleSheet.create({
     fontSize: 24,
     fontWeight: "700",
     textAlign: "center",
-    lineHeight: 36,
   },
   matchHe: {
     fontSize: 17,
@@ -6159,7 +6170,6 @@ const s = StyleSheet.create({
     fontSize: 42,
     fontWeight: "700",
     textAlign: "center",
-    lineHeight: 62,
   },
   chooseOptionGrid: { flexDirection: "row", flexWrap: "wrap", gap: 10 },
   chooseOption: {
