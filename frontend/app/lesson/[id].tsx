@@ -14,6 +14,8 @@ import {
   ActivityIndicator,
   Animated,
   Image,
+  Alert,
+  Linking,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useLocalSearchParams, useRouter } from "expo-router";
@@ -624,6 +626,28 @@ export default function LessonScreen() {
     [id],
   );
 
+  // ── Mic permission helper ──────────────────────────────────────────────────
+  const requestMicPermission = async (): Promise<boolean> => {
+    const { status, canAskAgain } = await Audio.requestPermissionsAsync();
+    if (status === 'granted') return true;
+    if (!canAskAgain) {
+      Alert.alert(
+        'Microphone Access Required',
+        'LevantiLearn needs microphone access for pronunciation practice. Please enable it in your device settings.',
+        [
+          { text: 'Cancel', style: 'cancel' },
+          { text: 'Open Settings', onPress: () => Linking.openSettings() },
+        ],
+      );
+    } else {
+      Alert.alert(
+        'Microphone Access Required',
+        'Please allow microphone access when prompted to use pronunciation practice.',
+      );
+    }
+    return false;
+  };
+
   // ── Audio helpers ──────────────────────────────────────────────────────────
   const playFeedbackSound = useCallback(
     async (type: "correct" | "wrong" | "complete") => {
@@ -723,27 +747,22 @@ export default function LessonScreen() {
   }, []);
 
   const startRecording = async (expectedArabic: string) => {
+    const granted = await requestMicPermission();
+    if (!granted) return;
     try {
-      const { status } = await Audio.requestPermissionsAsync();
-      if (status !== "granted") {
-        alert("נדרשת הרשאת מיקרופון. אנא אפשר גישה בהגדרות.");
-        return;
-      }
       await Audio.setAudioModeAsync({
         allowsRecordingIOS: true,
         playsInSilentModeIOS: true,
       });
       const rec = new Audio.Recording();
-      await rec.prepareToRecordAsync(
-        Audio.RecordingOptionsPresets.HIGH_QUALITY,
-      );
+      await rec.prepareToRecordAsync(Audio.RecordingOptionsPresets.HIGH_QUALITY);
       await rec.startAsync();
       recordingRef.current = rec;
       expectedArabicRef.current = expectedArabic;
       setListenPhase("recording");
       setTimeout(() => finishListenRepeatRecording(), 6000);
     } catch {
-      alert("לא ניתן לגשת למיקרופון. אנא אפשר גישה בהגדרות.");
+      Alert.alert('Recording Error', 'Could not start recording. Please try again.');
     }
   };
 
@@ -778,21 +797,15 @@ export default function LessonScreen() {
   }, [playAudio]);
 
   const startDialogueRecording = async (line: any) => {
+    const granted = await requestMicPermission();
+    if (!granted) { setDialogueMicState("idle"); return; }
     try {
-      const { status } = await Audio.requestPermissionsAsync();
-      if (status !== "granted") {
-        alert("נדרשת הרשאת מיקרופון.");
-        setDialogueMicState("idle");
-        return;
-      }
       await Audio.setAudioModeAsync({
         allowsRecordingIOS: true,
         playsInSilentModeIOS: true,
       });
       const rec = new Audio.Recording();
-      await rec.prepareToRecordAsync(
-        Audio.RecordingOptionsPresets.HIGH_QUALITY,
-      );
+      await rec.prepareToRecordAsync(Audio.RecordingOptionsPresets.HIGH_QUALITY);
       await rec.startAsync();
       recordingRef.current = rec;
       dialogueLineRef.current = line;
