@@ -1752,12 +1752,7 @@ export default function LessonScreen() {
           <WordIcon icon={stg.icon} iconColor={stg.icon_color} size={148} />
         </TouchableOpacity>
 
-        <Text
-          style={[s.wordCardArabic, { color: c.text }]}
-          adjustsFontSizeToFit
-          minimumFontScale={0.5}
-          numberOfLines={2}
-        >
+        <Text style={[s.wordCardArabic, { color: c.text }]}>
           {stg.arabic}
         </Text>
         <Text style={[s.hebrewText, { color: c.label }]}>
@@ -1938,12 +1933,7 @@ export default function LessonScreen() {
           </TouchableOpacity>
         </View>
 
-        <Text
-          style={[s.wordCardArabic, { color: c.text }]}
-          adjustsFontSizeToFit
-          minimumFontScale={0.5}
-          numberOfLines={2}
-        >
+        <Text style={[s.wordCardArabic, { color: c.text }]}>
           {stg.arabic}
         </Text>
         {!!stg.translit && (
@@ -2035,9 +2025,6 @@ export default function LessonScreen() {
           </TouchableOpacity>
           <Text
             style={[s.chooseArabicLarge, { color: "#151515", fontFamily: FONT_AR }]}
-            adjustsFontSizeToFit
-            minimumFontScale={0.45}
-            numberOfLines={2}
           >
             {stg.arabic}
           </Text>
@@ -2219,9 +2206,6 @@ export default function LessonScreen() {
               >
                 <Text
                   style={[s.writeChipText, { color: isCorrect ? c.primary : isWrong ? c.wrong : c.text }]}
-                  adjustsFontSizeToFit
-                  minimumFontScale={0.5}
-                  numberOfLines={2}
                 >
                   {opt.arabic}
                 </Text>
@@ -2310,9 +2294,6 @@ export default function LessonScreen() {
                 >
                   <Text
                     style={[s.matchAr, { color: leftTxt, fontFamily: FONT_AR }]}
-                    adjustsFontSizeToFit
-                    minimumFontScale={0.5}
-                    numberOfLines={2}
                   >
                     {p.arabic}
                   </Text>
@@ -5646,9 +5627,8 @@ const s = StyleSheet.create({
     fontSize: 60,
     fontWeight: "900",
     textAlign: "center",
-    lineHeight: 80,
     marginBottom: 6,
-    flexShrink: 1,
+    paddingHorizontal: 12,
   },
   freqBadge: {
     borderRadius: 50,
