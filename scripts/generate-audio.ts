@@ -24,6 +24,10 @@ import * as dotenv from 'dotenv';
 // Load credentials from backend/.env
 dotenv.config({ path: path.join(__dirname, '../backend/.env') });
 
+// Windows: Node.js doesn't use the system certificate store, so Azure's cert chain
+// can't be verified. Safe to bypass for this developer-only script.
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
+
 // ── Configuration ─────────────────────────────────────────────────────────────
 
 const AZURE_KEY    = process.env.AZURE_SPEECH_KEY    ?? '';
@@ -93,35 +97,48 @@ function sleep(ms: number): Promise<void> {
 
 // ── Voice validation ──────────────────────────────────────────────────────────
 
+async function testVoice(voice: string): Promise<boolean> {
+  const lang   = voice.split('-').slice(0, 2).join('-'); // e.g. ar-PS, ar-SY
+  const ssml   = `<speak version='1.0' xml:lang='${lang}'><voice name='${voice}'>مرحبا</voice></speak>`;
+  const url    = `https://${AZURE_REGION}.tts.speech.microsoft.com/cognitiveservices/v1`;
+  try {
+    const res = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Ocp-Apim-Subscription-Key': AZURE_KEY,
+        'Content-Type':              'application/ssml+xml',
+        'X-Microsoft-OutputFormat':  'audio-16khz-128kbitrate-mono-mp3',
+        'User-Agent':                'LevantiLearn/1.0',
+      },
+      body: ssml,
+      signal,
+    });
+    return res.ok; // 200 = voice is available and working
+  } catch {
+    return false;
+  }
+}
+
 async function selectVoice(preferred: string): Promise<string> {
-  console.log('\n🔍 Checking Azure voice availability...');
-  const url = `https://${AZURE_REGION}.tts.speech.microsoft.com/cognitiveservices/v1/voices/list`;
-  const res = await fetch(url, {
-    headers: { 'Ocp-Apim-Subscription-Key': AZURE_KEY },
-    signal,
-  });
-  if (!res.ok) throw new Error(`Voice list fetch failed: ${res.status} ${await res.text()}`);
+  console.log('\n🔍 Checking Azure voice availability via test synthesis...');
 
-  const voices = await res.json() as Array<{ ShortName: string }>;
-  const names  = new Set(voices.map(v => v.ShortName));
-
-  if (names.has(preferred)) {
-    console.log(`✅ Voice ${preferred} is available.`);
+  if (await testVoice(preferred)) {
+    console.log(`✅ Voice ${preferred} is available and working.`);
     return preferred;
   }
 
-  console.warn(`⚠️  Voice ${preferred} is not available on this account.`);
+  console.warn(`⚠️  Voice ${preferred} is not available in region ${AZURE_REGION}.`);
 
-  if (names.has(FALLBACK_VOICE)) {
-    console.log(`   Fallback available: ${FALLBACK_VOICE}`);
+  if (await testVoice(FALLBACK_VOICE)) {
+    console.log(`   Fallback ${FALLBACK_VOICE} is available.`);
     const answer = await promptUser(`Proceed with ${FALLBACK_VOICE}? (y/N): `);
     if (answer.toLowerCase() !== 'y') { console.log('Aborted.'); process.exit(0); }
     return FALLBACK_VOICE;
   }
 
   throw new Error(
-    `Neither ${preferred} nor ${FALLBACK_VOICE} is available. ` +
-    `Check your Azure subscription region (current: ${AZURE_REGION}).`
+    `Neither ${preferred} nor ${FALLBACK_VOICE} works in region ${AZURE_REGION}.\n` +
+    `Verify your AZURE_SPEECH_KEY and AZURE_SPEECH_REGION in backend/.env.`
   );
 }
 
