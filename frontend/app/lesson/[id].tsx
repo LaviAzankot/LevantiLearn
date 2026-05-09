@@ -628,9 +628,13 @@ export default function LessonScreen() {
   );
 
   // ── Mic permission helper ──────────────────────────────────────────────────
-  const requestMicPermission = async (): Promise<boolean> => {
+  // Cache: once granted we never re-request (avoids stale-status false-negatives)
+  const micGrantedRef = useRef(false);
+
+  const ensureMicPermission = async (): Promise<boolean> => {
+    if (micGrantedRef.current) return true;
     const { status, canAskAgain } = await Audio.requestPermissionsAsync();
-    if (status === 'granted') return true;
+    if (status === 'granted') { micGrantedRef.current = true; return true; }
     if (!canAskAgain) {
       Alert.alert(
         'Microphone Access Required',
@@ -643,7 +647,7 @@ export default function LessonScreen() {
     } else {
       Alert.alert(
         'Microphone Access Required',
-        'Please allow microphone access when prompted to use pronunciation practice.',
+        'Please allow microphone access when prompted.',
       );
     }
     return false;
@@ -752,22 +756,35 @@ export default function LessonScreen() {
   }, []);
 
   const startRecording = async (expectedArabic: string) => {
-    const granted = await requestMicPermission();
+    const granted = await ensureMicPermission();
     if (!granted) return;
+
+    // Clean up any lingering recording from a previous attempt
+    if (recordingRef.current) {
+      try { await recordingRef.current.stopAndUnloadAsync(); } catch {}
+      recordingRef.current = null;
+    }
+
+    // Stop playback before switching audio mode — avoids iOS intermittent failures
+    await stopCurrentAudio();
+
     try {
       await Audio.setAudioModeAsync({
         allowsRecordingIOS: true,
         playsInSilentModeIOS: true,
       });
-      const rec = new Audio.Recording();
-      await rec.prepareToRecordAsync(Audio.RecordingOptionsPresets.HIGH_QUALITY);
-      await rec.startAsync();
-      recordingRef.current = rec;
+      // createAsync is the modern single-call API — more reliable than the
+      // 3-step new/prepare/start pattern which has intermittent race conditions
+      const { recording } = await Audio.Recording.createAsync(
+        Audio.RecordingOptionsPresets.HIGH_QUALITY,
+      );
+      recordingRef.current = recording;
       expectedArabicRef.current = expectedArabic;
       setListenPhase("recording");
       setTimeout(() => finishListenRepeatRecording(), 6000);
-    } catch {
-      Alert.alert('Recording Error', 'Could not start recording. Please try again.');
+    } catch (e) {
+      console.warn("[mic] startRecording failed:", e);
+      setListenPhase("speak"); // reset so user can tap again
     }
   };
 
@@ -802,22 +819,29 @@ export default function LessonScreen() {
   }, [playAudio]);
 
   const startDialogueRecording = async (line: any) => {
-    const granted = await requestMicPermission();
+    const granted = await ensureMicPermission();
     if (!granted) { setDialogueMicState("idle"); return; }
+
+    if (recordingRef.current) {
+      try { await recordingRef.current.stopAndUnloadAsync(); } catch {}
+      recordingRef.current = null;
+    }
+    await stopCurrentAudio();
+
     try {
       await Audio.setAudioModeAsync({
         allowsRecordingIOS: true,
         playsInSilentModeIOS: true,
       });
-      const rec = new Audio.Recording();
-      await rec.prepareToRecordAsync(Audio.RecordingOptionsPresets.HIGH_QUALITY);
-      await rec.startAsync();
-      recordingRef.current = rec;
+      const { recording } = await Audio.Recording.createAsync(
+        Audio.RecordingOptionsPresets.HIGH_QUALITY,
+      );
+      recordingRef.current = recording;
       dialogueLineRef.current = line;
       setDialogueMicState("recording");
       setTimeout(() => finishDialogueRecording(), 7000);
-    } catch {
-      alert("לא ניתן לגשת למיקרופון.");
+    } catch (e) {
+      console.warn("[mic] startDialogueRecording failed:", e);
       setDialogueMicState("idle");
     }
   };
