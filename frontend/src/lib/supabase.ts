@@ -22,5 +22,7 @@ export const supabase = createClient(SUPABASE_URL, SUPABASE_ANON, {
     autoRefreshToken: true,
     persistSession: true,
     detectSessionInUrl: false,
+    // PKCE flow is required for OAuth in React Native (no implicit token in URL)
+    flowType: 'pkce',
   },
 });

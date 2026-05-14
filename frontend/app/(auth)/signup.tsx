@@ -12,6 +12,7 @@ import { useRouter } from 'expo-router';
 import { useColorScheme } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useAuthStore } from '../../src/store/authStore';
+import { SocialAuthButtons } from '../../src/components/SocialAuthButtons';
 
 const C = {
   light: { bg: '#f7f6f2', card: '#ffffff', primary: '#fe4d01', text: '#2e2f2d', label: '#5b5c59', border: '#e3e3de', right: '#00675f' },
@@ -24,6 +25,10 @@ export default function SignupScreen() {
   const router    = useRouter();
   const signUp    = useAuthStore(s => s.signUp);
   const isLoading = useAuthStore(s => s.isLoading);
+
+  // Social sign-in skips the onboarding name form; send them to goals screen
+  // so they still get the dialect/goal setup + paywall flow.
+  const handleSocialSuccess = () => router.replace('/onboarding/goals');
 
   const [name,     setName]     = useState('');
   const [email,    setEmail]    = useState('');
@@ -46,7 +51,8 @@ export default function SignupScreen() {
     }
     try {
       await signUp(email.trim().toLowerCase(), password, name.trim());
-      router.replace('/(tabs)');
+      // New users go through onboarding → paywall before entering the app
+      router.replace('/onboarding/goals');
     } catch (e: any) {
       Alert.alert('Sign up failed', e.message ?? 'Could not create account.');
     }
@@ -153,6 +159,9 @@ export default function SignupScreen() {
             <Text style={[s.terms, { color: c.label }]}>
               By signing up you agree to our Terms of Service and Privacy Policy.
             </Text>
+
+            {/* Social auth — Google + Apple */}
+            <SocialAuthButtons onSuccess={handleSocialSuccess} />
           </View>
 
           {/* Footer */}

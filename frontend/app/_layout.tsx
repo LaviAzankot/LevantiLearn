@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { Stack, useRouter, useSegments } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
-import { useColorScheme, ActivityIndicator, View } from 'react-native';
+import { useColorScheme, ActivityIndicator, View, AppState } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { useFonts } from 'expo-font';
 import {
@@ -19,6 +19,7 @@ import {
 } from '@expo-google-fonts/plus-jakarta-sans';
 import { useAuthStore } from '../src/store/authStore';
 import { audioService } from '../src/services/AudioService';
+import { initSubscription, useSubscriptionStore } from '../src/hooks/useSubscription';
 
 export default function RootLayout() {
   const scheme      = useColorScheme();
@@ -26,6 +27,7 @@ export default function RootLayout() {
   const segments    = useSegments();
   const initialize  = useAuthStore(s => s.initialize);
   const session     = useAuthStore(s => s.session);
+  const profile     = useAuthStore(s => s.profile);
   const isInitialized = useAuthStore(s => s.isInitialized);
 
   const [fontsLoaded] = useFonts({
@@ -46,19 +48,38 @@ export default function RootLayout() {
     audioService.init().catch(e => console.warn('[AudioService] init failed:', e));
   }, []);
 
+  // Initialize RevenueCat once profile is available
+  useEffect(() => {
+    if (!profile?.id) return;
+    initSubscription(profile.id).catch(e =>
+      console.warn('[RevenueCat] init failed:', e),
+    );
+  }, [profile?.id]);
+
+  // Refresh entitlements on every foreground event
+  useEffect(() => {
+    const sub = AppState.addEventListener('change', (state) => {
+      if (state === 'active' && profile?.id) {
+        useSubscriptionStore.getState()._refresh();
+      }
+    });
+    return () => sub.remove();
+  }, [profile?.id]);
+
   // Route protection — redirect based on auth state
   useEffect(() => {
     if (!isInitialized) return;
 
-    const inAuthGroup = segments[0] === '(auth)';
+    const inAuthGroup       = segments[0] === '(auth)';
+    const inOnboardingGroup = segments[0] === 'onboarding';
+    const inPaywall         = segments[0] === 'paywall';
 
     if (!session && !inAuthGroup) {
-      // Not logged in — send to login
       router.replace('/(auth)/login');
     } else if (session && inAuthGroup) {
-      // Already logged in — send to app
       router.replace('/(tabs)');
     }
+    // onboarding/goals and /paywall are accessible while logged in — no redirect needed
   }, [session, isInitialized, segments]);
 
   // Show spinner while fonts or auth are loading
@@ -79,8 +100,11 @@ export default function RootLayout() {
       <Stack screenOptions={{ headerShown: false }}>
         <Stack.Screen name="(auth)" />
         <Stack.Screen name="(tabs)" />
-        <Stack.Screen name="lesson/[id]" options={{ animation: 'slide_from_right' }} />
-        <Stack.Screen name="premium" options={{ animation: 'slide_from_bottom' }} />
+        <Stack.Screen name="lesson/[id]"      options={{ animation: 'slide_from_right' }} />
+        <Stack.Screen name="premium"          options={{ animation: 'slide_from_bottom' }} />
+        <Stack.Screen name="paywall"          options={{ animation: 'slide_from_bottom' }} />
+        <Stack.Screen name="onboarding/goals" options={{ animation: 'slide_from_right' }} />
+        <Stack.Screen name="admin"            options={{ animation: 'slide_from_bottom' }} />
       </Stack>
     </SafeAreaProvider>
   );

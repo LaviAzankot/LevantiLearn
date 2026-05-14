@@ -17,6 +17,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   ios: {
     supportsTablet: false,
     bundleIdentifier: 'com.levantilearn.app',
+    usesAppleSignIn: true,
     infoPlist: {
       NSMicrophoneUsageDescription: 'LevantiLearn needs mic access for pronunciation practice.',
       NSSpeechRecognitionUsageDescription: 'Used to score your Arabic pronunciation.',
@@ -29,6 +30,14 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     },
     package: 'com.levantilearn.app',
     permissions: ['RECORD_AUDIO'],
+    intentFilters: [
+      {
+        action: 'VIEW',
+        autoVerify: true,
+        data: [{ scheme: 'levantilearn', host: 'auth', pathPrefix: '/callback' }],
+        category: ['BROWSABLE', 'DEFAULT'],
+      },
+    ],
   },
   web: {
     bundler: 'metro',

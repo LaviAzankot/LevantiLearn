@@ -27,6 +27,9 @@ import { SvgXml } from "react-native-svg";
 import * as FileSystem from "expo-file-system";
 import { pickAvatarsForLesson, getAvatar } from "../../src/assets/avatars";
 import { audioService } from "../../src/services/AudioService";
+import { useSubscription } from "../../src/hooks/useSubscription";
+import { OutOfHeartsModal } from "../../src/components/OutOfHeartsModal";
+import { preloadCorrectSound, playCorrectSound } from "../../src/utils/SoundManager";
 
 // ── Design tokens ─────────────────────────────────────────────────────────────
 const COLORS = {
@@ -589,6 +592,7 @@ export default function LessonScreen() {
   // ── Speak the Blank state ──────────────────────────────────────────────────
   const [speakBlankRoundIdx, setSpeakBlankRoundIdx] = useState(0);
   const [speakBlankRevealed, setSpeakBlankRevealed] = useState(false);
+  const [speakBlankScoring, setSpeakBlankScoring] = useState(false);
   const [speakBlankPlayingLine, setSpeakBlankPlayingLine] = useState<
     number | null
   >(null);
@@ -606,6 +610,54 @@ export default function LessonScreen() {
   const [masteryScore, setMasteryScore] = useState(0);
   const [masteryDone, setMasteryDone] = useState(false);
 
+  // ── Subscription + hearts ──────────────────────────────────────────────────
+  const { isPremium, currentHearts, nextHeartAt, deductHeart } = useSubscription();
+  const [showHeartsModal, setShowHeartsModal] = useState(false);
+
+  // Refs to track previous wrong-answer state so we fire exactly once per transition
+  const _prevWrongLen    = useRef(0);
+  const _prevBuildWrong  = useRef(false);
+  const _prevMatchWrong  = useRef<string | null>(null);
+  const _prevListenPhase = useRef("speak");
+  const _prevDialogueMic = useRef("idle");
+  const _prevShadowPhase = useRef("idle");
+
+  // Deduct 1 heart each time a new wrong-answer event fires
+  useEffect(() => {
+    if (wrongAnswers.length > _prevWrongLen.current) deductHeart();
+    _prevWrongLen.current = wrongAnswers.length;
+  }, [wrongAnswers]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
+    if (buildWrong && !_prevBuildWrong.current) deductHeart();
+    _prevBuildWrong.current = buildWrong;
+  }, [buildWrong]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
+    if (matchWrong && !_prevMatchWrong.current) deductHeart();
+    _prevMatchWrong.current = matchWrong;
+  }, [matchWrong]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
+    if (listenPhase === "wrong" && _prevListenPhase.current !== "wrong") deductHeart();
+    _prevListenPhase.current = listenPhase;
+  }, [listenPhase]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
+    if (dialogueMicState === "wrong" && _prevDialogueMic.current !== "wrong") deductHeart();
+    _prevDialogueMic.current = dialogueMicState;
+  }, [dialogueMicState]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
+    if (shadowPhase === "wrong" && _prevShadowPhase.current !== "wrong") deductHeart();
+    _prevShadowPhase.current = shadowPhase;
+  }, [shadowPhase]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // Show out-of-hearts modal the moment hearts hit 0 mid-lesson
+  useEffect(() => {
+    if (!isPremium && currentHearts === 0) setShowHeartsModal(true);
+  }, [currentHearts, isPremium]);
+
   // ── Feedback overlay ───────────────────────────────────────────────────────
   const [feedbackVisible, setFeedbackVisible] = useState(false);
   const [feedbackCorrect, setFeedbackCorrect] = useState(false);
@@ -614,6 +666,8 @@ export default function LessonScreen() {
 
   // ── Refs ───────────────────────────────────────────────────────────────────
   const audioSoundRef = useRef<Audio.Sound | null>(null);
+  const prefetchSoundRef = useRef<Audio.Sound | null>(null);
+  const prefetchTextRef = useRef<string>('');
   const recordingRef = useRef<Audio.Recording | null>(null);
   const expectedArabicRef = useRef<string>("");
   const dialogueLineRef = useRef<any>(null);
@@ -682,18 +736,55 @@ export default function LessonScreen() {
     }
   }, []);
 
+  const prefetchAudio = useCallback(async (text: string) => {
+    if (!text || prefetchTextRef.current === text) return;
+    const localMod = audioService.getModuleForText(text);
+    if (localMod !== null) return; // local file — no need to prefetch
+    try {
+      const prev = prefetchSoundRef.current;
+      if (prev) { prefetchSoundRef.current = null; await prev.unloadAsync().catch(() => {}); }
+      prefetchTextRef.current = text;
+      const { sound } = await Audio.Sound.createAsync(
+        { uri: `${API}/api/tts/synthesize?text=${encodeURIComponent(text)}` },
+        { shouldPlay: false },
+      );
+      prefetchSoundRef.current = sound;
+    } catch {}
+  }, []);
+
   const playAudio = useCallback(
     async (text: string, onEnd?: () => void) => {
       await stopCurrentAudio();
       setAudioProgress(0.01);
       try {
         await Audio.setAudioModeAsync({ playsInSilentModeIOS: true });
-        // Prefer local pre-generated file; fall back to backend TTS
+        // Use prefetched sound if available, otherwise load fresh
         const localMod = audioService.getModuleForText(text);
+        let sound: Audio.Sound;
+        if (prefetchTextRef.current === text && prefetchSoundRef.current && !localMod) {
+          sound = prefetchSoundRef.current;
+          prefetchSoundRef.current = null;
+          prefetchTextRef.current = '';
+          await sound.setOnPlaybackStatusUpdate((status: any) => {
+            if (!status.isLoaded) return;
+            const dur = status.durationMillis ?? 0;
+            const pos = status.positionMillis ?? 0;
+            if (dur > 0) setAudioProgress(Math.max(0.01, Math.min(pos / dur, 1)));
+            if (status.didJustFinish) {
+              audioSoundRef.current = null;
+              sound.unloadAsync().catch(() => {});
+              setAudioProgress(0);
+              onEnd?.();
+            }
+          });
+          await sound.playAsync();
+          audioSoundRef.current = sound;
+          return;
+        }
         const source: Parameters<typeof Audio.Sound.createAsync>[0] = localMod !== null
           ? (localMod as any)
           : { uri: `${API}/api/tts/synthesize?text=${encodeURIComponent(text)}` };
-        const { sound } = await Audio.Sound.createAsync(
+        const { sound: newSound } = await Audio.Sound.createAsync(
           source,
           { shouldPlay: true },
           (status: any) => {
@@ -704,13 +795,13 @@ export default function LessonScreen() {
               setAudioProgress(Math.max(0.01, Math.min(pos / dur, 1)));
             if (status.didJustFinish) {
               audioSoundRef.current = null;
-              sound.unloadAsync().catch(() => {});
+              newSound.unloadAsync().catch(() => {});
               setAudioProgress(0);
               onEnd?.();
             }
           },
         );
-        audioSoundRef.current = sound;
+        audioSoundRef.current = newSound;
       } catch {
         onEnd?.();
       }
@@ -781,7 +872,7 @@ export default function LessonScreen() {
       recordingRef.current = recording;
       expectedArabicRef.current = expectedArabic;
       setListenPhase("recording");
-      setTimeout(() => finishListenRepeatRecording(), 6000);
+      setTimeout(() => finishListenRepeatRecording(), 2500);
     } catch (e) {
       console.warn("[mic] startRecording failed:", e);
       setListenPhase("speak"); // reset so user can tap again
@@ -1058,11 +1149,18 @@ export default function LessonScreen() {
     return map;
   }, [expandedLesson]);
 
+  // ── Preload sound effects ─────────────────────────────────────────────────
+  useEffect(() => { preloadCorrectSound(); }, []);
+
   // ── Load lesson ────────────────────────────────────────────────────────────
   useEffect(() => {
     fetch(`${API}/api/lessons/${id}`)
       .then((r) => r.json())
       .then((data) => {
+        // Prefetch first stage audio in parallel with state update
+        const firstStage = (data.stages ?? [])[0];
+        const firstText = firstStage?.arabic ?? firstStage?.sentence_arabic ?? firstStage?.audio_text ?? null;
+        if (firstText) prefetchAudio(firstText);
         setLesson(data);
         setLoading(false);
       })
@@ -1070,25 +1168,32 @@ export default function LessonScreen() {
         setError("Could not load lesson. Is the backend running?");
         setLoading(false);
       });
-  }, [id]);
+  }, [id, prefetchAudio]);
 
   // ── Auto-play TTS on stage mount ───────────────────────────────────────────
   useEffect(() => {
     if (!expandedLesson) return;
-    const stg = (expandedLesson.stages ?? [])[stage];
-    let text: string | null = null;
-    if (stg?.type === "word_card") text = stg.arabic;
-    else if (stg?.type === "listen_repeat") text = stg.arabic;
-    else if (stg?.type === "choose_translation") text = stg.arabic;
-    else if (stg?.type === "write_translation") text = stg.arabic;
-    else if (stg?.type === "sentence_build") text = stg.sentence_arabic;
-    else if (stg?.type === "shadowing") {
-      setShadowPhase("idle");
-      text = null;
-    } else if (stg?.type === "listening_comprehension") text = stg.audio_text;
+    const stages = expandedLesson.stages ?? [];
+    const stg = stages[stage];
+    const getStageText = (s: any): string | null => {
+      if (!s) return null;
+      if (s.type === "word_card") return s.arabic;
+      if (s.type === "listen_repeat") return s.arabic;
+      if (s.type === "choose_translation") return s.arabic;
+      if (s.type === "write_translation") return s.arabic;
+      if (s.type === "sentence_build") return s.sentence_arabic;
+      if (s.type === "listening_comprehension") return s.audio_text;
+      return null;
+    };
+    if (stg?.type === "shadowing") setShadowPhase("idle");
+    const text = getStageText(stg);
     if (!text) return;
-    playAudio(text);
-  }, [stage, expandedLesson, playAudio]);
+    // Prefetch next stage audio in background
+    const nextText = getStageText(stages[stage + 1]);
+    if (nextText) prefetchAudio(nextText);
+    const t = setTimeout(() => playAudio(text), 600);
+    return () => clearTimeout(t);
+  }, [stage, expandedLesson, playAudio, prefetchAudio]);
 
   // ── STT result handler ─────────────────────────────────────────────────────
   useEffect(() => {
@@ -1101,7 +1206,7 @@ export default function LessonScreen() {
           goNextStage();
           setListenPhase("speak");
           setSpeechResult(null);
-        }, 1400);
+        }, 800);
       } else {
         setListenPhase("wrong");
         setTimeout(() => {
@@ -1143,7 +1248,9 @@ export default function LessonScreen() {
       }
     } else if (stg?.type === "speak_the_blank") {
       const rounds = stg.rounds ?? [];
+      setSpeakBlankScoring(false);
       if (speechResult.score >= PASS_THRESHOLD) {
+        playCorrectSound();
         setListenPhase("correct");
         setTimeout(() => {
           setSpeechResult(null);
@@ -1242,6 +1349,7 @@ export default function LessonScreen() {
     feedbackAnim.setValue(80);
     setSpeakBlankRoundIdx(0);
     setSpeakBlankRevealed(false);
+    setSpeakBlankScoring(false);
     setSpeakBlankPlayingLine(null);
     setSubjectLetter(0);
     setSubjectAudience("him");
@@ -2348,6 +2456,7 @@ export default function LessonScreen() {
                     onPress={() => {
                       if (isRightMatched || !matchSelected) return;
                       if (rightPair.id === matchSelected) {
+                        playCorrectSound();
                         setMatchedIds((prev) => [...prev, rightPair.id]);
                         setMatchSelected(null);
                       } else {
@@ -5189,15 +5298,20 @@ export default function LessonScreen() {
                 { backgroundColor: micBg, shadowColor: micBg },
               ]}
               onPress={() => {
-                if (listenPhase === "recording") finishListenRepeatRecording();
-                else if (listenPhase === "speak" || listenPhase === "wrong") {
+                if (listenPhase === "recording") {
+                  setSpeakBlankScoring(true);
+                  setTimeout(() => finishListenRepeatRecording(), 400);
+                } else if (listenPhase === "speak" || listenPhase === "wrong") {
                   const r = (currentStage.rounds ?? [])[speakBlankRoundIdx];
                   if (r?.answer?.blank) startRecording(r.answer.blank.arabic);
                 }
               }}
+              disabled={speakBlankScoring}
               activeOpacity={0.87}
             >
-              {isSuccess ? (
+              {speakBlankScoring ? (
+                <ActivityIndicator color="#fff" size="large" />
+              ) : isSuccess ? (
                 <Ionicons name="checkmark" size={38} color="#fff" />
               ) : isRetry ? (
                 <Ionicons name="refresh" size={28} color="#fff" />
@@ -5552,6 +5666,14 @@ export default function LessonScreen() {
 
         {/* Action bar */}
         {renderActionBar()}
+
+        {/* Out-of-hearts modal — shown when free user reaches 0 hearts mid-lesson */}
+        <OutOfHeartsModal
+          visible={showHeartsModal}
+          nextHeartAt={nextHeartAt}
+          onGoPremiun={() => { setShowHeartsModal(false); router.push("/paywall"); }}
+          onWait={() => setShowHeartsModal(false)}
+        />
       </View>
     </SafeAreaView>
   );

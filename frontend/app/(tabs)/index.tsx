@@ -1,6 +1,6 @@
 /**
  * LevantiLearn — Learn / Home tab
- * Practice-style redesign: topic filter pills + horizontal lesson cards with avatars
+ * Integrates hearts system, subscription paywall, and locked-lesson flow.
  */
 import React, { useState, useEffect, useCallback } from 'react';
 import {
@@ -14,6 +14,11 @@ import { Ionicons } from '@expo/vector-icons';
 import { api } from '../../src/services/api';
 import { useAuthStore } from '../../src/store/authStore';
 import { getAvatar } from '../../src/assets/avatars';
+import { useSubscription } from '../../src/hooks/useSubscription';
+import { HeartsBar } from '../../src/components/HeartsBar';
+import { OutOfHeartsModal } from '../../src/components/OutOfHeartsModal';
+import { LockedLessonOverlay } from '../../src/components/LockedLessonOverlay';
+import { supabase } from '../../src/lib/supabase';
 
 type Lesson = {
   id: string; topic: string; topic_ar: string;
@@ -75,6 +80,15 @@ function getGreeting() {
   return 'Good night';
 }
 
+// Analytics helper
+async function logEvent(name: string, data?: Record<string, unknown>) {
+  try {
+    await supabase.from('analytics_events').insert({
+      event_name: name, data, created_at: new Date().toISOString(),
+    });
+  } catch {}
+}
+
 // ═══════════════════════════════════════════════════════════════════════════════
 export default function HomeTab() {
   const router   = useRouter();
@@ -82,16 +96,21 @@ export default function HomeTab() {
   const c        = C[scheme === 'dark' ? 'dark' : 'light'];
   const profile  = useAuthStore(s => s.profile);
 
-  const [lessons,    setLessons]    = useState<Lesson[]>([]);
-  const [dueCount,   setDueCount]   = useState(0);
-  const [loading,    setLoading]    = useState(true);
-  const [refreshing, setRefreshing] = useState(false);
-  const [error,      setError]      = useState('');
-  const [filter,     setFilter]     = useState<string | null>(null);
+  // Subscription + hearts (single source of truth)
+  const {
+    isPremium, currentHearts, nextHeartAt,
+  } = useSubscription();
+
+  const [lessons,          setLessons]          = useState<Lesson[]>([]);
+  const [dueCount,         setDueCount]         = useState(0);
+  const [loading,          setLoading]          = useState(true);
+  const [refreshing,       setRefreshing]       = useState(false);
+  const [error,            setError]            = useState('');
+  const [filter,           setFilter]           = useState<string | null>(null);
+  const [showHeartsModal,  setShowHeartsModal]  = useState(false);
 
   const load = useCallback(async () => {
     try {
-      const isPremium = profile?.is_premium ?? false;
       const userId    = profile?.id ?? 'guest';
       const [catalogData, due] = await Promise.all([
         api.lessons.getCatalog(isPremium),
@@ -106,7 +125,7 @@ export default function HomeTab() {
       setLoading(false);
       setRefreshing(false);
     }
-  }, [profile]);
+  }, [profile, isPremium]);
 
   useEffect(() => { load(); }, [load]);
 
@@ -115,12 +134,29 @@ export default function HomeTab() {
   const lessonsForLevel = (levelId: string) =>
     lessons.filter(l => l.level === levelId);
 
-  const visibleGroups  = LEVEL_GROUPS.filter(g => lessonsForLevel(g.id).length > 0);
-  const displayGroups  = filter
+  const visibleGroups = LEVEL_GROUPS.filter(g => lessonsForLevel(g.id).length > 0);
+  const displayGroups = filter
     ? visibleGroups.filter(g => g.id === filter)
     : visibleGroups;
 
   const nextLesson = lessons.find(l => !l.locked && !l.completed) ?? lessons[0];
+
+  // ── Lesson card tap handler ────────────────────────────────────────────────
+  const handleLessonPress = (lesson: Lesson) => {
+    if (lesson.locked) {
+      // Curriculum lock → show paywall
+      logEvent('upsell_shown', { source: 'locked_lesson', lesson_id: lesson.id });
+      router.push('/paywall');
+      return;
+    }
+    if (!isPremium && currentHearts <= 0 && !lesson.completed) {
+      // Hearts depleted and not a replay → show out-of-hearts modal
+      logEvent('hearts_empty', { lesson_id: lesson.id });
+      setShowHeartsModal(true);
+      return;
+    }
+    router.push(`/lesson/${lesson.id}`);
+  };
 
   // ── Loading ──────────────────────────────────────────────────────────────────
   if (loading) {
@@ -163,16 +199,42 @@ export default function HomeTab() {
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} tintColor={c.primary} />
         }
       >
-        {/* ── Top bar: greeting + logo + profile btn ───────────────────────── */}
+        {/* ── Top bar ─────────────────────────────────────────────────────── */}
         <View style={s.header}>
           <View>
             <Text style={[s.greeting, { color: c.label }]}>{getGreeting()} 👋</Text>
             <Text style={[s.logo,     { color: c.text  }]}>LevantiLearn</Text>
           </View>
-          <TouchableOpacity style={[s.avatarBtn, { backgroundColor: c.primary + '18' }]} activeOpacity={0.8}>
-            <Ionicons name="person" size={18} color={c.primary} />
-          </TouchableOpacity>
+          <View style={s.headerRight}>
+            {/* Hearts bar — hidden for premium */}
+            <HeartsBar
+              hearts={currentHearts}
+              nextHeartAt={nextHeartAt}
+              isPremium={isPremium}
+            />
+            <TouchableOpacity
+              style={[s.avatarBtn, { backgroundColor: c.primary + '18' }]}
+              activeOpacity={0.8}
+            >
+              <Ionicons name="person" size={18} color={c.primary} />
+            </TouchableOpacity>
+          </View>
         </View>
+
+        {/* ── Premium banner (free users) ──────────────────────────────────── */}
+        {!isPremium && (
+          <TouchableOpacity
+            style={[s.premiumBanner, { backgroundColor: c.primary + '12', borderColor: c.primary + '30' }]}
+            onPress={() => router.push('/paywall')}
+            activeOpacity={0.88}
+          >
+            <Ionicons name="diamond" size={18} color={c.primary} />
+            <Text style={[s.premiumBannerText, { color: c.primary }]}>
+              Unlock all lessons — Start free trial
+            </Text>
+            <Ionicons name="chevron-forward" size={16} color={c.primary} />
+          </TouchableOpacity>
+        )}
 
         {/* ── Page title + subtitle ────────────────────────────────────────── */}
         <View style={s.titleSection}>
@@ -182,7 +244,7 @@ export default function HomeTab() {
           </Text>
         </View>
 
-        {/* ── SRS Review banner (only when words are due) ──────────────────── */}
+        {/* ── SRS Review banner ────────────────────────────────────────────── */}
         {dueCount > 0 && (
           <TouchableOpacity
             style={[s.reviewBanner, { backgroundColor: c.card, borderColor: c.primary + '30' }]}
@@ -242,13 +304,14 @@ export default function HomeTab() {
                 const isDone    = lesson.completed;
                 const isCurrent = lesson.id === nextLesson?.id;
                 const cardBg    = scheme === 'dark' ? grp.cardDark : grp.cardLight;
+                // Show hearts-empty treatment for non-premium users with 0 hearts on new lessons
+                const heartsBlocked = !isPremium && currentHearts <= 0 && !isDone && !isLocked;
 
                 return (
                   <TouchableOpacity
                     key={lesson.id}
-                    style={[s.lessonCard, { backgroundColor: cardBg, opacity: isLocked ? 0.55 : 1 }]}
-                    onPress={() => !isLocked && router.push(`/lesson/${lesson.id}`)}
-                    disabled={isLocked}
+                    style={[s.lessonCard, { backgroundColor: cardBg, opacity: (isLocked || heartsBlocked) ? 0.7 : 1, overflow: 'hidden' }]}
+                    onPress={() => handleLessonPress(lesson)}
                     activeOpacity={0.88}
                   >
                     {/* Status badge top-right */}
@@ -256,13 +319,17 @@ export default function HomeTab() {
                       <View style={[s.statusBadge, { backgroundColor: c.right }]}>
                         <Ionicons name="checkmark" size={13} color="#fff" />
                       </View>
-                    ) : isCurrent ? (
+                    ) : isCurrent && !isLocked ? (
                       <View style={[s.statusBadge, { backgroundColor: c.primary }]}>
                         <Ionicons name="play" size={13} color="#fff" />
                       </View>
                     ) : isLocked ? (
                       <View style={[s.statusBadge, { backgroundColor: 'rgba(0,0,0,0.2)' }]}>
                         <Ionicons name="lock-closed" size={13} color="#fff" />
+                      </View>
+                    ) : heartsBlocked ? (
+                      <View style={[s.statusBadge, { backgroundColor: '#fe4d01' }]}>
+                        <Ionicons name="heart-dislike" size={13} color="#fff" />
                       </View>
                     ) : null}
 
@@ -291,6 +358,13 @@ export default function HomeTab() {
                         resizeMode="contain"
                       />
                     </View>
+
+                    {/* Locked overlay — tappable → paywall */}
+                    {isLocked && (
+                      <LockedLessonOverlay
+                        onPress={() => router.push('/paywall')}
+                      />
+                    )}
                   </TouchableOpacity>
                 );
               })}
@@ -300,6 +374,17 @@ export default function HomeTab() {
 
         <View style={{ height: 40 }} />
       </ScrollView>
+
+      {/* Out-of-hearts modal */}
+      <OutOfHeartsModal
+        visible={showHeartsModal}
+        nextHeartAt={nextHeartAt}
+        onGoPremiun={() => {
+          setShowHeartsModal(false);
+          router.push('/paywall');
+        }}
+        onWait={() => setShowHeartsModal(false)}
+      />
     </SafeAreaView>
   );
 }
@@ -338,7 +423,6 @@ const s = StyleSheet.create({
   safe:   { flex: 1 },
   scroll: { paddingBottom: 32 },
 
-  // Loading / error
   loadingWrap: { flex: 1, alignItems: 'center', justifyContent: 'center', gap: 16 },
   loadingText: { fontSize: 15 },
   errorTitle:  { fontSize: 18, fontWeight: '700', marginTop: 8 },
@@ -346,16 +430,22 @@ const s = StyleSheet.create({
   retryBtn:    { marginTop: 8, paddingHorizontal: 28, paddingVertical: 12, borderRadius: 50 },
   retryText:   { color: '#fff', fontWeight: '700', fontSize: 15 },
 
-  // Header
   header: {
     flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center',
     paddingHorizontal: 24, paddingTop: 20, paddingBottom: 8,
   },
-  greeting:  { fontSize: 13, fontWeight: '500', marginBottom: 2 },
-  logo:      { fontSize: 24, fontWeight: '800', letterSpacing: -0.5 },
-  avatarBtn: { width: 38, height: 38, borderRadius: 19, alignItems: 'center', justifyContent: 'center' },
+  headerRight: { flexDirection: 'row', alignItems: 'center', gap: 10 },
+  greeting:    { fontSize: 13, fontWeight: '500', marginBottom: 2 },
+  logo:        { fontSize: 24, fontWeight: '800', letterSpacing: -0.5 },
+  avatarBtn:   { width: 38, height: 38, borderRadius: 19, alignItems: 'center', justifyContent: 'center' },
 
-  // Title section
+  premiumBanner: {
+    flexDirection: 'row', alignItems: 'center', gap: 10,
+    marginHorizontal: 24, marginTop: 12, marginBottom: 4,
+    borderRadius: 14, borderWidth: 1.5, paddingHorizontal: 16, paddingVertical: 11,
+  },
+  premiumBannerText: { flex: 1, fontSize: 14, fontWeight: '700' },
+
   titleSection: {
     paddingHorizontal: 24, paddingTop: 28, paddingBottom: 32, alignItems: 'center',
   },
@@ -368,7 +458,6 @@ const s = StyleSheet.create({
     textAlign: 'center', lineHeight: 24,
   },
 
-  // Review banner
   reviewBanner: {
     flexDirection: 'row', alignItems: 'center',
     marginHorizontal: 24, marginBottom: 28,
@@ -381,7 +470,6 @@ const s = StyleSheet.create({
   reviewBannerSub:   { fontSize: 12, marginTop: 2, lineHeight: 16 },
   reviewBannerArrow: { width: 32, height: 32, borderRadius: 16, alignItems: 'center', justifyContent: 'center' },
 
-  // Filter pills
   filterRow: { paddingHorizontal: 24, gap: 10, paddingBottom: 36 },
   pill: {
     flexDirection: 'row', alignItems: 'center', gap: 8,
@@ -393,18 +481,16 @@ const s = StyleSheet.create({
   pillIcon: { width: 24, height: 24, borderRadius: 7, alignItems: 'center', justifyContent: 'center' },
   pillText: { fontSize: 15, fontWeight: '600' },
 
-  // Topic section
   topicSection: { marginBottom: 52 },
   sectionIntro: { paddingHorizontal: 24, marginBottom: 20, alignItems: 'center' },
   sectionTitle: { fontSize: 28, fontWeight: '800', letterSpacing: -0.8, marginBottom: 6, textAlign: 'center' },
   sectionDesc:  { fontSize: 15, fontStyle: 'italic', lineHeight: 22, textAlign: 'center' },
 
-  // Lesson cards row
   lessonRow: { paddingHorizontal: 24, gap: 16, paddingVertical: 8 },
   lessonCard: {
     width: 280, minHeight: 340, borderRadius: 24,
     padding: 24, paddingBottom: 156,
-    overflow: 'hidden', position: 'relative',
+    position: 'relative',
     borderWidth: 2.5, borderColor: 'rgba(255,255,255,0.55)',
     shadowColor: '#f59e0b', shadowOpacity: 0.16,
     shadowOffset: { width: 0, height: 8 }, shadowRadius: 20, elevation: 5,
@@ -419,14 +505,12 @@ const s = StyleSheet.create({
   },
   cardTagText: { fontSize: 12, fontWeight: '700', color: '#2d2416' },
 
-  // Avatar
   cardAvatarWrap: {
     position: 'absolute', bottom: 0, left: 0, right: 0,
     alignItems: 'center', pointerEvents: 'none' as any,
   },
   cardAvatar: { width: 148, height: 148 },
 
-  // Status badge
   statusBadge: {
     position: 'absolute', top: 16, right: 16,
     width: 30, height: 30, borderRadius: 15,

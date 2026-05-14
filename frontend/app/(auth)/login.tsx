@@ -1,17 +1,18 @@
 /**
- * Login screen — Supabase email/password auth
+ * Login screen — email/password + Google + Apple sign-in
  */
 import React, { useState } from 'react';
 import {
   View, Text, TextInput, TouchableOpacity,
   StyleSheet, KeyboardAvoidingView, Platform,
-  ActivityIndicator, Alert,
+  ActivityIndicator, Alert, ScrollView,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
 import { useColorScheme } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useAuthStore } from '../../src/store/authStore';
+import { SocialAuthButtons } from '../../src/components/SocialAuthButtons';
 
 const C = {
   light: { bg: '#f7f6f2', card: '#ffffff', primary: '#fe4d01', text: '#2e2f2d', label: '#5b5c59', border: '#e3e3de' },
@@ -19,10 +20,10 @@ const C = {
 };
 
 export default function LoginScreen() {
-  const scheme   = useColorScheme();
-  const c        = C[scheme === 'dark' ? 'dark' : 'light'];
-  const router   = useRouter();
-  const signIn   = useAuthStore(s => s.signIn);
+  const scheme    = useColorScheme();
+  const c         = C[scheme === 'dark' ? 'dark' : 'light'];
+  const router    = useRouter();
+  const signIn    = useAuthStore(s => s.signIn);
   const isLoading = useAuthStore(s => s.isLoading);
 
   const [email,    setEmail]    = useState('');
@@ -42,18 +43,25 @@ export default function LoginScreen() {
     }
   };
 
+  // Social sign-in lands existing users directly on the main tabs.
+  // New users created via social auth skip onboarding (no display_name needed).
+  const handleSocialSuccess = () => router.replace('/(tabs)');
+
   return (
     <SafeAreaView style={[s.safe, { backgroundColor: c.bg }]}>
       <KeyboardAvoidingView
         style={{ flex: 1 }}
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       >
-        <View style={s.inner}>
-
+        <ScrollView
+          contentContainerStyle={s.inner}
+          keyboardShouldPersistTaps="handled"
+          showsVerticalScrollIndicator={false}
+        >
           {/* Logo */}
           <View style={s.logoWrap}>
             <Text style={[s.logoText, { color: c.primary }]}>LevantiLearn</Text>
-            <Text style={[s.logoSub, { color: c.label }]}>Learn Arabic</Text>
+            <Text style={[s.logoSub,  { color: c.label  }]}>Learn Levantine Arabic</Text>
           </View>
 
           {/* Card */}
@@ -93,7 +101,7 @@ export default function LoginScreen() {
               </TouchableOpacity>
             </View>
 
-            {/* Submit */}
+            {/* Sign in button */}
             <TouchableOpacity
               style={[s.btn, { backgroundColor: c.primary, opacity: isLoading ? 0.7 : 1 }]}
               onPress={handleLogin}
@@ -105,6 +113,9 @@ export default function LoginScreen() {
                 : <Text style={s.btnText}>Sign in</Text>
               }
             </TouchableOpacity>
+
+            {/* Social auth — Google + Apple */}
+            <SocialAuthButtons onSuccess={handleSocialSuccess} />
           </View>
 
           {/* Footer */}
@@ -115,7 +126,7 @@ export default function LoginScreen() {
             </TouchableOpacity>
           </View>
 
-        </View>
+        </ScrollView>
       </KeyboardAvoidingView>
     </SafeAreaView>
   );
@@ -123,7 +134,7 @@ export default function LoginScreen() {
 
 const s = StyleSheet.create({
   safe:      { flex: 1 },
-  inner:     { flex: 1, justifyContent: 'center', paddingHorizontal: 24, gap: 24 },
+  inner:     { flexGrow: 1, justifyContent: 'center', paddingHorizontal: 24, paddingVertical: 32, gap: 24 },
   logoWrap:  { alignItems: 'center', gap: 6 },
   logoText:  { fontSize: 32, fontWeight: '800', letterSpacing: -1 },
   logoSub:   { fontSize: 15 },
