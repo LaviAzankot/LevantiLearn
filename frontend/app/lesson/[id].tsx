@@ -30,6 +30,9 @@ import { audioService } from "../../src/services/AudioService";
 import { useSubscription } from "../../src/hooks/useSubscription";
 import { OutOfHeartsModal } from "../../src/components/OutOfHeartsModal";
 import { preloadCorrectSound, playCorrectSound } from "../../src/utils/SoundManager";
+import { MAX_HEARTS } from "../../src/constants/subscriptions";
+import { useMascot } from "../../src/hooks/useMascot";
+import { MascotDisplay } from "../../src/components/MascotDisplay";
 
 // ── Design tokens ─────────────────────────────────────────────────────────────
 const COLORS = {
@@ -612,6 +615,9 @@ export default function LessonScreen() {
 
   // ── Subscription + hearts ──────────────────────────────────────────────────
   const { isPremium, currentHearts, nextHeartAt, deductHeart } = useSubscription();
+
+  // ── Mascot ─────────────────────────────────────────────────────────────────
+  const mascot = useMascot();
   const [showHeartsModal, setShowHeartsModal] = useState(false);
 
   // Refs to track previous wrong-answer state so we fire exactly once per transition
@@ -891,6 +897,7 @@ export default function LessonScreen() {
     const result = await scoreFromUri(rec.getURI(), line?.target_voweled ?? "");
     setLastTranscript(result.transcript ?? "");
     if (result.passed) {
+      mascot.onCorrectAnswer();
       playFeedbackSound("correct");
       setDialogueMicState("correct");
       playAudio(line?.full_arabic ?? "", () => {
@@ -902,6 +909,7 @@ export default function LessonScreen() {
         }, 600);
       });
     } else {
+      mascot.onWrongAnswer();
       playFeedbackSound("wrong");
       setDialogueFailCount((f) => f + 1);
       setDialogueMicState("wrong");
@@ -1149,8 +1157,11 @@ export default function LessonScreen() {
     return map;
   }, [expandedLesson]);
 
-  // ── Preload sound effects ─────────────────────────────────────────────────
-  useEffect(() => { preloadCorrectSound(); }, []);
+  // ── Preload sound effects + start mascot ─────────────────────────────────
+  useEffect(() => {
+    preloadCorrectSound();
+    mascot.onLessonStart();
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   // ── Load lesson ────────────────────────────────────────────────────────────
   useEffect(() => {
@@ -1201,6 +1212,7 @@ export default function LessonScreen() {
     if (!speechResult) return;
     if (stg?.type === "listen_repeat") {
       if (speechResult.score >= PASS_THRESHOLD) {
+        mascot.onCorrectAnswer();
         setListenPhase("correct");
         setTimeout(() => {
           goNextStage();
@@ -1208,6 +1220,7 @@ export default function LessonScreen() {
           setSpeechResult(null);
         }, 800);
       } else {
+        mascot.onWrongAnswer();
         setListenPhase("wrong");
         setTimeout(() => {
           setListenPhase("speak");
@@ -1250,6 +1263,7 @@ export default function LessonScreen() {
       const rounds = stg.rounds ?? [];
       setSpeakBlankScoring(false);
       if (speechResult.score >= PASS_THRESHOLD) {
+        mascot.onCorrectAnswer();
         playCorrectSound();
         setListenPhase("correct");
         setTimeout(() => {
@@ -1265,6 +1279,7 @@ export default function LessonScreen() {
           }
         }, 1100);
       } else {
+        mascot.onWrongAnswer();
         setListenPhase("wrong");
         setTimeout(() => {
           setListenPhase("speak");
@@ -1272,7 +1287,7 @@ export default function LessonScreen() {
         }, 1200);
       }
     }
-  }, [speechResult]);
+  }, [speechResult]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // ── Dialogue: auto-advance NPC lines ──────────────────────────────────────
   useEffect(() => {
@@ -1369,6 +1384,7 @@ export default function LessonScreen() {
         resetExerciseState();
       } else {
         setCompleted(true);
+        mascot.onLessonComplete();
         playFeedbackSound("complete");
       }
       Animated.timing(stageOpacity, {
@@ -1472,6 +1488,7 @@ export default function LessonScreen() {
       <CompleteScreen
         c={c}
         lesson={expandedLesson}
+        mascot={mascot}
         onHome={() => router.push("/")}
         onNext={expandedLesson?.next_lesson ? () => router.replace(`/lesson/${expandedLesson.next_lesson}`) : undefined}
       />
@@ -2456,10 +2473,12 @@ export default function LessonScreen() {
                     onPress={() => {
                       if (isRightMatched || !matchSelected) return;
                       if (rightPair.id === matchSelected) {
+                        mascot.onCorrectAnswer();
                         playCorrectSound();
                         setMatchedIds((prev) => [...prev, rightPair.id]);
                         setMatchSelected(null);
                       } else {
+                        mascot.onWrongAnswer();
                         setMatchWrong(rightPair.id);
                         setTimeout(() => setMatchWrong(null), 500);
                         setMatchSelected(null);
@@ -5565,7 +5584,7 @@ export default function LessonScreen() {
   return (
     <SafeAreaView style={[s.safe, { backgroundColor: c.background }]}>
       <View style={s.centeredWrapper}>
-        {/* Header — X circle · back arrow · progress bar · skip arrow · counter */}
+        {/* Header — X circle · back arrow · progress bar · skip arrow · hearts */}
         <View style={[s.header, { backgroundColor: c.background }]}>
           <TouchableOpacity
             onPress={() => router.back()}
@@ -5592,9 +5611,18 @@ export default function LessonScreen() {
           <TouchableOpacity onPress={goNextStage} style={s.headerArrowBtn}>
             <Ionicons name="chevron-forward" size={18} color={c.label} />
           </TouchableOpacity>
-          <Text style={[s.stageCountText, { color: c.label }]}>
-            {stage + 1}/{totalStages}
-          </Text>
+          {!isPremium && (
+            <View style={s.headerHeartsRow}>
+              {Array.from({ length: MAX_HEARTS }).map((_, i) => (
+                <Ionicons
+                  key={i}
+                  name={i < currentHearts ? 'heart' : 'heart-outline'}
+                  size={15}
+                  color={i < currentHearts ? '#fe4d01' : '#d4d0c8'}
+                />
+              ))}
+            </View>
+          )}
         </View>
 
         {/* Eyebrow label — orange uppercase, matches design */}
@@ -5674,6 +5702,14 @@ export default function LessonScreen() {
           onGoPremiun={() => { setShowHeartsModal(false); router.push("/paywall"); }}
           onWait={() => setShowHeartsModal(false)}
         />
+
+        {/* Mascot — floating top-left overlay */}
+        <MascotDisplay
+          mascotState={mascot.mascotState}
+          mascotImage={mascot.mascotImage}
+          bubbleText={mascot.bubbleText}
+          streakCount={mascot.streakCount}
+        />
       </View>
     </SafeAreaView>
   );
@@ -5738,7 +5774,7 @@ function ErrorScreen({ c, error, onBack }: any) {
   );
 }
 
-function CompleteScreen({ c, lesson, onHome, onNext }: any) {
+function CompleteScreen({ c, lesson, mascot, onHome, onNext }: any) {
   return (
     <SafeAreaView
       style={[
@@ -5751,25 +5787,14 @@ function CompleteScreen({ c, lesson, onHome, onNext }: any) {
         },
       ]}
     >
-      <View
-        style={{
-          width: 110,
-          height: 110,
-          borderRadius: 55,
-          backgroundColor: c.primary + "15",
-          borderWidth: 2,
-          borderColor: c.primary + "25",
-          alignItems: "center",
-          justifyContent: "center",
-          shadowColor: c.primary,
-          shadowOpacity: 0.2,
-          shadowOffset: { width: 0, height: 8 },
-          shadowRadius: 20,
-          elevation: 6,
-        }}
-      >
-        <Ionicons name="sparkles" size={54} color={c.primary} />
-      </View>
+      {/* Mascot — large, centered, with bubble */}
+      <MascotDisplay
+        mascotState={mascot?.mascotState ?? 'complete'}
+        mascotImage={mascot?.mascotImage}
+        bubbleText={mascot?.bubbleText ?? 'Well done!'}
+        streakCount={mascot?.streakCount ?? 0}
+        isComplete
+      />
       <Text
         style={{
           color: c.text,
@@ -5924,6 +5949,12 @@ const s = StyleSheet.create({
     overflow: "hidden",
   },
   progressFill: { height: "100%", borderRadius: 999 },
+  headerHeartsRow: {
+    flexDirection: "row",
+    gap: 3,
+    alignItems: "center",
+    marginLeft: 6,
+  },
   stageCountText: {
     fontSize: 13,
     fontWeight: "600",
